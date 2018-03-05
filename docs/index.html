@@ -30,23 +30,35 @@
 
 <form>
 <div class="container">
-    <div class="row">
+    <div class="row" style="margin:12px 0;">
         <div class="col-sm">
-            <h2>
+            <h2 class="rwd-line form-inline">
                 Generate a
-                <select id="project-type">
+                &nbsp;
+                <select id="project-type" class="form-control">
                     <option value="gradle">Gradle project</option>
                     <option value="maven">Maven project</option>
                 </select>
+                &nbsp;
                 using
-                <select id="ktor-engine">
+                &nbsp;
+                <select id="ktor-engine" class="form-control">
                     <option value="netty">Netty</option>
                     <option value="jetty">Jetty</option>
                     <option value="tomcat">Tomcat</option>
                     <option value="cio">CIO</option>
                 </select>
+                &nbsp;
+                <!--
+                ,
+                <select id="ktor-config" class="form-control">
+                    <option value="hocon">HOCON</option>
+                    <option value="embeddedServer">embedServ.</option>
+                </select>
+                -->
                 and Ktor
-                <select id="ktor-version">
+                &nbsp;
+                <select id="ktor-version" class="form-control">
                     <option value="0.9.1">0.9.1</option>
                 </select>
             </h2>
@@ -63,17 +75,15 @@
                 <label for="artifact-group">Name</label>
                 <input type="text" id="artifact-name" class="form-control" placeholder="ktor-demo" value="ktor-demo" />
             </div>
+            <div class="form-group">
+                <button type="button" id="buildButton" class="btn btn-primary" disabled>Build</button>
+                <span class="loading">Waiting JavaScript...</span>
+            </div>
         </div>
         <div class="col-sm">
             <h3>Dependencies</h3>
             <div><input id="dependency-filter" type="text" placeholder="Filter" /></div>
             <div id="dependencies" style="height:250px;overflow:auto;">Loading dependencies...</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm">
-            <button type="button" id="buildButton" class="btn btn-primary" disabled>Build</button>
-            <span class="loading">Waiting JavaScript...</span>
         </div>
     </div>
 </div>
