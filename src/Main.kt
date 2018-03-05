@@ -7,30 +7,22 @@ import kotlin.browser.*
 external val jQuery: JQueryStatic<HTMLElement> = definedExternally
 
 inline fun jq(str: String) = jQuery(str)
+inline fun jq(str: HTMLElement) = jQuery(str)
 
 //external fun JQuery.on(name: String, event: dynamic)
 //inline fun JQuery<HTMLElement>.on(name: String, event: dynamic) = this.asDynamic().on(name, event)
 inline fun JQuery<HTMLElement>.on(name: String, noinline event: () -> Unit) = this.asDynamic().on(name, event)
+inline fun JQuery<HTMLElement>.each(noinline event: (index: Int, element: HTMLElement) -> Unit): Unit = this.asDynamic().each(event)
+
+inline fun JQuery<HTMLElement>.change(noinline event: () -> Unit) = this.asDynamic().change(event)
 
 const val DOLLAR = '$'
 
-data class Dependency(val repo: String, val artifact: String, val id: String = "", val title: String)
-
-object Dependencies {
-    //val KOTLINX_HTML = Dependency("jcenter", "org.jetbrains.kotlinx:kotlinx-html-jvm:0.6.9", "html-dsl", "HTML DSL")
-    val KOTLINX_HTML = Dependency("jcenter", "io.ktor:ktor-html-builder:\$ktor_version", "html-dsl", "HTML DSL")
-
-
-    val dependencies = listOf(
-        KOTLINX_HTML
-    )
-}
-
-val dependencies = Dependencies.dependencies
-
 fun main(args: Array<String>) {
+    //console.log(dependencies)
     addDependencies()
     registerBuildButton()
+    handleFiltering()
     removeLoading()
 }
 
@@ -41,8 +33,23 @@ fun addDependencies() {
     for (dependency in dependencies) {
         deps.append(
             jq("<label for='artifact-${dependency.id}' class='artifact' />")
-                .append(jq("<input id='artifact-${dependency.id}' type='checkbox' />"))
-                .append(jq("<span />").text(" " + dependency.title))
+                .append(
+                    jq("<div class='title' />")
+                        .append(jq("<input id='artifact-${dependency.id}' type='checkbox' />"))
+                        .append(jq("<span />").text(" ${dependency.title}"))
+                        .append(jq("<span class='artifact-name' />").text(" (${dependency.artifact})"))
+                )
+                .append(jq("<div class='subtitle' />")
+                    .append(jq("<div />").text(dependency.description))
+                    .append(
+                        jq("<div />")
+                            .apply {
+                                if (dependency.documentation != null) {
+                                    append(jq("<a />").attr("href", dependency.documentation).attr("target", "_blank").text("Documentation"))
+                                }
+                            }
+                    )
+                )
         )
     }
 }
@@ -69,7 +76,7 @@ fun registerBuildButton() {
             println("DEPENDENCY: $dependency :: include=$toInclude")
         }
 
-        val reposToInclude = (listOf("jcenter", "https://kotlin.bintray.com/ktor")
+        val reposToInclude = (listOf("jcenter", "ktor")
                 + dependenciesToInclude.map { it.repo }).toSet()
 
         try {
@@ -113,6 +120,7 @@ fun registerBuildButton() {
                                 for (repo in reposToInclude) {
                                     when (repo) {
                                         "jcenter" -> +"jcenter()"
+                                        "ktor" -> +"maven { url 'https://kotlin.bintray.com/ktor' }"
                                         else -> +"maven { url '$repo' }"
                                     }
                                 }
@@ -152,7 +160,7 @@ fun registerBuildButton() {
                     +"import io.ktor.application.*"
                     +"import io.ktor.response.*"
                     +"import io.ktor.routing.*"
-                    if (Dependencies.KOTLINX_HTML in dependenciesToInclude) {
+                    if (Dependencies.HTML_DSL in dependenciesToInclude) {
                         +"import io.ktor.html.*"
                         +"import kotlinx.html.*"
                     }
@@ -165,7 +173,7 @@ fun registerBuildButton() {
                                 +"call.respondText(\"HELLO WORLD!\")"
                             }
                             +""
-                            if (Dependencies.KOTLINX_HTML in dependenciesToInclude) {
+                            if (Dependencies.HTML_DSL in dependenciesToInclude) {
                                 "get(\"/html\")" {
                                     "call.respondHtml" {
                                         "body" {
@@ -184,6 +192,18 @@ fun registerBuildButton() {
             window.alert("Couldn't generate ZIP. Reason: $e")
         }
     })
+}
+
+fun handleFiltering() {
+    val dependencyFilter = jq("#dependency-filter")
+    dependencyFilter.on("keyup") {
+        val filter = dependencyFilter.`val`().unsafeCast<String>().toLowerCase()
+        jq("label.artifact").each { index, element ->
+            //console.log(thiz, element)
+            val visible = (filter.isEmpty() || jq(element).text().toLowerCase().contains(filter))
+            if (visible) jq(element).show() else jq(element).hide()
+        }
+    }
 }
 
 fun removeLoading() {

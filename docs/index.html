@@ -14,7 +14,14 @@
 <style type="text/css">
     .loading { color: #aaa; }
     .loaded { display: none; }
-    label.artifact { display: block; }
+    label.artifact { display: block; padding: 0 8px; }
+    label.artifact .subtitle { }
+    .artifact .subtitle { font-size: 0.75em; color: #777; }
+    .artifact .artifact-name { font-size: 0.75em; color: #aaa; }
+    .artifact:hover { background: #fafafa; }
+    #dependencies {
+        border: 1px solid #ddd;
+    }
 </style>
 
 <nav class="navbar navbar-dark bg-dark">
@@ -59,7 +66,8 @@
         </div>
         <div class="col-sm">
             <h3>Dependencies</h3>
-            <div id="dependencies">Loading dependencies...</div>
+            <div><input id="dependency-filter" type="text" placeholder="Filter" /></div>
+            <div id="dependencies" style="height:250px;overflow:auto;">Loading dependencies...</div>
         </div>
     </div>
     <div class="row">
