@@ -14,8 +14,24 @@ inline fun JQuery<HTMLElement>.on(name: String, noinline event: () -> Unit) = th
 
 const val DOLLAR = '$'
 
+data class Dependency(val repo: String, val artifact: String, val title: String)
+val dependencies = listOf(
+    Dependency("jcenter", "org.jetbrains.kotlinx:kotlinx-html-jvm:0.6.9", "HTML DSL")
+)
+
 fun main(args: Array<String>) {
-    jq("#buildButton").on("click", {
+    addDependencies()
+    registerBuildButton()
+    removeLoading()
+}
+
+fun addDependencies() {
+    for (dependency in dependencies) {
+    }
+}
+
+fun registerBuildButton() {
+    jq("#buildButton").removeAttr("disabled").on("click", {
         val projectType = jq("#project-type").`val`().unsafeCast<String>()
         val ktorEngine = jq("#ktor-engine").`val`().unsafeCast<String>()
         val ktorVersion = jq("#ktor-version").`val`().unsafeCast<String>()
@@ -116,4 +132,8 @@ fun main(args: Array<String>) {
             window.alert("Couldn't generate ZIP. Reason: $e")
         }
     })
+}
+
+fun removeLoading() {
+    jq(".loading").removeClass("loading").addClass("loaded")
 }

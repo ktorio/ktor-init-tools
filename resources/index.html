@@ -10,6 +10,12 @@
     <title>Ktor start</title>
 </head>
 <body>
+
+<style type="text/css">
+    .loading { color: #aaa; }
+    .loaded { display: none; }
+</style>
+
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Ktor start</a>
 </nav>
@@ -57,7 +63,8 @@
     </div>
     <div class="row">
         <div class="col-sm">
-            <button type="button" id="buildButton" class="btn btn-primary">Build</button>
+            <button type="button" id="buildButton" class="btn btn-primary" disabled>Build</button>
+            <span class="loading">Waiting JavaScript...</span>
         </div>
     </div>
 </div>
