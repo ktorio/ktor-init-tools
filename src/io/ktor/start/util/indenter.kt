@@ -1,3 +1,4 @@
+package io.ktor.start.util
 
 class Indenter {
     @PublishedApi

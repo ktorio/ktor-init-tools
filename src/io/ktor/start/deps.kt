@@ -1,9 +1,6 @@
-import kotlin.browser.*
+package io.ktor.start
 
-external object Object {
-    fun keys(obj: dynamic): Array<String>
-    fun values(obj: dynamic): Array<dynamic>
-}
+import io.ktor.start.util.*
 
 data class Dependency(
     val repo: String,
