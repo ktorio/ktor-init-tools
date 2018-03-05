@@ -1,0 +1,115 @@
+buildscript {
+    ext.kotlin_version = '1.2.30'
+    ext.web_dir = 'web'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+group 'io.ktor'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'kotlin2js'
+apply plugin: 'idea'
+
+sourceSets {
+    main.kotlin.srcDirs += "src/main/kotlin"
+    test.kotlin.srcDirs += "src/test/kotlin"
+}
+
+compileKotlin2Js {
+    kotlinOptions.outputFile = "${web_dir}/output.js"
+    kotlinOptions.moduleKind = "umd"
+    kotlinOptions.sourceMap = true
+}
+
+compileTestKotlin2Js {
+    kotlinOptions.moduleKind = "umd"
+    kotlinOptions.sourceMap = true
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://kotlin.bintray.com/js-externals" }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    compile "kotlin.js.externals:kotlin-js-jquery:3.2.0-0"
+    testCompile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
+}
+
+clean.doFirst() {
+    delete("${web_dir}")
+}
+
+build.doLast() {
+    // Copy kotlin.js and kotlin-meta.js from jar into web directory
+    configurations.compile.each { File file ->
+        copy {
+            includeEmptyDirs = false
+
+            from zipTree(file.absolutePath)
+            into "${projectDir}/${web_dir}"
+            exclude "**/*.meta.js", "**/*.kjsm"
+            include { fileTreeElement ->
+                def path = fileTreeElement.path
+                path.endsWith(".js") && (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
+            }
+        }
+    }
+
+    // Unpack build contents
+    // TODO Remove this step when a CDN link is available.
+    copy {
+        File artifact = new File("build/libs/${project.name}-${project.version}.jar")
+        includeEmptyDirs = false
+
+        from zipTree(artifact)
+        into "${web_dir}"
+        exclude "**/*.meta.js", "**/*.kjsm"
+        include { fileTreeElement ->
+            def path = fileTreeElement.path
+            !(path.startsWith("META-INF/") || path.startsWith("${project.name}"))
+        }
+    }
+
+    // Copy scripts to web directory
+    copy {
+        includeEmptyDirs = false
+        from new File("build/classes/main")
+        exclude "**/*.meta.js", "**/*.kjsm"
+        into "${web_dir}"
+    }
+
+    copy {
+        includeEmptyDirs = false
+        from new File("build/classes/test")
+        exclude "**/*.meta.js", "**/*.kjsm"
+        into "${web_dir}"
+    }
+
+    copy {
+        includeEmptyDirs = false
+        from new File("build/resources/test")
+        exclude "**/*.meta.js", "**/*.kjsm"
+        into "${web_dir}"
+    }
+
+    copy {
+        includeEmptyDirs = false
+        from "${web_dir}"
+        exclude "**/*.meta.js", "**/*.kjsm", "**/*.map"
+        into new File(project.rootDir, "..")
+    }
+}
+
+idea {
+    module {
+        excludeDirs = [".gradle", ".idea", "build", "gradle", "web", "src/main/resources/lib"].collect { new File(it) }
+    }
+}
