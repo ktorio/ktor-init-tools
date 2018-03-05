@@ -104,12 +104,12 @@ build.doLast() {
         includeEmptyDirs = false
         from "${web_dir}"
         exclude "**/*.meta.js", "**/*.kjsm", "**/*.map"
-        into new File(project.rootDir, "..")
+        into "docs"
     }
 }
 
 idea {
     module {
-        excludeDirs = [".gradle", ".idea", "build", "gradle", "web", "src/main/resources/lib"].collect { new File(it) }
+        excludeDirs = [".gradle", ".idea", "build", "gradle", "docs", "web", "src/main/resources/lib"].collect { new File(it) }
     }
 }
