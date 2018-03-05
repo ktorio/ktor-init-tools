@@ -1,4 +1,9 @@
-/.gradle
 /.idea
+*.iml
+*.iws
+*.ipr
+
+/.gradle
 /build
+
 /web

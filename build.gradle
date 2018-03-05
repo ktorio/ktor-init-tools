@@ -17,8 +17,9 @@ apply plugin: 'kotlin2js'
 apply plugin: 'idea'
 
 sourceSets {
-    main.kotlin.srcDirs += "src/main/kotlin"
-    test.kotlin.srcDirs += "src/test/kotlin"
+    main.kotlin.srcDirs += "src"
+    main.resources.srcDirs += "resources"
+    test.kotlin.srcDirs += "test"
 }
 
 compileKotlin2Js {
@@ -110,6 +111,6 @@ build.doLast() {
 
 idea {
     module {
-        excludeDirs = [".gradle", ".idea", "build", "gradle", "docs", "web", "src/main/resources/lib"].collect { new File(it) }
+        excludeDirs = [".gradle", ".idea", "build", "gradle", "docs", "web", "resources/lib"].collect { new File(it) }
     }
 }
