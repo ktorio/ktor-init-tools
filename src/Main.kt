@@ -14,10 +14,19 @@ inline fun JQuery<HTMLElement>.on(name: String, noinline event: () -> Unit) = th
 
 const val DOLLAR = '$'
 
-data class Dependency(val repo: String, val artifact: String, val title: String)
-val dependencies = listOf(
-    Dependency("jcenter", "org.jetbrains.kotlinx:kotlinx-html-jvm:0.6.9", "HTML DSL")
-)
+data class Dependency(val repo: String, val artifact: String, val id: String = "", val title: String)
+
+object Dependencies {
+    //val KOTLINX_HTML = Dependency("jcenter", "org.jetbrains.kotlinx:kotlinx-html-jvm:0.6.9", "html-dsl", "HTML DSL")
+    val KOTLINX_HTML = Dependency("jcenter", "io.ktor:ktor-html-builder:\$ktor_version", "html-dsl", "HTML DSL")
+
+
+    val dependencies = listOf(
+        KOTLINX_HTML
+    )
+}
+
+val dependencies = Dependencies.dependencies
 
 fun main(args: Array<String>) {
     addDependencies()
@@ -26,7 +35,15 @@ fun main(args: Array<String>) {
 }
 
 fun addDependencies() {
+    val deps = jq("#dependencies")
+    deps.text("")
+
     for (dependency in dependencies) {
+        deps.append(
+            jq("<label for='artifact-${dependency.id}' class='artifact' />")
+                .append(jq("<input id='artifact-${dependency.id}' type='checkbox' />"))
+                .append(jq("<span />").text(" " + dependency.title))
+        )
     }
 }
 
@@ -42,6 +59,19 @@ fun registerBuildButton() {
         println("ktorEngine: $ktorEngine")
         println("artifactGroup: $artifactGroup")
         println("artifactName: $artifactName")
+
+        val dependenciesToInclude = dependencies.filter {
+            jq("#artifact-${it.id}").prop("checked").unsafeCast<Boolean>()
+        }.toSet()
+
+        for (dependency in dependencies) {
+            val toInclude = dependency in dependenciesToInclude
+            println("DEPENDENCY: $dependency :: include=$toInclude")
+        }
+
+        val reposToInclude = (listOf("jcenter", "https://kotlin.bintray.com/ktor")
+                + dependenciesToInclude.map { it.repo }).toSet()
+
         try {
             download("ktor-sample-$projectType-$ktorEngine-$artifactGroup-$artifactName.zip", buildZip {
 
@@ -80,15 +110,22 @@ fun registerBuildButton() {
                             }
                             +""
                             "repositories" {
-                                +"jcenter()"
-                                +"maven { url 'https://kotlin.bintray.com/ktor' }"
+                                for (repo in reposToInclude) {
+                                    when (repo) {
+                                        "jcenter" -> +"jcenter()"
+                                        else -> +"maven { url '$repo' }"
+                                    }
+                                }
                             }
                             +""
                             "dependencies" {
                                 +"compile \"org.jetbrains.kotlin:kotlin-stdlib-jdk8:${DOLLAR}kotlin_version\""
                                 +"compile \"io.ktor:ktor-server-$ktorEngine:${DOLLAR}ktor_version\""
-                                +"compile \"io.ktor:ktor-html-builder:${DOLLAR}ktor_version\""
                                 +"compile \"ch.qos.logback:logback-classic:${DOLLAR}logback_version\""
+                                +""
+                                for (dep in dependenciesToInclude) {
+                                    +"compile \"${dep.artifact}\""
+                                }
                                 +""
                                 +"testCompile \"io.ktor:ktor-server-tests:${DOLLAR}ktor_version\""
                             }
@@ -115,6 +152,10 @@ fun registerBuildButton() {
                     +"import io.ktor.application.*"
                     +"import io.ktor.response.*"
                     +"import io.ktor.routing.*"
+                    if (Dependencies.KOTLINX_HTML in dependenciesToInclude) {
+                        +"import io.ktor.html.*"
+                        +"import kotlinx.html.*"
+                    }
                     +""
                     +"fun main(args: Array<String>): Unit = $developmentPackage.main(args)"
                     +""
@@ -122,6 +163,17 @@ fun registerBuildButton() {
                         "routing" {
                             "get(\"/\")" {
                                 +"call.respondText(\"HELLO WORLD!\")"
+                            }
+                            +""
+                            if (Dependencies.KOTLINX_HTML in dependenciesToInclude) {
+                                "get(\"/html\")" {
+                                    "call.respondHtml" {
+                                        "body" {
+                                            +"h1 { +\"HTML\" }"
+                                        }
+                                    }
+
+                                }
                             }
                         }
                     }
