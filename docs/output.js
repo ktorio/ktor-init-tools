@@ -12,8 +12,6 @@
 }(this, function (_, Kotlin) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
-  var defineInlineFunction = Kotlin.defineInlineFunction;
-  var wrapFunction = Kotlin.wrapFunction;
   var Unit = Kotlin.kotlin.Unit;
   var println = Kotlin.kotlin.io.println_s8jyv4$;
   var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
@@ -21,36 +19,22 @@
   var plus = Kotlin.kotlin.collections.plus_mydzjv$;
   var RuntimeException_init = Kotlin.kotlin.RuntimeException_init_pdl1vj$;
   var Throwable = Error;
-  var contains = Kotlin.kotlin.text.contains_li3zpu$;
   var Kind_CLASS = Kotlin.Kind.CLASS;
+  var contains = Kotlin.kotlin.text.contains_li3zpu$;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
+  var copyOf = Kotlin.kotlin.collections.copyOf_mrm5p$;
+  var numberToByte = Kotlin.numberToByte;
+  var wrapFunction = Kotlin.wrapFunction;
+  var defineInlineFunction = Kotlin.defineInlineFunction;
+  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
+  var toChar = Kotlin.toChar;
+  var StringBuilder = Kotlin.kotlin.text.StringBuilder;
+  var throwCCE = Kotlin.throwCCE;
   var lastOrNull = Kotlin.kotlin.collections.lastOrNull_2p1efm$;
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var equals = Kotlin.equals;
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_8cymmc$;
   var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
-  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
-  var toChar = Kotlin.toChar;
-  var StringBuilder = Kotlin.kotlin.text.StringBuilder;
-  var copyOf = Kotlin.kotlin.collections.copyOf_mrm5p$;
-  var numberToByte = Kotlin.numberToByte;
-  var throwCCE = Kotlin.throwCCE;
-  var jq = defineInlineFunction('output.jq_61zpoe$', function (str) {
-    return jQuery(str);
-  });
-  var jq_0 = defineInlineFunction('output.jq_lt8gi4$', function (str) {
-    return jQuery(str);
-  });
-  var on = defineInlineFunction('output.on_nsccip$', function ($receiver, name, event) {
-    return $receiver.on(name, event);
-  });
-  var each = defineInlineFunction('output.each_4tgbmb$', function ($receiver, event) {
-    $receiver.each(event);
-  });
-  var change = defineInlineFunction('output.change_tue5ot$', function ($receiver, event) {
-    return $receiver.change(event);
-  });
-  var DOLLAR;
   function main(args) {
     addDependencies();
     registerBuildButton();
@@ -84,230 +68,46 @@
       deps.append(tmp$_4.append(tmp$_5.append($receiver)));
     }
   }
-  function registerBuildButton$lambda$lambda$lambda(closure$ktorVersion, closure$developmentEngineFQ, closure$reposToInclude, closure$ktorEngine, closure$dependenciesToInclude) {
+  function registerBuildButton$lambda$lambda$lambda(closure$info) {
     return function ($receiver) {
-      var $receiver_0 = 'buildscript';
-      $receiver.line_61zpoe$($receiver_0 + ' {');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      try {
-        var closure$ktorVersion_0 = closure$ktorVersion;
-        $receiver.line_61zpoe$("ext.kotlin_version = '1.2.30'");
-        $receiver.line_61zpoe$("ext.ktor_version = '" + closure$ktorVersion_0 + "'");
-        $receiver.line_61zpoe$("ext.logback_version = '1.2.1'");
-        $receiver.line_61zpoe$('');
-        $receiver.line_61zpoe$('repositories' + ' {');
-        $receiver.indentation = $receiver.indentation + 1 | 0;
-        try {
-          $receiver.line_61zpoe$('jcenter()');
-        }
-        finally {
-          $receiver.indentation = $receiver.indentation - 1 | 0;
-        }
-        $receiver.line_61zpoe$('}');
-        $receiver.line_61zpoe$('');
-        $receiver.line_61zpoe$('dependencies' + ' {');
-        $receiver.indentation = $receiver.indentation + 1 | 0;
-        try {
-          $receiver.line_61zpoe$('classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"');
-        }
-        finally {
-          $receiver.indentation = $receiver.indentation - 1 | 0;
-        }
-        $receiver.line_61zpoe$('}');
-      }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
-      }
-      $receiver.line_61zpoe$('}');
-      $receiver.line_61zpoe$('');
-      $receiver.line_61zpoe$("apply plugin: 'kotlin'");
-      $receiver.line_61zpoe$("apply plugin: 'application'");
-      $receiver.line_61zpoe$('');
-      $receiver.line_61zpoe$('mainClassName = ' + '"' + closure$developmentEngineFQ + '"');
-      $receiver.line_61zpoe$('');
-      $receiver.line_61zpoe$('sourceSets' + ' {');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      try {
-        $receiver.line_61zpoe$("main.kotlin.srcDirs = ['src']");
-        $receiver.line_61zpoe$("main.resources.srcDirs = ['resources']");
-      }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
-      }
-      $receiver.line_61zpoe$('}');
-      $receiver.line_61zpoe$('');
-      var $receiver_1 = 'repositories';
-      $receiver.line_61zpoe$($receiver_1 + ' {');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      try {
-        var tmp$;
-        tmp$ = closure$reposToInclude.iterator();
-        while (tmp$.hasNext()) {
-          var repo = tmp$.next();
-          switch (repo) {
-            case 'jcenter':
-              $receiver.line_61zpoe$('jcenter()');
-              break;
-            case 'ktor':
-              $receiver.line_61zpoe$("maven { url 'https://kotlin.bintray.com/ktor' }");
-              break;
-            default:$receiver.line_61zpoe$("maven { url '" + repo + "' }");
-              break;
-          }
-        }
-      }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
-      }
-      $receiver.line_61zpoe$('}');
-      $receiver.line_61zpoe$('');
-      var $receiver_2 = 'dependencies';
-      $receiver.line_61zpoe$($receiver_2 + ' {');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      try {
-        var closure$ktorEngine_0 = closure$ktorEngine;
-        var closure$dependenciesToInclude_0 = closure$dependenciesToInclude;
-        var tmp$_0;
-        $receiver.line_61zpoe$('compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"');
-        $receiver.line_61zpoe$('compile ' + '"' + 'io.ktor:ktor-server-' + closure$ktorEngine_0 + ':' + String.fromCharCode(DOLLAR) + 'ktor_version' + '"');
-        $receiver.line_61zpoe$('compile "ch.qos.logback:logback-classic:$logback_version"');
-        $receiver.line_61zpoe$('');
-        tmp$_0 = closure$dependenciesToInclude_0.iterator();
-        while (tmp$_0.hasNext()) {
-          var dep = tmp$_0.next();
-          $receiver.line_61zpoe$('compile ' + '"' + dep.artifact + '"');
-        }
-        $receiver.line_61zpoe$('');
-        $receiver.line_61zpoe$('testCompile "io.ktor:ktor-server-tests:$ktor_version"');
-      }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
-      }
-      $receiver.line_61zpoe$('}');
-      $receiver.line_61zpoe$('');
-      $receiver.line_61zpoe$("kotlin.experimental.coroutines = 'enable'");
+      buildPomXml($receiver, closure$info);
       return Unit;
     };
   }
-  function registerBuildButton$lambda$lambda$lambda_0(closure$artifactGroup) {
+  function registerBuildButton$lambda$lambda$lambda_0(closure$info) {
     return function ($receiver) {
-      $receiver.line_61zpoe$('ktor' + ' {');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      try {
-        var closure$artifactGroup_0 = closure$artifactGroup;
-        $receiver.line_61zpoe$('deployment' + ' {');
-        $receiver.indentation = $receiver.indentation + 1 | 0;
-        try {
-          $receiver.line_61zpoe$('port = 8080');
-        }
-        finally {
-          $receiver.indentation = $receiver.indentation - 1 | 0;
-        }
-        $receiver.line_61zpoe$('}');
-        $receiver.line_61zpoe$('application' + ' {');
-        $receiver.indentation = $receiver.indentation + 1 | 0;
-        try {
-          $receiver.line_61zpoe$('modules = [ ' + closure$artifactGroup_0 + '.ApplicationKt.main ]');
-        }
-        finally {
-          $receiver.indentation = $receiver.indentation - 1 | 0;
-        }
-        $receiver.line_61zpoe$('}');
-      }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
-      }
-      $receiver.line_61zpoe$('}');
+      buildBuildGradle($receiver, closure$info);
       return Unit;
     };
   }
-  function registerBuildButton$lambda$lambda$lambda_1(closure$artifactGroup, closure$dependenciesToInclude, closure$developmentPackage) {
+  function registerBuildButton$lambda$lambda$lambda_1(closure$info) {
     return function ($receiver) {
-      $receiver.line_61zpoe$('package ' + closure$artifactGroup);
-      $receiver.line_61zpoe$('');
-      $receiver.line_61zpoe$('import io.ktor.application.*');
-      $receiver.line_61zpoe$('import io.ktor.response.*');
-      $receiver.line_61zpoe$('import io.ktor.routing.*');
-      if (closure$dependenciesToInclude.contains_11rb$(Dependencies_getInstance().HTML_DSL)) {
-        $receiver.line_61zpoe$('import io.ktor.html.*');
-        $receiver.line_61zpoe$('import kotlinx.html.*');
-      }
-      $receiver.line_61zpoe$('');
-      $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + closure$developmentPackage + '.main(args)');
-      $receiver.line_61zpoe$('');
-      var $receiver_0 = 'fun Application.main()';
-      $receiver.line_61zpoe$($receiver_0 + ' {');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      try {
-        var closure$dependenciesToInclude_0 = closure$dependenciesToInclude;
-        $receiver.line_61zpoe$('routing' + ' {');
-        $receiver.indentation = $receiver.indentation + 1 | 0;
-        try {
-          $receiver.line_61zpoe$('get("/")' + ' {');
-          $receiver.indentation = $receiver.indentation + 1 | 0;
-          try {
-            $receiver.line_61zpoe$('call.respondText("HELLO WORLD!")');
-          }
-          finally {
-            $receiver.indentation = $receiver.indentation - 1 | 0;
-          }
-          $receiver.line_61zpoe$('}');
-          $receiver.line_61zpoe$('');
-          if (closure$dependenciesToInclude_0.contains_11rb$(Dependencies_getInstance().HTML_DSL)) {
-            $receiver.line_61zpoe$('get("/html")' + ' {');
-            $receiver.indentation = $receiver.indentation + 1 | 0;
-            try {
-              $receiver.line_61zpoe$('call.respondHtml' + ' {');
-              $receiver.indentation = $receiver.indentation + 1 | 0;
-              try {
-                $receiver.line_61zpoe$('body' + ' {');
-                $receiver.indentation = $receiver.indentation + 1 | 0;
-                try {
-                  $receiver.line_61zpoe$('h1 { +"HTML" }');
-                }
-                finally {
-                  $receiver.indentation = $receiver.indentation - 1 | 0;
-                }
-                $receiver.line_61zpoe$('}');
-              }
-              finally {
-                $receiver.indentation = $receiver.indentation - 1 | 0;
-              }
-              $receiver.line_61zpoe$('}');
-            }
-            finally {
-              $receiver.indentation = $receiver.indentation - 1 | 0;
-            }
-            $receiver.line_61zpoe$('}');
-          }
-        }
-        finally {
-          $receiver.indentation = $receiver.indentation - 1 | 0;
-        }
-        $receiver.line_61zpoe$('}');
-      }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
-      }
-      $receiver.line_61zpoe$('}');
+      buildApplicationConf($receiver, closure$info);
       return Unit;
     };
   }
-  var NotImplementedError_init = Kotlin.kotlin.NotImplementedError;
-  function registerBuildButton$lambda$lambda(closure$ktorEngine, closure$projectType, closure$artifactName, closure$ktorVersion, closure$reposToInclude, closure$dependenciesToInclude, closure$artifactGroup) {
+  function registerBuildButton$lambda$lambda$lambda_2(closure$info) {
+    return function ($receiver) {
+      buildApplicationKt($receiver, closure$info);
+      return Unit;
+    };
+  }
+  function registerBuildButton$lambda$lambda(closure$ktorEngine, closure$ktorVersion, closure$artifactGroup, closure$reposToInclude, closure$dependenciesToInclude, closure$projectType, closure$artifactName) {
     return function ($receiver) {
       var developmentPackage = 'io.ktor.server.' + closure$ktorEngine;
       var developmentEngineFQ = developmentPackage + '.DevelopmentEngine';
+      var info = new BuildInfo(closure$ktorVersion, developmentPackage, closure$artifactGroup, developmentEngineFQ, closure$reposToInclude, closure$dependenciesToInclude, closure$ktorEngine);
       switch (closure$projectType) {
         case 'maven':
-          throw new NotImplementedError_init('An operation is not implemented: ' + 'Unsupported maven for now');
+          $receiver.add_axwij4$(closure$artifactName + '/pom.xml', indenter(registerBuildButton$lambda$lambda$lambda(info)));
+          break;
         case 'gradle':
-          $receiver.add_wvmfjy$(closure$artifactName + '/build.gradle', indenter(registerBuildButton$lambda$lambda$lambda(closure$ktorVersion, developmentEngineFQ, closure$reposToInclude, closure$ktorEngine, closure$dependenciesToInclude)));
+          $receiver.add_axwij4$(closure$artifactName + '/build.gradle', indenter(registerBuildButton$lambda$lambda$lambda_0(info)));
           break;
         default:throw RuntimeException_init('Unknown project type ' + closure$projectType);
       }
-      $receiver.add_wvmfjy$(closure$artifactName + '/resources/application.conf', indenter(registerBuildButton$lambda$lambda$lambda_0(closure$artifactGroup)));
-      $receiver.add_wvmfjy$(closure$artifactName + '/src/Application.kt', indenter(registerBuildButton$lambda$lambda$lambda_1(closure$artifactGroup, closure$dependenciesToInclude, developmentPackage)));
+      $receiver.add_axwij4$(closure$artifactName + '/resources/application.conf', indenter(registerBuildButton$lambda$lambda$lambda_1(info)));
+      $receiver.add_axwij4$(closure$artifactName + '/src/Application.kt', indenter(registerBuildButton$lambda$lambda$lambda_2(info)));
       return Unit;
     };
   }
@@ -357,7 +157,7 @@
     }
     var reposToInclude = toSet(plus(tmp$_1, destination_0));
     try {
-      download('ktor-sample-' + projectType + '-' + ktorEngine + '-' + artifactGroup + '-' + artifactName + '.zip', buildZip(registerBuildButton$lambda$lambda(ktorEngine, projectType, artifactName, ktorVersion, reposToInclude, dependenciesToInclude, artifactGroup)));
+      download('ktor-sample-' + projectType + '-' + ktorEngine + '-' + artifactGroup + '-' + artifactName + '.zip', buildZip(registerBuildButton$lambda$lambda(ktorEngine, ktorVersion, artifactGroup, reposToInclude, dependenciesToInclude, projectType, artifactName)));
     }
      catch (e) {
       if (Kotlin.isType(e, Throwable)) {
@@ -372,6 +172,260 @@
   function registerBuildButton() {
     var str = '#buildButton';
     jQuery(str).removeAttr('disabled').on('click', registerBuildButton$lambda);
+  }
+  function BuildInfo(ktorVersion, developmentPackage, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine) {
+    this.ktorVersion = ktorVersion;
+    this.developmentPackage = developmentPackage;
+    this.artifactGroup = artifactGroup;
+    this.developmentEngineFQ = developmentEngineFQ;
+    this.reposToInclude = reposToInclude;
+    this.dependenciesToInclude = dependenciesToInclude;
+    this.ktorEngine = ktorEngine;
+  }
+  BuildInfo.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'BuildInfo',
+    interfaces: []
+  };
+  BuildInfo.prototype.component1 = function () {
+    return this.ktorVersion;
+  };
+  BuildInfo.prototype.component2 = function () {
+    return this.developmentPackage;
+  };
+  BuildInfo.prototype.component3 = function () {
+    return this.artifactGroup;
+  };
+  BuildInfo.prototype.component4 = function () {
+    return this.developmentEngineFQ;
+  };
+  BuildInfo.prototype.component5 = function () {
+    return this.reposToInclude;
+  };
+  BuildInfo.prototype.component6 = function () {
+    return this.dependenciesToInclude;
+  };
+  BuildInfo.prototype.component7 = function () {
+    return this.ktorEngine;
+  };
+  BuildInfo.prototype.copy_44p8uj$ = function (ktorVersion, developmentPackage, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine) {
+    return new BuildInfo(ktorVersion === void 0 ? this.ktorVersion : ktorVersion, developmentPackage === void 0 ? this.developmentPackage : developmentPackage, artifactGroup === void 0 ? this.artifactGroup : artifactGroup, developmentEngineFQ === void 0 ? this.developmentEngineFQ : developmentEngineFQ, reposToInclude === void 0 ? this.reposToInclude : reposToInclude, dependenciesToInclude === void 0 ? this.dependenciesToInclude : dependenciesToInclude, ktorEngine === void 0 ? this.ktorEngine : ktorEngine);
+  };
+  BuildInfo.prototype.toString = function () {
+    return 'BuildInfo(ktorVersion=' + Kotlin.toString(this.ktorVersion) + (', developmentPackage=' + Kotlin.toString(this.developmentPackage)) + (', artifactGroup=' + Kotlin.toString(this.artifactGroup)) + (', developmentEngineFQ=' + Kotlin.toString(this.developmentEngineFQ)) + (', reposToInclude=' + Kotlin.toString(this.reposToInclude)) + (', dependenciesToInclude=' + Kotlin.toString(this.dependenciesToInclude)) + (', ktorEngine=' + Kotlin.toString(this.ktorEngine)) + ')';
+  };
+  BuildInfo.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.ktorVersion) | 0;
+    result = result * 31 + Kotlin.hashCode(this.developmentPackage) | 0;
+    result = result * 31 + Kotlin.hashCode(this.artifactGroup) | 0;
+    result = result * 31 + Kotlin.hashCode(this.developmentEngineFQ) | 0;
+    result = result * 31 + Kotlin.hashCode(this.reposToInclude) | 0;
+    result = result * 31 + Kotlin.hashCode(this.dependenciesToInclude) | 0;
+    result = result * 31 + Kotlin.hashCode(this.ktorEngine) | 0;
+    return result;
+  };
+  BuildInfo.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.ktorVersion, other.ktorVersion) && Kotlin.equals(this.developmentPackage, other.developmentPackage) && Kotlin.equals(this.artifactGroup, other.artifactGroup) && Kotlin.equals(this.developmentEngineFQ, other.developmentEngineFQ) && Kotlin.equals(this.reposToInclude, other.reposToInclude) && Kotlin.equals(this.dependenciesToInclude, other.dependenciesToInclude) && Kotlin.equals(this.ktorEngine, other.ktorEngine)))));
+  };
+  var NotImplementedError_init = Kotlin.kotlin.NotImplementedError;
+  function buildPomXml($receiver, info) {
+    throw new NotImplementedError_init('An operation is not implemented: ' + 'Unsupported Maven for now');
+  }
+  var DOLLAR;
+  function buildBuildGradle($receiver, info) {
+    $receiver.line_61zpoe$('buildscript' + ' {');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$("ext.kotlin_version = '1.2.30'");
+      $receiver.line_61zpoe$("ext.ktor_version = '" + info.ktorVersion + "'");
+      $receiver.line_61zpoe$("ext.logback_version = '1.2.1'");
+      $receiver.line_61zpoe$('');
+      $receiver.line_61zpoe$('repositories' + ' {');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('jcenter()');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+      $receiver.line_61zpoe$('');
+      $receiver.line_61zpoe$('dependencies' + ' {');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('');
+    $receiver.line_61zpoe$("apply plugin: 'kotlin'");
+    $receiver.line_61zpoe$("apply plugin: 'application'");
+    $receiver.line_61zpoe$('');
+    $receiver.line_61zpoe$('mainClassName = ' + '"' + info.developmentEngineFQ + '"');
+    $receiver.line_61zpoe$('');
+    $receiver.line_61zpoe$('sourceSets' + ' {');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$("main.kotlin.srcDirs = ['src']");
+      $receiver.line_61zpoe$("main.resources.srcDirs = ['resources']");
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('');
+    $receiver.line_61zpoe$('repositories' + ' {');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      var tmp$;
+      tmp$ = info.reposToInclude.iterator();
+      while (tmp$.hasNext()) {
+        var repo = tmp$.next();
+        switch (repo) {
+          case 'jcenter':
+            $receiver.line_61zpoe$('jcenter()');
+            break;
+          case 'ktor':
+            $receiver.line_61zpoe$("maven { url 'https://kotlin.bintray.com/ktor' }");
+            break;
+          default:$receiver.line_61zpoe$("maven { url '" + repo + "' }");
+            break;
+        }
+      }
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('');
+    $receiver.line_61zpoe$('dependencies' + ' {');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      var tmp$_0;
+      $receiver.line_61zpoe$('compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"');
+      $receiver.line_61zpoe$('compile ' + '"' + 'io.ktor:ktor-server-' + info.ktorEngine + ':' + String.fromCharCode(DOLLAR) + 'ktor_version' + '"');
+      $receiver.line_61zpoe$('compile "ch.qos.logback:logback-classic:$logback_version"');
+      $receiver.line_61zpoe$('');
+      tmp$_0 = info.dependenciesToInclude.iterator();
+      while (tmp$_0.hasNext()) {
+        var dep = tmp$_0.next();
+        $receiver.line_61zpoe$('compile ' + '"' + dep.artifact + '"');
+      }
+      $receiver.line_61zpoe$('');
+      $receiver.line_61zpoe$('testCompile "io.ktor:ktor-server-tests:$ktor_version"');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('');
+    $receiver.line_61zpoe$("kotlin.experimental.coroutines = 'enable'");
+    return info;
+  }
+  function buildApplicationConf($receiver, info) {
+    $receiver.line_61zpoe$('ktor' + ' {');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('deployment' + ' {');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('port = 8080');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+      $receiver.line_61zpoe$('application' + ' {');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('modules = [ ' + info.artifactGroup + '.ApplicationKt.main ]');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+    return info;
+  }
+  function buildApplicationKt($receiver, info) {
+    $receiver.line_61zpoe$('package ' + info.artifactGroup);
+    $receiver.line_61zpoe$('');
+    $receiver.line_61zpoe$('import io.ktor.application.*');
+    $receiver.line_61zpoe$('import io.ktor.response.*');
+    $receiver.line_61zpoe$('import io.ktor.routing.*');
+    if (info.dependenciesToInclude.contains_11rb$(Dependencies_getInstance().HTML_DSL)) {
+      $receiver.line_61zpoe$('import io.ktor.html.*');
+      $receiver.line_61zpoe$('import kotlinx.html.*');
+    }
+    $receiver.line_61zpoe$('');
+    $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + info.developmentPackage + '.main(args)');
+    $receiver.line_61zpoe$('');
+    $receiver.line_61zpoe$('fun Application.main()' + ' {');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('routing' + ' {');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('get("/")' + ' {');
+        $receiver.indentation = $receiver.indentation + 1 | 0;
+        try {
+          $receiver.line_61zpoe$('call.respondText("HELLO WORLD!")');
+        }
+        finally {
+          $receiver.indentation = $receiver.indentation - 1 | 0;
+        }
+        $receiver.line_61zpoe$('}');
+        $receiver.line_61zpoe$('');
+        if (info.dependenciesToInclude.contains_11rb$(Dependencies_getInstance().HTML_DSL)) {
+          $receiver.line_61zpoe$('get("/html")' + ' {');
+          $receiver.indentation = $receiver.indentation + 1 | 0;
+          try {
+            $receiver.line_61zpoe$('call.respondHtml' + ' {');
+            $receiver.indentation = $receiver.indentation + 1 | 0;
+            try {
+              $receiver.line_61zpoe$('body' + ' {');
+              $receiver.indentation = $receiver.indentation + 1 | 0;
+              try {
+                $receiver.line_61zpoe$('h1 { +"HTML" }');
+              }
+              finally {
+                $receiver.indentation = $receiver.indentation - 1 | 0;
+              }
+              $receiver.line_61zpoe$('}');
+            }
+            finally {
+              $receiver.indentation = $receiver.indentation - 1 | 0;
+            }
+            $receiver.line_61zpoe$('}');
+          }
+          finally {
+            $receiver.indentation = $receiver.indentation - 1 | 0;
+          }
+          $receiver.line_61zpoe$('}');
+        }
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+    return info;
   }
   function handleFiltering$lambda$lambda(closure$filter) {
     return function (index, element) {
@@ -488,6 +542,260 @@
     return Dependencies_instance;
   }
   var dependencies;
+  function ByteArrayOutputStream() {
+    this.pos_0 = 0;
+    this.data_0 = new Int8Array(1024);
+  }
+  Object.defineProperty(ByteArrayOutputStream.prototype, 'size', {
+    get: function () {
+      return this.pos_0;
+    }
+  });
+  var Math_0 = Math;
+  ByteArrayOutputStream.prototype.ensure_0 = function (count) {
+    if ((this.pos_0 + count | 0) > this.data_0.length) {
+      var tmp$ = this.data_0;
+      var a = this.pos_0 + count | 0;
+      var b = this.data_0.length * 2 | 0;
+      this.data_0 = copyOf(tmp$, Math_0.max(a, b));
+    }
+    return this;
+  };
+  ByteArrayOutputStream.prototype.byte_0 = wrapFunction(function () {
+    return function (v) {
+      var tmp$;
+      this.data_0[tmp$ = this.pos_0, this.pos_0 = tmp$ + 1 | 0, tmp$] = numberToByte(v);
+    };
+  });
+  ByteArrayOutputStream.prototype.u8_za3lpa$ = function (v) {
+    var $receiver = this.ensure_0(1);
+    var tmp$;
+    $receiver.data_0[tmp$ = $receiver.pos_0, $receiver.pos_0 = tmp$ + 1 | 0, tmp$] = numberToByte(v);
+    return $receiver;
+  };
+  ByteArrayOutputStream.prototype.u16_le_za3lpa$ = function (v) {
+    var $receiver = this.ensure_0(2);
+    var v_0 = v >> 0;
+    var tmp$;
+    $receiver.data_0[tmp$ = $receiver.pos_0, $receiver.pos_0 = tmp$ + 1 | 0, tmp$] = numberToByte(v_0);
+    var v_1 = v >> 8;
+    var tmp$_0;
+    $receiver.data_0[tmp$_0 = $receiver.pos_0, $receiver.pos_0 = tmp$_0 + 1 | 0, tmp$_0] = numberToByte(v_1);
+    return $receiver;
+  };
+  ByteArrayOutputStream.prototype.u32_le_za3lpa$ = function (v) {
+    var $receiver = this.ensure_0(4);
+    var v_0 = v >> 0;
+    var tmp$;
+    $receiver.data_0[tmp$ = $receiver.pos_0, $receiver.pos_0 = tmp$ + 1 | 0, tmp$] = numberToByte(v_0);
+    var v_1 = v >> 8;
+    var tmp$_0;
+    $receiver.data_0[tmp$_0 = $receiver.pos_0, $receiver.pos_0 = tmp$_0 + 1 | 0, tmp$_0] = numberToByte(v_1);
+    var v_2 = v >> 16;
+    var tmp$_1;
+    $receiver.data_0[tmp$_1 = $receiver.pos_0, $receiver.pos_0 = tmp$_1 + 1 | 0, tmp$_1] = numberToByte(v_2);
+    var v_3 = v >> 24;
+    var tmp$_2;
+    $receiver.data_0[tmp$_2 = $receiver.pos_0, $receiver.pos_0 = tmp$_2 + 1 | 0, tmp$_2] = numberToByte(v_3);
+    return $receiver;
+  };
+  ByteArrayOutputStream.prototype.bytes_fqrh44$ = function (data) {
+    var $receiver = this.ensure_0(data.length);
+    for (var n = 0; n < data.length; n++) {
+      var v = data[n];
+      var tmp$;
+      $receiver.data_0[tmp$ = $receiver.pos_0, $receiver.pos_0 = tmp$ + 1 | 0, tmp$] = numberToByte(v);
+    }
+    return $receiver;
+  };
+  ByteArrayOutputStream.prototype.toByteArray = function () {
+    return copyOf(this.data_0, this.pos_0);
+  };
+  ByteArrayOutputStream.prototype.build_xuyaid$ = defineInlineFunction('output.io.ktor.start.util.ByteArrayOutputStream.build_xuyaid$', function (builder) {
+    builder(this);
+    return this.toByteArray();
+  });
+  ByteArrayOutputStream.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ByteArrayOutputStream',
+    interfaces: []
+  };
+  var buildByteArray = defineInlineFunction('output.io.ktor.start.util.buildByteArray_xuyaid$', wrapFunction(function () {
+    var ByteArrayOutputStream_init = _.io.ktor.start.util.ByteArrayOutputStream;
+    return function (builder) {
+      var $this = new ByteArrayOutputStream_init();
+      builder($this);
+      return $this.toByteArray();
+    };
+  }));
+  function Charset() {
+  }
+  Charset.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'Charset',
+    interfaces: []
+  };
+  function UTF8() {
+    UTF8_instance = this;
+  }
+  UTF8.prototype.createByte_0 = function (codePoint, shift) {
+    return codePoint >> shift & 63 | 128;
+  };
+  UTF8.prototype.decode_9w11d2$ = function (out, src, start, end) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2;
+    var i = start;
+    while (i < end) {
+      var c = src[tmp$ = i, i = tmp$ + 1 | 0, tmp$] & 255;
+      switch (c >> 4) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+          out.append_s8itvh$(toChar(c));
+          break;
+        case 12:
+        case 13:
+          out.append_s8itvh$(toChar((c & 31) << 6 | src[tmp$_0 = i, i = tmp$_0 + 1 | 0, tmp$_0] & 63));
+          break;
+        case 14:
+          out.append_s8itvh$(toChar((c & 15) << 12 | (src[tmp$_1 = i, i = tmp$_1 + 1 | 0, tmp$_1] & 63) << 6 | src[tmp$_2 = i, i = tmp$_2 + 1 | 0, tmp$_2] & 63));
+          break;
+      }
+    }
+  };
+  UTF8.prototype.encode_srd0ak$ = function (out, src, start, end) {
+    for (var n = start; n < end; n++) {
+      var codePoint = src.charCodeAt(n) | 0;
+      if ((codePoint & ~127) === 0) {
+        out.u8_za3lpa$(codePoint);
+      }
+       else {
+        if ((codePoint & ~2047) === 0) {
+          out.u8_za3lpa$(codePoint >> 6 & 31 | 192);
+        }
+         else if ((codePoint & ~65535) === 0) {
+          out.u8_za3lpa$(codePoint >> 12 & 15 | 224);
+          out.u8_za3lpa$(this.createByte_0(codePoint, 6));
+        }
+         else if ((codePoint & -2097152) === 0) {
+          out.u8_za3lpa$(codePoint >> 18 & 7 | 240);
+          out.u8_za3lpa$(this.createByte_0(codePoint, 12));
+          out.u8_za3lpa$(this.createByte_0(codePoint, 6));
+        }
+        out.u8_za3lpa$(codePoint & 63 | 128);
+      }
+    }
+  };
+  UTF8.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'UTF8',
+    interfaces: [Charset]
+  };
+  var UTF8_instance = null;
+  function UTF8_getInstance() {
+    if (UTF8_instance === null) {
+      new UTF8();
+    }
+    return UTF8_instance;
+  }
+  function ASCII() {
+    ASCII_instance = this;
+  }
+  ASCII.prototype.decode_9w11d2$ = function (out, src, start, end) {
+    for (var n = start; n < end; n++)
+      out.append_s8itvh$(toChar(src[n]));
+  };
+  ASCII.prototype.encode_srd0ak$ = function (out, src, start, end) {
+    for (var n = start; n < end; n++)
+      out.u8_za3lpa$(src.charCodeAt(n) | 0);
+  };
+  ASCII.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'ASCII',
+    interfaces: [Charset]
+  };
+  var ASCII_instance = null;
+  function ASCII_getInstance() {
+    if (ASCII_instance === null) {
+      new ASCII();
+    }
+    return ASCII_instance;
+  }
+  function toString($receiver, charset) {
+    var $receiver_0 = new StringBuilder();
+    charset.decode_9w11d2$($receiver_0, $receiver, 0, $receiver.length);
+    return $receiver_0.toString();
+  }
+  function toByteArray($receiver, charset) {
+    var $this = new ByteArrayOutputStream();
+    charset.encode_srd0ak$($this, $receiver, 0, $receiver.length);
+    return $this.toByteArray();
+  }
+  function CRC32() {
+    CRC32_instance = this;
+    var $receiver = new Int32Array(256);
+    var tmp$;
+    var POLY = (new Kotlin.Long(-306674912, 0)).toInt();
+    for (var n = 0; n < 256; n++) {
+      var c = n;
+      for (var k = 0; k < 8; k++) {
+        if ((c & 1) !== 0) {
+          tmp$ = POLY ^ c >>> 1;
+        }
+         else {
+          tmp$ = c >>> 1;
+        }
+        c = tmp$;
+      }
+      $receiver[n] = c;
+    }
+    this.table = $receiver;
+  }
+  CRC32.prototype.update_3fbn1q$ = function (initial, u) {
+    var crc = initial ^ -1;
+    for (var i = 0; i < u.length; i++) {
+      crc = this.table[(crc ^ u[i]) & 255] ^ crc >>> 8;
+    }
+    return crc ^ -1;
+  };
+  CRC32.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'CRC32',
+    interfaces: []
+  };
+  var CRC32_instance = null;
+  function CRC32_getInstance() {
+    if (CRC32_instance === null) {
+      new CRC32();
+    }
+    return CRC32_instance;
+  }
+  function crc32($receiver) {
+    return CRC32_getInstance().update_3fbn1q$(0, $receiver);
+  }
+  function download(filename, data, type) {
+    if (type === void 0)
+      type = 'application/octet-stream';
+    var tmp$, tmp$_0, tmp$_1;
+    var o = {};
+    o['type'] = type;
+    var blob = new Blob([data], o);
+    if (window.navigator.msSaveOrOpenBlob) {
+      window.navigator.msSaveBlob(blob, filename);
+    }
+     else {
+      var elem = Kotlin.isType(tmp$ = window.document.createElement('a'), HTMLAnchorElement) ? tmp$ : throwCCE();
+      elem.href = URL.createObjectURL(blob);
+      elem.download = filename;
+      (tmp$_0 = document.body) != null ? tmp$_0.appendChild(elem) : null;
+      elem.click();
+      (tmp$_1 = document.body) != null ? tmp$_1.removeChild(elem) : null;
+    }
+  }
   function Indenter() {
     this.indentation = 0;
     this.lines_0 = ArrayList_init();
@@ -520,7 +828,7 @@
     var element = Indenter$Indents_getInstance().get_za3lpa$(this.indentation) + str;
     $receiver.add_11rb$(element);
   };
-  Indenter.prototype.line_a4mwiz$ = defineInlineFunction('output.Indenter.line_a4mwiz$', function (str, callback) {
+  Indenter.prototype.line_a4mwiz$ = defineInlineFunction('output.io.ktor.start.util.Indenter.line_a4mwiz$', function (str, callback) {
     this.line_61zpoe$(str + ' {');
     this.indentation = this.indentation + 1 | 0;
     try {
@@ -531,7 +839,7 @@
     }
     this.line_61zpoe$('}');
   });
-  Indenter.prototype.invoke_79xod4$ = defineInlineFunction('output.Indenter.invoke_79xod4$', function ($receiver, callback) {
+  Indenter.prototype.invoke_79xod4$ = defineInlineFunction('output.io.ktor.start.util.Indenter.invoke_79xod4$', function ($receiver, callback) {
     this.line_61zpoe$($receiver + ' {');
     this.indentation = this.indentation + 1 | 0;
     try {
@@ -542,10 +850,10 @@
     }
     this.line_61zpoe$('}');
   });
-  Indenter.prototype.unaryPlus_pdl1vz$ = defineInlineFunction('output.Indenter.unaryPlus_pdl1vz$', function ($receiver) {
+  Indenter.prototype.unaryPlus_pdl1vz$ = defineInlineFunction('output.io.ktor.start.util.Indenter.unaryPlus_pdl1vz$', function ($receiver) {
     this.line_61zpoe$($receiver);
   });
-  Indenter.prototype.indent_o14v8n$ = defineInlineFunction('output.Indenter.indent_o14v8n$', function (callback) {
+  Indenter.prototype.indent_o14v8n$ = defineInlineFunction('output.io.ktor.start.util.Indenter.indent_o14v8n$', function (callback) {
     this.indentation = this.indentation + 1 | 0;
     try {
       callback();
@@ -566,6 +874,32 @@
     var $receiver = new Indenter();
     callback($receiver);
     return $receiver.toString();
+  }
+  var jq = defineInlineFunction('output.io.ktor.start.util.jq_61zpoe$', function (str) {
+    return jQuery(str);
+  });
+  var jq_0 = defineInlineFunction('output.io.ktor.start.util.jq_lt8gi4$', function (str) {
+    return jQuery(str);
+  });
+  var on = defineInlineFunction('output.io.ktor.start.util.on_nsccip$', function ($receiver, name, event) {
+    return $receiver.on(name, event);
+  });
+  var each = defineInlineFunction('output.io.ktor.start.util.each_4tgbmb$', function ($receiver, event) {
+    $receiver.each(event);
+  });
+  var change = defineInlineFunction('output.io.ktor.start.util.change_tue5ot$', function ($receiver, event) {
+    return $receiver.change(event);
+  });
+  function jsObject(pairs) {
+    var tmp$;
+    var obj = {};
+    for (tmp$ = 0; tmp$ !== pairs.length; ++tmp$) {
+      var tmp$_0 = pairs[tmp$];
+      var key = tmp$_0.get_za3lpa$(0);
+      var value = tmp$_0.get_za3lpa$(1);
+      obj[key] = value;
+    }
+    return obj;
   }
   function ZipBuilder() {
     this.files = LinkedHashMap_init();
@@ -597,7 +931,7 @@
     var value = new ZipBuilder$FileInfo(name, data, date);
     $receiver.put_xwzc9p$(name, value);
   };
-  ZipBuilder.prototype.add_wvmfjy$ = function (name, data, charset, date) {
+  ZipBuilder.prototype.add_axwij4$ = function (name, data, charset, date) {
     if (charset === void 0)
       charset = UTF8_getInstance();
     if (date === void 0)
@@ -693,321 +1027,65 @@
     generate(zb);
     return zb.toByteArray();
   }
-  function Charset() {
-  }
-  Charset.$metadata$ = {
-    kind: Kind_INTERFACE,
-    simpleName: 'Charset',
-    interfaces: []
-  };
-  function UTF8() {
-    UTF8_instance = this;
-  }
-  UTF8.prototype.createByte_0 = function (codePoint, shift) {
-    return codePoint >> shift & 63 | 128;
-  };
-  UTF8.prototype.decode_9w11d2$ = function (out, src, start, end) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2;
-    var i = start;
-    while (i < end) {
-      var c = src[tmp$ = i, i = tmp$ + 1 | 0, tmp$] & 255;
-      switch (c >> 4) {
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-          out.append_s8itvh$(toChar(c));
-          break;
-        case 12:
-        case 13:
-          out.append_s8itvh$(toChar((c & 31) << 6 | src[tmp$_0 = i, i = tmp$_0 + 1 | 0, tmp$_0] & 63));
-          break;
-        case 14:
-          out.append_s8itvh$(toChar((c & 15) << 12 | (src[tmp$_1 = i, i = tmp$_1 + 1 | 0, tmp$_1] & 63) << 6 | src[tmp$_2 = i, i = tmp$_2 + 1 | 0, tmp$_2] & 63));
-          break;
-      }
-    }
-  };
-  UTF8.prototype.encode_1sr9yu$ = function (out, src, start, end) {
-    for (var n = start; n < end; n++) {
-      var codePoint = src.charCodeAt(n) | 0;
-      if ((codePoint & ~127) === 0) {
-        out.u8_za3lpa$(codePoint);
-      }
-       else {
-        if ((codePoint & ~2047) === 0) {
-          out.u8_za3lpa$(codePoint >> 6 & 31 | 192);
-        }
-         else if ((codePoint & ~65535) === 0) {
-          out.u8_za3lpa$(codePoint >> 12 & 15 | 224);
-          out.u8_za3lpa$(this.createByte_0(codePoint, 6));
-        }
-         else if ((codePoint & -2097152) === 0) {
-          out.u8_za3lpa$(codePoint >> 18 & 7 | 240);
-          out.u8_za3lpa$(this.createByte_0(codePoint, 12));
-          out.u8_za3lpa$(this.createByte_0(codePoint, 6));
-        }
-        out.u8_za3lpa$(codePoint & 63 | 128);
-      }
-    }
-  };
-  UTF8.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'UTF8',
-    interfaces: [Charset]
-  };
-  var UTF8_instance = null;
-  function UTF8_getInstance() {
-    if (UTF8_instance === null) {
-      new UTF8();
-    }
-    return UTF8_instance;
-  }
-  function ASCII() {
-    ASCII_instance = this;
-  }
-  ASCII.prototype.decode_9w11d2$ = function (out, src, start, end) {
-    for (var n = start; n < end; n++)
-      out.append_s8itvh$(toChar(src[n]));
-  };
-  ASCII.prototype.encode_1sr9yu$ = function (out, src, start, end) {
-    for (var n = start; n < end; n++)
-      out.u8_za3lpa$(src.charCodeAt(n) | 0);
-  };
-  ASCII.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'ASCII',
-    interfaces: [Charset]
-  };
-  var ASCII_instance = null;
-  function ASCII_getInstance() {
-    if (ASCII_instance === null) {
-      new ASCII();
-    }
-    return ASCII_instance;
-  }
-  function toString($receiver, charset) {
-    var $receiver_0 = new StringBuilder();
-    charset.decode_9w11d2$($receiver_0, $receiver, 0, $receiver.length);
-    return $receiver_0.toString();
-  }
-  function toByteArray($receiver, charset) {
-    var $this = new ByteArrayOutputStream();
-    charset.encode_1sr9yu$($this, $receiver, 0, $receiver.length);
-    return $this.toByteArray();
-  }
-  function jsObject(pairs) {
-    var tmp$;
-    var obj = {};
-    for (tmp$ = 0; tmp$ !== pairs.length; ++tmp$) {
-      var tmp$_0 = pairs[tmp$];
-      var key = tmp$_0.get_za3lpa$(0);
-      var value = tmp$_0.get_za3lpa$(1);
-      obj[key] = value;
-    }
-    return obj;
-  }
-  function ByteArrayOutputStream() {
-    this.pos_0 = 0;
-    this.data_0 = new Int8Array(1024);
-  }
-  Object.defineProperty(ByteArrayOutputStream.prototype, 'size', {
-    get: function () {
-      return this.pos_0;
-    }
-  });
-  var Math_0 = Math;
-  ByteArrayOutputStream.prototype.ensure_0 = function (count) {
-    if ((this.pos_0 + count | 0) > this.data_0.length) {
-      var tmp$ = this.data_0;
-      var a = this.pos_0 + count | 0;
-      var b = this.data_0.length * 2 | 0;
-      this.data_0 = copyOf(tmp$, Math_0.max(a, b));
-    }
-    return this;
-  };
-  ByteArrayOutputStream.prototype.byte_0 = wrapFunction(function () {
-    return function (v) {
-      var tmp$;
-      this.data_0[tmp$ = this.pos_0, this.pos_0 = tmp$ + 1 | 0, tmp$] = numberToByte(v);
-    };
-  });
-  ByteArrayOutputStream.prototype.u8_za3lpa$ = function (v) {
-    var $receiver = this.ensure_0(1);
-    var tmp$;
-    $receiver.data_0[tmp$ = $receiver.pos_0, $receiver.pos_0 = tmp$ + 1 | 0, tmp$] = numberToByte(v);
-    return $receiver;
-  };
-  ByteArrayOutputStream.prototype.u16_le_za3lpa$ = function (v) {
-    var $receiver = this.ensure_0(2);
-    var v_0 = v >> 0;
-    var tmp$;
-    $receiver.data_0[tmp$ = $receiver.pos_0, $receiver.pos_0 = tmp$ + 1 | 0, tmp$] = numberToByte(v_0);
-    var v_1 = v >> 8;
-    var tmp$_0;
-    $receiver.data_0[tmp$_0 = $receiver.pos_0, $receiver.pos_0 = tmp$_0 + 1 | 0, tmp$_0] = numberToByte(v_1);
-    return $receiver;
-  };
-  ByteArrayOutputStream.prototype.u32_le_za3lpa$ = function (v) {
-    var $receiver = this.ensure_0(4);
-    var v_0 = v >> 0;
-    var tmp$;
-    $receiver.data_0[tmp$ = $receiver.pos_0, $receiver.pos_0 = tmp$ + 1 | 0, tmp$] = numberToByte(v_0);
-    var v_1 = v >> 8;
-    var tmp$_0;
-    $receiver.data_0[tmp$_0 = $receiver.pos_0, $receiver.pos_0 = tmp$_0 + 1 | 0, tmp$_0] = numberToByte(v_1);
-    var v_2 = v >> 16;
-    var tmp$_1;
-    $receiver.data_0[tmp$_1 = $receiver.pos_0, $receiver.pos_0 = tmp$_1 + 1 | 0, tmp$_1] = numberToByte(v_2);
-    var v_3 = v >> 24;
-    var tmp$_2;
-    $receiver.data_0[tmp$_2 = $receiver.pos_0, $receiver.pos_0 = tmp$_2 + 1 | 0, tmp$_2] = numberToByte(v_3);
-    return $receiver;
-  };
-  ByteArrayOutputStream.prototype.bytes_fqrh44$ = function (data) {
-    var $receiver = this.ensure_0(data.length);
-    for (var n = 0; n < data.length; n++) {
-      var v = data[n];
-      var tmp$;
-      $receiver.data_0[tmp$ = $receiver.pos_0, $receiver.pos_0 = tmp$ + 1 | 0, tmp$] = numberToByte(v);
-    }
-    return $receiver;
-  };
-  ByteArrayOutputStream.prototype.toByteArray = function () {
-    return copyOf(this.data_0, this.pos_0);
-  };
-  ByteArrayOutputStream.prototype.build_8xvj6p$ = defineInlineFunction('output.ByteArrayOutputStream.build_8xvj6p$', function (builder) {
-    builder(this);
-    return this.toByteArray();
-  });
-  ByteArrayOutputStream.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'ByteArrayOutputStream',
-    interfaces: []
-  };
-  var buildByteArray = defineInlineFunction('output.buildByteArray_8xvj6p$', wrapFunction(function () {
-    var ByteArrayOutputStream_init = _.ByteArrayOutputStream;
-    return function (builder) {
-      var $this = new ByteArrayOutputStream_init();
-      builder($this);
-      return $this.toByteArray();
-    };
-  }));
-  function CRC32() {
-    CRC32_instance = this;
-    var $receiver = new Int32Array(256);
-    var tmp$;
-    var POLY = (new Kotlin.Long(-306674912, 0)).toInt();
-    for (var n = 0; n < 256; n++) {
-      var c = n;
-      for (var k = 0; k < 8; k++) {
-        if ((c & 1) !== 0) {
-          tmp$ = POLY ^ c >>> 1;
-        }
-         else {
-          tmp$ = c >>> 1;
-        }
-        c = tmp$;
-      }
-      $receiver[n] = c;
-    }
-    this.table = $receiver;
-  }
-  CRC32.prototype.update_3fbn1q$ = function (initial, u) {
-    var crc = initial ^ -1;
-    for (var i = 0; i < u.length; i++) {
-      crc = this.table[(crc ^ u[i]) & 255] ^ crc >>> 8;
-    }
-    return crc ^ -1;
-  };
-  CRC32.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'CRC32',
-    interfaces: []
-  };
-  var CRC32_instance = null;
-  function CRC32_getInstance() {
-    if (CRC32_instance === null) {
-      new CRC32();
-    }
-    return CRC32_instance;
-  }
-  function crc32($receiver) {
-    return CRC32_getInstance().update_3fbn1q$(0, $receiver);
-  }
-  function download(filename, data, type) {
-    if (type === void 0)
-      type = 'application/octet-stream';
-    var tmp$, tmp$_0, tmp$_1;
-    var o = {};
-    o['type'] = type;
-    var blob = new Blob([data], o);
-    if (window.navigator.msSaveOrOpenBlob) {
-      window.navigator.msSaveBlob(blob, filename);
-    }
-     else {
-      var elem = Kotlin.isType(tmp$ = window.document.createElement('a'), HTMLAnchorElement) ? tmp$ : throwCCE();
-      elem.href = URL.createObjectURL(blob);
-      elem.download = filename;
-      (tmp$_0 = document.body) != null ? tmp$_0.appendChild(elem) : null;
-      elem.click();
-      (tmp$_1 = document.body) != null ? tmp$_1.removeChild(elem) : null;
-    }
-  }
-  _.jq_61zpoe$ = jq;
-  _.jq_lt8gi4$ = jq_0;
-  _.on_nsccip$ = on;
-  _.each_4tgbmb$ = each;
-  _.change_tue5ot$ = change;
-  Object.defineProperty(_, 'DOLLAR', {
+  var package$io = _.io || (_.io = {});
+  var package$ktor = package$io.ktor || (package$io.ktor = {});
+  var package$start = package$ktor.start || (package$ktor.start = {});
+  package$start.main_kand9s$ = main;
+  $$importsForInline$$.output = _;
+  package$start.addDependencies = addDependencies;
+  package$start.registerBuildButton = registerBuildButton;
+  package$start.BuildInfo = BuildInfo;
+  package$start.buildPomXml_j0vqe2$ = buildPomXml;
+  Object.defineProperty(package$start, 'DOLLAR', {
     get: function () {
       return DOLLAR;
     }
   });
-  _.main_kand9s$ = main;
-  $$importsForInline$$.output = _;
-  _.addDependencies = addDependencies;
-  _.registerBuildButton = registerBuildButton;
-  _.handleFiltering = handleFiltering;
-  _.removeLoading = removeLoading;
-  _.Dependency = Dependency;
-  Object.defineProperty(_, 'Dependencies', {
+  package$start.buildBuildGradle_j0vqe2$ = buildBuildGradle;
+  package$start.buildApplicationConf_j0vqe2$ = buildApplicationConf;
+  package$start.buildApplicationKt_j0vqe2$ = buildApplicationKt;
+  package$start.handleFiltering = handleFiltering;
+  package$start.removeLoading = removeLoading;
+  package$start.Dependency = Dependency;
+  Object.defineProperty(package$start, 'Dependencies', {
     get: Dependencies_getInstance
   });
-  Object.defineProperty(_, 'dependencies', {
+  Object.defineProperty(package$start, 'dependencies', {
     get: function () {
       return dependencies;
     }
   });
+  var package$util = package$start.util || (package$start.util = {});
+  package$util.ByteArrayOutputStream = ByteArrayOutputStream;
+  package$util.buildByteArray_xuyaid$ = buildByteArray;
+  package$util.Charset = Charset;
+  Object.defineProperty(package$util, 'UTF8', {
+    get: UTF8_getInstance
+  });
+  Object.defineProperty(package$util, 'ASCII', {
+    get: ASCII_getInstance
+  });
+  package$util.toString_ecs3bj$ = toString;
+  package$util.toByteArray_wtqmxj$ = toByteArray;
+  Object.defineProperty(package$util, 'CRC32', {
+    get: CRC32_getInstance
+  });
+  package$util.crc32_964n91$ = crc32;
+  package$util.download_cyqrs4$ = download;
   Object.defineProperty(Indenter, 'Indents', {
     get: Indenter$Indents_getInstance
   });
-  _.Indenter = Indenter;
-  _.indenter_gyo5pe$ = indenter;
+  package$util.Indenter = Indenter;
+  package$util.indenter_yot30u$ = indenter;
+  package$util.jq_61zpoe$ = jq;
+  package$util.jq_lt8gi4$ = jq_0;
+  package$util.on_nsccip$ = on;
+  package$util.each_4tgbmb$ = each;
+  package$util.change_tue5ot$ = change;
+  package$util.jsObject_qgjp2i$ = jsObject;
   ZipBuilder.FileInfo = ZipBuilder$FileInfo;
-  _.ZipBuilder = ZipBuilder;
-  _.buildZip_xtijp9$ = buildZip;
-  _.Charset = Charset;
-  Object.defineProperty(_, 'UTF8', {
-    get: UTF8_getInstance
-  });
-  Object.defineProperty(_, 'ASCII', {
-    get: ASCII_getInstance
-  });
-  _.toString_jcr7nl$ = toString;
-  _.toByteArray_234o2j$ = toByteArray;
-  _.jsObject_qgjp2i$ = jsObject;
-  _.ByteArrayOutputStream = ByteArrayOutputStream;
-  _.buildByteArray_8xvj6p$ = buildByteArray;
-  Object.defineProperty(_, 'CRC32', {
-    get: CRC32_getInstance
-  });
-  _.crc32_964n91$ = crc32;
-  _.download_cyqrs4$ = download;
+  package$util.ZipBuilder = ZipBuilder;
+  package$util.buildZip_oi1qpb$ = buildZip;
   DOLLAR = 36;
   var $receiver = Object.values(Dependencies_getInstance());
   var destination = ArrayList_init();
