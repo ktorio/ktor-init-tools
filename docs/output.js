@@ -14,15 +14,19 @@
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var defineInlineFunction = Kotlin.defineInlineFunction;
   var wrapFunction = Kotlin.wrapFunction;
+  var Kind_CLASS = Kotlin.Kind.CLASS;
+  var listOf = Kotlin.kotlin.collections.listOf_mh5how$;
+  var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var println = Kotlin.kotlin.io.println_s8jyv4$;
+  var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
+  var listOf_0 = Kotlin.kotlin.collections.listOf_i5x0yv$;
+  var plus = Kotlin.kotlin.collections.plus_mydzjv$;
   var Unit = Kotlin.kotlin.Unit;
+  var equals = Kotlin.equals;
   var RuntimeException_init = Kotlin.kotlin.RuntimeException_init_pdl1vj$;
   var Throwable = Error;
   var lastOrNull = Kotlin.kotlin.collections.lastOrNull_2p1efm$;
-  var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
-  var Kind_CLASS = Kotlin.Kind.CLASS;
-  var equals = Kotlin.equals;
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_8cymmc$;
   var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
@@ -38,7 +42,88 @@
     return $receiver.on(name, event);
   });
   var DOLLAR;
-  function main$lambda$lambda$lambda(closure$ktorVersion, closure$developmentEngineFQ, closure$ktorEngine) {
+  function Dependency(repo, artifact, id, title) {
+    if (id === void 0)
+      id = '';
+    this.repo = repo;
+    this.artifact = artifact;
+    this.id = id;
+    this.title = title;
+  }
+  Dependency.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Dependency',
+    interfaces: []
+  };
+  Dependency.prototype.component1 = function () {
+    return this.repo;
+  };
+  Dependency.prototype.component2 = function () {
+    return this.artifact;
+  };
+  Dependency.prototype.component3 = function () {
+    return this.id;
+  };
+  Dependency.prototype.component4 = function () {
+    return this.title;
+  };
+  Dependency.prototype.copy_w74nik$ = function (repo, artifact, id, title) {
+    return new Dependency(repo === void 0 ? this.repo : repo, artifact === void 0 ? this.artifact : artifact, id === void 0 ? this.id : id, title === void 0 ? this.title : title);
+  };
+  Dependency.prototype.toString = function () {
+    return 'Dependency(repo=' + Kotlin.toString(this.repo) + (', artifact=' + Kotlin.toString(this.artifact)) + (', id=' + Kotlin.toString(this.id)) + (', title=' + Kotlin.toString(this.title)) + ')';
+  };
+  Dependency.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.repo) | 0;
+    result = result * 31 + Kotlin.hashCode(this.artifact) | 0;
+    result = result * 31 + Kotlin.hashCode(this.id) | 0;
+    result = result * 31 + Kotlin.hashCode(this.title) | 0;
+    return result;
+  };
+  Dependency.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.repo, other.repo) && Kotlin.equals(this.artifact, other.artifact) && Kotlin.equals(this.id, other.id) && Kotlin.equals(this.title, other.title)))));
+  };
+  function Dependencies() {
+    Dependencies_instance = this;
+    this.KOTLINX_HTML = new Dependency('jcenter', 'io.ktor:ktor-html-builder:$ktor_version', 'html-dsl', 'HTML DSL');
+    this.dependencies = listOf(this.KOTLINX_HTML);
+  }
+  Dependencies.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Dependencies',
+    interfaces: []
+  };
+  var Dependencies_instance = null;
+  function Dependencies_getInstance() {
+    if (Dependencies_instance === null) {
+      new Dependencies();
+    }
+    return Dependencies_instance;
+  }
+  var dependencies;
+  function main(args) {
+    addDependencies();
+    registerBuildButton();
+    removeLoading();
+  }
+  function addDependencies() {
+    var tmp$;
+    var str = '#dependencies';
+    var deps = jQuery(str);
+    deps.text('');
+    tmp$ = dependencies.iterator();
+    while (tmp$.hasNext()) {
+      var dependency = tmp$.next();
+      var str_0 = "<label for='artifact-" + dependency.id + "' class='artifact' />";
+      var tmp$_0 = jQuery(str_0);
+      var str_1 = "<input id='artifact-" + dependency.id + "' type='checkbox' />";
+      var tmp$_1 = tmp$_0.append(jQuery(str_1));
+      var str_2 = '<span />';
+      deps.append(tmp$_1.append(jQuery(str_2).text(' ' + dependency.title)));
+    }
+  }
+  function registerBuildButton$lambda$lambda$lambda(closure$ktorVersion, closure$developmentEngineFQ, closure$reposToInclude, closure$ktorEngine, closure$dependenciesToInclude) {
     return function ($receiver) {
       var $receiver_0 = 'buildscript';
       $receiver.line_61zpoe$($receiver_0 + ' {');
@@ -90,26 +175,43 @@
       }
       $receiver.line_61zpoe$('}');
       $receiver.line_61zpoe$('');
-      $receiver.line_61zpoe$('repositories' + ' {');
+      var $receiver_1 = 'repositories';
+      $receiver.line_61zpoe$($receiver_1 + ' {');
       $receiver.indentation = $receiver.indentation + 1 | 0;
       try {
-        $receiver.line_61zpoe$('jcenter()');
-        $receiver.line_61zpoe$("maven { url 'https://kotlin.bintray.com/ktor' }");
+        var tmp$;
+        tmp$ = closure$reposToInclude.iterator();
+        while (tmp$.hasNext()) {
+          var repo = tmp$.next();
+          if (equals(repo, 'jcenter')) {
+            $receiver.line_61zpoe$('jcenter()');
+          }
+           else {
+            $receiver.line_61zpoe$("maven { url '" + repo + "' }");
+          }
+        }
       }
       finally {
         $receiver.indentation = $receiver.indentation - 1 | 0;
       }
       $receiver.line_61zpoe$('}');
       $receiver.line_61zpoe$('');
-      var $receiver_1 = 'dependencies';
-      $receiver.line_61zpoe$($receiver_1 + ' {');
+      var $receiver_2 = 'dependencies';
+      $receiver.line_61zpoe$($receiver_2 + ' {');
       $receiver.indentation = $receiver.indentation + 1 | 0;
       try {
         var closure$ktorEngine_0 = closure$ktorEngine;
+        var closure$dependenciesToInclude_0 = closure$dependenciesToInclude;
+        var tmp$_0;
         $receiver.line_61zpoe$('compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"');
         $receiver.line_61zpoe$('compile ' + '"' + 'io.ktor:ktor-server-' + closure$ktorEngine_0 + ':' + String.fromCharCode(DOLLAR) + 'ktor_version' + '"');
-        $receiver.line_61zpoe$('compile "io.ktor:ktor-html-builder:$ktor_version"');
         $receiver.line_61zpoe$('compile "ch.qos.logback:logback-classic:$logback_version"');
+        $receiver.line_61zpoe$('');
+        tmp$_0 = closure$dependenciesToInclude_0.iterator();
+        while (tmp$_0.hasNext()) {
+          var dep = tmp$_0.next();
+          $receiver.line_61zpoe$('compile ' + '"' + dep.artifact + '"');
+        }
         $receiver.line_61zpoe$('');
         $receiver.line_61zpoe$('testCompile "io.ktor:ktor-server-tests:$ktor_version"');
       }
@@ -122,7 +224,7 @@
       return Unit;
     };
   }
-  function main$lambda$lambda$lambda_0(closure$artifactGroup) {
+  function registerBuildButton$lambda$lambda$lambda_0(closure$artifactGroup) {
     return function ($receiver) {
       $receiver.line_61zpoe$('ktor' + ' {');
       $receiver.indentation = $receiver.indentation + 1 | 0;
@@ -154,19 +256,25 @@
       return Unit;
     };
   }
-  function main$lambda$lambda$lambda_1(closure$artifactGroup, closure$developmentPackage) {
+  function registerBuildButton$lambda$lambda$lambda_1(closure$artifactGroup, closure$dependenciesToInclude, closure$developmentPackage) {
     return function ($receiver) {
       $receiver.line_61zpoe$('package ' + closure$artifactGroup);
       $receiver.line_61zpoe$('');
       $receiver.line_61zpoe$('import io.ktor.application.*');
       $receiver.line_61zpoe$('import io.ktor.response.*');
       $receiver.line_61zpoe$('import io.ktor.routing.*');
+      if (closure$dependenciesToInclude.contains_11rb$(Dependencies_getInstance().KOTLINX_HTML)) {
+        $receiver.line_61zpoe$('import io.ktor.html.*');
+        $receiver.line_61zpoe$('import kotlinx.html.*');
+      }
       $receiver.line_61zpoe$('');
       $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + closure$developmentPackage + '.main(args)');
       $receiver.line_61zpoe$('');
-      $receiver.line_61zpoe$('fun Application.main()' + ' {');
+      var $receiver_0 = 'fun Application.main()';
+      $receiver.line_61zpoe$($receiver_0 + ' {');
       $receiver.indentation = $receiver.indentation + 1 | 0;
       try {
+        var closure$dependenciesToInclude_0 = closure$dependenciesToInclude;
         $receiver.line_61zpoe$('routing' + ' {');
         $receiver.indentation = $receiver.indentation + 1 | 0;
         try {
@@ -179,6 +287,34 @@
             $receiver.indentation = $receiver.indentation - 1 | 0;
           }
           $receiver.line_61zpoe$('}');
+          $receiver.line_61zpoe$('');
+          if (closure$dependenciesToInclude_0.contains_11rb$(Dependencies_getInstance().KOTLINX_HTML)) {
+            $receiver.line_61zpoe$('get("/html")' + ' {');
+            $receiver.indentation = $receiver.indentation + 1 | 0;
+            try {
+              $receiver.line_61zpoe$('call.respondHtml' + ' {');
+              $receiver.indentation = $receiver.indentation + 1 | 0;
+              try {
+                $receiver.line_61zpoe$('body' + ' {');
+                $receiver.indentation = $receiver.indentation + 1 | 0;
+                try {
+                  $receiver.line_61zpoe$('h1 { +"HTML" }');
+                }
+                finally {
+                  $receiver.indentation = $receiver.indentation - 1 | 0;
+                }
+                $receiver.line_61zpoe$('}');
+              }
+              finally {
+                $receiver.indentation = $receiver.indentation - 1 | 0;
+              }
+              $receiver.line_61zpoe$('}');
+            }
+            finally {
+              $receiver.indentation = $receiver.indentation - 1 | 0;
+            }
+            $receiver.line_61zpoe$('}');
+          }
         }
         finally {
           $receiver.indentation = $receiver.indentation - 1 | 0;
@@ -193,7 +329,7 @@
     };
   }
   var NotImplementedError_init = Kotlin.kotlin.NotImplementedError;
-  function main$lambda$lambda(closure$ktorEngine, closure$projectType, closure$artifactName, closure$ktorVersion, closure$artifactGroup) {
+  function registerBuildButton$lambda$lambda(closure$ktorEngine, closure$projectType, closure$artifactName, closure$ktorVersion, closure$reposToInclude, closure$dependenciesToInclude, closure$artifactGroup) {
     return function ($receiver) {
       var developmentPackage = 'io.ktor.server.' + closure$ktorEngine;
       var developmentEngineFQ = developmentPackage + '.DevelopmentEngine';
@@ -201,16 +337,19 @@
         case 'maven':
           throw new NotImplementedError_init('An operation is not implemented: ' + 'Unsupported maven for now');
         case 'gradle':
-          $receiver.add_wvmfjy$(closure$artifactName + '/build.gradle', indenter(main$lambda$lambda$lambda(closure$ktorVersion, developmentEngineFQ, closure$ktorEngine)));
+          $receiver.add_wvmfjy$(closure$artifactName + '/build.gradle', indenter(registerBuildButton$lambda$lambda$lambda(closure$ktorVersion, developmentEngineFQ, closure$reposToInclude, closure$ktorEngine, closure$dependenciesToInclude)));
           break;
         default:throw RuntimeException_init('Unknown project type ' + closure$projectType);
       }
-      $receiver.add_wvmfjy$(closure$artifactName + '/resources/application.conf', indenter(main$lambda$lambda$lambda_0(closure$artifactGroup)));
-      $receiver.add_wvmfjy$(closure$artifactName + '/src/Application.kt', indenter(main$lambda$lambda$lambda_1(closure$artifactGroup, developmentPackage)));
+      $receiver.add_wvmfjy$(closure$artifactName + '/resources/application.conf', indenter(registerBuildButton$lambda$lambda$lambda_0(closure$artifactGroup)));
+      $receiver.add_wvmfjy$(closure$artifactName + '/src/Application.kt', indenter(registerBuildButton$lambda$lambda$lambda_1(closure$artifactGroup, closure$dependenciesToInclude, developmentPackage)));
       return Unit;
     };
   }
-  function main$lambda() {
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
+  function registerBuildButton$lambda() {
+    var tmp$;
     var str = '#project-type';
     var projectType = jQuery(str).val();
     var str_0 = '#ktor-engine';
@@ -226,8 +365,34 @@
     println('ktorEngine: ' + ktorEngine);
     println('artifactGroup: ' + artifactGroup);
     println('artifactName: ' + artifactName);
+    var $receiver = dependencies;
+    var destination = ArrayList_init();
+    var tmp$_0;
+    tmp$_0 = $receiver.iterator();
+    while (tmp$_0.hasNext()) {
+      var element = tmp$_0.next();
+      var str_4 = '#artifact-' + element.id;
+      if (jQuery(str_4).prop('checked'))
+        destination.add_11rb$(element);
+    }
+    var dependenciesToInclude = toSet(destination);
+    tmp$ = dependencies.iterator();
+    while (tmp$.hasNext()) {
+      var dependency = tmp$.next();
+      var toInclude = dependenciesToInclude.contains_11rb$(dependency);
+      println('DEPENDENCY: ' + dependency + ' :: include=' + toInclude);
+    }
+    var tmp$_1 = listOf_0(['jcenter', 'https://kotlin.bintray.com/ktor']);
+    var destination_0 = ArrayList_init(collectionSizeOrDefault(dependenciesToInclude, 10));
+    var tmp$_2;
+    tmp$_2 = dependenciesToInclude.iterator();
+    while (tmp$_2.hasNext()) {
+      var item = tmp$_2.next();
+      destination_0.add_11rb$(item.repo);
+    }
+    var reposToInclude = toSet(plus(tmp$_1, destination_0));
     try {
-      download('ktor-sample-' + projectType + '-' + ktorEngine + '-' + artifactGroup + '-' + artifactName + '.zip', buildZip(main$lambda$lambda(ktorEngine, projectType, artifactName, ktorVersion, artifactGroup)));
+      download('ktor-sample-' + projectType + '-' + ktorEngine + '-' + artifactGroup + '-' + artifactName + '.zip', buildZip(registerBuildButton$lambda$lambda(ktorEngine, projectType, artifactName, ktorVersion, reposToInclude, dependenciesToInclude, artifactGroup)));
     }
      catch (e) {
       if (Kotlin.isType(e, Throwable)) {
@@ -239,11 +404,14 @@
     }
     return Unit;
   }
-  function main(args) {
+  function registerBuildButton() {
     var str = '#buildButton';
-    jQuery(str).on('click', main$lambda);
+    jQuery(str).removeAttr('disabled').on('click', registerBuildButton$lambda);
   }
-  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+  function removeLoading() {
+    var str = '.loading';
+    jQuery(str).removeClass('loading').addClass('loaded');
+  }
   function Indenter() {
     this.indentation = 0;
     this.lines_0 = ArrayList_init();
@@ -721,8 +889,20 @@
       return DOLLAR;
     }
   });
-  $$importsForInline$$.output = _;
+  _.Dependency = Dependency;
+  Object.defineProperty(_, 'Dependencies', {
+    get: Dependencies_getInstance
+  });
+  Object.defineProperty(_, 'dependencies', {
+    get: function () {
+      return dependencies;
+    }
+  });
   _.main_kand9s$ = main;
+  $$importsForInline$$.output = _;
+  _.addDependencies = addDependencies;
+  _.registerBuildButton = registerBuildButton;
+  _.removeLoading = removeLoading;
   Object.defineProperty(Indenter, 'Indents', {
     get: Indenter$Indents_getInstance
   });
@@ -749,6 +929,7 @@
   _.crc32_964n91$ = crc32;
   _.download_cyqrs4$ = download;
   DOLLAR = 36;
+  dependencies = Dependencies_getInstance().dependencies;
   main([]);
   Kotlin.defineModule('output', _);
   return _;
