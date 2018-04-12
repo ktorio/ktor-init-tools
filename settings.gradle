@@ -1,1 +1,3 @@
 rootProject.name = 'start.ktor.io'
+
+include "ktor-intellij-plugin"

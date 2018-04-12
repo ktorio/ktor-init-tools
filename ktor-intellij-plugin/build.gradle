@@ -1,0 +1,26 @@
+plugins {
+  id "org.jetbrains.intellij" version "0.3.1"
+}
+
+//apply plugin: 'org.jetbrains.intellij'
+apply plugin: "kotlin"
+
+intellij {
+	version "IC-2017.2.5"
+	plugins = ['kotlin']
+	pluginName 'ktor'
+	plugins 'coverage'
+	downloadSources true
+}
+
+//publishPlugin {
+//	if (globalProps.jetbrainsUsername != null) {
+//		username globalProps.jetbrainsUsername
+//		password globalProps.jetbrainsPassword
+//	}
+//}
+
+runIde {
+	maxHeapSize = "2g"
+}
+
