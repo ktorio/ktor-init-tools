@@ -237,7 +237,7 @@
     $receiver.line_61zpoe$('buildscript' + ' {');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
-      $receiver.line_61zpoe$("ext.kotlin_version = '1.2.30'");
+      $receiver.line_61zpoe$("ext.kotlin_version = '1.2.41'");
       $receiver.line_61zpoe$("ext.ktor_version = '" + info.ktorVersion + "'");
       $receiver.line_61zpoe$("ext.logback_version = '1.2.1'");
       $receiver.line_61zpoe$('');
@@ -670,14 +670,14 @@
   UTF8.prototype.encode_srd0ak$ = function (out, src, start, end) {
     for (var n = start; n < end; n++) {
       var codePoint = src.charCodeAt(n) | 0;
-      if ((codePoint & ~127) === 0) {
+      if ((codePoint & -128) === 0) {
         out.u8_za3lpa$(codePoint);
       }
        else {
-        if ((codePoint & ~2047) === 0) {
+        if ((codePoint & -2048) === 0) {
           out.u8_za3lpa$(codePoint >> 6 & 31 | 192);
         }
-         else if ((codePoint & ~65535) === 0) {
+         else if ((codePoint & -65536) === 0) {
           out.u8_za3lpa$(codePoint >> 12 & 15 | 224);
           out.u8_za3lpa$(this.createByte_0(codePoint, 6));
         }
@@ -739,7 +739,7 @@
     CRC32_instance = this;
     var $receiver = new Int32Array(256);
     var tmp$;
-    var POLY = (new Kotlin.Long(-306674912, 0)).toInt();
+    var POLY = -306674912;
     for (var n = 0; n < 256; n++) {
       var c = n;
       for (var k = 0; k < 8; k++) {

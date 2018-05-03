@@ -121,7 +121,7 @@ const val DOLLAR = '$'
 
 fun Indenter.buildBuildGradle(info: BuildInfo) = info.apply {
     "buildscript" {
-        +"ext.kotlin_version = '1.2.30'"
+        +"ext.kotlin_version = '1.2.41'"
         +"ext.ktor_version = '$ktorVersion'"
         +"ext.logback_version = '1.2.1'"
         +""
