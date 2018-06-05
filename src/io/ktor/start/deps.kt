@@ -26,7 +26,7 @@ object Dependencies {
         "freemarker",
         "Freemarker",
         "Serve HTML content using Apache freemarker",
-        documentation = "http://ktor.io/features/freemarker.html"
+        documentation = "https://ktor.io/features/freemarker.html"
     )
     val TPL_VELOCITY = Dependency(
         "ktor",
@@ -41,7 +41,7 @@ object Dependencies {
         "auth",
         "Authentication",
         "Handle Basic and Digest HTTP Auth, Form authentication and OAuth 1a and 2",
-        documentation = "http://ktor.io/features/authentication.html"
+        documentation = "https://ktor.io/features/authentication.html"
     )
     val AUTH_JWT = Dependency(
         "ktor",
@@ -49,7 +49,7 @@ object Dependencies {
         "auth-jwt",
         "Authentication JWT",
         "Handle JWT authentication",
-        documentation = "http://ktor.io/features/authentication.html#jwt"
+        documentation = "https://ktor.io/features/authentication.html#jwt"
     )
     val AUTH_LDAP = Dependency(
         "ktor",
@@ -57,7 +57,7 @@ object Dependencies {
         "auth-ldap",
         "Authentication LDAP",
         "Handle JDAP authentication",
-        documentation = "http://ktor.io/features/authentication.html#ldap"
+        documentation = "https://ktor.io/features/authentication.html#ldap"
     )
     val JSON_GSON = Dependency(
         "ktor",
@@ -79,7 +79,7 @@ object Dependencies {
         "ktor-locations",
         "Locations",
         "Allows to define route locations in a typed way",
-        documentation = "http://ktor.io/features/locations.html"
+        documentation = "https://ktor.io/features/locations.html"
     )
     val METRICS = Dependency(
         "ktor",
@@ -94,7 +94,7 @@ object Dependencies {
         "ktor-sessions",
         "Sessions",
         "Adds supports for sessions: with the payload in the client or the server",
-        documentation = "http://ktor.io/features/sessions.html"
+        documentation = "https://ktor.io/features/sessions.html"
     )
     val WEBSOCKETS = Dependency(
         "ktor",
@@ -109,7 +109,7 @@ object Dependencies {
         "ktor-network",
         "Raw Sockets",
         "Adds Raw Socket support for listening and connecting to tcp and udp sockets",
-        documentation = "http://ktor.io/servers/raw-sockets.html"
+        documentation = "https://ktor.io/servers/raw-sockets.html"
     )
     val HTTP_CLIENT = Dependency(
         "ktor",
@@ -117,7 +117,7 @@ object Dependencies {
         "ktor-client-apache",
         "HTTP Client",
         "Adds support for doing HTTP requests",
-        documentation = "http://ktor.io/clients/http-client.html"
+        documentation = "https://ktor.io/clients/http-client.html"
     )
 }
 

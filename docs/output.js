@@ -599,19 +599,19 @@
   function Dependencies() {
     Dependencies_instance = this;
     this.HTML_DSL = new Dependency('jcenter', 'io.ktor:ktor-html-builder:$ktor_version', 'html-dsl', 'HTML DSL', 'Generate HTML using Kotlin code');
-    this.TPL_FREEMARKER = new Dependency('ktor', 'io.ktor:ktor-freemarker:$ktor_version', 'freemarker', 'Freemarker', 'Serve HTML content using Apache freemarker', 'http://ktor.io/features/freemarker.html');
+    this.TPL_FREEMARKER = new Dependency('ktor', 'io.ktor:ktor-freemarker:$ktor_version', 'freemarker', 'Freemarker', 'Serve HTML content using Apache freemarker', 'https://ktor.io/features/freemarker.html');
     this.TPL_VELOCITY = new Dependency('ktor', 'io.ktor:ktor-velocity:$ktor_version', 'velocity', 'Velocity', 'Serve HTML content using Apache velocity');
-    this.AUTH = new Dependency('ktor', 'io.ktor:ktor-auth:$ktor_version', 'auth', 'Authentication', 'Handle Basic and Digest HTTP Auth, Form authentication and OAuth 1a and 2', 'http://ktor.io/features/authentication.html');
-    this.AUTH_JWT = new Dependency('ktor', 'io.ktor:ktor-auth-jwt:$ktor_version', 'auth-jwt', 'Authentication JWT', 'Handle JWT authentication', 'http://ktor.io/features/authentication.html#jwt');
-    this.AUTH_LDAP = new Dependency('ktor', 'io.ktor:ktor-auth-ldap:$ktor_version', 'auth-ldap', 'Authentication LDAP', 'Handle JDAP authentication', 'http://ktor.io/features/authentication.html#ldap');
+    this.AUTH = new Dependency('ktor', 'io.ktor:ktor-auth:$ktor_version', 'auth', 'Authentication', 'Handle Basic and Digest HTTP Auth, Form authentication and OAuth 1a and 2', 'https://ktor.io/features/authentication.html');
+    this.AUTH_JWT = new Dependency('ktor', 'io.ktor:ktor-auth-jwt:$ktor_version', 'auth-jwt', 'Authentication JWT', 'Handle JWT authentication', 'https://ktor.io/features/authentication.html#jwt');
+    this.AUTH_LDAP = new Dependency('ktor', 'io.ktor:ktor-auth-ldap:$ktor_version', 'auth-ldap', 'Authentication LDAP', 'Handle JDAP authentication', 'https://ktor.io/features/authentication.html#ldap');
     this.JSON_GSON = new Dependency('ktor', 'io.ktor:ktor-gson:$ktor_version', 'ktor-gson', 'GSON', 'Handles JSON serialization using GSON library');
     this.JSON_JACKSON = new Dependency('ktor', 'io.ktor:ktor-jackson:$ktor_version', 'ktor-jackson', 'Jackson', 'Handles JSON serialization using Jackson library');
-    this.LOCATIONS = new Dependency('ktor', 'io.ktor:ktor-locations:$ktor_version', 'ktor-locations', 'Locations', 'Allows to define route locations in a typed way', 'http://ktor.io/features/locations.html');
+    this.LOCATIONS = new Dependency('ktor', 'io.ktor:ktor-locations:$ktor_version', 'ktor-locations', 'Locations', 'Allows to define route locations in a typed way', 'https://ktor.io/features/locations.html');
     this.METRICS = new Dependency('ktor', 'io.ktor:ktor-metrics:$ktor_version', 'ktor-metrics', 'Metrics', 'Adds supports for monitoring several metrics');
-    this.SESSIONS = new Dependency('ktor', 'io.ktor:ktor-sessions:$ktor_version', 'ktor-sessions', 'Sessions', 'Adds supports for sessions: with the payload in the client or the server', 'http://ktor.io/features/sessions.html');
+    this.SESSIONS = new Dependency('ktor', 'io.ktor:ktor-sessions:$ktor_version', 'ktor-sessions', 'Sessions', 'Adds supports for sessions: with the payload in the client or the server', 'https://ktor.io/features/sessions.html');
     this.WEBSOCKETS = new Dependency('ktor', 'io.ktor:ktor-websockets:$ktor_version', 'ktor-websockets', 'WebSockets', 'Adds WebSockets support for bidirectional communication with the client');
-    this.RAW_SOCKETS = new Dependency('ktor', 'io.ktor:ktor-network:$ktor_version', 'ktor-network', 'Raw Sockets', 'Adds Raw Socket support for listening and connecting to tcp and udp sockets', 'http://ktor.io/servers/raw-sockets.html');
-    this.HTTP_CLIENT = new Dependency('ktor', 'io.ktor:ktor-client-apache:$ktor_version', 'ktor-client-apache', 'HTTP Client', 'Adds support for doing HTTP requests', 'http://ktor.io/clients/http-client.html');
+    this.RAW_SOCKETS = new Dependency('ktor', 'io.ktor:ktor-network:$ktor_version', 'ktor-network', 'Raw Sockets', 'Adds Raw Socket support for listening and connecting to tcp and udp sockets', 'https://ktor.io/servers/raw-sockets.html');
+    this.HTTP_CLIENT = new Dependency('ktor', 'io.ktor:ktor-client-apache:$ktor_version', 'ktor-client-apache', 'HTTP Client', 'Adds support for doing HTTP requests', 'https://ktor.io/clients/http-client.html');
   }
   Dependencies.$metadata$ = {
     kind: Kind_OBJECT,
