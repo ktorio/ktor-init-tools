@@ -17,7 +17,6 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <moduleType id="KTOR_MODULE" implementationClass="io.ktor.start.intellij.KtorModuleType"/>
-
     </extensions>
 
     <actions>
