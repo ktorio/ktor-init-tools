@@ -10,17 +10,35 @@ fun main(args: Array<String>) {
     removeLoading()
 }
 
+val hashParams: Map<String, List<String>> by lazy {
+    try {
+        window.location.hash.trim('#').formUrlDecode()
+    } catch (e: Throwable) {
+        mapOf<String, List<String>>()
+    }
+}
+
+fun String.formUrlDecode(): Map<String, List<String>> = this.split('&')
+    .map { val (key, value) = it.split('=', limit = 2); key to value }
+    .groupBy { it.first }
+    .map { it.key to it.value.map { it.second } }
+    .toMap()
+
 fun addDependencies() {
     val deps = jq("#dependencies")
     deps.text("")
 
+    val dependencyIds = (hashParams["dependency"] ?: listOf()).toSet()
+
     for (dependency in dependencies) {
         //console.log(dependency)
+        val checkedBool = dependency.id in dependencyIds
+        val checked = if (checkedBool) "checked" else ""
         deps.append(
             jq("<label for='artifact-${dependency.id}' class='artifact' />")
                 .append(
                     jq("<div class='title' />")
-                        .append(jq("<input id='artifact-${dependency.id}' type='checkbox' />"))
+                        .append(jq("<input id='artifact-${dependency.id}' type='checkbox' $checked />"))
                         .append(jq("<span />").text(" ${dependency.title}"))
                         .append(jq("<span class='artifact-name' />").text(" (${dependency.artifact})"))
                 )
@@ -43,6 +61,10 @@ fun addDependencies() {
                 )
         )
     }
+
+    jq("#artifact-group").`val`(hashParams["artifact-group"]?.firstOrNull() ?: "com.example")
+    jq("#artifact-name").`val`(hashParams["artifact-name"]?.firstOrNull() ?: "ktor-demo")
+    jq("#ktor-version").`val`(hashParams["ktor-version"]?.firstOrNull() ?: "0.9.2")
 }
 
 fun registerBuildButton() {
