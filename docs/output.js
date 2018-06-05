@@ -12,13 +12,19 @@
 }(this, function (_, Kotlin) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
-  var Unit = Kotlin.kotlin.Unit;
-  var println = Kotlin.kotlin.io.println_s8jyv4$;
+  var trim = Kotlin.kotlin.text.trim_wqw3xr$;
+  var Throwable = Error;
+  var lazy = Kotlin.kotlin.lazy_klfg04$;
+  var split = Kotlin.kotlin.text.split_o64adg$;
+  var to = Kotlin.kotlin.to_ujzrz7$;
+  var toMap = Kotlin.kotlin.collections.toMap_6hr0sd$;
   var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
+  var Unit = Kotlin.kotlin.Unit;
+  var firstOrNull = Kotlin.kotlin.collections.firstOrNull_2p1efm$;
+  var println = Kotlin.kotlin.io.println_s8jyv4$;
   var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var plus = Kotlin.kotlin.collections.plus_mydzjv$;
   var RuntimeException_init = Kotlin.kotlin.RuntimeException_init_pdl1vj$;
-  var Throwable = Error;
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var contains = Kotlin.kotlin.text.contains_li3zpu$;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
@@ -41,32 +47,112 @@
     handleFiltering();
     removeLoading();
   }
-  function addDependencies() {
+  var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
+  function hashParams$lambda() {
+    try {
+      return formUrlDecode(trim(window.location.hash, Kotlin.charArrayOf(35)));
+    }
+     catch (e) {
+      if (Kotlin.isType(e, Throwable)) {
+        return emptyMap();
+      }
+       else
+        throw e;
+    }
+  }
+  var hashParams;
+  function get_hashParams() {
+    return hashParams.value;
+  }
+  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+  function formUrlDecode($receiver) {
+    var $receiver_0 = split($receiver, Kotlin.charArrayOf(38));
+    var destination = ArrayList_init(collectionSizeOrDefault($receiver_0, 10));
     var tmp$;
+    tmp$ = $receiver_0.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      var tmp$_0 = destination.add_11rb$;
+      var tmp$_1 = split(item, Kotlin.charArrayOf(61), void 0, 2);
+      var key = tmp$_1.get_za3lpa$(0);
+      var value = tmp$_1.get_za3lpa$(1);
+      tmp$_0.call(destination, to(key, value));
+    }
+    var destination_0 = LinkedHashMap_init();
+    var tmp$_2;
+    tmp$_2 = destination.iterator();
+    while (tmp$_2.hasNext()) {
+      var element = tmp$_2.next();
+      var key_0 = element.first;
+      var tmp$_0_0;
+      var value_0 = destination_0.get_11rb$(key_0);
+      if (value_0 == null) {
+        var answer = ArrayList_init();
+        destination_0.put_xwzc9p$(key_0, answer);
+        tmp$_0_0 = answer;
+      }
+       else {
+        tmp$_0_0 = value_0;
+      }
+      var list = tmp$_0_0;
+      list.add_11rb$(element);
+    }
+    var destination_1 = ArrayList_init(destination_0.size);
+    var tmp$_3;
+    tmp$_3 = destination_0.entries.iterator();
+    while (tmp$_3.hasNext()) {
+      var item_0 = tmp$_3.next();
+      var tmp$_4 = destination_1.add_11rb$;
+      var tmp$_5 = item_0.key;
+      var $receiver_1 = item_0.value;
+      var destination_2 = ArrayList_init(collectionSizeOrDefault($receiver_1, 10));
+      var tmp$_6;
+      tmp$_6 = $receiver_1.iterator();
+      while (tmp$_6.hasNext()) {
+        var item_1 = tmp$_6.next();
+        destination_2.add_11rb$(item_1.second);
+      }
+      tmp$_4.call(destination_1, to(tmp$_5, destination_2));
+    }
+    return toMap(destination_1);
+  }
+  var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
+  function addDependencies() {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6;
     var str = '#dependencies';
     var deps = jQuery(str);
     deps.text('');
-    tmp$ = dependencies.iterator();
-    while (tmp$.hasNext()) {
-      var dependency = tmp$.next();
+    var dependencyIds = toSet((tmp$ = get_hashParams().get_11rb$('dependency')) != null ? tmp$ : emptyList());
+    tmp$_0 = dependencies.iterator();
+    while (tmp$_0.hasNext()) {
+      var dependency = tmp$_0.next();
+      var checkedBool = dependencyIds.contains_11rb$(dependency.id);
+      var checked = checkedBool ? 'checked' : '';
       var str_0 = "<label for='artifact-" + dependency.id + "' class='artifact' />";
-      var tmp$_0 = jQuery(str_0);
+      var tmp$_7 = jQuery(str_0);
       var str_1 = "<div class='title' />";
-      var tmp$_1 = jQuery(str_1);
-      var str_2 = "<input id='artifact-" + dependency.id + "' type='checkbox' />";
-      var tmp$_2 = tmp$_1.append(jQuery(str_2));
+      var tmp$_8 = jQuery(str_1);
+      var str_2 = "<input id='artifact-" + dependency.id + "' type='checkbox' " + checked + ' />';
+      var tmp$_9 = tmp$_8.append(jQuery(str_2));
       var str_3 = '<span />';
-      var tmp$_3 = tmp$_2.append(jQuery(str_3).text(' ' + dependency.title));
+      var tmp$_10 = tmp$_9.append(jQuery(str_3).text(' ' + dependency.title));
       var str_4 = "<span class='artifact-name' />";
-      var tmp$_4 = tmp$_0.append(tmp$_3.append(jQuery(str_4).text(' (' + dependency.artifact + ')')));
+      var tmp$_11 = tmp$_7.append(tmp$_10.append(jQuery(str_4).text(' (' + dependency.artifact + ')')));
       var str_5 = "<div class='subtitle' />";
-      var tmp$_5 = jQuery(str_5).append(jQuery('<div />').text(dependency.description));
+      var tmp$_12 = jQuery(str_5).append(jQuery('<div />').text(dependency.description));
       var $receiver = jQuery('<div />');
       if (dependency.documentation != null) {
         $receiver.append(jQuery('<a />').attr('href', dependency.documentation).attr('target', '_blank').text('Documentation'));
       }
-      deps.append(tmp$_4.append(tmp$_5.append($receiver)));
+      deps.append(tmp$_11.append(tmp$_12.append($receiver)));
     }
+    var str_6 = '#artifact-group';
+    jQuery(str_6).val((tmp$_2 = (tmp$_1 = get_hashParams().get_11rb$('artifact-group')) != null ? firstOrNull(tmp$_1) : null) != null ? tmp$_2 : 'com.example');
+    var str_7 = '#artifact-name';
+    jQuery(str_7).val((tmp$_4 = (tmp$_3 = get_hashParams().get_11rb$('artifact-name')) != null ? firstOrNull(tmp$_3) : null) != null ? tmp$_4 : 'ktor-demo');
+    var str_8 = '#ktor-version';
+    jQuery(str_8).val((tmp$_6 = (tmp$_5 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_5) : null) != null ? tmp$_6 : '0.9.2');
   }
   function registerBuildButton$lambda$lambda$lambda(closure$info) {
     return function ($receiver) {
@@ -111,8 +197,6 @@
       return Unit;
     };
   }
-  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
-  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
   function registerBuildButton$lambda() {
     var tmp$;
     var str = '#project-type';
@@ -1031,6 +1115,10 @@
   var package$ktor = package$io.ktor || (package$io.ktor = {});
   var package$start = package$ktor.start || (package$ktor.start = {});
   package$start.main_kand9s$ = main;
+  Object.defineProperty(package$start, 'hashParams', {
+    get: get_hashParams
+  });
+  package$start.formUrlDecode_pdl1vz$ = formUrlDecode;
   $$importsForInline$$.output = _;
   package$start.addDependencies = addDependencies;
   package$start.registerBuildButton = registerBuildButton;
@@ -1086,6 +1174,7 @@
   ZipBuilder.FileInfo = ZipBuilder$FileInfo;
   package$util.ZipBuilder = ZipBuilder;
   package$util.buildZip_oi1qpb$ = buildZip;
+  hashParams = lazy(hashParams$lambda);
   DOLLAR = 36;
   var $receiver = Object.values(Dependencies_getInstance());
   var destination = ArrayList_init();
