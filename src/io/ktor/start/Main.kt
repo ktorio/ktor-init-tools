@@ -145,7 +145,7 @@ fun addDependencies() {
                     jq("<div class='title' />")
                         .append(jq("<input id='artifact-${dependency.id}' type='checkbox' $checked />"))
                         .append(jq("<span />").text(" ${dependency.title}"))
-                        .append(jq("<span class='artifact-name' />").text(" (${dependency.artifact})"))
+                        .append(jq("<span class='artifact-name' />").text(" (${dependency.artifacts.joinToString(", ")})"))
                 )
                 .append(
                     jq("<div class='subtitle' />")
@@ -155,7 +155,7 @@ fun addDependencies() {
                                 .apply {
                                     if (dependency.documentation != null) {
                                         append(
-                                            jq("<a />").attr("href", dependency.documentation).attr(
+                                            jq("<a />").attr("href", dependency.documentation ?: "").attr(
                                                 "target",
                                                 "_blank"
                                             ).text("Documentation")
@@ -214,20 +214,24 @@ suspend fun build(dev: Boolean) {
                 ktorEngine = ktorEngine
             )
 
-            fun addFile(name: String, data: ByteArray, mode: Int = "644".octal) {
+            fun addFile(name: String, data: ByteArray, mode: Int = "644".octal, display: Boolean = true) {
                 if (dev) {
                     console.warn("ADD file: $name")
-                    try {
-                        console.log(data.toString(UTF8))
-                    } catch (e: Throwable) {
-                        console.log("<binary file>")
+                    if (display) {
+                        try {
+                            console.log(data.toString(UTF8))
+                        } catch (e: Throwable) {
+                            console.log("<binary file>")
+                        }
+                    } else {
+                        console.log("<ignored>")
                     }
                 }
                 add(name, data, mode = mode)
             }
 
-            fun addFile(name: String, data: String, charset: Charset = UTF8, mode: Int = "644".octal) {
-                addFile(name, data.toByteArray(charset), mode = mode)
+            fun addFile(name: String, data: String, charset: Charset = UTF8, mode: Int = "644".octal, display: Boolean = true) {
+                addFile(name, data.toByteArray(charset), mode = mode, display = true)
             }
 
             // BUILDSCRIPT
@@ -239,16 +243,19 @@ suspend fun build(dev: Boolean) {
                         addFile(
                             "$artifactName/gradlew",
                             fetchFile("gradle/gradlew"),
-                            mode = "755".toInt(8)
+                            mode = "755".toInt(8),
+                            display = false
                         )
-                        addFile("$artifactName/gradlew.bat", fetchFile("gradle/gradlew.bat"))
+                        addFile("$artifactName/gradlew.bat", fetchFile("gradle/gradlew.bat"), display = false)
                         addFile(
                             "$artifactName/gradle/wrapper/gradle-wrapper.jar",
-                            fetchFile("gradle/gradle/wrapper/gradle-wrapper.jar")
+                            fetchFile("gradle/gradle/wrapper/gradle-wrapper.jar"),
+                            display = false
                         )
                         addFile(
                             "$artifactName/gradle/wrapper/gradle-wrapper.properties",
-                            fetchFile("gradle/gradle/wrapper/gradle-wrapper.properties")
+                            fetchFile("gradle/gradle/wrapper/gradle-wrapper.properties"),
+                            display = false
                         )
                     }
                 }
@@ -257,8 +264,8 @@ suspend fun build(dev: Boolean) {
 
             addFile("$artifactName/resources/application.conf", indenter { buildApplicationConf(info.copy()) })
 
-            if (info.hasDependency(Dependencies.TPL_FREEMARKER)) {
-                FreemarkerFeature.addFiles(info, object : FileContainer {
+            for (feat in info.featuresToInclude) {
+                feat.addFiles(info, object : FileContainer {
                     override fun add(name: String, content: ByteArray, mode: Int) {
                         addFile(name, content, mode = mode)
                     }
@@ -301,7 +308,9 @@ data class BuildInfo(
     val reposToInclude: Set<String>,
     val dependenciesToInclude: Set<Dependency>,
     val ktorEngine: String
-)
+) {
+    val featuresToInclude = dependenciesToInclude.filterIsInstance<Feature>()
+}
 
 fun Indenter.buildPomXml(info: BuildInfo) = info.apply {
     TODO("Unsupported Maven for now")
@@ -349,8 +358,8 @@ fun Indenter.buildBuildGradle(info: BuildInfo) = info.apply {
         +"compile \"io.ktor:ktor-server-$ktorEngine:${DOLLAR}ktor_version\""
         +"compile \"ch.qos.logback:logback-classic:${DOLLAR}logback_version\""
         +""
-        for (dep in dependenciesToInclude) {
-            +"compile \"${dep.artifact}\""
+        for (artifact in dependenciesToInclude.flatMap { it.artifacts }.distinct()) {
+            +"compile \"$artifact\""
         }
         +""
         +"testCompile \"io.ktor:ktor-server-tests:${DOLLAR}ktor_version\""
@@ -394,8 +403,8 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
         packages += "kotlinx.css"
         //packages += "kotlinx.css.properties"
     }
-    if (hasDependency(Dependencies.TPL_FREEMARKER)) {
-        packages += FreemarkerFeature.imports(info)
+    for (feat in info.featuresToInclude) {
+        packages += feat.imports(info)
     }
     for (p in packages) {
         +"import $p.*"
@@ -408,15 +417,13 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
     }
     +""
 
-    if (info.hasDependency(Dependencies.TPL_FREEMARKER)) {
-        FreemarkerFeature.apply { classes(info) }
-        +""
+    for (feat in info.featuresToInclude) {
+        feat.apply { classes(info) }
     }
 
     "fun Application.main()" {
-        if (info.hasDependency(Dependencies.TPL_FREEMARKER)) {
-            FreemarkerFeature.apply { installFeature(info) }
-            +""
+        for (feat in info.featuresToInclude) {
+            feat.apply { installFeature(info) }
         }
 
         "routing" {
@@ -433,9 +440,8 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
                     }
                 }
             }
-            if (info.hasDependency(Dependencies.TPL_FREEMARKER)) {
-                +""
-                FreemarkerFeature.apply { routing(info) }
+            for (feat in info.featuresToInclude) {
+                feat.apply { routing(info) }
             }
             if (hasDependency(Dependencies.CSS_DSL)) {
                 +""
