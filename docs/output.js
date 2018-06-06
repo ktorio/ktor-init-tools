@@ -631,10 +631,24 @@
       }
      while (true);
   };
-  function build$lambda$ObjectLiteral(this$) {
+  function build$lambda$ObjectLiteral(closure$dev, this$) {
+    this.closure$dev = closure$dev;
     this.this$ = this$;
   }
   build$lambda$ObjectLiteral.prototype.add_dkzqdg$$default = function (name, content, mode) {
+    if (this.closure$dev) {
+      console.warn('ADD file: ' + name);
+      try {
+        console.log(toString(content, UTF8_getInstance()));
+      }
+       catch (e) {
+        if (Kotlin.isType(e, Throwable)) {
+          console.log('<binary file>');
+        }
+         else
+          throw e;
+      }
+    }
     this.this$.add_w0mhwy$(name, content, void 0, mode);
   };
   build$lambda$ObjectLiteral.$metadata$ = {
@@ -722,7 +736,7 @@
             this.exceptionState_0 = 2;
             this.local$zb = new ZipBuilder();
             this.state_0 = 1;
-            this.result_0 = KtorProjectGenerator_getInstance().generate_p20w4r$(info, build$lambda$lambda, new build$lambda$ObjectLiteral(this.local$zb), this);
+            this.result_0 = KtorProjectGenerator_getInstance().generate_p20w4r$(info, build$lambda$lambda, new build$lambda$ObjectLiteral(this.local$dev, this.local$zb), this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;

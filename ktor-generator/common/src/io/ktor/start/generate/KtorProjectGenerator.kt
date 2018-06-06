@@ -5,26 +5,6 @@ import io.ktor.start.util.*
 
 object KtorProjectGenerator {
     suspend fun generate(info: BuildInfo, fetchFile: suspend (path: String) -> ByteArray, files: FileContainer) = info.apply {
-        //fun addFile(name: String, data: ByteArray, mode: Int = "644".octal, display: Boolean = true) {
-        //    if (dev) {
-        //        console.warn("ADD file: $name")
-        //        if (display) {
-        //            try {
-        //                console.log(data.toString(UTF8))
-        //            } catch (e: Throwable) {
-        //                console.log("<binary file>")
-        //            }
-        //        } else {
-        //            console.log("<ignored>")
-        //        }
-        //    }
-        //    add(name, data, mode = mode)
-        //}
-
-        //fun addFile(name: String, data: String, charset: Charset = UTF8, mode: Int = "644".octal, display: Boolean = true) {
-        //    addFile(name, data.toByteArray(charset), mode = mode, display = true)
-        //}
-
         // BUILDSCRIPT
         when (projectType) {
             "maven" -> files.add("$artifactName/pom.xml", indenter { buildPomXml(info.copy()) })

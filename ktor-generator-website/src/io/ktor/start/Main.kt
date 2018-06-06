@@ -200,6 +200,14 @@ suspend fun build(dev: Boolean) {
         val zipBytes = buildZip {
             KtorProjectGenerator.generate(info, { fetchFile(it) }, object : FileContainer {
                 override fun add(name: String, content: ByteArray, mode: Int) {
+                    if (dev) {
+                        console.warn("ADD file: $name")
+                        try {
+                            console.log(content.toString(UTF8))
+                        } catch (e: Throwable) {
+                            console.log("<binary file>")
+                        }
+                    }
                     this@buildZip.add(name, content, mode = mode)
                 }
             })
