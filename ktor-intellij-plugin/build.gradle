@@ -5,6 +5,12 @@ plugins {
 //apply plugin: 'org.jetbrains.intellij'
 apply plugin: "kotlin"
 
+sourceSets {
+	main.kotlin.srcDirs += "src"
+	main.resources.srcDirs += "resources"
+	test.kotlin.srcDirs += "test"
+}
+
 intellij {
 	version "IC-2017.2.5"
 	plugins = ['kotlin']

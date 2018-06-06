@@ -8,5 +8,8 @@
 /docs/META-INF
 /docs/output
 /ktor-generator/build
+/ktor-generator/common/build
 /ktor-generator/js/build
 /ktor-generator/jvm/build
+/ktor-generator-website/build
+/ktor-intellij-plugin/build

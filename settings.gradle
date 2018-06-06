@@ -1,11 +1,12 @@
 rootProject.name = 'start.ktor.io'
 
 include "ktor-intellij-plugin"
+include "ktor-generator-website"
 
-include "ktor-generator"
+include "ktor-generator-common"
 include "ktor-generator-jvm"
 include "ktor-generator-js"
 
-findProject(":ktor-generator")?.projectDir = file("ktor-generator")
+findProject(":ktor-generator-common")?.projectDir = file("ktor-generator/common")
 findProject(":ktor-generator-jvm")?.projectDir = file("ktor-generator/jvm")
 findProject(":ktor-generator-js")?.projectDir = file("ktor-generator/js")

@@ -3,6 +3,8 @@ package io.ktor.start
 import io.ktor.start.util.*
 
 data class BuildInfo(
+    val includeWrapper: Boolean,
+    val projectType: String,
     val ktorVersion: String,
     val developmentPackage: String,
     val artifactName: String,

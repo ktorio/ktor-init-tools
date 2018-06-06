@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    expectedBy project(":ktor-generator")
+    expectedBy project(":ktor-generator-common")
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
 }

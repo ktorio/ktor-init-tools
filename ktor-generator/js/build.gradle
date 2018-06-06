@@ -1,21 +1,15 @@
 apply plugin: 'kotlin-platform-js'
 
-compileKotlin2Js {
-    kotlinOptions.moduleKind = "umd"
-    kotlinOptions.sourceMap = false
-    kotlinOptions.metaInfo = false
-}
-
-compileTestKotlin2Js {
-    kotlinOptions.moduleKind = "umd"
-    kotlinOptions.sourceMap = false
-    kotlinOptions.metaInfo = false
-}
-
 sourceSets {
     main.kotlin.srcDirs += "src"
     main.resources.srcDirs += "resources"
     test.kotlin.srcDirs += "test"
+}
+
+[compileKotlin2Js, compileTestKotlin2Js]*.configure {
+    kotlinOptions.moduleKind = "umd"
+    kotlinOptions.sourceMap = false
+    kotlinOptions.metaInfo = false
 }
 
 repositories {
@@ -23,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    expectedBy project(":ktor-generator")
+    expectedBy project(":ktor-generator-common")
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
     testCompile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
 }
