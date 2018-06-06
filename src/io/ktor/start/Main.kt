@@ -197,7 +197,7 @@ fun registerBuildButton() {
             }
 
             val reposToInclude = (listOf("jcenter", "ktor")
-                    + dependenciesToInclude.map { it.repo }).toSet()
+                    + dependenciesToInclude.flatMap { it.repos }).toSet()
 
             try {
                 generateBrowserFile("ktor-sample-$projectType-$ktorEngine-$artifactGroup-$artifactName.zip", buildZip {
@@ -218,7 +218,9 @@ fun registerBuildButton() {
                     when (projectType) {
                         "maven" -> add("$artifactName/pom.xml", indenter { buildPomXml(info) })
                         "gradle" -> {
-                            add("$artifactName/build.gradle", indenter { buildBuildGradle(info) })
+                            val build_gradle = indenter { buildBuildGradle(info) }
+                            //println(build_gradle)
+                            add("$artifactName/build.gradle", build_gradle)
                             if (includeWrapper) {
                                 add(
                                     "$artifactName/gradlew",
@@ -240,7 +242,9 @@ fun registerBuildButton() {
                     }
 
                     add("$artifactName/resources/application.conf", indenter { buildApplicationConf(info) })
-                    add("$artifactName/src/Application.kt", indenter { buildApplicationKt(info) })
+                    val application_kt = indenter { buildApplicationKt(info) }
+                    //println(application_kt)
+                    add("$artifactName/src/Application.kt", application_kt)
                 })
             } catch (e: Throwable) {
                 console.error(e)
@@ -328,6 +332,8 @@ fun Indenter.buildApplicationConf(info: BuildInfo) = info.apply {
     }
 }
 
+val VER_092 = SemVer("0.9.2")
+
 fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
     +"package $artifactGroup"
     +""
@@ -339,7 +345,11 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
         +"import kotlinx.html.*"
     }
     +""
-    +"fun main(args: Array<String>): Unit = $developmentPackage.main(args)"
+    if (SemVer(ktorVersion) >= VER_092) {
+        +"fun main(args: Array<String>): Unit = $developmentEngineFQ.main(args)"
+    } else {
+        +"fun main(args: Array<String>): Unit = $developmentPackage.main(args)"
+    }
     +""
     "fun Application.main()" {
         "routing" {

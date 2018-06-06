@@ -48,6 +48,10 @@
   var experimental = Kotlin.kotlin.coroutines.experimental;
   var Continuation = Kotlin.kotlin.coroutines.experimental.Continuation;
   var startCoroutine = Kotlin.kotlin.coroutines.experimental.startCoroutine_xtwlez$;
+  var first = Kotlin.kotlin.collections.first_2p1efm$;
+  var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
+  var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
+  var Comparable = Kotlin.kotlin.Comparable;
   var equals = Kotlin.equals;
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_8cymmc$;
   var defaultArtifactGroup;
@@ -441,12 +445,13 @@
             }
 
             var tmp$_1 = listOf_0(['jcenter', 'ktor']);
-            var destination_0 = ArrayList_init(collectionSizeOrDefault(dependenciesToInclude, 10));
+            var destination_0 = ArrayList_init();
             var tmp$_2;
             tmp$_2 = dependenciesToInclude.iterator();
             while (tmp$_2.hasNext()) {
-              var item = tmp$_2.next();
-              destination_0.add_11rb$(item.repo);
+              var element_0 = tmp$_2.next();
+              var list = element_0.repos;
+              addAll(destination_0, list);
             }
 
             var reposToInclude = toSet(plus(tmp$_1, destination_0));
@@ -462,7 +467,8 @@
                 this.state_0 = 6;
                 continue;
               case 'gradle':
-                this.local$zb.add_oyaiiq$(this.local$artifactName + '/build.gradle', indenter(registerBuildButton$lambda$lambda$lambda$lambda_0(this.local$info)));
+                var build_gradle = indenter(registerBuildButton$lambda$lambda$lambda$lambda_0(this.local$info));
+                this.local$zb.add_oyaiiq$(this.local$artifactName + '/build.gradle', build_gradle);
                 if (get_includeWrapper()) {
                   this.state_0 = 1;
                   this.result_0 = fetchFile('gradle/gradlew', this);
@@ -508,7 +514,8 @@
             continue;
           case 6:
             this.local$zb.add_oyaiiq$(this.local$artifactName + '/resources/application.conf', indenter(registerBuildButton$lambda$lambda$lambda$lambda_1(this.local$info)));
-            this.local$zb.add_oyaiiq$(this.local$artifactName + '/src/Application.kt', indenter(registerBuildButton$lambda$lambda$lambda$lambda_2(this.local$info)));
+            var application_kt = indenter(registerBuildButton$lambda$lambda$lambda$lambda_2(this.local$info));
+            this.local$zb.add_oyaiiq$(this.local$artifactName + '/src/Application.kt', application_kt);
             return generateBrowserFile(this.local$tmp$, this.local$zb.toByteArray()), Unit;
           case 7:
             this.exceptionState_0 = 10;
@@ -736,6 +743,7 @@
     $receiver.line_61zpoe$('}');
     return info;
   }
+  var VER_092;
   function buildApplicationKt($receiver, info) {
     $receiver.line_61zpoe$('package ' + info.artifactGroup);
     $receiver.line_61zpoe$('');
@@ -747,7 +755,12 @@
       $receiver.line_61zpoe$('import kotlinx.html.*');
     }
     $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + info.developmentPackage + '.main(args)');
+    if ((new SemVer(info.ktorVersion)).compareTo_11rb$(VER_092) >= 0) {
+      $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + info.developmentEngineFQ + '.main(args)');
+    }
+     else {
+      $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + info.developmentPackage + '.main(args)');
+    }
     $receiver.line_61zpoe$('');
     $receiver.line_61zpoe$('fun Application.main()' + ' {');
     $receiver.indentation = $receiver.indentation + 1 | 0;
@@ -837,10 +850,10 @@
     var str = '.loading';
     jQuery(str).removeClass('loading').addClass('loaded');
   }
-  function Dependency(repo, artifact, id, title, description, documentation) {
+  function Dependency(repos, artifact, id, title, description, documentation) {
     if (documentation === void 0)
       documentation = null;
-    this.repo = repo;
+    this.repos = repos;
     this.artifact = artifact;
     this.id = id;
     this.title = title;
@@ -853,7 +866,7 @@
     interfaces: []
   };
   Dependency.prototype.component1 = function () {
-    return this.repo;
+    return this.repos;
   };
   Dependency.prototype.component2 = function () {
     return this.artifact;
@@ -870,15 +883,15 @@
   Dependency.prototype.component6 = function () {
     return this.documentation;
   };
-  Dependency.prototype.copy_bz2au1$ = function (repo, artifact, id, title, description, documentation) {
-    return new Dependency(repo === void 0 ? this.repo : repo, artifact === void 0 ? this.artifact : artifact, id === void 0 ? this.id : id, title === void 0 ? this.title : title, description === void 0 ? this.description : description, documentation === void 0 ? this.documentation : documentation);
+  Dependency.prototype.copy_wvxpwu$ = function (repos, artifact, id, title, description, documentation) {
+    return new Dependency(repos === void 0 ? this.repos : repos, artifact === void 0 ? this.artifact : artifact, id === void 0 ? this.id : id, title === void 0 ? this.title : title, description === void 0 ? this.description : description, documentation === void 0 ? this.documentation : documentation);
   };
   Dependency.prototype.toString = function () {
-    return 'Dependency(repo=' + Kotlin.toString(this.repo) + (', artifact=' + Kotlin.toString(this.artifact)) + (', id=' + Kotlin.toString(this.id)) + (', title=' + Kotlin.toString(this.title)) + (', description=' + Kotlin.toString(this.description)) + (', documentation=' + Kotlin.toString(this.documentation)) + ')';
+    return 'Dependency(repos=' + Kotlin.toString(this.repos) + (', artifact=' + Kotlin.toString(this.artifact)) + (', id=' + Kotlin.toString(this.id)) + (', title=' + Kotlin.toString(this.title)) + (', description=' + Kotlin.toString(this.description)) + (', documentation=' + Kotlin.toString(this.documentation)) + ')';
   };
   Dependency.prototype.hashCode = function () {
     var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.repo) | 0;
+    result = result * 31 + Kotlin.hashCode(this.repos) | 0;
     result = result * 31 + Kotlin.hashCode(this.artifact) | 0;
     result = result * 31 + Kotlin.hashCode(this.id) | 0;
     result = result * 31 + Kotlin.hashCode(this.title) | 0;
@@ -887,25 +900,44 @@
     return result;
   };
   Dependency.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.repo, other.repo) && Kotlin.equals(this.artifact, other.artifact) && Kotlin.equals(this.id, other.id) && Kotlin.equals(this.title, other.title) && Kotlin.equals(this.description, other.description) && Kotlin.equals(this.documentation, other.documentation)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.repos, other.repos) && Kotlin.equals(this.artifact, other.artifact) && Kotlin.equals(this.id, other.id) && Kotlin.equals(this.title, other.title) && Kotlin.equals(this.description, other.description) && Kotlin.equals(this.documentation, other.documentation)))));
   };
+  function Repos() {
+    Repos_instance = this;
+    this.jcenter = listOf('jcenter');
+    this.ktor = listOf('ktor');
+    this.kotlin_js_wrappers = listOf('https://kotlin.bintray.com/kotlin-js-wrappers');
+  }
+  Repos.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Repos',
+    interfaces: []
+  };
+  var Repos_instance = null;
+  function Repos_getInstance() {
+    if (Repos_instance === null) {
+      new Repos();
+    }
+    return Repos_instance;
+  }
   function Dependencies() {
     Dependencies_instance = this;
-    this.HTML_DSL = new Dependency('jcenter', 'io.ktor:ktor-html-builder:$ktor_version', 'html-dsl', 'HTML DSL', 'Generate HTML using Kotlin code');
-    this.TPL_FREEMARKER = new Dependency('ktor', 'io.ktor:ktor-freemarker:$ktor_version', 'freemarker', 'Freemarker', 'Serve HTML content using Apache freemarker', 'https://ktor.io/features/freemarker.html');
-    this.TPL_VELOCITY = new Dependency('ktor', 'io.ktor:ktor-velocity:$ktor_version', 'velocity', 'Velocity', 'Serve HTML content using Apache velocity');
-    this.AUTH = new Dependency('ktor', 'io.ktor:ktor-auth:$ktor_version', 'auth', 'Authentication', 'Handle Basic and Digest HTTP Auth, Form authentication and OAuth 1a and 2', 'https://ktor.io/features/authentication.html');
-    this.AUTH_JWT = new Dependency('ktor', 'io.ktor:ktor-auth-jwt:$ktor_version', 'auth-jwt', 'Authentication JWT', 'Handle JWT authentication', 'https://ktor.io/features/authentication.html#jwt');
-    this.AUTH_LDAP = new Dependency('ktor', 'io.ktor:ktor-auth-ldap:$ktor_version', 'auth-ldap', 'Authentication LDAP', 'Handle JDAP authentication', 'https://ktor.io/features/authentication.html#ldap');
-    this.JSON_GSON = new Dependency('ktor', 'io.ktor:ktor-gson:$ktor_version', 'ktor-gson', 'GSON', 'Handles JSON serialization using GSON library');
-    this.JSON_JACKSON = new Dependency('ktor', 'io.ktor:ktor-jackson:$ktor_version', 'ktor-jackson', 'Jackson', 'Handles JSON serialization using Jackson library');
-    this.LOCATIONS = new Dependency('ktor', 'io.ktor:ktor-locations:$ktor_version', 'ktor-locations', 'Locations', 'Allows to define route locations in a typed way', 'https://ktor.io/features/locations.html');
-    this.METRICS = new Dependency('ktor', 'io.ktor:ktor-metrics:$ktor_version', 'ktor-metrics', 'Metrics', 'Adds supports for monitoring several metrics');
-    this.SESSIONS = new Dependency('ktor', 'io.ktor:ktor-sessions:$ktor_version', 'ktor-sessions', 'Sessions', 'Adds supports for sessions: with the payload in the client or the server', 'https://ktor.io/features/sessions.html');
-    this.WEBSOCKETS = new Dependency('ktor', 'io.ktor:ktor-websockets:$ktor_version', 'ktor-websockets', 'WebSockets', 'Adds WebSockets support for bidirectional communication with the client');
-    this.RAW_SOCKETS = new Dependency('ktor', 'io.ktor:ktor-network:$ktor_version', 'ktor-network', 'Raw Sockets', 'Adds Raw Socket support for listening and connecting to tcp and udp sockets', 'https://ktor.io/servers/raw-sockets.html');
-    this.RAW_SOCKETS_TLS = new Dependency('ktor', 'io.ktor:ktor-network-tls:$ktor_version', 'ktor-network-tls', 'Raw Secure SSL/TLS Sockets', 'Adds Raw Socket support for listening and connecting to tcp and udp sockets with secure sockets', 'https://ktor.io/servers/raw-sockets.html#secure');
-    this.HTTP_CLIENT = new Dependency('ktor', 'io.ktor:ktor-client-apache:$ktor_version', 'ktor-client-apache', 'HTTP Client', 'Adds support for doing HTTP requests', 'https://ktor.io/clients/http-client.html');
+    this.HTML_DSL = new Dependency(Repos_getInstance().jcenter, 'io.ktor:ktor-html-builder:$ktor_version', 'html-dsl', 'HTML DSL', 'Generate HTML using Kotlin code');
+    this.CSS_DSL = new Dependency(plus(Repos_getInstance().ktor, Repos_getInstance().kotlin_js_wrappers), 'org.jetbrains:kotlin-css-jvm:1.0.0-pre.31-kotlin-1.2.41', 'css-dsl', 'CSS DSL', 'Generate CSS using Kotlin code');
+    this.TPL_FREEMARKER = new Dependency(Repos_getInstance().ktor, 'io.ktor:ktor-freemarker:$ktor_version', 'freemarker', 'Freemarker', 'Serve HTML content using Apache freemarker', 'https://ktor.io/features/freemarker.html');
+    this.TPL_VELOCITY = new Dependency(Repos_getInstance().ktor, 'io.ktor:ktor-velocity:$ktor_version', 'velocity', 'Velocity', 'Serve HTML content using Apache velocity');
+    this.AUTH = new Dependency(Repos_getInstance().ktor, 'io.ktor:ktor-auth:$ktor_version', 'auth', 'Authentication', 'Handle Basic and Digest HTTP Auth, Form authentication and OAuth 1a and 2', 'https://ktor.io/features/authentication.html');
+    this.AUTH_JWT = new Dependency(Repos_getInstance().ktor, 'io.ktor:ktor-auth-jwt:$ktor_version', 'auth-jwt', 'Authentication JWT', 'Handle JWT authentication', 'https://ktor.io/features/authentication.html#jwt');
+    this.AUTH_LDAP = new Dependency(Repos_getInstance().ktor, 'io.ktor:ktor-auth-ldap:$ktor_version', 'auth-ldap', 'Authentication LDAP', 'Handle JDAP authentication', 'https://ktor.io/features/authentication.html#ldap');
+    this.JSON_GSON = new Dependency(Repos_getInstance().ktor, 'io.ktor:ktor-gson:$ktor_version', 'ktor-gson', 'GSON', 'Handles JSON serialization using GSON library');
+    this.JSON_JACKSON = new Dependency(Repos_getInstance().ktor, 'io.ktor:ktor-jackson:$ktor_version', 'ktor-jackson', 'Jackson', 'Handles JSON serialization using Jackson library');
+    this.LOCATIONS = new Dependency(Repos_getInstance().ktor, 'io.ktor:ktor-locations:$ktor_version', 'ktor-locations', 'Locations', 'Allows to define route locations in a typed way', 'https://ktor.io/features/locations.html');
+    this.METRICS = new Dependency(Repos_getInstance().ktor, 'io.ktor:ktor-metrics:$ktor_version', 'ktor-metrics', 'Metrics', 'Adds supports for monitoring several metrics');
+    this.SESSIONS = new Dependency(Repos_getInstance().ktor, 'io.ktor:ktor-sessions:$ktor_version', 'ktor-sessions', 'Sessions', 'Adds supports for sessions: with the payload in the client or the server', 'https://ktor.io/features/sessions.html');
+    this.WEBSOCKETS = new Dependency(Repos_getInstance().ktor, 'io.ktor:ktor-websockets:$ktor_version', 'ktor-websockets', 'WebSockets', 'Adds WebSockets support for bidirectional communication with the client');
+    this.RAW_SOCKETS = new Dependency(Repos_getInstance().ktor, 'io.ktor:ktor-network:$ktor_version', 'ktor-network', 'Raw Sockets', 'Adds Raw Socket support for listening and connecting to tcp and udp sockets', 'https://ktor.io/servers/raw-sockets.html');
+    this.RAW_SOCKETS_TLS = new Dependency(Repos_getInstance().ktor, 'io.ktor:ktor-network-tls:$ktor_version', 'ktor-network-tls', 'Raw Secure SSL/TLS Sockets', 'Adds Raw Socket support for listening and connecting to tcp and udp sockets with secure sockets', 'https://ktor.io/servers/raw-sockets.html#secure');
+    this.HTTP_CLIENT = new Dependency(Repos_getInstance().ktor, 'io.ktor:ktor-client-apache:$ktor_version', 'ktor-client-apache', 'HTTP Client', 'Adds support for doing HTTP requests', 'https://ktor.io/clients/http-client.html');
   }
   Dependencies.$metadata$ = {
     kind: Kind_OBJECT,
@@ -1423,6 +1455,47 @@
   function launch(callback) {
     startCoroutine(callback, EmptyContinuation);
   }
+  function SemVer(version) {
+    this.version = version;
+    this.parts1_0 = split(this.version, Kotlin.charArrayOf(45), void 0, 2);
+    this.parts2_0 = split(first(this.parts1_0), Kotlin.charArrayOf(46));
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5;
+    this.major = (tmp$_0 = (tmp$ = getOrNull(this.parts2_0, 0)) != null ? toIntOrNull(tmp$) : null) != null ? tmp$_0 : 0;
+    this.minor = (tmp$_2 = (tmp$_1 = getOrNull(this.parts2_0, 1)) != null ? toIntOrNull(tmp$_1) : null) != null ? tmp$_2 : 0;
+    this.patch = (tmp$_4 = (tmp$_3 = getOrNull(this.parts2_0, 2)) != null ? toIntOrNull(tmp$_3) : null) != null ? tmp$_4 : 0;
+    this.info = (tmp$_5 = getOrNull(this.parts1_0, 1)) != null ? tmp$_5 : '';
+  }
+  SemVer.prototype.compareTo_11rb$ = function (other) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2;
+    var tmp$_3;
+    var $receiver = Kotlin.primitiveCompareTo(this.major, other.major);
+    if ((tmp$ = $receiver !== 0 ? $receiver : null) != null)
+      tmp$_3 = tmp$;
+    else {
+      var $receiver_0 = Kotlin.primitiveCompareTo(this.minor, other.minor);
+      tmp$_3 = $receiver_0 !== 0 ? $receiver_0 : null;
+    }
+    var tmp$_4;
+    if ((tmp$_0 = tmp$_3) != null)
+      tmp$_4 = tmp$_0;
+    else {
+      var $receiver_1 = Kotlin.primitiveCompareTo(this.patch, other.patch);
+      tmp$_4 = $receiver_1 !== 0 ? $receiver_1 : null;
+    }
+    var tmp$_5;
+    if ((tmp$_1 = tmp$_4) != null)
+      tmp$_5 = tmp$_1;
+    else {
+      var $receiver_2 = Kotlin.compareTo(this.info, other.info);
+      tmp$_5 = $receiver_2 !== 0 ? $receiver_2 : null;
+    }
+    return (tmp$_2 = tmp$_5) != null ? tmp$_2 : 0;
+  };
+  SemVer.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SemVer',
+    interfaces: [Comparable]
+  };
   function ZipBuilder() {
     ZipBuilder$Companion_getInstance();
     this.files = LinkedHashMap_init();
@@ -1634,10 +1707,18 @@
   });
   package$start.buildBuildGradle_j0vqe2$ = buildBuildGradle;
   package$start.buildApplicationConf_j0vqe2$ = buildApplicationConf;
+  Object.defineProperty(package$start, 'VER_092', {
+    get: function () {
+      return VER_092;
+    }
+  });
   package$start.buildApplicationKt_j0vqe2$ = buildApplicationKt;
   package$start.handleFiltering = handleFiltering;
   package$start.removeLoading = removeLoading;
   package$start.Dependency = Dependency;
+  Object.defineProperty(package$start, 'Repos', {
+    get: Repos_getInstance
+  });
   Object.defineProperty(package$start, 'Dependencies', {
     get: Dependencies_getInstance
   });
@@ -1683,6 +1764,7 @@
     }
   });
   package$util.launch_g2bo5h$ = launch;
+  package$util.SemVer = SemVer;
   Object.defineProperty(ZipBuilder, 'Companion', {
     get: ZipBuilder$Companion_getInstance
   });
@@ -1696,6 +1778,7 @@
   insideIframe = lazy(insideIframe$lambda);
   hashParams = lazy(hashParams$lambda);
   DOLLAR = 36;
+  VER_092 = new SemVer('0.9.2');
   var $receiver = Object.values(Dependencies_getInstance());
   var destination = ArrayList_init();
   var tmp$;
