@@ -1,6 +1,9 @@
 package io.ktor.start.util
 
-class Indenter {
+interface BaseIndenter {
+}
+
+open class Indenter : BaseIndenter {
     @PublishedApi
     internal var indentation = 0
     private val lines = arrayListOf<String>()

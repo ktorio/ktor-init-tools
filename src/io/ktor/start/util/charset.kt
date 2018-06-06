@@ -25,6 +25,7 @@ object UTF8 : Charset {
                     // 1110 xxxx  10xx xxxx  10xx xxxx
                     out.append((c and 0x0F shl 12 or (src[i++].toInt() and 0x3F shl 6) or (src[i++].toInt() and 0x3F)).toChar())
                 }
+                else -> error("Invalid UTF string")
             }
         }
     }
@@ -36,15 +37,18 @@ object UTF8 : Charset {
             if (codePoint and 0x7F.inv() == 0) { // 1-byte sequence
                 out.u8(codePoint)
             } else {
-                if (codePoint and 0x7FF.inv() == 0) { // 2-byte sequence
-                    out.u8((codePoint shr 6 and 0x1F or 0xC0))
-                } else if (codePoint and 0xFFFF.inv() == 0) { // 3-byte sequence
-                    out.u8((codePoint shr 12 and 0x0F or 0xE0))
-                    out.u8((createByte(codePoint, 6)))
-                } else if (codePoint and -0x200000 == 0) { // 4-byte sequence
-                    out.u8((codePoint shr 18 and 0x07 or 0xF0))
-                    out.u8((createByte(codePoint, 12)))
-                    out.u8((createByte(codePoint, 6)))
+                when {
+                    codePoint and 0x7FF.inv() == 0 -> // 2-byte sequence
+                        out.u8((codePoint shr 6 and 0x1F or 0xC0))
+                    codePoint and 0xFFFF.inv() == 0 -> { // 3-byte sequence
+                        out.u8((codePoint shr 12 and 0x0F or 0xE0))
+                        out.u8((createByte(codePoint, 6)))
+                    }
+                    codePoint and -0x200000 == 0 -> { // 4-byte sequence
+                        out.u8((codePoint shr 18 and 0x07 or 0xF0))
+                        out.u8((createByte(codePoint, 12)))
+                        out.u8((createByte(codePoint, 6)))
+                    }
                 }
                 out.u8((codePoint and 0x3F or 0x80))
             }

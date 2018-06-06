@@ -1,5 +1,6 @@
 package io.ktor.start
 
+import io.ktor.start.features.*
 import io.ktor.start.util.*
 import js.externals.jquery.*
 import kotlin.browser.*
@@ -173,103 +174,120 @@ fun addDependencies() {
     }
 }
 
+suspend fun build(dev: Boolean) {
+    val projectType = jq("#project-type").`val`().unsafeCast<String>()
+    val ktorEngine = jq("#ktor-engine").`val`().unsafeCast<String>()
+    val ktorVersion = jq("#ktor-version").`val`().unsafeCast<String>()
+    val artifactGroup = jq("#artifact-group").`val`().unsafeCast<String>()
+    val artifactName = jq("#artifact-name").`val`().unsafeCast<String>()
+    println("Generating ktor-sample.zip...")
+    println("projectType: $projectType")
+    println("ktorEngine: $ktorEngine")
+    println("artifactGroup: $artifactGroup")
+    println("artifactName: $artifactName")
+
+    val dependenciesToInclude = dependencies.filter {
+        jq("#artifact-${it.id}").prop("checked").unsafeCast<Boolean>()
+    }.toSet()
+
+    for (dependency in dependencies) {
+        val toInclude = dependency in dependenciesToInclude
+        println("DEPENDENCY: $dependency :: include=$toInclude")
+    }
+
+    val reposToInclude = (listOf("jcenter", "ktor")
+            + dependenciesToInclude.flatMap { it.repos }).toSet()
+
+    try {
+        val zipBytes = buildZip {
+            val developmentPackage = "io.ktor.server.$ktorEngine"
+            val developmentEngineFQ = "$developmentPackage.DevelopmentEngine"
+
+            val info = BuildInfo(
+                ktorVersion = ktorVersion,
+                developmentPackage = developmentPackage,
+                artifactName = artifactName,
+                artifactGroup = artifactGroup,
+                developmentEngineFQ = developmentEngineFQ,
+                reposToInclude = reposToInclude,
+                dependenciesToInclude = dependenciesToInclude,
+                ktorEngine = ktorEngine
+            )
+
+            fun addFile(name: String, data: ByteArray, mode: Int = "644".octal) {
+                if (dev) {
+                    console.warn("ADD file: $name")
+                    try {
+                        console.log(data.toString(UTF8))
+                    } catch (e: Throwable) {
+                        console.log("<binary file>")
+                    }
+                }
+                add(name, data, mode = mode)
+            }
+
+            fun addFile(name: String, data: String, charset: Charset = UTF8, mode: Int = "644".octal) {
+                addFile(name, data.toByteArray(charset), mode = mode)
+            }
+
+            // BUILDSCRIPT
+            when (projectType) {
+                "maven" -> addFile("$artifactName/pom.xml", indenter { buildPomXml(info.copy()) })
+                "gradle" -> {
+                    addFile("$artifactName/build.gradle", indenter { buildBuildGradle(info.copy()) })
+                    if (includeWrapper) {
+                        addFile(
+                            "$artifactName/gradlew",
+                            fetchFile("gradle/gradlew"),
+                            mode = "755".toInt(8)
+                        )
+                        addFile("$artifactName/gradlew.bat", fetchFile("gradle/gradlew.bat"))
+                        addFile(
+                            "$artifactName/gradle/wrapper/gradle-wrapper.jar",
+                            fetchFile("gradle/gradle/wrapper/gradle-wrapper.jar")
+                        )
+                        addFile(
+                            "$artifactName/gradle/wrapper/gradle-wrapper.properties",
+                            fetchFile("gradle/gradle/wrapper/gradle-wrapper.properties")
+                        )
+                    }
+                }
+                else -> throw RuntimeException("Unknown project type $projectType")
+            }
+
+            addFile("$artifactName/resources/application.conf", indenter { buildApplicationConf(info.copy()) })
+
+            if (info.hasDependency(Dependencies.TPL_FREEMARKER)) {
+                FreemarkerFeature.addFiles(info, object : FileContainer {
+                    override fun add(name: String, content: ByteArray, mode: Int) {
+                        addFile(name, content, mode = mode)
+                    }
+                })
+            }
+
+            addFile("$artifactName/src/Application.kt", indenter { buildApplicationKt(info.copy()) })
+        }
+        if (!dev) {
+            generateBrowserFile("ktor-sample-$projectType-$ktorEngine-$artifactGroup-$artifactName.zip", zipBytes)
+        }
+    } catch (e: Throwable) {
+        console.error(e)
+        window.alert("Couldn't generate ZIP. Reason: $e")
+    }
+}
+
 fun registerBuildButton() {
+    if (document.location!!.hostname in setOf("127.0.0.1", "localhost")) {
+        jq("#buildButtonDev").removeAttr("disabled").css("display", "inline-block").on("click", {
+            launch {
+                build(dev = true)
+            }
+        })
+    }
+
     jq("#buildButton").removeAttr("disabled").on("click", {
         launch {
-            val projectType = jq("#project-type").`val`().unsafeCast<String>()
-            val ktorEngine = jq("#ktor-engine").`val`().unsafeCast<String>()
-            val ktorVersion = jq("#ktor-version").`val`().unsafeCast<String>()
-            val artifactGroup = jq("#artifact-group").`val`().unsafeCast<String>()
-            val artifactName = jq("#artifact-name").`val`().unsafeCast<String>()
-            println("Generating ktor-sample.zip...")
-            println("projectType: $projectType")
-            println("ktorEngine: $ktorEngine")
-            println("artifactGroup: $artifactGroup")
-            println("artifactName: $artifactName")
-
-            val dependenciesToInclude = dependencies.filter {
-                jq("#artifact-${it.id}").prop("checked").unsafeCast<Boolean>()
-            }.toSet()
-
-            for (dependency in dependencies) {
-                val toInclude = dependency in dependenciesToInclude
-                println("DEPENDENCY: $dependency :: include=$toInclude")
-            }
-
-            val reposToInclude = (listOf("jcenter", "ktor")
-                    + dependenciesToInclude.flatMap { it.repos }).toSet()
-
-            try {
-                generateBrowserFile("ktor-sample-$projectType-$ktorEngine-$artifactGroup-$artifactName.zip", buildZip {
-                    val developmentPackage = "io.ktor.server.$ktorEngine"
-                    val developmentEngineFQ = "$developmentPackage.DevelopmentEngine"
-
-                    val info = BuildInfo(
-                        ktorVersion = ktorVersion,
-                        developmentPackage = developmentPackage,
-                        artifactGroup = artifactGroup,
-                        developmentEngineFQ = developmentEngineFQ,
-                        reposToInclude = reposToInclude,
-                        dependenciesToInclude = dependenciesToInclude,
-                        ktorEngine = ktorEngine
-                    )
-
-                    // BUILDSCRIPT
-                    when (projectType) {
-                        "maven" -> add("$artifactName/pom.xml", indenter { buildPomXml(info) })
-                        "gradle" -> {
-                            val build_gradle = indenter { buildBuildGradle(info) }
-                            //println(build_gradle)
-                            add("$artifactName/build.gradle", build_gradle)
-                            if (includeWrapper) {
-                                add(
-                                    "$artifactName/gradlew",
-                                    fetchFile("gradle/gradlew"),
-                                    mode = "755".toInt(8)
-                                )
-                                add("$artifactName/gradlew.bat", fetchFile("gradle/gradlew.bat"))
-                                add(
-                                    "$artifactName/gradle/wrapper/gradle-wrapper.jar",
-                                    fetchFile("gradle/gradle/wrapper/gradle-wrapper.jar")
-                                )
-                                add(
-                                    "$artifactName/gradle/wrapper/gradle-wrapper.properties",
-                                    fetchFile("gradle/gradle/wrapper/gradle-wrapper.properties")
-                                )
-                            }
-                        }
-                        else -> throw RuntimeException("Unknown project type $projectType")
-                    }
-
-                    add("$artifactName/resources/application.conf", indenter { buildApplicationConf(info) })
-                    if (info.hasDependency(Dependencies.TPL_FREEMARKER)) {
-                        add("$artifactName/resources/templates/index.ftl", indenter {
-                            +"<#-- @ftlvariable name=\"data\" type=\"$artifactGroup.IndexData\" -->"
-                            +"<html>"
-                            indent {
-                                +"<body>"
-                                indent {
-                                    +"<ul>"
-                                    +"<#list data.items as item>"
-                                    indent {
-                                        +"<li>\${item}</li>"
-                                    }
-                                    +"</#list>"
-                                    +"</ul>"
-                                }
-                                +"</body>"
-                            }
-                            +"</html>"
-                        })
-                    }
-                    val application_kt = indenter { buildApplicationKt(info) }
-                    println(application_kt)
-                    add("$artifactName/src/Application.kt", application_kt)
-                })
-            } catch (e: Throwable) {
-                console.error(e)
-                window.alert("Couldn't generate ZIP. Reason: $e")
-            }
+            build(dev = false)
         }
     })
 }
@@ -277,6 +295,7 @@ fun registerBuildButton() {
 data class BuildInfo(
     val ktorVersion: String,
     val developmentPackage: String,
+    val artifactName: String,
     val artifactGroup: String,
     val developmentEngineFQ: String,
     val reposToInclude: Set<String>,
@@ -376,8 +395,7 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
         //packages += "kotlinx.css.properties"
     }
     if (hasDependency(Dependencies.TPL_FREEMARKER)) {
-        packages += "freemarker.cache"
-        packages += "io.ktor.freemarker"
+        packages += FreemarkerFeature.imports(info)
     }
     for (p in packages) {
         +"import $p.*"
@@ -391,15 +409,13 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
     +""
 
     if (info.hasDependency(Dependencies.TPL_FREEMARKER)) {
-        +"data class IndexData(val items: List<Int>)"
+        FreemarkerFeature.apply { classes(info) }
         +""
     }
 
     "fun Application.main()" {
         if (info.hasDependency(Dependencies.TPL_FREEMARKER)) {
-            "install(FreeMarker)" {
-                +"templateLoader = ClassTemplateLoader(this::class.java.classLoader, \"templates\")"
-            }
+            FreemarkerFeature.apply { installFeature(info) }
             +""
         }
 
@@ -418,9 +434,8 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
                 }
             }
             if (info.hasDependency(Dependencies.TPL_FREEMARKER)) {
-                "get(\"/html-freemarker\")" {
-                    +"call.respond(FreeMarkerContent(\"index.ftl\", mapOf(\"data\" to IndexData(listOf(1, 2, 3))), \"\"))"
-                }
+                +""
+                FreemarkerFeature.apply { routing(info) }
             }
             if (hasDependency(Dependencies.CSS_DSL)) {
                 +""

@@ -12,6 +12,9 @@
 }(this, function (_, Kotlin) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
+  var toInt = Kotlin.kotlin.text.toInt_6ic1pp$;
+  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
+  var Kind_CLASS = Kotlin.Kind.CLASS;
   var lazy = Kotlin.kotlin.lazy_klfg04$;
   var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
   var arrayListOf = Kotlin.kotlin.collections.arrayListOf_i5x0yv$;
@@ -26,13 +29,13 @@
   var toMap = Kotlin.kotlin.collections.toMap_6hr0sd$;
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
-  var println = Kotlin.kotlin.io.println_s8jyv4$;
-  var listOf_0 = Kotlin.kotlin.collections.listOf_i5x0yv$;
-  var toInt = Kotlin.kotlin.text.toInt_6ic1pp$;
-  var RuntimeException_init = Kotlin.kotlin.RuntimeException_init_pdl1vj$;
   var CoroutineImpl = Kotlin.kotlin.coroutines.experimental.CoroutineImpl;
   var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.experimental.intrinsics.COROUTINE_SUSPENDED;
-  var Kind_CLASS = Kotlin.Kind.CLASS;
+  var println = Kotlin.kotlin.io.println_s8jyv4$;
+  var listOf_0 = Kotlin.kotlin.collections.listOf_i5x0yv$;
+  var RuntimeException_init = Kotlin.kotlin.RuntimeException_init_pdl1vj$;
+  var setOf = Kotlin.kotlin.collections.setOf_i5x0yv$;
+  var ensureNotNull = Kotlin.ensureNotNull;
   var LinkedHashSet_init = Kotlin.kotlin.collections.LinkedHashSet_init_287e2$;
   var contains = Kotlin.kotlin.text.contains_li3zpu$;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
@@ -40,7 +43,6 @@
   var numberToByte = Kotlin.numberToByte;
   var wrapFunction = Kotlin.wrapFunction;
   var defineInlineFunction = Kotlin.defineInlineFunction;
-  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var toChar = Kotlin.toChar;
   var StringBuilder = Kotlin.kotlin.text.StringBuilder;
   var throwCCE = Kotlin.throwCCE;
@@ -55,6 +57,48 @@
   var Comparable = Kotlin.kotlin.Comparable;
   var equals = Kotlin.equals;
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_8cymmc$;
+  FreemarkerFeature.prototype = Object.create(Feature.prototype);
+  FreemarkerFeature.prototype.constructor = FreemarkerFeature;
+  function FileContainer() {
+  }
+  FileContainer.prototype.add_dkzqdg$ = function (name, content, mode, callback$default) {
+    if (mode === void 0)
+      mode = toInt('644', 8);
+    callback$default ? callback$default(name, content, mode) : this.add_dkzqdg$$default(name, content, mode);
+  };
+  FileContainer.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'FileContainer',
+    interfaces: []
+  };
+  function add($receiver, name, content, charset, mode) {
+    if (charset === void 0)
+      charset = UTF8_getInstance();
+    if (mode === void 0)
+      mode = toInt('644', 8);
+    $receiver.add_dkzqdg$(name, toByteArray(content, charset), mode);
+  }
+  function Feature() {
+  }
+  var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
+  Feature.prototype.imports_jbwadm$ = function (info) {
+    return emptyList();
+  };
+  Feature.prototype.classes_j0vqe2$ = function ($receiver, info) {
+  };
+  Feature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+  };
+  Feature.prototype.routing_j0vqe2$ = function ($receiver, info) {
+  };
+  Feature.prototype.extensions_j0vqe2$ = function ($receiver, info) {
+  };
+  Feature.prototype.addFiles_553mg9$ = function (info, files) {
+  };
+  Feature.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Feature',
+    interfaces: []
+  };
   var defaultArtifactGroup;
   var defaultArtifactName;
   var defaultKtorVersion;
@@ -322,7 +366,6 @@
     updateHash();
     return Unit;
   }
-  var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
   function addDependencies() {
     var tmp$, tmp$_0, tmp$_1;
     var str = '#dependencies';
@@ -359,72 +402,116 @@
       jQuery(str_6).change(addDependencies$lambda);
     }
   }
-  function registerBuildButton$lambda$lambda$lambda$lambda(closure$info) {
+  function build$lambda$addFile(closure$dev, this$) {
+    return function (name, data, mode) {
+      if (mode === void 0)
+        mode = get_octal('644');
+      if (closure$dev) {
+        console.warn('ADD file: ' + name);
+        try {
+          console.log(toString(data, UTF8_getInstance()));
+        }
+         catch (e) {
+          if (Kotlin.isType(e, Throwable)) {
+            console.log('<binary file>');
+          }
+           else
+            throw e;
+        }
+      }
+      this$.add_w0mhwy$(name, data, void 0, mode);
+    };
+  }
+  function build$lambda$addFile_0(closure$addFile) {
+    return function (name, data, charset, mode) {
+      if (charset === void 0)
+        charset = UTF8_getInstance();
+      if (mode === void 0)
+        mode = get_octal('644');
+      closure$addFile(name, toByteArray(data, charset), mode);
+    };
+  }
+  function build$lambda$lambda(closure$info) {
     return function ($receiver) {
-      buildPomXml($receiver, closure$info);
+      buildPomXml($receiver, closure$info.copy_mtpjrb$());
       return Unit;
     };
   }
-  function registerBuildButton$lambda$lambda$lambda$lambda_0(closure$info) {
+  function build$lambda$lambda_0(closure$info) {
     return function ($receiver) {
-      buildBuildGradle($receiver, closure$info);
+      buildBuildGradle($receiver, closure$info.copy_mtpjrb$());
       return Unit;
     };
   }
-  function registerBuildButton$lambda$lambda$lambda$lambda_1(closure$info) {
+  function build$lambda$lambda_1(closure$info) {
     return function ($receiver) {
-      buildApplicationConf($receiver, closure$info);
+      buildApplicationConf($receiver, closure$info.copy_mtpjrb$());
       return Unit;
     };
   }
-  function registerBuildButton$lambda$lambda$lambda$lambda_2(closure$info) {
+  function build$lambda$ObjectLiteral(closure$addFile) {
+    this.closure$addFile = closure$addFile;
+  }
+  build$lambda$ObjectLiteral.prototype.add_dkzqdg$$default = function (name, content, mode) {
+    this.closure$addFile(name, content, mode);
+  };
+  build$lambda$ObjectLiteral.$metadata$ = {
+    kind: Kind_CLASS,
+    interfaces: [FileContainer]
+  };
+  function build$lambda$lambda_2(closure$info) {
     return function ($receiver) {
-      buildApplicationKt($receiver, closure$info);
+      buildApplicationKt($receiver, closure$info.copy_mtpjrb$());
       return Unit;
     };
   }
-  function registerBuildButton$lambda$lambda(continuation_0, suspended) {
-    var instance = new Coroutine$registerBuildButton$lambda$lambda(continuation_0);
+  function build(dev_0, continuation_0, suspended) {
+    var instance = new Coroutine$build(dev_0, continuation_0);
     if (suspended)
       return instance;
     else
       return instance.doResume(null);
   }
-  function Coroutine$registerBuildButton$lambda$lambda(continuation_0) {
+  function Coroutine$build(dev_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
-    this.exceptionState_0 = 10;
+    this.exceptionState_0 = 9;
+    this.local$projectType = void 0;
+    this.local$ktorEngine = void 0;
+    this.local$artifactGroup = void 0;
     this.local$artifactName = void 0;
-    this.local$tmp$ = void 0;
     this.local$zb = void 0;
     this.local$info = void 0;
+    this.local$addFile = void 0;
+    this.local$addFile_0 = void 0;
+    this.local$dev = dev_0;
   }
-  Coroutine$registerBuildButton$lambda$lambda.$metadata$ = {
+  Coroutine$build.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: null,
     interfaces: [CoroutineImpl]
   };
-  Coroutine$registerBuildButton$lambda$lambda.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$registerBuildButton$lambda$lambda.prototype.constructor = Coroutine$registerBuildButton$lambda$lambda;
-  Coroutine$registerBuildButton$lambda$lambda.prototype.doResume = function () {
+  Coroutine$build.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$build.prototype.constructor = Coroutine$build;
+  Coroutine$build.prototype.doResume = function () {
     do
       try {
         switch (this.state_0) {
           case 0:
             var tmp$;
             var str = '#project-type';
-            var projectType = jQuery(str).val();
+            this.local$projectType = jQuery(str).val();
             var str_0 = '#ktor-engine';
-            var ktorEngine = jQuery(str_0).val();
+            this.local$ktorEngine = jQuery(str_0).val();
             var str_1 = '#ktor-version';
             var ktorVersion = jQuery(str_1).val();
             var str_2 = '#artifact-group';
-            var artifactGroup = jQuery(str_2).val();
+            this.local$artifactGroup = jQuery(str_2).val();
             var str_3 = '#artifact-name';
             this.local$artifactName = jQuery(str_3).val();
             println('Generating ktor-sample.zip...');
-            println('projectType: ' + projectType);
-            println('ktorEngine: ' + ktorEngine);
-            println('artifactGroup: ' + artifactGroup);
+            println('projectType: ' + this.local$projectType);
+            println('ktorEngine: ' + this.local$ktorEngine);
+            println('artifactGroup: ' + this.local$artifactGroup);
             println('artifactName: ' + this.local$artifactName);
             var $receiver = dependencies;
             var destination = ArrayList_init();
@@ -457,19 +544,19 @@
 
             var reposToInclude = toSet(plus(tmp$_1, destination_0));
             this.exceptionState_0 = 7;
-            this.local$tmp$ = 'ktor-sample-' + projectType + '-' + ktorEngine + '-' + artifactGroup + '-' + this.local$artifactName + '.zip';
             this.local$zb = new ZipBuilder();
-            var developmentPackage = 'io.ktor.server.' + ktorEngine;
+            var developmentPackage = 'io.ktor.server.' + this.local$ktorEngine;
             var developmentEngineFQ = developmentPackage + '.DevelopmentEngine';
-            this.local$info = new BuildInfo(ktorVersion, developmentPackage, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine);
-            switch (projectType) {
+            this.local$info = new BuildInfo(ktorVersion, developmentPackage, this.local$artifactName, this.local$artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, this.local$ktorEngine);
+            this.local$addFile = build$lambda$addFile(this.local$dev, this.local$zb);
+            this.local$addFile_0 = build$lambda$addFile_0(this.local$addFile);
+            switch (this.local$projectType) {
               case 'maven':
-                this.local$zb.add_oyaiiq$(this.local$artifactName + '/pom.xml', indenter(registerBuildButton$lambda$lambda$lambda$lambda(this.local$info)));
+                this.local$addFile_0(this.local$artifactName + '/pom.xml', indenter(build$lambda$lambda(this.local$info)));
                 this.state_0 = 6;
                 continue;
               case 'gradle':
-                var build_gradle = indenter(registerBuildButton$lambda$lambda$lambda$lambda_0(this.local$info));
-                this.local$zb.add_oyaiiq$(this.local$artifactName + '/build.gradle', build_gradle);
+                this.local$addFile_0(this.local$artifactName + '/build.gradle', indenter(build$lambda$lambda_0(this.local$info)));
                 if (get_includeWrapper()) {
                   this.state_0 = 1;
                   this.result_0 = fetchFile('gradle/gradlew', this);
@@ -482,65 +569,117 @@
                   continue;
                 }
 
-              default:throw RuntimeException_init('Unknown project type ' + projectType);
+              default:throw RuntimeException_init('Unknown project type ' + this.local$projectType);
             }
 
           case 1:
-            this.local$zb.add_w0mhwy$(this.local$artifactName + '/gradlew', this.result_0, void 0, toInt('755', 8));
+            this.local$addFile(this.local$artifactName + '/gradlew', this.result_0, toInt('755', 8));
             this.state_0 = 2;
             this.result_0 = fetchFile('gradle/gradlew.bat', this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;
           case 2:
-            this.local$zb.add_w0mhwy$(this.local$artifactName + '/gradlew.bat', this.result_0);
+            this.local$addFile(this.local$artifactName + '/gradlew.bat', this.result_0);
             this.state_0 = 3;
             this.result_0 = fetchFile('gradle/gradle/wrapper/gradle-wrapper.jar', this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;
           case 3:
-            this.local$zb.add_w0mhwy$(this.local$artifactName + '/gradle/wrapper/gradle-wrapper.jar', this.result_0);
+            this.local$addFile(this.local$artifactName + '/gradle/wrapper/gradle-wrapper.jar', this.result_0);
             this.state_0 = 4;
             this.result_0 = fetchFile('gradle/gradle/wrapper/gradle-wrapper.properties', this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;
           case 4:
-            this.local$zb.add_w0mhwy$(this.local$artifactName + '/gradle/wrapper/gradle-wrapper.properties', this.result_0);
+            this.local$addFile(this.local$artifactName + '/gradle/wrapper/gradle-wrapper.properties', this.result_0);
             this.state_0 = 5;
             continue;
           case 5:
             this.state_0 = 6;
             continue;
           case 6:
-            this.local$zb.add_oyaiiq$(this.local$artifactName + '/resources/application.conf', indenter(registerBuildButton$lambda$lambda$lambda$lambda_1(this.local$info)));
-            var application_kt = indenter(registerBuildButton$lambda$lambda$lambda$lambda_2(this.local$info));
-            println(application_kt);
-            this.local$zb.add_oyaiiq$(this.local$artifactName + '/src/Application.kt', application_kt);
-            return generateBrowserFile(this.local$tmp$, this.local$zb.toByteArray()), Unit;
+            this.local$addFile_0(this.local$artifactName + '/resources/application.conf', indenter(build$lambda$lambda_1(this.local$info)));
+            if (hasDependency(this.local$info, Dependencies_getInstance().TPL_FREEMARKER)) {
+              FreemarkerFeature_getInstance().addFiles_553mg9$(this.local$info, new build$lambda$ObjectLiteral(this.local$addFile));
+            }
+
+            this.local$addFile_0(this.local$artifactName + '/src/Application.kt', indenter(build$lambda$lambda_2(this.local$info)));
+            var zipBytes = this.local$zb.toByteArray();
+            if (!this.local$dev) {
+              generateBrowserFile('ktor-sample-' + this.local$projectType + '-' + this.local$ktorEngine + '-' + this.local$artifactGroup + '-' + this.local$artifactName + '.zip', zipBytes);
+            }
+
+            this.exceptionState_0 = 9;
+            this.state_0 = 8;
+            continue;
           case 7:
-            this.exceptionState_0 = 10;
+            this.exceptionState_0 = 9;
             var e = this.exception_0;
             if (Kotlin.isType(e, Throwable)) {
               console.error(e);
-              return window.alert("Couldn't generate ZIP. Reason: " + e), Unit;
+              window.alert("Couldn't generate ZIP. Reason: " + e);
             }
-             else {
+             else
               throw e;
-            }
-
-          case 8:
-            this.state_0 = 9;
+            this.state_0 = 8;
             continue;
-          case 9:
+          case 8:
             return;
-          case 10:
+          case 9:
             throw this.exception_0;
         }
       }
        catch (e) {
-        if (this.state_0 === 10) {
+        if (this.state_0 === 9) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function registerBuildButton$lambda$lambda(continuation_0, suspended) {
+    var instance = new Coroutine$registerBuildButton$lambda$lambda(continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
+  function Coroutine$registerBuildButton$lambda$lambda(continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+  }
+  Coroutine$registerBuildButton$lambda$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$registerBuildButton$lambda$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$registerBuildButton$lambda$lambda.prototype.constructor = Coroutine$registerBuildButton$lambda$lambda;
+  Coroutine$registerBuildButton$lambda$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = build(true, this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
           this.exceptionState_0 = this.state_0;
           throw e;
         }
@@ -555,13 +694,68 @@
     launch(registerBuildButton$lambda$lambda);
     return Unit;
   }
-  function registerBuildButton() {
-    var str = '#buildButton';
-    jQuery(str).removeAttr('disabled').on('click', registerBuildButton$lambda);
+  function registerBuildButton$lambda$lambda_0(continuation_0, suspended) {
+    var instance = new Coroutine$registerBuildButton$lambda$lambda_0(continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
   }
-  function BuildInfo(ktorVersion, developmentPackage, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine) {
+  function Coroutine$registerBuildButton$lambda$lambda_0(continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+  }
+  Coroutine$registerBuildButton$lambda$lambda_0.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$registerBuildButton$lambda$lambda_0.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$registerBuildButton$lambda$lambda_0.prototype.constructor = Coroutine$registerBuildButton$lambda$lambda_0;
+  Coroutine$registerBuildButton$lambda$lambda_0.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = build(false, this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function registerBuildButton$lambda_0() {
+    launch(registerBuildButton$lambda$lambda_0);
+    return Unit;
+  }
+  function registerBuildButton() {
+    if (setOf(['127.0.0.1', 'localhost']).contains_11rb$(ensureNotNull(document.location).hostname)) {
+      var str = '#buildButtonDev';
+      jQuery(str).removeAttr('disabled').css('display', 'inline-block').on('click', registerBuildButton$lambda);
+    }
+    var str_0 = '#buildButton';
+    jQuery(str_0).removeAttr('disabled').on('click', registerBuildButton$lambda_0);
+  }
+  function BuildInfo(ktorVersion, developmentPackage, artifactName, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine) {
     this.ktorVersion = ktorVersion;
     this.developmentPackage = developmentPackage;
+    this.artifactName = artifactName;
     this.artifactGroup = artifactGroup;
     this.developmentEngineFQ = developmentEngineFQ;
     this.reposToInclude = reposToInclude;
@@ -580,30 +774,34 @@
     return this.developmentPackage;
   };
   BuildInfo.prototype.component3 = function () {
-    return this.artifactGroup;
+    return this.artifactName;
   };
   BuildInfo.prototype.component4 = function () {
-    return this.developmentEngineFQ;
+    return this.artifactGroup;
   };
   BuildInfo.prototype.component5 = function () {
-    return this.reposToInclude;
+    return this.developmentEngineFQ;
   };
   BuildInfo.prototype.component6 = function () {
-    return this.dependenciesToInclude;
+    return this.reposToInclude;
   };
   BuildInfo.prototype.component7 = function () {
+    return this.dependenciesToInclude;
+  };
+  BuildInfo.prototype.component8 = function () {
     return this.ktorEngine;
   };
-  BuildInfo.prototype.copy_44p8uj$ = function (ktorVersion, developmentPackage, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine) {
-    return new BuildInfo(ktorVersion === void 0 ? this.ktorVersion : ktorVersion, developmentPackage === void 0 ? this.developmentPackage : developmentPackage, artifactGroup === void 0 ? this.artifactGroup : artifactGroup, developmentEngineFQ === void 0 ? this.developmentEngineFQ : developmentEngineFQ, reposToInclude === void 0 ? this.reposToInclude : reposToInclude, dependenciesToInclude === void 0 ? this.dependenciesToInclude : dependenciesToInclude, ktorEngine === void 0 ? this.ktorEngine : ktorEngine);
+  BuildInfo.prototype.copy_mtpjrb$ = function (ktorVersion, developmentPackage, artifactName, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine) {
+    return new BuildInfo(ktorVersion === void 0 ? this.ktorVersion : ktorVersion, developmentPackage === void 0 ? this.developmentPackage : developmentPackage, artifactName === void 0 ? this.artifactName : artifactName, artifactGroup === void 0 ? this.artifactGroup : artifactGroup, developmentEngineFQ === void 0 ? this.developmentEngineFQ : developmentEngineFQ, reposToInclude === void 0 ? this.reposToInclude : reposToInclude, dependenciesToInclude === void 0 ? this.dependenciesToInclude : dependenciesToInclude, ktorEngine === void 0 ? this.ktorEngine : ktorEngine);
   };
   BuildInfo.prototype.toString = function () {
-    return 'BuildInfo(ktorVersion=' + Kotlin.toString(this.ktorVersion) + (', developmentPackage=' + Kotlin.toString(this.developmentPackage)) + (', artifactGroup=' + Kotlin.toString(this.artifactGroup)) + (', developmentEngineFQ=' + Kotlin.toString(this.developmentEngineFQ)) + (', reposToInclude=' + Kotlin.toString(this.reposToInclude)) + (', dependenciesToInclude=' + Kotlin.toString(this.dependenciesToInclude)) + (', ktorEngine=' + Kotlin.toString(this.ktorEngine)) + ')';
+    return 'BuildInfo(ktorVersion=' + Kotlin.toString(this.ktorVersion) + (', developmentPackage=' + Kotlin.toString(this.developmentPackage)) + (', artifactName=' + Kotlin.toString(this.artifactName)) + (', artifactGroup=' + Kotlin.toString(this.artifactGroup)) + (', developmentEngineFQ=' + Kotlin.toString(this.developmentEngineFQ)) + (', reposToInclude=' + Kotlin.toString(this.reposToInclude)) + (', dependenciesToInclude=' + Kotlin.toString(this.dependenciesToInclude)) + (', ktorEngine=' + Kotlin.toString(this.ktorEngine)) + ')';
   };
   BuildInfo.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.ktorVersion) | 0;
     result = result * 31 + Kotlin.hashCode(this.developmentPackage) | 0;
+    result = result * 31 + Kotlin.hashCode(this.artifactName) | 0;
     result = result * 31 + Kotlin.hashCode(this.artifactGroup) | 0;
     result = result * 31 + Kotlin.hashCode(this.developmentEngineFQ) | 0;
     result = result * 31 + Kotlin.hashCode(this.reposToInclude) | 0;
@@ -612,7 +810,7 @@
     return result;
   };
   BuildInfo.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.ktorVersion, other.ktorVersion) && Kotlin.equals(this.developmentPackage, other.developmentPackage) && Kotlin.equals(this.artifactGroup, other.artifactGroup) && Kotlin.equals(this.developmentEngineFQ, other.developmentEngineFQ) && Kotlin.equals(this.reposToInclude, other.reposToInclude) && Kotlin.equals(this.dependenciesToInclude, other.dependenciesToInclude) && Kotlin.equals(this.ktorEngine, other.ktorEngine)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.ktorVersion, other.ktorVersion) && Kotlin.equals(this.developmentPackage, other.developmentPackage) && Kotlin.equals(this.artifactName, other.artifactName) && Kotlin.equals(this.artifactGroup, other.artifactGroup) && Kotlin.equals(this.developmentEngineFQ, other.developmentEngineFQ) && Kotlin.equals(this.reposToInclude, other.reposToInclude) && Kotlin.equals(this.dependenciesToInclude, other.dependenciesToInclude) && Kotlin.equals(this.ktorEngine, other.ktorEngine)))));
   };
   var NotImplementedError_init = Kotlin.kotlin.NotImplementedError;
   function buildPomXml($receiver, info) {
@@ -775,6 +973,9 @@
       var element_6 = 'kotlinx.css';
       packages.add_11rb$(element_6);
     }
+    if (hasDependency(info, Dependencies_getInstance().TPL_FREEMARKER)) {
+      addAll(packages, FreemarkerFeature_getInstance().imports_jbwadm$(info));
+    }
     tmp$ = packages.iterator();
     while (tmp$.hasNext()) {
       var p = tmp$.next();
@@ -788,9 +989,17 @@
       $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + info.developmentPackage + '.main(args)');
     }
     $receiver.line_61zpoe$('');
+    if (hasDependency(info, Dependencies_getInstance().TPL_FREEMARKER)) {
+      FreemarkerFeature_getInstance().classes_j0vqe2$($receiver, info);
+      $receiver.line_61zpoe$('');
+    }
     $receiver.line_61zpoe$('fun Application.main()' + ' {');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
+      if (hasDependency(info, Dependencies_getInstance().TPL_FREEMARKER)) {
+        FreemarkerFeature_getInstance().installFeature_j0vqe2$($receiver, info);
+        $receiver.line_61zpoe$('');
+      }
       $receiver.line_61zpoe$('routing' + ' {');
       $receiver.indentation = $receiver.indentation + 1 | 0;
       try {
@@ -830,6 +1039,10 @@
             $receiver.indentation = $receiver.indentation - 1 | 0;
           }
           $receiver.line_61zpoe$('}');
+        }
+        if (hasDependency(info, Dependencies_getInstance().TPL_FREEMARKER)) {
+          $receiver.line_61zpoe$('');
+          FreemarkerFeature_getInstance().routing_j0vqe2$($receiver, info);
         }
         if (hasDependency(info, Dependencies_getInstance().CSS_DSL)) {
           $receiver.line_61zpoe$('');
@@ -1062,6 +1275,124 @@
     return Dependencies_instance;
   }
   var dependencies;
+  function FreemarkerFeature() {
+    FreemarkerFeature_instance = this;
+    Feature.call(this);
+    this.repos_csvuzi$_0 = Repos_getInstance().ktor;
+    this.artifacts_u4kg8y$_0 = listOf('io.ktor:ktor-freemarker:$ktor_version');
+    this.id_fl2zti$_0 = 'freemarker';
+    this.title_bsiyfp$_0 = 'Freemarker';
+    this.description_lowc3r$_0 = 'Serve HTML content using Apache freemarker';
+    this.documentation_ccfenr$_0 = 'https://ktor.io/features/freemarker.html';
+  }
+  Object.defineProperty(FreemarkerFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_csvuzi$_0;
+    }
+  });
+  Object.defineProperty(FreemarkerFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_u4kg8y$_0;
+    }
+  });
+  Object.defineProperty(FreemarkerFeature.prototype, 'id', {
+    get: function () {
+      return this.id_fl2zti$_0;
+    }
+  });
+  Object.defineProperty(FreemarkerFeature.prototype, 'title', {
+    get: function () {
+      return this.title_bsiyfp$_0;
+    }
+  });
+  Object.defineProperty(FreemarkerFeature.prototype, 'description', {
+    get: function () {
+      return this.description_lowc3r$_0;
+    }
+  });
+  Object.defineProperty(FreemarkerFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_ccfenr$_0;
+    }
+  });
+  FreemarkerFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf_0(['freemarker.cache', 'io.ktor.freemarker']);
+  };
+  FreemarkerFeature.prototype.classes_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('data class IndexData(val items: List<Int>)');
+  };
+  FreemarkerFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(FreeMarker)' + ' {');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  FreemarkerFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('get("/html-freemarker")' + ' {');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('call.respond(FreeMarkerContent("index.ftl", mapOf("data" to IndexData(listOf(1, 2, 3))), ""))');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  FreemarkerFeature.prototype.extensions_j0vqe2$ = function ($receiver, info) {
+  };
+  function FreemarkerFeature$addFiles$lambda(closure$info) {
+    return function ($receiver) {
+      $receiver.line_61zpoe$('<#-- @ftlvariable name=' + '"' + 'data' + '"' + ' type=' + '"' + closure$info.artifactGroup + '.IndexData' + '"' + ' -->');
+      $receiver.line_61zpoe$('<html>');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('<body>');
+        $receiver.indentation = $receiver.indentation + 1 | 0;
+        try {
+          $receiver.line_61zpoe$('<ul>');
+          $receiver.line_61zpoe$('<#list data.items as item>');
+          $receiver.indentation = $receiver.indentation + 1 | 0;
+          try {
+            $receiver.line_61zpoe$('<li>${item}<\/li>');
+          }
+          finally {
+            $receiver.indentation = $receiver.indentation - 1 | 0;
+          }
+          $receiver.line_61zpoe$('<\/#list>');
+          $receiver.line_61zpoe$('<\/ul>');
+        }
+        finally {
+          $receiver.indentation = $receiver.indentation - 1 | 0;
+        }
+        $receiver.line_61zpoe$('<\/body>');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('<\/html>');
+      return Unit;
+    };
+  }
+  FreemarkerFeature.prototype.addFiles_553mg9$ = function (info, files) {
+    add(files, info.artifactName + '/resources/templates/index.ftl', indenter(FreemarkerFeature$addFiles$lambda(info)));
+  };
+  FreemarkerFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'FreemarkerFeature',
+    interfaces: [Feature]
+  };
+  var FreemarkerFeature_instance = null;
+  function FreemarkerFeature_getInstance() {
+    if (FreemarkerFeature_instance === null) {
+      new FreemarkerFeature();
+    }
+    return FreemarkerFeature_instance;
+  }
   function ByteArrayOutputStream() {
     this.pos_0 = 0;
     this.data_0 = new Int8Array(1024);
@@ -1161,6 +1492,7 @@
   UTF8.prototype.createByte_0 = function (codePoint, shift) {
     return codePoint >> shift & 63 | 128;
   };
+  var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
   UTF8.prototype.decode_9w11d2$ = function (out, src, start, end) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2;
     var i = start;
@@ -1184,6 +1516,7 @@
         case 14:
           out.append_s8itvh$(toChar((c & 15) << 12 | (src[tmp$_1 = i, i = tmp$_1 + 1 | 0, tmp$_1] & 63) << 6 | src[tmp$_2 = i, i = tmp$_2 + 1 | 0, tmp$_2] & 63));
           break;
+        default:throw IllegalStateException_init('Invalid UTF string'.toString());
       }
     }
   };
@@ -1194,10 +1527,9 @@
         out.u8_za3lpa$(codePoint);
       }
        else {
-        if ((codePoint & -2048) === 0) {
+        if ((codePoint & -2048) === 0)
           out.u8_za3lpa$(codePoint >> 6 & 31 | 192);
-        }
-         else if ((codePoint & -65536) === 0) {
+        else if ((codePoint & -65536) === 0) {
           out.u8_za3lpa$(codePoint >> 12 & 15 | 224);
           out.u8_za3lpa$(this.createByte_0(codePoint, 6));
         }
@@ -1316,9 +1648,19 @@
       (tmp$_1 = document.body) != null ? tmp$_1.removeChild(elem) : null;
     }
   }
+  function get_octal($receiver) {
+    return toInt($receiver, 8);
+  }
+  function BaseIndenter() {
+  }
+  BaseIndenter.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'BaseIndenter',
+    interfaces: []
+  };
   function Indenter() {
     this.indentation = 0;
-    this.lines_0 = ArrayList_init();
+    this.lines_97gspi$_0 = ArrayList_init();
   }
   function Indenter$Indents() {
     Indenter$Indents_instance = this;
@@ -1344,7 +1686,7 @@
     return Indenter$Indents_instance;
   }
   Indenter.prototype.line_61zpoe$ = function (str) {
-    var $receiver = this.lines_0;
+    var $receiver = this.lines_97gspi$_0;
     var element = Indenter$Indents_getInstance().get_za3lpa$(this.indentation) + str;
     $receiver.add_11rb$(element);
   };
@@ -1383,12 +1725,12 @@
     }
   });
   Indenter.prototype.toString = function () {
-    return joinToString(this.lines_0, '\n');
+    return joinToString(this.lines_97gspi$_0, '\n');
   };
   Indenter.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'Indenter',
-    interfaces: []
+    interfaces: [BaseIndenter]
   };
   function indenter(callback) {
     var $receiver = new Indenter();
@@ -1768,6 +2110,9 @@
   var package$io = _.io || (_.io = {});
   var package$ktor = package$io.ktor || (package$io.ktor = {});
   var package$start = package$ktor.start || (package$ktor.start = {});
+  package$start.FileContainer = FileContainer;
+  package$start.add_ykoeqs$ = add;
+  package$start.Feature = Feature;
   Object.defineProperty(package$start, 'defaultArtifactGroup', {
     get: function () {
       return defaultArtifactGroup;
@@ -1807,6 +2152,7 @@
   package$start.formUrlEncode_ye33rp$ = formUrlEncode;
   package$start.formUrlEncode_jgmxsd$ = formUrlEncode_0;
   package$start.addDependencies = addDependencies;
+  package$start.build_6taknv$ = build;
   package$start.registerBuildButton = registerBuildButton;
   package$start.BuildInfo = BuildInfo;
   package$start.buildPomXml_j0vqe2$ = buildPomXml;
@@ -1838,6 +2184,10 @@
       return dependencies;
     }
   });
+  var package$features = package$start.features || (package$start.features = {});
+  Object.defineProperty(package$features, 'FreemarkerFeature', {
+    get: FreemarkerFeature_getInstance
+  });
   var package$util = package$start.util || (package$start.util = {});
   package$util.ByteArrayOutputStream = ByteArrayOutputStream;
   package$util.buildByteArray_xuyaid$ = buildByteArray;
@@ -1855,6 +2205,8 @@
   });
   package$util.crc32_964n91$ = crc32;
   package$util.generateBrowserFile_cyqrs4$ = generateBrowserFile;
+  package$util.get_octal_pdl1vz$ = get_octal;
+  package$util.BaseIndenter = BaseIndenter;
   Object.defineProperty(Indenter, 'Indents', {
     get: Indenter$Indents_getInstance
   });
@@ -1882,6 +2234,7 @@
   ZipBuilder.FileInfo = ZipBuilder$FileInfo;
   package$util.ZipBuilder = ZipBuilder;
   package$util.buildZip_oi1qpb$ = buildZip;
+  build$lambda$ObjectLiteral.prototype.add_dkzqdg$ = FileContainer.prototype.add_dkzqdg$;
   defaultArtifactGroup = 'com.example';
   defaultArtifactName = 'ktor-demo';
   defaultKtorVersion = '0.9.2';
