@@ -242,6 +242,26 @@ fun registerBuildButton() {
                     }
 
                     add("$artifactName/resources/application.conf", indenter { buildApplicationConf(info) })
+                    if (info.hasDependency(Dependencies.TPL_FREEMARKER)) {
+                        add("$artifactName/resources/templates/index.ftl", indenter {
+                            +"<#-- @ftlvariable name=\"data\" type=\"$artifactGroup.IndexData\" -->"
+                            +"<html>"
+                            indent {
+                                +"<body>"
+                                indent {
+                                    +"<ul>"
+                                    +"<#list data.items as item>"
+                                    indent {
+                                        +"<li>\${item}</li>"
+                                    }
+                                    +"</#list>"
+                                    +"</ul>"
+                                }
+                                +"</body>"
+                            }
+                            +"</html>"
+                        })
+                    }
                     val application_kt = indenter { buildApplicationKt(info) }
                     println(application_kt)
                     add("$artifactName/src/Application.kt", application_kt)
@@ -355,6 +375,10 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
         packages += "kotlinx.css"
         //packages += "kotlinx.css.properties"
     }
+    if (hasDependency(Dependencies.TPL_FREEMARKER)) {
+        packages += "freemarker.cache"
+        packages += "io.ktor.freemarker"
+    }
     for (p in packages) {
         +"import $p.*"
     }
@@ -365,7 +389,20 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
         +"fun main(args: Array<String>): Unit = $developmentPackage.main(args)"
     }
     +""
+
+    if (info.hasDependency(Dependencies.TPL_FREEMARKER)) {
+        +"data class IndexData(val items: List<Int>)"
+        +""
+    }
+
     "fun Application.main()" {
+        if (info.hasDependency(Dependencies.TPL_FREEMARKER)) {
+            "install(FreeMarker)" {
+                +"templateLoader = ClassTemplateLoader(this::class.java.classLoader, \"templates\")"
+            }
+            +""
+        }
+
         "routing" {
             "get(\"/\")" {
                 +"call.respondText(\"HELLO WORLD!\")"
@@ -378,6 +415,11 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
                             +"h1 { +\"HTML\" }"
                         }
                     }
+                }
+            }
+            if (info.hasDependency(Dependencies.TPL_FREEMARKER)) {
+                "get(\"/html-freemarker\")" {
+                    +"call.respond(FreeMarkerContent(\"index.ftl\", mapOf(\"data\" to IndexData(listOf(1, 2, 3))), \"\"))"
                 }
             }
             if (hasDependency(Dependencies.CSS_DSL)) {
