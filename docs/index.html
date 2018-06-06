@@ -63,6 +63,8 @@
                         <option value="maven">Maven project</option>
                     </select>
                     &nbsp;
+                    <label for="include_wrapper"><input type="checkbox" id="include_wrapper" checked />&nbsp;with Wrapper</label>
+                    &nbsp;
                     using
                     &nbsp;
                     <select id="ktor-engine" class="form-control">
@@ -109,7 +111,7 @@
             <div class="col-sm">
                 <h3>Dependencies</h3>
                 <div><input id="dependency-filter" type="text" placeholder="Filter"/></div>
-                <div id="dependencies" style="height:250px;overflow:auto;">Loading dependencies...</div>
+                <div id="dependencies" style="height:250px;overflow:auto;"><div style="padding: 8px;">Loading dependencies...</div></div>
             </div>
         </div>
     </form>

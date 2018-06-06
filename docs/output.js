@@ -12,19 +12,26 @@
 }(this, function (_, Kotlin) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
+  var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
+  var arrayListOf = Kotlin.kotlin.collections.arrayListOf_i5x0yv$;
+  var Unit = Kotlin.kotlin.Unit;
+  var firstOrNull = Kotlin.kotlin.collections.firstOrNull_2p1efm$;
   var trim = Kotlin.kotlin.text.trim_wqw3xr$;
   var Throwable = Error;
   var lazy = Kotlin.kotlin.lazy_klfg04$;
   var split = Kotlin.kotlin.text.split_o64adg$;
+  var listOf = Kotlin.kotlin.collections.listOf_mh5how$;
+  var plus = Kotlin.kotlin.collections.plus_mydzjv$;
   var to = Kotlin.kotlin.to_ujzrz7$;
   var toMap = Kotlin.kotlin.collections.toMap_6hr0sd$;
+  var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
-  var Unit = Kotlin.kotlin.Unit;
-  var firstOrNull = Kotlin.kotlin.collections.firstOrNull_2p1efm$;
   var println = Kotlin.kotlin.io.println_s8jyv4$;
-  var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
-  var plus = Kotlin.kotlin.collections.plus_mydzjv$;
+  var listOf_0 = Kotlin.kotlin.collections.listOf_i5x0yv$;
+  var toInt = Kotlin.kotlin.text.toInt_6ic1pp$;
   var RuntimeException_init = Kotlin.kotlin.RuntimeException_init_pdl1vj$;
+  var CoroutineImpl = Kotlin.kotlin.coroutines.experimental.CoroutineImpl;
+  var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.experimental.intrinsics.COROUTINE_SUSPENDED;
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var contains = Kotlin.kotlin.text.contains_li3zpu$;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
@@ -37,15 +44,160 @@
   var StringBuilder = Kotlin.kotlin.text.StringBuilder;
   var throwCCE = Kotlin.throwCCE;
   var lastOrNull = Kotlin.kotlin.collections.lastOrNull_2p1efm$;
-  var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
+  var getCallableRef = Kotlin.getCallableRef;
+  var experimental = Kotlin.kotlin.coroutines.experimental;
+  var Continuation = Kotlin.kotlin.coroutines.experimental.Continuation;
+  var startCoroutine = Kotlin.kotlin.coroutines.experimental.startCoroutine_xtwlez$;
   var equals = Kotlin.equals;
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_8cymmc$;
-  var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
+  var defaultArtifactGroup;
+  var defaultArtifactName;
+  var defaultKtorVersion;
+  var defaultKtorEngine;
+  function get_checked($receiver) {
+    return !!$receiver.prop('checked');
+  }
+  function set_checked($receiver, value) {
+    $receiver.prop('checked', value ? 'checked' : '');
+  }
+  function get_includeWrapper() {
+    var str = '#include_wrapper';
+    return get_checked(jQuery(str));
+  }
+  function set_includeWrapper(value) {
+    var str = '#include_wrapper';
+    set_checked(jQuery(str), value);
+  }
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+  function updateHash() {
+    var tmp$, tmp$_0;
+    var items = LinkedHashMap_init();
+    if (!get_includeWrapper()) {
+      var key = 'no_wrapper';
+      var value = arrayListOf(['']);
+      items.put_xwzc9p$(key, value);
+    }
+    var dependency = ArrayList_init();
+    var key_0 = 'dependency';
+    items.put_xwzc9p$(key_0, dependency);
+    tmp$ = dependencies.iterator();
+    while (tmp$.hasNext()) {
+      var dep = tmp$.next();
+      var str = '#artifact-' + dep.id;
+      if (get_checked(jQuery(str))) {
+        var element = dep.id;
+        dependency.add_11rb$(element);
+      }
+    }
+    var str_0 = '#ktor-engine';
+    var ktorEngine = jQuery(str_0).val();
+    if (ktorEngine != defaultKtorEngine) {
+      var key_1 = 'ktor-engine';
+      var value_0 = arrayListOf([ktorEngine]);
+      items.put_xwzc9p$(key_1, value_0);
+    }
+    var str_1 = '#ktor-version';
+    var ktorVersion = jQuery(str_1).val();
+    if (ktorVersion != defaultKtorVersion) {
+      var key_2 = 'ktor-version';
+      var value_1 = arrayListOf([ktorVersion]);
+      items.put_xwzc9p$(key_2, value_1);
+    }
+    var str_2 = '#project-type';
+    var projectType = jQuery(str_2).val();
+    if (projectType != 'gradle') {
+      var key_3 = 'project-type';
+      var value_2 = arrayListOf([projectType]);
+      items.put_xwzc9p$(key_3, value_2);
+    }
+    var str_3 = '#artifact-group';
+    var artifactGroup = jQuery(str_3).val();
+    if (artifactGroup != defaultArtifactGroup) {
+      var key_4 = 'artifact-group';
+      var value_3 = arrayListOf([artifactGroup]);
+      items.put_xwzc9p$(key_4, value_3);
+    }
+    var str_4 = '#artifact-name';
+    var artifactName = jQuery(str_4).val();
+    if (artifactName != defaultArtifactName) {
+      var key_5 = 'artifact-name';
+      var value_4 = arrayListOf([artifactName]);
+      items.put_xwzc9p$(key_5, value_4);
+    }
+    (tmp$_0 = document.location) != null ? (tmp$_0.hash = formUrlEncode_0(items)) : null;
+  }
+  function main$lambda() {
+    updateHash();
+    return Unit;
+  }
+  function main$lambda_0() {
+    updateHash();
+    return Unit;
+  }
+  function main$lambda_1() {
+    updateHash();
+    return Unit;
+  }
+  function main$lambda_2() {
+    updateHash();
+    return Unit;
+  }
+  function main$lambda_3() {
+    updateHash();
+    return Unit;
+  }
+  function main$lambda_4() {
+    updateHash();
+    return Unit;
+  }
+  function main$lambda_5() {
+    updateHash();
+    return Unit;
+  }
+  function main$lambda_6() {
+    updateHash();
+    return Unit;
+  }
+  var Map = Kotlin.kotlin.collections.Map;
   function main(args) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8;
+    var str = '#include_wrapper';
+    jQuery(str).change(main$lambda);
+    var str_0 = '#ktor-engine';
+    jQuery(str_0).change(main$lambda_0);
+    var str_1 = '#ktor-version';
+    jQuery(str_1).change(main$lambda_1);
+    var str_2 = '#project-type';
+    jQuery(str_2).change(main$lambda_2);
+    var str_3 = '#artifact-group';
+    jQuery(str_3).change(main$lambda_3);
+    var str_4 = '#artifact-name';
+    jQuery(str_4).change(main$lambda_4);
+    var str_5 = '#artifact-group';
+    jQuery(str_5).keyup(main$lambda_5);
+    var str_6 = '#artifact-name';
+    jQuery(str_6).keyup(main$lambda_6);
+    var str_7 = '#include_wrapper';
+    var tmp$_9 = jQuery(str_7);
+    var $receiver = get_hashParams();
+    var key = 'no_wrapper';
+    var tmp$_10;
+    tmp$_9.prop('checked', (Kotlin.isType(tmp$_10 = $receiver, Map) ? tmp$_10 : throwCCE()).containsKey_11rb$(key) ? '' : 'checked');
+    var str_8 = '#artifact-group';
+    jQuery(str_8).val((tmp$_0 = (tmp$ = get_hashParams().get_11rb$('artifact-group')) != null ? firstOrNull(tmp$) : null) != null ? tmp$_0 : 'com.example');
+    var str_9 = '#artifact-name';
+    jQuery(str_9).val((tmp$_2 = (tmp$_1 = get_hashParams().get_11rb$('artifact-name')) != null ? firstOrNull(tmp$_1) : null) != null ? tmp$_2 : 'ktor-demo');
+    var str_10 = '#ktor-version';
+    jQuery(str_10).val((tmp$_4 = (tmp$_3 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_3) : null) != null ? tmp$_4 : defaultKtorVersion);
+    var str_11 = '#ktor-engine';
+    jQuery(str_11).val((tmp$_6 = (tmp$_5 = get_hashParams().get_11rb$('ktor-engine')) != null ? firstOrNull(tmp$_5) : null) != null ? tmp$_6 : defaultKtorEngine);
+    var str_12 = '#ktor-version';
+    jQuery(str_12).val((tmp$_8 = (tmp$_7 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_7) : null) != null ? tmp$_8 : defaultKtorVersion);
     addDependencies();
     registerBuildButton();
     handleFiltering();
     removeLoading();
+    updateHash();
   }
   var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
   function hashParams$lambda() {
@@ -65,7 +217,6 @@
     return hashParams.value;
   }
   var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
-  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   function formUrlDecode($receiver) {
     var $receiver_0 = split($receiver, Kotlin.charArrayOf(38));
     var destination = ArrayList_init(collectionSizeOrDefault($receiver_0, 10));
@@ -74,7 +225,7 @@
     while (tmp$.hasNext()) {
       var item = tmp$.next();
       var tmp$_0 = destination.add_11rb$;
-      var tmp$_1 = split(item, Kotlin.charArrayOf(61), void 0, 2);
+      var tmp$_1 = plus(split(item, Kotlin.charArrayOf(61), void 0, 2), listOf(''));
       var key = tmp$_1.get_za3lpa$(0);
       var value = tmp$_1.get_za3lpa$(1);
       tmp$_0.call(destination, to(key, value));
@@ -117,9 +268,40 @@
     }
     return toMap(destination_1);
   }
+  function formUrlEncode$lambda(it) {
+    return it.second.length > 0 ? it.first + '=' + it.second : it.first;
+  }
+  function formUrlEncode($receiver) {
+    return joinToString($receiver, '&', void 0, void 0, void 0, void 0, formUrlEncode$lambda);
+  }
+  var addAll = Kotlin.kotlin.collections.addAll_ipc267$;
+  function formUrlEncode_0($receiver) {
+    var $receiver_0 = $receiver.entries;
+    var destination = ArrayList_init();
+    var tmp$;
+    tmp$ = $receiver_0.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      var $receiver_1 = element.value;
+      var destination_0 = ArrayList_init(collectionSizeOrDefault($receiver_1, 10));
+      var tmp$_0;
+      tmp$_0 = $receiver_1.iterator();
+      while (tmp$_0.hasNext()) {
+        var item = tmp$_0.next();
+        destination_0.add_11rb$(to(element.key, item));
+      }
+      var list = destination_0;
+      addAll(destination, list);
+    }
+    return formUrlEncode(destination);
+  }
+  function addDependencies$lambda() {
+    updateHash();
+    return Unit;
+  }
   var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
   function addDependencies() {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6;
+    var tmp$, tmp$_0, tmp$_1;
     var str = '#dependencies';
     var deps = jQuery(str);
     deps.text('');
@@ -130,127 +312,220 @@
       var checkedBool = dependencyIds.contains_11rb$(dependency.id);
       var checked = checkedBool ? 'checked' : '';
       var str_0 = "<label for='artifact-" + dependency.id + "' class='artifact' />";
-      var tmp$_7 = jQuery(str_0);
+      var tmp$_2 = jQuery(str_0);
       var str_1 = "<div class='title' />";
-      var tmp$_8 = jQuery(str_1);
+      var tmp$_3 = jQuery(str_1);
       var str_2 = "<input id='artifact-" + dependency.id + "' type='checkbox' " + checked + ' />';
-      var tmp$_9 = tmp$_8.append(jQuery(str_2));
+      var tmp$_4 = tmp$_3.append(jQuery(str_2));
       var str_3 = '<span />';
-      var tmp$_10 = tmp$_9.append(jQuery(str_3).text(' ' + dependency.title));
+      var tmp$_5 = tmp$_4.append(jQuery(str_3).text(' ' + dependency.title));
       var str_4 = "<span class='artifact-name' />";
-      var tmp$_11 = tmp$_7.append(tmp$_10.append(jQuery(str_4).text(' (' + dependency.artifact + ')')));
+      var tmp$_6 = tmp$_2.append(tmp$_5.append(jQuery(str_4).text(' (' + dependency.artifact + ')')));
       var str_5 = "<div class='subtitle' />";
-      var tmp$_12 = jQuery(str_5).append(jQuery('<div />').text(dependency.description));
+      var tmp$_7 = jQuery(str_5).append(jQuery('<div />').text(dependency.description));
       var $receiver = jQuery('<div />');
       if (dependency.documentation != null) {
         $receiver.append(jQuery('<a />').attr('href', dependency.documentation).attr('target', '_blank').text('Documentation'));
       }
-      deps.append(tmp$_11.append(tmp$_12.append($receiver)));
+      deps.append(tmp$_6.append(tmp$_7.append($receiver)));
     }
-    var str_6 = '#artifact-group';
-    jQuery(str_6).val((tmp$_2 = (tmp$_1 = get_hashParams().get_11rb$('artifact-group')) != null ? firstOrNull(tmp$_1) : null) != null ? tmp$_2 : 'com.example');
-    var str_7 = '#artifact-name';
-    jQuery(str_7).val((tmp$_4 = (tmp$_3 = get_hashParams().get_11rb$('artifact-name')) != null ? firstOrNull(tmp$_3) : null) != null ? tmp$_4 : 'ktor-demo');
-    var str_8 = '#ktor-version';
-    jQuery(str_8).val((tmp$_6 = (tmp$_5 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_5) : null) != null ? tmp$_6 : '0.9.2');
+    tmp$_1 = dependencies.iterator();
+    while (tmp$_1.hasNext()) {
+      var dependency_0 = tmp$_1.next();
+      var str_6 = '#artifact-' + dependency_0.id;
+      jQuery(str_6).change(addDependencies$lambda);
+    }
   }
-  function registerBuildButton$lambda$lambda$lambda(closure$info) {
+  function registerBuildButton$lambda$lambda$lambda$lambda(closure$info) {
     return function ($receiver) {
       buildPomXml($receiver, closure$info);
       return Unit;
     };
   }
-  function registerBuildButton$lambda$lambda$lambda_0(closure$info) {
+  function registerBuildButton$lambda$lambda$lambda$lambda_0(closure$info) {
     return function ($receiver) {
       buildBuildGradle($receiver, closure$info);
       return Unit;
     };
   }
-  function registerBuildButton$lambda$lambda$lambda_1(closure$info) {
+  function registerBuildButton$lambda$lambda$lambda$lambda_1(closure$info) {
     return function ($receiver) {
       buildApplicationConf($receiver, closure$info);
       return Unit;
     };
   }
-  function registerBuildButton$lambda$lambda$lambda_2(closure$info) {
+  function registerBuildButton$lambda$lambda$lambda$lambda_2(closure$info) {
     return function ($receiver) {
       buildApplicationKt($receiver, closure$info);
       return Unit;
     };
   }
-  function registerBuildButton$lambda$lambda(closure$ktorEngine, closure$ktorVersion, closure$artifactGroup, closure$reposToInclude, closure$dependenciesToInclude, closure$projectType, closure$artifactName) {
-    return function ($receiver) {
-      var developmentPackage = 'io.ktor.server.' + closure$ktorEngine;
-      var developmentEngineFQ = developmentPackage + '.DevelopmentEngine';
-      var info = new BuildInfo(closure$ktorVersion, developmentPackage, closure$artifactGroup, developmentEngineFQ, closure$reposToInclude, closure$dependenciesToInclude, closure$ktorEngine);
-      switch (closure$projectType) {
-        case 'maven':
-          $receiver.add_axwij4$(closure$artifactName + '/pom.xml', indenter(registerBuildButton$lambda$lambda$lambda(info)));
-          break;
-        case 'gradle':
-          $receiver.add_axwij4$(closure$artifactName + '/build.gradle', indenter(registerBuildButton$lambda$lambda$lambda_0(info)));
-          break;
-        default:throw RuntimeException_init('Unknown project type ' + closure$projectType);
-      }
-      $receiver.add_axwij4$(closure$artifactName + '/resources/application.conf', indenter(registerBuildButton$lambda$lambda$lambda_1(info)));
-      $receiver.add_axwij4$(closure$artifactName + '/src/Application.kt', indenter(registerBuildButton$lambda$lambda$lambda_2(info)));
-      return Unit;
-    };
+  function registerBuildButton$lambda$lambda(continuation_0, suspended) {
+    var instance = new Coroutine$registerBuildButton$lambda$lambda(continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
   }
-  function registerBuildButton$lambda() {
-    var tmp$;
-    var str = '#project-type';
-    var projectType = jQuery(str).val();
-    var str_0 = '#ktor-engine';
-    var ktorEngine = jQuery(str_0).val();
-    var str_1 = '#ktor-version';
-    var ktorVersion = jQuery(str_1).val();
-    var str_2 = '#artifact-group';
-    var artifactGroup = jQuery(str_2).val();
-    var str_3 = '#artifact-name';
-    var artifactName = jQuery(str_3).val();
-    println('Generating ktor-sample.zip...');
-    println('projectType: ' + projectType);
-    println('ktorEngine: ' + ktorEngine);
-    println('artifactGroup: ' + artifactGroup);
-    println('artifactName: ' + artifactName);
-    var $receiver = dependencies;
-    var destination = ArrayList_init();
-    var tmp$_0;
-    tmp$_0 = $receiver.iterator();
-    while (tmp$_0.hasNext()) {
-      var element = tmp$_0.next();
-      var str_4 = '#artifact-' + element.id;
-      if (jQuery(str_4).prop('checked'))
-        destination.add_11rb$(element);
-    }
-    var dependenciesToInclude = toSet(destination);
-    tmp$ = dependencies.iterator();
-    while (tmp$.hasNext()) {
-      var dependency = tmp$.next();
-      var toInclude = dependenciesToInclude.contains_11rb$(dependency);
-      println('DEPENDENCY: ' + dependency + ' :: include=' + toInclude);
-    }
-    var tmp$_1 = listOf(['jcenter', 'ktor']);
-    var destination_0 = ArrayList_init(collectionSizeOrDefault(dependenciesToInclude, 10));
-    var tmp$_2;
-    tmp$_2 = dependenciesToInclude.iterator();
-    while (tmp$_2.hasNext()) {
-      var item = tmp$_2.next();
-      destination_0.add_11rb$(item.repo);
-    }
-    var reposToInclude = toSet(plus(tmp$_1, destination_0));
-    try {
-      download('ktor-sample-' + projectType + '-' + ktorEngine + '-' + artifactGroup + '-' + artifactName + '.zip', buildZip(registerBuildButton$lambda$lambda(ktorEngine, ktorVersion, artifactGroup, reposToInclude, dependenciesToInclude, projectType, artifactName)));
-    }
-     catch (e) {
-      if (Kotlin.isType(e, Throwable)) {
-        console.error(e);
-        window.alert("Couldn't generate ZIP. Reason: " + e);
+  function Coroutine$registerBuildButton$lambda$lambda(continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 10;
+    this.local$artifactName = void 0;
+    this.local$tmp$ = void 0;
+    this.local$zb = void 0;
+    this.local$info = void 0;
+  }
+  Coroutine$registerBuildButton$lambda$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$registerBuildButton$lambda$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$registerBuildButton$lambda$lambda.prototype.constructor = Coroutine$registerBuildButton$lambda$lambda;
+  Coroutine$registerBuildButton$lambda$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            var tmp$;
+            var str = '#project-type';
+            var projectType = jQuery(str).val();
+            var str_0 = '#ktor-engine';
+            var ktorEngine = jQuery(str_0).val();
+            var str_1 = '#ktor-version';
+            var ktorVersion = jQuery(str_1).val();
+            var str_2 = '#artifact-group';
+            var artifactGroup = jQuery(str_2).val();
+            var str_3 = '#artifact-name';
+            this.local$artifactName = jQuery(str_3).val();
+            println('Generating ktor-sample.zip...');
+            println('projectType: ' + projectType);
+            println('ktorEngine: ' + ktorEngine);
+            println('artifactGroup: ' + artifactGroup);
+            println('artifactName: ' + this.local$artifactName);
+            var $receiver = dependencies;
+            var destination = ArrayList_init();
+            var tmp$_0;
+            tmp$_0 = $receiver.iterator();
+            while (tmp$_0.hasNext()) {
+              var element = tmp$_0.next();
+              var str_4 = '#artifact-' + element.id;
+              if (jQuery(str_4).prop('checked'))
+                destination.add_11rb$(element);
+            }
+
+            var dependenciesToInclude = toSet(destination);
+            tmp$ = dependencies.iterator();
+            while (tmp$.hasNext()) {
+              var dependency = tmp$.next();
+              var toInclude = dependenciesToInclude.contains_11rb$(dependency);
+              println('DEPENDENCY: ' + dependency + ' :: include=' + toInclude);
+            }
+
+            var tmp$_1 = listOf_0(['jcenter', 'ktor']);
+            var destination_0 = ArrayList_init(collectionSizeOrDefault(dependenciesToInclude, 10));
+            var tmp$_2;
+            tmp$_2 = dependenciesToInclude.iterator();
+            while (tmp$_2.hasNext()) {
+              var item = tmp$_2.next();
+              destination_0.add_11rb$(item.repo);
+            }
+
+            var reposToInclude = toSet(plus(tmp$_1, destination_0));
+            this.exceptionState_0 = 7;
+            this.local$tmp$ = 'ktor-sample-' + projectType + '-' + ktorEngine + '-' + artifactGroup + '-' + this.local$artifactName + '.zip';
+            this.local$zb = new ZipBuilder();
+            var developmentPackage = 'io.ktor.server.' + ktorEngine;
+            var developmentEngineFQ = developmentPackage + '.DevelopmentEngine';
+            this.local$info = new BuildInfo(ktorVersion, developmentPackage, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine);
+            switch (projectType) {
+              case 'maven':
+                this.local$zb.add_oyaiiq$(this.local$artifactName + '/pom.xml', indenter(registerBuildButton$lambda$lambda$lambda$lambda(this.local$info)));
+                this.state_0 = 6;
+                continue;
+              case 'gradle':
+                this.local$zb.add_oyaiiq$(this.local$artifactName + '/build.gradle', indenter(registerBuildButton$lambda$lambda$lambda$lambda_0(this.local$info)));
+                if (get_includeWrapper()) {
+                  this.state_0 = 1;
+                  this.result_0 = fetchFile('gradle/gradlew', this);
+                  if (this.result_0 === COROUTINE_SUSPENDED)
+                    return COROUTINE_SUSPENDED;
+                  continue;
+                }
+                 else {
+                  this.state_0 = 5;
+                  continue;
+                }
+
+              default:throw RuntimeException_init('Unknown project type ' + projectType);
+            }
+
+          case 1:
+            this.local$zb.add_w0mhwy$(this.local$artifactName + '/gradlew', this.result_0, void 0, toInt('755', 8));
+            this.state_0 = 2;
+            this.result_0 = fetchFile('gradle/gradlew.bat', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 2:
+            this.local$zb.add_w0mhwy$(this.local$artifactName + '/gradlew.bat', this.result_0);
+            this.state_0 = 3;
+            this.result_0 = fetchFile('gradle/gradle/wrapper/gradle-wrapper.jar', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 3:
+            this.local$zb.add_w0mhwy$(this.local$artifactName + '/gradle/wrapper/gradle-wrapper.jar', this.result_0);
+            this.state_0 = 4;
+            this.result_0 = fetchFile('gradle/gradle/wrapper/gradle-wrapper.properties', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 4:
+            this.local$zb.add_w0mhwy$(this.local$artifactName + '/gradle/wrapper/gradle-wrapper.properties', this.result_0);
+            this.state_0 = 5;
+            continue;
+          case 5:
+            this.state_0 = 6;
+            continue;
+          case 6:
+            this.local$zb.add_oyaiiq$(this.local$artifactName + '/resources/application.conf', indenter(registerBuildButton$lambda$lambda$lambda$lambda_1(this.local$info)));
+            this.local$zb.add_oyaiiq$(this.local$artifactName + '/src/Application.kt', indenter(registerBuildButton$lambda$lambda$lambda$lambda_2(this.local$info)));
+            return generateBrowserFile(this.local$tmp$, this.local$zb.toByteArray()), Unit;
+          case 7:
+            this.exceptionState_0 = 10;
+            var e = this.exception_0;
+            if (Kotlin.isType(e, Throwable)) {
+              console.error(e);
+              return window.alert("Couldn't generate ZIP. Reason: " + e), Unit;
+            }
+             else {
+              throw e;
+            }
+
+          case 8:
+            this.state_0 = 9;
+            continue;
+          case 9:
+            return;
+          case 10:
+            throw this.exception_0;
+        }
       }
-       else
-        throw e;
-    }
+       catch (e) {
+        if (this.state_0 === 10) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function registerBuildButton$lambda() {
+    launch(registerBuildButton$lambda$lambda);
     return Unit;
   }
   function registerBuildButton() {
@@ -861,7 +1136,7 @@
   function crc32($receiver) {
     return CRC32_getInstance().update_3fbn1q$(0, $receiver);
   }
-  function download(filename, data, type) {
+  function generateBrowserFile(filename, data, type) {
     if (type === void 0)
       type = 'application/octet-stream';
     var tmp$, tmp$_0, tmp$_1;
@@ -974,6 +1249,9 @@
   var change = defineInlineFunction('output.io.ktor.start.util.change_tue5ot$', function ($receiver, event) {
     return $receiver.change(event);
   });
+  var keyup = defineInlineFunction('output.io.ktor.start.util.keyup_tue5ot$', function ($receiver, event) {
+    return $receiver.keyup(event);
+  });
   function jsObject(pairs) {
     var tmp$;
     var obj = {};
@@ -985,49 +1263,219 @@
     }
     return obj;
   }
+  function await$lambda(this$await) {
+    return function (it) {
+      this$await.then(getCallableRef('resume', function ($receiver, value) {
+        return $receiver.resume_11rb$(value), Unit;
+      }.bind(null, it)), getCallableRef('resumeWithException', function ($receiver, exception) {
+        return $receiver.resumeWithException_tcv7n7$(exception), Unit;
+      }.bind(null, it)));
+      return Unit;
+    };
+  }
+  var SafeContinuation_init = Kotlin.kotlin.coroutines.experimental.SafeContinuation_init_n4f53e$;
+  function suspendCoroutine$lambda(closure$block) {
+    return function (c) {
+      var safe = SafeContinuation_init(c);
+      closure$block(safe);
+      return safe.getResult();
+    };
+  }
+  function await_0($receiver_0, continuation_0, suspended) {
+    var instance = new Coroutine$await($receiver_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
+  function Coroutine$await($receiver_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$await.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$await.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$await.prototype.constructor = Coroutine$await;
+  Coroutine$await.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = suspendCoroutine$lambda(await$lambda(this.local$$receiver))(this.facade);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            this.result_0;
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function fetchFile(file_0, continuation_0, suspended) {
+    var instance = new Coroutine$fetchFile(file_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
+  function Coroutine$fetchFile(file_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$file = file_0;
+  }
+  Coroutine$fetchFile.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$fetchFile.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$fetchFile.prototype.constructor = Coroutine$fetchFile;
+  Coroutine$fetchFile.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = await_0(window.fetch(this.local$file), this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            var response = this.result_0;
+            this.state_0 = 3;
+            this.result_0 = await_0(response.arrayBuffer(), this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 3:
+            var buffer = this.result_0;
+            return new Int8Array(buffer);
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function EmptyContinuation$ObjectLiteral() {
+    this.context_1r6z8g$_0 = experimental.EmptyCoroutineContext;
+  }
+  Object.defineProperty(EmptyContinuation$ObjectLiteral.prototype, 'context', {
+    get: function () {
+      return this.context_1r6z8g$_0;
+    }
+  });
+  EmptyContinuation$ObjectLiteral.prototype.resume_11rb$ = function (value) {
+  };
+  EmptyContinuation$ObjectLiteral.prototype.resumeWithException_tcv7n7$ = function (exception) {
+  };
+  EmptyContinuation$ObjectLiteral.$metadata$ = {
+    kind: Kind_CLASS,
+    interfaces: [Continuation]
+  };
+  var EmptyContinuation;
+  function launch(callback) {
+    startCoroutine(callback, EmptyContinuation);
+  }
   function ZipBuilder() {
+    ZipBuilder$Companion_getInstance();
     this.files = LinkedHashMap_init();
   }
-  function ZipBuilder$FileInfo(name, data, date) {
+  function ZipBuilder$Companion() {
+    ZipBuilder$Companion_instance = this;
+    this.S_IFREG = toInt('0100000', 8);
+    this.S_IFDIR = toInt('0040000', 8);
+    this.DEFAULT_FILE = toInt('644', 8);
+  }
+  ZipBuilder$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var ZipBuilder$Companion_instance = null;
+  function ZipBuilder$Companion_getInstance() {
+    if (ZipBuilder$Companion_instance === null) {
+      new ZipBuilder$Companion();
+    }
+    return ZipBuilder$Companion_instance;
+  }
+  function ZipBuilder$FileInfo(name, data, date, mode) {
+    if (mode === void 0)
+      mode = ZipBuilder$Companion_getInstance().DEFAULT_FILE;
     this.name = name;
     this.data = data;
     this.date = date;
+    this.mode = mode;
   }
   ZipBuilder$FileInfo.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'FileInfo',
     interfaces: []
   };
-  ZipBuilder.prototype.addParentDir_urj10$ = function (name, date) {
+  ZipBuilder.prototype.addParentDir_lqdnne$ = function (name, date, mode) {
+    if (mode === void 0)
+      mode = ZipBuilder$Companion_getInstance().DEFAULT_FILE | ZipBuilder$Companion_getInstance().S_IFDIR;
     if (equals(name, ''))
       return;
-    this.addParentDir_urj10$(substringBeforeLast(name, 47, ''), date);
+    this.addParentDir_lqdnne$(substringBeforeLast(name, 47, ''), date);
     var dname = name + '/';
     var $receiver = this.files;
-    var value = new ZipBuilder$FileInfo(dname, new Int8Array([]), date);
+    var value = new ZipBuilder$FileInfo(dname, new Int8Array([]), date, mode);
     $receiver.put_xwzc9p$(dname, value);
   };
-  ZipBuilder.prototype.add_rnye2o$ = function (name, data, date) {
+  ZipBuilder.prototype.add_w0mhwy$ = function (name, data, date, mode) {
     if (date === void 0)
       date = new Date();
-    this.addParentDir_urj10$(substringBeforeLast(name, 47, ''), date);
+    if (mode === void 0)
+      mode = ZipBuilder$Companion_getInstance().DEFAULT_FILE;
+    this.addParentDir_lqdnne$(substringBeforeLast(name, 47, ''), date);
     var $receiver = this.files;
-    var value = new ZipBuilder$FileInfo(name, data, date);
+    var value = new ZipBuilder$FileInfo(name, data, date, mode | ZipBuilder$Companion_getInstance().S_IFREG);
     $receiver.put_xwzc9p$(name, value);
   };
-  ZipBuilder.prototype.add_axwij4$ = function (name, data, charset, date) {
+  ZipBuilder.prototype.add_oyaiiq$ = function (name, data, charset, date, mode) {
     if (charset === void 0)
       charset = UTF8_getInstance();
     if (date === void 0)
       date = new Date();
-    this.add_rnye2o$(name, toByteArray(data, charset), date);
+    if (mode === void 0)
+      mode = ZipBuilder$Companion_getInstance().DEFAULT_FILE;
+    this.add_w0mhwy$(name, toByteArray(data, charset), date, mode);
   };
-  function ZipBuilder$toByteArray$CenterEntry(fileNameBytes, crc32, headerOffset, size, date) {
+  function ZipBuilder$toByteArray$CenterEntry(fileNameBytes, crc32, headerOffset, size, date, mode) {
     this.fileNameBytes = fileNameBytes;
     this.crc32 = crc32;
     this.headerOffset = headerOffset;
     this.size = size;
     this.date = date;
+    this.mode = mode;
   }
   ZipBuilder$toByteArray$CenterEntry.$metadata$ = {
     kind: Kind_CLASS,
@@ -1058,16 +1506,17 @@
       $this.u16_le_za3lpa$(0);
       $this.bytes_fqrh44$(fileNameBytes);
       $this.bytes_fqrh44$(fileData);
-      var element = new ZipBuilder$toByteArray$CenterEntry(fileNameBytes, crc32_0, headerOffset, fileData.length, file.date);
+      var element = new ZipBuilder$toByteArray$CenterEntry(fileNameBytes, crc32_0, headerOffset, fileData.length, file.date, file.mode);
       centerEntries.add_11rb$(element);
     }
     var directoryStart = $this.size;
+    var system = 3;
     tmp$_0 = centerEntries.iterator();
     while (tmp$_0.hasNext()) {
       var center = tmp$_0.next();
       $this.u32_le_za3lpa$(33639248);
-      $this.u16_le_za3lpa$(20);
-      $this.u16_le_za3lpa$(10);
+      $this.u16_le_za3lpa$(63 | system << 8);
+      $this.u16_le_za3lpa$(20 | system << 8);
       $this.u16_le_za3lpa$(0);
       $this.u16_le_za3lpa$(0);
       $this.u16_le_za3lpa$(this.toDosTime_0(center.date));
@@ -1080,7 +1529,7 @@
       $this.u16_le_za3lpa$(0);
       $this.u16_le_za3lpa$(0);
       $this.u16_le_za3lpa$(0);
-      $this.u32_le_za3lpa$(0);
+      $this.u32_le_za3lpa$(32800 | (32768 | center.mode) << 16);
       $this.u32_le_za3lpa$(center.headerOffset);
       $this.bytes_fqrh44$(center.fileNameBytes);
     }
@@ -1106,20 +1555,52 @@
     simpleName: 'ZipBuilder',
     interfaces: []
   };
-  function buildZip(generate) {
-    var zb = new ZipBuilder();
-    generate(zb);
-    return zb.toByteArray();
-  }
+  var buildZip = defineInlineFunction('output.io.ktor.start.util.buildZip_oi1qpb$', wrapFunction(function () {
+    var ZipBuilder_init = _.io.ktor.start.util.ZipBuilder;
+    return function (generate) {
+      var zb = new ZipBuilder_init();
+      generate(zb);
+      return zb.toByteArray();
+    };
+  }));
   var package$io = _.io || (_.io = {});
   var package$ktor = package$io.ktor || (package$io.ktor = {});
   var package$start = package$ktor.start || (package$ktor.start = {});
+  Object.defineProperty(package$start, 'defaultArtifactGroup', {
+    get: function () {
+      return defaultArtifactGroup;
+    }
+  });
+  Object.defineProperty(package$start, 'defaultArtifactName', {
+    get: function () {
+      return defaultArtifactName;
+    }
+  });
+  Object.defineProperty(package$start, 'defaultKtorVersion', {
+    get: function () {
+      return defaultKtorVersion;
+    }
+  });
+  Object.defineProperty(package$start, 'defaultKtorEngine', {
+    get: function () {
+      return defaultKtorEngine;
+    }
+  });
+  package$start.get_checked_pzor9e$ = get_checked;
+  package$start.set_checked_4n8m03$ = set_checked;
+  $$importsForInline$$.output = _;
+  Object.defineProperty(package$start, 'includeWrapper', {
+    get: get_includeWrapper,
+    set: set_includeWrapper
+  });
+  package$start.updateHash = updateHash;
   package$start.main_kand9s$ = main;
   Object.defineProperty(package$start, 'hashParams', {
     get: get_hashParams
   });
   package$start.formUrlDecode_pdl1vz$ = formUrlDecode;
-  $$importsForInline$$.output = _;
+  package$start.formUrlEncode_ye33rp$ = formUrlEncode;
+  package$start.formUrlEncode_jgmxsd$ = formUrlEncode_0;
   package$start.addDependencies = addDependencies;
   package$start.registerBuildButton = registerBuildButton;
   package$start.BuildInfo = BuildInfo;
@@ -1159,7 +1640,7 @@
     get: CRC32_getInstance
   });
   package$util.crc32_964n91$ = crc32;
-  package$util.download_cyqrs4$ = download;
+  package$util.generateBrowserFile_cyqrs4$ = generateBrowserFile;
   Object.defineProperty(Indenter, 'Indents', {
     get: Indenter$Indents_getInstance
   });
@@ -1170,10 +1651,26 @@
   package$util.on_nsccip$ = on;
   package$util.each_4tgbmb$ = each;
   package$util.change_tue5ot$ = change;
+  package$util.keyup_tue5ot$ = keyup;
   package$util.jsObject_qgjp2i$ = jsObject;
+  package$util.await_t11jrl$ = await_0;
+  package$util.fetchFile_61zpoe$ = fetchFile;
+  Object.defineProperty(package$util, 'EmptyContinuation', {
+    get: function () {
+      return EmptyContinuation;
+    }
+  });
+  package$util.launch_g2bo5h$ = launch;
+  Object.defineProperty(ZipBuilder, 'Companion', {
+    get: ZipBuilder$Companion_getInstance
+  });
   ZipBuilder.FileInfo = ZipBuilder$FileInfo;
   package$util.ZipBuilder = ZipBuilder;
   package$util.buildZip_oi1qpb$ = buildZip;
+  defaultArtifactGroup = 'com.example';
+  defaultArtifactName = 'ktor-demo';
+  defaultKtorVersion = '0.9.2';
+  defaultKtorEngine = 'netty';
   hashParams = lazy(hashParams$lambda);
   DOLLAR = 36;
   var $receiver = Object.values(Dependencies_getInstance());
@@ -1185,6 +1682,7 @@
       destination.add_11rb$(element);
   }
   dependencies = destination;
+  EmptyContinuation = new EmptyContinuation$ObjectLiteral();
   main([]);
   Kotlin.defineModule('output', _);
   return _;
