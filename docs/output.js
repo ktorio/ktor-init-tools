@@ -33,6 +33,7 @@
   var CoroutineImpl = Kotlin.kotlin.coroutines.experimental.CoroutineImpl;
   var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.experimental.intrinsics.COROUTINE_SUSPENDED;
   var Kind_CLASS = Kotlin.Kind.CLASS;
+  var LinkedHashSet_init = Kotlin.kotlin.collections.LinkedHashSet_init_287e2$;
   var contains = Kotlin.kotlin.text.contains_li3zpu$;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var copyOf = Kotlin.kotlin.collections.copyOf_mrm5p$;
@@ -515,6 +516,7 @@
           case 6:
             this.local$zb.add_oyaiiq$(this.local$artifactName + '/resources/application.conf', indenter(registerBuildButton$lambda$lambda$lambda$lambda_1(this.local$info)));
             var application_kt = indenter(registerBuildButton$lambda$lambda$lambda$lambda_2(this.local$info));
+            println(application_kt);
             this.local$zb.add_oyaiiq$(this.local$artifactName + '/src/Application.kt', application_kt);
             return generateBrowserFile(this.local$tmp$, this.local$zb.toByteArray()), Unit;
           case 7:
@@ -722,6 +724,7 @@
       $receiver.indentation = $receiver.indentation + 1 | 0;
       try {
         $receiver.line_61zpoe$('port = 8080');
+        $receiver.line_61zpoe$('port = ${?PORT}');
       }
       finally {
         $receiver.indentation = $receiver.indentation - 1 | 0;
@@ -744,15 +747,38 @@
     return info;
   }
   var VER_092;
+  function hasDependency($receiver, dep) {
+    return $receiver.dependenciesToInclude.contains_11rb$(dep);
+  }
   function buildApplicationKt($receiver, info) {
+    var tmp$;
+    var packages = LinkedHashSet_init();
     $receiver.line_61zpoe$('package ' + info.artifactGroup);
     $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('import io.ktor.application.*');
-    $receiver.line_61zpoe$('import io.ktor.response.*');
-    $receiver.line_61zpoe$('import io.ktor.routing.*');
-    if (info.dependenciesToInclude.contains_11rb$(Dependencies_getInstance().HTML_DSL)) {
-      $receiver.line_61zpoe$('import io.ktor.html.*');
-      $receiver.line_61zpoe$('import kotlinx.html.*');
+    var element = 'io.ktor.application';
+    packages.add_11rb$(element);
+    var element_0 = 'io.ktor.response';
+    packages.add_11rb$(element_0);
+    var element_1 = 'io.ktor.routing';
+    packages.add_11rb$(element_1);
+    var element_2 = 'io.ktor.http';
+    packages.add_11rb$(element_2);
+    if (hasDependency(info, Dependencies_getInstance().HTML_DSL)) {
+      var element_3 = 'io.ktor.html';
+      packages.add_11rb$(element_3);
+      var element_4 = 'kotlinx.html';
+      packages.add_11rb$(element_4);
+    }
+    if (hasDependency(info, Dependencies_getInstance().CSS_DSL)) {
+      var element_5 = 'kotlinx.html';
+      packages.add_11rb$(element_5);
+      var element_6 = 'kotlinx.css';
+      packages.add_11rb$(element_6);
+    }
+    tmp$ = packages.iterator();
+    while (tmp$.hasNext()) {
+      var p = tmp$.next();
+      $receiver.line_61zpoe$('import ' + p + '.*');
     }
     $receiver.line_61zpoe$('');
     if ((new SemVer(info.ktorVersion)).compareTo_11rb$(VER_092) >= 0) {
@@ -777,9 +803,9 @@
           $receiver.indentation = $receiver.indentation - 1 | 0;
         }
         $receiver.line_61zpoe$('}');
-        $receiver.line_61zpoe$('');
-        if (info.dependenciesToInclude.contains_11rb$(Dependencies_getInstance().HTML_DSL)) {
-          $receiver.line_61zpoe$('get("/html")' + ' {');
+        if (hasDependency(info, Dependencies_getInstance().HTML_DSL)) {
+          $receiver.line_61zpoe$('');
+          $receiver.line_61zpoe$('get("/html-dsl")' + ' {');
           $receiver.indentation = $receiver.indentation + 1 | 0;
           try {
             $receiver.line_61zpoe$('call.respondHtml' + ' {');
@@ -789,6 +815,52 @@
               $receiver.indentation = $receiver.indentation + 1 | 0;
               try {
                 $receiver.line_61zpoe$('h1 { +"HTML" }');
+              }
+              finally {
+                $receiver.indentation = $receiver.indentation - 1 | 0;
+              }
+              $receiver.line_61zpoe$('}');
+            }
+            finally {
+              $receiver.indentation = $receiver.indentation - 1 | 0;
+            }
+            $receiver.line_61zpoe$('}');
+          }
+          finally {
+            $receiver.indentation = $receiver.indentation - 1 | 0;
+          }
+          $receiver.line_61zpoe$('}');
+        }
+        if (hasDependency(info, Dependencies_getInstance().CSS_DSL)) {
+          $receiver.line_61zpoe$('');
+          $receiver.line_61zpoe$('get("/styles.css")' + ' {');
+          $receiver.indentation = $receiver.indentation + 1 | 0;
+          try {
+            $receiver.line_61zpoe$('call.respondCss' + ' {');
+            $receiver.indentation = $receiver.indentation + 1 | 0;
+            try {
+              $receiver.line_61zpoe$('body' + ' {');
+              $receiver.indentation = $receiver.indentation + 1 | 0;
+              try {
+                $receiver.line_61zpoe$('backgroundColor = Color.red');
+              }
+              finally {
+                $receiver.indentation = $receiver.indentation - 1 | 0;
+              }
+              $receiver.line_61zpoe$('}');
+              $receiver.line_61zpoe$('p' + ' {');
+              $receiver.indentation = $receiver.indentation + 1 | 0;
+              try {
+                $receiver.line_61zpoe$('fontSize = 2.em');
+              }
+              finally {
+                $receiver.indentation = $receiver.indentation - 1 | 0;
+              }
+              $receiver.line_61zpoe$('}');
+              $receiver.line_61zpoe$('rule("p.myclass")' + ' {');
+              $receiver.indentation = $receiver.indentation + 1 | 0;
+              try {
+                $receiver.line_61zpoe$('color = Color.blue');
               }
               finally {
                 $receiver.indentation = $receiver.indentation - 1 | 0;
@@ -815,6 +887,44 @@
       $receiver.indentation = $receiver.indentation - 1 | 0;
     }
     $receiver.line_61zpoe$('}');
+    if (hasDependency(info, Dependencies_getInstance().CSS_DSL)) {
+      $receiver.line_61zpoe$('');
+      $receiver.line_61zpoe$('fun FlowOrMetaDataContent.styleCss(builder: CSSBuilder.() -> Unit)' + ' {');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('style(type = ContentType.Text.CSS.toString())' + ' {');
+        $receiver.indentation = $receiver.indentation + 1 | 0;
+        try {
+          $receiver.line_61zpoe$('+CSSBuilder().apply(builder).toString()');
+        }
+        finally {
+          $receiver.indentation = $receiver.indentation - 1 | 0;
+        }
+        $receiver.line_61zpoe$('}');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+      $receiver.line_61zpoe$('fun CommonAttributeGroupFacade.style(builder: CSSBuilder.() -> Unit)' + ' {');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('this.style = CSSBuilder().apply(builder).toString().trim()');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+      $receiver.line_61zpoe$('suspend inline fun ApplicationCall.respondCss(builder: CSSBuilder.() -> Unit)' + ' {');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('this.respondText(CSSBuilder().apply(builder).toString(), ContentType.Text.CSS)');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+    }
     return info;
   }
   function handleFiltering$lambda$lambda(closure$filter) {
@@ -1712,6 +1822,7 @@
       return VER_092;
     }
   });
+  package$start.hasDependency_4hn9rq$ = hasDependency;
   package$start.buildApplicationKt_j0vqe2$ = buildApplicationKt;
   package$start.handleFiltering = handleFiltering;
   package$start.removeLoading = removeLoading;

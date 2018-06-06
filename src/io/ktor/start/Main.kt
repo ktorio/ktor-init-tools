@@ -324,6 +324,7 @@ fun Indenter.buildApplicationConf(info: BuildInfo) = info.apply {
     "ktor" {
         "deployment" {
             +"port = 8080"
+            +"port = \${?PORT}"
         }
 
         "application" {
@@ -337,19 +338,25 @@ val VER_092 = SemVer("0.9.2")
 fun BuildInfo.hasDependency(dep: Dependency): Boolean = dep in dependenciesToInclude
 
 fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
+    val packages = LinkedHashSet<String>()
+
     +"package $artifactGroup"
     +""
-    +"import io.ktor.application.*"
-    +"import io.ktor.response.*"
-    +"import io.ktor.routing.*"
+    packages += "io.ktor.application"
+    packages += "io.ktor.response"
+    packages += "io.ktor.routing"
+    packages += "io.ktor.http"
     if (hasDependency(Dependencies.HTML_DSL)) {
-        +"import io.ktor.html.*"
-        +"import kotlinx.html.*"
+        packages += "io.ktor.html"
+        packages += "kotlinx.html"
     }
     if (hasDependency(Dependencies.CSS_DSL)) {
-        +"import kotlinx.css.*"
-        +"import kotlinx.css.properties.*"
-        +"import kotlinx.html.*"
+        packages += "kotlinx.html"
+        packages += "kotlinx.css"
+        //packages += "kotlinx.css.properties"
+    }
+    for (p in packages) {
+        +"import $p.*"
     }
     +""
     if (SemVer(ktorVersion) >= VER_092) {
@@ -363,8 +370,8 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
             "get(\"/\")" {
                 +"call.respondText(\"HELLO WORLD!\")"
             }
-            +""
             if (hasDependency(Dependencies.HTML_DSL)) {
+                +""
                 "get(\"/html-dsl\")" {
                     "call.respondHtml" {
                         "body" {
@@ -374,6 +381,7 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
                 }
             }
             if (hasDependency(Dependencies.CSS_DSL)) {
+                +""
                 "get(\"/styles.css\")" {
                     "call.respondCss" {
                         "body" {
@@ -390,7 +398,9 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
             }
         }
     }
+
     if (hasDependency(Dependencies.CSS_DSL)) {
+        +""
         "fun FlowOrMetaDataContent.styleCss(builder: CSSBuilder.() -> Unit)" {
             "style(type = ContentType.Text.CSS.toString())" {
                 +"+CSSBuilder().apply(builder).toString()"
