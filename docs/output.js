@@ -904,6 +904,7 @@
     this.SESSIONS = new Dependency('ktor', 'io.ktor:ktor-sessions:$ktor_version', 'ktor-sessions', 'Sessions', 'Adds supports for sessions: with the payload in the client or the server', 'https://ktor.io/features/sessions.html');
     this.WEBSOCKETS = new Dependency('ktor', 'io.ktor:ktor-websockets:$ktor_version', 'ktor-websockets', 'WebSockets', 'Adds WebSockets support for bidirectional communication with the client');
     this.RAW_SOCKETS = new Dependency('ktor', 'io.ktor:ktor-network:$ktor_version', 'ktor-network', 'Raw Sockets', 'Adds Raw Socket support for listening and connecting to tcp and udp sockets', 'https://ktor.io/servers/raw-sockets.html');
+    this.RAW_SOCKETS_TLS = new Dependency('ktor', 'io.ktor:ktor-network-tls:$ktor_version', 'ktor-network-tls', 'Raw Secure SSL/TLS Sockets', 'Adds Raw Socket support for listening and connecting to tcp and udp sockets with secure sockets', 'https://ktor.io/servers/raw-sockets.html#secure');
     this.HTTP_CLIENT = new Dependency('ktor', 'io.ktor:ktor-client-apache:$ktor_version', 'ktor-client-apache', 'HTTP Client', 'Adds support for doing HTTP requests', 'https://ktor.io/clients/http-client.html');
   }
   Dependencies.$metadata$ = {

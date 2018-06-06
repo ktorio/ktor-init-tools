@@ -111,6 +111,14 @@ object Dependencies {
         "Adds Raw Socket support for listening and connecting to tcp and udp sockets",
         documentation = "https://ktor.io/servers/raw-sockets.html"
     )
+    val RAW_SOCKETS_TLS = Dependency(
+        "ktor",
+        "io.ktor:ktor-network-tls:\$ktor_version",
+        "ktor-network-tls",
+        "Raw Secure SSL/TLS Sockets",
+        "Adds Raw Socket support for listening and connecting to tcp and udp sockets with secure sockets",
+        documentation = "https://ktor.io/servers/raw-sockets.html#secure"
+    )
     val HTTP_CLIENT = Dependency(
         "ktor",
         "io.ktor:ktor-client-apache:\$ktor_version",
