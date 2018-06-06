@@ -16,7 +16,7 @@ abstract class Feature : Dependency {
     //abstract override val id: String
     //abstract override val title: String
     //abstract override val description: String
-    //abstract override val documentation: String?
+    override val documentation: String? = null
 
     open fun imports(info: BuildInfo): List<String> = listOf()
     open fun Indenter.classes(info: BuildInfo): Unit = Unit

@@ -36,6 +36,7 @@
   var RuntimeException_init = Kotlin.kotlin.RuntimeException_init_pdl1vj$;
   var setOf = Kotlin.kotlin.collections.setOf_i5x0yv$;
   var ensureNotNull = Kotlin.ensureNotNull;
+  var equals = Kotlin.equals;
   var distinct = Kotlin.kotlin.collections.distinct_7wnvza$;
   var LinkedHashSet_init = Kotlin.kotlin.collections.LinkedHashSet_init_287e2$;
   var contains = Kotlin.kotlin.text.contains_li3zpu$;
@@ -56,10 +57,13 @@
   var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
   var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
   var Comparable = Kotlin.kotlin.Comparable;
-  var equals = Kotlin.equals;
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_8cymmc$;
+  CssDslFeature.prototype = Object.create(Feature.prototype);
+  CssDslFeature.prototype.constructor = CssDslFeature;
   FreemarkerFeature.prototype = Object.create(Feature.prototype);
   FreemarkerFeature.prototype.constructor = FreemarkerFeature;
+  HtmlDslFeature.prototype = Object.create(Feature.prototype);
+  HtmlDslFeature.prototype.constructor = HtmlDslFeature;
   function FileContainer() {
   }
   FileContainer.prototype.add_dkzqdg$ = function (name, content, mode, callback$default) {
@@ -80,7 +84,13 @@
     $receiver.add_dkzqdg$(name, toByteArray(content, charset), mode);
   }
   function Feature() {
+    this.documentation_nx4xfm$_0 = null;
   }
+  Object.defineProperty(Feature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_nx4xfm$_0;
+    }
+  });
   var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
   Feature.prototype.imports_jbwadm$ = function (info) {
     return emptyList();
@@ -785,6 +795,7 @@
         destination.add_11rb$(element);
     }
     this.featuresToInclude = destination;
+    this.ktorVer = new SemVer(this.ktorVersion);
   }
   BuildInfo.$metadata$ = {
     kind: Kind_CLASS,
@@ -897,15 +908,11 @@
       tmp$ = info.reposToInclude.iterator();
       while (tmp$.hasNext()) {
         var repo = tmp$.next();
-        switch (repo) {
-          case 'jcenter':
-            $receiver.line_61zpoe$('jcenter()');
-            break;
-          case 'ktor':
-            $receiver.line_61zpoe$("maven { url 'https://kotlin.bintray.com/ktor' }");
-            break;
-          default:$receiver.line_61zpoe$("maven { url '" + repo + "' }");
-            break;
+        if (equals(repo, 'jcenter')) {
+          $receiver.line_61zpoe$('jcenter()');
+        }
+         else {
+          $receiver.line_61zpoe$("maven { url '" + repo + "' }");
         }
       }
     }
@@ -978,11 +985,8 @@
     return info;
   }
   var VER_092;
-  function hasDependency($receiver, dep) {
-    return $receiver.dependenciesToInclude.contains_11rb$(dep);
-  }
   function buildApplicationKt($receiver, info) {
-    var tmp$, tmp$_0, tmp$_1;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2;
     var packages = LinkedHashSet_init();
     $receiver.line_61zpoe$('package ' + info.artifactGroup);
     $receiver.line_61zpoe$('');
@@ -994,18 +998,6 @@
     packages.add_11rb$(element_1);
     var element_2 = 'io.ktor.http';
     packages.add_11rb$(element_2);
-    if (hasDependency(info, Dependencies_getInstance().HTML_DSL)) {
-      var element_3 = 'io.ktor.html';
-      packages.add_11rb$(element_3);
-      var element_4 = 'kotlinx.html';
-      packages.add_11rb$(element_4);
-    }
-    if (hasDependency(info, Dependencies_getInstance().CSS_DSL)) {
-      var element_5 = 'kotlinx.html';
-      packages.add_11rb$(element_5);
-      var element_6 = 'kotlinx.css';
-      packages.add_11rb$(element_6);
-    }
     tmp$ = info.featuresToInclude.iterator();
     while (tmp$.hasNext()) {
       var feat = tmp$.next();
@@ -1017,7 +1009,7 @@
       $receiver.line_61zpoe$('import ' + p + '.*');
     }
     $receiver.line_61zpoe$('');
-    if ((new SemVer(info.ktorVersion)).compareTo_11rb$(VER_092) >= 0) {
+    if (info.ktorVer.compareTo_11rb$(VER_092) >= 0) {
       $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + info.developmentEngineFQ + '.main(args)');
     }
      else {
@@ -1032,16 +1024,16 @@
     $receiver.line_61zpoe$('fun Application.main()' + ' {');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
-      var tmp$_2;
-      tmp$_2 = info.featuresToInclude.iterator();
-      while (tmp$_2.hasNext()) {
-        var feat_1 = tmp$_2.next();
+      var tmp$_3;
+      tmp$_3 = info.featuresToInclude.iterator();
+      while (tmp$_3.hasNext()) {
+        var feat_1 = tmp$_3.next();
         feat_1.installFeature_j0vqe2$($receiver, info);
       }
       $receiver.line_61zpoe$('routing' + ' {');
       $receiver.indentation = $receiver.indentation + 1 | 0;
       try {
-        var tmp$_3;
+        var tmp$_4;
         $receiver.line_61zpoe$('get("/")' + ' {');
         $receiver.indentation = $receiver.indentation + 1 | 0;
         try {
@@ -1051,84 +1043,10 @@
           $receiver.indentation = $receiver.indentation - 1 | 0;
         }
         $receiver.line_61zpoe$('}');
-        if (hasDependency(info, Dependencies_getInstance().HTML_DSL)) {
-          $receiver.line_61zpoe$('');
-          $receiver.line_61zpoe$('get("/html-dsl")' + ' {');
-          $receiver.indentation = $receiver.indentation + 1 | 0;
-          try {
-            $receiver.line_61zpoe$('call.respondHtml' + ' {');
-            $receiver.indentation = $receiver.indentation + 1 | 0;
-            try {
-              $receiver.line_61zpoe$('body' + ' {');
-              $receiver.indentation = $receiver.indentation + 1 | 0;
-              try {
-                $receiver.line_61zpoe$('h1 { +"HTML" }');
-              }
-              finally {
-                $receiver.indentation = $receiver.indentation - 1 | 0;
-              }
-              $receiver.line_61zpoe$('}');
-            }
-            finally {
-              $receiver.indentation = $receiver.indentation - 1 | 0;
-            }
-            $receiver.line_61zpoe$('}');
-          }
-          finally {
-            $receiver.indentation = $receiver.indentation - 1 | 0;
-          }
-          $receiver.line_61zpoe$('}');
-        }
-        tmp$_3 = info.featuresToInclude.iterator();
-        while (tmp$_3.hasNext()) {
-          var feat_2 = tmp$_3.next();
+        tmp$_4 = info.featuresToInclude.iterator();
+        while (tmp$_4.hasNext()) {
+          var feat_2 = tmp$_4.next();
           feat_2.routing_j0vqe2$($receiver, info);
-        }
-        if (hasDependency(info, Dependencies_getInstance().CSS_DSL)) {
-          $receiver.line_61zpoe$('');
-          $receiver.line_61zpoe$('get("/styles.css")' + ' {');
-          $receiver.indentation = $receiver.indentation + 1 | 0;
-          try {
-            $receiver.line_61zpoe$('call.respondCss' + ' {');
-            $receiver.indentation = $receiver.indentation + 1 | 0;
-            try {
-              $receiver.line_61zpoe$('body' + ' {');
-              $receiver.indentation = $receiver.indentation + 1 | 0;
-              try {
-                $receiver.line_61zpoe$('backgroundColor = Color.red');
-              }
-              finally {
-                $receiver.indentation = $receiver.indentation - 1 | 0;
-              }
-              $receiver.line_61zpoe$('}');
-              $receiver.line_61zpoe$('p' + ' {');
-              $receiver.indentation = $receiver.indentation + 1 | 0;
-              try {
-                $receiver.line_61zpoe$('fontSize = 2.em');
-              }
-              finally {
-                $receiver.indentation = $receiver.indentation - 1 | 0;
-              }
-              $receiver.line_61zpoe$('}');
-              $receiver.line_61zpoe$('rule("p.myclass")' + ' {');
-              $receiver.indentation = $receiver.indentation + 1 | 0;
-              try {
-                $receiver.line_61zpoe$('color = Color.blue');
-              }
-              finally {
-                $receiver.indentation = $receiver.indentation - 1 | 0;
-              }
-              $receiver.line_61zpoe$('}');
-            }
-            finally {
-              $receiver.indentation = $receiver.indentation - 1 | 0;
-            }
-            $receiver.line_61zpoe$('}');
-          }
-          finally {
-            $receiver.indentation = $receiver.indentation - 1 | 0;
-          }
-          $receiver.line_61zpoe$('}');
         }
       }
       finally {
@@ -1140,43 +1058,10 @@
       $receiver.indentation = $receiver.indentation - 1 | 0;
     }
     $receiver.line_61zpoe$('}');
-    if (hasDependency(info, Dependencies_getInstance().CSS_DSL)) {
-      $receiver.line_61zpoe$('');
-      $receiver.line_61zpoe$('fun FlowOrMetaDataContent.styleCss(builder: CSSBuilder.() -> Unit)' + ' {');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      try {
-        $receiver.line_61zpoe$('style(type = ContentType.Text.CSS.toString())' + ' {');
-        $receiver.indentation = $receiver.indentation + 1 | 0;
-        try {
-          $receiver.line_61zpoe$('+CSSBuilder().apply(builder).toString()');
-        }
-        finally {
-          $receiver.indentation = $receiver.indentation - 1 | 0;
-        }
-        $receiver.line_61zpoe$('}');
-      }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
-      }
-      $receiver.line_61zpoe$('}');
-      $receiver.line_61zpoe$('fun CommonAttributeGroupFacade.style(builder: CSSBuilder.() -> Unit)' + ' {');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      try {
-        $receiver.line_61zpoe$('this.style = CSSBuilder().apply(builder).toString().trim()');
-      }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
-      }
-      $receiver.line_61zpoe$('}');
-      $receiver.line_61zpoe$('suspend inline fun ApplicationCall.respondCss(builder: CSSBuilder.() -> Unit)' + ' {');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      try {
-        $receiver.line_61zpoe$('this.respondText(CSSBuilder().apply(builder).toString(), ContentType.Text.CSS)');
-      }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
-      }
-      $receiver.line_61zpoe$('}');
+    tmp$_2 = info.featuresToInclude.iterator();
+    while (tmp$_2.hasNext()) {
+      var feat_3 = tmp$_2.next();
+      feat_3.extensions_j0vqe2$($receiver, info);
     }
     return info;
   }
@@ -1305,7 +1190,7 @@
   function Repos() {
     Repos_instance = this;
     this.jcenter = listOf('jcenter');
-    this.ktor = listOf('ktor');
+    this.ktor = listOf('https://kotlin.bintray.com/ktor');
     this.kotlin_js_wrappers = listOf('https://kotlin.bintray.com/kotlin-js-wrappers');
   }
   Repos.$metadata$ = {
@@ -1322,8 +1207,6 @@
   }
   function Dependencies() {
     Dependencies_instance = this;
-    this.HTML_DSL = new IntDependency(Repos_getInstance().jcenter, listOf('io.ktor:ktor-html-builder:$ktor_version'), 'html-dsl', 'HTML DSL', 'Generate HTML using Kotlin code');
-    this.CSS_DSL = new IntDependency(plus(Repos_getInstance().ktor, Repos_getInstance().kotlin_js_wrappers), listOf('org.jetbrains:kotlin-css-jvm:1.0.0-pre.31-kotlin-1.2.41'), 'css-dsl', 'CSS DSL', 'Generate CSS using Kotlin code');
     this.TPL_VELOCITY = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-velocity:$ktor_version'), 'velocity', 'Velocity', 'Serve HTML content using Apache velocity');
     this.AUTH = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-auth:$ktor_version'), 'auth', 'Authentication', 'Handle Basic and Digest HTTP Auth, Form authentication and OAuth 1a and 2', 'https://ktor.io/features/authentication.html');
     this.AUTH_JWT = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-auth-jwt:$ktor_version'), 'auth-jwt', 'Authentication JWT', 'Handle JWT authentication', 'https://ktor.io/features/authentication.html#jwt');
@@ -1364,6 +1247,145 @@
   var dependencies;
   function get_dependencies() {
     return dependencies.value;
+  }
+  function CssDslFeature() {
+    CssDslFeature_instance = this;
+    Feature.call(this);
+    this.repos_w3vhti$_0 = plus(Repos_getInstance().jcenter, Repos_getInstance().kotlin_js_wrappers);
+    this.artifacts_hbxqui$_0 = listOf('org.jetbrains:kotlin-css-jvm:1.0.0-pre.31-kotlin-1.2.41');
+    this.id_67agn6$_0 = 'css-dsl';
+    this.title_x48edb$_0 = 'CSS DSL';
+    this.description_fxg5az$_0 = 'Generate CSS using Kotlin code';
+    this.documentation_9osmsj$_0 = 'https://github.com/JetBrains/kotlin-wrappers/tree/master/kotlin-css';
+  }
+  Object.defineProperty(CssDslFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_w3vhti$_0;
+    }
+  });
+  Object.defineProperty(CssDslFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_hbxqui$_0;
+    }
+  });
+  Object.defineProperty(CssDslFeature.prototype, 'id', {
+    get: function () {
+      return this.id_67agn6$_0;
+    }
+  });
+  Object.defineProperty(CssDslFeature.prototype, 'title', {
+    get: function () {
+      return this.title_x48edb$_0;
+    }
+  });
+  Object.defineProperty(CssDslFeature.prototype, 'description', {
+    get: function () {
+      return this.description_fxg5az$_0;
+    }
+  });
+  Object.defineProperty(CssDslFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_9osmsj$_0;
+    }
+  });
+  CssDslFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf_0(['kotlinx.html', 'kotlinx.css']);
+  };
+  CssDslFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('');
+    $receiver.line_61zpoe$('get("/styles.css")' + ' {');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('call.respondCss' + ' {');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('body' + ' {');
+        $receiver.indentation = $receiver.indentation + 1 | 0;
+        try {
+          $receiver.line_61zpoe$('backgroundColor = Color.red');
+        }
+        finally {
+          $receiver.indentation = $receiver.indentation - 1 | 0;
+        }
+        $receiver.line_61zpoe$('}');
+        $receiver.line_61zpoe$('p' + ' {');
+        $receiver.indentation = $receiver.indentation + 1 | 0;
+        try {
+          $receiver.line_61zpoe$('fontSize = 2.em');
+        }
+        finally {
+          $receiver.indentation = $receiver.indentation - 1 | 0;
+        }
+        $receiver.line_61zpoe$('}');
+        $receiver.line_61zpoe$('rule("p.myclass")' + ' {');
+        $receiver.indentation = $receiver.indentation + 1 | 0;
+        try {
+          $receiver.line_61zpoe$('color = Color.blue');
+        }
+        finally {
+          $receiver.indentation = $receiver.indentation - 1 | 0;
+        }
+        $receiver.line_61zpoe$('}');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  CssDslFeature.prototype.extensions_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('');
+    $receiver.line_61zpoe$('fun FlowOrMetaDataContent.styleCss(builder: CSSBuilder.() -> Unit)' + ' {');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('style(type = ContentType.Text.CSS.toString())' + ' {');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('+CSSBuilder().apply(builder).toString()');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('fun CommonAttributeGroupFacade.style(builder: CSSBuilder.() -> Unit)' + ' {');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('this.style = CSSBuilder().apply(builder).toString().trim()');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('suspend inline fun ApplicationCall.respondCss(builder: CSSBuilder.() -> Unit)' + ' {');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('this.respondText(CSSBuilder().apply(builder).toString(), ContentType.Text.CSS)');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  CssDslFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'CssDslFeature',
+    interfaces: [Feature]
+  };
+  var CssDslFeature_instance = null;
+  function CssDslFeature_getInstance() {
+    if (CssDslFeature_instance === null) {
+      new CssDslFeature();
+    }
+    return CssDslFeature_instance;
   }
   function FreemarkerFeature() {
     FreemarkerFeature_instance = this;
@@ -1482,6 +1504,89 @@
       new FreemarkerFeature();
     }
     return FreemarkerFeature_instance;
+  }
+  function HtmlDslFeature() {
+    HtmlDslFeature_instance = this;
+    Feature.call(this);
+    this.repos_jw6vl4$_0 = Repos_getInstance().jcenter;
+    this.artifacts_mmn820$_0 = listOf('io.ktor:ktor-html-builder:$ktor_version');
+    this.id_6osof4$_0 = 'html-dsl';
+    this.title_ivtz1b$_0 = 'HTML DSL';
+    this.description_vpobnn$_0 = 'Generate HTML using Kotlin code';
+    this.documentation_kyhzcv$_0 = 'https://ktor.io/features/templates/html-dsl.html';
+  }
+  Object.defineProperty(HtmlDslFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_jw6vl4$_0;
+    }
+  });
+  Object.defineProperty(HtmlDslFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_mmn820$_0;
+    }
+  });
+  Object.defineProperty(HtmlDslFeature.prototype, 'id', {
+    get: function () {
+      return this.id_6osof4$_0;
+    }
+  });
+  Object.defineProperty(HtmlDslFeature.prototype, 'title', {
+    get: function () {
+      return this.title_ivtz1b$_0;
+    }
+  });
+  Object.defineProperty(HtmlDslFeature.prototype, 'description', {
+    get: function () {
+      return this.description_vpobnn$_0;
+    }
+  });
+  Object.defineProperty(HtmlDslFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_kyhzcv$_0;
+    }
+  });
+  HtmlDslFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf_0(['io.ktor.html', 'kotlinx.html']);
+  };
+  HtmlDslFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('');
+    $receiver.line_61zpoe$('get("/html-dsl")' + ' {');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('call.respondHtml' + ' {');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('body' + ' {');
+        $receiver.indentation = $receiver.indentation + 1 | 0;
+        try {
+          $receiver.line_61zpoe$('h1 { +"HTML" }');
+        }
+        finally {
+          $receiver.indentation = $receiver.indentation - 1 | 0;
+        }
+        $receiver.line_61zpoe$('}');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  HtmlDslFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'HtmlDslFeature',
+    interfaces: [Feature]
+  };
+  var HtmlDslFeature_instance = null;
+  function HtmlDslFeature_getInstance() {
+    if (HtmlDslFeature_instance === null) {
+      new HtmlDslFeature();
+    }
+    return HtmlDslFeature_instance;
   }
   var ALL_FEATURES;
   function ByteArrayOutputStream() {
@@ -2259,7 +2364,6 @@
       return VER_092;
     }
   });
-  package$start.hasDependency_4hn9rq$ = hasDependency;
   package$start.buildApplicationKt_j0vqe2$ = buildApplicationKt;
   package$start.handleFiltering = handleFiltering;
   package$start.removeLoading = removeLoading;
@@ -2275,8 +2379,14 @@
     get: get_dependencies
   });
   var package$features = package$start.features || (package$start.features = {});
+  Object.defineProperty(package$features, 'CssDslFeature', {
+    get: CssDslFeature_getInstance
+  });
   Object.defineProperty(package$features, 'FreemarkerFeature', {
     get: FreemarkerFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'HtmlDslFeature', {
+    get: HtmlDslFeature_getInstance
   });
   Object.defineProperty(package$features, 'ALL_FEATURES', {
     get: function () {
@@ -2339,7 +2449,7 @@
   DOLLAR = 36;
   VER_092 = new SemVer('0.9.2');
   dependencies = lazy(dependencies$lambda);
-  ALL_FEATURES = listOf(FreemarkerFeature_getInstance());
+  ALL_FEATURES = listOf_0([HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance()]);
   EmptyContinuation = new EmptyContinuation$ObjectLiteral();
   main([]);
   Kotlin.defineModule('output', _);

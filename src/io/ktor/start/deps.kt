@@ -23,26 +23,12 @@ interface Dependency {
 
 object Repos {
     val jcenter = listOf("jcenter")
-    val ktor = listOf("ktor")
+    val ktor = listOf("https://kotlin.bintray.com/ktor")
     val kotlin_js_wrappers = listOf("https://kotlin.bintray.com/kotlin-js-wrappers")
 }
 
 @Suppress("unused")
 object Dependencies {
-    val HTML_DSL = IntDependency(
-        Repos.jcenter,
-        listOf("io.ktor:ktor-html-builder:\$ktor_version"),
-        "html-dsl",
-        "HTML DSL",
-        "Generate HTML using Kotlin code"
-    )
-    val CSS_DSL = IntDependency(
-        Repos.ktor + Repos.kotlin_js_wrappers,
-        listOf("org.jetbrains:kotlin-css-jvm:1.0.0-pre.31-kotlin-1.2.41"),
-        "css-dsl",
-        "CSS DSL",
-        "Generate CSS using Kotlin code"
-    )
     val TPL_VELOCITY = IntDependency(
         Repos.ktor,
         listOf("io.ktor:ktor-velocity:\$ktor_version"),

@@ -310,6 +310,7 @@ data class BuildInfo(
     val ktorEngine: String
 ) {
     val featuresToInclude = dependenciesToInclude.filterIsInstance<Feature>()
+    val ktorVer = SemVer(ktorVersion)
 }
 
 fun Indenter.buildPomXml(info: BuildInfo) = info.apply {
@@ -347,7 +348,6 @@ fun Indenter.buildBuildGradle(info: BuildInfo) = info.apply {
         for (repo in reposToInclude) {
             when (repo) {
                 "jcenter" -> +"jcenter()"
-                "ktor" -> +"maven { url 'https://kotlin.bintray.com/ktor' }"
                 else -> +"maven { url '$repo' }"
             }
         }
@@ -383,8 +383,6 @@ fun Indenter.buildApplicationConf(info: BuildInfo) = info.apply {
 
 val VER_092 = SemVer("0.9.2")
 
-fun BuildInfo.hasDependency(dep: Dependency): Boolean = dep in dependenciesToInclude
-
 fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
     val packages = LinkedHashSet<String>()
 
@@ -394,15 +392,6 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
     packages += "io.ktor.response"
     packages += "io.ktor.routing"
     packages += "io.ktor.http"
-    if (hasDependency(Dependencies.HTML_DSL)) {
-        packages += "io.ktor.html"
-        packages += "kotlinx.html"
-    }
-    if (hasDependency(Dependencies.CSS_DSL)) {
-        packages += "kotlinx.html"
-        packages += "kotlinx.css"
-        //packages += "kotlinx.css.properties"
-    }
     for (feat in info.featuresToInclude) {
         packages += feat.imports(info)
     }
@@ -410,7 +399,7 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
         +"import $p.*"
     }
     +""
-    if (SemVer(ktorVersion) >= VER_092) {
+    if (ktorVer >= VER_092) {
         +"fun main(args: Array<String>): Unit = $developmentEngineFQ.main(args)"
     } else {
         +"fun main(args: Array<String>): Unit = $developmentPackage.main(args)"
@@ -430,53 +419,14 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
             "get(\"/\")" {
                 +"call.respondText(\"HELLO WORLD!\")"
             }
-            if (hasDependency(Dependencies.HTML_DSL)) {
-                +""
-                "get(\"/html-dsl\")" {
-                    "call.respondHtml" {
-                        "body" {
-                            +"h1 { +\"HTML\" }"
-                        }
-                    }
-                }
-            }
             for (feat in info.featuresToInclude) {
                 feat.apply { routing(info) }
-            }
-            if (hasDependency(Dependencies.CSS_DSL)) {
-                +""
-                "get(\"/styles.css\")" {
-                    "call.respondCss" {
-                        "body" {
-                            +"backgroundColor = Color.red"
-                        }
-                        "p" {
-                            +"fontSize = 2.em"
-                        }
-                        "rule(\"p.myclass\")" {
-                            +"color = Color.blue"
-                        }
-                    }
-                }
             }
         }
     }
 
-    if (hasDependency(Dependencies.CSS_DSL)) {
-        +""
-        "fun FlowOrMetaDataContent.styleCss(builder: CSSBuilder.() -> Unit)" {
-            "style(type = ContentType.Text.CSS.toString())" {
-                +"+CSSBuilder().apply(builder).toString()"
-            }
-        }
-
-        "fun CommonAttributeGroupFacade.style(builder: CSSBuilder.() -> Unit)" {
-            +"this.style = CSSBuilder().apply(builder).toString().trim()"
-        }
-
-        "suspend inline fun ApplicationCall.respondCss(builder: CSSBuilder.() -> Unit)" {
-            +"this.respondText(CSSBuilder().apply(builder).toString(), ContentType.Text.CSS)"
-        }
+    for (feat in info.featuresToInclude) {
+        feat.apply { extensions(info) }
     }
 }
 
