@@ -1,7 +1,6 @@
 package io.ktor.start.util
 
 import kotlin.collections.set
-import kotlin.js.*
 
 // To view detailed information `zipinfo -l file.zip`
 // https://www.mkssoftware.com/docs/man1/zipinfo.1.asp
@@ -11,23 +10,30 @@ class ZipBuilder {
         val S_IFDIR = "0040000".toInt(8) // directory
         val DEFAULT_FILE = "644".toInt(8)
     }
-    class FileInfo(val name: String, val data: ByteArray, val date: Date, val mode: Int = DEFAULT_FILE)
+
+    class FileInfo(val name: String, val data: ByteArray, val date: DateTime, val mode: Int = DEFAULT_FILE)
 
     val files = LinkedHashMap<String, FileInfo>()
 
-    fun addParentDir(name: String, date: Date, mode: Int = DEFAULT_FILE or S_IFDIR) {
+    fun addParentDir(name: String, date: DateTime = NewDateTime(), mode: Int = DEFAULT_FILE or S_IFDIR) {
         if (name == "") return
         addParentDir(name.substringBeforeLast('/', ""), date)
         val dname = "$name/"
         files[dname] = FileInfo(dname, byteArrayOf(), date, mode = mode)
     }
 
-    fun add(name: String, data: ByteArray, date: Date = Date(), mode: Int = DEFAULT_FILE) {
+    fun add(name: String, data: ByteArray, date: DateTime = NewDateTime(), mode: Int = DEFAULT_FILE) {
         addParentDir(name.substringBeforeLast('/', ""), date)
         files[name] = FileInfo(name, data, date, mode = mode or S_IFREG)
     }
 
-    fun add(name: String, data: String, charset: Charset = UTF8, date: Date = Date(), mode: Int = DEFAULT_FILE) {
+    fun add(
+        name: String,
+        data: String,
+        charset: Charset = UTF8,
+        date: DateTime = NewDateTime(),
+        mode: Int = DEFAULT_FILE
+    ) {
         add(name, data.toByteArray(charset), date, mode = mode)
     }
 
@@ -37,7 +43,7 @@ class ZipBuilder {
             val crc32: Int,
             val headerOffset: Int,
             val size: Int,
-            val date: Date,
+            val date: DateTime,
             val mode: Int
         )
 
@@ -104,10 +110,10 @@ class ZipBuilder {
         }
     }
 
-    private fun Date.toDosDate() =
-        (this.getDate()) or ((this.getMonth() + 1) shl 5) or ((this.getFullYear() - 1980) shl 9)
+    private fun DateTime.toDosDate() =
+        (this.date) or ((this.month + 1) shl 5) or ((this.fullYear - 1980) shl 9)
 
-    private fun Date.toDosTime() = (this.getSeconds() / 2) or (this.getMinutes() shl 5) or (this.getHours() shl 11)
+    private fun DateTime.toDosTime() = (this.seconds / 2) or (this.minutes shl 5) or (this.hours shl 11)
 }
 
 inline fun buildZip(generate: ZipBuilder.() -> Unit): ByteArray {

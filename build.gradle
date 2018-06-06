@@ -13,7 +13,8 @@ buildscript {
 group 'io.ktor'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'kotlin2js'
+//apply plugin: 'kotlin2js'
+apply plugin: 'kotlin-platform-js'
 apply plugin: 'idea'
 
 sourceSets {
@@ -36,11 +37,12 @@ compileTestKotlin2Js {
 }
 
 repositories {
-    mavenCentral()
+    jcenter()
     maven { url "https://kotlin.bintray.com/js-externals" }
 }
 
 dependencies {
+    compile project(":ktor-generator-js")
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
     compile "kotlin.js.externals:kotlin-js-jquery:3.2.0-0"
     testCompile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
@@ -53,7 +55,7 @@ clean.doFirst() {
 task buildAndCopy(type: Copy, dependsOn: ['build']) {
     // Copy kotlin.js and kotlin-meta.js from jar into web directory
     configurations.compile.each { File file ->
-        println(file.absolutePath)
+        //println(file.absolutePath)
         from(zipTree(file.absolutePath)) {
             exclude "**/*.meta.js", "**/*.kjsm"
             include { fileTreeElement ->

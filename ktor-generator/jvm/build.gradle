@@ -1,0 +1,17 @@
+apply plugin: 'kotlin-platform-jvm'
+
+sourceSets {
+    main.kotlin.srcDirs += "src"
+    main.resources.srcDirs += "resources"
+    test.kotlin.srcDirs += "test"
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    expectedBy project(":ktor-generator")
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+}

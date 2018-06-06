@@ -276,7 +276,10 @@ suspend fun build(dev: Boolean) {
             addFile("$artifactName/src/Application.kt", indenter { buildApplicationKt(info.copy()) })
         }
         if (!dev) {
-            generateBrowserFile("ktor-sample-$projectType-$ktorEngine-$artifactGroup-$artifactName.zip", zipBytes)
+            generateBrowserFile(
+                "ktor-sample-$projectType-$ktorEngine-$artifactGroup-$artifactName.zip",
+                zipBytes
+            )
         }
     } catch (e: Throwable) {
         console.error(e)
@@ -300,19 +303,6 @@ fun registerBuildButton() {
     })
 }
 
-data class BuildInfo(
-    val ktorVersion: String,
-    val developmentPackage: String,
-    val artifactName: String,
-    val artifactGroup: String,
-    val developmentEngineFQ: String,
-    val reposToInclude: Set<String>,
-    val dependenciesToInclude: Set<Feature>,
-    val ktorEngine: String
-) {
-    val featuresToInclude = dependenciesToInclude
-    val ktorVer = SemVer(ktorVersion)
-}
 
 fun Indenter.buildPomXml(info: BuildInfo) = info.apply {
     TODO("Unsupported Maven for now")
