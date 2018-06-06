@@ -1,9 +1,11 @@
-/.idea
+.idea
+.gradle
 *.iml
 *.iws
 *.ipr
 
-/.gradle
 /build
 
+/docs/META-INF
+/docs/output
 /web

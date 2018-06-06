@@ -1,6 +1,6 @@
 buildscript {
     ext.kotlin_version = '1.2.41'
-    ext.web_dir = 'web'
+    ext.web_dir = 'docs'
 
     repositories {
         mavenCentral()
@@ -48,14 +48,11 @@ clean.doFirst() {
     delete("${web_dir}")
 }
 
-build.doLast() {
+task buildAndCopy(type: Copy, dependsOn: ['build']) {
     // Copy kotlin.js and kotlin-meta.js from jar into web directory
     configurations.compile.each { File file ->
-        copy {
-            includeEmptyDirs = false
-
-            from zipTree(file.absolutePath)
-            into "${projectDir}/${web_dir}"
+        println(file.absolutePath)
+        from(zipTree(file.absolutePath)) {
             exclude "**/*.meta.js", "**/*.kjsm"
             include { fileTreeElement ->
                 def path = fileTreeElement.path
@@ -66,51 +63,43 @@ build.doLast() {
 
     // Unpack build contents
     // TODO Remove this step when a CDN link is available.
-    copy {
-        File artifact = new File("build/libs/${project.name}-${project.version}.jar")
-        includeEmptyDirs = false
+    //File appJar = new File("${buildDir}/libs/${project.name}-${project.version}.jar")
+    //println(appJar)
+    //from(zipTree(appJar)) {
+    //    exclude "**/*.meta.js", "**/*.kjsm"
+    //    //include { fileTreeElement ->
+    //    //    def path = fileTreeElement.path
+    //    //    !(path.startsWith("META-INF/") || path.startsWith("${project.name}"))
+    //    //}
+    //}
 
-        from zipTree(artifact)
-        into "${web_dir}"
+    from(new File("${buildDir}/resources/main")) {
         exclude "**/*.meta.js", "**/*.kjsm"
-        include { fileTreeElement ->
-            def path = fileTreeElement.path
-            !(path.startsWith("META-INF/") || path.startsWith("${project.name}"))
-        }
     }
 
     // Copy scripts to web directory
-    copy {
-        includeEmptyDirs = false
-        from new File("build/classes/main")
+    from(new File("${buildDir}/classes/main")) {
         exclude "**/*.meta.js", "**/*.kjsm"
-        into "${web_dir}"
     }
 
-    copy {
-        includeEmptyDirs = false
-        from new File("build/classes/test")
+    from(new File("${buildDir}/classes/test")) {
         exclude "**/*.meta.js", "**/*.kjsm"
-        into "${web_dir}"
     }
 
-    copy {
-        includeEmptyDirs = false
-        from new File("build/resources/test")
+    from(new File("${buildDir}/resources/test")) {
         exclude "**/*.meta.js", "**/*.kjsm"
-        into "${web_dir}"
     }
 
-    copy {
-        includeEmptyDirs = false
-        from "${web_dir}"
-        exclude "**/*.meta.js", "**/*.kjsm", "**/*.map"
-        into "docs"
-    }
+    includeEmptyDirs = false
+    into "${projectDir}/${web_dir}"
+}
+
+build.doLast() {
+
 }
 
 idea {
     module {
-        excludeDirs = [".gradle", ".idea", "build", "gradle", "docs", "web", "resources/lib"].collect { new File(it) }
+        excludeDirs = [".gradle", ".idea", "build", "gradle", "docs", "resources/lib"].collect { new File(it) }
     }
 }
