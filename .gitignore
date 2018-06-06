@@ -3,9 +3,10 @@
 *.iml
 *.iws
 *.ipr
-
+*.DS_Store
 /build
-
 /docs/META-INF
 /docs/output
-/web
+/ktor-generator/build
+/ktor-generator/js/build
+/ktor-generator/jvm/build
