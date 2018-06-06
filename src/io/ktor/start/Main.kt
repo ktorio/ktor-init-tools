@@ -243,7 +243,7 @@ fun registerBuildButton() {
 
                     add("$artifactName/resources/application.conf", indenter { buildApplicationConf(info) })
                     val application_kt = indenter { buildApplicationKt(info) }
-                    //println(application_kt)
+                    println(application_kt)
                     add("$artifactName/src/Application.kt", application_kt)
                 })
             } catch (e: Throwable) {
@@ -334,14 +334,21 @@ fun Indenter.buildApplicationConf(info: BuildInfo) = info.apply {
 
 val VER_092 = SemVer("0.9.2")
 
+fun BuildInfo.hasDependency(dep: Dependency): Boolean = dep in dependenciesToInclude
+
 fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
     +"package $artifactGroup"
     +""
     +"import io.ktor.application.*"
     +"import io.ktor.response.*"
     +"import io.ktor.routing.*"
-    if (Dependencies.HTML_DSL in dependenciesToInclude) {
+    if (hasDependency(Dependencies.HTML_DSL)) {
         +"import io.ktor.html.*"
+        +"import kotlinx.html.*"
+    }
+    if (hasDependency(Dependencies.CSS_DSL)) {
+        +"import kotlinx.css.*"
+        +"import kotlinx.css.properties.*"
         +"import kotlinx.html.*"
     }
     +""
@@ -357,16 +364,45 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
                 +"call.respondText(\"HELLO WORLD!\")"
             }
             +""
-            if (Dependencies.HTML_DSL in dependenciesToInclude) {
-                "get(\"/html\")" {
+            if (hasDependency(Dependencies.HTML_DSL)) {
+                "get(\"/html-dsl\")" {
                     "call.respondHtml" {
                         "body" {
                             +"h1 { +\"HTML\" }"
                         }
                     }
-
                 }
             }
+            if (hasDependency(Dependencies.CSS_DSL)) {
+                "get(\"/styles.css\")" {
+                    "call.respondCss" {
+                        "body" {
+                            +"backgroundColor = Color.red"
+                        }
+                        "p" {
+                            +"fontSize = 2.em"
+                        }
+                        "rule(\"p.myclass\")" {
+                            +"color = Color.blue"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (hasDependency(Dependencies.CSS_DSL)) {
+        "fun FlowOrMetaDataContent.styleCss(builder: CSSBuilder.() -> Unit)" {
+            "style(type = ContentType.Text.CSS.toString())" {
+                +"+CSSBuilder().apply(builder).toString()"
+            }
+        }
+
+        "fun CommonAttributeGroupFacade.style(builder: CSSBuilder.() -> Unit)" {
+            +"this.style = CSSBuilder().apply(builder).toString().trim()"
+        }
+
+        "suspend inline fun ApplicationCall.respondCss(builder: CSSBuilder.() -> Unit)" {
+            +"this.respondText(CSSBuilder().apply(builder).toString(), ContentType.Text.CSS)"
         }
     }
 }
