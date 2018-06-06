@@ -12,17 +12,17 @@
 }(this, function (_, Kotlin) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
+  var lazy = Kotlin.kotlin.lazy_klfg04$;
   var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
   var arrayListOf = Kotlin.kotlin.collections.arrayListOf_i5x0yv$;
+  var to = Kotlin.kotlin.to_ujzrz7$;
   var Unit = Kotlin.kotlin.Unit;
   var firstOrNull = Kotlin.kotlin.collections.firstOrNull_2p1efm$;
   var trim = Kotlin.kotlin.text.trim_wqw3xr$;
   var Throwable = Error;
-  var lazy = Kotlin.kotlin.lazy_klfg04$;
   var split = Kotlin.kotlin.text.split_o64adg$;
   var listOf = Kotlin.kotlin.collections.listOf_mh5how$;
   var plus = Kotlin.kotlin.collections.plus_mydzjv$;
-  var to = Kotlin.kotlin.to_ujzrz7$;
   var toMap = Kotlin.kotlin.collections.toMap_6hr0sd$;
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
@@ -54,6 +54,18 @@
   var defaultArtifactName;
   var defaultKtorVersion;
   var defaultKtorEngine;
+  function insideIframe$lambda() {
+    try {
+      return window.self !== window.top;
+    }
+     catch (e) {
+      return true;
+    }
+  }
+  var insideIframe;
+  function get_insideIframe() {
+    return insideIframe.value;
+  }
   function get_checked($receiver) {
     return !!$receiver.prop('checked');
   }
@@ -70,7 +82,7 @@
   }
   var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   function updateHash() {
-    var tmp$, tmp$_0;
+    var tmp$, tmp$_0, tmp$_1;
     var items = LinkedHashMap_init();
     if (!get_includeWrapper()) {
       var key = 'no_wrapper';
@@ -125,6 +137,12 @@
       items.put_xwzc9p$(key_5, value_4);
     }
     (tmp$_0 = document.location) != null ? (tmp$_0.hash = formUrlEncode_0(items)) : null;
+    try {
+      window.top.postMessage(jsObject([to('type', 'updateHash'), to('value', (tmp$_1 = document.location) != null ? tmp$_1.hash : null)]), '*');
+    }
+     catch (e) {
+      console.error(e);
+    }
   }
   function main$lambda() {
     updateHash();
@@ -1257,8 +1275,8 @@
     var obj = {};
     for (tmp$ = 0; tmp$ !== pairs.length; ++tmp$) {
       var tmp$_0 = pairs[tmp$];
-      var key = tmp$_0.get_za3lpa$(0);
-      var value = tmp$_0.get_za3lpa$(1);
+      var key = tmp$_0.component1()
+      , value = tmp$_0.component2();
       obj[key] = value;
     }
     return obj;
@@ -1586,6 +1604,9 @@
       return defaultKtorEngine;
     }
   });
+  Object.defineProperty(package$start, 'insideIframe', {
+    get: get_insideIframe
+  });
   package$start.get_checked_pzor9e$ = get_checked;
   package$start.set_checked_4n8m03$ = set_checked;
   $$importsForInline$$.output = _;
@@ -1652,7 +1673,7 @@
   package$util.each_4tgbmb$ = each;
   package$util.change_tue5ot$ = change;
   package$util.keyup_tue5ot$ = keyup;
-  package$util.jsObject_qgjp2i$ = jsObject;
+  package$util.jsObject_8bsfpn$ = jsObject;
   package$util.await_t11jrl$ = await_0;
   package$util.fetchFile_61zpoe$ = fetchFile;
   Object.defineProperty(package$util, 'EmptyContinuation', {
@@ -1671,6 +1692,7 @@
   defaultArtifactName = 'ktor-demo';
   defaultKtorVersion = '0.9.2';
   defaultKtorEngine = 'netty';
+  insideIframe = lazy(insideIframe$lambda);
   hashParams = lazy(hashParams$lambda);
   DOLLAR = 36;
   var $receiver = Object.values(Dependencies_getInstance());
@@ -1687,5 +1709,3 @@
   Kotlin.defineModule('output', _);
   return _;
 }));
-
-//# sourceMappingURL=output.js.map

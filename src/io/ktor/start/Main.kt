@@ -9,6 +9,17 @@ val defaultArtifactName = "ktor-demo"
 val defaultKtorVersion = "0.9.2"
 val defaultKtorEngine = "netty"
 
+val insideIframe: Boolean by lazy {
+    try {
+        window.self !== window.top
+    } catch (e: dynamic) {
+        true
+    }
+}
+
+//val globalLocation get() = window.top.location
+//val localLocation get() = window.location
+
 var JQuery<*>.checked
     get(): Boolean = !!this.prop("checked").asDynamic()
     set(value: Boolean) {
@@ -59,10 +70,18 @@ fun updateHash() {
     }
 
     document.location?.hash = items.formUrlEncode()
+
+    try {
+        window.top.postMessage(jsObject("type" to "updateHash", "value" to document.location?.hash), "*")
+    } catch (e: dynamic) {
+        console.error(e)
+    }
 }
 
 fun main(args: Array<String>) {
     //println("TEST2")
+    //println(localLocation)
+    //println(globalLocation)
     jq("#include_wrapper").change { updateHash() }
     jq("#ktor-engine").change { updateHash() }
     jq("#ktor-version").change { updateHash() }

@@ -10,7 +10,7 @@ external object Object {
     fun values(obj: dynamic): Array<dynamic>
 }
 
-fun jsObject(vararg pairs: List<Pair<String, dynamic>>): dynamic {
+fun jsObject(vararg pairs: Pair<String, dynamic>): dynamic {
     val obj = js("({})")
     for ((key, value) in pairs) obj[key] = value
     return obj

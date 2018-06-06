@@ -25,12 +25,14 @@ sourceSets {
 compileKotlin2Js {
     kotlinOptions.outputFile = "${web_dir}/output.js"
     kotlinOptions.moduleKind = "umd"
-    kotlinOptions.sourceMap = true
+    kotlinOptions.sourceMap = false
+    kotlinOptions.metaInfo = false
 }
 
 compileTestKotlin2Js {
     kotlinOptions.moduleKind = "umd"
-    kotlinOptions.sourceMap = true
+    kotlinOptions.sourceMap = false
+    kotlinOptions.metaInfo = false
 }
 
 repositories {
