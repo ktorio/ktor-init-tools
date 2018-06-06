@@ -5,7 +5,7 @@ import org.w3c.dom.url.*
 import org.w3c.files.*
 import kotlin.browser.*
 
-fun download(filename: String, data: ByteArray, type: String = "application/octet-stream") {
+fun generateBrowserFile(filename: String, data: ByteArray, type: String = "application/octet-stream") {
     val blob = Blob(arrayOf(data), BlobPropertyBag(type = type))
     if (window.navigator.asDynamic().msSaveOrOpenBlob) {
         window.navigator.asDynamic().msSaveBlob(blob, filename)

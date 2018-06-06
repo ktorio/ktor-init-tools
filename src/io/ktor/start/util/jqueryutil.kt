@@ -18,3 +18,4 @@ inline fun JQuery<HTMLElement>.each(noinline event: (index: Int, element: HTMLEl
     this.asDynamic().each(event)
 
 inline fun JQuery<HTMLElement>.change(noinline event: () -> Unit) = this.asDynamic().change(event)
+inline fun JQuery<HTMLElement>.keyup(noinline event: () -> Unit) = this.asDynamic().keyup(event)

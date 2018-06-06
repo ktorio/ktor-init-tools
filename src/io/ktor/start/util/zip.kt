@@ -3,25 +3,32 @@ package io.ktor.start.util
 import kotlin.collections.set
 import kotlin.js.*
 
+// To view detailed information `zipinfo -l file.zip`
+// https://www.mkssoftware.com/docs/man1/zipinfo.1.asp
 class ZipBuilder {
-    class FileInfo(val name: String, val data: ByteArray, val date: Date)
+    companion object {
+        val S_IFREG = "0100000".toInt(8) // regular
+        val S_IFDIR = "0040000".toInt(8) // directory
+        val DEFAULT_FILE = "644".toInt(8)
+    }
+    class FileInfo(val name: String, val data: ByteArray, val date: Date, val mode: Int = DEFAULT_FILE)
 
     val files = LinkedHashMap<String, FileInfo>()
 
-    fun addParentDir(name: String, date: Date) {
+    fun addParentDir(name: String, date: Date, mode: Int = DEFAULT_FILE or S_IFDIR) {
         if (name == "") return
         addParentDir(name.substringBeforeLast('/', ""), date)
         val dname = "$name/"
-        files[dname] = FileInfo(dname, byteArrayOf(), date)
+        files[dname] = FileInfo(dname, byteArrayOf(), date, mode = mode)
     }
 
-    fun add(name: String, data: ByteArray, date: Date = Date()) {
+    fun add(name: String, data: ByteArray, date: Date = Date(), mode: Int = DEFAULT_FILE) {
         addParentDir(name.substringBeforeLast('/', ""), date)
-        files[name] = FileInfo(name, data, date)
+        files[name] = FileInfo(name, data, date, mode = mode or S_IFREG)
     }
 
-    fun add(name: String, data: String, charset: Charset = UTF8, date: Date = Date()) {
-        add(name, data.toByteArray(charset), date)
+    fun add(name: String, data: String, charset: Charset = UTF8, date: Date = Date(), mode: Int = DEFAULT_FILE) {
+        add(name, data.toByteArray(charset), date, mode = mode)
     }
 
     fun toByteArray(): ByteArray {
@@ -30,7 +37,8 @@ class ZipBuilder {
             val crc32: Int,
             val headerOffset: Int,
             val size: Int,
-            val date: Date
+            val date: Date,
+            val mode: Int
         )
 
         val centerEntries = arrayListOf<CenterEntry>()
@@ -56,15 +64,16 @@ class ZipBuilder {
                 u16_le(0) // EXTRA LENGTH
                 bytes(fileNameBytes)
                 bytes(fileData)
-                centerEntries += CenterEntry(fileNameBytes, crc32, headerOffset, fileData.size, file.date)
+                centerEntries += CenterEntry(fileNameBytes, crc32, headerOffset, fileData.size, file.date, file.mode)
             }
 
             val directoryStart = this.size
+            val system = 3 // UNIX
             // DIRENTRY
             for (center in centerEntries) {
                 u32_le(0x02014b50)
-                u16_le(20) // VERSION
-                u16_le(10) // VERSION_EXTRACT
+                u16_le(0x3F or (system shl 8)) // VERSION
+                u16_le(0x14 or (system shl 8)) // VERSION_EXTRACT
                 u16_le(0) // FLAGS
                 u16_le(0) // COMPRESSION: STORED
                 u16_le(center.date.toDosTime())
@@ -77,7 +86,7 @@ class ZipBuilder {
                 u16_le(0) // FILE COMMENT LENGTH
                 u16_le(0) // DISK NUMBER START
                 u16_le(0) // INTERNAL ATTRIBUTES
-                u32_le(0) // EXTERNAL ATTRIBUTES
+                u32_le(0x8020 or ((0x8000 or center.mode) shl 16)) // EXTERNAL ATTRIBUTES
                 u32_le(center.headerOffset) // HEADER OFFSET
                 bytes(center.fileNameBytes)
             }
@@ -101,7 +110,7 @@ class ZipBuilder {
     private fun Date.toDosTime() = (this.getSeconds() / 2) or (this.getMinutes() shl 5) or (this.getHours() shl 11)
 }
 
-fun buildZip(generate: ZipBuilder.() -> Unit): ByteArray {
+inline fun buildZip(generate: ZipBuilder.() -> Unit): ByteArray {
     val zb = ZipBuilder()
     generate(zb)
     return zb.toByteArray()
