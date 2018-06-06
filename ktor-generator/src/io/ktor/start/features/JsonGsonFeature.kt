@@ -8,4 +8,5 @@ object JsonGsonFeature : Feature() {
     override val id = "ktor-gson"
     override val title = "GSON"
     override val description = "Handles JSON serialization using GSON library"
+    override val documentation = "https://ktor.io/features/content-negotiation/gson.html"
 }

@@ -8,4 +8,5 @@ object MetricsFeature : Feature() {
     override val id = "ktor-metrics"
     override val title = "Metrics"
     override val description = "Adds supports for monitoring several metrics"
+    override val documentation = "https://ktor.io/features/metrics.html"
 }

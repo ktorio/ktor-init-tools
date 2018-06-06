@@ -8,4 +8,5 @@ object JsonJacksonFeature : Feature() {
     override val id = "ktor-jackson"
     override val title = "Jackson"
     override val description = "Handles JSON serialization using Jackson library"
+    override val documentation = "https://ktor.io/features/content-negotiation/jackson.html"
 }

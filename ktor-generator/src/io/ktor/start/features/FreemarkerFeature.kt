@@ -9,7 +9,7 @@ object FreemarkerFeature : Feature() {
     override val id = "freemarker"
     override val title = "Freemarker"
     override val description = "Serve HTML content using Apache freemarker"
-    override val documentation = "https://ktor.io/features/freemarker.html"
+    override val documentation = "https://ktor.io/features/templates/freemarker.html"
 
     override fun imports(info: BuildInfo) = listOf(
         "freemarker.cache",

@@ -8,4 +8,5 @@ object WebsocketsFeature : Feature() {
     override val id = "ktor-websockets"
     override val title = "WebSockets"
     override val description = "Adds WebSockets support for bidirectional communication with the client"
+    override val documentation = "https://ktor.io/features/websockets.html"
 }
