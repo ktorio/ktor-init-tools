@@ -58,12 +58,38 @@
   var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
   var Comparable = Kotlin.kotlin.Comparable;
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_8cymmc$;
+  AuthFeature.prototype = Object.create(Feature.prototype);
+  AuthFeature.prototype.constructor = AuthFeature;
+  AuthJwtFeature.prototype = Object.create(Feature.prototype);
+  AuthJwtFeature.prototype.constructor = AuthJwtFeature;
+  AuthLdapFeature.prototype = Object.create(Feature.prototype);
+  AuthLdapFeature.prototype.constructor = AuthLdapFeature;
   CssDslFeature.prototype = Object.create(Feature.prototype);
   CssDslFeature.prototype.constructor = CssDslFeature;
   FreemarkerFeature.prototype = Object.create(Feature.prototype);
   FreemarkerFeature.prototype.constructor = FreemarkerFeature;
   HtmlDslFeature.prototype = Object.create(Feature.prototype);
   HtmlDslFeature.prototype.constructor = HtmlDslFeature;
+  HttpClientFeature.prototype = Object.create(Feature.prototype);
+  HttpClientFeature.prototype.constructor = HttpClientFeature;
+  JsonGsonFeature.prototype = Object.create(Feature.prototype);
+  JsonGsonFeature.prototype.constructor = JsonGsonFeature;
+  JsonJacksonFeature.prototype = Object.create(Feature.prototype);
+  JsonJacksonFeature.prototype.constructor = JsonJacksonFeature;
+  LocationsFeature.prototype = Object.create(Feature.prototype);
+  LocationsFeature.prototype.constructor = LocationsFeature;
+  MetricsFeature.prototype = Object.create(Feature.prototype);
+  MetricsFeature.prototype.constructor = MetricsFeature;
+  RawSocketsFeature.prototype = Object.create(Feature.prototype);
+  RawSocketsFeature.prototype.constructor = RawSocketsFeature;
+  RawSocketsTlsFeature.prototype = Object.create(Feature.prototype);
+  RawSocketsTlsFeature.prototype.constructor = RawSocketsTlsFeature;
+  SessionsFeature.prototype = Object.create(Feature.prototype);
+  SessionsFeature.prototype.constructor = SessionsFeature;
+  VelocityFeature.prototype = Object.create(Feature.prototype);
+  VelocityFeature.prototype.constructor = VelocityFeature;
+  WebsocketsFeature.prototype = Object.create(Feature.prototype);
+  WebsocketsFeature.prototype.constructor = WebsocketsFeature;
   function FileContainer() {
   }
   FileContainer.prototype.add_dkzqdg$ = function (name, content, mode, callback$default) {
@@ -108,8 +134,9 @@
   Feature.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'Feature',
-    interfaces: [Dependency]
+    interfaces: []
   };
+  var KOTLIN_VERSION;
   var defaultArtifactGroup;
   var defaultArtifactName;
   var defaultKtorVersion;
@@ -152,7 +179,7 @@
     var dependency = ArrayList_init();
     var key_0 = 'dependency';
     items.put_xwzc9p$(key_0, dependency);
-    tmp$ = get_dependencies().iterator();
+    tmp$ = ALL_FEATURES.iterator();
     while (tmp$.hasNext()) {
       var dep = tmp$.next();
       var str = '#artifact-' + dep.id;
@@ -383,7 +410,7 @@
     var deps = jQuery(str);
     deps.text('');
     var dependencyIds = toSet((tmp$ = get_hashParams().get_11rb$('dependency')) != null ? tmp$ : emptyList());
-    tmp$_0 = get_dependencies().iterator();
+    tmp$_0 = ALL_FEATURES.iterator();
     while (tmp$_0.hasNext()) {
       var dependency = tmp$_0.next();
       var checkedBool = dependencyIds.contains_11rb$(dependency.id);
@@ -407,7 +434,7 @@
       }
       deps.append(tmp$_6.append(tmp$_7.append($receiver)));
     }
-    tmp$_1 = get_dependencies().iterator();
+    tmp$_1 = ALL_FEATURES.iterator();
     while (tmp$_1.hasNext()) {
       var dependency_0 = tmp$_1.next();
       var str_6 = '#artifact-' + dependency_0.id;
@@ -454,19 +481,19 @@
   }
   function build$lambda$lambda(closure$info) {
     return function ($receiver) {
-      buildPomXml($receiver, closure$info.copy_mtpjrb$());
+      buildPomXml($receiver, closure$info.copy_qxt8fu$());
       return Unit;
     };
   }
   function build$lambda$lambda_0(closure$info) {
     return function ($receiver) {
-      buildBuildGradle($receiver, closure$info.copy_mtpjrb$());
+      buildBuildGradle($receiver, closure$info.copy_qxt8fu$());
       return Unit;
     };
   }
   function build$lambda$lambda_1(closure$info) {
     return function ($receiver) {
-      buildApplicationConf($receiver, closure$info.copy_mtpjrb$());
+      buildApplicationConf($receiver, closure$info.copy_qxt8fu$());
       return Unit;
     };
   }
@@ -482,7 +509,7 @@
   };
   function build$lambda$lambda_2(closure$info) {
     return function ($receiver) {
-      buildApplicationKt($receiver, closure$info.copy_mtpjrb$());
+      buildApplicationKt($receiver, closure$info.copy_qxt8fu$());
       return Unit;
     };
   }
@@ -534,7 +561,7 @@
             println('ktorEngine: ' + this.local$ktorEngine);
             println('artifactGroup: ' + this.local$artifactGroup);
             println('artifactName: ' + this.local$artifactName);
-            var $receiver = get_dependencies();
+            var $receiver = ALL_FEATURES;
             var destination = ArrayList_init();
             var tmp$_0;
             tmp$_0 = $receiver.iterator();
@@ -546,7 +573,7 @@
             }
 
             var dependenciesToInclude = toSet(destination);
-            tmp$ = get_dependencies().iterator();
+            tmp$ = ALL_FEATURES.iterator();
             while (tmp$.hasNext()) {
               var dependency = tmp$.next();
               var toInclude = dependenciesToInclude.contains_11rb$(dependency);
@@ -785,16 +812,7 @@
     this.reposToInclude = reposToInclude;
     this.dependenciesToInclude = dependenciesToInclude;
     this.ktorEngine = ktorEngine;
-    var $receiver = this.dependenciesToInclude;
-    var destination = ArrayList_init();
-    var tmp$;
-    tmp$ = $receiver.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      if (Kotlin.isType(element, Feature))
-        destination.add_11rb$(element);
-    }
-    this.featuresToInclude = destination;
+    this.featuresToInclude = this.dependenciesToInclude;
     this.ktorVer = new SemVer(this.ktorVersion);
   }
   BuildInfo.$metadata$ = {
@@ -826,7 +844,7 @@
   BuildInfo.prototype.component8 = function () {
     return this.ktorEngine;
   };
-  BuildInfo.prototype.copy_mtpjrb$ = function (ktorVersion, developmentPackage, artifactName, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine) {
+  BuildInfo.prototype.copy_qxt8fu$ = function (ktorVersion, developmentPackage, artifactName, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine) {
     return new BuildInfo(ktorVersion === void 0 ? this.ktorVersion : ktorVersion, developmentPackage === void 0 ? this.developmentPackage : developmentPackage, artifactName === void 0 ? this.artifactName : artifactName, artifactGroup === void 0 ? this.artifactGroup : artifactGroup, developmentEngineFQ === void 0 ? this.developmentEngineFQ : developmentEngineFQ, reposToInclude === void 0 ? this.reposToInclude : reposToInclude, dependenciesToInclude === void 0 ? this.dependenciesToInclude : dependenciesToInclude, ktorEngine === void 0 ? this.ktorEngine : ktorEngine);
   };
   BuildInfo.prototype.toString = function () {
@@ -984,7 +1002,6 @@
     $receiver.line_61zpoe$('}');
     return info;
   }
-  var VER_092;
   function buildApplicationKt($receiver, info) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2;
     var packages = LinkedHashSet_init();
@@ -1009,7 +1026,7 @@
       $receiver.line_61zpoe$('import ' + p + '.*');
     }
     $receiver.line_61zpoe$('');
-    if (info.ktorVer.compareTo_11rb$(VER_092) >= 0) {
+    if (info.ktorVer.compareTo_11rb$(Versions_getInstance().V092) >= 0) {
       $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + info.developmentEngineFQ + '.main(args)');
     }
      else {
@@ -1098,95 +1115,6 @@
     var str = '.loading';
     jQuery(str).removeClass('loading').addClass('loaded');
   }
-  function IntDependency(repos, artifacts, id, title, description, documentation) {
-    if (documentation === void 0)
-      documentation = null;
-    this.repos_o53y43$_0 = repos;
-    this.artifacts_k8cdzn$_0 = artifacts;
-    this.id_jzg1i3$_0 = id;
-    this.title_p5gunw$_0 = title;
-    this.description_umree0$_0 = description;
-    this.documentation_f4u21y$_0 = documentation;
-  }
-  Object.defineProperty(IntDependency.prototype, 'repos', {
-    get: function () {
-      return this.repos_o53y43$_0;
-    }
-  });
-  Object.defineProperty(IntDependency.prototype, 'artifacts', {
-    get: function () {
-      return this.artifacts_k8cdzn$_0;
-    }
-  });
-  Object.defineProperty(IntDependency.prototype, 'id', {
-    get: function () {
-      return this.id_jzg1i3$_0;
-    }
-  });
-  Object.defineProperty(IntDependency.prototype, 'title', {
-    get: function () {
-      return this.title_p5gunw$_0;
-    }
-  });
-  Object.defineProperty(IntDependency.prototype, 'description', {
-    get: function () {
-      return this.description_umree0$_0;
-    }
-  });
-  Object.defineProperty(IntDependency.prototype, 'documentation', {
-    get: function () {
-      return this.documentation_f4u21y$_0;
-    }
-  });
-  IntDependency.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'IntDependency',
-    interfaces: [Dependency]
-  };
-  IntDependency.prototype.component1 = function () {
-    return this.repos;
-  };
-  IntDependency.prototype.component2 = function () {
-    return this.artifacts;
-  };
-  IntDependency.prototype.component3 = function () {
-    return this.id;
-  };
-  IntDependency.prototype.component4 = function () {
-    return this.title;
-  };
-  IntDependency.prototype.component5 = function () {
-    return this.description;
-  };
-  IntDependency.prototype.component6 = function () {
-    return this.documentation;
-  };
-  IntDependency.prototype.copy_te1da5$ = function (repos, artifacts, id, title, description, documentation) {
-    return new IntDependency(repos === void 0 ? this.repos : repos, artifacts === void 0 ? this.artifacts : artifacts, id === void 0 ? this.id : id, title === void 0 ? this.title : title, description === void 0 ? this.description : description, documentation === void 0 ? this.documentation : documentation);
-  };
-  IntDependency.prototype.toString = function () {
-    return 'IntDependency(repos=' + Kotlin.toString(this.repos) + (', artifacts=' + Kotlin.toString(this.artifacts)) + (', id=' + Kotlin.toString(this.id)) + (', title=' + Kotlin.toString(this.title)) + (', description=' + Kotlin.toString(this.description)) + (', documentation=' + Kotlin.toString(this.documentation)) + ')';
-  };
-  IntDependency.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.repos) | 0;
-    result = result * 31 + Kotlin.hashCode(this.artifacts) | 0;
-    result = result * 31 + Kotlin.hashCode(this.id) | 0;
-    result = result * 31 + Kotlin.hashCode(this.title) | 0;
-    result = result * 31 + Kotlin.hashCode(this.description) | 0;
-    result = result * 31 + Kotlin.hashCode(this.documentation) | 0;
-    return result;
-  };
-  IntDependency.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.repos, other.repos) && Kotlin.equals(this.artifacts, other.artifacts) && Kotlin.equals(this.id, other.id) && Kotlin.equals(this.title, other.title) && Kotlin.equals(this.description, other.description) && Kotlin.equals(this.documentation, other.documentation)))));
-  };
-  function Dependency() {
-  }
-  Dependency.$metadata$ = {
-    kind: Kind_INTERFACE,
-    simpleName: 'Dependency',
-    interfaces: []
-  };
   function Repos() {
     Repos_instance = this;
     this.jcenter = listOf('jcenter');
@@ -1205,48 +1133,178 @@
     }
     return Repos_instance;
   }
-  function Dependencies() {
-    Dependencies_instance = this;
-    this.TPL_VELOCITY = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-velocity:$ktor_version'), 'velocity', 'Velocity', 'Serve HTML content using Apache velocity');
-    this.AUTH = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-auth:$ktor_version'), 'auth', 'Authentication', 'Handle Basic and Digest HTTP Auth, Form authentication and OAuth 1a and 2', 'https://ktor.io/features/authentication.html');
-    this.AUTH_JWT = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-auth-jwt:$ktor_version'), 'auth-jwt', 'Authentication JWT', 'Handle JWT authentication', 'https://ktor.io/features/authentication.html#jwt');
-    this.AUTH_LDAP = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-auth-ldap:$ktor_version'), 'auth-ldap', 'Authentication LDAP', 'Handle JDAP authentication', 'https://ktor.io/features/authentication.html#ldap');
-    this.JSON_GSON = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-gson:$ktor_version'), 'ktor-gson', 'GSON', 'Handles JSON serialization using GSON library');
-    this.JSON_JACKSON = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-jackson:$ktor_version'), 'ktor-jackson', 'Jackson', 'Handles JSON serialization using Jackson library');
-    this.LOCATIONS = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-locations:$ktor_version'), 'ktor-locations', 'Locations', 'Allows to define route locations in a typed way', 'https://ktor.io/features/locations.html');
-    this.METRICS = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-metrics:$ktor_version'), 'ktor-metrics', 'Metrics', 'Adds supports for monitoring several metrics');
-    this.SESSIONS = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-sessions:$ktor_version'), 'ktor-sessions', 'Sessions', 'Adds supports for sessions: with the payload in the client or the server', 'https://ktor.io/features/sessions.html');
-    this.WEBSOCKETS = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-websockets:$ktor_version'), 'ktor-websockets', 'WebSockets', 'Adds WebSockets support for bidirectional communication with the client');
-    this.RAW_SOCKETS = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-network:$ktor_version'), 'ktor-network', 'Raw Sockets', 'Adds Raw Socket support for listening and connecting to tcp and udp sockets', 'https://ktor.io/servers/raw-sockets.html');
-    this.RAW_SOCKETS_TLS = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-network-tls:$ktor_version'), 'ktor-network-tls', 'Raw Secure SSL/TLS Sockets', 'Adds Raw Socket support for listening and connecting to tcp and udp sockets with secure sockets', 'https://ktor.io/servers/raw-sockets.html#secure');
-    this.HTTP_CLIENT = new IntDependency(Repos_getInstance().ktor, listOf('io.ktor:ktor-client-apache:$ktor_version'), 'ktor-client-apache', 'HTTP Client', 'Adds support for doing HTTP requests', 'https://ktor.io/clients/http-client.html');
+  function Versions() {
+    Versions_instance = this;
+    this.V092 = new SemVer('0.9.2');
+    this.LAST = Versions_getInstance().V092;
   }
-  Dependencies.$metadata$ = {
+  Versions.$metadata$ = {
     kind: Kind_OBJECT,
-    simpleName: 'Dependencies',
+    simpleName: 'Versions',
     interfaces: []
   };
-  var Dependencies_instance = null;
-  function Dependencies_getInstance() {
-    if (Dependencies_instance === null) {
-      new Dependencies();
+  var Versions_instance = null;
+  function Versions_getInstance() {
+    if (Versions_instance === null) {
+      new Versions();
     }
-    return Dependencies_instance;
+    return Versions_instance;
   }
-  function dependencies$lambda() {
-    var $receiver = Object.values(Dependencies_getInstance());
-    var destination = ArrayList_init();
-    var tmp$;
-    for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
-      var element = $receiver[tmp$];
-      if (Kotlin.isType(element, IntDependency))
-        destination.add_11rb$(element);
+  function AuthFeature() {
+    AuthFeature_instance = this;
+    Feature.call(this);
+    this.repos_7vahic$_0 = Repos_getInstance().ktor;
+    this.artifacts_w3fnd0$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
+    this.id_2oeams$_0 = 'auth';
+    this.title_8vne25$_0 = 'Authentication';
+    this.description_4ec9yv$_0 = 'Handle Basic and Digest HTTP Auth, Form authentication and OAuth 1a and 2';
+    this.documentation_awl92t$_0 = 'https://ktor.io/features/authentication.html';
+  }
+  Object.defineProperty(AuthFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_7vahic$_0;
     }
-    return plus(destination, ALL_FEATURES);
+  });
+  Object.defineProperty(AuthFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_w3fnd0$_0;
+    }
+  });
+  Object.defineProperty(AuthFeature.prototype, 'id', {
+    get: function () {
+      return this.id_2oeams$_0;
+    }
+  });
+  Object.defineProperty(AuthFeature.prototype, 'title', {
+    get: function () {
+      return this.title_8vne25$_0;
+    }
+  });
+  Object.defineProperty(AuthFeature.prototype, 'description', {
+    get: function () {
+      return this.description_4ec9yv$_0;
+    }
+  });
+  Object.defineProperty(AuthFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_awl92t$_0;
+    }
+  });
+  AuthFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'AuthFeature',
+    interfaces: [Feature]
+  };
+  var AuthFeature_instance = null;
+  function AuthFeature_getInstance() {
+    if (AuthFeature_instance === null) {
+      new AuthFeature();
+    }
+    return AuthFeature_instance;
   }
-  var dependencies;
-  function get_dependencies() {
-    return dependencies.value;
+  function AuthJwtFeature() {
+    AuthJwtFeature_instance = this;
+    Feature.call(this);
+    this.repos_3yaw91$_0 = Repos_getInstance().ktor;
+    this.artifacts_mpewbp$_0 = listOf('io.ktor:ktor-auth-jwt:$ktor_version');
+    this.id_96dnzh$_0 = 'auth-jwt';
+    this.title_4ynssu$_0 = 'Authentication JWT';
+    this.description_6r30ye$_0 = 'Handle JWT authentication';
+    this.documentation_31w9g$_0 = 'https://ktor.io/features/authentication.html#jwt';
+  }
+  Object.defineProperty(AuthJwtFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_3yaw91$_0;
+    }
+  });
+  Object.defineProperty(AuthJwtFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_mpewbp$_0;
+    }
+  });
+  Object.defineProperty(AuthJwtFeature.prototype, 'id', {
+    get: function () {
+      return this.id_96dnzh$_0;
+    }
+  });
+  Object.defineProperty(AuthJwtFeature.prototype, 'title', {
+    get: function () {
+      return this.title_4ynssu$_0;
+    }
+  });
+  Object.defineProperty(AuthJwtFeature.prototype, 'description', {
+    get: function () {
+      return this.description_6r30ye$_0;
+    }
+  });
+  Object.defineProperty(AuthJwtFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_31w9g$_0;
+    }
+  });
+  AuthJwtFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'AuthJwtFeature',
+    interfaces: [Feature]
+  };
+  var AuthJwtFeature_instance = null;
+  function AuthJwtFeature_getInstance() {
+    if (AuthJwtFeature_instance === null) {
+      new AuthJwtFeature();
+    }
+    return AuthJwtFeature_instance;
+  }
+  function AuthLdapFeature() {
+    AuthLdapFeature_instance = this;
+    Feature.call(this);
+    this.repos_h37k17$_0 = Repos_getInstance().ktor;
+    this.artifacts_u8q64r$_0 = listOf('io.ktor:ktor-auth-ldap:$ktor_version');
+    this.id_t8ep8z$_0 = 'auth-ldap';
+    this.title_i3kgl0$_0 = 'Authentication LDAP';
+    this.description_9cnttc$_0 = 'Handle JDAP authentication';
+    this.documentation_c0ed66$_0 = 'https://ktor.io/features/authentication.html#ldap';
+  }
+  Object.defineProperty(AuthLdapFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_h37k17$_0;
+    }
+  });
+  Object.defineProperty(AuthLdapFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_u8q64r$_0;
+    }
+  });
+  Object.defineProperty(AuthLdapFeature.prototype, 'id', {
+    get: function () {
+      return this.id_t8ep8z$_0;
+    }
+  });
+  Object.defineProperty(AuthLdapFeature.prototype, 'title', {
+    get: function () {
+      return this.title_i3kgl0$_0;
+    }
+  });
+  Object.defineProperty(AuthLdapFeature.prototype, 'description', {
+    get: function () {
+      return this.description_9cnttc$_0;
+    }
+  });
+  Object.defineProperty(AuthLdapFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_c0ed66$_0;
+    }
+  });
+  AuthLdapFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'AuthLdapFeature',
+    interfaces: [Feature]
+  };
+  var AuthLdapFeature_instance = null;
+  function AuthLdapFeature_getInstance() {
+    if (AuthLdapFeature_instance === null) {
+      new AuthLdapFeature();
+    }
+    return AuthLdapFeature_instance;
   }
   function CssDslFeature() {
     CssDslFeature_instance = this;
@@ -1587,6 +1645,496 @@
       new HtmlDslFeature();
     }
     return HtmlDslFeature_instance;
+  }
+  function HttpClientFeature() {
+    HttpClientFeature_instance = this;
+    Feature.call(this);
+    this.repos_widcof$_0 = Repos_getInstance().ktor;
+    this.artifacts_7ubutr$_0 = listOf('io.ktor:ktor-client-apache:$ktor_version');
+    this.id_5df4yx$_0 = 'ktor-client-apache';
+    this.title_xiq988$_0 = 'HTTP Client';
+    this.description_dbmzxo$_0 = 'Adds support for doing HTTP requests';
+    this.documentation_6yu7ti$_0 = 'https://ktor.io/clients/http-client.html';
+  }
+  Object.defineProperty(HttpClientFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_widcof$_0;
+    }
+  });
+  Object.defineProperty(HttpClientFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_7ubutr$_0;
+    }
+  });
+  Object.defineProperty(HttpClientFeature.prototype, 'id', {
+    get: function () {
+      return this.id_5df4yx$_0;
+    }
+  });
+  Object.defineProperty(HttpClientFeature.prototype, 'title', {
+    get: function () {
+      return this.title_xiq988$_0;
+    }
+  });
+  Object.defineProperty(HttpClientFeature.prototype, 'description', {
+    get: function () {
+      return this.description_dbmzxo$_0;
+    }
+  });
+  Object.defineProperty(HttpClientFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_6yu7ti$_0;
+    }
+  });
+  HttpClientFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'HttpClientFeature',
+    interfaces: [Feature]
+  };
+  var HttpClientFeature_instance = null;
+  function HttpClientFeature_getInstance() {
+    if (HttpClientFeature_instance === null) {
+      new HttpClientFeature();
+    }
+    return HttpClientFeature_instance;
+  }
+  function JsonGsonFeature() {
+    JsonGsonFeature_instance = this;
+    Feature.call(this);
+    this.repos_m451m9$_0 = Repos_getInstance().ktor;
+    this.artifacts_vpbenj$_0 = listOf('io.ktor:ktor-gson:$ktor_version');
+    this.id_whgybt$_0 = 'ktor-gson';
+    this.title_l3s52g$_0 = 'GSON';
+    this.description_q40g24$_0 = 'Handles JSON serialization using GSON library';
+  }
+  Object.defineProperty(JsonGsonFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_m451m9$_0;
+    }
+  });
+  Object.defineProperty(JsonGsonFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_vpbenj$_0;
+    }
+  });
+  Object.defineProperty(JsonGsonFeature.prototype, 'id', {
+    get: function () {
+      return this.id_whgybt$_0;
+    }
+  });
+  Object.defineProperty(JsonGsonFeature.prototype, 'title', {
+    get: function () {
+      return this.title_l3s52g$_0;
+    }
+  });
+  Object.defineProperty(JsonGsonFeature.prototype, 'description', {
+    get: function () {
+      return this.description_q40g24$_0;
+    }
+  });
+  JsonGsonFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'JsonGsonFeature',
+    interfaces: [Feature]
+  };
+  var JsonGsonFeature_instance = null;
+  function JsonGsonFeature_getInstance() {
+    if (JsonGsonFeature_instance === null) {
+      new JsonGsonFeature();
+    }
+    return JsonGsonFeature_instance;
+  }
+  function JsonJacksonFeature() {
+    JsonJacksonFeature_instance = this;
+    Feature.call(this);
+    this.repos_6gchw1$_0 = Repos_getInstance().ktor;
+    this.artifacts_tziadr$_0 = listOf('io.ktor:ktor-jackson:$ktor_version');
+    this.id_f6uih$_0 = 'ktor-jackson';
+    this.title_7gpefu$_0 = 'Jackson';
+    this.description_10c27q$_0 = 'Handles JSON serialization using Jackson library';
+  }
+  Object.defineProperty(JsonJacksonFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_6gchw1$_0;
+    }
+  });
+  Object.defineProperty(JsonJacksonFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_tziadr$_0;
+    }
+  });
+  Object.defineProperty(JsonJacksonFeature.prototype, 'id', {
+    get: function () {
+      return this.id_f6uih$_0;
+    }
+  });
+  Object.defineProperty(JsonJacksonFeature.prototype, 'title', {
+    get: function () {
+      return this.title_7gpefu$_0;
+    }
+  });
+  Object.defineProperty(JsonJacksonFeature.prototype, 'description', {
+    get: function () {
+      return this.description_10c27q$_0;
+    }
+  });
+  JsonJacksonFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'JsonJacksonFeature',
+    interfaces: [Feature]
+  };
+  var JsonJacksonFeature_instance = null;
+  function JsonJacksonFeature_getInstance() {
+    if (JsonJacksonFeature_instance === null) {
+      new JsonJacksonFeature();
+    }
+    return JsonJacksonFeature_instance;
+  }
+  function LocationsFeature() {
+    LocationsFeature_instance = this;
+    Feature.call(this);
+    this.repos_krkeos$_0 = Repos_getInstance().ktor;
+    this.artifacts_3l6utg$_0 = listOf('io.ktor:ktor-locations:$ktor_version');
+    this.id_3nq5lg$_0 = 'ktor-locations';
+    this.title_jr7i4z$_0 = 'Locations';
+    this.description_iieyh5$_0 = 'Allows to define route locations in a typed way';
+    this.documentation_e2hub9$_0 = 'https://ktor.io/features/locations.html';
+  }
+  Object.defineProperty(LocationsFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_krkeos$_0;
+    }
+  });
+  Object.defineProperty(LocationsFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_3l6utg$_0;
+    }
+  });
+  Object.defineProperty(LocationsFeature.prototype, 'id', {
+    get: function () {
+      return this.id_3nq5lg$_0;
+    }
+  });
+  Object.defineProperty(LocationsFeature.prototype, 'title', {
+    get: function () {
+      return this.title_jr7i4z$_0;
+    }
+  });
+  Object.defineProperty(LocationsFeature.prototype, 'description', {
+    get: function () {
+      return this.description_iieyh5$_0;
+    }
+  });
+  Object.defineProperty(LocationsFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_e2hub9$_0;
+    }
+  });
+  LocationsFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'LocationsFeature',
+    interfaces: [Feature]
+  };
+  var LocationsFeature_instance = null;
+  function LocationsFeature_getInstance() {
+    if (LocationsFeature_instance === null) {
+      new LocationsFeature();
+    }
+    return LocationsFeature_instance;
+  }
+  function MetricsFeature() {
+    MetricsFeature_instance = this;
+    Feature.call(this);
+    this.repos_pfso6v$_0 = Repos_getInstance().ktor;
+    this.artifacts_p4lqmv$_0 = listOf('io.ktor:ktor-metrics:$ktor_version');
+    this.id_h3qtcf$_0 = 'ktor-metrics';
+    this.title_offrn2$_0 = 'Metrics';
+    this.description_i28fde$_0 = 'Adds supports for monitoring several metrics';
+  }
+  Object.defineProperty(MetricsFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_pfso6v$_0;
+    }
+  });
+  Object.defineProperty(MetricsFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_p4lqmv$_0;
+    }
+  });
+  Object.defineProperty(MetricsFeature.prototype, 'id', {
+    get: function () {
+      return this.id_h3qtcf$_0;
+    }
+  });
+  Object.defineProperty(MetricsFeature.prototype, 'title', {
+    get: function () {
+      return this.title_offrn2$_0;
+    }
+  });
+  Object.defineProperty(MetricsFeature.prototype, 'description', {
+    get: function () {
+      return this.description_i28fde$_0;
+    }
+  });
+  MetricsFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'MetricsFeature',
+    interfaces: [Feature]
+  };
+  var MetricsFeature_instance = null;
+  function MetricsFeature_getInstance() {
+    if (MetricsFeature_instance === null) {
+      new MetricsFeature();
+    }
+    return MetricsFeature_instance;
+  }
+  function RawSocketsFeature() {
+    RawSocketsFeature_instance = this;
+    Feature.call(this);
+    this.repos_6u018$_0 = Repos_getInstance().ktor;
+    this.artifacts_lv9ej0$_0 = listOf('io.ktor:ktor-network:$ktor_version');
+    this.id_k9lq70$_0 = 'ktor-network';
+    this.title_tiwil$_0 = 'Raw Sockets';
+    this.description_b0vn7r$_0 = 'Adds Raw Socket support for listening and connecting to tcp and udp sockets';
+    this.documentation_e8j2ez$_0 = 'https://ktor.io/servers/raw-sockets.html';
+  }
+  Object.defineProperty(RawSocketsFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_6u018$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_lv9ej0$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsFeature.prototype, 'id', {
+    get: function () {
+      return this.id_k9lq70$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsFeature.prototype, 'title', {
+    get: function () {
+      return this.title_tiwil$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsFeature.prototype, 'description', {
+    get: function () {
+      return this.description_b0vn7r$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_e8j2ez$_0;
+    }
+  });
+  RawSocketsFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'RawSocketsFeature',
+    interfaces: [Feature]
+  };
+  var RawSocketsFeature_instance = null;
+  function RawSocketsFeature_getInstance() {
+    if (RawSocketsFeature_instance === null) {
+      new RawSocketsFeature();
+    }
+    return RawSocketsFeature_instance;
+  }
+  function RawSocketsTlsFeature() {
+    RawSocketsTlsFeature_instance = this;
+    Feature.call(this);
+    this.repos_9ufirt$_0 = Repos_getInstance().ktor;
+    this.artifacts_bme33d$_0 = listOf('io.ktor:ktor-network-tls:$ktor_version');
+    this.id_lfbjkf$_0 = 'ktor-network-tls';
+    this.title_ausfbm$_0 = 'Raw Secure SSL/TLS Sockets';
+    this.description_3sv442$_0 = 'Adds Raw Socket support for listening and connecting to tcp and udp sockets with secure sockets';
+    this.documentation_5ucdjk$_0 = 'https://ktor.io/servers/raw-sockets.html#secure';
+  }
+  Object.defineProperty(RawSocketsTlsFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_9ufirt$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsTlsFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_bme33d$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsTlsFeature.prototype, 'id', {
+    get: function () {
+      return this.id_lfbjkf$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsTlsFeature.prototype, 'title', {
+    get: function () {
+      return this.title_ausfbm$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsTlsFeature.prototype, 'description', {
+    get: function () {
+      return this.description_3sv442$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsTlsFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_5ucdjk$_0;
+    }
+  });
+  RawSocketsTlsFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'RawSocketsTlsFeature',
+    interfaces: [Feature]
+  };
+  var RawSocketsTlsFeature_instance = null;
+  function RawSocketsTlsFeature_getInstance() {
+    if (RawSocketsTlsFeature_instance === null) {
+      new RawSocketsTlsFeature();
+    }
+    return RawSocketsTlsFeature_instance;
+  }
+  function SessionsFeature() {
+    SessionsFeature_instance = this;
+    Feature.call(this);
+    this.repos_630btl$_0 = Repos_getInstance().ktor;
+    this.artifacts_vzw0ft$_0 = listOf('io.ktor:ktor-sessions:$ktor_version');
+    this.id_g5mcan$_0 = 'ktor-sessions';
+    this.title_73d8de$_0 = 'Sessions';
+    this.description_s0f43m$_0 = 'Adds supports for sessions: with the payload in the client or the server';
+    this.documentation_qlpy80$_0 = 'https://ktor.io/features/sessions.html';
+  }
+  Object.defineProperty(SessionsFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_630btl$_0;
+    }
+  });
+  Object.defineProperty(SessionsFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_vzw0ft$_0;
+    }
+  });
+  Object.defineProperty(SessionsFeature.prototype, 'id', {
+    get: function () {
+      return this.id_g5mcan$_0;
+    }
+  });
+  Object.defineProperty(SessionsFeature.prototype, 'title', {
+    get: function () {
+      return this.title_73d8de$_0;
+    }
+  });
+  Object.defineProperty(SessionsFeature.prototype, 'description', {
+    get: function () {
+      return this.description_s0f43m$_0;
+    }
+  });
+  Object.defineProperty(SessionsFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_qlpy80$_0;
+    }
+  });
+  SessionsFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'SessionsFeature',
+    interfaces: [Feature]
+  };
+  var SessionsFeature_instance = null;
+  function SessionsFeature_getInstance() {
+    if (SessionsFeature_instance === null) {
+      new SessionsFeature();
+    }
+    return SessionsFeature_instance;
+  }
+  function VelocityFeature() {
+    VelocityFeature_instance = this;
+    Feature.call(this);
+    this.repos_pmsk9$_0 = Repos_getInstance().ktor;
+    this.artifacts_fuibnd$_0 = listOf('io.ktor:ktor-velocity:$ktor_version');
+    this.id_jr50fz$_0 = 'velocity';
+    this.title_1pzp42$_0 = 'Velocity';
+    this.description_84u56m$_0 = 'Serve HTML content using Apache velocity';
+  }
+  Object.defineProperty(VelocityFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_pmsk9$_0;
+    }
+  });
+  Object.defineProperty(VelocityFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_fuibnd$_0;
+    }
+  });
+  Object.defineProperty(VelocityFeature.prototype, 'id', {
+    get: function () {
+      return this.id_jr50fz$_0;
+    }
+  });
+  Object.defineProperty(VelocityFeature.prototype, 'title', {
+    get: function () {
+      return this.title_1pzp42$_0;
+    }
+  });
+  Object.defineProperty(VelocityFeature.prototype, 'description', {
+    get: function () {
+      return this.description_84u56m$_0;
+    }
+  });
+  VelocityFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'VelocityFeature',
+    interfaces: [Feature]
+  };
+  var VelocityFeature_instance = null;
+  function VelocityFeature_getInstance() {
+    if (VelocityFeature_instance === null) {
+      new VelocityFeature();
+    }
+    return VelocityFeature_instance;
+  }
+  function WebsocketsFeature() {
+    WebsocketsFeature_instance = this;
+    Feature.call(this);
+    this.repos_r46ofs$_0 = Repos_getInstance().ktor;
+    this.artifacts_nxkzmg$_0 = listOf('io.ktor:ktor-websockets:$ktor_version');
+    this.id_jwih4g$_0 = 'ktor-websockets';
+    this.title_q3trvz$_0 = 'WebSockets';
+    this.description_6508ur$_0 = 'Adds WebSockets support for bidirectional communication with the client';
+  }
+  Object.defineProperty(WebsocketsFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_r46ofs$_0;
+    }
+  });
+  Object.defineProperty(WebsocketsFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_nxkzmg$_0;
+    }
+  });
+  Object.defineProperty(WebsocketsFeature.prototype, 'id', {
+    get: function () {
+      return this.id_jwih4g$_0;
+    }
+  });
+  Object.defineProperty(WebsocketsFeature.prototype, 'title', {
+    get: function () {
+      return this.title_q3trvz$_0;
+    }
+  });
+  Object.defineProperty(WebsocketsFeature.prototype, 'description', {
+    get: function () {
+      return this.description_6508ur$_0;
+    }
+  });
+  WebsocketsFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'WebsocketsFeature',
+    interfaces: [Feature]
+  };
+  var WebsocketsFeature_instance = null;
+  function WebsocketsFeature_getInstance() {
+    if (WebsocketsFeature_instance === null) {
+      new WebsocketsFeature();
+    }
+    return WebsocketsFeature_instance;
   }
   var ALL_FEATURES;
   function ByteArrayOutputStream() {
@@ -2309,6 +2857,11 @@
   package$start.FileContainer = FileContainer;
   package$start.add_ykoeqs$ = add;
   package$start.Feature = Feature;
+  Object.defineProperty(package$start, 'KOTLIN_VERSION', {
+    get: function () {
+      return KOTLIN_VERSION;
+    }
+  });
   Object.defineProperty(package$start, 'defaultArtifactGroup', {
     get: function () {
       return defaultArtifactGroup;
@@ -2359,26 +2912,25 @@
   });
   package$start.buildBuildGradle_j0vqe2$ = buildBuildGradle;
   package$start.buildApplicationConf_j0vqe2$ = buildApplicationConf;
-  Object.defineProperty(package$start, 'VER_092', {
-    get: function () {
-      return VER_092;
-    }
-  });
   package$start.buildApplicationKt_j0vqe2$ = buildApplicationKt;
   package$start.handleFiltering = handleFiltering;
   package$start.removeLoading = removeLoading;
-  package$start.IntDependency = IntDependency;
-  package$start.Dependency = Dependency;
   Object.defineProperty(package$start, 'Repos', {
     get: Repos_getInstance
   });
-  Object.defineProperty(package$start, 'Dependencies', {
-    get: Dependencies_getInstance
-  });
-  Object.defineProperty(package$start, 'dependencies', {
-    get: get_dependencies
+  Object.defineProperty(package$start, 'Versions', {
+    get: Versions_getInstance
   });
   var package$features = package$start.features || (package$start.features = {});
+  Object.defineProperty(package$features, 'AuthFeature', {
+    get: AuthFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'AuthJwtFeature', {
+    get: AuthJwtFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'AuthLdapFeature', {
+    get: AuthLdapFeature_getInstance
+  });
   Object.defineProperty(package$features, 'CssDslFeature', {
     get: CssDslFeature_getInstance
   });
@@ -2387,6 +2939,36 @@
   });
   Object.defineProperty(package$features, 'HtmlDslFeature', {
     get: HtmlDslFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'HttpClientFeature', {
+    get: HttpClientFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'JsonGsonFeature', {
+    get: JsonGsonFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'JsonJacksonFeature', {
+    get: JsonJacksonFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'LocationsFeature', {
+    get: LocationsFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'MetricsFeature', {
+    get: MetricsFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'RawSocketsFeature', {
+    get: RawSocketsFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'RawSocketsTlsFeature', {
+    get: RawSocketsTlsFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'SessionsFeature', {
+    get: SessionsFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'VelocityFeature', {
+    get: VelocityFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'WebsocketsFeature', {
+    get: WebsocketsFeature_getInstance
   });
   Object.defineProperty(package$features, 'ALL_FEATURES', {
     get: function () {
@@ -2440,16 +3022,15 @@
   package$util.ZipBuilder = ZipBuilder;
   package$util.buildZip_oi1qpb$ = buildZip;
   build$lambda$ObjectLiteral.prototype.add_dkzqdg$ = FileContainer.prototype.add_dkzqdg$;
+  KOTLIN_VERSION = '1.2.41';
   defaultArtifactGroup = 'com.example';
   defaultArtifactName = 'ktor-demo';
-  defaultKtorVersion = '0.9.2';
+  defaultKtorVersion = Versions_getInstance().LAST.version;
   defaultKtorEngine = 'netty';
   insideIframe = lazy(insideIframe$lambda);
   hashParams = lazy(hashParams$lambda);
   DOLLAR = 36;
-  VER_092 = new SemVer('0.9.2');
-  dependencies = lazy(dependencies$lambda);
-  ALL_FEATURES = listOf_0([HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance()]);
+  ALL_FEATURES = listOf_0([HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), AuthFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), WebsocketsFeature_getInstance(), HttpClientFeature_getInstance(), RawSocketsFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
   EmptyContinuation = new EmptyContinuation$ObjectLiteral();
   main([]);
   Kotlin.defineModule('output', _);

@@ -10,13 +10,13 @@ fun FileContainer.add(name: String, content: String, charset: Charset = UTF8, mo
     add(name, content.toByteArray(charset), mode = mode)
 }
 
-abstract class Feature : Dependency {
-    //abstract override val repos: List<String>
-    //abstract override val artifacts: List<String>
-    //abstract override val id: String
-    //abstract override val title: String
-    //abstract override val description: String
-    override val documentation: String? = null
+abstract class Feature {
+    abstract val repos: List<String>
+    abstract val artifacts: List<String>
+    abstract val id: String
+    abstract val title: String
+    abstract val description: String
+    open val documentation: String? = null
 
     open fun imports(info: BuildInfo): List<String> = listOf()
     open fun Indenter.classes(info: BuildInfo): Unit = Unit

@@ -5,9 +5,10 @@ import io.ktor.start.util.*
 import js.externals.jquery.*
 import kotlin.browser.*
 
+val KOTLIN_VERSION = "1.2.41"
 val defaultArtifactGroup = "com.example"
 val defaultArtifactName = "ktor-demo"
-val defaultKtorVersion = "0.9.2"
+val defaultKtorVersion = Versions.LAST.version
 val defaultKtorEngine = "netty"
 
 val insideIframe: Boolean by lazy {
@@ -40,7 +41,7 @@ fun updateHash() {
     }
     val dependency = arrayListOf<String>()
     items["dependency"] = dependency
-    for (dep in dependencies) {
+    for (dep in ALL_FEATURES) {
         if (jq("#artifact-${dep.id}").checked) {
             dependency += dep.id
         }
@@ -135,7 +136,7 @@ fun addDependencies() {
 
     val dependencyIds = (hashParams["dependency"] ?: listOf()).toSet()
 
-    for (dependency in dependencies) {
+    for (dependency in ALL_FEATURES) {
         //console.log(dependency)
         val checkedBool = dependency.id in dependencyIds
         val checked = if (checkedBool) "checked" else ""
@@ -167,7 +168,7 @@ fun addDependencies() {
         )
     }
 
-    for (dependency in dependencies) {
+    for (dependency in ALL_FEATURES) {
         jq("#artifact-${dependency.id}").change {
             updateHash()
         }
@@ -186,11 +187,11 @@ suspend fun build(dev: Boolean) {
     println("artifactGroup: $artifactGroup")
     println("artifactName: $artifactName")
 
-    val dependenciesToInclude = dependencies.filter {
+    val dependenciesToInclude = ALL_FEATURES.filter {
         jq("#artifact-${it.id}").prop("checked").unsafeCast<Boolean>()
     }.toSet()
 
-    for (dependency in dependencies) {
+    for (dependency in ALL_FEATURES) {
         val toInclude = dependency in dependenciesToInclude
         println("DEPENDENCY: $dependency :: include=$toInclude")
     }
@@ -306,10 +307,10 @@ data class BuildInfo(
     val artifactGroup: String,
     val developmentEngineFQ: String,
     val reposToInclude: Set<String>,
-    val dependenciesToInclude: Set<Dependency>,
+    val dependenciesToInclude: Set<Feature>,
     val ktorEngine: String
 ) {
-    val featuresToInclude = dependenciesToInclude.filterIsInstance<Feature>()
+    val featuresToInclude = dependenciesToInclude
     val ktorVer = SemVer(ktorVersion)
 }
 
@@ -321,7 +322,7 @@ const val DOLLAR = '$'
 
 fun Indenter.buildBuildGradle(info: BuildInfo) = info.apply {
     "buildscript" {
-        +"ext.kotlin_version = '1.2.41'"
+        +"ext.kotlin_version = '$KOTLIN_VERSION'"
         +"ext.ktor_version = '$ktorVersion'"
         +"ext.logback_version = '1.2.1'"
         +""
@@ -381,7 +382,6 @@ fun Indenter.buildApplicationConf(info: BuildInfo) = info.apply {
     }
 }
 
-val VER_092 = SemVer("0.9.2")
 
 fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
     val packages = LinkedHashSet<String>()
@@ -399,7 +399,7 @@ fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
         +"import $p.*"
     }
     +""
-    if (ktorVer >= VER_092) {
+    if (ktorVer >= Versions.V092) {
         +"fun main(args: Array<String>): Unit = $developmentEngineFQ.main(args)"
     } else {
         +"fun main(args: Array<String>): Unit = $developmentPackage.main(args)"
