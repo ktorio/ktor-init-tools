@@ -37,13 +37,13 @@
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
   var println = Kotlin.kotlin.io.println_s8jyv4$;
-  var listOf_0 = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var setOf = Kotlin.kotlin.collections.setOf_i5x0yv$;
   var ensureNotNull = Kotlin.ensureNotNull;
   var contains = Kotlin.kotlin.text.contains_li3zpu$;
   var toInt = Kotlin.kotlin.text.toInt_6ic1pp$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
+  var listOf_0 = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var RuntimeException_init = Kotlin.kotlin.RuntimeException_init_pdl1vj$;
   var equals = Kotlin.equals;
   var distinct = Kotlin.kotlin.collections.distinct_7wnvza$;
@@ -719,7 +719,7 @@
               println('DEPENDENCY: ' + dependency + ' :: include=' + toInclude);
             }
 
-            var tmp$_1 = listOf_0(['jcenter', 'ktor']);
+            var tmp$_1 = plus(listOf('jcenter'), Repos_getInstance().ktor);
             var destination_0 = ArrayList_init();
             var tmp$_2;
             tmp$_2 = dependenciesToInclude.iterator();
