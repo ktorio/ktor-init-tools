@@ -58,22 +58,48 @@
   var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
   var Comparable = Kotlin.kotlin.Comparable;
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_8cymmc$;
+  AuthBasicFeature.prototype = Object.create(Feature.prototype);
+  AuthBasicFeature.prototype.constructor = AuthBasicFeature;
+  AuthDigestFeature.prototype = Object.create(Feature.prototype);
+  AuthDigestFeature.prototype.constructor = AuthDigestFeature;
   AuthFeature.prototype = Object.create(Feature.prototype);
   AuthFeature.prototype.constructor = AuthFeature;
   AuthJwtFeature.prototype = Object.create(Feature.prototype);
   AuthJwtFeature.prototype.constructor = AuthJwtFeature;
   AuthLdapFeature.prototype = Object.create(Feature.prototype);
   AuthLdapFeature.prototype.constructor = AuthLdapFeature;
+  AuthOauthFeature.prototype = Object.create(Feature.prototype);
+  AuthOauthFeature.prototype.constructor = AuthOauthFeature;
+  AutoHeadResponseFeature.prototype = Object.create(Feature.prototype);
+  AutoHeadResponseFeature.prototype.constructor = AutoHeadResponseFeature;
+  CORSFeature.prototype = Object.create(Feature.prototype);
+  CORSFeature.prototype.constructor = CORSFeature;
+  CachingHeadersFeature.prototype = Object.create(Feature.prototype);
+  CachingHeadersFeature.prototype.constructor = CachingHeadersFeature;
+  CallLoggingFeature.prototype = Object.create(Feature.prototype);
+  CallLoggingFeature.prototype.constructor = CallLoggingFeature;
+  CompressionFeature.prototype = Object.create(Feature.prototype);
+  CompressionFeature.prototype.constructor = CompressionFeature;
   ConditionalHeadersFeature.prototype = Object.create(Feature.prototype);
   ConditionalHeadersFeature.prototype.constructor = ConditionalHeadersFeature;
   CssDslFeature.prototype = Object.create(Feature.prototype);
   CssDslFeature.prototype.constructor = CssDslFeature;
+  DataConversionFeature.prototype = Object.create(Feature.prototype);
+  DataConversionFeature.prototype.constructor = DataConversionFeature;
+  DefaultHeadersFeature.prototype = Object.create(Feature.prototype);
+  DefaultHeadersFeature.prototype.constructor = DefaultHeadersFeature;
+  ForwardedHeaderSupportFeature.prototype = Object.create(Feature.prototype);
+  ForwardedHeaderSupportFeature.prototype.constructor = ForwardedHeaderSupportFeature;
   FreemarkerFeature.prototype = Object.create(Feature.prototype);
   FreemarkerFeature.prototype.constructor = FreemarkerFeature;
+  HSTSFeature.prototype = Object.create(Feature.prototype);
+  HSTSFeature.prototype.constructor = HSTSFeature;
   HtmlDslFeature.prototype = Object.create(Feature.prototype);
   HtmlDslFeature.prototype.constructor = HtmlDslFeature;
   HttpClientFeature.prototype = Object.create(Feature.prototype);
   HttpClientFeature.prototype.constructor = HttpClientFeature;
+  HttpsRedirectFeature.prototype = Object.create(Feature.prototype);
+  HttpsRedirectFeature.prototype.constructor = HttpsRedirectFeature;
   JsonGsonFeature.prototype = Object.create(Feature.prototype);
   JsonGsonFeature.prototype.constructor = JsonGsonFeature;
   JsonJacksonFeature.prototype = Object.create(Feature.prototype);
@@ -82,12 +108,20 @@
   LocationsFeature.prototype.constructor = LocationsFeature;
   MetricsFeature.prototype = Object.create(Feature.prototype);
   MetricsFeature.prototype.constructor = MetricsFeature;
+  PartialContentFeature.prototype = Object.create(Feature.prototype);
+  PartialContentFeature.prototype.constructor = PartialContentFeature;
   RawSocketsFeature.prototype = Object.create(Feature.prototype);
   RawSocketsFeature.prototype.constructor = RawSocketsFeature;
   RawSocketsTlsFeature.prototype = Object.create(Feature.prototype);
   RawSocketsTlsFeature.prototype.constructor = RawSocketsTlsFeature;
   SessionsFeature.prototype = Object.create(Feature.prototype);
   SessionsFeature.prototype.constructor = SessionsFeature;
+  ShutdownUrlFeature.prototype = Object.create(Feature.prototype);
+  ShutdownUrlFeature.prototype.constructor = ShutdownUrlFeature;
+  StaticContentFeature.prototype = Object.create(Feature.prototype);
+  StaticContentFeature.prototype.constructor = StaticContentFeature;
+  StatusPagesFeature.prototype = Object.create(Feature.prototype);
+  StatusPagesFeature.prototype.constructor = StatusPagesFeature;
   VelocityFeature.prototype = Object.create(Feature.prototype);
   VelocityFeature.prototype.constructor = VelocityFeature;
   WebsocketsFeature.prototype = Object.create(Feature.prototype);
@@ -1039,6 +1073,13 @@
     simpleName: 'FileContainer',
     interfaces: []
   };
+  function FileFetcher() {
+  }
+  FileFetcher.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'FileFetcher',
+    interfaces: []
+  };
   function add($receiver, name, content, charset, mode) {
     if (charset === void 0)
       charset = UTF8_getInstance();
@@ -1057,6 +1098,10 @@
   Feature.prototype.imports_jbwadm$ = function (info) {
     return emptyList();
   };
+  Feature.prototype.hoconKtorSection_j0vqe2$ = function ($receiver, info) {
+  };
+  Feature.prototype.hoconKtorDeploymentSection_j0vqe2$ = function ($receiver, info) {
+  };
   Feature.prototype.classes_j0vqe2$ = function ($receiver, info) {
   };
   Feature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
@@ -1065,7 +1110,8 @@
   };
   Feature.prototype.extensions_j0vqe2$ = function ($receiver, info) {
   };
-  Feature.prototype.addFiles_553mg9$ = function (info, files) {
+  Feature.prototype.addFiles_yiqn0e$ = function (info, files, fetcher, continuation) {
+    return Unit;
   };
   Feature.$metadata$ = {
     kind: Kind_CLASS,
@@ -1107,6 +1153,110 @@
       new Versions();
     }
     return Versions_instance;
+  }
+  function AuthBasicFeature() {
+    AuthBasicFeature_instance = this;
+    Feature.call(this);
+    this.repos_gdc384$_0 = Repos_getInstance().ktor;
+    this.artifacts_u3usuk$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
+    this.id_l2z8dw$_0 = 'auth-basic';
+    this.title_fcz6ob$_0 = 'Authentication Basic';
+    this.description_2o6p01$_0 = 'Handle Basic authentication';
+    this.documentation_zez1d9$_0 = 'https://ktor.io/features/authentication/basic.html';
+  }
+  Object.defineProperty(AuthBasicFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_gdc384$_0;
+    }
+  });
+  Object.defineProperty(AuthBasicFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_u3usuk$_0;
+    }
+  });
+  Object.defineProperty(AuthBasicFeature.prototype, 'id', {
+    get: function () {
+      return this.id_l2z8dw$_0;
+    }
+  });
+  Object.defineProperty(AuthBasicFeature.prototype, 'title', {
+    get: function () {
+      return this.title_fcz6ob$_0;
+    }
+  });
+  Object.defineProperty(AuthBasicFeature.prototype, 'description', {
+    get: function () {
+      return this.description_2o6p01$_0;
+    }
+  });
+  Object.defineProperty(AuthBasicFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_zez1d9$_0;
+    }
+  });
+  AuthBasicFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'AuthBasicFeature',
+    interfaces: [Feature]
+  };
+  var AuthBasicFeature_instance = null;
+  function AuthBasicFeature_getInstance() {
+    if (AuthBasicFeature_instance === null) {
+      new AuthBasicFeature();
+    }
+    return AuthBasicFeature_instance;
+  }
+  function AuthDigestFeature() {
+    AuthDigestFeature_instance = this;
+    Feature.call(this);
+    this.repos_c8nfaw$_0 = Repos_getInstance().ktor;
+    this.artifacts_eodlew$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
+    this.id_8m6rlc$_0 = 'auth-digest';
+    this.title_b8air3$_0 = 'Authentication Digest';
+    this.description_jyeoml$_0 = 'Handle Digest authentication';
+    this.documentation_o927hr$_0 = 'https://ktor.io/features/authentication/digest.html';
+  }
+  Object.defineProperty(AuthDigestFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_c8nfaw$_0;
+    }
+  });
+  Object.defineProperty(AuthDigestFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_eodlew$_0;
+    }
+  });
+  Object.defineProperty(AuthDigestFeature.prototype, 'id', {
+    get: function () {
+      return this.id_8m6rlc$_0;
+    }
+  });
+  Object.defineProperty(AuthDigestFeature.prototype, 'title', {
+    get: function () {
+      return this.title_b8air3$_0;
+    }
+  });
+  Object.defineProperty(AuthDigestFeature.prototype, 'description', {
+    get: function () {
+      return this.description_jyeoml$_0;
+    }
+  });
+  Object.defineProperty(AuthDigestFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_o927hr$_0;
+    }
+  });
+  AuthDigestFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'AuthDigestFeature',
+    interfaces: [Feature]
+  };
+  var AuthDigestFeature_instance = null;
+  function AuthDigestFeature_getInstance() {
+    if (AuthDigestFeature_instance === null) {
+      new AuthDigestFeature();
+    }
+    return AuthDigestFeature_instance;
   }
   function AuthFeature() {
     AuthFeature_instance = this;
@@ -1168,7 +1318,7 @@
     this.id_96dnzh$_0 = 'auth-jwt';
     this.title_4ynssu$_0 = 'Authentication JWT';
     this.description_6r30ye$_0 = 'Handle JWT authentication';
-    this.documentation_31w9g$_0 = 'https://ktor.io/features/authentication.html#jwt';
+    this.documentation_31w9g$_0 = 'https://ktor.io/features/authentication/jwt.html';
   }
   Object.defineProperty(AuthJwtFeature.prototype, 'repos', {
     get: function () {
@@ -1220,7 +1370,7 @@
     this.id_t8ep8z$_0 = 'auth-ldap';
     this.title_i3kgl0$_0 = 'Authentication LDAP';
     this.description_9cnttc$_0 = 'Handle JDAP authentication';
-    this.documentation_c0ed66$_0 = 'https://ktor.io/features/authentication.html#ldap';
+    this.documentation_c0ed66$_0 = 'https://ktor.io/features/authentication/ldap.html';
   }
   Object.defineProperty(AuthLdapFeature.prototype, 'repos', {
     get: function () {
@@ -1264,6 +1414,424 @@
     }
     return AuthLdapFeature_instance;
   }
+  function AuthOauthFeature() {
+    AuthOauthFeature_instance = this;
+    Feature.call(this);
+    this.repos_kohdg5$_0 = Repos_getInstance().ktor;
+    this.artifacts_iga75h$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
+    this.id_mtmshv$_0 = 'auth-oauth';
+    this.title_lou9zy$_0 = 'Authentication OAuth';
+    this.description_pb06ii$_0 = 'Handle OAuth authentication';
+    this.documentation_jqbbpg$_0 = 'https://ktor.io/features/authentication/oauth.html';
+  }
+  Object.defineProperty(AuthOauthFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_kohdg5$_0;
+    }
+  });
+  Object.defineProperty(AuthOauthFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_iga75h$_0;
+    }
+  });
+  Object.defineProperty(AuthOauthFeature.prototype, 'id', {
+    get: function () {
+      return this.id_mtmshv$_0;
+    }
+  });
+  Object.defineProperty(AuthOauthFeature.prototype, 'title', {
+    get: function () {
+      return this.title_lou9zy$_0;
+    }
+  });
+  Object.defineProperty(AuthOauthFeature.prototype, 'description', {
+    get: function () {
+      return this.description_pb06ii$_0;
+    }
+  });
+  Object.defineProperty(AuthOauthFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_jqbbpg$_0;
+    }
+  });
+  AuthOauthFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'AuthOauthFeature',
+    interfaces: [Feature]
+  };
+  var AuthOauthFeature_instance = null;
+  function AuthOauthFeature_getInstance() {
+    if (AuthOauthFeature_instance === null) {
+      new AuthOauthFeature();
+    }
+    return AuthOauthFeature_instance;
+  }
+  function AutoHeadResponseFeature() {
+    AutoHeadResponseFeature_instance = this;
+    Feature.call(this);
+    this.repos_kkh3f0$_0 = Repos_getInstance().ktor;
+    this.artifacts_bu7kwk$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.id_qppt8$_0 = 'caching-headers';
+    this.title_lktzyt$_0 = 'CachingHeaders';
+    this.description_x6jbpr$_0 = 'Send the headers Cache-Control and Expires used by clients and proxies to cache requests';
+    this.documentation_uh6iib$_0 = 'https://ktor.io/features/caching-headers.html';
+  }
+  Object.defineProperty(AutoHeadResponseFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_kkh3f0$_0;
+    }
+  });
+  Object.defineProperty(AutoHeadResponseFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_bu7kwk$_0;
+    }
+  });
+  Object.defineProperty(AutoHeadResponseFeature.prototype, 'id', {
+    get: function () {
+      return this.id_qppt8$_0;
+    }
+  });
+  Object.defineProperty(AutoHeadResponseFeature.prototype, 'title', {
+    get: function () {
+      return this.title_lktzyt$_0;
+    }
+  });
+  Object.defineProperty(AutoHeadResponseFeature.prototype, 'description', {
+    get: function () {
+      return this.description_x6jbpr$_0;
+    }
+  });
+  Object.defineProperty(AutoHeadResponseFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_uh6iib$_0;
+    }
+  });
+  AutoHeadResponseFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf('io.ktor.features.*');
+  };
+  AutoHeadResponseFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(CachingHeaders)' + ' {' + '');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('options { outgoingContent ->');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('when (outgoingContent.contentType?.withoutParameters())' + ' {' + '');
+        $receiver.indentation = $receiver.indentation + 1 | 0;
+        try {
+          $receiver.line_61zpoe$('ContentType.Text.CSS -> CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 24 * 60 * 60))');
+          $receiver.line_61zpoe$('else -> null');
+        }
+        finally {
+          $receiver.indentation = $receiver.indentation - 1 | 0;
+        }
+        $receiver.line_61zpoe$('}');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  AutoHeadResponseFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'AutoHeadResponseFeature',
+    interfaces: [Feature]
+  };
+  var AutoHeadResponseFeature_instance = null;
+  function AutoHeadResponseFeature_getInstance() {
+    if (AutoHeadResponseFeature_instance === null) {
+      new AutoHeadResponseFeature();
+    }
+    return AutoHeadResponseFeature_instance;
+  }
+  function CORSFeature() {
+    CORSFeature_instance = this;
+    Feature.call(this);
+    this.repos_oe5gzt$_0 = Repos_getInstance().ktor;
+    this.artifacts_4k9qv$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.id_6t1969$_0 = 'cors';
+    this.title_peidjm$_0 = 'CORS';
+    this.description_f34sy$_0 = 'Enable Cross-Origin Resource Sharing (CORS)';
+    this.documentation_mhlcsw$_0 = 'https://ktor.io/features/cors.html';
+  }
+  Object.defineProperty(CORSFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_oe5gzt$_0;
+    }
+  });
+  Object.defineProperty(CORSFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_4k9qv$_0;
+    }
+  });
+  Object.defineProperty(CORSFeature.prototype, 'id', {
+    get: function () {
+      return this.id_6t1969$_0;
+    }
+  });
+  Object.defineProperty(CORSFeature.prototype, 'title', {
+    get: function () {
+      return this.title_peidjm$_0;
+    }
+  });
+  Object.defineProperty(CORSFeature.prototype, 'description', {
+    get: function () {
+      return this.description_f34sy$_0;
+    }
+  });
+  Object.defineProperty(CORSFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_mhlcsw$_0;
+    }
+  });
+  CORSFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf('io.ktor.features.*');
+  };
+  CORSFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(CORS)' + ' {' + '');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('method(HttpMethod.Options)');
+      $receiver.line_61zpoe$('method(HttpMethod.Get)');
+      $receiver.line_61zpoe$('method(HttpMethod.Post)');
+      $receiver.line_61zpoe$('method(HttpMethod.Put)');
+      $receiver.line_61zpoe$('method(HttpMethod.Delete)');
+      $receiver.line_61zpoe$('method(HttpMethod.Patch)');
+      $receiver.line_61zpoe$('header(HttpHeaders.Authorization)');
+      $receiver.line_61zpoe$('allowCredentials = true');
+      $receiver.line_61zpoe$('anyHost()');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  CORSFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'CORSFeature',
+    interfaces: [Feature]
+  };
+  var CORSFeature_instance = null;
+  function CORSFeature_getInstance() {
+    if (CORSFeature_instance === null) {
+      new CORSFeature();
+    }
+    return CORSFeature_instance;
+  }
+  function CachingHeadersFeature() {
+    CachingHeadersFeature_instance = this;
+    Feature.call(this);
+    this.repos_uw8ngd$_0 = Repos_getInstance().ktor;
+    this.artifacts_txevmr$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.id_rntdhx$_0 = 'auto-head-response';
+    this.title_tvvqwk$_0 = 'AutoHeadResponse';
+    this.description_r8mwew$_0 = 'Provide responses to HEAD requests for existing routes that have the GET verb defined';
+    this.documentation_d2dgk6$_0 = 'https://ktor.io/features/autoheadresponse.html';
+  }
+  Object.defineProperty(CachingHeadersFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_uw8ngd$_0;
+    }
+  });
+  Object.defineProperty(CachingHeadersFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_txevmr$_0;
+    }
+  });
+  Object.defineProperty(CachingHeadersFeature.prototype, 'id', {
+    get: function () {
+      return this.id_rntdhx$_0;
+    }
+  });
+  Object.defineProperty(CachingHeadersFeature.prototype, 'title', {
+    get: function () {
+      return this.title_tvvqwk$_0;
+    }
+  });
+  Object.defineProperty(CachingHeadersFeature.prototype, 'description', {
+    get: function () {
+      return this.description_r8mwew$_0;
+    }
+  });
+  Object.defineProperty(CachingHeadersFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_d2dgk6$_0;
+    }
+  });
+  CachingHeadersFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf('io.ktor.features.*');
+  };
+  CachingHeadersFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(AutoHeadResponse)');
+  };
+  CachingHeadersFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'CachingHeadersFeature',
+    interfaces: [Feature]
+  };
+  var CachingHeadersFeature_instance = null;
+  function CachingHeadersFeature_getInstance() {
+    if (CachingHeadersFeature_instance === null) {
+      new CachingHeadersFeature();
+    }
+    return CachingHeadersFeature_instance;
+  }
+  function CallLoggingFeature() {
+    CallLoggingFeature_instance = this;
+    Feature.call(this);
+    this.repos_i5jjl3$_0 = Repos_getInstance().ktor;
+    this.artifacts_moa661$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.id_f09gfl$_0 = 'call-logging';
+    this.title_j5wg4w$_0 = 'CallLogging';
+    this.description_4e4v78$_0 = 'Logs client requests';
+    this.documentation_5es19u$_0 = 'https://ktor.io/features/call-logging.html';
+  }
+  Object.defineProperty(CallLoggingFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_i5jjl3$_0;
+    }
+  });
+  Object.defineProperty(CallLoggingFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_moa661$_0;
+    }
+  });
+  Object.defineProperty(CallLoggingFeature.prototype, 'id', {
+    get: function () {
+      return this.id_f09gfl$_0;
+    }
+  });
+  Object.defineProperty(CallLoggingFeature.prototype, 'title', {
+    get: function () {
+      return this.title_j5wg4w$_0;
+    }
+  });
+  Object.defineProperty(CallLoggingFeature.prototype, 'description', {
+    get: function () {
+      return this.description_4e4v78$_0;
+    }
+  });
+  Object.defineProperty(CallLoggingFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_5es19u$_0;
+    }
+  });
+  CallLoggingFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf('io.ktor.features.*');
+  };
+  CallLoggingFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(CallLogging)' + ' {' + '');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('level = Level.INFO');
+      $receiver.line_61zpoe$('filter { call -> call.request.path().startsWith("/") }');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  CallLoggingFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'CallLoggingFeature',
+    interfaces: [Feature]
+  };
+  var CallLoggingFeature_instance = null;
+  function CallLoggingFeature_getInstance() {
+    if (CallLoggingFeature_instance === null) {
+      new CallLoggingFeature();
+    }
+    return CallLoggingFeature_instance;
+  }
+  function CompressionFeature() {
+    CompressionFeature_instance = this;
+    Feature.call(this);
+    this.repos_viging$_0 = Repos_getInstance().ktor;
+    this.artifacts_dplvt8$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.id_1vcik4$_0 = 'compression';
+    this.title_witf79$_0 = 'Compression';
+    this.description_f74yxd$_0 = 'Compress outgoing content using gzip, deflate or custom encoder and thus reduce the size of the response';
+    this.documentation_1q1cdp$_0 = 'https://ktor.io/features/compression.html';
+  }
+  Object.defineProperty(CompressionFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_viging$_0;
+    }
+  });
+  Object.defineProperty(CompressionFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_dplvt8$_0;
+    }
+  });
+  Object.defineProperty(CompressionFeature.prototype, 'id', {
+    get: function () {
+      return this.id_1vcik4$_0;
+    }
+  });
+  Object.defineProperty(CompressionFeature.prototype, 'title', {
+    get: function () {
+      return this.title_witf79$_0;
+    }
+  });
+  Object.defineProperty(CompressionFeature.prototype, 'description', {
+    get: function () {
+      return this.description_f74yxd$_0;
+    }
+  });
+  Object.defineProperty(CompressionFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_1q1cdp$_0;
+    }
+  });
+  CompressionFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf('io.ktor.features.*');
+  };
+  CompressionFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(Compression)' + ' {' + '');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('gzip' + ' {' + '');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('priority = 1.0');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+      $receiver.line_61zpoe$('deflate' + ' {' + '');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('priority = 10.0');
+        $receiver.line_61zpoe$('minimumSize(1024) // condition');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  CompressionFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'CompressionFeature',
+    interfaces: [Feature]
+  };
+  var CompressionFeature_instance = null;
+  function CompressionFeature_getInstance() {
+    if (CompressionFeature_instance === null) {
+      new CompressionFeature();
+    }
+    return CompressionFeature_instance;
+  }
   function ConditionalHeadersFeature() {
     ConditionalHeadersFeature_instance = this;
     Feature.call(this);
@@ -1305,7 +1873,7 @@
     }
   });
   ConditionalHeadersFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.features');
+    return listOf('io.ktor.features.*');
   };
   ConditionalHeadersFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
     $receiver.line_61zpoe$('install(ConditionalHeaders)');
@@ -1363,17 +1931,17 @@
     }
   });
   CssDslFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf_0(['kotlinx.html', 'kotlinx.css']);
+    return listOf_0(['kotlinx.html.*', 'kotlinx.css.*']);
   };
   CssDslFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
     $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('get("/styles.css")' + ' {');
+    $receiver.line_61zpoe$('get("/styles.css")' + ' {' + '');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
-      $receiver.line_61zpoe$('call.respondCss' + ' {');
+      $receiver.line_61zpoe$('call.respondCss' + ' {' + '');
       $receiver.indentation = $receiver.indentation + 1 | 0;
       try {
-        $receiver.line_61zpoe$('body' + ' {');
+        $receiver.line_61zpoe$('body' + ' {' + '');
         $receiver.indentation = $receiver.indentation + 1 | 0;
         try {
           $receiver.line_61zpoe$('backgroundColor = Color.red');
@@ -1382,7 +1950,7 @@
           $receiver.indentation = $receiver.indentation - 1 | 0;
         }
         $receiver.line_61zpoe$('}');
-        $receiver.line_61zpoe$('p' + ' {');
+        $receiver.line_61zpoe$('p' + ' {' + '');
         $receiver.indentation = $receiver.indentation + 1 | 0;
         try {
           $receiver.line_61zpoe$('fontSize = 2.em');
@@ -1391,7 +1959,7 @@
           $receiver.indentation = $receiver.indentation - 1 | 0;
         }
         $receiver.line_61zpoe$('}');
-        $receiver.line_61zpoe$('rule("p.myclass")' + ' {');
+        $receiver.line_61zpoe$('rule("p.myclass")' + ' {' + '');
         $receiver.indentation = $receiver.indentation + 1 | 0;
         try {
           $receiver.line_61zpoe$('color = Color.blue');
@@ -1413,10 +1981,10 @@
   };
   CssDslFeature.prototype.extensions_j0vqe2$ = function ($receiver, info) {
     $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('fun FlowOrMetaDataContent.styleCss(builder: CSSBuilder.() -> Unit)' + ' {');
+    $receiver.line_61zpoe$('fun FlowOrMetaDataContent.styleCss(builder: CSSBuilder.() -> Unit)' + ' {' + '');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
-      $receiver.line_61zpoe$('style(type = ContentType.Text.CSS.toString())' + ' {');
+      $receiver.line_61zpoe$('style(type = ContentType.Text.CSS.toString())' + ' {' + '');
       $receiver.indentation = $receiver.indentation + 1 | 0;
       try {
         $receiver.line_61zpoe$('+CSSBuilder().apply(builder).toString()');
@@ -1430,7 +1998,7 @@
       $receiver.indentation = $receiver.indentation - 1 | 0;
     }
     $receiver.line_61zpoe$('}');
-    $receiver.line_61zpoe$('fun CommonAttributeGroupFacade.style(builder: CSSBuilder.() -> Unit)' + ' {');
+    $receiver.line_61zpoe$('fun CommonAttributeGroupFacade.style(builder: CSSBuilder.() -> Unit)' + ' {' + '');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
       $receiver.line_61zpoe$('this.style = CSSBuilder().apply(builder).toString().trim()');
@@ -1439,7 +2007,7 @@
       $receiver.indentation = $receiver.indentation - 1 | 0;
     }
     $receiver.line_61zpoe$('}');
-    $receiver.line_61zpoe$('suspend inline fun ApplicationCall.respondCss(builder: CSSBuilder.() -> Unit)' + ' {');
+    $receiver.line_61zpoe$('suspend inline fun ApplicationCall.respondCss(builder: CSSBuilder.() -> Unit)' + ' {' + '');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
       $receiver.line_61zpoe$('this.respondText(CSSBuilder().apply(builder).toString(), ContentType.Text.CSS)');
@@ -1461,6 +2029,189 @@
     }
     return CssDslFeature_instance;
   }
+  function DataConversionFeature() {
+    DataConversionFeature_instance = this;
+    Feature.call(this);
+    this.repos_8tlujo$_0 = Repos_getInstance().ktor;
+    this.artifacts_u45w58$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.id_2onzc4$_0 = 'data-conversion';
+    this.title_7t8xzv$_0 = 'DataConversion';
+    this.description_aw9oqp$_0 = 'Allows to serialize and deserialize a list of values (used by the Locations feature)';
+    this.documentation_g2l1rx$_0 = 'https://ktor.io/features/caching-headers.html';
+  }
+  Object.defineProperty(DataConversionFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_8tlujo$_0;
+    }
+  });
+  Object.defineProperty(DataConversionFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_u45w58$_0;
+    }
+  });
+  Object.defineProperty(DataConversionFeature.prototype, 'id', {
+    get: function () {
+      return this.id_2onzc4$_0;
+    }
+  });
+  Object.defineProperty(DataConversionFeature.prototype, 'title', {
+    get: function () {
+      return this.title_7t8xzv$_0;
+    }
+  });
+  Object.defineProperty(DataConversionFeature.prototype, 'description', {
+    get: function () {
+      return this.description_aw9oqp$_0;
+    }
+  });
+  Object.defineProperty(DataConversionFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_g2l1rx$_0;
+    }
+  });
+  DataConversionFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf('io.ktor.features.*');
+  };
+  DataConversionFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(DataConversion)');
+  };
+  DataConversionFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'DataConversionFeature',
+    interfaces: [Feature]
+  };
+  var DataConversionFeature_instance = null;
+  function DataConversionFeature_getInstance() {
+    if (DataConversionFeature_instance === null) {
+      new DataConversionFeature();
+    }
+    return DataConversionFeature_instance;
+  }
+  function DefaultHeadersFeature() {
+    DefaultHeadersFeature_instance = this;
+    Feature.call(this);
+    this.repos_919slb$_0 = Repos_getInstance().ktor;
+    this.artifacts_6l0msh$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.id_if58rb$_0 = 'default-headers';
+    this.title_80ww1i$_0 = 'DefaultHeaders';
+    this.description_fdbkgq$_0 = 'This feature adds a default set of headers to HTTP responses';
+    this.documentation_sx3qg8$_0 = 'https://ktor.io/features/default-headers.html';
+  }
+  Object.defineProperty(DefaultHeadersFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_919slb$_0;
+    }
+  });
+  Object.defineProperty(DefaultHeadersFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_6l0msh$_0;
+    }
+  });
+  Object.defineProperty(DefaultHeadersFeature.prototype, 'id', {
+    get: function () {
+      return this.id_if58rb$_0;
+    }
+  });
+  Object.defineProperty(DefaultHeadersFeature.prototype, 'title', {
+    get: function () {
+      return this.title_80ww1i$_0;
+    }
+  });
+  Object.defineProperty(DefaultHeadersFeature.prototype, 'description', {
+    get: function () {
+      return this.description_fdbkgq$_0;
+    }
+  });
+  Object.defineProperty(DefaultHeadersFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_sx3qg8$_0;
+    }
+  });
+  DefaultHeadersFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf('io.ktor.features.*');
+  };
+  DefaultHeadersFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(DefaultHeaders)' + ' {' + '');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('header("X-Engine", "Ktor") // will send this header with each response');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  DefaultHeadersFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'DefaultHeadersFeature',
+    interfaces: [Feature]
+  };
+  var DefaultHeadersFeature_instance = null;
+  function DefaultHeadersFeature_getInstance() {
+    if (DefaultHeadersFeature_instance === null) {
+      new DefaultHeadersFeature();
+    }
+    return DefaultHeadersFeature_instance;
+  }
+  function ForwardedHeaderSupportFeature() {
+    ForwardedHeaderSupportFeature_instance = this;
+    Feature.call(this);
+    this.repos_avmc56$_0 = Repos_getInstance().ktor;
+    this.artifacts_qtfn4q$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.id_p6erwi$_0 = 'forwarded-header-support';
+    this.title_bvz8oz$_0 = 'ForwardedHeaderSupport';
+    this.description_x5iiox$_0 = 'This feature allows you to handle reverse proxy headers to get information about the original request when it\u2019s behind a proxy.';
+    this.documentation_d9es7z$_0 = 'https://ktor.io/features/forward-headers.html';
+  }
+  Object.defineProperty(ForwardedHeaderSupportFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_avmc56$_0;
+    }
+  });
+  Object.defineProperty(ForwardedHeaderSupportFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_qtfn4q$_0;
+    }
+  });
+  Object.defineProperty(ForwardedHeaderSupportFeature.prototype, 'id', {
+    get: function () {
+      return this.id_p6erwi$_0;
+    }
+  });
+  Object.defineProperty(ForwardedHeaderSupportFeature.prototype, 'title', {
+    get: function () {
+      return this.title_bvz8oz$_0;
+    }
+  });
+  Object.defineProperty(ForwardedHeaderSupportFeature.prototype, 'description', {
+    get: function () {
+      return this.description_x5iiox$_0;
+    }
+  });
+  Object.defineProperty(ForwardedHeaderSupportFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_d9es7z$_0;
+    }
+  });
+  ForwardedHeaderSupportFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf('io.ktor.features.*');
+  };
+  ForwardedHeaderSupportFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(ForwardedHeaderSupport) // WARNING: for security, do not include this if not behind a reverse proxy');
+    $receiver.line_61zpoe$('install(XForwardedHeaderSupport) // WARNING: for security, do not include this if not behind a reverse proxy');
+  };
+  ForwardedHeaderSupportFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'ForwardedHeaderSupportFeature',
+    interfaces: [Feature]
+  };
+  var ForwardedHeaderSupportFeature_instance = null;
+  function ForwardedHeaderSupportFeature_getInstance() {
+    if (ForwardedHeaderSupportFeature_instance === null) {
+      new ForwardedHeaderSupportFeature();
+    }
+    return ForwardedHeaderSupportFeature_instance;
+  }
   function FreemarkerFeature() {
     FreemarkerFeature_instance = this;
     Feature.call(this);
@@ -1468,7 +2219,7 @@
     this.artifacts_u4kg8y$_0 = listOf('io.ktor:ktor-freemarker:$ktor_version');
     this.id_fl2zti$_0 = 'freemarker';
     this.title_bsiyfp$_0 = 'Freemarker';
-    this.description_lowc3r$_0 = 'Serve HTML content using Apache freemarker';
+    this.description_lowc3r$_0 = "Serve HTML content using Apache's FreeMarker template engine";
     this.documentation_ccfenr$_0 = 'https://ktor.io/features/templates/freemarker.html';
   }
   Object.defineProperty(FreemarkerFeature.prototype, 'repos', {
@@ -1502,13 +2253,13 @@
     }
   });
   FreemarkerFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf_0(['freemarker.cache', 'io.ktor.freemarker']);
+    return listOf_0(['freemarker.cache.*', 'io.ktor.freemarker.*']);
   };
   FreemarkerFeature.prototype.classes_j0vqe2$ = function ($receiver, info) {
     $receiver.line_61zpoe$('data class IndexData(val items: List<Int>)');
   };
   FreemarkerFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('install(FreeMarker)' + ' {');
+    $receiver.line_61zpoe$('install(FreeMarker)' + ' {' + '');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
       $receiver.line_61zpoe$('templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")');
@@ -1519,7 +2270,7 @@
     $receiver.line_61zpoe$('}');
   };
   FreemarkerFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('get("/html-freemarker")' + ' {');
+    $receiver.line_61zpoe$('get("/html-freemarker")' + ' {' + '');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
       $receiver.line_61zpoe$('call.respond(FreeMarkerContent("index.ftl", mapOf("data" to IndexData(listOf(1, 2, 3))), ""))');
@@ -1564,7 +2315,7 @@
       return Unit;
     };
   }
-  FreemarkerFeature.prototype.addFiles_553mg9$ = function (info, files) {
+  FreemarkerFeature.prototype.addFiles_yiqn0e$ = function (info, files, fetcher, continuation) {
     add(files, info.artifactName + '/resources/templates/index.ftl', indenter(FreemarkerFeature$addFiles$lambda(info)));
   };
   FreemarkerFeature.$metadata$ = {
@@ -1579,6 +2330,72 @@
     }
     return FreemarkerFeature_instance;
   }
+  function HSTSFeature() {
+    HSTSFeature_instance = this;
+    Feature.call(this);
+    this.repos_ekzbmu$_0 = Repos_getInstance().ktor;
+    this.artifacts_q4ud8a$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.id_3oa8eq$_0 = 'hsts';
+    this.title_flc86n$_0 = 'HSTS';
+    this.description_8z16kr$_0 = 'Enable HTTP Strict Transport Security (HSTS)';
+    this.documentation_hhoj3n$_0 = 'https://ktor.io/features/hsts.html';
+  }
+  Object.defineProperty(HSTSFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_ekzbmu$_0;
+    }
+  });
+  Object.defineProperty(HSTSFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_q4ud8a$_0;
+    }
+  });
+  Object.defineProperty(HSTSFeature.prototype, 'id', {
+    get: function () {
+      return this.id_3oa8eq$_0;
+    }
+  });
+  Object.defineProperty(HSTSFeature.prototype, 'title', {
+    get: function () {
+      return this.title_flc86n$_0;
+    }
+  });
+  Object.defineProperty(HSTSFeature.prototype, 'description', {
+    get: function () {
+      return this.description_8z16kr$_0;
+    }
+  });
+  Object.defineProperty(HSTSFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_hhoj3n$_0;
+    }
+  });
+  HSTSFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf('io.ktor.features.*');
+  };
+  HSTSFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(HSTS)' + ' {' + '');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('includeSubDomains = true');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  HSTSFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'HSTSFeature',
+    interfaces: [Feature]
+  };
+  var HSTSFeature_instance = null;
+  function HSTSFeature_getInstance() {
+    if (HSTSFeature_instance === null) {
+      new HSTSFeature();
+    }
+    return HSTSFeature_instance;
+  }
   function HtmlDslFeature() {
     HtmlDslFeature_instance = this;
     Feature.call(this);
@@ -1586,7 +2403,7 @@
     this.artifacts_mmn820$_0 = listOf('io.ktor:ktor-html-builder:$ktor_version');
     this.id_6osof4$_0 = 'html-dsl';
     this.title_ivtz1b$_0 = 'HTML DSL';
-    this.description_vpobnn$_0 = 'Generate HTML using Kotlin code';
+    this.description_vpobnn$_0 = 'Generate HTML using Kotlin code like a pure-core template engine';
     this.documentation_kyhzcv$_0 = 'https://ktor.io/features/templates/html-dsl.html';
   }
   Object.defineProperty(HtmlDslFeature.prototype, 'repos', {
@@ -1620,17 +2437,17 @@
     }
   });
   HtmlDslFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf_0(['io.ktor.html', 'kotlinx.html']);
+    return listOf_0(['io.ktor.html.*', 'kotlinx.html.*']);
   };
   HtmlDslFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
     $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('get("/html-dsl")' + ' {');
+    $receiver.line_61zpoe$('get("/html-dsl")' + ' {' + '');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
-      $receiver.line_61zpoe$('call.respondHtml' + ' {');
+      $receiver.line_61zpoe$('call.respondHtml' + ' {' + '');
       $receiver.indentation = $receiver.indentation + 1 | 0;
       try {
-        $receiver.line_61zpoe$('body' + ' {');
+        $receiver.line_61zpoe$('body' + ' {' + '');
         $receiver.indentation = $receiver.indentation + 1 | 0;
         try {
           $receiver.line_61zpoe$('h1 { +"HTML" }');
@@ -1714,6 +2531,75 @@
     }
     return HttpClientFeature_instance;
   }
+  function HttpsRedirectFeature() {
+    HttpsRedirectFeature_instance = this;
+    Feature.call(this);
+    this.repos_gluhnx$_0 = Repos_getInstance().ktor;
+    this.artifacts_npr6b7$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.id_wawpbf$_0 = 'https-redirect';
+    this.title_hm7e7q$_0 = 'HttpsRedirect';
+    this.description_a9gxgu$_0 = 'All the affected HTTP calls perform a redirect to its HTTPS counterpart before processing the call';
+    this.documentation_zfw7sc$_0 = 'https://ktor.io/features/https-redirect.html';
+  }
+  Object.defineProperty(HttpsRedirectFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_gluhnx$_0;
+    }
+  });
+  Object.defineProperty(HttpsRedirectFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_npr6b7$_0;
+    }
+  });
+  Object.defineProperty(HttpsRedirectFeature.prototype, 'id', {
+    get: function () {
+      return this.id_wawpbf$_0;
+    }
+  });
+  Object.defineProperty(HttpsRedirectFeature.prototype, 'title', {
+    get: function () {
+      return this.title_hm7e7q$_0;
+    }
+  });
+  Object.defineProperty(HttpsRedirectFeature.prototype, 'description', {
+    get: function () {
+      return this.description_a9gxgu$_0;
+    }
+  });
+  Object.defineProperty(HttpsRedirectFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_zfw7sc$_0;
+    }
+  });
+  HttpsRedirectFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf('io.ktor.features.*');
+  };
+  HttpsRedirectFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(HttpsRedirect)' + ' {' + '');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('// The port to redirect to. By default 443, the default HTTPS port.');
+      $receiver.line_61zpoe$('sslPort = 443');
+      $receiver.line_61zpoe$('// 301 Moved Permanently, or 302 Found redirect.');
+      $receiver.line_61zpoe$('permanentRedirect = true');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  HttpsRedirectFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'HttpsRedirectFeature',
+    interfaces: [Feature]
+  };
+  var HttpsRedirectFeature_instance = null;
+  function HttpsRedirectFeature_getInstance() {
+    if (HttpsRedirectFeature_instance === null) {
+      new HttpsRedirectFeature();
+    }
+    return HttpsRedirectFeature_instance;
+  }
   function JsonGsonFeature() {
     JsonGsonFeature_instance = this;
     Feature.call(this);
@@ -1754,6 +2640,35 @@
       return this.documentation_5wcawm$_0;
     }
   });
+  JsonGsonFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf_0(['io.ktor.gson.*', 'io.ktor.features.*']);
+  };
+  JsonGsonFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(ContentNegotiation)' + ' {' + '');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('gson' + ' {' + '');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver.line_61zpoe$('}');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  JsonGsonFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('');
+    $receiver.line_61zpoe$('get("/json/gson")' + ' {' + '');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('call.respond(mapOf("hello" to "world"))');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
   JsonGsonFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'JsonGsonFeature',
@@ -1807,13 +2722,13 @@
     }
   });
   JsonJacksonFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf_0(['com.fasterxml.jackson.databind', 'io.ktor.jackson', 'io.ktor.features']);
+    return listOf_0(['com.fasterxml.jackson.databind.*', 'io.ktor.jackson.*', 'io.ktor.features.*']);
   };
   JsonJacksonFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('install(ContentNegotiation)' + ' {');
+    $receiver.line_61zpoe$('install(ContentNegotiation)' + ' {' + '');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
-      $receiver.line_61zpoe$('jackson' + ' {');
+      $receiver.line_61zpoe$('jackson' + ' {' + '');
       $receiver.indentation = $receiver.indentation + 1 | 0;
       try {
         $receiver.line_61zpoe$('enable(SerializationFeature.INDENT_OUTPUT)');
@@ -1830,7 +2745,7 @@
   };
   JsonJacksonFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
     $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('get("/json")' + ' {');
+    $receiver.line_61zpoe$('get("/json/jackson")' + ' {' + '');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
       $receiver.line_61zpoe$('call.respond(mapOf("hello" to "world"))');
@@ -1955,6 +2870,74 @@
       new MetricsFeature();
     }
     return MetricsFeature_instance;
+  }
+  function PartialContentFeature() {
+    PartialContentFeature_instance = this;
+    Feature.call(this);
+    this.repos_mhgxh0$_0 = Repos_getInstance().ktor;
+    this.artifacts_4a672s$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.id_ln9vy4$_0 = 'partial-content';
+    this.title_nhtu0t$_0 = 'PartialContent';
+    this.description_oxbc4n$_0 = 'Handles requests with the Range header. Generating Accept-Ranges and the Content-Range headers and slicing the served content when required.';
+    this.documentation_96tbtn$_0 = 'https://ktor.io/features/partial-content.html';
+  }
+  Object.defineProperty(PartialContentFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_mhgxh0$_0;
+    }
+  });
+  Object.defineProperty(PartialContentFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_4a672s$_0;
+    }
+  });
+  Object.defineProperty(PartialContentFeature.prototype, 'id', {
+    get: function () {
+      return this.id_ln9vy4$_0;
+    }
+  });
+  Object.defineProperty(PartialContentFeature.prototype, 'title', {
+    get: function () {
+      return this.title_nhtu0t$_0;
+    }
+  });
+  Object.defineProperty(PartialContentFeature.prototype, 'description', {
+    get: function () {
+      return this.description_oxbc4n$_0;
+    }
+  });
+  Object.defineProperty(PartialContentFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_96tbtn$_0;
+    }
+  });
+  PartialContentFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf('io.ktor.features.*');
+  };
+  PartialContentFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(PartialContent)' + ' {' + '');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('// Maximum number of ranges that will be accepted from a HTTP request.');
+      $receiver.line_61zpoe$('// If the HTTP request specifies more ranges, they will all be merged into a single range.');
+      $receiver.line_61zpoe$('maxRangeCount = 10');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  PartialContentFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'PartialContentFeature',
+    interfaces: [Feature]
+  };
+  var PartialContentFeature_instance = null;
+  function PartialContentFeature_getInstance() {
+    if (PartialContentFeature_instance === null) {
+      new PartialContentFeature();
+    }
+    return PartialContentFeature_instance;
   }
   function RawSocketsFeature() {
     RawSocketsFeature_instance = this;
@@ -2112,6 +3095,285 @@
     }
     return SessionsFeature_instance;
   }
+  function ShutdownUrlFeature() {
+    ShutdownUrlFeature_instance = this;
+    Feature.call(this);
+    this.repos_ru14ht$_0 = Repos_getInstance().ktor;
+    this.artifacts_jxegkf$_0 = listOf('io.ktor:ktor-server-host-common:$ktor_version');
+    this.id_hv121z$_0 = 'shutdown-url';
+    this.title_qto7y0$_0 = 'Shutdown URL';
+    this.description_mniexw$_0 = 'This feature enables a URL that when accessed, shutdowns the server.';
+    this.documentation_bridsq$_0 = 'https://ktor.io/features/shutdown-url.html';
+  }
+  Object.defineProperty(ShutdownUrlFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_ru14ht$_0;
+    }
+  });
+  Object.defineProperty(ShutdownUrlFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_jxegkf$_0;
+    }
+  });
+  Object.defineProperty(ShutdownUrlFeature.prototype, 'id', {
+    get: function () {
+      return this.id_hv121z$_0;
+    }
+  });
+  Object.defineProperty(ShutdownUrlFeature.prototype, 'title', {
+    get: function () {
+      return this.title_qto7y0$_0;
+    }
+  });
+  Object.defineProperty(ShutdownUrlFeature.prototype, 'description', {
+    get: function () {
+      return this.description_mniexw$_0;
+    }
+  });
+  Object.defineProperty(ShutdownUrlFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_bridsq$_0;
+    }
+  });
+  ShutdownUrlFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf('io.ktor.server.engine.*');
+  };
+  ShutdownUrlFeature.prototype.hoconKtorDeploymentSection_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('shutdown.url = "/ktor/application/shutdown"');
+  };
+  ShutdownUrlFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(ShutDownUrl.ApplicationCallFeature)' + ' {' + '');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$("// The URL that will be intercepted (you can also use the application.conf's ktor.deployment.shutdown.url key)");
+      $receiver.line_61zpoe$('shutDownUrl = "/ktor/application/shutdown"');
+      $receiver.line_61zpoe$('// A function that will be executed to get the exit code of the process');
+      $receiver.line_61zpoe$('exitCodeSupplier = { 0 } // ApplicationCall.() -> Int');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  ShutdownUrlFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'ShutdownUrlFeature',
+    interfaces: [Feature]
+  };
+  var ShutdownUrlFeature_instance = null;
+  function ShutdownUrlFeature_getInstance() {
+    if (ShutdownUrlFeature_instance === null) {
+      new ShutdownUrlFeature();
+    }
+    return ShutdownUrlFeature_instance;
+  }
+  function StaticContentFeature() {
+    StaticContentFeature_instance = this;
+    Feature.call(this);
+    this.repos_r7te0h$_0 = Repos_getInstance().ktor;
+    this.artifacts_983xwv$_0 = listOf('io.ktor:ktor-server-host-common:$ktor_version');
+    this.id_cquh7d$_0 = 'static-content';
+    this.title_s86aka$_0 = 'Static Content';
+    this.description_7aci0a$_0 = 'Serves static files from defined locations.';
+    this.documentation_h35puw$_0 = 'https://ktor.io/features/static-content.html';
+  }
+  Object.defineProperty(StaticContentFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_r7te0h$_0;
+    }
+  });
+  Object.defineProperty(StaticContentFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_983xwv$_0;
+    }
+  });
+  Object.defineProperty(StaticContentFeature.prototype, 'id', {
+    get: function () {
+      return this.id_cquh7d$_0;
+    }
+  });
+  Object.defineProperty(StaticContentFeature.prototype, 'title', {
+    get: function () {
+      return this.title_s86aka$_0;
+    }
+  });
+  Object.defineProperty(StaticContentFeature.prototype, 'description', {
+    get: function () {
+      return this.description_7aci0a$_0;
+    }
+  });
+  Object.defineProperty(StaticContentFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_h35puw$_0;
+    }
+  });
+  StaticContentFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf('io.ktor.content.*');
+  };
+  StaticContentFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('// Static feature. Try to access `/static/ktor_logo.svg`');
+    $receiver.line_61zpoe$('static("static")' + ' {' + '');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('resources("static")');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  StaticContentFeature.prototype.addFiles_yiqn0e$ = function (info_0, files_0, fetcher_0, continuation_0, suspended) {
+    var instance = new Coroutine$addFiles_yiqn0e$(this, info_0, files_0, fetcher_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  };
+  function Coroutine$addFiles_yiqn0e$($this, info_0, files_0, fetcher_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.$this = $this;
+    this.local$tmp$ = void 0;
+    this.local$info = info_0;
+    this.local$files = files_0;
+    this.local$fetcher = fetcher_0;
+  }
+  Coroutine$addFiles_yiqn0e$.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$addFiles_yiqn0e$.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$addFiles_yiqn0e$.prototype.constructor = Coroutine$addFiles_yiqn0e$;
+  Coroutine$addFiles_yiqn0e$.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.local$tmp$ = this.local$info.artifactName + '/resources/static/ktor_logo.svg';
+            this.state_0 = 2;
+            this.result_0 = this.local$fetcher.fetch_61zpoe$('static/ktor_logo.svg', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            this.local$files.add_dkzqdg$(this.local$tmp$, this.result_0);
+            return;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  StaticContentFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'StaticContentFeature',
+    interfaces: [Feature]
+  };
+  var StaticContentFeature_instance = null;
+  function StaticContentFeature_getInstance() {
+    if (StaticContentFeature_instance === null) {
+      new StaticContentFeature();
+    }
+    return StaticContentFeature_instance;
+  }
+  function StatusPagesFeature() {
+    StatusPagesFeature_instance = this;
+    Feature.call(this);
+    this.repos_va4em0$_0 = Repos_getInstance().ktor;
+    this.artifacts_tsgcm0$_0 = listOf('io.ktor:ktor-server-host-common:$ktor_version');
+    this.id_rrlp1c$_0 = 'status-pages';
+    this.title_wahb5t$_0 = 'Status Pages';
+    this.description_hk4jhf$_0 = 'Allow to respond to thrown exceptions.';
+    this.documentation_eu1hsx$_0 = 'https://ktor.io/features/status-pages.html';
+  }
+  Object.defineProperty(StatusPagesFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_va4em0$_0;
+    }
+  });
+  Object.defineProperty(StatusPagesFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_tsgcm0$_0;
+    }
+  });
+  Object.defineProperty(StatusPagesFeature.prototype, 'id', {
+    get: function () {
+      return this.id_rrlp1c$_0;
+    }
+  });
+  Object.defineProperty(StatusPagesFeature.prototype, 'title', {
+    get: function () {
+      return this.title_wahb5t$_0;
+    }
+  });
+  Object.defineProperty(StatusPagesFeature.prototype, 'description', {
+    get: function () {
+      return this.description_hk4jhf$_0;
+    }
+  });
+  Object.defineProperty(StatusPagesFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_eu1hsx$_0;
+    }
+  });
+  StatusPagesFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf('io.ktor.features.*');
+  };
+  StatusPagesFeature.prototype.classes_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('class AuthenticationException : RuntimeException()');
+    $receiver.line_61zpoe$('class AuthorizationException : RuntimeException()');
+  };
+  StatusPagesFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(StatusPages)' + ' {' + '');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('exception<AuthenticationException>' + ' {' + ' cause ->');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('call.respond(HttpStatusCode.Unauthorized)');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+      $receiver.line_61zpoe$('exception<AuthorizationException>' + ' {' + ' cause ->');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('call.respond(HttpStatusCode.Forbidden)');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  StatusPagesFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'StatusPagesFeature',
+    interfaces: [Feature]
+  };
+  var StatusPagesFeature_instance = null;
+  function StatusPagesFeature_getInstance() {
+    if (StatusPagesFeature_instance === null) {
+      new StatusPagesFeature();
+    }
+    return StatusPagesFeature_instance;
+  }
   function VelocityFeature() {
     VelocityFeature_instance = this;
     Feature.call(this);
@@ -2119,7 +3381,7 @@
     this.artifacts_fuibnd$_0 = listOf('io.ktor:ktor-velocity:$ktor_version');
     this.id_jr50fz$_0 = 'velocity';
     this.title_1pzp42$_0 = 'Velocity';
-    this.description_84u56m$_0 = 'Serve HTML content using Apache velocity';
+    this.description_84u56m$_0 = "Serve HTML content using Apache's Velocity template engine";
     this.documentation_stry68$_0 = 'https://ktor.io/features/templates/velocity.html';
   }
   Object.defineProperty(VelocityFeature.prototype, 'repos', {
@@ -2248,6 +3510,16 @@
     kind: Kind_CLASS,
     interfaces: [FileContainer]
   };
+  function KtorProjectGenerator$generate$lambda$ObjectLiteral_0(closure$fetchFile) {
+    this.closure$fetchFile = closure$fetchFile;
+  }
+  KtorProjectGenerator$generate$lambda$ObjectLiteral_0.prototype.fetch_61zpoe$ = function (path, continuation) {
+    return this.closure$fetchFile(path, continuation);
+  };
+  KtorProjectGenerator$generate$lambda$ObjectLiteral_0.$metadata$ = {
+    kind: Kind_CLASS,
+    interfaces: [FileFetcher]
+  };
   function KtorProjectGenerator$generate$lambda$lambda_2(closure$info) {
     return function ($receiver) {
       buildApplicationKt($receiver, closure$info.copy_s590xl$());
@@ -2269,6 +3541,7 @@
     this.local$tmp$_0 = void 0;
     this.local$tmp$_1 = void 0;
     this.local$tmp$_2 = void 0;
+    this.local$tmp$_3 = void 0;
     this.local$info = info_0;
     this.local$fetchFile = fetchFile_0;
     this.local$files = files_0;
@@ -2285,7 +3558,6 @@
       try {
         switch (this.state_0) {
           case 0:
-            var tmp$;
             switch (this.local$info.projectType) {
               case 'maven':
                 add(this.local$files, this.local$info.artifactName + '/pom.xml', indenter(KtorProjectGenerator$generate$lambda$lambda(this.local$info)));
@@ -2344,12 +3616,25 @@
             continue;
           case 7:
             add(this.local$files, this.local$info.artifactName + '/resources/application.conf', indenter(KtorProjectGenerator$generate$lambda$lambda_1(this.local$info)));
-            tmp$ = this.local$info.featuresToInclude.iterator();
-            while (tmp$.hasNext()) {
-              var feat = tmp$.next();
-              feat.addFiles_553mg9$(this.local$info, new KtorProjectGenerator$generate$lambda$ObjectLiteral(this.local$files));
+            this.local$tmp$_3 = this.local$info.featuresToInclude.iterator();
+            this.state_0 = 8;
+            continue;
+          case 8:
+            if (!this.local$tmp$_3.hasNext()) {
+              this.state_0 = 10;
+              continue;
             }
 
+            var feat = this.local$tmp$_3.next();
+            this.state_0 = 9;
+            this.result_0 = feat.addFiles_yiqn0e$(this.local$info, new KtorProjectGenerator$generate$lambda$ObjectLiteral(this.local$files), new KtorProjectGenerator$generate$lambda$ObjectLiteral_0(this.local$fetchFile), this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 9:
+            this.state_0 = 8;
+            continue;
+          case 10:
             add(this.local$files, this.local$info.artifactName + '/src/Application.kt', indenter(KtorProjectGenerator$generate$lambda$lambda_2(this.local$info)));
             return this.local$info;
         }
@@ -2384,14 +3669,14 @@
   }
   var DOLLAR;
   function buildBuildGradle($receiver, info) {
-    $receiver.line_61zpoe$('buildscript' + ' {');
+    $receiver.line_61zpoe$('buildscript' + ' {' + '');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
       $receiver.line_61zpoe$("ext.kotlin_version = '1.2.41'");
       $receiver.line_61zpoe$("ext.ktor_version = '" + info.ktorVersion + "'");
       $receiver.line_61zpoe$("ext.logback_version = '1.2.1'");
       $receiver.line_61zpoe$('');
-      $receiver.line_61zpoe$('repositories' + ' {');
+      $receiver.line_61zpoe$('repositories' + ' {' + '');
       $receiver.indentation = $receiver.indentation + 1 | 0;
       try {
         $receiver.line_61zpoe$('jcenter()');
@@ -2401,7 +3686,7 @@
       }
       $receiver.line_61zpoe$('}');
       $receiver.line_61zpoe$('');
-      $receiver.line_61zpoe$('dependencies' + ' {');
+      $receiver.line_61zpoe$('dependencies' + ' {' + '');
       $receiver.indentation = $receiver.indentation + 1 | 0;
       try {
         $receiver.line_61zpoe$('classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"');
@@ -2421,7 +3706,7 @@
     $receiver.line_61zpoe$('');
     $receiver.line_61zpoe$('mainClassName = ' + '"' + info.developmentEngineFQ + '"');
     $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('sourceSets' + ' {');
+    $receiver.line_61zpoe$('sourceSets' + ' {' + '');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
       $receiver.line_61zpoe$("main.kotlin.srcDirs = ['src']");
@@ -2432,7 +3717,7 @@
     }
     $receiver.line_61zpoe$('}');
     $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('repositories' + ' {');
+    $receiver.line_61zpoe$('repositories' + ' {' + '');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
       var tmp$;
@@ -2452,7 +3737,7 @@
     }
     $receiver.line_61zpoe$('}');
     $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('dependencies' + ' {');
+    $receiver.line_61zpoe$('dependencies' + ' {' + '');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
       var tmp$_0;
@@ -2486,20 +3771,27 @@
     return info;
   }
   function buildApplicationConf($receiver, info) {
-    $receiver.line_61zpoe$('ktor' + ' {');
+    $receiver.line_61zpoe$('ktor' + ' {' + '');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
-      $receiver.line_61zpoe$('deployment' + ' {');
+      var tmp$;
+      $receiver.line_61zpoe$('deployment' + ' {' + '');
       $receiver.indentation = $receiver.indentation + 1 | 0;
       try {
+        var tmp$_0;
         $receiver.line_61zpoe$('port = 8080');
         $receiver.line_61zpoe$('port = ${?PORT}');
+        tmp$_0 = info.featuresToInclude.iterator();
+        while (tmp$_0.hasNext()) {
+          var feat = tmp$_0.next();
+          feat.hoconKtorDeploymentSection_j0vqe2$($receiver, info);
+        }
       }
       finally {
         $receiver.indentation = $receiver.indentation - 1 | 0;
       }
       $receiver.line_61zpoe$('}');
-      $receiver.line_61zpoe$('application' + ' {');
+      $receiver.line_61zpoe$('application' + ' {' + '');
       $receiver.indentation = $receiver.indentation + 1 | 0;
       try {
         $receiver.line_61zpoe$('modules = [ ' + info.artifactGroup + '.ApplicationKt.main ]');
@@ -2508,6 +3800,11 @@
         $receiver.indentation = $receiver.indentation - 1 | 0;
       }
       $receiver.line_61zpoe$('}');
+      tmp$ = info.featuresToInclude.iterator();
+      while (tmp$.hasNext()) {
+        var feat_0 = tmp$.next();
+        feat_0.hoconKtorSection_j0vqe2$($receiver, info);
+      }
     }
     finally {
       $receiver.indentation = $receiver.indentation - 1 | 0;
@@ -2517,26 +3814,26 @@
   }
   function buildApplicationKt($receiver, info) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2;
-    var packages = LinkedHashSet_init();
+    var imports = LinkedHashSet_init();
     $receiver.line_61zpoe$('package ' + info.artifactGroup);
     $receiver.line_61zpoe$('');
-    var element = 'io.ktor.application';
-    packages.add_11rb$(element);
-    var element_0 = 'io.ktor.response';
-    packages.add_11rb$(element_0);
-    var element_1 = 'io.ktor.routing';
-    packages.add_11rb$(element_1);
-    var element_2 = 'io.ktor.http';
-    packages.add_11rb$(element_2);
+    var element = 'io.ktor.application.*';
+    imports.add_11rb$(element);
+    var element_0 = 'io.ktor.response.*';
+    imports.add_11rb$(element_0);
+    var element_1 = 'io.ktor.routing.*';
+    imports.add_11rb$(element_1);
+    var element_2 = 'io.ktor.http.*';
+    imports.add_11rb$(element_2);
     tmp$ = info.featuresToInclude.iterator();
     while (tmp$.hasNext()) {
       var feat = tmp$.next();
-      addAll(packages, feat.imports_jbwadm$(info));
+      addAll(imports, feat.imports_jbwadm$(info));
     }
-    tmp$_0 = packages.iterator();
+    tmp$_0 = imports.iterator();
     while (tmp$_0.hasNext()) {
       var p = tmp$_0.next();
-      $receiver.line_61zpoe$('import ' + p + '.*');
+      $receiver.line_61zpoe$('import ' + p);
     }
     $receiver.line_61zpoe$('');
     if (info.ktorVer.compareTo_11rb$(Versions_getInstance().V092) >= 0) {
@@ -2551,7 +3848,7 @@
       var feat_0 = tmp$_1.next();
       feat_0.classes_j0vqe2$($receiver, info);
     }
-    $receiver.line_61zpoe$('fun Application.main()' + ' {');
+    $receiver.line_61zpoe$('fun Application.main()' + ' {' + '');
     $receiver.indentation = $receiver.indentation + 1 | 0;
     try {
       var tmp$_3;
@@ -2560,11 +3857,11 @@
         var feat_1 = tmp$_3.next();
         feat_1.installFeature_j0vqe2$($receiver, info);
       }
-      $receiver.line_61zpoe$('routing' + ' {');
+      $receiver.line_61zpoe$('routing' + ' {' + '');
       $receiver.indentation = $receiver.indentation + 1 | 0;
       try {
         var tmp$_4;
-        $receiver.line_61zpoe$('get("/")' + ' {');
+        $receiver.line_61zpoe$('get("/")' + ' {' + '');
         $receiver.indentation = $receiver.indentation + 1 | 0;
         try {
           $receiver.line_61zpoe$('call.respondText("HELLO WORLD!")');
@@ -2873,8 +4170,10 @@
     var element = Indenter$Indents_getInstance().get_za3lpa$(this.indentation) + str;
     $receiver.add_11rb$(element);
   };
-  Indenter.prototype.line_a4mwiz$ = defineInlineFunction('output.io.ktor.start.util.Indenter.line_a4mwiz$', function (str, callback) {
-    this.line_61zpoe$(str + ' {');
+  Indenter.prototype.line_hgzy0z$ = defineInlineFunction('output.io.ktor.start.util.Indenter.line_hgzy0z$', function (str, suffix, callback) {
+    if (suffix === void 0)
+      suffix = '';
+    this.line_61zpoe$(str + ' {' + suffix);
     this.indentation = this.indentation + 1 | 0;
     try {
       callback();
@@ -2884,8 +4183,10 @@
     }
     this.line_61zpoe$('}');
   });
-  Indenter.prototype.invoke_79xod4$ = defineInlineFunction('output.io.ktor.start.util.Indenter.invoke_79xod4$', function ($receiver, callback) {
-    this.line_61zpoe$($receiver + ' {');
+  Indenter.prototype.invoke_44doqu$ = defineInlineFunction('output.io.ktor.start.util.Indenter.invoke_44doqu$', function ($receiver, suffix, callback) {
+    if (suffix === void 0)
+      suffix = '';
+    this.line_61zpoe$($receiver + ' {' + suffix);
     this.indentation = this.indentation + 1 | 0;
     try {
       callback();
@@ -3196,6 +4497,7 @@
   package$util.get_seconds_t5kl13$ = get_seconds;
   package$start.BuildInfo = BuildInfo;
   package$start.FileContainer = FileContainer;
+  package$start.FileFetcher = FileFetcher;
   package$start.add_ykoeqs$ = add;
   package$start.Feature = Feature;
   Object.defineProperty(package$start, 'Repos', {
@@ -3210,6 +4512,12 @@
     get: Versions_getInstance
   });
   var package$features = package$start.features || (package$start.features = {});
+  Object.defineProperty(package$features, 'AuthBasicFeature', {
+    get: AuthBasicFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'AuthDigestFeature', {
+    get: AuthDigestFeature_getInstance
+  });
   Object.defineProperty(package$features, 'AuthFeature', {
     get: AuthFeature_getInstance
   });
@@ -3219,20 +4527,53 @@
   Object.defineProperty(package$features, 'AuthLdapFeature', {
     get: AuthLdapFeature_getInstance
   });
+  Object.defineProperty(package$features, 'AuthOauthFeature', {
+    get: AuthOauthFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'AutoHeadResponseFeature', {
+    get: AutoHeadResponseFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'CORSFeature', {
+    get: CORSFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'CachingHeadersFeature', {
+    get: CachingHeadersFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'CallLoggingFeature', {
+    get: CallLoggingFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'CompressionFeature', {
+    get: CompressionFeature_getInstance
+  });
   Object.defineProperty(package$features, 'ConditionalHeadersFeature', {
     get: ConditionalHeadersFeature_getInstance
   });
   Object.defineProperty(package$features, 'CssDslFeature', {
     get: CssDslFeature_getInstance
   });
+  Object.defineProperty(package$features, 'DataConversionFeature', {
+    get: DataConversionFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'DefaultHeadersFeature', {
+    get: DefaultHeadersFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'ForwardedHeaderSupportFeature', {
+    get: ForwardedHeaderSupportFeature_getInstance
+  });
   Object.defineProperty(package$features, 'FreemarkerFeature', {
     get: FreemarkerFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'HSTSFeature', {
+    get: HSTSFeature_getInstance
   });
   Object.defineProperty(package$features, 'HtmlDslFeature', {
     get: HtmlDslFeature_getInstance
   });
   Object.defineProperty(package$features, 'HttpClientFeature', {
     get: HttpClientFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'HttpsRedirectFeature', {
+    get: HttpsRedirectFeature_getInstance
   });
   Object.defineProperty(package$features, 'JsonGsonFeature', {
     get: JsonGsonFeature_getInstance
@@ -3246,6 +4587,9 @@
   Object.defineProperty(package$features, 'MetricsFeature', {
     get: MetricsFeature_getInstance
   });
+  Object.defineProperty(package$features, 'PartialContentFeature', {
+    get: PartialContentFeature_getInstance
+  });
   Object.defineProperty(package$features, 'RawSocketsFeature', {
     get: RawSocketsFeature_getInstance
   });
@@ -3254,6 +4598,15 @@
   });
   Object.defineProperty(package$features, 'SessionsFeature', {
     get: SessionsFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'ShutdownUrlFeature', {
+    get: ShutdownUrlFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'StaticContentFeature', {
+    get: StaticContentFeature_getInstance
+  });
+  Object.defineProperty(package$features, 'StatusPagesFeature', {
+    get: StatusPagesFeature_getInstance
   });
   Object.defineProperty(package$features, 'VelocityFeature', {
     get: VelocityFeature_getInstance
@@ -3318,7 +4671,7 @@
   insideIframe = lazy(insideIframe$lambda);
   hashParams = lazy(hashParams$lambda);
   KOTLIN_VERSION = '1.2.41';
-  ALL_FEATURES = listOf_0([HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), AuthFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), ConditionalHeadersFeature_getInstance(), WebsocketsFeature_getInstance(), HttpClientFeature_getInstance(), RawSocketsFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
+  ALL_FEATURES = listOf_0([HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), HttpClientFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
   DOLLAR = 36;
   main([]);
   Kotlin.defineModule('output', _);
