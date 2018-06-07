@@ -1,9 +1,10 @@
 package io.ktor.start.features
 
 import io.ktor.start.*
+import io.ktor.start.project.*
 import io.ktor.start.util.*
 
-object FreemarkerFeature : Feature() {
+object FreemarkerFeature : Feature(ApplicationKt, RoutingFeature) {
     override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-freemarker:\$ktor_version")
     override val id = "freemarker"
@@ -11,32 +12,23 @@ object FreemarkerFeature : Feature() {
     override val description = "Serve HTML content using Apache's FreeMarker template engine"
     override val documentation = "https://ktor.io/features/templates/freemarker.html"
 
-    override fun imports(info: BuildInfo) = listOf(
-        "freemarker.cache.*",
-        "io.ktor.freemarker.*"
-    )
-
-    override fun Indenter.classes(info: BuildInfo) {
-        +"data class IndexData(val items: List<Int>)"
-    }
-
-    override fun Indenter.installFeature(info: BuildInfo) {
-        "install(FreeMarker)" {
-            +"templateLoader = ClassTemplateLoader(this::class.java.classLoader, \"templates\")"
+    override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addImport("freemarker.cache.*")
+        addImport("io.ktor.freemarker.*")
+        addApplicationClasses {
+            +"data class IndexData(val items: List<Int>)"
         }
-    }
-
-    override fun Indenter.routing(info: BuildInfo) {
-        "get(\"/html-freemarker\")" {
-            +"call.respond(FreeMarkerContent(\"index.ftl\", mapOf(\"data\" to IndexData(listOf(1, 2, 3))), \"\"))"
+        addFeatureInstall {
+            "install(FreeMarker)" {
+                +"templateLoader = ClassTemplateLoader(this::class.java.classLoader, \"templates\")"
+            }
         }
-    }
-
-    override fun Indenter.extensions(info: BuildInfo) {
-    }
-
-    override suspend fun addFiles(info: BuildInfo, files: FileContainer, fetcher: FileFetcher) {
-        files.add("${info.artifactName}/resources/templates/index.ftl", indenter {
+        addRoute {
+            "get(\"/html-freemarker\")" {
+                +"call.respond(FreeMarkerContent(\"index.ftl\", mapOf(\"data\" to IndexData(listOf(1, 2, 3))), \"\"))"
+            }
+        }
+        fileText("${info.artifactName}/resources/templates/index.ftl") {
             +"<#-- @ftlvariable name=\"data\" type=\"${info.artifactGroup}.IndexData\" -->"
             +"<html>"
             indent {
@@ -53,6 +45,6 @@ object FreemarkerFeature : Feature() {
                 +"</body>"
             }
             +"</html>"
-        })
+        }
     }
 }

@@ -1,9 +1,10 @@
 package io.ktor.start.features
 
 import io.ktor.start.*
+import io.ktor.start.project.*
 import io.ktor.start.util.*
 
-object ConditionalHeadersFeature : Feature() {
+object ConditionalHeadersFeature : Feature(ApplicationKt) {
     override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-server-core:\$ktor_version")
     override val id = "conditional-headers"
@@ -11,11 +12,10 @@ object ConditionalHeadersFeature : Feature() {
     override val description = "Avoids sending content if the client already has the same content using ETag or LastModified"
     override val documentation = "https://ktor.io/features/conditional-headers.html"
 
-    override fun imports(info: BuildInfo) = listOf(
-        "io.ktor.features.*"
-    )
-
-    override fun Indenter.installFeature(info: BuildInfo) {
-        +"install(ConditionalHeaders)"
+    override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addImport("io.ktor.features.*")
+        addFeatureInstall {
+            +"install(ConditionalHeaders)"
+        }
     }
 }

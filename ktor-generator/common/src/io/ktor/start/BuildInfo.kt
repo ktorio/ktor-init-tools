@@ -12,8 +12,11 @@ data class BuildInfo(
     val developmentEngineFQ: String,
     val reposToInclude: Set<String>,
     val dependenciesToInclude: Set<Feature>,
-    val ktorEngine: String
+    val ktorEngine: String,
+    val fetch: suspend (path: String) -> ByteArray
 ) {
     val featuresToInclude = dependenciesToInclude
     val ktorVer = SemVer(ktorVersion)
 }
+
+typealias BuildInfoBlock = Block<BuildInfo>

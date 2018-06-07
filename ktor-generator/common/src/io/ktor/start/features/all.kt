@@ -22,6 +22,7 @@ val ALL_FEATURES = listOf(
     CallLoggingFeature,
     ConditionalHeadersFeature,
     CORSFeature,
+    AutoHeadResponseFeature,
     DataConversionFeature,
     DefaultHeadersFeature,
     ForwardedHeaderSupportFeature,

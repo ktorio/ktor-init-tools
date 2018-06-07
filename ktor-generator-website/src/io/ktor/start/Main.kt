@@ -1,7 +1,7 @@
 package io.ktor.start
 
 import io.ktor.start.features.*
-import io.ktor.start.generate.*
+import io.ktor.start.project.*
 import io.ktor.start.util.*
 import js.externals.jquery.*
 import kotlin.browser.*
@@ -194,23 +194,24 @@ suspend fun build(dev: Boolean) {
         developmentEngineFQ = developmentEngineFQ,
         reposToInclude = reposToInclude,
         dependenciesToInclude = dependenciesToInclude,
-        ktorEngine = ktorEngine
+        ktorEngine = ktorEngine,
+        fetch = { fetchFile(it) }
     )
     try {
         val zipBytes = buildZip {
-            KtorProjectGenerator.generate(info, { fetchFile(it) }, object : FileContainer {
-                override fun add(name: String, content: ByteArray, mode: Int) {
-                    if (dev) {
-                        console.warn("ADD file: $name")
-                        try {
-                            console.log(content.toString(UTF8))
-                        } catch (e: Throwable) {
-                            console.log("<binary file>")
-                        }
+            val files = generate(info, (listOf(ApplicationKt) + dependenciesToInclude))
+            for ((file, result) in files) {
+                val rname = "${info.artifactName}/$file"
+                if (dev) {
+                    console.warn("ADD file: $rname")
+                    try {
+                        console.log(result.data.toString(UTF8))
+                    } catch (e: Throwable) {
+                        console.log("<binary file>")
                     }
-                    this@buildZip.add(name, content, mode = mode)
                 }
-            })
+                this@buildZip.add(rname, result.data, mode = result.mode)
+            }
         }
         if (!dev) {
             generateBrowserFile(

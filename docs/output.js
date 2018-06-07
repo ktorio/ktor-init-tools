@@ -25,6 +25,7 @@
   var throwCCE = Kotlin.throwCCE;
   var firstOrNull = Kotlin.kotlin.collections.firstOrNull_2p1efm$;
   var lazy = Kotlin.kotlin.lazy_klfg04$;
+  var PropertyMetadata = Kotlin.PropertyMetadata;
   var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
   var arrayListOf = Kotlin.kotlin.collections.arrayListOf_i5x0yv$;
   var to = Kotlin.kotlin.to_ujzrz7$;
@@ -44,20 +45,27 @@
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var listOf_0 = Kotlin.kotlin.collections.listOf_i5x0yv$;
-  var RuntimeException_init = Kotlin.kotlin.RuntimeException_init_pdl1vj$;
-  var equals = Kotlin.equals;
-  var distinct = Kotlin.kotlin.collections.distinct_7wnvza$;
   var LinkedHashSet_init = Kotlin.kotlin.collections.LinkedHashSet_init_287e2$;
+  var equals = Kotlin.equals;
+  var toList = Kotlin.kotlin.collections.toList_7wnvza$;
+  var Any = Object;
+  var toString = Kotlin.toString;
+  var toSet_0 = Kotlin.kotlin.collections.toSet_us0mfu$;
   var copyOf = Kotlin.kotlin.collections.copyOf_mrm5p$;
   var numberToByte = Kotlin.numberToByte;
   var toChar = Kotlin.toChar;
   var StringBuilder = Kotlin.kotlin.text.StringBuilder;
-  var lastOrNull = Kotlin.kotlin.collections.lastOrNull_2p1efm$;
-  var first = Kotlin.kotlin.collections.first_2p1efm$;
+  var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
+  var unboxChar = Kotlin.unboxChar;
+  var replace = Kotlin.kotlin.text.replace_680rmw$;
   var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
+  var split_0 = Kotlin.kotlin.text.split_ip8yn$;
+  var first = Kotlin.kotlin.collections.first_2p1efm$;
   var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
   var Comparable = Kotlin.kotlin.Comparable;
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_8cymmc$;
+  Feature.prototype = Object.create(Block.prototype);
+  Feature.prototype.constructor = Feature;
   AuthBasicFeature.prototype = Object.create(Feature.prototype);
   AuthBasicFeature.prototype.constructor = AuthBasicFeature;
   AuthDigestFeature.prototype = Object.create(Feature.prototype);
@@ -130,6 +138,12 @@
   VelocityFeature.prototype.constructor = VelocityFeature;
   WebsocketsFeature.prototype = Object.create(Feature.prototype);
   WebsocketsFeature.prototype.constructor = WebsocketsFeature;
+  ApplicationConf.prototype = Object.create(Block.prototype);
+  ApplicationConf.prototype.constructor = ApplicationConf;
+  ApplicationKt.prototype = Object.create(Block.prototype);
+  ApplicationKt.prototype.constructor = ApplicationKt;
+  BuildFiles.prototype = Object.create(Block.prototype);
+  BuildFiles.prototype.constructor = BuildFiles;
   function jsObject(pairs) {
     var tmp$;
     var obj = {};
@@ -624,26 +638,26 @@
       jQuery(str_6).change(addDependencies$lambda);
     }
   }
-  function build$lambda$lambda(it_0, continuation_0, suspended) {
-    var instance = new Coroutine$build$lambda$lambda(it_0, continuation_0);
+  function build$lambda(it_0, continuation_0, suspended) {
+    var instance = new Coroutine$build$lambda(it_0, continuation_0);
     if (suspended)
       return instance;
     else
       return instance.doResume(null);
   }
-  function Coroutine$build$lambda$lambda(it_0, continuation_0) {
+  function Coroutine$build$lambda(it_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
     this.local$it = it_0;
   }
-  Coroutine$build$lambda$lambda.$metadata$ = {
+  Coroutine$build$lambda.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: null,
     interfaces: [CoroutineImpl]
   };
-  Coroutine$build$lambda$lambda.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$build$lambda$lambda.prototype.constructor = Coroutine$build$lambda$lambda;
-  Coroutine$build$lambda$lambda.prototype.doResume = function () {
+  Coroutine$build$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$build$lambda.prototype.constructor = Coroutine$build$lambda;
+  Coroutine$build$lambda.prototype.doResume = function () {
     do
       try {
         switch (this.state_0) {
@@ -671,30 +685,6 @@
       }
      while (true);
   };
-  function build$lambda$ObjectLiteral(closure$dev, this$) {
-    this.closure$dev = closure$dev;
-    this.this$ = this$;
-  }
-  build$lambda$ObjectLiteral.prototype.add_dkzqdg$$default = function (name, content, mode) {
-    if (this.closure$dev) {
-      console.warn('ADD file: ' + name);
-      try {
-        console.log(toString(content, UTF8_getInstance()));
-      }
-       catch (e) {
-        if (Kotlin.isType(e, Throwable)) {
-          console.log('<binary file>');
-        }
-         else
-          throw e;
-      }
-    }
-    this.this$.add_w0mhwy$(name, content, void 0, mode);
-  };
-  build$lambda$ObjectLiteral.$metadata$ = {
-    kind: Kind_CLASS,
-    interfaces: [FileContainer]
-  };
   function build(dev_0, continuation_0, suspended) {
     var instance = new Coroutine$build(dev_0, continuation_0);
     if (suspended)
@@ -709,6 +699,7 @@
     this.local$ktorEngine = void 0;
     this.local$artifactGroup = void 0;
     this.local$artifactName = void 0;
+    this.local$info = void 0;
     this.local$zb = void 0;
     this.local$dev = dev_0;
   }
@@ -772,15 +763,39 @@
             var reposToInclude = toSet(plus(tmp$_1, destination_0));
             var developmentPackage = 'io.ktor.server.' + this.local$ktorEngine;
             var developmentEngineFQ = developmentPackage + '.DevelopmentEngine';
-            var info = new BuildInfo(get_includeWrapper(), this.local$projectType, ktorVersion, developmentPackage, this.local$artifactName, this.local$artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, this.local$ktorEngine);
+            this.local$info = new BuildInfo(get_includeWrapper(), this.local$projectType, ktorVersion, developmentPackage, this.local$artifactName, this.local$artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, this.local$ktorEngine, build$lambda);
             this.exceptionState_0 = 2;
             this.local$zb = new ZipBuilder();
+            var tmp$_3;
             this.state_0 = 1;
-            this.result_0 = KtorProjectGenerator_getInstance().generate_p20w4r$(info, build$lambda$lambda, new build$lambda$ObjectLiteral(this.local$dev, this.local$zb), this);
+            this.result_0 = generate(this.local$info, plus(listOf(ApplicationKt_getInstance()), dependenciesToInclude), this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;
           case 1:
+            var files = this.result_0;
+            tmp$_3 = files.entries.iterator();
+            while (tmp$_3.hasNext()) {
+              var tmp$_4 = tmp$_3.next();
+              var file = tmp$_4.key;
+              var result = tmp$_4.value;
+              var rname = this.local$info.artifactName + '/' + file;
+              if (this.local$dev) {
+                console.warn('ADD file: ' + rname);
+                try {
+                  console.log(toString_0(result.data, UTF8_getInstance()));
+                }
+                 catch (e) {
+                  if (Kotlin.isType(e, Throwable)) {
+                    console.log('<binary file>');
+                  }
+                   else
+                    throw e;
+                }
+              }
+              this.local$zb.add_w0mhwy$(rname, result.data, void 0, result.mode);
+            }
+
             var zipBytes = this.local$zb.toByteArray();
             if (!this.local$dev) {
               generateBrowserFile('ktor-sample-' + this.local$projectType + '-' + this.local$ktorEngine + '-' + this.local$artifactGroup + '-' + this.local$artifactName + '.zip', zipBytes);
@@ -993,7 +1008,7 @@
     var tmp$;
     return (Kotlin.isType(tmp$ = $receiver, Date) ? tmp$ : throwCCE()).getSeconds();
   }
-  function BuildInfo(includeWrapper, projectType, ktorVersion, developmentPackage, artifactName, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine) {
+  function BuildInfo(includeWrapper, projectType, ktorVersion, developmentPackage, artifactName, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine, fetch) {
     this.includeWrapper = includeWrapper;
     this.projectType = projectType;
     this.ktorVersion = ktorVersion;
@@ -1004,6 +1019,7 @@
     this.reposToInclude = reposToInclude;
     this.dependenciesToInclude = dependenciesToInclude;
     this.ktorEngine = ktorEngine;
+    this.fetch = fetch;
     this.featuresToInclude = this.dependenciesToInclude;
     this.ktorVer = new SemVer(this.ktorVersion);
   }
@@ -1042,11 +1058,14 @@
   BuildInfo.prototype.component10 = function () {
     return this.ktorEngine;
   };
-  BuildInfo.prototype.copy_s590xl$ = function (includeWrapper, projectType, ktorVersion, developmentPackage, artifactName, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine) {
-    return new BuildInfo(includeWrapper === void 0 ? this.includeWrapper : includeWrapper, projectType === void 0 ? this.projectType : projectType, ktorVersion === void 0 ? this.ktorVersion : ktorVersion, developmentPackage === void 0 ? this.developmentPackage : developmentPackage, artifactName === void 0 ? this.artifactName : artifactName, artifactGroup === void 0 ? this.artifactGroup : artifactGroup, developmentEngineFQ === void 0 ? this.developmentEngineFQ : developmentEngineFQ, reposToInclude === void 0 ? this.reposToInclude : reposToInclude, dependenciesToInclude === void 0 ? this.dependenciesToInclude : dependenciesToInclude, ktorEngine === void 0 ? this.ktorEngine : ktorEngine);
+  BuildInfo.prototype.component11 = function () {
+    return this.fetch;
+  };
+  BuildInfo.prototype.copy_1zifd9$ = function (includeWrapper, projectType, ktorVersion, developmentPackage, artifactName, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine, fetch) {
+    return new BuildInfo(includeWrapper === void 0 ? this.includeWrapper : includeWrapper, projectType === void 0 ? this.projectType : projectType, ktorVersion === void 0 ? this.ktorVersion : ktorVersion, developmentPackage === void 0 ? this.developmentPackage : developmentPackage, artifactName === void 0 ? this.artifactName : artifactName, artifactGroup === void 0 ? this.artifactGroup : artifactGroup, developmentEngineFQ === void 0 ? this.developmentEngineFQ : developmentEngineFQ, reposToInclude === void 0 ? this.reposToInclude : reposToInclude, dependenciesToInclude === void 0 ? this.dependenciesToInclude : dependenciesToInclude, ktorEngine === void 0 ? this.ktorEngine : ktorEngine, fetch === void 0 ? this.fetch : fetch);
   };
   BuildInfo.prototype.toString = function () {
-    return 'BuildInfo(includeWrapper=' + Kotlin.toString(this.includeWrapper) + (', projectType=' + Kotlin.toString(this.projectType)) + (', ktorVersion=' + Kotlin.toString(this.ktorVersion)) + (', developmentPackage=' + Kotlin.toString(this.developmentPackage)) + (', artifactName=' + Kotlin.toString(this.artifactName)) + (', artifactGroup=' + Kotlin.toString(this.artifactGroup)) + (', developmentEngineFQ=' + Kotlin.toString(this.developmentEngineFQ)) + (', reposToInclude=' + Kotlin.toString(this.reposToInclude)) + (', dependenciesToInclude=' + Kotlin.toString(this.dependenciesToInclude)) + (', ktorEngine=' + Kotlin.toString(this.ktorEngine)) + ')';
+    return 'BuildInfo(includeWrapper=' + Kotlin.toString(this.includeWrapper) + (', projectType=' + Kotlin.toString(this.projectType)) + (', ktorVersion=' + Kotlin.toString(this.ktorVersion)) + (', developmentPackage=' + Kotlin.toString(this.developmentPackage)) + (', artifactName=' + Kotlin.toString(this.artifactName)) + (', artifactGroup=' + Kotlin.toString(this.artifactGroup)) + (', developmentEngineFQ=' + Kotlin.toString(this.developmentEngineFQ)) + (', reposToInclude=' + Kotlin.toString(this.reposToInclude)) + (', dependenciesToInclude=' + Kotlin.toString(this.dependenciesToInclude)) + (', ktorEngine=' + Kotlin.toString(this.ktorEngine)) + (', fetch=' + Kotlin.toString(this.fetch)) + ')';
   };
   BuildInfo.prototype.hashCode = function () {
     var result = 0;
@@ -1060,10 +1079,11 @@
     result = result * 31 + Kotlin.hashCode(this.reposToInclude) | 0;
     result = result * 31 + Kotlin.hashCode(this.dependenciesToInclude) | 0;
     result = result * 31 + Kotlin.hashCode(this.ktorEngine) | 0;
+    result = result * 31 + Kotlin.hashCode(this.fetch) | 0;
     return result;
   };
   BuildInfo.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.includeWrapper, other.includeWrapper) && Kotlin.equals(this.projectType, other.projectType) && Kotlin.equals(this.ktorVersion, other.ktorVersion) && Kotlin.equals(this.developmentPackage, other.developmentPackage) && Kotlin.equals(this.artifactName, other.artifactName) && Kotlin.equals(this.artifactGroup, other.artifactGroup) && Kotlin.equals(this.developmentEngineFQ, other.developmentEngineFQ) && Kotlin.equals(this.reposToInclude, other.reposToInclude) && Kotlin.equals(this.dependenciesToInclude, other.dependenciesToInclude) && Kotlin.equals(this.ktorEngine, other.ktorEngine)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.includeWrapper, other.includeWrapper) && Kotlin.equals(this.projectType, other.projectType) && Kotlin.equals(this.ktorVersion, other.ktorVersion) && Kotlin.equals(this.developmentPackage, other.developmentPackage) && Kotlin.equals(this.artifactName, other.artifactName) && Kotlin.equals(this.artifactGroup, other.artifactGroup) && Kotlin.equals(this.developmentEngineFQ, other.developmentEngineFQ) && Kotlin.equals(this.reposToInclude, other.reposToInclude) && Kotlin.equals(this.dependenciesToInclude, other.dependenciesToInclude) && Kotlin.equals(this.ktorEngine, other.ktorEngine) && Kotlin.equals(this.fetch, other.fetch)))));
   };
   function FileContainer() {
   }
@@ -1091,45 +1111,35 @@
       mode = toInt('644', 8);
     $receiver.add_dkzqdg$(name, toByteArray(content, charset), mode);
   }
-  function Feature() {
-    this.dependencies_baa9gz$_0 = lazy(Feature$dependencies$lambda);
+  function Feature(deps) {
+    Block.call(this, deps.slice());
     this.documentation_nx4xfm$_0 = null;
   }
-  Object.defineProperty(Feature.prototype, 'dependencies', {
-    get: function () {
-      return this.dependencies_baa9gz$_0.value;
-    }
-  });
   Object.defineProperty(Feature.prototype, 'documentation', {
     get: function () {
       return this.documentation_nx4xfm$_0;
     }
   });
-  Feature.prototype.imports_jbwadm$ = function (info) {
-    return emptyList();
+  Feature.prototype.render_miqy8c$ = function ($receiver, info) {
+    var tmp$, tmp$_0;
+    tmp$ = this.repos.iterator();
+    while (tmp$.hasNext()) {
+      var repo = tmp$.next();
+      addMavenRepository($receiver, repo);
+    }
+    tmp$_0 = this.artifacts.iterator();
+    while (tmp$_0.hasNext()) {
+      var artifact = tmp$_0.next();
+      addCompileDependency($receiver, new MvnArtifact(artifact));
+    }
+    this.renderFeature_gtq0m3$($receiver, info);
   };
-  Feature.prototype.hoconKtorSection_j0vqe2$ = function ($receiver, info) {
+  Feature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
   };
-  Feature.prototype.hoconKtorDeploymentSection_j0vqe2$ = function ($receiver, info) {
-  };
-  Feature.prototype.classes_j0vqe2$ = function ($receiver, info) {
-  };
-  Feature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
-  };
-  Feature.prototype.routing_j0vqe2$ = function ($receiver, info) {
-  };
-  Feature.prototype.extensions_j0vqe2$ = function ($receiver, info) {
-  };
-  Feature.prototype.addFiles_yiqn0e$ = function (info, files, fetcher, continuation) {
-    return Unit;
-  };
-  function Feature$dependencies$lambda() {
-    return emptyList();
-  }
   Feature.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'Feature',
-    interfaces: []
+    interfaces: [Block]
   };
   function Repos() {
     Repos_instance = this;
@@ -1169,10 +1179,9 @@
   }
   function AuthBasicFeature() {
     AuthBasicFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance()]);
     this.repos_gdc384$_0 = Repos_getInstance().ktor;
     this.artifacts_u3usuk$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
-    this.dependencies_ngdkn6$_0 = lazy(AuthBasicFeature$dependencies$lambda);
     this.id_l2z8dw$_0 = 'auth-basic';
     this.title_fcz6ob$_0 = 'Authentication Basic';
     this.description_2o6p01$_0 = 'Handle Basic authentication';
@@ -1186,11 +1195,6 @@
   Object.defineProperty(AuthBasicFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_u3usuk$_0;
-    }
-  });
-  Object.defineProperty(AuthBasicFeature.prototype, 'dependencies', {
-    get: function () {
-      return this.dependencies_ngdkn6$_0.value;
     }
   });
   Object.defineProperty(AuthBasicFeature.prototype, 'id', {
@@ -1213,9 +1217,16 @@
       return this.documentation_zez1d9$_0;
     }
   });
-  function AuthBasicFeature$dependencies$lambda() {
-    return listOf(AuthFeature_getInstance());
+  function AuthBasicFeature$renderFeature$lambda($receiver) {
+    $receiver.line_61zpoe$('basic'.length === 0 ? '{ ' + '' : 'basic' + ' { ' + '');
+    $receiver._indent();
+    $receiver._unindent();
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
   }
+  AuthBasicFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addAuthProvider($receiver, AuthBasicFeature$renderFeature$lambda);
+  };
   AuthBasicFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'AuthBasicFeature',
@@ -1230,10 +1241,9 @@
   }
   function AuthDigestFeature() {
     AuthDigestFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance()]);
     this.repos_c8nfaw$_0 = Repos_getInstance().ktor;
     this.artifacts_eodlew$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
-    this.dependencies_f4ppya$_0 = lazy(AuthDigestFeature$dependencies$lambda);
     this.id_8m6rlc$_0 = 'auth-digest';
     this.title_b8air3$_0 = 'Authentication Digest';
     this.description_jyeoml$_0 = 'Handle Digest authentication';
@@ -1247,11 +1257,6 @@
   Object.defineProperty(AuthDigestFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_eodlew$_0;
-    }
-  });
-  Object.defineProperty(AuthDigestFeature.prototype, 'dependencies', {
-    get: function () {
-      return this.dependencies_f4ppya$_0.value;
     }
   });
   Object.defineProperty(AuthDigestFeature.prototype, 'id', {
@@ -1274,9 +1279,6 @@
       return this.documentation_o927hr$_0;
     }
   });
-  function AuthDigestFeature$dependencies$lambda() {
-    return listOf(AuthFeature_getInstance());
-  }
   AuthDigestFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'AuthDigestFeature',
@@ -1291,13 +1293,14 @@
   }
   function AuthFeature() {
     AuthFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_7vahic$_0 = Repos_getInstance().ktor;
     this.artifacts_w3fnd0$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
     this.id_2oeams$_0 = 'auth';
     this.title_8vne25$_0 = 'Authentication';
     this.description_4ec9yv$_0 = 'Handle Basic and Digest HTTP Auth, Form authentication and OAuth 1a and 2';
     this.documentation_awl92t$_0 = 'https://ktor.io/features/authentication.html';
+    this.BLOCK = this.newSlot_pdl1vj$('BLOCK');
   }
   Object.defineProperty(AuthFeature.prototype, 'repos', {
     get: function () {
@@ -1329,6 +1332,40 @@
       return this.documentation_awl92t$_0;
     }
   });
+  function AuthFeature$renderFeature$lambda(closure$info, this$AuthFeature, this$renderFeature) {
+    return function ($receiver) {
+      if (closure$info.ktorVer.compareTo_11rb$(Versions_getInstance().V092) >= 0) {
+        var $receiver_0 = 'install(Authentication)';
+        $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+        $receiver._indent();
+        try {
+          var this$AuthFeature_0 = this$AuthFeature;
+          this$renderFeature.block_rsgfsn$($receiver, this$AuthFeature_0.BLOCK);
+        }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$('}' + '');
+      }
+       else {
+        var $receiver_1 = 'install(Authentication)';
+        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + '' : $receiver_1 + ' { ' + '');
+        $receiver._indent();
+        try {
+          var this$AuthFeature_1 = this$AuthFeature;
+          this$renderFeature.block_rsgfsn$($receiver, this$AuthFeature_1.BLOCK);
+        }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$('}' + '');
+      }
+      return Unit;
+    };
+  }
+  AuthFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addFeatureInstall($receiver, AuthFeature$renderFeature$lambda(info, this, $receiver));
+  };
   AuthFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'AuthFeature',
@@ -1341,12 +1378,20 @@
     }
     return AuthFeature_instance;
   }
+  function addAuthProvider$lambda(closure$callback) {
+    return function ($receiver) {
+      closure$callback($receiver);
+      return Unit;
+    };
+  }
+  function addAuthProvider($receiver, callback) {
+    $receiver.append_qu2wte$(AuthFeature_getInstance().BLOCK, void 0, addAuthProvider$lambda(callback));
+  }
   function AuthJwtFeature() {
     AuthJwtFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance()]);
     this.repos_3yaw91$_0 = Repos_getInstance().ktor;
     this.artifacts_mpewbp$_0 = listOf('io.ktor:ktor-auth-jwt:$ktor_version');
-    this.dependencies_vhapdn$_0 = lazy(AuthJwtFeature$dependencies$lambda);
     this.id_96dnzh$_0 = 'auth-jwt';
     this.title_4ynssu$_0 = 'Authentication JWT';
     this.description_6r30ye$_0 = 'Handle JWT authentication';
@@ -1360,11 +1405,6 @@
   Object.defineProperty(AuthJwtFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_mpewbp$_0;
-    }
-  });
-  Object.defineProperty(AuthJwtFeature.prototype, 'dependencies', {
-    get: function () {
-      return this.dependencies_vhapdn$_0.value;
     }
   });
   Object.defineProperty(AuthJwtFeature.prototype, 'id', {
@@ -1387,9 +1427,6 @@
       return this.documentation_31w9g$_0;
     }
   });
-  function AuthJwtFeature$dependencies$lambda() {
-    return listOf(AuthFeature_getInstance());
-  }
   AuthJwtFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'AuthJwtFeature',
@@ -1404,10 +1441,9 @@
   }
   function AuthLdapFeature() {
     AuthLdapFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance()]);
     this.repos_h37k17$_0 = Repos_getInstance().ktor;
     this.artifacts_u8q64r$_0 = listOf('io.ktor:ktor-auth-ldap:$ktor_version');
-    this.dependencies_u00jxb$_0 = lazy(AuthLdapFeature$dependencies$lambda);
     this.id_t8ep8z$_0 = 'auth-ldap';
     this.title_i3kgl0$_0 = 'Authentication LDAP';
     this.description_9cnttc$_0 = 'Handle JDAP authentication';
@@ -1421,11 +1457,6 @@
   Object.defineProperty(AuthLdapFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_u8q64r$_0;
-    }
-  });
-  Object.defineProperty(AuthLdapFeature.prototype, 'dependencies', {
-    get: function () {
-      return this.dependencies_u00jxb$_0.value;
     }
   });
   Object.defineProperty(AuthLdapFeature.prototype, 'id', {
@@ -1448,9 +1479,6 @@
       return this.documentation_c0ed66$_0;
     }
   });
-  function AuthLdapFeature$dependencies$lambda() {
-    return listOf(AuthFeature_getInstance());
-  }
   AuthLdapFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'AuthLdapFeature',
@@ -1465,10 +1493,9 @@
   }
   function AuthOauthFeature() {
     AuthOauthFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance()]);
     this.repos_kohdg5$_0 = Repos_getInstance().ktor;
     this.artifacts_iga75h$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
-    this.dependencies_w441hn$_0 = lazy(AuthOauthFeature$dependencies$lambda);
     this.id_mtmshv$_0 = 'auth-oauth';
     this.title_lou9zy$_0 = 'Authentication OAuth';
     this.description_pb06ii$_0 = 'Handle OAuth authentication';
@@ -1482,11 +1509,6 @@
   Object.defineProperty(AuthOauthFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_iga75h$_0;
-    }
-  });
-  Object.defineProperty(AuthOauthFeature.prototype, 'dependencies', {
-    get: function () {
-      return this.dependencies_w441hn$_0.value;
     }
   });
   Object.defineProperty(AuthOauthFeature.prototype, 'id', {
@@ -1509,9 +1531,6 @@
       return this.documentation_jqbbpg$_0;
     }
   });
-  function AuthOauthFeature$dependencies$lambda() {
-    return listOf(AuthFeature_getInstance());
-  }
   AuthOauthFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'AuthOauthFeature',
@@ -1526,7 +1545,7 @@
   }
   function AutoHeadResponseFeature() {
     AutoHeadResponseFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_kkh3f0$_0 = Repos_getInstance().ktor;
     this.artifacts_bu7kwk$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_qppt8$_0 = 'caching-headers';
@@ -1564,36 +1583,40 @@
       return this.documentation_uh6iib$_0;
     }
   });
-  AutoHeadResponseFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.features.*');
-  };
-  AutoHeadResponseFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('install(CachingHeaders)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+  function AutoHeadResponseFeature$renderFeature$lambda($receiver) {
+    var $receiver_0 = 'install(CachingHeaders)';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
       $receiver.line_61zpoe$('options { outgoingContent ->');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
+      $receiver._indent();
       try {
-        $receiver.line_61zpoe$('when (outgoingContent.contentType?.withoutParameters())' + ' {' + '');
-        $receiver.indentation = $receiver.indentation + 1 | 0;
+        var $receiver_1 = 'when (outgoingContent.contentType?.withoutParameters())';
+        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + '' : $receiver_1 + ' { ' + '');
+        $receiver._indent();
         try {
           $receiver.line_61zpoe$('ContentType.Text.CSS -> CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 24 * 60 * 60))');
           $receiver.line_61zpoe$('else -> null');
         }
         finally {
-          $receiver.indentation = $receiver.indentation - 1 | 0;
+          $receiver._unindent();
         }
-        $receiver.line_61zpoe$('}');
+        $receiver.line_61zpoe$('}' + '');
       }
       finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
+        $receiver._unindent();
       }
       $receiver.line_61zpoe$('}');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  AutoHeadResponseFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.features.*');
+    addFeatureInstall($receiver, AutoHeadResponseFeature$renderFeature$lambda);
   };
   AutoHeadResponseFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -1609,7 +1632,7 @@
   }
   function CORSFeature() {
     CORSFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_oe5gzt$_0 = Repos_getInstance().ktor;
     this.artifacts_4k9qv$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_6t1969$_0 = 'cors';
@@ -1647,12 +1670,10 @@
       return this.documentation_mhlcsw$_0;
     }
   });
-  CORSFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.features.*');
-  };
-  CORSFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('install(CORS)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+  function CORSFeature$renderFeature$lambda($receiver) {
+    var $receiver_0 = 'install(CORS)';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
       $receiver.line_61zpoe$('method(HttpMethod.Options)');
       $receiver.line_61zpoe$('method(HttpMethod.Get)');
@@ -1665,9 +1686,14 @@
       $receiver.line_61zpoe$('anyHost()');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  CORSFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.features.*');
+    addFeatureInstall($receiver, CORSFeature$renderFeature$lambda);
   };
   CORSFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -1683,7 +1709,7 @@
   }
   function CachingHeadersFeature() {
     CachingHeadersFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_uw8ngd$_0 = Repos_getInstance().ktor;
     this.artifacts_txevmr$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_rntdhx$_0 = 'auto-head-response';
@@ -1721,11 +1747,13 @@
       return this.documentation_d2dgk6$_0;
     }
   });
-  CachingHeadersFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.features.*');
-  };
-  CachingHeadersFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+  function CachingHeadersFeature$renderFeature$lambda($receiver) {
     $receiver.line_61zpoe$('install(AutoHeadResponse)');
+    return Unit;
+  }
+  CachingHeadersFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.features.*');
+    addFeatureInstall($receiver, CachingHeadersFeature$renderFeature$lambda);
   };
   CachingHeadersFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -1741,7 +1769,7 @@
   }
   function CallLoggingFeature() {
     CallLoggingFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_i5jjl3$_0 = Repos_getInstance().ktor;
     this.artifacts_moa661$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_f09gfl$_0 = 'call-logging';
@@ -1779,20 +1807,23 @@
       return this.documentation_5es19u$_0;
     }
   });
-  CallLoggingFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.features.*');
-  };
-  CallLoggingFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('install(CallLogging)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+  function CallLoggingFeature$renderFeature$lambda($receiver) {
+    var $receiver_0 = 'install(CallLogging)';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
       $receiver.line_61zpoe$('level = Level.INFO');
       $receiver.line_61zpoe$('filter { call -> call.request.path().startsWith("/") }');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  CallLoggingFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.features.*');
+    addFeatureInstall($receiver, CallLoggingFeature$renderFeature$lambda);
   };
   CallLoggingFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -1808,7 +1839,7 @@
   }
   function CompressionFeature() {
     CompressionFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_viging$_0 = Repos_getInstance().ktor;
     this.artifacts_dplvt8$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_1vcik4$_0 = 'compression';
@@ -1846,37 +1877,40 @@
       return this.documentation_1q1cdp$_0;
     }
   });
-  CompressionFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.features.*');
-  };
-  CompressionFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('install(Compression)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+  function CompressionFeature$renderFeature$lambda($receiver) {
+    var $receiver_0 = 'install(Compression)';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
-      $receiver.line_61zpoe$('gzip' + ' {' + '');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
+      $receiver.line_61zpoe$('gzip'.length === 0 ? '{ ' + '' : 'gzip' + ' { ' + '');
+      $receiver._indent();
       try {
         $receiver.line_61zpoe$('priority = 1.0');
       }
       finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
+        $receiver._unindent();
       }
-      $receiver.line_61zpoe$('}');
-      $receiver.line_61zpoe$('deflate' + ' {' + '');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
+      $receiver.line_61zpoe$('}' + '');
+      $receiver.line_61zpoe$('deflate'.length === 0 ? '{ ' + '' : 'deflate' + ' { ' + '');
+      $receiver._indent();
       try {
         $receiver.line_61zpoe$('priority = 10.0');
         $receiver.line_61zpoe$('minimumSize(1024) // condition');
       }
       finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
+        $receiver._unindent();
       }
-      $receiver.line_61zpoe$('}');
+      $receiver.line_61zpoe$('}' + '');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  CompressionFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.features.*');
+    addFeatureInstall($receiver, CompressionFeature$renderFeature$lambda);
   };
   CompressionFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -1892,7 +1926,7 @@
   }
   function ConditionalHeadersFeature() {
     ConditionalHeadersFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_ty7nmk$_0 = Repos_getInstance().ktor;
     this.artifacts_wgsw8s$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_9jyzvg$_0 = 'conditional-headers';
@@ -1930,11 +1964,13 @@
       return this.documentation_evxn25$_0;
     }
   });
-  ConditionalHeadersFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.features.*');
-  };
-  ConditionalHeadersFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+  function ConditionalHeadersFeature$renderFeature$lambda($receiver) {
     $receiver.line_61zpoe$('install(ConditionalHeaders)');
+    return Unit;
+  }
+  ConditionalHeadersFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.features.*');
+    addFeatureInstall($receiver, ConditionalHeadersFeature$renderFeature$lambda);
   };
   ConditionalHeadersFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -1950,13 +1986,14 @@
   }
   function ContentNegotiationFeature() {
     ContentNegotiationFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_n2l5us$_0 = Repos_getInstance().ktor;
     this.artifacts_bjzgak$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_gizhws$_0 = 'content-negotiation';
     this.title_o2y2el$_0 = 'ContentNegotiation';
     this.description_qp3lmx$_0 = 'Provides automatic content conversion according to Content-Type and Accept headers.';
     this.documentation_w25oc5$_0 = 'https://ktor.io/features/content-negotiation.html';
+    this.BLOCK = this.newSlot_pdl1vj$('BLOCK');
   }
   Object.defineProperty(ContentNegotiationFeature.prototype, 'repos', {
     get: function () {
@@ -1988,6 +2025,25 @@
       return this.documentation_w25oc5$_0;
     }
   });
+  function ContentNegotiationFeature$renderFeature$lambda(this$ContentNegotiationFeature, this$renderFeature) {
+    return function ($receiver) {
+      var $receiver_0 = 'install(ContentNegotiation)';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+      $receiver._indent();
+      try {
+        var this$ContentNegotiationFeature_0 = this$ContentNegotiationFeature;
+        this$renderFeature.block_rsgfsn$($receiver, this$ContentNegotiationFeature_0.BLOCK);
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      return Unit;
+    };
+  }
+  ContentNegotiationFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addFeatureInstall($receiver, ContentNegotiationFeature$renderFeature$lambda(this, $receiver));
+  };
   ContentNegotiationFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'ContentNegotiationFeature',
@@ -2002,7 +2058,7 @@
   }
   function CssDslFeature() {
     CssDslFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.repos_w3vhti$_0 = plus(Repos_getInstance().jcenter, Repos_getInstance().kotlin_js_wrappers);
     this.artifacts_hbxqui$_0 = listOf('org.jetbrains:kotlin-css-jvm:1.0.0-pre.31-kotlin-1.2.41');
     this.id_67agn6$_0 = 'css-dsl';
@@ -2040,92 +2096,102 @@
       return this.documentation_9osmsj$_0;
     }
   });
-  CssDslFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf_0(['kotlinx.html.*', 'kotlinx.css.*']);
-  };
-  CssDslFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('get("/styles.css")' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+  function CssDslFeature$renderFeature$lambda($receiver) {
+    var $receiver_0 = 'get("/styles.css")';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
-      $receiver.line_61zpoe$('call.respondCss' + ' {' + '');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
+      var $receiver_1 = 'call.respondCss';
+      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + '' : $receiver_1 + ' { ' + '');
+      $receiver._indent();
       try {
-        $receiver.line_61zpoe$('body' + ' {' + '');
-        $receiver.indentation = $receiver.indentation + 1 | 0;
+        $receiver.line_61zpoe$('body'.length === 0 ? '{ ' + '' : 'body' + ' { ' + '');
+        $receiver._indent();
         try {
           $receiver.line_61zpoe$('backgroundColor = Color.red');
         }
         finally {
-          $receiver.indentation = $receiver.indentation - 1 | 0;
+          $receiver._unindent();
         }
-        $receiver.line_61zpoe$('}');
-        $receiver.line_61zpoe$('p' + ' {' + '');
-        $receiver.indentation = $receiver.indentation + 1 | 0;
+        $receiver.line_61zpoe$('}' + '');
+        $receiver.line_61zpoe$('p'.length === 0 ? '{ ' + '' : 'p' + ' { ' + '');
+        $receiver._indent();
         try {
           $receiver.line_61zpoe$('fontSize = 2.em');
         }
         finally {
-          $receiver.indentation = $receiver.indentation - 1 | 0;
+          $receiver._unindent();
         }
-        $receiver.line_61zpoe$('}');
-        $receiver.line_61zpoe$('rule("p.myclass")' + ' {' + '');
-        $receiver.indentation = $receiver.indentation + 1 | 0;
+        $receiver.line_61zpoe$('}' + '');
+        var $receiver_2 = 'rule("p.myclass")';
+        $receiver.line_61zpoe$($receiver_2.length === 0 ? '{ ' + '' : $receiver_2 + ' { ' + '');
+        $receiver._indent();
         try {
           $receiver.line_61zpoe$('color = Color.blue');
         }
         finally {
-          $receiver.indentation = $receiver.indentation - 1 | 0;
+          $receiver._unindent();
         }
-        $receiver.line_61zpoe$('}');
+        $receiver.line_61zpoe$('}' + '');
       }
       finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
+        $receiver._unindent();
       }
-      $receiver.line_61zpoe$('}');
+      $receiver.line_61zpoe$('}' + '');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
-  };
-  CssDslFeature.prototype.extensions_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('fun FlowOrMetaDataContent.styleCss(builder: CSSBuilder.() -> Unit)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  function CssDslFeature$renderFeature$lambda_0($receiver) {
+    var $receiver_0 = 'fun FlowOrMetaDataContent.styleCss(builder: CSSBuilder.() -> Unit)';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
-      $receiver.line_61zpoe$('style(type = ContentType.Text.CSS.toString())' + ' {' + '');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
+      var $receiver_1 = 'style(type = ContentType.Text.CSS.toString())';
+      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + '' : $receiver_1 + ' { ' + '');
+      $receiver._indent();
       try {
         $receiver.line_61zpoe$('+CSSBuilder().apply(builder).toString()');
       }
       finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
+        $receiver._unindent();
       }
-      $receiver.line_61zpoe$('}');
+      $receiver.line_61zpoe$('}' + '');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
-    $receiver.line_61zpoe$('fun CommonAttributeGroupFacade.style(builder: CSSBuilder.() -> Unit)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+    $receiver.line_61zpoe$('}' + '');
+    var $receiver_2 = 'fun CommonAttributeGroupFacade.style(builder: CSSBuilder.() -> Unit)';
+    $receiver.line_61zpoe$($receiver_2.length === 0 ? '{ ' + '' : $receiver_2 + ' { ' + '');
+    $receiver._indent();
     try {
       $receiver.line_61zpoe$('this.style = CSSBuilder().apply(builder).toString().trim()');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
-    $receiver.line_61zpoe$('suspend inline fun ApplicationCall.respondCss(builder: CSSBuilder.() -> Unit)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+    $receiver.line_61zpoe$('}' + '');
+    var $receiver_3 = 'suspend inline fun ApplicationCall.respondCss(builder: CSSBuilder.() -> Unit)';
+    $receiver.line_61zpoe$($receiver_3.length === 0 ? '{ ' + '' : $receiver_3 + ' { ' + '');
+    $receiver._indent();
     try {
       $receiver.line_61zpoe$('this.respondText(CSSBuilder().apply(builder).toString(), ContentType.Text.CSS)');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  CssDslFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'kotlinx.html.*');
+    addImport($receiver, 'kotlinx.css.*');
+    addRoute($receiver, CssDslFeature$renderFeature$lambda);
+    addExtensionMethods($receiver, CssDslFeature$renderFeature$lambda_0);
   };
   CssDslFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -2141,7 +2207,7 @@
   }
   function DataConversionFeature() {
     DataConversionFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_8tlujo$_0 = Repos_getInstance().ktor;
     this.artifacts_u45w58$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_2onzc4$_0 = 'data-conversion';
@@ -2179,11 +2245,13 @@
       return this.documentation_g2l1rx$_0;
     }
   });
-  DataConversionFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.features.*');
-  };
-  DataConversionFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+  function DataConversionFeature$renderFeature$lambda($receiver) {
     $receiver.line_61zpoe$('install(DataConversion)');
+    return Unit;
+  }
+  DataConversionFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.features.*');
+    addFeatureInstall($receiver, DataConversionFeature$renderFeature$lambda);
   };
   DataConversionFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -2199,7 +2267,7 @@
   }
   function DefaultHeadersFeature() {
     DefaultHeadersFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_919slb$_0 = Repos_getInstance().ktor;
     this.artifacts_6l0msh$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_if58rb$_0 = 'default-headers';
@@ -2237,19 +2305,22 @@
       return this.documentation_sx3qg8$_0;
     }
   });
-  DefaultHeadersFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.features.*');
-  };
-  DefaultHeadersFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('install(DefaultHeaders)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+  function DefaultHeadersFeature$renderFeature$lambda($receiver) {
+    var $receiver_0 = 'install(DefaultHeaders)';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
       $receiver.line_61zpoe$('header("X-Engine", "Ktor") // will send this header with each response');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  DefaultHeadersFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.features.*');
+    addFeatureInstall($receiver, DefaultHeadersFeature$renderFeature$lambda);
   };
   DefaultHeadersFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -2265,7 +2336,7 @@
   }
   function ForwardedHeaderSupportFeature() {
     ForwardedHeaderSupportFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_avmc56$_0 = Repos_getInstance().ktor;
     this.artifacts_qtfn4q$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_p6erwi$_0 = 'forwarded-header-support';
@@ -2303,12 +2374,14 @@
       return this.documentation_d9es7z$_0;
     }
   });
-  ForwardedHeaderSupportFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.features.*');
-  };
-  ForwardedHeaderSupportFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+  function ForwardedHeaderSupportFeature$renderFeature$lambda($receiver) {
     $receiver.line_61zpoe$('install(ForwardedHeaderSupport) // WARNING: for security, do not include this if not behind a reverse proxy');
     $receiver.line_61zpoe$('install(XForwardedHeaderSupport) // WARNING: for security, do not include this if not behind a reverse proxy');
+    return Unit;
+  }
+  ForwardedHeaderSupportFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.features.*');
+    addFeatureInstall($receiver, ForwardedHeaderSupportFeature$renderFeature$lambda);
   };
   ForwardedHeaderSupportFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -2324,7 +2397,7 @@
   }
   function FreemarkerFeature() {
     FreemarkerFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.repos_csvuzi$_0 = Repos_getInstance().ktor;
     this.artifacts_u4kg8y$_0 = listOf('io.ktor:ktor-freemarker:$ktor_version');
     this.id_fl2zti$_0 = 'freemarker';
@@ -2362,71 +2435,116 @@
       return this.documentation_ccfenr$_0;
     }
   });
-  FreemarkerFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf_0(['freemarker.cache.*', 'io.ktor.freemarker.*']);
-  };
-  FreemarkerFeature.prototype.classes_j0vqe2$ = function ($receiver, info) {
+  function FreemarkerFeature$renderFeature$lambda($receiver) {
     $receiver.line_61zpoe$('data class IndexData(val items: List<Int>)');
-  };
-  FreemarkerFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('install(FreeMarker)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+    return Unit;
+  }
+  function FreemarkerFeature$renderFeature$lambda_0($receiver) {
+    var $receiver_0 = 'install(FreeMarker)';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
       $receiver.line_61zpoe$('templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
-  };
-  FreemarkerFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('get("/html-freemarker")' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  function FreemarkerFeature$renderFeature$lambda_1($receiver) {
+    var $receiver_0 = 'get("/html-freemarker")';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
       $receiver.line_61zpoe$('call.respond(FreeMarkerContent("index.ftl", mapOf("data" to IndexData(listOf(1, 2, 3))), ""))');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
-  };
-  FreemarkerFeature.prototype.extensions_j0vqe2$ = function ($receiver, info) {
-  };
-  function FreemarkerFeature$addFiles$lambda(closure$info) {
-    return function ($receiver) {
-      $receiver.line_61zpoe$('<#-- @ftlvariable name=' + '"' + 'data' + '"' + ' type=' + '"' + closure$info.artifactGroup + '.IndexData' + '"' + ' -->');
-      $receiver.line_61zpoe$('<html>');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      try {
-        $receiver.line_61zpoe$('<body>');
-        $receiver.indentation = $receiver.indentation + 1 | 0;
-        try {
-          $receiver.line_61zpoe$('<ul>');
-          $receiver.line_61zpoe$('<#list data.items as item>');
-          $receiver.indentation = $receiver.indentation + 1 | 0;
-          try {
-            $receiver.line_61zpoe$('<li>${item}<\/li>');
-          }
-          finally {
-            $receiver.indentation = $receiver.indentation - 1 | 0;
-          }
-          $receiver.line_61zpoe$('<\/#list>');
-          $receiver.line_61zpoe$('<\/ul>');
-        }
-        finally {
-          $receiver.indentation = $receiver.indentation - 1 | 0;
-        }
-        $receiver.line_61zpoe$('<\/body>');
-      }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
-      }
-      $receiver.line_61zpoe$('<\/html>');
-      return Unit;
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  function FreemarkerFeature$renderFeature$lambda_2(closure$info_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$FreemarkerFeature$renderFeature$lambda(closure$info_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
     };
   }
-  FreemarkerFeature.prototype.addFiles_yiqn0e$ = function (info, files, fetcher, continuation) {
-    add(files, info.artifactName + '/resources/templates/index.ftl', indenter(FreemarkerFeature$addFiles$lambda(info)));
+  function Coroutine$FreemarkerFeature$renderFeature$lambda(closure$info_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$FreemarkerFeature$renderFeature$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$FreemarkerFeature$renderFeature$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$FreemarkerFeature$renderFeature$lambda.prototype.constructor = Coroutine$FreemarkerFeature$renderFeature$lambda;
+  Coroutine$FreemarkerFeature$renderFeature$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.local$$receiver.line_61zpoe$('<#-- @ftlvariable name=' + '"' + 'data' + '"' + ' type=' + '"' + this.local$closure$info.artifactGroup + '.IndexData' + '"' + ' -->');
+            this.local$$receiver.line_61zpoe$('<html>');
+            this.local$$receiver._indent();
+            try {
+              this.local$$receiver.line_61zpoe$('<body>');
+              this.local$$receiver._indent();
+              try {
+                this.local$$receiver.line_61zpoe$('<ul>');
+                this.local$$receiver.line_61zpoe$('<#list data.items as item>');
+                this.local$$receiver._indent();
+                try {
+                  this.local$$receiver.line_61zpoe$('<li>${item}<\/li>');
+                }
+                finally {
+                  this.local$$receiver._unindent();
+                }
+                this.local$$receiver.line_61zpoe$('<\/#list>');
+                this.local$$receiver.line_61zpoe$('<\/ul>');
+              }
+              finally {
+                this.local$$receiver._unindent();
+              }
+              this.local$$receiver.line_61zpoe$('<\/body>');
+            }
+            finally {
+              this.local$$receiver._unindent();
+            }
+
+            return this.local$$receiver.line_61zpoe$('<\/html>');
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  FreemarkerFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'freemarker.cache.*');
+    addImport($receiver, 'io.ktor.freemarker.*');
+    addApplicationClasses($receiver, FreemarkerFeature$renderFeature$lambda);
+    addFeatureInstall($receiver, FreemarkerFeature$renderFeature$lambda_0);
+    addRoute($receiver, FreemarkerFeature$renderFeature$lambda_1);
+    $receiver.fileText_7k8vha$(info.artifactName + '/resources/templates/index.ftl', void 0, void 0, FreemarkerFeature$renderFeature$lambda_2(info));
   };
   FreemarkerFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -2442,7 +2560,7 @@
   }
   function HSTSFeature() {
     HSTSFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_ekzbmu$_0 = Repos_getInstance().ktor;
     this.artifacts_q4ud8a$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_3oa8eq$_0 = 'hsts';
@@ -2480,19 +2598,22 @@
       return this.documentation_hhoj3n$_0;
     }
   });
-  HSTSFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.features.*');
-  };
-  HSTSFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('install(HSTS)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+  function HSTSFeature$renderFeature$lambda($receiver) {
+    var $receiver_0 = 'install(HSTS)';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
       $receiver.line_61zpoe$('includeSubDomains = true');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  HSTSFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.features.*');
+    addFeatureInstall($receiver, HSTSFeature$renderFeature$lambda);
   };
   HSTSFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -2508,7 +2629,7 @@
   }
   function HtmlDslFeature() {
     HtmlDslFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.repos_jw6vl4$_0 = Repos_getInstance().jcenter;
     this.artifacts_mmn820$_0 = listOf('io.ktor:ktor-html-builder:$ktor_version');
     this.id_6osof4$_0 = 'html-dsl';
@@ -2546,36 +2667,40 @@
       return this.documentation_kyhzcv$_0;
     }
   });
-  HtmlDslFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf_0(['io.ktor.html.*', 'kotlinx.html.*']);
-  };
-  HtmlDslFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('get("/html-dsl")' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+  function HtmlDslFeature$renderFeature$lambda($receiver) {
+    var $receiver_0 = 'get("/html-dsl")';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
-      $receiver.line_61zpoe$('call.respondHtml' + ' {' + '');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
+      var $receiver_1 = 'call.respondHtml';
+      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + '' : $receiver_1 + ' { ' + '');
+      $receiver._indent();
       try {
-        $receiver.line_61zpoe$('body' + ' {' + '');
-        $receiver.indentation = $receiver.indentation + 1 | 0;
+        $receiver.line_61zpoe$('body'.length === 0 ? '{ ' + '' : 'body' + ' { ' + '');
+        $receiver._indent();
         try {
           $receiver.line_61zpoe$('h1 { +"HTML" }');
         }
         finally {
-          $receiver.indentation = $receiver.indentation - 1 | 0;
+          $receiver._unindent();
         }
-        $receiver.line_61zpoe$('}');
+        $receiver.line_61zpoe$('}' + '');
       }
       finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
+        $receiver._unindent();
       }
-      $receiver.line_61zpoe$('}');
+      $receiver.line_61zpoe$('}' + '');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  HtmlDslFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.html.*');
+    addImport($receiver, 'kotlinx.html.*');
+    addRoute($receiver, HtmlDslFeature$renderFeature$lambda);
   };
   HtmlDslFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -2591,7 +2716,7 @@
   }
   function HttpClientFeature() {
     HttpClientFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_widcof$_0 = Repos_getInstance().ktor;
     this.artifacts_7ubutr$_0 = listOf('io.ktor:ktor-client-apache:$ktor_version');
     this.id_5df4yx$_0 = 'ktor-client-apache';
@@ -2643,7 +2768,7 @@
   }
   function HttpsRedirectFeature() {
     HttpsRedirectFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_gluhnx$_0 = Repos_getInstance().ktor;
     this.artifacts_npr6b7$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_wawpbf$_0 = 'https-redirect';
@@ -2681,12 +2806,10 @@
       return this.documentation_zfw7sc$_0;
     }
   });
-  HttpsRedirectFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.features.*');
-  };
-  HttpsRedirectFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('install(HttpsRedirect)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+  function HttpsRedirectFeature$renderFeature$lambda($receiver) {
+    var $receiver_0 = 'install(HttpsRedirect)';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
       $receiver.line_61zpoe$('// The port to redirect to. By default 443, the default HTTPS port.');
       $receiver.line_61zpoe$('sslPort = 443');
@@ -2694,9 +2817,14 @@
       $receiver.line_61zpoe$('permanentRedirect = true');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  HttpsRedirectFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.features.*');
+    addFeatureInstall($receiver, HttpsRedirectFeature$renderFeature$lambda);
   };
   HttpsRedirectFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -2712,10 +2840,9 @@
   }
   function JsonGsonFeature() {
     JsonGsonFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance(), ContentNegotiationFeature_getInstance(), RoutingFeature_getInstance()]);
     this.repos_m451m9$_0 = Repos_getInstance().ktor;
     this.artifacts_vpbenj$_0 = listOf('io.ktor:ktor-gson:$ktor_version');
-    this.dependencies_7nxs6z$_0 = lazy(JsonGsonFeature$dependencies$lambda);
     this.id_whgybt$_0 = 'ktor-gson';
     this.title_l3s52g$_0 = 'GSON';
     this.description_q40g24$_0 = 'Handles JSON serialization using GSON library';
@@ -2729,11 +2856,6 @@
   Object.defineProperty(JsonGsonFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_vpbenj$_0;
-    }
-  });
-  Object.defineProperty(JsonGsonFeature.prototype, 'dependencies', {
-    get: function () {
-      return this.dependencies_7nxs6z$_0.value;
     }
   });
   Object.defineProperty(JsonGsonFeature.prototype, 'id', {
@@ -2756,38 +2878,32 @@
       return this.documentation_5wcawm$_0;
     }
   });
-  JsonGsonFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf_0(['io.ktor.gson.*', 'io.ktor.features.*']);
-  };
-  JsonGsonFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('install(ContentNegotiation)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
-    try {
-      $receiver.line_61zpoe$('gson' + ' {' + '');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      $receiver.indentation = $receiver.indentation - 1 | 0;
-      $receiver.line_61zpoe$('}');
-    }
-    finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
-    }
-    $receiver.line_61zpoe$('}');
-  };
-  JsonGsonFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('get("/json/gson")' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+  function JsonGsonFeature$renderFeature$lambda($receiver) {
+    $receiver.line_61zpoe$('gson'.length === 0 ? '{ ' + '' : 'gson' + ' { ' + '');
+    $receiver._indent();
+    $receiver._unindent();
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  function JsonGsonFeature$renderFeature$lambda_0($receiver) {
+    var $receiver_0 = 'get("/json/gson")';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
       $receiver.line_61zpoe$('call.respond(mapOf("hello" to "world"))');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
-  };
-  function JsonGsonFeature$dependencies$lambda() {
-    return listOf(ContentNegotiationFeature_getInstance());
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
   }
+  JsonGsonFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.gson.*');
+    addImport($receiver, 'io.ktor.features.*');
+    $receiver.append_qu2wte$(ContentNegotiationFeature_getInstance().BLOCK, void 0, JsonGsonFeature$renderFeature$lambda);
+    addRoute($receiver, JsonGsonFeature$renderFeature$lambda_0);
+  };
   JsonGsonFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'JsonGsonFeature',
@@ -2802,10 +2918,9 @@
   }
   function JsonJacksonFeature() {
     JsonJacksonFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance(), ContentNegotiationFeature_getInstance(), RoutingFeature_getInstance()]);
     this.repos_6gchw1$_0 = Repos_getInstance().ktor;
     this.artifacts_tziadr$_0 = listOf('io.ktor:ktor-jackson:$ktor_version');
-    this.dependencies_3yn51j$_0 = lazy(JsonJacksonFeature$dependencies$lambda);
     this.id_f6uih$_0 = 'ktor-jackson';
     this.title_7gpefu$_0 = 'Jackson';
     this.description_10c27q$_0 = 'Handles JSON serialization using Jackson library';
@@ -2819,11 +2934,6 @@
   Object.defineProperty(JsonJacksonFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_tziadr$_0;
-    }
-  });
-  Object.defineProperty(JsonJacksonFeature.prototype, 'dependencies', {
-    get: function () {
-      return this.dependencies_3yn51j$_0.value;
     }
   });
   Object.defineProperty(JsonJacksonFeature.prototype, 'id', {
@@ -2846,43 +2956,38 @@
       return this.documentation_lvygo$_0;
     }
   });
-  JsonJacksonFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf_0(['com.fasterxml.jackson.databind.*', 'io.ktor.jackson.*', 'io.ktor.features.*']);
-  };
-  JsonJacksonFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('install(ContentNegotiation)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+  function JsonJacksonFeature$renderFeature$lambda($receiver) {
+    $receiver.line_61zpoe$('jackson'.length === 0 ? '{ ' + '' : 'jackson' + ' { ' + '');
+    $receiver._indent();
     try {
-      $receiver.line_61zpoe$('jackson' + ' {' + '');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      try {
-        $receiver.line_61zpoe$('enable(SerializationFeature.INDENT_OUTPUT)');
-      }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
-      }
-      $receiver.line_61zpoe$('}');
+      $receiver.line_61zpoe$('enable(SerializationFeature.INDENT_OUTPUT)');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
-  };
-  JsonJacksonFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('get("/json/jackson")' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  function JsonJacksonFeature$renderFeature$lambda_0($receiver) {
+    var $receiver_0 = 'get("/json/jackson")';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
       $receiver.line_61zpoe$('call.respond(mapOf("hello" to "world"))');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
-  };
-  function JsonJacksonFeature$dependencies$lambda() {
-    return listOf(ContentNegotiationFeature_getInstance());
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
   }
+  JsonJacksonFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'com.fasterxml.jackson.databind.*');
+    addImport($receiver, 'io.ktor.jackson.*');
+    addImport($receiver, 'io.ktor.features.*');
+    $receiver.append_qu2wte$(ContentNegotiationFeature_getInstance().BLOCK, void 0, JsonJacksonFeature$renderFeature$lambda);
+    addRoute($receiver, JsonJacksonFeature$renderFeature$lambda_0);
+  };
   JsonJacksonFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'JsonJacksonFeature',
@@ -2897,10 +3002,9 @@
   }
   function LocationsFeature() {
     LocationsFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance(), StatusPagesFeature_getInstance()]);
     this.repos_krkeos$_0 = Repos_getInstance().ktor;
     this.artifacts_3l6utg$_0 = listOf('io.ktor:ktor-locations:$ktor_version');
-    this.dependencies_tn1sqi$_0 = lazy(LocationsFeature$dependencies$lambda);
     this.id_3nq5lg$_0 = 'ktor-locations';
     this.title_jr7i4z$_0 = 'Locations';
     this.description_iieyh5$_0 = 'Allows to define route locations in a typed way';
@@ -2914,11 +3018,6 @@
   Object.defineProperty(LocationsFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_3l6utg$_0;
-    }
-  });
-  Object.defineProperty(LocationsFeature.prototype, 'dependencies', {
-    get: function () {
-      return this.dependencies_tn1sqi$_0.value;
     }
   });
   Object.defineProperty(LocationsFeature.prototype, 'id', {
@@ -2941,9 +3040,6 @@
       return this.documentation_e2hub9$_0;
     }
   });
-  function LocationsFeature$dependencies$lambda() {
-    return listOf(StatusPagesFeature_getInstance());
-  }
   LocationsFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'LocationsFeature',
@@ -2958,7 +3054,7 @@
   }
   function MetricsFeature() {
     MetricsFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_pfso6v$_0 = Repos_getInstance().ktor;
     this.artifacts_p4lqmv$_0 = listOf('io.ktor:ktor-metrics:$ktor_version');
     this.id_h3qtcf$_0 = 'ktor-metrics';
@@ -3010,12 +3106,12 @@
   }
   function PartialContentFeature() {
     PartialContentFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_mhgxh0$_0 = Repos_getInstance().ktor;
     this.artifacts_4a672s$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_ln9vy4$_0 = 'partial-content';
     this.title_nhtu0t$_0 = 'PartialContent';
-    this.description_oxbc4n$_0 = 'Handles requests with the Range header. Generating Accept-Ranges and the Content-Range headers and slicing the served content when required.';
+    this.description_oxbc4n$_0 = 'Handles requests with the Range header. ' + 'Generating Accept-Ranges and the Content-Range headers and slicing the served content when required.';
     this.documentation_96tbtn$_0 = 'https://ktor.io/features/partial-content.html';
   }
   Object.defineProperty(PartialContentFeature.prototype, 'repos', {
@@ -3048,21 +3144,24 @@
       return this.documentation_96tbtn$_0;
     }
   });
-  PartialContentFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.features.*');
-  };
-  PartialContentFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('install(PartialContent)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+  function PartialContentFeature$renderFeature$lambda($receiver) {
+    var $receiver_0 = 'install(PartialContent)';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
       $receiver.line_61zpoe$('// Maximum number of ranges that will be accepted from a HTTP request.');
       $receiver.line_61zpoe$('// If the HTTP request specifies more ranges, they will all be merged into a single range.');
       $receiver.line_61zpoe$('maxRangeCount = 10');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  PartialContentFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.features.*');
+    addFeatureInstall($receiver, PartialContentFeature$renderFeature$lambda);
   };
   PartialContentFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -3078,7 +3177,7 @@
   }
   function RawSocketsFeature() {
     RawSocketsFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_6u018$_0 = Repos_getInstance().ktor;
     this.artifacts_lv9ej0$_0 = listOf('io.ktor:ktor-network:$ktor_version');
     this.id_k9lq70$_0 = 'ktor-network';
@@ -3130,7 +3229,7 @@
   }
   function RawSocketsTlsFeature() {
     RawSocketsTlsFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_9ufirt$_0 = Repos_getInstance().ktor;
     this.artifacts_bme33d$_0 = listOf('io.ktor:ktor-network-tls:$ktor_version');
     this.id_lfbjkf$_0 = 'ktor-network-tls';
@@ -3182,13 +3281,14 @@
   }
   function RoutingFeature() {
     RoutingFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_hd5igk$_0 = Repos_getInstance().ktor;
     this.artifacts_jiqbx0$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_l5zff8$_0 = 'routing';
     this.title_gcslwr$_0 = 'Routing';
     this.description_rjcp5b$_0 = 'Allows to define structured routes and associated handlers.';
     this.documentation_f0l9u5$_0 = 'https://ktor.io/features/routing.html';
+    this.BLOCK = this.newSlot_pdl1vj$('BLOCK');
   }
   Object.defineProperty(RoutingFeature.prototype, 'repos', {
     get: function () {
@@ -3220,6 +3320,24 @@
       return this.documentation_f0l9u5$_0;
     }
   });
+  function RoutingFeature$renderFeature$lambda(this$RoutingFeature, this$renderFeature) {
+    return function ($receiver) {
+      $receiver.line_61zpoe$('routing'.length === 0 ? '{ ' + '' : 'routing' + ' { ' + '');
+      $receiver._indent();
+      try {
+        var this$RoutingFeature_0 = this$RoutingFeature;
+        this$renderFeature.block_rsgfsn$($receiver, this$RoutingFeature_0.BLOCK);
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      return Unit;
+    };
+  }
+  RoutingFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    $receiver.append_qu2wte$(ApplicationKt_getInstance().MODULE_POST, void 0, RoutingFeature$renderFeature$lambda(this, $receiver));
+  };
   RoutingFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'RoutingFeature',
@@ -3232,9 +3350,19 @@
     }
     return RoutingFeature_instance;
   }
+  function addRoute$lambda(closure$callback) {
+    return function ($receiver) {
+      $receiver.line_61zpoe$('');
+      closure$callback($receiver);
+      return Unit;
+    };
+  }
+  function addRoute($receiver, callback) {
+    $receiver.append_qu2wte$(RoutingFeature_getInstance().BLOCK, void 0, addRoute$lambda(callback));
+  }
   function SessionsFeature() {
     SessionsFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_630btl$_0 = Repos_getInstance().ktor;
     this.artifacts_vzw0ft$_0 = listOf('io.ktor:ktor-sessions:$ktor_version');
     this.id_g5mcan$_0 = 'ktor-sessions';
@@ -3286,7 +3414,7 @@
   }
   function ShutdownUrlFeature() {
     ShutdownUrlFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance(), ApplicationConf_getInstance()]);
     this.repos_ru14ht$_0 = Repos_getInstance().ktor;
     this.artifacts_jxegkf$_0 = listOf('io.ktor:ktor-server-host-common:$ktor_version');
     this.id_hv121z$_0 = 'shutdown-url';
@@ -3324,15 +3452,14 @@
       return this.documentation_bridsq$_0;
     }
   });
-  ShutdownUrlFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.server.engine.*');
-  };
-  ShutdownUrlFeature.prototype.hoconKtorDeploymentSection_j0vqe2$ = function ($receiver, info) {
+  function ShutdownUrlFeature$renderFeature$lambda($receiver) {
     $receiver.line_61zpoe$('shutdown.url = "/ktor/application/shutdown"');
-  };
-  ShutdownUrlFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('install(ShutDownUrl.ApplicationCallFeature)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+    return Unit;
+  }
+  function ShutdownUrlFeature$renderFeature$lambda_0($receiver) {
+    var $receiver_0 = 'install(ShutDownUrl.ApplicationCallFeature)';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
       $receiver.line_61zpoe$("// The URL that will be intercepted (you can also use the application.conf's ktor.deployment.shutdown.url key)");
       $receiver.line_61zpoe$('shutDownUrl = "/ktor/application/shutdown"');
@@ -3340,9 +3467,15 @@
       $receiver.line_61zpoe$('exitCodeSupplier = { 0 } // ApplicationCall.() -> Int');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  ShutdownUrlFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.server.engine.*');
+    addHoconDeployment($receiver, ShutdownUrlFeature$renderFeature$lambda);
+    addFeatureInstall($receiver, ShutdownUrlFeature$renderFeature$lambda_0);
   };
   ShutdownUrlFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -3358,7 +3491,7 @@
   }
   function StaticContentFeature() {
     StaticContentFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.repos_r7te0h$_0 = Repos_getInstance().ktor;
     this.artifacts_983xwv$_0 = listOf('io.ktor:ktor-server-host-common:$ktor_version');
     this.id_cquh7d$_0 = 'static-content';
@@ -3396,60 +3529,55 @@
       return this.documentation_h35puw$_0;
     }
   });
-  StaticContentFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.content.*');
-  };
-  StaticContentFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
+  function StaticContentFeature$renderFeature$lambda($receiver) {
     $receiver.line_61zpoe$('// Static feature. Try to access `/static/ktor_logo.svg`');
-    $receiver.line_61zpoe$('static("static")' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+    var $receiver_0 = 'static("static")';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
       $receiver.line_61zpoe$('resources("static")');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
-  };
-  StaticContentFeature.prototype.addFiles_yiqn0e$ = function (info_0, files_0, fetcher_0, continuation_0, suspended) {
-    var instance = new Coroutine$addFiles_yiqn0e$(this, info_0, files_0, fetcher_0, continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
-  };
-  function Coroutine$addFiles_yiqn0e$($this, info_0, files_0, fetcher_0, continuation_0) {
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  function StaticContentFeature$renderFeature$lambda_0(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$StaticContentFeature$renderFeature$lambda(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$StaticContentFeature$renderFeature$lambda(closure$info_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
-    this.$this = $this;
-    this.local$tmp$ = void 0;
-    this.local$info = info_0;
-    this.local$files = files_0;
-    this.local$fetcher = fetcher_0;
+    this.local$closure$info = closure$info_0;
   }
-  Coroutine$addFiles_yiqn0e$.$metadata$ = {
+  Coroutine$StaticContentFeature$renderFeature$lambda.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: null,
     interfaces: [CoroutineImpl]
   };
-  Coroutine$addFiles_yiqn0e$.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$addFiles_yiqn0e$.prototype.constructor = Coroutine$addFiles_yiqn0e$;
-  Coroutine$addFiles_yiqn0e$.prototype.doResume = function () {
+  Coroutine$StaticContentFeature$renderFeature$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$StaticContentFeature$renderFeature$lambda.prototype.constructor = Coroutine$StaticContentFeature$renderFeature$lambda;
+  Coroutine$StaticContentFeature$renderFeature$lambda.prototype.doResume = function () {
     do
       try {
         switch (this.state_0) {
           case 0:
-            this.local$tmp$ = this.local$info.artifactName + '/resources/static/ktor_logo.svg';
             this.state_0 = 2;
-            this.result_0 = this.local$fetcher.fetch_61zpoe$('static/ktor_logo.svg', this);
+            this.result_0 = this.local$closure$info.fetch('static/ktor_logo.svg', this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;
           case 1:
             throw this.exception_0;
           case 2:
-            this.local$files.add_dkzqdg$(this.local$tmp$, this.result_0);
-            return;
+            return this.result_0;
         }
       }
        catch (e) {
@@ -3463,6 +3591,11 @@
         }
       }
      while (true);
+  };
+  StaticContentFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.content.*');
+    addRoute($receiver, StaticContentFeature$renderFeature$lambda);
+    $receiver.fileBinary_7n0jo0$('resources/static/ktor_logo.svg', void 0, void 0, StaticContentFeature$renderFeature$lambda_0(info));
   };
   StaticContentFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -3478,7 +3611,7 @@
   }
   function StatusPagesFeature() {
     StatusPagesFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.repos_va4em0$_0 = Repos_getInstance().ktor;
     this.artifacts_tsgcm0$_0 = listOf('io.ktor:ktor-server-host-common:$ktor_version');
     this.id_rrlp1c$_0 = 'status-pages';
@@ -3516,40 +3649,49 @@
       return this.documentation_eu1hsx$_0;
     }
   });
-  StatusPagesFeature.prototype.imports_jbwadm$ = function (info) {
-    return listOf('io.ktor.features.*');
-  };
-  StatusPagesFeature.prototype.classes_j0vqe2$ = function ($receiver, info) {
+  function StatusPagesFeature$renderFeature$lambda($receiver) {
     $receiver.line_61zpoe$('class AuthenticationException : RuntimeException()');
     $receiver.line_61zpoe$('class AuthorizationException : RuntimeException()');
-  };
-  StatusPagesFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
-    $receiver.line_61zpoe$('install(StatusPages)' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
+    return Unit;
+  }
+  function StatusPagesFeature$renderFeature$lambda_0($receiver) {
+    var $receiver_0 = 'install(StatusPages)';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    $receiver._indent();
     try {
-      $receiver.line_61zpoe$('exception<AuthenticationException>' + ' {' + ' cause ->');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
+      var $receiver_1 = 'exception<AuthenticationException>';
+      var suffix = ' cause ->';
+      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + suffix : $receiver_1 + ' { ' + suffix);
+      $receiver._indent();
       try {
         $receiver.line_61zpoe$('call.respond(HttpStatusCode.Unauthorized)');
       }
       finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
+        $receiver._unindent();
       }
-      $receiver.line_61zpoe$('}');
-      $receiver.line_61zpoe$('exception<AuthorizationException>' + ' {' + ' cause ->');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
+      $receiver.line_61zpoe$('}' + '');
+      var $receiver_2 = 'exception<AuthorizationException>';
+      var suffix_0 = ' cause ->';
+      $receiver.line_61zpoe$($receiver_2.length === 0 ? '{ ' + suffix_0 : $receiver_2 + ' { ' + suffix_0);
+      $receiver._indent();
       try {
         $receiver.line_61zpoe$('call.respond(HttpStatusCode.Forbidden)');
       }
       finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
+        $receiver._unindent();
       }
-      $receiver.line_61zpoe$('}');
+      $receiver.line_61zpoe$('}' + '');
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      $receiver._unindent();
     }
-    $receiver.line_61zpoe$('}');
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  StatusPagesFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.features.*');
+    addApplicationClasses($receiver, StatusPagesFeature$renderFeature$lambda);
+    addRoute($receiver, StatusPagesFeature$renderFeature$lambda_0);
   };
   StatusPagesFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -3565,7 +3707,7 @@
   }
   function VelocityFeature() {
     VelocityFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_pmsk9$_0 = Repos_getInstance().ktor;
     this.artifacts_fuibnd$_0 = listOf('io.ktor:ktor-velocity:$ktor_version');
     this.id_jr50fz$_0 = 'velocity';
@@ -3617,7 +3759,7 @@
   }
   function WebsocketsFeature() {
     WebsocketsFeature_instance = this;
-    Feature.call(this);
+    Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_r46ofs$_0 = Repos_getInstance().ktor;
     this.artifacts_nxkzmg$_0 = listOf('io.ktor:ktor-websockets:$ktor_version');
     this.id_jwih4g$_0 = 'ktor-websockets';
@@ -3668,164 +3810,80 @@
     return WebsocketsFeature_instance;
   }
   var ALL_FEATURES;
-  function KtorProjectGenerator() {
-    KtorProjectGenerator_instance = this;
+  function ApplicationConf() {
+    ApplicationConf_instance = this;
+    Block.call(this, []);
+    this.KTOR = this.newSlot_pdl1vj$('KTOR');
+    this.DEPLOYMENT = this.newSlot_pdl1vj$('DEPLOYMENT');
   }
-  function KtorProjectGenerator$generate$lambda$lambda(closure$info) {
-    return function ($receiver) {
-      buildPomXml($receiver, closure$info.copy_s590xl$());
-      return Unit;
+  function ApplicationConf$render$lambda(this$ApplicationConf_0, this$render_0, closure$info_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$ApplicationConf$render$lambda(this$ApplicationConf_0, this$render_0, closure$info_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
     };
   }
-  function KtorProjectGenerator$generate$lambda$lambda_0(closure$info) {
-    return function ($receiver) {
-      buildBuildGradle($receiver, closure$info.copy_s590xl$());
-      return Unit;
-    };
-  }
-  function KtorProjectGenerator$generate$lambda$lambda_1(closure$info) {
-    return function ($receiver) {
-      buildApplicationConf($receiver, closure$info.copy_s590xl$());
-      return Unit;
-    };
-  }
-  function KtorProjectGenerator$generate$lambda$ObjectLiteral(closure$files) {
-    this.closure$files = closure$files;
-  }
-  KtorProjectGenerator$generate$lambda$ObjectLiteral.prototype.add_dkzqdg$$default = function (name, content, mode) {
-    this.closure$files.add_dkzqdg$(name, content, mode);
-  };
-  KtorProjectGenerator$generate$lambda$ObjectLiteral.$metadata$ = {
-    kind: Kind_CLASS,
-    interfaces: [FileContainer]
-  };
-  function KtorProjectGenerator$generate$lambda$ObjectLiteral_0(closure$fetchFile) {
-    this.closure$fetchFile = closure$fetchFile;
-  }
-  KtorProjectGenerator$generate$lambda$ObjectLiteral_0.prototype.fetch_61zpoe$ = function (path, continuation) {
-    return this.closure$fetchFile(path, continuation);
-  };
-  KtorProjectGenerator$generate$lambda$ObjectLiteral_0.$metadata$ = {
-    kind: Kind_CLASS,
-    interfaces: [FileFetcher]
-  };
-  function KtorProjectGenerator$generate$lambda$lambda_2(closure$info) {
-    return function ($receiver) {
-      buildApplicationKt($receiver, closure$info.copy_s590xl$());
-      return Unit;
-    };
-  }
-  KtorProjectGenerator.prototype.generate_p20w4r$ = function (info_0, fetchFile_0, files_0, continuation_0, suspended) {
-    var instance = new Coroutine$generate_p20w4r$(this, info_0, fetchFile_0, files_0, continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
-  };
-  function Coroutine$generate_p20w4r$($this, info_0, fetchFile_0, files_0, continuation_0) {
+  function Coroutine$ApplicationConf$render$lambda(this$ApplicationConf_0, this$render_0, closure$info_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
     this.exceptionState_0 = 1;
-    this.$this = $this;
-    this.local$tmp$ = void 0;
-    this.local$tmp$_0 = void 0;
-    this.local$tmp$_1 = void 0;
-    this.local$tmp$_2 = void 0;
-    this.local$tmp$_3 = void 0;
-    this.local$info = info_0;
-    this.local$fetchFile = fetchFile_0;
-    this.local$files = files_0;
+    this.local$this$ApplicationConf = this$ApplicationConf_0;
+    this.local$this$render = this$render_0;
+    this.local$closure$info = closure$info_0;
+    this.local$$receiver = $receiver_0;
   }
-  Coroutine$generate_p20w4r$.$metadata$ = {
+  Coroutine$ApplicationConf$render$lambda.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: null,
     interfaces: [CoroutineImpl]
   };
-  Coroutine$generate_p20w4r$.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$generate_p20w4r$.prototype.constructor = Coroutine$generate_p20w4r$;
-  Coroutine$generate_p20w4r$.prototype.doResume = function () {
+  Coroutine$ApplicationConf$render$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$ApplicationConf$render$lambda.prototype.constructor = Coroutine$ApplicationConf$render$lambda;
+  Coroutine$ApplicationConf$render$lambda.prototype.doResume = function () {
     do
       try {
         switch (this.state_0) {
           case 0:
-            switch (this.local$info.projectType) {
-              case 'maven':
-                add(this.local$files, this.local$info.artifactName + '/pom.xml', indenter(KtorProjectGenerator$generate$lambda$lambda(this.local$info)));
-                this.state_0 = 7;
-                continue;
-              case 'gradle':
-                add(this.local$files, this.local$info.artifactName + '/build.gradle', indenter(KtorProjectGenerator$generate$lambda$lambda_0(this.local$info)));
-                if (this.local$info.includeWrapper) {
-                  this.local$tmp$ = this.local$info.artifactName + '/gradlew';
-                  this.state_0 = 2;
-                  this.result_0 = this.local$fetchFile('gradle/gradlew', this);
-                  if (this.result_0 === COROUTINE_SUSPENDED)
-                    return COROUTINE_SUSPENDED;
-                  continue;
-                }
-                 else {
-                  this.state_0 = 6;
-                  continue;
-                }
-
-              default:throw RuntimeException_init('Unknown project type ' + this.local$info.projectType);
+            this.local$$receiver.line_61zpoe$('ktor'.length === 0 ? '{ ' + '' : 'ktor' + ' { ' + '');
+            this.local$$receiver._indent();
+            try {
+              var this$ApplicationConf = this.local$this$ApplicationConf;
+              var this$render = this.local$this$render;
+              var closure$info = this.local$closure$info;
+              var $receiver = 'deployment';
+              this.local$$receiver.line_61zpoe$($receiver.length === 0 ? '{ ' + '' : $receiver + ' { ' + '');
+              this.local$$receiver._indent();
+              try {
+                this.local$$receiver.line_61zpoe$('port = 8080');
+                this.local$$receiver.line_61zpoe$('port = ${?PORT}');
+                this$render.block_rsgfsn$(this.local$$receiver, this$ApplicationConf.DEPLOYMENT);
+              }
+              finally {
+                this.local$$receiver._unindent();
+              }
+              this.local$$receiver.line_61zpoe$('}' + '');
+              var $receiver_0 = 'application';
+              this.local$$receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+              this.local$$receiver._indent();
+              try {
+                this.local$$receiver.line_61zpoe$('modules = [ ' + closure$info.artifactGroup + '.ApplicationKt.main ]');
+              }
+              finally {
+                this.local$$receiver._unindent();
+              }
+              this.local$$receiver.line_61zpoe$('}' + '');
+              this$render.block_rsgfsn$(this.local$$receiver, this$ApplicationConf.KTOR);
+            }
+            finally {
+              this.local$$receiver._unindent();
             }
 
+            this.local$$receiver.line_61zpoe$('}' + '');
+            return this.local$$receiver;
           case 1:
             throw this.exception_0;
-          case 2:
-            this.local$files.add_dkzqdg$(this.local$tmp$, this.result_0, toInt('755', 8));
-            this.local$tmp$_0 = this.local$info.artifactName + '/gradlew.bat';
-            this.state_0 = 3;
-            this.result_0 = this.local$fetchFile('gradle/gradlew.bat', this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 3:
-            this.local$files.add_dkzqdg$(this.local$tmp$_0, this.result_0);
-            this.local$tmp$_1 = this.local$info.artifactName + '/gradle/wrapper/gradle-wrapper.jar';
-            this.state_0 = 4;
-            this.result_0 = this.local$fetchFile('gradle/gradle/wrapper/gradle-wrapper.jar', this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 4:
-            this.local$files.add_dkzqdg$(this.local$tmp$_1, this.result_0);
-            this.local$tmp$_2 = this.local$info.artifactName + '/gradle/wrapper/gradle-wrapper.properties';
-            this.state_0 = 5;
-            this.result_0 = this.local$fetchFile('gradle/gradle/wrapper/gradle-wrapper.properties', this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 5:
-            this.local$files.add_dkzqdg$(this.local$tmp$_2, this.result_0);
-            this.state_0 = 6;
-            continue;
-          case 6:
-            this.state_0 = 7;
-            continue;
-          case 7:
-            add(this.local$files, this.local$info.artifactName + '/resources/application.conf', indenter(KtorProjectGenerator$generate$lambda$lambda_1(this.local$info)));
-            this.local$tmp$_3 = this.local$info.featuresToInclude.iterator();
-            this.state_0 = 8;
-            continue;
-          case 8:
-            if (!this.local$tmp$_3.hasNext()) {
-              this.state_0 = 10;
-              continue;
-            }
-
-            var feat = this.local$tmp$_3.next();
-            this.state_0 = 9;
-            this.result_0 = feat.addFiles_yiqn0e$(this.local$info, new KtorProjectGenerator$generate$lambda$ObjectLiteral(this.local$files), new KtorProjectGenerator$generate$lambda$ObjectLiteral_0(this.local$fetchFile), this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 9:
-            this.state_0 = 8;
-            continue;
-          case 10:
-            add(this.local$files, this.local$info.artifactName + '/src/Application.kt', indenter(KtorProjectGenerator$generate$lambda$lambda_2(this.local$info)));
-            return this.local$info;
         }
       }
        catch (e) {
@@ -3840,247 +3898,973 @@
       }
      while (true);
   };
-  KtorProjectGenerator.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'KtorProjectGenerator',
-    interfaces: []
+  ApplicationConf.prototype.render_miqy8c$ = function ($receiver, info) {
+    $receiver.fileText_7k8vha$('resources/application.conf', void 0, void 0, ApplicationConf$render$lambda(this, $receiver, info));
   };
-  var KtorProjectGenerator_instance = null;
-  function KtorProjectGenerator_getInstance() {
-    if (KtorProjectGenerator_instance === null) {
-      new KtorProjectGenerator();
+  ApplicationConf.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'ApplicationConf',
+    interfaces: [Block]
+  };
+  var ApplicationConf_instance = null;
+  function ApplicationConf_getInstance() {
+    if (ApplicationConf_instance === null) {
+      new ApplicationConf();
     }
-    return KtorProjectGenerator_instance;
+    return ApplicationConf_instance;
   }
-  var NotImplementedError_init = Kotlin.kotlin.NotImplementedError;
-  function buildPomXml($receiver, info) {
-    throw new NotImplementedError_init('An operation is not implemented: ' + 'Unsupported Maven for now');
+  function addHoconDeployment$lambda(closure$block) {
+    return function ($receiver) {
+      closure$block($receiver);
+      return Unit;
+    };
   }
-  var DOLLAR;
-  function buildBuildGradle($receiver, info) {
-    $receiver.line_61zpoe$('buildscript' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
-    try {
-      $receiver.line_61zpoe$("ext.kotlin_version = '1.2.41'");
-      $receiver.line_61zpoe$("ext.ktor_version = '" + info.ktorVersion + "'");
-      $receiver.line_61zpoe$("ext.logback_version = '1.2.1'");
-      $receiver.line_61zpoe$('');
-      $receiver.line_61zpoe$('repositories' + ' {' + '');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      try {
-        $receiver.line_61zpoe$('jcenter()');
-      }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
-      }
-      $receiver.line_61zpoe$('}');
-      $receiver.line_61zpoe$('');
-      $receiver.line_61zpoe$('dependencies' + ' {' + '');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      try {
-        $receiver.line_61zpoe$('classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"');
-      }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
-      }
-      $receiver.line_61zpoe$('}');
-    }
-    finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
-    }
-    $receiver.line_61zpoe$('}');
-    $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$("apply plugin: 'kotlin'");
-    $receiver.line_61zpoe$("apply plugin: 'application'");
-    $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('mainClassName = ' + '"' + info.developmentEngineFQ + '"');
-    $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('sourceSets' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
-    try {
-      $receiver.line_61zpoe$("main.kotlin.srcDirs = ['src']");
-      $receiver.line_61zpoe$("main.resources.srcDirs = ['resources']");
-    }
-    finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
-    }
-    $receiver.line_61zpoe$('}');
-    $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('repositories' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
-    try {
+  function addHoconDeployment($receiver, block) {
+    $receiver.append_qu2wte$(ApplicationConf_getInstance().DEPLOYMENT, void 0, addHoconDeployment$lambda(block));
+  }
+  function addHoconKtor$lambda(closure$block) {
+    return function ($receiver) {
+      closure$block($receiver);
+      return Unit;
+    };
+  }
+  function addHoconKtor($receiver, block) {
+    $receiver.append_qu2wte$(ApplicationConf_getInstance().KTOR, void 0, addHoconKtor$lambda(block));
+  }
+  function ApplicationKt() {
+    ApplicationKt_instance = this;
+    Block.call(this, [BuildFiles_getInstance()]);
+    this.MODULE_INSTALL = this.newSlot_pdl1vj$('MODULE_INSTALL');
+    this.MODULE_POST = this.newSlot_pdl1vj$('MODULE_POST');
+    this.APPLICATION_CLASSES = this.newSlot_pdl1vj$('APPLICATION_CLASSES');
+    this.EXTENSIONS = this.newSlot_pdl1vj$('EXTENSIONS');
+  }
+  function ApplicationKt$render$lambda$lambda(this$render) {
+    return function ($receiver) {
       var tmp$;
-      tmp$ = info.reposToInclude.iterator();
+      tmp$ = get_applicationKtImports(this$render).iterator();
       while (tmp$.hasNext()) {
-        var repo = tmp$.next();
-        if (equals(repo, 'jcenter')) {
-          $receiver.line_61zpoe$('jcenter()');
+        var import_0 = tmp$.next();
+        $receiver.line_61zpoe$('import ' + import_0);
+      }
+      return Unit;
+    };
+  }
+  function ApplicationKt$render$lambda(closure$info_0, this$render_0, this$ApplicationKt_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$ApplicationKt$render$lambda(closure$info_0, this$render_0, this$ApplicationKt_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$ApplicationKt$render$lambda(closure$info_0, this$render_0, this$ApplicationKt_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+    this.local$this$render = this$render_0;
+    this.local$this$ApplicationKt = this$ApplicationKt_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$ApplicationKt$render$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$ApplicationKt$render$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$ApplicationKt$render$lambda.prototype.constructor = Coroutine$ApplicationKt$render$lambda;
+  Coroutine$ApplicationKt$render$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.local$$receiver.line_61zpoe$('package ' + this.local$closure$info.developmentPackage);
+            this.local$$receiver.line_61zpoe$('');
+            this.local$$receiver.linedeferred_yot30u$(ApplicationKt$render$lambda$lambda(this.local$this$render));
+            if (this.local$closure$info.ktorVer.compareTo_11rb$(Versions_getInstance().V092) >= 0) {
+              this.local$$receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + this.local$closure$info.developmentEngineFQ + '.main(args)');
+            }
+             else {
+              this.local$$receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + this.local$closure$info.developmentPackage + '.main(args)');
+            }
+
+            this.local$this$render.block_rsgfsn$(this.local$$receiver, this.local$this$ApplicationKt.APPLICATION_CLASSES);
+            var $receiver = 'fun Application.main()';
+            this.local$$receiver.line_61zpoe$($receiver.length === 0 ? '{ ' + '' : $receiver + ' { ' + '');
+            this.local$$receiver._indent();
+            try {
+              var this$ApplicationKt = this.local$this$ApplicationKt;
+              var this$render = this.local$this$render;
+              this$render.block_rsgfsn$(this.local$$receiver, this$ApplicationKt.MODULE_INSTALL);
+              this$render.block_rsgfsn$(this.local$$receiver, this$ApplicationKt.MODULE_POST);
+            }
+            finally {
+              this.local$$receiver._unindent();
+            }
+
+            this.local$$receiver.line_61zpoe$('}' + '');
+            return this.local$this$render.block_rsgfsn$(this.local$$receiver, this.local$this$ApplicationKt.EXTENSIONS), Unit;
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
         }
          else {
-          $receiver.line_61zpoe$("maven { url '" + repo + "' }");
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
         }
       }
+     while (true);
+  };
+  ApplicationKt.prototype.render_miqy8c$ = function ($receiver, info) {
+    $receiver.fileText_7k8vha$('src/application.kt', void 0, void 0, ApplicationKt$render$lambda(info, $receiver, this));
+  };
+  ApplicationKt.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'ApplicationKt',
+    interfaces: [Block]
+  };
+  var ApplicationKt_instance = null;
+  function ApplicationKt_getInstance() {
+    if (ApplicationKt_instance === null) {
+      new ApplicationKt();
     }
-    finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
-    }
-    $receiver.line_61zpoe$('}');
-    $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$('dependencies' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
-    try {
-      var tmp$_0;
-      $receiver.line_61zpoe$('compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"');
-      $receiver.line_61zpoe$('compile ' + '"' + 'io.ktor:ktor-server-' + info.ktorEngine + ':' + String.fromCharCode(DOLLAR) + 'ktor_version' + '"');
-      $receiver.line_61zpoe$('compile "ch.qos.logback:logback-classic:$logback_version"');
-      $receiver.line_61zpoe$('');
-      var $receiver_0 = info.dependenciesToInclude;
-      var destination = ArrayList_init();
-      var tmp$_1;
-      tmp$_1 = $receiver_0.iterator();
-      while (tmp$_1.hasNext()) {
-        var element = tmp$_1.next();
-        var list = element.artifacts;
-        addAll(destination, list);
-      }
-      tmp$_0 = distinct(destination).iterator();
-      while (tmp$_0.hasNext()) {
-        var artifact = tmp$_0.next();
-        $receiver.line_61zpoe$('compile ' + '"' + artifact + '"');
-      }
-      $receiver.line_61zpoe$('');
-      $receiver.line_61zpoe$('testCompile "io.ktor:ktor-server-tests:$ktor_version"');
-    }
-    finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
-    }
-    $receiver.line_61zpoe$('}');
-    $receiver.line_61zpoe$('');
-    $receiver.line_61zpoe$("kotlin.experimental.coroutines = 'enable'");
-    return info;
+    return ApplicationKt_instance;
   }
-  function buildApplicationConf($receiver, info) {
-    $receiver.line_61zpoe$('ktor' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
-    try {
-      var tmp$;
-      $receiver.line_61zpoe$('deployment' + ' {' + '');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      try {
-        var tmp$_0;
-        $receiver.line_61zpoe$('port = 8080');
-        $receiver.line_61zpoe$('port = ${?PORT}');
-        tmp$_0 = info.featuresToInclude.iterator();
-        while (tmp$_0.hasNext()) {
-          var feat = tmp$_0.next();
-          feat.hoconKtorDeploymentSection_j0vqe2$($receiver, info);
-        }
-      }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
-      }
-      $receiver.line_61zpoe$('}');
-      $receiver.line_61zpoe$('application' + ' {' + '');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
-      try {
-        $receiver.line_61zpoe$('modules = [ ' + info.artifactGroup + '.ApplicationKt.main ]');
-      }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
-      }
-      $receiver.line_61zpoe$('}');
-      tmp$ = info.featuresToInclude.iterator();
+  function applicationKtImports$lambda() {
+    return LinkedHashSet_init();
+  }
+  var applicationKtImports;
+  var applicationKtImports_metadata = new PropertyMetadata('applicationKtImports');
+  function get_applicationKtImports($receiver) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+    tmp$_1 = $receiver.extra;
+    tmp$_0 = (tmp$ = applicationKtImports.name) != null ? tmp$ : applicationKtImports_metadata.callableName;
+    return (tmp$_3 = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE()) != null ? tmp$_3 : applicationKtImports.default();
+  }
+  function addImport($receiver, import_0) {
+    get_applicationKtImports($receiver).add_11rb$(import_0);
+  }
+  function addFeatureInstall$lambda(closure$callback) {
+    return function ($receiver) {
+      $receiver.line_61zpoe$('');
+      closure$callback($receiver);
+      return Unit;
+    };
+  }
+  function addFeatureInstall($receiver, callback) {
+    $receiver.append_qu2wte$(ApplicationKt_getInstance().MODULE_INSTALL, void 0, addFeatureInstall$lambda(callback));
+  }
+  function addExtensionMethods$lambda(closure$callback) {
+    return function ($receiver) {
+      $receiver.line_61zpoe$('');
+      closure$callback($receiver);
+      return Unit;
+    };
+  }
+  function addExtensionMethods($receiver, callback) {
+    $receiver.append_qu2wte$(ApplicationKt_getInstance().EXTENSIONS, void 0, addExtensionMethods$lambda(callback));
+  }
+  function addApplicationClasses$lambda(closure$callback) {
+    return function ($receiver) {
+      $receiver.line_61zpoe$('');
+      closure$callback($receiver);
+      return Unit;
+    };
+  }
+  function addApplicationClasses($receiver, callback) {
+    $receiver.append_qu2wte$(ApplicationKt_getInstance().APPLICATION_CLASSES, void 0, addApplicationClasses$lambda(callback));
+  }
+  function BuildFiles() {
+    BuildFiles_instance = this;
+    Block.call(this, []);
+  }
+  function BuildFiles$render$lambda$lambda$lambda(this$render) {
+    return function ($receiver) {
+      var tmp$, tmp$_0;
+      tmp$ = get_compileDependencies(this$render).iterator();
       while (tmp$.hasNext()) {
-        var feat_0 = tmp$.next();
-        feat_0.hoconKtorSection_j0vqe2$($receiver, info);
+        var dep = tmp$.next();
+        $receiver.line_61zpoe$('compile ' + '"' + dep.dependency + '"');
       }
-    }
-    finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
-    }
-    $receiver.line_61zpoe$('}');
-    return info;
+      tmp$_0 = get_testDependencies(this$render).iterator();
+      while (tmp$_0.hasNext()) {
+        var dep_0 = tmp$_0.next();
+        $receiver.line_61zpoe$('testCompile ' + '"' + dep_0.dependency + '"');
+      }
+      return Unit;
+    };
   }
-  function buildApplicationKt($receiver, info) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2;
-    var imports = LinkedHashSet_init();
-    $receiver.line_61zpoe$('package ' + info.artifactGroup);
-    $receiver.line_61zpoe$('');
-    var element = 'io.ktor.application.*';
-    imports.add_11rb$(element);
-    var element_0 = 'io.ktor.response.*';
-    imports.add_11rb$(element_0);
-    var element_1 = 'io.ktor.routing.*';
-    imports.add_11rb$(element_1);
-    var element_2 = 'io.ktor.http.*';
-    imports.add_11rb$(element_2);
-    tmp$ = info.featuresToInclude.iterator();
-    while (tmp$.hasNext()) {
-      var feat = tmp$.next();
-      addAll(imports, feat.imports_jbwadm$(info));
-    }
-    tmp$_0 = imports.iterator();
-    while (tmp$_0.hasNext()) {
-      var p = tmp$_0.next();
-      $receiver.line_61zpoe$('import ' + p);
-    }
-    $receiver.line_61zpoe$('');
-    if (info.ktorVer.compareTo_11rb$(Versions_getInstance().V092) >= 0) {
-      $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + info.developmentEngineFQ + '.main(args)');
+  function BuildFiles$render$lambda(closure$info_0, this$render_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$BuildFiles$render$lambda(closure$info_0, this$render_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFiles$render$lambda(closure$info_0, this$render_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+    this.local$this$render = this$render_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$BuildFiles$render$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFiles$render$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFiles$render$lambda.prototype.constructor = Coroutine$BuildFiles$render$lambda;
+  Coroutine$BuildFiles$render$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            var $receiver = 'buildscript';
+            this.local$$receiver.line_61zpoe$($receiver.length === 0 ? '{ ' + '' : $receiver + ' { ' + '');
+            this.local$$receiver._indent();
+            try {
+              var closure$info = this.local$closure$info;
+              this.local$$receiver.line_61zpoe$("ext.kotlin_version = '1.2.41'");
+              this.local$$receiver.line_61zpoe$("ext.ktor_version = '" + closure$info.ktorVersion + "'");
+              this.local$$receiver.line_61zpoe$("ext.logback_version = '1.2.1'");
+              this.local$$receiver.line_61zpoe$('');
+              var $receiver_0 = 'repositories';
+              this.local$$receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+              this.local$$receiver._indent();
+              try {
+                this.local$$receiver.line_61zpoe$('jcenter()');
+              }
+              finally {
+                this.local$$receiver._unindent();
+              }
+              this.local$$receiver.line_61zpoe$('}' + '');
+              this.local$$receiver.line_61zpoe$('');
+              var $receiver_1 = 'dependencies';
+              this.local$$receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + '' : $receiver_1 + ' { ' + '');
+              this.local$$receiver._indent();
+              try {
+                this.local$$receiver.line_61zpoe$('classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"');
+              }
+              finally {
+                this.local$$receiver._unindent();
+              }
+              this.local$$receiver.line_61zpoe$('}' + '');
+            }
+            finally {
+              this.local$$receiver._unindent();
+            }
+
+            this.local$$receiver.line_61zpoe$('}' + '');
+            this.local$$receiver.line_61zpoe$('');
+            this.local$$receiver.line_61zpoe$("apply plugin: 'kotlin'");
+            this.local$$receiver.line_61zpoe$("apply plugin: 'application'");
+            this.local$$receiver.line_61zpoe$('');
+            this.local$$receiver.line_61zpoe$('mainClassName = ' + '"' + this.local$closure$info.developmentEngineFQ + '"');
+            this.local$$receiver.line_61zpoe$('');
+            var $receiver_2 = 'sourceSets';
+            this.local$$receiver.line_61zpoe$($receiver_2.length === 0 ? '{ ' + '' : $receiver_2 + ' { ' + '');
+            this.local$$receiver._indent();
+            try {
+              this.local$$receiver.line_61zpoe$("main.kotlin.srcDirs = ['src']");
+              this.local$$receiver.line_61zpoe$("main.resources.srcDirs = ['resources']");
+            }
+            finally {
+              this.local$$receiver._unindent();
+            }
+
+            this.local$$receiver.line_61zpoe$('}' + '');
+            this.local$$receiver.line_61zpoe$('');
+            var $receiver_3 = 'repositories';
+            this.local$$receiver.line_61zpoe$($receiver_3.length === 0 ? '{ ' + '' : $receiver_3 + ' { ' + '');
+            this.local$$receiver._indent();
+            try {
+              var tmp$;
+              tmp$ = get_reposToInclude(this.local$this$render).iterator();
+              while (tmp$.hasNext()) {
+                var repo = tmp$.next();
+                if (equals(repo, 'jcenter')) {
+                  this.local$$receiver.line_61zpoe$('jcenter()');
+                }
+                 else {
+                  this.local$$receiver.line_61zpoe$("maven { url '" + repo + "' }");
+                }
+              }
+            }
+            finally {
+              this.local$$receiver._unindent();
+            }
+
+            this.local$$receiver.line_61zpoe$('}' + '');
+            this.local$$receiver.line_61zpoe$('');
+            var $receiver_4 = 'dependencies';
+            this.local$$receiver.line_61zpoe$($receiver_4.length === 0 ? '{ ' + '' : $receiver_4 + ' { ' + '');
+            this.local$$receiver._indent();
+            try {
+              this.local$$receiver.linedeferred_yot30u$(BuildFiles$render$lambda$lambda$lambda(this.local$this$render));
+            }
+            finally {
+              this.local$$receiver._unindent();
+            }
+
+            this.local$$receiver.line_61zpoe$('}' + '');
+            this.local$$receiver.line_61zpoe$('');
+            return this.local$$receiver.line_61zpoe$("kotlin.experimental.coroutines = 'enable'");
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function BuildFiles$render$lambda_0(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BuildFiles$render$lambda_0(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFiles$render$lambda_0(closure$info_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+  }
+  Coroutine$BuildFiles$render$lambda_0.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFiles$render$lambda_0.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFiles$render$lambda_0.prototype.constructor = Coroutine$BuildFiles$render$lambda_0;
+  Coroutine$BuildFiles$render$lambda_0.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = this.local$closure$info.fetch('gradle/gradlew', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function BuildFiles$render$lambda_1(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BuildFiles$render$lambda_1(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFiles$render$lambda_1(closure$info_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+  }
+  Coroutine$BuildFiles$render$lambda_1.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFiles$render$lambda_1.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFiles$render$lambda_1.prototype.constructor = Coroutine$BuildFiles$render$lambda_1;
+  Coroutine$BuildFiles$render$lambda_1.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = this.local$closure$info.fetch('gradle/gradlew.bat', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function BuildFiles$render$lambda_2(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BuildFiles$render$lambda_2(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFiles$render$lambda_2(closure$info_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+  }
+  Coroutine$BuildFiles$render$lambda_2.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFiles$render$lambda_2.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFiles$render$lambda_2.prototype.constructor = Coroutine$BuildFiles$render$lambda_2;
+  Coroutine$BuildFiles$render$lambda_2.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = this.local$closure$info.fetch('gradle/gradle/wrapper/gradle-wrapper.jar', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function BuildFiles$render$lambda_3(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BuildFiles$render$lambda_3(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFiles$render$lambda_3(closure$info_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+  }
+  Coroutine$BuildFiles$render$lambda_3.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFiles$render$lambda_3.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFiles$render$lambda_3.prototype.constructor = Coroutine$BuildFiles$render$lambda_3;
+  Coroutine$BuildFiles$render$lambda_3.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = this.local$closure$info.fetch('gradle/gradle/wrapper/gradle-wrapper.properties', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
+  BuildFiles.prototype.render_miqy8c$ = function ($receiver, info) {
+    if (equals(info.projectType, 'gradle')) {
+      $receiver.fileText_7k8vha$('build.gradle', void 0, void 0, BuildFiles$render$lambda(info, $receiver));
+      if (info.includeWrapper) {
+        $receiver.fileBinary_7n0jo0$('gradlew', void 0, toInt('755', 8), BuildFiles$render$lambda_0(info));
+        $receiver.fileBinary_7n0jo0$('gradlew.bat', void 0, void 0, BuildFiles$render$lambda_1(info));
+        $receiver.fileBinary_7n0jo0$('gradle/wrapper/gradle-wrapper.jar', void 0, void 0, BuildFiles$render$lambda_2(info));
+        $receiver.fileBinary_7n0jo0$('gradle/wrapper/gradle-wrapper.properties', void 0, void 0, BuildFiles$render$lambda_3(info));
+      }
     }
      else {
-      $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + info.developmentPackage + '.main(args)');
+      throw IllegalStateException_init(('Unsupported build type ' + info.projectType).toString());
     }
-    $receiver.line_61zpoe$('');
-    tmp$_1 = info.featuresToInclude.iterator();
-    while (tmp$_1.hasNext()) {
-      var feat_0 = tmp$_1.next();
-      feat_0.classes_j0vqe2$($receiver, info);
+    addMavenRepository($receiver, 'jcenter');
+    addCompileDependency($receiver, new MvnArtifact('org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version'));
+    addCompileDependency($receiver, new MvnArtifact('io.ktor:ktor-server-' + info.ktorEngine + ':' + '$' + 'ktor_version'));
+    addCompileDependency($receiver, new MvnArtifact('ch.qos.logback:logback-classic:$logback_version'));
+    addTestDependency($receiver, new MvnArtifact('io.ktor:ktor-server-tests:$ktor_version'));
+  };
+  BuildFiles.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'BuildFiles',
+    interfaces: [Block]
+  };
+  var BuildFiles_instance = null;
+  function BuildFiles_getInstance() {
+    if (BuildFiles_instance === null) {
+      new BuildFiles();
     }
-    $receiver.line_61zpoe$('fun Application.main()' + ' {' + '');
-    $receiver.indentation = $receiver.indentation + 1 | 0;
-    try {
-      var tmp$_3;
-      tmp$_3 = info.featuresToInclude.iterator();
-      while (tmp$_3.hasNext()) {
-        var feat_1 = tmp$_3.next();
-        feat_1.installFeature_j0vqe2$($receiver, info);
-      }
-      $receiver.line_61zpoe$('routing' + ' {' + '');
-      $receiver.indentation = $receiver.indentation + 1 | 0;
+    return BuildFiles_instance;
+  }
+  function reposToInclude$lambda() {
+    return ArrayList_init();
+  }
+  var reposToInclude;
+  var reposToInclude_metadata = new PropertyMetadata('reposToInclude');
+  function get_reposToInclude($receiver) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+    tmp$_1 = $receiver.extra;
+    tmp$_0 = (tmp$ = reposToInclude.name) != null ? tmp$ : reposToInclude_metadata.callableName;
+    return (tmp$_3 = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE()) != null ? tmp$_3 : reposToInclude.default();
+  }
+  function compileDependencies$lambda() {
+    return ArrayList_init();
+  }
+  var compileDependencies;
+  var compileDependencies_metadata = new PropertyMetadata('compileDependencies');
+  function get_compileDependencies($receiver) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+    tmp$_1 = $receiver.extra;
+    tmp$_0 = (tmp$ = compileDependencies.name) != null ? tmp$ : compileDependencies_metadata.callableName;
+    return (tmp$_3 = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE()) != null ? tmp$_3 : compileDependencies.default();
+  }
+  function testDependencies$lambda() {
+    return ArrayList_init();
+  }
+  var testDependencies;
+  var testDependencies_metadata = new PropertyMetadata('testDependencies');
+  function get_testDependencies($receiver) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+    tmp$_1 = $receiver.extra;
+    tmp$_0 = (tmp$ = testDependencies.name) != null ? tmp$ : testDependencies_metadata.callableName;
+    return (tmp$_3 = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE()) != null ? tmp$_3 : testDependencies.default();
+  }
+  function addMavenRepository($receiver, repository) {
+    get_reposToInclude($receiver).add_11rb$(repository);
+  }
+  function addCompileDependency($receiver, dependency) {
+    get_compileDependencies($receiver).add_11rb$(dependency);
+  }
+  function addTestDependency($receiver, dependency) {
+    get_testDependencies($receiver).add_11rb$(dependency);
+  }
+  var copyToArray = Kotlin.kotlin.collections.copyToArray;
+  function generate(subject, blocks, continuation) {
+    return generate_0(subject, copyToArray(toList(blocks)).slice(), continuation);
+  }
+  function generate_0(subject_0, blocks_0, continuation_0, suspended) {
+    var instance = new Coroutine$generate(subject_0, blocks_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
+  function Coroutine$generate(subject_0, blocks_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$tmp$_0 = void 0;
+    this.local$out = void 0;
+    this.local$file = void 0;
+    this.local$subject = subject_0;
+    this.local$blocks = blocks_0;
+  }
+  Coroutine$generate.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$generate.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$generate.prototype.constructor = Coroutine$generate;
+  Coroutine$generate.prototype.doResume = function () {
+    do
       try {
-        var tmp$_4;
-        $receiver.line_61zpoe$('get("/")' + ' {' + '');
-        $receiver.indentation = $receiver.indentation + 1 | 0;
-        try {
-          $receiver.line_61zpoe$('call.respondText("HELLO WORLD!")');
-        }
-        finally {
-          $receiver.indentation = $receiver.indentation - 1 | 0;
-        }
-        $receiver.line_61zpoe$('}');
-        tmp$_4 = info.featuresToInclude.iterator();
-        while (tmp$_4.hasNext()) {
-          var feat_2 = tmp$_4.next();
-          feat_2.routing_j0vqe2$($receiver, info);
+        switch (this.state_0) {
+          case 0:
+            var tmp$;
+            this.local$out = LinkedHashMap_init();
+            var bb = new BlockBuilder(this.local$subject);
+            for (tmp$ = 0; tmp$ !== this.local$blocks.length; ++tmp$) {
+              var block = this.local$blocks[tmp$];
+              bb.visit_z5skon$(block);
+            }
+
+            this.local$tmp$_0 = bb.files.entries.iterator();
+            this.state_0 = 2;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            if (!this.local$tmp$_0.hasNext()) {
+              this.state_0 = 4;
+              continue;
+            }
+
+            var tmp$_0 = this.local$tmp$_0.next();
+            this.local$file = tmp$_0.key;
+            var gen = tmp$_0.value;
+            this.state_0 = 3;
+            this.result_0 = gen(this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 3:
+            var value = this.result_0;
+            this.local$out.put_xwzc9p$(this.local$file, value);
+            this.state_0 = 2;
+            continue;
+          case 4:
+            return this.local$out;
         }
       }
-      finally {
-        $receiver.indentation = $receiver.indentation - 1 | 0;
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
       }
-      $receiver.line_61zpoe$('}');
+     while (true);
+  };
+  function BlockSlot(name, block) {
+    this.name = name;
+    this.block = block;
+  }
+  BlockSlot.prototype.toString = function () {
+    return 'Slot(' + this.block + '.' + this.name + ')';
+  };
+  BlockSlot.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'BlockSlot',
+    interfaces: []
+  };
+  function SlotInstance(slot) {
+    this.slot = slot;
+    this.$delegate_frufmh$_0 = new Extra$Mixin();
+    this.blocks = ArrayList_init();
+  }
+  SlotInstance.prototype.render_oryfgh$ = function (indenter) {
+    var tmp$;
+    tmp$ = this.blocks.iterator();
+    while (tmp$.hasNext()) {
+      var block = tmp$.next();
+      block(indenter);
+    }
+  };
+  SlotInstance.prototype.toString = function () {
+    return 'SlotInstance(' + this.slot + ')';
+  };
+  Object.defineProperty(SlotInstance.prototype, 'extra', {
+    get: function () {
+      return this.$delegate_frufmh$_0.extra;
+    },
+    set: function (tmp$) {
+      this.$delegate_frufmh$_0.extra = tmp$;
+    }
+  });
+  SlotInstance.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SlotInstance',
+    interfaces: [Extra]
+  };
+  function FileResult(name, data, type, mode) {
+    this.name = name;
+    this.data = data;
+    this.type = type;
+    this.mode = mode;
+  }
+  FileResult.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'FileResult',
+    interfaces: []
+  };
+  var HashSet_init = Kotlin.kotlin.collections.HashSet_init_287e2$;
+  function BlockBuilder(subject) {
+    this.subject = subject;
+    this.$delegate_ts3nbg$_0 = new Extra$Mixin();
+    this.blockInstances = LinkedHashMap_init();
+    this.files = LinkedHashMap_init();
+    this.currentBlock = null;
+    this.visited_7kwj06$_0 = HashSet_init();
+  }
+  BlockBuilder.prototype.getSlotInstance_aiiv2x$ = function (slot) {
+    var tmp$;
+    var $receiver = this.blockInstances;
+    var tmp$_0;
+    var value = $receiver.get_11rb$(slot);
+    if (value == null) {
+      var answer = new SlotInstance(slot);
+      $receiver.put_xwzc9p$(slot, answer);
+      tmp$_0 = answer;
+    }
+     else {
+      tmp$_0 = value;
+    }
+    return Kotlin.isType(tmp$ = tmp$_0, SlotInstance) ? tmp$ : throwCCE();
+  };
+  BlockBuilder.prototype.append_qu2wte$ = function (slot, once, callback) {
+    if (once === void 0)
+      once = false;
+    if (!ensureNotNull(this.currentBlock).blockDeps.contains_11rb$(slot.block)) {
+      throw IllegalStateException_init(('To use ' + slot + ', must directly depend on block ' + slot.block).toString());
+    }
+    var instance = this.getSlotInstance_aiiv2x$(slot);
+    instance.blocks.add_11rb$(callback);
+  };
+  function BlockBuilder$fileText$lambda(closure$callback_0, closure$charset_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BlockBuilder$fileText$lambda(closure$callback_0, closure$charset_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BlockBuilder$fileText$lambda(closure$callback_0, closure$charset_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$callback = closure$callback_0;
+    this.local$closure$charset = closure$charset_0;
+    this.local$indenter = void 0;
+  }
+  Coroutine$BlockBuilder$fileText$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BlockBuilder$fileText$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BlockBuilder$fileText$lambda.prototype.constructor = Coroutine$BlockBuilder$fileText$lambda;
+  Coroutine$BlockBuilder$fileText$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.local$indenter = new Indenter();
+            this.state_0 = 2;
+            this.result_0 = this.local$closure$callback(this.local$indenter, this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return toByteArray(this.local$indenter.toString(), this.local$closure$charset);
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  BlockBuilder.prototype.fileText_7k8vha$ = function (name, charset, mode, callback) {
+    if (charset === void 0)
+      charset = UTF8_getInstance();
+    if (mode === void 0)
+      mode = toInt('644', 8);
+    this.fileBinary_7n0jo0$(name, 'text', mode, BlockBuilder$fileText$lambda(callback, charset));
+  };
+  function BlockBuilder$fileBinary$lambda(closure$name_0, closure$callback_0, closure$type_0, closure$mode_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BlockBuilder$fileBinary$lambda(closure$name_0, closure$callback_0, closure$type_0, closure$mode_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BlockBuilder$fileBinary$lambda(closure$name_0, closure$callback_0, closure$type_0, closure$mode_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$name = closure$name_0;
+    this.local$closure$callback = closure$callback_0;
+    this.local$closure$type = closure$type_0;
+    this.local$closure$mode = closure$mode_0;
+  }
+  Coroutine$BlockBuilder$fileBinary$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BlockBuilder$fileBinary$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BlockBuilder$fileBinary$lambda.prototype.constructor = Coroutine$BlockBuilder$fileBinary$lambda;
+  Coroutine$BlockBuilder$fileBinary$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            var tmp$;
+            this.state_0 = 2;
+            this.result_0 = this.local$closure$callback(this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            tmp$ = this.result_0;
+            return new FileResult(this.local$closure$name, tmp$, this.local$closure$type, this.local$closure$mode);
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  BlockBuilder.prototype.fileBinary_7n0jo0$ = function (name, type, mode, callback) {
+    if (type === void 0)
+      type = 'binary';
+    if (mode === void 0)
+      mode = toInt('644', 8);
+    this.files.put_xwzc9p$(name, BlockBuilder$fileBinary$lambda(name, callback, type, mode));
+  };
+  function BlockBuilder$block$lambda(closure$instance) {
+    return function ($receiver) {
+      closure$instance.render_oryfgh$($receiver);
+      return Unit;
+    };
+  }
+  BlockBuilder.prototype.block_rsgfsn$ = function ($receiver, slot) {
+    var instance = this.getSlotInstance_aiiv2x$(slot);
+    $receiver.linedeferred_yot30u$(BlockBuilder$block$lambda(instance));
+  };
+  BlockBuilder.prototype.currentBlock_dxbwye$ = function (temporal, callback) {
+    var old = this.currentBlock;
+    try {
+      this.currentBlock = temporal;
+      callback();
     }
     finally {
-      $receiver.indentation = $receiver.indentation - 1 | 0;
+      this.currentBlock = old;
     }
-    $receiver.line_61zpoe$('}');
-    tmp$_2 = info.featuresToInclude.iterator();
-    while (tmp$_2.hasNext()) {
-      var feat_3 = tmp$_2.next();
-      feat_3.extensions_j0vqe2$($receiver, info);
-    }
-    return info;
+  };
+  function BlockBuilder$visit$lambda(closure$block, this$BlockBuilder) {
+    return function () {
+      println('RENDERING: ' + closure$block);
+      var $receiver = closure$block;
+      var this$BlockBuilder_0 = this$BlockBuilder;
+      var tmp$;
+      $receiver.render_miqy8c$(this$BlockBuilder_0, (tmp$ = this$BlockBuilder_0.subject) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE());
+      return Unit;
+    };
   }
+  BlockBuilder.prototype.visit_z5skon$ = function (block) {
+    var tmp$;
+    if (this.visited_7kwj06$_0.contains_11rb$(block))
+      return;
+    println('VISIT: ' + block);
+    this.visited_7kwj06$_0.add_11rb$(block);
+    tmp$ = block.blockDeps.iterator();
+    while (tmp$.hasNext()) {
+      var parent = tmp$.next();
+      this.visit_z5skon$(parent);
+    }
+    this.currentBlock_dxbwye$(block, BlockBuilder$visit$lambda(block, this));
+  };
+  Object.defineProperty(BlockBuilder.prototype, 'extra', {
+    get: function () {
+      return this.$delegate_ts3nbg$_0.extra;
+    },
+    set: function (tmp$) {
+      this.$delegate_ts3nbg$_0.extra = tmp$;
+    }
+  });
+  BlockBuilder.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'BlockBuilder',
+    interfaces: [Extra]
+  };
+  function Block(blockDeps) {
+    this.blockDeps = toSet_0(blockDeps);
+  }
+  Block.prototype.newSlot_pdl1vj$ = function (name) {
+    if (name === void 0)
+      name = null;
+    return new BlockSlot(name != null ? name : 'unnamed', this);
+  };
+  Block.prototype.render_miqy8c$ = function ($receiver, info) {
+  };
+  Block.prototype.toString = function () {
+    return 'Block(' + toString(Kotlin.getKClassFromExpression(this).simpleName) + ')';
+  };
+  Block.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Block',
+    interfaces: []
+  };
   function ByteArrayOutputStream() {
     this.pos_0 = 0;
     this.data_0 = new Int8Array(1024);
@@ -4180,7 +4964,6 @@
   UTF8.prototype.createByte_0 = function (codePoint, shift) {
     return codePoint >> shift & 63 | 128;
   };
-  var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
   UTF8.prototype.decode_9w11d2$ = function (out, src, start, end) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2;
     var i = start;
@@ -4265,7 +5048,7 @@
     }
     return ASCII_instance;
   }
-  function toString($receiver, charset) {
+  function toString_0($receiver, charset) {
     var $receiver_0 = new StringBuilder();
     charset.decode_9w11d2$($receiver_0, $receiver, 0, $receiver.length);
     return $receiver_0.toString();
@@ -4320,96 +5103,666 @@
   function get_octal($receiver) {
     return toInt($receiver, 8);
   }
-  function BaseIndenter() {
+  function Extra() {
   }
-  BaseIndenter.$metadata$ = {
+  function Extra$Mixin(extra) {
+    if (extra === void 0)
+      extra = null;
+    this.extra_7v3q3f$_0 = extra;
+  }
+  Object.defineProperty(Extra$Mixin.prototype, 'extra', {
+    get: function () {
+      return this.extra_7v3q3f$_0;
+    },
+    set: function (extra) {
+      this.extra_7v3q3f$_0 = extra;
+    }
+  });
+  Extra$Mixin.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Mixin',
+    interfaces: [Extra]
+  };
+  function Extra$Property(name, defaultGen) {
+    if (name === void 0)
+      name = null;
+    this.name = name;
+    this.defaultGen = defaultGen;
+  }
+  Extra$Property.prototype.getValue_m0xvcc$ = defineInlineFunction('output.io.ktor.start.util.Extra.Property.getValue_m0xvcc$', wrapFunction(function () {
+    var Any = Object;
+    var throwCCE = Kotlin.throwCCE;
+    var setExtra = _.io.ktor.start.util.setExtra_5kiv3h$;
+    return function (thisRef, property) {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2;
+      tmp$_1 = thisRef.extra;
+      tmp$_0 = (tmp$ = this.name) != null ? tmp$ : property.callableName;
+      var res = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE();
+      if (res == null) {
+        var r = this.defaultGen();
+        var tmp$_3, tmp$_4;
+        setExtra(thisRef, (tmp$_3 = this.name) != null ? tmp$_3 : property.callableName, (tmp$_4 = r) == null || Kotlin.isType(tmp$_4, Any) ? tmp$_4 : throwCCE());
+        return r;
+      }
+      return res;
+    };
+  }));
+  Extra$Property.prototype.setValue_jwwfbt$ = defineInlineFunction('output.io.ktor.start.util.Extra.Property.setValue_jwwfbt$', wrapFunction(function () {
+    var Any = Object;
+    var throwCCE = Kotlin.throwCCE;
+    var setExtra = _.io.ktor.start.util.setExtra_5kiv3h$;
+    return function (thisRef, property, value) {
+      var tmp$, tmp$_0;
+      setExtra(thisRef, (tmp$ = this.name) != null ? tmp$ : property.callableName, (tmp$_0 = value) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE());
+    };
+  }));
+  Extra$Property.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Property',
+    interfaces: []
+  };
+  function Extra$PropertyThis(name, defaultGen) {
+    if (name === void 0)
+      name = null;
+    this.name = name;
+    this.defaultGen = defaultGen;
+  }
+  Extra$PropertyThis.prototype.getValue_tv2abg$ = defineInlineFunction('output.io.ktor.start.util.Extra.PropertyThis.getValue_tv2abg$', wrapFunction(function () {
+    var Any = Object;
+    var throwCCE = Kotlin.throwCCE;
+    var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
+    return function (thisRef, property) {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2;
+      tmp$_1 = thisRef.extra;
+      tmp$_0 = (tmp$ = this.name) != null ? tmp$ : property.callableName;
+      var res = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE();
+      if (res == null) {
+        var r = this.defaultGen(thisRef);
+        var tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
+        if (thisRef.extra == null)
+          thisRef.extra = LinkedHashMap_init();
+        tmp$_7 = thisRef.extra;
+        tmp$_4 = (tmp$_3 = this.name) != null ? tmp$_3 : property.callableName;
+        tmp$_6 = (tmp$_5 = r) == null || Kotlin.isType(tmp$_5, Any) ? tmp$_5 : throwCCE();
+        if (tmp$_7 != null) {
+          tmp$_7.put_xwzc9p$(tmp$_4, tmp$_6);
+        }
+        return r;
+      }
+      return res;
+    };
+  }));
+  Extra$PropertyThis.prototype.setValue_9wlt1k$ = defineInlineFunction('output.io.ktor.start.util.Extra.PropertyThis.setValue_9wlt1k$', wrapFunction(function () {
+    var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
+    var Any = Object;
+    var throwCCE = Kotlin.throwCCE;
+    return function (thisRef, property, value) {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+      if (thisRef.extra == null)
+        thisRef.extra = LinkedHashMap_init();
+      tmp$_3 = thisRef.extra;
+      tmp$_0 = (tmp$ = this.name) != null ? tmp$ : property.callableName;
+      tmp$_2 = (tmp$_1 = value) == null || Kotlin.isType(tmp$_1, Any) ? tmp$_1 : throwCCE();
+      if (tmp$_3 != null) {
+        tmp$_3.put_xwzc9p$(tmp$_0, tmp$_2);
+      }
+    };
+  }));
+  Extra$PropertyThis.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'PropertyThis',
+    interfaces: []
+  };
+  Extra.$metadata$ = {
     kind: Kind_INTERFACE,
-    simpleName: 'BaseIndenter',
+    simpleName: 'Extra',
     interfaces: []
   };
-  function Indenter() {
-    this.indentation = 0;
-    this.lines_97gspi$_0 = ArrayList_init();
-  }
-  function Indenter$Indents() {
-    Indenter$Indents_instance = this;
-    this.indents = ArrayList_init();
-  }
-  Indenter$Indents.prototype.get_za3lpa$ = function (index) {
+  function getExtraTyped($receiver, name) {
     var tmp$, tmp$_0;
-    while (this.indents.size <= index) {
-      this.indents.add_11rb$((tmp$_0 = (tmp$ = lastOrNull(this.indents)) != null ? tmp$ + '    ' : null) != null ? tmp$_0 : '');
+    return (tmp$_0 = (tmp$ = $receiver.extra) != null ? tmp$.get_11rb$(name) : null) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE();
+  }
+  function getExtra($receiver, name) {
+    var tmp$;
+    return (tmp$ = $receiver.extra) != null ? tmp$.get_11rb$(name) : null;
+  }
+  function setExtra($receiver, name, value) {
+    var tmp$;
+    if ($receiver.extra == null)
+      $receiver.extra = LinkedHashMap_init();
+    if ((tmp$ = $receiver.extra) != null) {
+      tmp$.put_xwzc9p$(name, value);
     }
-    return this.indents.get_za3lpa$(index);
-  };
-  Indenter$Indents.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'Indents',
+  }
+  function extraProperty(name, default_0) {
+    if (name === void 0)
+      name = null;
+    this.name = name;
+    this.default = default_0;
+  }
+  extraProperty.prototype.getValue_m0xvcc$ = defineInlineFunction('output.io.ktor.start.util.extraProperty.getValue_m0xvcc$', wrapFunction(function () {
+    var Any = Object;
+    var throwCCE = Kotlin.throwCCE;
+    return function (thisRef, property) {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+      tmp$_1 = thisRef.extra;
+      tmp$_0 = (tmp$ = this.name) != null ? tmp$ : property.callableName;
+      return (tmp$_3 = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE()) != null ? tmp$_3 : this.default();
+    };
+  }));
+  extraProperty.prototype.setValue_jwwfbt$ = defineInlineFunction('output.io.ktor.start.util.extraProperty.setValue_jwwfbt$', wrapFunction(function () {
+    var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
+    var Any = Object;
+    var throwCCE = Kotlin.throwCCE;
+    return function (thisRef, property, value) {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+      if (thisRef.extra == null)
+        thisRef.extra = LinkedHashMap_init();
+      tmp$_3 = thisRef.extra;
+      tmp$_0 = (tmp$ = this.name) != null ? tmp$ : property.callableName;
+      tmp$_2 = (tmp$_1 = value) == null || Kotlin.isType(tmp$_1, Any) ? tmp$_1 : throwCCE();
+      if (tmp$_3 != null) {
+        tmp$_3.put_xwzc9p$(tmp$_0, tmp$_2);
+      }
+    };
+  }));
+  extraProperty.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'extraProperty',
     interfaces: []
   };
-  var Indenter$Indents_instance = null;
-  function Indenter$Indents_getInstance() {
-    if (Indenter$Indents_instance === null) {
-      new Indenter$Indents();
+  function Indenter(actions) {
+    Indenter$Companion_getInstance();
+    if (actions === void 0) {
+      actions = ArrayList_init();
     }
-    return Indenter$Indents_instance;
+    this.actions_0 = actions;
+    this.noIndentEmptyLines = true;
+    this.out = '';
   }
-  Indenter.prototype.line_61zpoe$ = function (str) {
-    var $receiver = this.lines_97gspi$_0;
-    var element = Indenter$Indents_getInstance().get_za3lpa$(this.indentation) + str;
-    $receiver.add_11rb$(element);
+  function Indenter$INDENTS() {
+    Indenter$INDENTS_instance = this;
+    this.INDENTS_0 = arrayListOf(['']);
+  }
+  Indenter$INDENTS.prototype.get_za3lpa$ = function (index) {
+    if (index >= this.INDENTS_0.size) {
+      var calculate = this.INDENTS_0.size * 10 | 0;
+      var indent = this.INDENTS_0.get_za3lpa$(this.INDENTS_0.size - 1 | 0);
+      while (calculate >= this.INDENTS_0.size) {
+        indent += '\t';
+        this.INDENTS_0.add_11rb$(indent);
+      }
+    }
+    return index <= 0 ? '' : this.INDENTS_0.get_za3lpa$(index);
   };
-  Indenter.prototype.line_hgzy0z$ = defineInlineFunction('output.io.ktor.start.util.Indenter.line_hgzy0z$', function (str, suffix, callback) {
-    if (suffix === void 0)
-      suffix = '';
-    this.line_61zpoe$(str + ' {' + suffix);
-    this.indentation = this.indentation + 1 | 0;
+  Indenter$INDENTS.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'INDENTS',
+    interfaces: []
+  };
+  var Indenter$INDENTS_instance = null;
+  function Indenter$INDENTS_getInstance() {
+    if (Indenter$INDENTS_instance === null) {
+      new Indenter$INDENTS();
+    }
+    return Indenter$INDENTS_instance;
+  }
+  function Indenter$Action() {
+  }
+  function Indenter$Action$Text() {
+  }
+  Indenter$Action$Text.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'Text',
+    interfaces: [Indenter$Action]
+  };
+  function Indenter$Action$Marker(data) {
+    this.data = data;
+  }
+  Indenter$Action$Marker.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Marker',
+    interfaces: [Indenter$Action]
+  };
+  Indenter$Action$Marker.prototype.component1 = function () {
+    return this.data;
+  };
+  Indenter$Action$Marker.prototype.copy_za3rmp$ = function (data) {
+    return new Indenter$Action$Marker(data === void 0 ? this.data : data);
+  };
+  Indenter$Action$Marker.prototype.toString = function () {
+    return 'Marker(data=' + Kotlin.toString(this.data) + ')';
+  };
+  Indenter$Action$Marker.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.data) | 0;
+    return result;
+  };
+  Indenter$Action$Marker.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.data, other.data))));
+  };
+  function Indenter$Action$Inline(str) {
+    this.str_hhwjt7$_0 = str;
+  }
+  Object.defineProperty(Indenter$Action$Inline.prototype, 'str', {
+    get: function () {
+      return this.str_hhwjt7$_0;
+    }
+  });
+  Indenter$Action$Inline.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Inline',
+    interfaces: [Indenter$Action$Text]
+  };
+  Indenter$Action$Inline.prototype.component1 = function () {
+    return this.str;
+  };
+  Indenter$Action$Inline.prototype.copy_61zpoe$ = function (str) {
+    return new Indenter$Action$Inline(str === void 0 ? this.str : str);
+  };
+  Indenter$Action$Inline.prototype.toString = function () {
+    return 'Inline(str=' + Kotlin.toString(this.str) + ')';
+  };
+  Indenter$Action$Inline.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.str) | 0;
+    return result;
+  };
+  Indenter$Action$Inline.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.str, other.str))));
+  };
+  function Indenter$Action$Line(str) {
+    this.str_fnpwjq$_0 = str;
+  }
+  Object.defineProperty(Indenter$Action$Line.prototype, 'str', {
+    get: function () {
+      return this.str_fnpwjq$_0;
+    }
+  });
+  Indenter$Action$Line.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Line',
+    interfaces: [Indenter$Action$Text]
+  };
+  Indenter$Action$Line.prototype.component1 = function () {
+    return this.str;
+  };
+  Indenter$Action$Line.prototype.copy_61zpoe$ = function (str) {
+    return new Indenter$Action$Line(str === void 0 ? this.str : str);
+  };
+  Indenter$Action$Line.prototype.toString = function () {
+    return 'Line(str=' + Kotlin.toString(this.str) + ')';
+  };
+  Indenter$Action$Line.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.str) | 0;
+    return result;
+  };
+  Indenter$Action$Line.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.str, other.str))));
+  };
+  function Indenter$Action$LineDeferred(callback) {
+    this.callback = callback;
+  }
+  Indenter$Action$LineDeferred.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'LineDeferred',
+    interfaces: [Indenter$Action]
+  };
+  Indenter$Action$LineDeferred.prototype.component1 = function () {
+    return this.callback;
+  };
+  Indenter$Action$LineDeferred.prototype.copy_xyzrvr$ = function (callback) {
+    return new Indenter$Action$LineDeferred(callback === void 0 ? this.callback : callback);
+  };
+  Indenter$Action$LineDeferred.prototype.toString = function () {
+    return 'LineDeferred(callback=' + Kotlin.toString(this.callback) + ')';
+  };
+  Indenter$Action$LineDeferred.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.callback) | 0;
+    return result;
+  };
+  Indenter$Action$LineDeferred.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.callback, other.callback))));
+  };
+  function Indenter$Action$Indent() {
+    Indenter$Action$Indent_instance = this;
+  }
+  Indenter$Action$Indent.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Indent',
+    interfaces: [Indenter$Action]
+  };
+  var Indenter$Action$Indent_instance = null;
+  function Indenter$Action$Indent_getInstance() {
+    if (Indenter$Action$Indent_instance === null) {
+      new Indenter$Action$Indent();
+    }
+    return Indenter$Action$Indent_instance;
+  }
+  function Indenter$Action$Unindent() {
+    Indenter$Action$Unindent_instance = this;
+  }
+  Indenter$Action$Unindent.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Unindent',
+    interfaces: [Indenter$Action]
+  };
+  var Indenter$Action$Unindent_instance = null;
+  function Indenter$Action$Unindent_getInstance() {
+    if (Indenter$Action$Unindent_instance === null) {
+      new Indenter$Action$Unindent();
+    }
+    return Indenter$Action$Unindent_instance;
+  }
+  Indenter$Action.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'Action',
+    interfaces: []
+  };
+  function Indenter$Companion() {
+    Indenter$Companion_instance = this;
+    var indenter = new Indenter();
+    this.EMPTY = indenter;
+  }
+  Indenter$Companion.prototype.genString_yot30u$ = function (init) {
+    var indenter = new Indenter();
+    init(indenter);
+    return indenter.toString();
+  };
+  Indenter$Companion.prototype.gen_yot30u$ = defineInlineFunction('output.io.ktor.start.util.Indenter.Companion.gen_yot30u$', wrapFunction(function () {
+    var Indenter_init = _.io.ktor.start.util.Indenter;
+    return function (init) {
+      var indenter = new Indenter_init();
+      init(indenter);
+      return indenter;
+    };
+  }));
+  Indenter$Companion.prototype.single_61zpoe$ = function (str) {
+    return new Indenter(arrayListOf([new Indenter$Action$Line(str)]));
+  };
+  Indenter$Companion.prototype.invoke_yot30u$ = function (init) {
+    var indenter = new Indenter();
+    init(indenter);
+    return indenter;
+  };
+  Indenter$Companion.prototype.invoke_61zpoe$ = function (str) {
+    return this.single_61zpoe$(str);
+  };
+  var StringBuilder_init = Kotlin.kotlin.text.StringBuilder_init_za3lpa$;
+  Indenter$Companion.prototype.replaceString_mvjluj$ = function (templateString, replacements) {
+    var pattern = Regex_init('\\$(\\w+)');
+    var replace_20wsma$result;
+    replace_20wsma$break: do {
+      var match = pattern.find_905azu$(templateString);
+      if (match == null) {
+        replace_20wsma$result = templateString.toString();
+        break replace_20wsma$break;
+      }
+      var lastStart = 0;
+      var length = templateString.length;
+      var sb = StringBuilder_init(length);
+      do {
+        var foundMatch = ensureNotNull(match);
+        sb.append_ezbsdh$(templateString, lastStart, foundMatch.range.start);
+        var tmp$;
+        sb.append_gw00v9$((tmp$ = replacements.get_11rb$(foundMatch.groupValues.get_za3lpa$(1))) != null ? tmp$ : '');
+        lastStart = foundMatch.range.endInclusive + 1 | 0;
+        match = foundMatch.next();
+      }
+       while (lastStart < length && match != null);
+      if (lastStart < length) {
+        sb.append_ezbsdh$(templateString, lastStart, length);
+      }
+      replace_20wsma$result = sb.toString();
+    }
+     while (false);
+    return replace_20wsma$result;
+  };
+  Indenter$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var Indenter$Companion_instance = null;
+  function Indenter$Companion_getInstance() {
+    if (Indenter$Companion_instance === null) {
+      new Indenter$Companion();
+    }
+    return Indenter$Companion_instance;
+  }
+  Indenter.prototype.inline_61zpoe$ = function (str) {
+    this.actions_0.add_11rb$(new Indenter$Action$Inline(str));
+    return this;
+  };
+  Indenter.prototype.line_oryfgh$ = function (indenter) {
+    this.actions_0.addAll_brywnq$(indenter.actions_0);
+    return this;
+  };
+  Indenter.prototype.line_61zpoe$ = function (str) {
+    this.actions_0.add_11rb$(new Indenter$Action$Line(str));
+    return this;
+  };
+  Indenter.prototype.line_pdl1vj$ = function (str) {
+    if (str != null)
+      this.line_61zpoe$(str);
+  };
+  Indenter.prototype.mark_za3rmp$ = function (data) {
+    this.actions_0.add_11rb$(new Indenter$Action$Marker(data));
+    return this;
+  };
+  function Indenter$linedeferred$lambda(closure$init) {
+    return function () {
+      var indenter = new Indenter();
+      closure$init(indenter);
+      return indenter;
+    };
+  }
+  Indenter.prototype.linedeferred_yot30u$ = function (init) {
+    this.actions_0.add_11rb$(new Indenter$Action$LineDeferred(Indenter$linedeferred$lambda(init)));
+    return this;
+  };
+  Indenter.prototype.line_a4mwiz$ = defineInlineFunction('output.io.ktor.start.util.Indenter.line_a4mwiz$', function (str, callback) {
+    this.line_61zpoe$(str.length === 0 ? '{' : str + ' {');
+    this._indent();
     try {
       callback();
     }
     finally {
-      this.indentation = this.indentation - 1 | 0;
+      this._unindent();
     }
+    this;
     this.line_61zpoe$('}');
+    return this;
   });
+  Indenter.prototype.line_slzebz$ = defineInlineFunction('output.io.ktor.start.util.Indenter.line_slzebz$', function (str, after, after2, callback) {
+    if (after === void 0)
+      after = '';
+    if (after2 === void 0)
+      after2 = '';
+    this.line_61zpoe$(str.length === 0 ? '{ ' + after : str + ' { ' + after);
+    this._indent();
+    try {
+      callback();
+    }
+    finally {
+      this._unindent();
+    }
+    this;
+    this.line_61zpoe$('}' + after2);
+    return this;
+  });
+  Indenter.prototype.indent_o14v8n$ = defineInlineFunction('output.io.ktor.start.util.Indenter.indent_o14v8n$', function (callback) {
+    this._indent();
+    try {
+      callback();
+    }
+    finally {
+      this._unindent();
+    }
+    return this;
+  });
+  Indenter.prototype._indent = function () {
+    this.actions_0.add_11rb$(Indenter$Action$Indent_getInstance());
+  };
+  Indenter.prototype._unindent = function () {
+    this.actions_0.add_11rb$(Indenter$Action$Unindent_getInstance());
+  };
+  function Indenter$toString$eval(closure$newLine, this$Indenter, closure$doIndent, closure$out, closure$line, closure$indentIndex, closure$markHandler) {
+    var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
+    var toBoxedChar = Kotlin.toBoxedChar;
+    var unboxChar_0 = Kotlin.unboxChar;
+    return function closure$eval(actions) {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+      tmp$ = actions.iterator();
+      while (tmp$.hasNext()) {
+        var action = tmp$.next();
+        if (Kotlin.isType(action, Indenter$Action$Text)) {
+          if (closure$newLine.v) {
+            var tmp$_4 = this$Indenter.noIndentEmptyLines;
+            if (tmp$_4) {
+              tmp$_4 = action.str.length === 0;
+            }
+            if (tmp$_4) {
+              if (closure$doIndent)
+                closure$out.append_s8itvh$(10);
+              tmp$_0 = closure$line.v;
+              closure$line.v = tmp$_0 + 1 | 0;
+            }
+             else {
+              if (closure$doIndent)
+                closure$out.append_gw00v9$(Indenter$INDENTS_getInstance().get_za3lpa$(closure$indentIndex.v));
+              else
+                closure$out.append_gw00v9$(' ');
+            }
+          }
+          closure$out.append_gw00v9$(action.str);
+          if (Kotlin.isType(action, Indenter$Action$Line)) {
+            var tmp$_5 = closure$line;
+            var tmp$_6 = closure$line.v;
+            var tmp$_7;
+            var count = 0;
+            tmp$_7 = iterator(action.str);
+            while (tmp$_7.hasNext()) {
+              var element = unboxChar_0(tmp$_7.next());
+              if (unboxChar(toBoxedChar(element)) === 10) {
+                count = count + 1 | 0;
+              }
+            }
+            tmp$_5.v = tmp$_6 + count | 0;
+            if (closure$doIndent)
+              closure$out.append_s8itvh$(10);
+            tmp$_1 = closure$line.v;
+            closure$line.v = tmp$_1 + 1 | 0;
+            closure$newLine.v = true;
+          }
+           else {
+            closure$newLine.v = false;
+          }
+        }
+         else if (Kotlin.isType(action, Indenter$Action$LineDeferred))
+          closure$eval(action.callback().actions_0);
+        else if (equals(action, Indenter$Action$Indent_getInstance())) {
+          tmp$_2 = closure$indentIndex.v;
+          closure$indentIndex.v = tmp$_2 + 1 | 0;
+        }
+         else if (equals(action, Indenter$Action$Unindent_getInstance())) {
+          tmp$_3 = closure$indentIndex.v;
+          closure$indentIndex.v = tmp$_3 - 1 | 0;
+        }
+         else if (Kotlin.isType(action, Indenter$Action$Marker))
+          closure$markHandler != null ? closure$markHandler(closure$out, closure$line.v, action.data) : null;
+      }
+    };
+  }
+  Indenter.prototype.toString_l6l5ny$ = function (markHandler, doIndent) {
+    var out = new StringBuilder();
+    var line = {v: 0};
+    var newLine = {v: true};
+    var indentIndex = {v: 0};
+    var eval_0 = Indenter$toString$eval(newLine, this, doIndent, out, line, indentIndex, markHandler);
+    eval_0(this.actions_0);
+    return out.toString();
+  };
   Indenter.prototype.invoke_44doqu$ = defineInlineFunction('output.io.ktor.start.util.Indenter.invoke_44doqu$', function ($receiver, suffix, callback) {
     if (suffix === void 0)
       suffix = '';
-    this.line_61zpoe$($receiver + ' {' + suffix);
-    this.indentation = this.indentation + 1 | 0;
+    this.line_61zpoe$($receiver.length === 0 ? '{ ' + suffix : $receiver + ' { ' + suffix);
+    this._indent();
     try {
       callback();
     }
     finally {
-      this.indentation = this.indentation - 1 | 0;
+      this._unindent();
     }
-    this.line_61zpoe$('}');
+    this;
+    this.line_61zpoe$('}' + '');
+    return this;
   });
   Indenter.prototype.unaryPlus_pdl1vz$ = defineInlineFunction('output.io.ktor.start.util.Indenter.unaryPlus_pdl1vz$', function ($receiver) {
-    this.line_61zpoe$($receiver);
+    return this.line_61zpoe$($receiver);
   });
-  Indenter.prototype.indent_o14v8n$ = defineInlineFunction('output.io.ktor.start.util.Indenter.indent_o14v8n$', function (callback) {
-    this.indentation = this.indentation + 1 | 0;
-    try {
-      callback();
-    }
-    finally {
-      this.indentation = this.indentation - 1 | 0;
-    }
-  });
+  Indenter.prototype.toString_95lvll$ = function (markHandler) {
+    return this.toString_l6l5ny$(markHandler, true);
+  };
+  Indenter.prototype.toString_8kj6y5$ = function (doIndent, indentChunk) {
+    if (doIndent === void 0)
+      doIndent = true;
+    if (indentChunk === void 0)
+      indentChunk = '\t';
+    var out = this.toString_l6l5ny$(null, doIndent);
+    return equals(indentChunk, '\t') ? out : replace(out, '\t', indentChunk);
+  };
   Indenter.prototype.toString = function () {
-    return joinToString(this.lines_97gspi$_0, '\n');
+    return this.toString_l6l5ny$(null, true);
   };
   Indenter.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'Indenter',
-    interfaces: [BaseIndenter]
+    interfaces: []
   };
-  function indenter(callback) {
-    var $receiver = new Indenter();
-    callback($receiver);
-    return $receiver.toString();
+  function MvnArtifact(dependency) {
+    this.dependency = dependency;
+    this.parts = split_0(this.dependency, [':']);
   }
+  Object.defineProperty(MvnArtifact.prototype, 'group', {
+    get: function () {
+      return getOrNull(this.parts, 0);
+    }
+  });
+  Object.defineProperty(MvnArtifact.prototype, 'name', {
+    get: function () {
+      return getOrNull(this.parts, 1);
+    }
+  });
+  Object.defineProperty(MvnArtifact.prototype, 'version', {
+    get: function () {
+      return getOrNull(this.parts, 2);
+    }
+  });
+  MvnArtifact.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MvnArtifact',
+    interfaces: []
+  };
+  MvnArtifact.prototype.component1 = function () {
+    return this.dependency;
+  };
+  MvnArtifact.prototype.copy_61zpoe$ = function (dependency) {
+    return new MvnArtifact(dependency === void 0 ? this.dependency : dependency);
+  };
+  MvnArtifact.prototype.toString = function () {
+    return 'MvnArtifact(dependency=' + Kotlin.toString(this.dependency) + ')';
+  };
+  MvnArtifact.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.dependency) | 0;
+    return result;
+  };
+  MvnArtifact.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.dependency, other.dependency))));
+  };
   function SemVer(version) {
     this.version = version;
     this.parts1_0 = split(this.version, Kotlin.charArrayOf(45), void 0, 2);
@@ -4710,6 +6063,7 @@
   Object.defineProperty(package$features, 'AuthFeature', {
     get: AuthFeature_getInstance
   });
+  package$features.addAuthProvider_xi0fd9$ = addAuthProvider;
   Object.defineProperty(package$features, 'AuthJwtFeature', {
     get: AuthJwtFeature_getInstance
   });
@@ -4791,6 +6145,7 @@
   Object.defineProperty(package$features, 'RoutingFeature', {
     get: RoutingFeature_getInstance
   });
+  package$features.addRoute_xi0fd9$ = addRoute;
   Object.defineProperty(package$features, 'SessionsFeature', {
     get: SessionsFeature_getInstance
   });
@@ -4814,19 +6169,32 @@
       return ALL_FEATURES;
     }
   });
-  var package$generate = package$start.generate || (package$start.generate = {});
-  Object.defineProperty(package$generate, 'KtorProjectGenerator', {
-    get: KtorProjectGenerator_getInstance
+  var package$project = package$start.project || (package$start.project = {});
+  Object.defineProperty(package$project, 'ApplicationConf', {
+    get: ApplicationConf_getInstance
   });
-  package$generate.buildPomXml_j0vqe2$ = buildPomXml;
-  Object.defineProperty(package$generate, 'DOLLAR', {
-    get: function () {
-      return DOLLAR;
-    }
+  package$project.addHoconDeployment_xi0fd9$ = addHoconDeployment;
+  package$project.addHoconKtor_xi0fd9$ = addHoconKtor;
+  Object.defineProperty(package$project, 'ApplicationKt', {
+    get: ApplicationKt_getInstance
   });
-  package$generate.buildBuildGradle_j0vqe2$ = buildBuildGradle;
-  package$generate.buildApplicationConf_j0vqe2$ = buildApplicationConf;
-  package$generate.buildApplicationKt_j0vqe2$ = buildApplicationKt;
+  package$project.addImport_zc4wmb$ = addImport;
+  package$project.addFeatureInstall_xi0fd9$ = addFeatureInstall;
+  package$project.addExtensionMethods_xi0fd9$ = addExtensionMethods;
+  package$project.addApplicationClasses_xi0fd9$ = addApplicationClasses;
+  Object.defineProperty(package$project, 'BuildFiles', {
+    get: BuildFiles_getInstance
+  });
+  package$project.addMavenRepository_zc4wmb$ = addMavenRepository;
+  package$project.addCompileDependency_6b55lg$ = addCompileDependency;
+  package$project.addTestDependency_6b55lg$ = addTestDependency;
+  package$util.generate_maf521$ = generate;
+  package$util.generate_xte3qv$ = generate_0;
+  package$util.BlockSlot = BlockSlot;
+  package$util.SlotInstance = SlotInstance;
+  package$util.FileResult = FileResult;
+  package$util.BlockBuilder = BlockBuilder;
+  package$util.Block = Block;
   package$util.ByteArrayOutputStream = ByteArrayOutputStream;
   package$util.buildByteArray_xuyaid$ = buildByteArray;
   package$util.Charset = Charset;
@@ -4836,19 +6204,41 @@
   Object.defineProperty(package$util, 'ASCII', {
     get: ASCII_getInstance
   });
-  package$util.toString_ecs3bj$ = toString;
+  package$util.toString_ecs3bj$ = toString_0;
   package$util.toByteArray_wtqmxj$ = toByteArray;
   Object.defineProperty(package$util, 'CRC32', {
     get: CRC32_getInstance
   });
   package$util.crc32_964n91$ = crc32;
   package$util.get_octal_pdl1vz$ = get_octal;
-  package$util.BaseIndenter = BaseIndenter;
-  Object.defineProperty(Indenter, 'Indents', {
-    get: Indenter$Indents_getInstance
+  Extra.Mixin = Extra$Mixin;
+  package$util.setExtra_5kiv3h$ = setExtra;
+  Extra.Property = Extra$Property;
+  Extra.PropertyThis = Extra$PropertyThis;
+  package$util.Extra = Extra;
+  package$util.getExtraTyped_p4ogyo$ = getExtraTyped;
+  package$util.getExtra_vj42u1$ = getExtra;
+  package$util.extraProperty = extraProperty;
+  Object.defineProperty(Indenter, 'INDENTS', {
+    get: Indenter$INDENTS_getInstance
+  });
+  Indenter$Action.Text = Indenter$Action$Text;
+  Indenter$Action.Marker = Indenter$Action$Marker;
+  Indenter$Action.Inline = Indenter$Action$Inline;
+  Indenter$Action.Line = Indenter$Action$Line;
+  Indenter$Action.LineDeferred = Indenter$Action$LineDeferred;
+  Object.defineProperty(Indenter$Action, 'Indent', {
+    get: Indenter$Action$Indent_getInstance
+  });
+  Object.defineProperty(Indenter$Action, 'Unindent', {
+    get: Indenter$Action$Unindent_getInstance
+  });
+  Indenter.Action = Indenter$Action;
+  Object.defineProperty(Indenter, 'Companion', {
+    get: Indenter$Companion_getInstance
   });
   package$util.Indenter = Indenter;
-  package$util.indenter_yot30u$ = indenter;
+  package$util.MvnArtifact = MvnArtifact;
   package$util.SemVer = SemVer;
   Object.defineProperty(ZipBuilder, 'Companion', {
     get: ZipBuilder$Companion_getInstance
@@ -4856,8 +6246,6 @@
   ZipBuilder.FileInfo = ZipBuilder$FileInfo;
   package$util.ZipBuilder = ZipBuilder;
   package$util.buildZip_oi1qpb$ = buildZip;
-  build$lambda$ObjectLiteral.prototype.add_dkzqdg$ = FileContainer.prototype.add_dkzqdg$;
-  KtorProjectGenerator$generate$lambda$ObjectLiteral.prototype.add_dkzqdg$ = FileContainer.prototype.add_dkzqdg$;
   EmptyContinuation = new EmptyContinuation$ObjectLiteral();
   defaultArtifactGroup = 'com.example';
   defaultArtifactName = 'ktor-demo';
@@ -4866,8 +6254,11 @@
   insideIframe = lazy(insideIframe$lambda);
   hashParams = lazy(hashParams$lambda);
   KOTLIN_VERSION = '1.2.41';
-  ALL_FEATURES = listOf_0([HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), HttpClientFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
-  DOLLAR = 36;
+  ALL_FEATURES = listOf_0([HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), HttpClientFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
+  applicationKtImports = new extraProperty(void 0, applicationKtImports$lambda);
+  reposToInclude = new extraProperty(void 0, reposToInclude$lambda);
+  compileDependencies = new extraProperty(void 0, compileDependencies$lambda);
+  testDependencies = new extraProperty(void 0, testDependencies$lambda);
   main([]);
   Kotlin.defineModule('output', _);
   return _;

@@ -1,8 +1,9 @@
 package io.ktor.start.features
 
 import io.ktor.start.*
+import io.ktor.start.project.*
 
-object RawSocketsFeature : Feature() {
+object RawSocketsFeature : Feature(ApplicationKt) {
     override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-network:\$ktor_version")
     override val id = "ktor-network"

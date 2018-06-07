@@ -1,8 +1,9 @@
 package io.ktor.start.features
 
 import io.ktor.start.*
+import io.ktor.start.project.*
 
-object VelocityFeature : Feature() {
+object VelocityFeature : Feature(ApplicationKt) {
     override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-velocity:\$ktor_version")
     override val id = "velocity"
