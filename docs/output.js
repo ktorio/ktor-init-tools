@@ -114,6 +114,8 @@
   RawSocketsFeature.prototype.constructor = RawSocketsFeature;
   RawSocketsTlsFeature.prototype = Object.create(Feature.prototype);
   RawSocketsTlsFeature.prototype.constructor = RawSocketsTlsFeature;
+  RoutingFeature.prototype = Object.create(Feature.prototype);
+  RoutingFeature.prototype.constructor = RoutingFeature;
   SessionsFeature.prototype = Object.create(Feature.prototype);
   SessionsFeature.prototype.constructor = SessionsFeature;
   ShutdownUrlFeature.prototype = Object.create(Feature.prototype);
@@ -3043,6 +3045,58 @@
     }
     return RawSocketsTlsFeature_instance;
   }
+  function RoutingFeature() {
+    RoutingFeature_instance = this;
+    Feature.call(this);
+    this.repos_hd5igk$_0 = Repos_getInstance().ktor;
+    this.artifacts_jiqbx0$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.id_l5zff8$_0 = 'routing';
+    this.title_gcslwr$_0 = 'Routing';
+    this.description_rjcp5b$_0 = 'Allows to define structured routes and associated handlers.';
+    this.documentation_f0l9u5$_0 = 'https://ktor.io/features/routing.html';
+  }
+  Object.defineProperty(RoutingFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_hd5igk$_0;
+    }
+  });
+  Object.defineProperty(RoutingFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_jiqbx0$_0;
+    }
+  });
+  Object.defineProperty(RoutingFeature.prototype, 'id', {
+    get: function () {
+      return this.id_l5zff8$_0;
+    }
+  });
+  Object.defineProperty(RoutingFeature.prototype, 'title', {
+    get: function () {
+      return this.title_gcslwr$_0;
+    }
+  });
+  Object.defineProperty(RoutingFeature.prototype, 'description', {
+    get: function () {
+      return this.description_rjcp5b$_0;
+    }
+  });
+  Object.defineProperty(RoutingFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_f0l9u5$_0;
+    }
+  });
+  RoutingFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'RoutingFeature',
+    interfaces: [Feature]
+  };
+  var RoutingFeature_instance = null;
+  function RoutingFeature_getInstance() {
+    if (RoutingFeature_instance === null) {
+      new RoutingFeature();
+    }
+    return RoutingFeature_instance;
+  }
   function SessionsFeature() {
     SessionsFeature_instance = this;
     Feature.call(this);
@@ -4596,6 +4650,9 @@
   Object.defineProperty(package$features, 'RawSocketsTlsFeature', {
     get: RawSocketsTlsFeature_getInstance
   });
+  Object.defineProperty(package$features, 'RoutingFeature', {
+    get: RoutingFeature_getInstance
+  });
   Object.defineProperty(package$features, 'SessionsFeature', {
     get: SessionsFeature_getInstance
   });
@@ -4671,7 +4728,7 @@
   insideIframe = lazy(insideIframe$lambda);
   hashParams = lazy(hashParams$lambda);
   KOTLIN_VERSION = '1.2.41';
-  ALL_FEATURES = listOf_0([HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), HttpClientFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
+  ALL_FEATURES = listOf_0([HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), HttpClientFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
   DOLLAR = 36;
   main([]);
   Kotlin.defineModule('output', _);
