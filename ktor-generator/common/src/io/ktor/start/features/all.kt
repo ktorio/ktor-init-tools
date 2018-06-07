@@ -28,6 +28,7 @@ val ALL_FEATURES = listOf(
     HSTSFeature,
     StatusPagesFeature,
     RoutingFeature,
+    ContentNegotiationFeature,
     HttpsRedirectFeature,
     ShutdownUrlFeature,
     WebsocketsFeature,

@@ -6,6 +6,7 @@ import io.ktor.start.util.*
 object JsonGsonFeature : Feature() {
     override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-gson:\$ktor_version")
+    override val dependencies by lazy { listOf(ContentNegotiationFeature) }
     override val id = "ktor-gson"
     override val title = "GSON"
     override val description = "Handles JSON serialization using GSON library"

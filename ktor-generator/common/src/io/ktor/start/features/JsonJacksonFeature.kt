@@ -6,6 +6,7 @@ import io.ktor.start.util.*
 object JsonJacksonFeature : Feature() {
     override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-jackson:\$ktor_version")
+    override val dependencies by lazy { listOf(ContentNegotiationFeature) }
     override val id = "ktor-jackson"
     override val title = "Jackson"
     override val description = "Handles JSON serialization using Jackson library"
