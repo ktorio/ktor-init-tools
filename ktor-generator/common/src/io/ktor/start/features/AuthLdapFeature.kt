@@ -8,5 +8,5 @@ object AuthLdapFeature : Feature() {
     override val id = "auth-ldap"
     override val title = "Authentication LDAP"
     override val description = "Handle JDAP authentication"
-    override val documentation = "https://ktor.io/features/authentication.html#ldap"
+    override val documentation = "https://ktor.io/features/authentication/ldap.html"
 }

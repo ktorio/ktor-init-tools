@@ -20,13 +20,13 @@ open class Indenter : BaseIndenter {
         lines += Indents[indentation] + str
     }
 
-    inline fun line(str: String, callback: () -> Unit) {
-        line("$str {")
+    inline fun line(str: String, suffix: String = "", callback: () -> Unit) {
+        line("$str {$suffix")
         indent(callback)
         line("}")
     }
 
-    inline operator fun String.invoke(callback: () -> Unit) = line(this, callback)
+    inline operator fun String.invoke(suffix: String = "", callback: () -> Unit) = line(this, suffix, callback)
     inline operator fun String.unaryPlus() = line(this)
 
     inline fun indent(callback: () -> Unit) {

@@ -8,7 +8,7 @@ object FreemarkerFeature : Feature() {
     override val artifacts = listOf("io.ktor:ktor-freemarker:\$ktor_version")
     override val id = "freemarker"
     override val title = "Freemarker"
-    override val description = "Serve HTML content using Apache freemarker"
+    override val description = "Serve HTML content using Apache's FreeMarker template engine"
     override val documentation = "https://ktor.io/features/templates/freemarker.html"
 
     override fun imports(info: BuildInfo) = listOf(
@@ -35,7 +35,7 @@ object FreemarkerFeature : Feature() {
     override fun Indenter.extensions(info: BuildInfo) {
     }
 
-    override fun addFiles(info: BuildInfo, files: FileContainer) {
+    override suspend fun addFiles(info: BuildInfo, files: FileContainer, fetcher: FileFetcher) {
         files.add("${info.artifactName}/resources/templates/index.ftl", indenter {
             +"<#-- @ftlvariable name=\"data\" type=\"${info.artifactGroup}.IndexData\" -->"
             +"<html>"

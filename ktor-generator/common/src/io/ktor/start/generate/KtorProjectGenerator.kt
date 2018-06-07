@@ -30,9 +30,9 @@ object KtorProjectGenerator {
 
         for (feat in info.featuresToInclude) {
             feat.addFiles(info, object : FileContainer {
-                override fun add(name: String, content: ByteArray, mode: Int) {
-                    files.add(name, content, mode = mode)
-                }
+                override fun add(name: String, content: ByteArray, mode: Int) = files.add(name, content, mode = mode)
+            }, object : FileFetcher {
+                override suspend fun fetch(path: String): ByteArray = fetchFile(path)
             })
         }
 
@@ -100,10 +100,17 @@ fun Indenter.buildApplicationConf(info: BuildInfo) = info.apply {
         "deployment" {
             +"port = 8080"
             +"port = \${?PORT}"
+            for (feat in info.featuresToInclude) {
+                feat.apply { hoconKtorDeploymentSection(info) }
+            }
         }
 
         "application" {
             +"modules = [ $artifactGroup.ApplicationKt.main ]"
+        }
+
+        for (feat in info.featuresToInclude) {
+            feat.apply { hoconKtorSection(info) }
         }
     }
 }

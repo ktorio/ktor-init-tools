@@ -27,7 +27,7 @@ object JsonJacksonFeature : Feature() {
 
     override fun Indenter.routing(info: BuildInfo) {
         +""
-        "get(\"/json\")" {
+        "get(\"/json/jackson\")" {
             +"call.respond(mapOf(\"hello\" to \"world\"))"
         }
     }

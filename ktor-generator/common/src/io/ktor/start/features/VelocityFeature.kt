@@ -7,6 +7,6 @@ object VelocityFeature : Feature() {
     override val artifacts = listOf("io.ktor:ktor-velocity:\$ktor_version")
     override val id = "velocity"
     override val title = "Velocity"
-    override val description = "Serve HTML content using Apache velocity"
+    override val description = "Serve HTML content using Apache's Velocity template engine"
     override val documentation = "https://ktor.io/features/templates/velocity.html"
 }

@@ -8,7 +8,7 @@ object HtmlDslFeature : Feature() {
     override val artifacts = listOf("io.ktor:ktor-html-builder:\$ktor_version")
     override val id = "html-dsl"
     override val title = "HTML DSL"
-    override val description = "Generate HTML using Kotlin code"
+    override val description = "Generate HTML using Kotlin code like a pure-core template engine"
     override val documentation = "https://ktor.io/features/templates/html-dsl.html"
 
     override fun imports(info: BuildInfo) = listOf(
