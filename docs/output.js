@@ -64,6 +64,8 @@
   AuthJwtFeature.prototype.constructor = AuthJwtFeature;
   AuthLdapFeature.prototype = Object.create(Feature.prototype);
   AuthLdapFeature.prototype.constructor = AuthLdapFeature;
+  ConditionalHeadersFeature.prototype = Object.create(Feature.prototype);
+  ConditionalHeadersFeature.prototype.constructor = ConditionalHeadersFeature;
   CssDslFeature.prototype = Object.create(Feature.prototype);
   CssDslFeature.prototype.constructor = CssDslFeature;
   FreemarkerFeature.prototype = Object.create(Feature.prototype);
@@ -1262,6 +1264,64 @@
     }
     return AuthLdapFeature_instance;
   }
+  function ConditionalHeadersFeature() {
+    ConditionalHeadersFeature_instance = this;
+    Feature.call(this);
+    this.repos_ty7nmk$_0 = Repos_getInstance().ktor;
+    this.artifacts_wgsw8s$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.id_9jyzvg$_0 = 'conditional-headers';
+    this.title_uykk6d$_0 = 'ConditionalHeaders';
+    this.description_2pafjz$_0 = 'Avoids sending content if the client already has the same content using ETag or LastModified';
+    this.documentation_evxn25$_0 = 'https://ktor.io/features/conditional-headers.html';
+  }
+  Object.defineProperty(ConditionalHeadersFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_ty7nmk$_0;
+    }
+  });
+  Object.defineProperty(ConditionalHeadersFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_wgsw8s$_0;
+    }
+  });
+  Object.defineProperty(ConditionalHeadersFeature.prototype, 'id', {
+    get: function () {
+      return this.id_9jyzvg$_0;
+    }
+  });
+  Object.defineProperty(ConditionalHeadersFeature.prototype, 'title', {
+    get: function () {
+      return this.title_uykk6d$_0;
+    }
+  });
+  Object.defineProperty(ConditionalHeadersFeature.prototype, 'description', {
+    get: function () {
+      return this.description_2pafjz$_0;
+    }
+  });
+  Object.defineProperty(ConditionalHeadersFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_evxn25$_0;
+    }
+  });
+  ConditionalHeadersFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf('io.ktor.features');
+  };
+  ConditionalHeadersFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(ConditionalHeaders)');
+  };
+  ConditionalHeadersFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'ConditionalHeadersFeature',
+    interfaces: [Feature]
+  };
+  var ConditionalHeadersFeature_instance = null;
+  function ConditionalHeadersFeature_getInstance() {
+    if (ConditionalHeadersFeature_instance === null) {
+      new ConditionalHeadersFeature();
+    }
+    return ConditionalHeadersFeature_instance;
+  }
   function CssDslFeature() {
     CssDslFeature_instance = this;
     Feature.call(this);
@@ -1746,6 +1806,40 @@
       return this.documentation_lvygo$_0;
     }
   });
+  JsonJacksonFeature.prototype.imports_jbwadm$ = function (info) {
+    return listOf_0(['com.fasterxml.jackson.databind', 'io.ktor.jackson', 'io.ktor.features']);
+  };
+  JsonJacksonFeature.prototype.installFeature_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('install(ContentNegotiation)' + ' {');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('jackson' + ' {');
+      $receiver.indentation = $receiver.indentation + 1 | 0;
+      try {
+        $receiver.line_61zpoe$('enable(SerializationFeature.INDENT_OUTPUT)');
+      }
+      finally {
+        $receiver.indentation = $receiver.indentation - 1 | 0;
+      }
+      $receiver.line_61zpoe$('}');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
+  JsonJacksonFeature.prototype.routing_j0vqe2$ = function ($receiver, info) {
+    $receiver.line_61zpoe$('');
+    $receiver.line_61zpoe$('get("/json")' + ' {');
+    $receiver.indentation = $receiver.indentation + 1 | 0;
+    try {
+      $receiver.line_61zpoe$('call.respond(mapOf("hello" to "world"))');
+    }
+    finally {
+      $receiver.indentation = $receiver.indentation - 1 | 0;
+    }
+    $receiver.line_61zpoe$('}');
+  };
   JsonJacksonFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'JsonJacksonFeature',
@@ -3125,6 +3219,9 @@
   Object.defineProperty(package$features, 'AuthLdapFeature', {
     get: AuthLdapFeature_getInstance
   });
+  Object.defineProperty(package$features, 'ConditionalHeadersFeature', {
+    get: ConditionalHeadersFeature_getInstance
+  });
   Object.defineProperty(package$features, 'CssDslFeature', {
     get: CssDslFeature_getInstance
   });
@@ -3221,7 +3318,7 @@
   insideIframe = lazy(insideIframe$lambda);
   hashParams = lazy(hashParams$lambda);
   KOTLIN_VERSION = '1.2.41';
-  ALL_FEATURES = listOf_0([HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), AuthFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), WebsocketsFeature_getInstance(), HttpClientFeature_getInstance(), RawSocketsFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
+  ALL_FEATURES = listOf_0([HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), AuthFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), ConditionalHeadersFeature_getInstance(), WebsocketsFeature_getInstance(), HttpClientFeature_getInstance(), RawSocketsFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
   DOLLAR = 36;
   main([]);
   Kotlin.defineModule('output', _);
