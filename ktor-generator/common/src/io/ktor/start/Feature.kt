@@ -16,6 +16,8 @@ fun FileContainer.add(name: String, content: String, charset: Charset = UTF8, mo
 }
 
 abstract class Feature(vararg deps: Block<BuildInfo>) : Block<BuildInfo>(*deps) {
+    val featureDeps get() = blockDeps.filterIsInstance<Feature>()
+
     abstract val repos: List<String>
     abstract val artifacts: List<String>
     abstract val id: String

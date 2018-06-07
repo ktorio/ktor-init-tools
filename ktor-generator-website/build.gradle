@@ -4,6 +4,7 @@ apply plugin: 'kotlin-platform-js'
 sourceSets {
     main.kotlin.srcDirs += "src"
     main.resources.srcDirs += "resources"
+    //main.resources.srcDirs += "../ktor-generator-website/resources"
     test.kotlin.srcDirs += "test"
 }
 

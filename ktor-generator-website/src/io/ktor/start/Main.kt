@@ -182,19 +182,12 @@ suspend fun build(dev: Boolean) {
         println("DEPENDENCY: $dependency :: include=$toInclude")
     }
 
-    val reposToInclude = (listOf("jcenter") + Repos.ktor + dependenciesToInclude.flatMap { it.repos }).toSet()
-    val developmentPackage = "io.ktor.server.$ktorEngine"
-    val developmentEngineFQ = "$developmentPackage.DevelopmentEngine"
     val info = BuildInfo(
         includeWrapper = includeWrapper,
         projectType = projectType,
         ktorVersion = ktorVersion,
-        developmentPackage = developmentPackage,
         artifactName = artifactName,
         artifactGroup = artifactGroup,
-        developmentEngineFQ = developmentEngineFQ,
-        reposToInclude = reposToInclude,
-        dependenciesToInclude = dependenciesToInclude,
         ktorEngine = ktorEngine,
         fetch = { fetchFile(it) }
     )

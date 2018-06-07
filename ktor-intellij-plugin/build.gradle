@@ -1,5 +1,5 @@
 plugins {
-  id "org.jetbrains.intellij" version "0.3.1"
+  id "org.jetbrains.intellij" version "0.3.2"
 }
 
 //apply plugin: 'org.jetbrains.intellij'
@@ -34,9 +34,7 @@ repositories {
 	jcenter()
 }
 
-
 dependencies {
 	compile project(":ktor-generator-jvm")
+	compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5"
 }
-
-
