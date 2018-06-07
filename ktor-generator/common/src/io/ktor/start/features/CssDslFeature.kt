@@ -12,8 +12,8 @@ object CssDslFeature : Feature() {
     override val documentation = "https://github.com/JetBrains/kotlin-wrappers/tree/master/kotlin-css"
 
     override fun imports(info: BuildInfo) = listOf(
-        "kotlinx.html",
-        "kotlinx.css"
+        "kotlinx.html.*",
+        "kotlinx.css.*"
     )
 
     override fun Indenter.routing(info: BuildInfo) {

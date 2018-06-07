@@ -12,7 +12,7 @@ object ConditionalHeadersFeature : Feature() {
     override val documentation = "https://ktor.io/features/conditional-headers.html"
 
     override fun imports(info: BuildInfo) = listOf(
-        "io.ktor.features"
+        "io.ktor.features.*"
     )
 
     override fun Indenter.installFeature(info: BuildInfo) {

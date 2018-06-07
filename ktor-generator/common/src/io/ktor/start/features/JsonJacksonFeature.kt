@@ -12,9 +12,9 @@ object JsonJacksonFeature : Feature() {
     override val documentation = "https://ktor.io/features/content-negotiation/jackson.html"
 
     override fun imports(info: BuildInfo) = listOf(
-        "com.fasterxml.jackson.databind",
-        "io.ktor.jackson",
-        "io.ktor.features"
+        "com.fasterxml.jackson.databind.*",
+        "io.ktor.jackson.*",
+        "io.ktor.features.*"
     )
 
     override fun Indenter.installFeature(info: BuildInfo) {

@@ -12,8 +12,8 @@ object FreemarkerFeature : Feature() {
     override val documentation = "https://ktor.io/features/templates/freemarker.html"
 
     override fun imports(info: BuildInfo) = listOf(
-        "freemarker.cache",
-        "io.ktor.freemarker"
+        "freemarker.cache.*",
+        "io.ktor.freemarker.*"
     )
 
     override fun Indenter.classes(info: BuildInfo) {

@@ -110,19 +110,19 @@ fun Indenter.buildApplicationConf(info: BuildInfo) = info.apply {
 
 
 fun Indenter.buildApplicationKt(info: BuildInfo) = info.apply {
-    val packages = LinkedHashSet<String>()
+    val imports = LinkedHashSet<String>()
 
     +"package $artifactGroup"
     +""
-    packages += "io.ktor.application"
-    packages += "io.ktor.response"
-    packages += "io.ktor.routing"
-    packages += "io.ktor.http"
+    imports += "io.ktor.application.*"
+    imports += "io.ktor.response.*"
+    imports += "io.ktor.routing.*"
+    imports += "io.ktor.http.*"
     for (feat in info.featuresToInclude) {
-        packages += feat.imports(info)
+        imports += feat.imports(info)
     }
-    for (p in packages) {
-        +"import $p.*"
+    for (p in imports) {
+        +"import $p"
     }
     +""
     if (ktorVer >= Versions.V092) {

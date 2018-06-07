@@ -12,8 +12,8 @@ object HtmlDslFeature : Feature() {
     override val documentation = "https://ktor.io/features/templates/html-dsl.html"
 
     override fun imports(info: BuildInfo) = listOf(
-        "io.ktor.html",
-        "kotlinx.html"
+        "io.ktor.html.*",
+        "kotlinx.html.*"
     )
 
     override fun Indenter.routing(info: BuildInfo) {
