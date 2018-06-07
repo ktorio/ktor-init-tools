@@ -13,6 +13,7 @@ val ALL_FEATURES = listOf(
     LocationsFeature,
     MetricsFeature,
     SessionsFeature,
+    CompressionFeature,
     ConditionalHeadersFeature,
     WebsocketsFeature,
     HttpClientFeature,
