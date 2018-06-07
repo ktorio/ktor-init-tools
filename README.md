@@ -5,6 +5,8 @@ based on the information and dependencies provided.
 
 The application: <https://soywiz.github.io/start-ktor-io-proposal/>
 
+## Website
+
 To compile continuously:
 
 ```bash
@@ -15,4 +17,12 @@ In other terminal, serve the docs folder:
 
 ```bash
 hs docs/
+```
+
+## IntelliJ plugin
+
+To run an IDE with the plugin:
+
+```bash
+./gradlew ktor-intellij-plugin:runIde
 ```

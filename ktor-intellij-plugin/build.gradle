@@ -30,3 +30,13 @@ runIde {
 	maxHeapSize = "2g"
 }
 
+repositories {
+	jcenter()
+}
+
+
+dependencies {
+	compile project(":ktor-generator-jvm")
+}
+
+
