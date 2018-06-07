@@ -6,15 +6,9 @@ import io.ktor.start.util.*
 object BuildFiles : BuildInfoBlock() {
     override fun BlockBuilder.render(info: BuildInfo) {
         when (info.projectType) {
-            "gradle" -> {
-                BuildFilesGradle.apply { render(info) }
-            }
-            "maven" -> {
-                BuildFilesMaven.apply { render(info) }
-            }
-            else -> {
-                error("Unsupported build type ${info.projectType}")
-            }
+            ProjectTypes.gradle -> BuildFilesGradle.apply { render(info) }
+            ProjectTypes.maven -> BuildFilesMaven.apply { render(info) }
+            else -> error("Unsupported build type ${info.projectType}")
         }
 
         addMavenRepository("jcenter")

@@ -26,7 +26,7 @@ fun main(args: Array<String>) {
     jq("#ktor-version").`val`(hashParams["ktor-version"]?.firstOrNull() ?: defaultKtorVersion)
     jq("#ktor-engine").`val`(hashParams["ktor-engine"]?.firstOrNull() ?: defaultKtorEngine)
     jq("#ktor-version").`val`(hashParams["ktor-version"]?.firstOrNull() ?: defaultKtorVersion)
-    jq("#project-type").`val`(hashParams["project-type"]?.firstOrNull() ?: defaultKtorEngine)
+    jq("#project-type").`val`(hashParams["project-type"]?.firstOrNull() ?: ProjectTypes.gradle)
 
     addDependencies()
     registerBuildButton()

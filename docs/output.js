@@ -406,7 +406,7 @@
     var str_12 = '#ktor-version';
     jQuery(str_12).val((tmp$_8 = (tmp$_7 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_7) : null) != null ? tmp$_8 : defaultKtorVersion);
     var str_13 = '#project-type';
-    jQuery(str_13).val((tmp$_10 = (tmp$_9 = get_hashParams().get_11rb$('project-type')) != null ? firstOrNull(tmp$_9) : null) != null ? tmp$_10 : defaultKtorEngine);
+    jQuery(str_13).val((tmp$_10 = (tmp$_9 = get_hashParams().get_11rb$('project-type')) != null ? firstOrNull(tmp$_9) : null) != null ? tmp$_10 : ProjectTypes_getInstance().gradle);
     addDependencies();
     registerBuildButton();
     handleFiltering();
@@ -1148,6 +1148,23 @@
     simpleName: 'Feature',
     interfaces: [Block]
   };
+  function ProjectTypes() {
+    ProjectTypes_instance = this;
+    this.gradle = 'gradle';
+    this.maven = 'maven';
+  }
+  ProjectTypes.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'ProjectTypes',
+    interfaces: []
+  };
+  var ProjectTypes_instance = null;
+  function ProjectTypes_getInstance() {
+    if (ProjectTypes_instance === null) {
+      new ProjectTypes();
+    }
+    return ProjectTypes_instance;
+  }
   function Repos() {
     Repos_instance = this;
     this.jcenter = listOf('jcenter');
@@ -7033,6 +7050,9 @@
   package$start.FileFetcher = FileFetcher;
   package$start.add_ykoeqs$ = add;
   package$start.Feature = Feature;
+  Object.defineProperty(package$start, 'ProjectTypes', {
+    get: ProjectTypes_getInstance
+  });
   Object.defineProperty(package$start, 'Repos', {
     get: Repos_getInstance
   });
