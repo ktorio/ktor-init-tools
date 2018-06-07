@@ -90,11 +90,11 @@ open class BlockBuilder(val subject: Any) : Extra by Extra.Mixin() {
     private val visited = hashSetOf<Block<*>>()
     fun <TSubject> visit(block: Block<TSubject>) {
         if (block in visited) return
-        println("VISIT: $block")
+        //println("VISIT: $block")
         visited += block
         for (parent in block.blockDeps) visit(parent)
         currentBlock(block) {
-            println("RENDERING: $block")
+            //println("RENDERING: $block")
             block.apply { render(subject as TSubject) }
         }
     }

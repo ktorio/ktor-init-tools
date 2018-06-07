@@ -43,6 +43,7 @@ object BuildFiles : BuildInfoBlock() {
                     +""
                     "dependencies" {
                         linedeferred {
+                            println("compileDependencies: $compileDependencies")
                             for (dep in compileDependencies) {
                                 +"compile \"${dep.dependency}\""
                             }
@@ -78,9 +79,9 @@ object BuildFiles : BuildInfoBlock() {
     }
 }
 
-private val BlockBuilder.reposToInclude: ArrayList<String> by extraProperty { arrayListOf<String>() }
-private val BlockBuilder.compileDependencies: ArrayList<MvnArtifact> by extraProperty { arrayListOf<MvnArtifact>() }
-private val BlockBuilder.testDependencies: ArrayList<MvnArtifact> by extraProperty { arrayListOf<MvnArtifact>() }
+private val BlockBuilder.reposToInclude: LinkedHashSet<String> by Extra.PropertyThis { LinkedHashSet<String>() }
+private val BlockBuilder.compileDependencies: LinkedHashSet<MvnArtifact> by Extra.PropertyThis { LinkedHashSet<MvnArtifact>() }
+private val BlockBuilder.testDependencies: LinkedHashSet<MvnArtifact> by Extra.PropertyThis { LinkedHashSet<MvnArtifact>() }
 
 fun BlockBuilder.addMavenRepository(repository: String) {
     reposToInclude += repository

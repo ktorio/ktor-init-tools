@@ -14,8 +14,12 @@ object RoutingFeature : Feature(ApplicationKt) {
     val BLOCK = newSlot("BLOCK")
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addImport("io.ktor.routing.*")
         append(ApplicationKt.MODULE_POST) {
             "routing" {
+                "get(\"/\")" {
+                    +"HELLO WORLD!"
+                }
                 block(BLOCK)
             }
         }

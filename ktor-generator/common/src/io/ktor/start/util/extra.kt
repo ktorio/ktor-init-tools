@@ -54,14 +54,3 @@ fun Extra.setExtra(name: String, value: Any?): Unit {
     if (extra == null) extra = LinkedHashMap()
     extra?.set(name, value)
 }
-
-@Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
-class extraProperty<T : Any?>(val name: String? = null, val default: () -> T) {
-    inline operator fun getValue(thisRef: Extra, property: KProperty<*>): T =
-        (thisRef.extra?.get(name ?: property.name) as T?) ?: default()
-
-    inline operator fun setValue(thisRef: Extra, property: KProperty<*>, value: T): Unit = run {
-        if (thisRef.extra == null) thisRef.extra = LinkedHashMap()
-        thisRef.extra?.set(name ?: property.name, value as Any?)
-    }
-}

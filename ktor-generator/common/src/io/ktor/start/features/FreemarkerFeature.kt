@@ -28,7 +28,7 @@ object FreemarkerFeature : Feature(ApplicationKt, RoutingFeature) {
                 +"call.respond(FreeMarkerContent(\"index.ftl\", mapOf(\"data\" to IndexData(listOf(1, 2, 3))), \"\"))"
             }
         }
-        fileText("${info.artifactName}/resources/templates/index.ftl") {
+        fileText("resources/templates/index.ftl") {
             +"<#-- @ftlvariable name=\"data\" type=\"${info.artifactGroup}.IndexData\" -->"
             +"<html>"
             indent {

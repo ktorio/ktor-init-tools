@@ -2544,7 +2544,7 @@
     addApplicationClasses($receiver, FreemarkerFeature$renderFeature$lambda);
     addFeatureInstall($receiver, FreemarkerFeature$renderFeature$lambda_0);
     addRoute($receiver, FreemarkerFeature$renderFeature$lambda_1);
-    $receiver.fileText_7k8vha$(info.artifactName + '/resources/templates/index.ftl', void 0, void 0, FreemarkerFeature$renderFeature$lambda_2(info));
+    $receiver.fileText_7k8vha$('resources/templates/index.ftl', void 0, void 0, FreemarkerFeature$renderFeature$lambda_2(info));
   };
   FreemarkerFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -3326,7 +3326,18 @@
       $receiver._indent();
       try {
         var this$RoutingFeature_0 = this$RoutingFeature;
-        this$renderFeature.block_rsgfsn$($receiver, this$RoutingFeature_0.BLOCK);
+        var this$renderFeature_0 = this$renderFeature;
+        var $receiver_0 = 'get("/")';
+        $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+        $receiver._indent();
+        try {
+          $receiver.line_61zpoe$('HELLO WORLD!');
+        }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$('}' + '');
+        this$renderFeature_0.block_rsgfsn$($receiver, this$RoutingFeature_0.BLOCK);
       }
       finally {
         $receiver._unindent();
@@ -3336,6 +3347,7 @@
     };
   }
   RoutingFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.routing.*');
     $receiver.append_qu2wte$(ApplicationKt_getInstance().MODULE_POST, void 0, RoutingFeature$renderFeature$lambda(this, $receiver));
   };
   RoutingFeature.$metadata$ = {
@@ -3933,7 +3945,7 @@
   }
   function ApplicationKt() {
     ApplicationKt_instance = this;
-    Block.call(this, [BuildFiles_getInstance()]);
+    Block.call(this, [BuildFiles_getInstance(), ApplicationConf_getInstance()]);
     this.MODULE_INSTALL = this.newSlot_pdl1vj$('MODULE_INSTALL');
     this.MODULE_POST = this.newSlot_pdl1vj$('MODULE_POST');
     this.APPLICATION_CLASSES = this.newSlot_pdl1vj$('APPLICATION_CLASSES');
@@ -3980,7 +3992,7 @@
       try {
         switch (this.state_0) {
           case 0:
-            this.local$$receiver.line_61zpoe$('package ' + this.local$closure$info.developmentPackage);
+            this.local$$receiver.line_61zpoe$('package ' + this.local$closure$info.artifactGroup);
             this.local$$receiver.line_61zpoe$('');
             this.local$$receiver.linedeferred_yot30u$(ApplicationKt$render$lambda$lambda(this.local$this$render));
             if (this.local$closure$info.ktorVer.compareTo_11rb$(Versions_getInstance().V092) >= 0) {
@@ -4023,6 +4035,8 @@
      while (true);
   };
   ApplicationKt.prototype.render_miqy8c$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.application.*');
+    addImport($receiver, 'io.ktor.response.*');
     $receiver.fileText_7k8vha$('src/application.kt', void 0, void 0, ApplicationKt$render$lambda(info, $receiver, this));
   };
   ApplicationKt.$metadata$ = {
@@ -4037,16 +4051,36 @@
     }
     return ApplicationKt_instance;
   }
-  function applicationKtImports$lambda() {
+  function applicationKtImports$lambda($receiver) {
     return LinkedHashSet_init();
   }
   var applicationKtImports;
   var applicationKtImports_metadata = new PropertyMetadata('applicationKtImports');
   function get_applicationKtImports($receiver) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
-    tmp$_1 = $receiver.extra;
-    tmp$_0 = (tmp$ = applicationKtImports.name) != null ? tmp$ : applicationKtImports_metadata.callableName;
-    return (tmp$_3 = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE()) != null ? tmp$_3 : applicationKtImports.default();
+    var getValue_tv2abg$result;
+    getValue_tv2abg$break: do {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2;
+      tmp$_1 = $receiver.extra;
+      tmp$_0 = (tmp$ = applicationKtImports.name) != null ? tmp$ : applicationKtImports_metadata.callableName;
+      var res = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE();
+      if (res == null) {
+        var r = applicationKtImports.defaultGen($receiver);
+        var tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
+        if ($receiver.extra == null)
+          $receiver.extra = LinkedHashMap_init();
+        tmp$_7 = $receiver.extra;
+        tmp$_4 = (tmp$_3 = applicationKtImports.name) != null ? tmp$_3 : applicationKtImports_metadata.callableName;
+        tmp$_6 = (tmp$_5 = r) == null || Kotlin.isType(tmp$_5, Any) ? tmp$_5 : throwCCE();
+        if (tmp$_7 != null) {
+          tmp$_7.put_xwzc9p$(tmp$_4, tmp$_6);
+        }
+        getValue_tv2abg$result = r;
+        break getValue_tv2abg$break;
+      }
+      getValue_tv2abg$result = res;
+    }
+     while (false);
+    return getValue_tv2abg$result;
   }
   function addImport($receiver, import_0) {
     get_applicationKtImports($receiver).add_11rb$(import_0);
@@ -4088,6 +4122,7 @@
   function BuildFiles$render$lambda$lambda$lambda(this$render) {
     return function ($receiver) {
       var tmp$, tmp$_0;
+      println('compileDependencies: ' + get_compileDependencies(this$render));
       tmp$ = get_compileDependencies(this$render).iterator();
       while (tmp$.hasNext()) {
         var dep = tmp$.next();
@@ -4464,38 +4499,98 @@
     }
     return BuildFiles_instance;
   }
-  function reposToInclude$lambda() {
-    return ArrayList_init();
+  function reposToInclude$lambda($receiver) {
+    return LinkedHashSet_init();
   }
   var reposToInclude;
   var reposToInclude_metadata = new PropertyMetadata('reposToInclude');
   function get_reposToInclude($receiver) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
-    tmp$_1 = $receiver.extra;
-    tmp$_0 = (tmp$ = reposToInclude.name) != null ? tmp$ : reposToInclude_metadata.callableName;
-    return (tmp$_3 = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE()) != null ? tmp$_3 : reposToInclude.default();
+    var getValue_tv2abg$result;
+    getValue_tv2abg$break: do {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2;
+      tmp$_1 = $receiver.extra;
+      tmp$_0 = (tmp$ = reposToInclude.name) != null ? tmp$ : reposToInclude_metadata.callableName;
+      var res = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE();
+      if (res == null) {
+        var r = reposToInclude.defaultGen($receiver);
+        var tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
+        if ($receiver.extra == null)
+          $receiver.extra = LinkedHashMap_init();
+        tmp$_7 = $receiver.extra;
+        tmp$_4 = (tmp$_3 = reposToInclude.name) != null ? tmp$_3 : reposToInclude_metadata.callableName;
+        tmp$_6 = (tmp$_5 = r) == null || Kotlin.isType(tmp$_5, Any) ? tmp$_5 : throwCCE();
+        if (tmp$_7 != null) {
+          tmp$_7.put_xwzc9p$(tmp$_4, tmp$_6);
+        }
+        getValue_tv2abg$result = r;
+        break getValue_tv2abg$break;
+      }
+      getValue_tv2abg$result = res;
+    }
+     while (false);
+    return getValue_tv2abg$result;
   }
-  function compileDependencies$lambda() {
-    return ArrayList_init();
+  function compileDependencies$lambda($receiver) {
+    return LinkedHashSet_init();
   }
   var compileDependencies;
   var compileDependencies_metadata = new PropertyMetadata('compileDependencies');
   function get_compileDependencies($receiver) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
-    tmp$_1 = $receiver.extra;
-    tmp$_0 = (tmp$ = compileDependencies.name) != null ? tmp$ : compileDependencies_metadata.callableName;
-    return (tmp$_3 = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE()) != null ? tmp$_3 : compileDependencies.default();
+    var getValue_tv2abg$result;
+    getValue_tv2abg$break: do {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2;
+      tmp$_1 = $receiver.extra;
+      tmp$_0 = (tmp$ = compileDependencies.name) != null ? tmp$ : compileDependencies_metadata.callableName;
+      var res = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE();
+      if (res == null) {
+        var r = compileDependencies.defaultGen($receiver);
+        var tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
+        if ($receiver.extra == null)
+          $receiver.extra = LinkedHashMap_init();
+        tmp$_7 = $receiver.extra;
+        tmp$_4 = (tmp$_3 = compileDependencies.name) != null ? tmp$_3 : compileDependencies_metadata.callableName;
+        tmp$_6 = (tmp$_5 = r) == null || Kotlin.isType(tmp$_5, Any) ? tmp$_5 : throwCCE();
+        if (tmp$_7 != null) {
+          tmp$_7.put_xwzc9p$(tmp$_4, tmp$_6);
+        }
+        getValue_tv2abg$result = r;
+        break getValue_tv2abg$break;
+      }
+      getValue_tv2abg$result = res;
+    }
+     while (false);
+    return getValue_tv2abg$result;
   }
-  function testDependencies$lambda() {
-    return ArrayList_init();
+  function testDependencies$lambda($receiver) {
+    return LinkedHashSet_init();
   }
   var testDependencies;
   var testDependencies_metadata = new PropertyMetadata('testDependencies');
   function get_testDependencies($receiver) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
-    tmp$_1 = $receiver.extra;
-    tmp$_0 = (tmp$ = testDependencies.name) != null ? tmp$ : testDependencies_metadata.callableName;
-    return (tmp$_3 = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE()) != null ? tmp$_3 : testDependencies.default();
+    var getValue_tv2abg$result;
+    getValue_tv2abg$break: do {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2;
+      tmp$_1 = $receiver.extra;
+      tmp$_0 = (tmp$ = testDependencies.name) != null ? tmp$ : testDependencies_metadata.callableName;
+      var res = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE();
+      if (res == null) {
+        var r = testDependencies.defaultGen($receiver);
+        var tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
+        if ($receiver.extra == null)
+          $receiver.extra = LinkedHashMap_init();
+        tmp$_7 = $receiver.extra;
+        tmp$_4 = (tmp$_3 = testDependencies.name) != null ? tmp$_3 : testDependencies_metadata.callableName;
+        tmp$_6 = (tmp$_5 = r) == null || Kotlin.isType(tmp$_5, Any) ? tmp$_5 : throwCCE();
+        if (tmp$_7 != null) {
+          tmp$_7.put_xwzc9p$(tmp$_4, tmp$_6);
+        }
+        getValue_tv2abg$result = r;
+        break getValue_tv2abg$break;
+      }
+      getValue_tv2abg$result = res;
+    }
+     while (false);
+    return getValue_tv2abg$result;
   }
   function addMavenRepository($receiver, repository) {
     get_reposToInclude($receiver).add_11rb$(repository);
@@ -4813,7 +4908,6 @@
   };
   function BlockBuilder$visit$lambda(closure$block, this$BlockBuilder) {
     return function () {
-      println('RENDERING: ' + closure$block);
       var $receiver = closure$block;
       var this$BlockBuilder_0 = this$BlockBuilder;
       var tmp$;
@@ -4825,7 +4919,6 @@
     var tmp$;
     if (this.visited_7kwj06$_0.contains_11rb$(block))
       return;
-    println('VISIT: ' + block);
     this.visited_7kwj06$_0.add_11rb$(block);
     tmp$ = block.blockDeps.iterator();
     while (tmp$.hasNext()) {
@@ -5234,43 +5327,6 @@
       tmp$.put_xwzc9p$(name, value);
     }
   }
-  function extraProperty(name, default_0) {
-    if (name === void 0)
-      name = null;
-    this.name = name;
-    this.default = default_0;
-  }
-  extraProperty.prototype.getValue_m0xvcc$ = defineInlineFunction('output.io.ktor.start.util.extraProperty.getValue_m0xvcc$', wrapFunction(function () {
-    var Any = Object;
-    var throwCCE = Kotlin.throwCCE;
-    return function (thisRef, property) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
-      tmp$_1 = thisRef.extra;
-      tmp$_0 = (tmp$ = this.name) != null ? tmp$ : property.callableName;
-      return (tmp$_3 = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE()) != null ? tmp$_3 : this.default();
-    };
-  }));
-  extraProperty.prototype.setValue_jwwfbt$ = defineInlineFunction('output.io.ktor.start.util.extraProperty.setValue_jwwfbt$', wrapFunction(function () {
-    var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
-    var Any = Object;
-    var throwCCE = Kotlin.throwCCE;
-    return function (thisRef, property, value) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
-      if (thisRef.extra == null)
-        thisRef.extra = LinkedHashMap_init();
-      tmp$_3 = thisRef.extra;
-      tmp$_0 = (tmp$ = this.name) != null ? tmp$ : property.callableName;
-      tmp$_2 = (tmp$_1 = value) == null || Kotlin.isType(tmp$_1, Any) ? tmp$_1 : throwCCE();
-      if (tmp$_3 != null) {
-        tmp$_3.put_xwzc9p$(tmp$_0, tmp$_2);
-      }
-    };
-  }));
-  extraProperty.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'extraProperty',
-    interfaces: []
-  };
   function Indenter(actions) {
     Indenter$Companion_getInstance();
     if (actions === void 0) {
@@ -6218,7 +6274,6 @@
   package$util.Extra = Extra;
   package$util.getExtraTyped_p4ogyo$ = getExtraTyped;
   package$util.getExtra_vj42u1$ = getExtra;
-  package$util.extraProperty = extraProperty;
   Object.defineProperty(Indenter, 'INDENTS', {
     get: Indenter$INDENTS_getInstance
   });
@@ -6255,10 +6310,10 @@
   hashParams = lazy(hashParams$lambda);
   KOTLIN_VERSION = '1.2.41';
   ALL_FEATURES = listOf_0([HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), HttpClientFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
-  applicationKtImports = new extraProperty(void 0, applicationKtImports$lambda);
-  reposToInclude = new extraProperty(void 0, reposToInclude$lambda);
-  compileDependencies = new extraProperty(void 0, compileDependencies$lambda);
-  testDependencies = new extraProperty(void 0, testDependencies$lambda);
+  applicationKtImports = new Extra$PropertyThis(void 0, applicationKtImports$lambda);
+  reposToInclude = new Extra$PropertyThis(void 0, reposToInclude$lambda);
+  compileDependencies = new Extra$PropertyThis(void 0, compileDependencies$lambda);
+  testDependencies = new Extra$PropertyThis(void 0, testDependencies$lambda);
   main([]);
   Kotlin.defineModule('output', _);
   return _;

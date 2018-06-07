@@ -3,15 +3,18 @@ package io.ktor.start.project
 import io.ktor.start.*
 import io.ktor.start.util.*
 
-object ApplicationKt : BuildInfoBlock(BuildFiles) {
+object ApplicationKt : BuildInfoBlock(BuildFiles, ApplicationConf) {
     val MODULE_INSTALL = newSlot("MODULE_INSTALL")
     val MODULE_POST = newSlot("MODULE_POST")
     val APPLICATION_CLASSES = newSlot("APPLICATION_CLASSES")
     val EXTENSIONS = newSlot("EXTENSIONS")
 
     override fun BlockBuilder.render(info: BuildInfo) {
+        addImport("io.ktor.application.*")
+        addImport("io.ktor.response.*")
+
         fileText("src/application.kt") {
-            +"package ${info.developmentPackage}"
+            +"package ${info.artifactGroup}"
             +""
             linedeferred {
                 for (import in applicationKtImports) {
@@ -33,7 +36,7 @@ object ApplicationKt : BuildInfoBlock(BuildFiles) {
     }
 }
 
-private val BlockBuilder.applicationKtImports: LinkedHashSet<String> by extraProperty { LinkedHashSet<String>() }
+private val BlockBuilder.applicationKtImports: LinkedHashSet<String> by Extra.PropertyThis { LinkedHashSet<String>() }
 
 fun BlockBuilder.addImport(import: String) {
     applicationKtImports += import
