@@ -209,6 +209,15 @@ class Indenter(private val actions: ArrayList<Action> = arrayListOf<Indenter.Act
     inline operator fun String.invoke(suffix: String = "", callback: () -> Unit) = line(this, after = suffix, callback = callback)
     inline operator fun String.unaryPlus() = line(this)
 
+    inline fun String.xml(callback: () -> Unit) {
+        val tagName = Regex("<(\\w+)").find(this)?.groupValues?.getOrNull(1) ?: error("Invalid XML tag")
+        line(this)
+        indent {
+            callback()
+        }
+        line("</$tagName>")
+    }
+
     fun toString(markHandler: ((sb: StringBuilder, line: Int, data: Any) -> Unit)?): String =
         toString(markHandler = markHandler, doIndent = true)
 
@@ -218,4 +227,24 @@ class Indenter(private val actions: ArrayList<Action> = arrayListOf<Indenter.Act
     }
 
     override fun toString(): String = toString(null, doIndent = true)
+}
+
+class XmlIndenter(val indenter: Indenter) {
+    inline operator fun String.invoke(callback: () -> Unit) {
+        val tagName = Regex("<(\\w+)").find(this)?.groupValues?.getOrNull(1) ?: error("Invalid XML tag")
+        indenter.line(this)
+        indenter.indent {
+            callback()
+        }
+        indenter.line("</$tagName>")
+    }
+
+    // @TODO: FIX!
+    //fun linedeferred(init: XmlIndenter.() -> Unit): Indenter {
+    //    return indenter.linedeferred { XmlIndenter(this).apply(init) }
+    //}
+}
+
+fun Indenter.xml(callback: XmlIndenter.() -> Unit) {
+    callback(XmlIndenter(this))
 }

@@ -47,9 +47,10 @@
   var listOf_0 = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var LinkedHashSet_init = Kotlin.kotlin.collections.LinkedHashSet_init_287e2$;
   var equals = Kotlin.equals;
+  var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
+  var toString = Kotlin.toString;
   var toList = Kotlin.kotlin.collections.toList_7wnvza$;
   var Any = Object;
-  var toString = Kotlin.toString;
   var toSet_0 = Kotlin.kotlin.collections.toSet_us0mfu$;
   var copyOf = Kotlin.kotlin.collections.copyOf_mrm5p$;
   var numberToByte = Kotlin.numberToByte;
@@ -57,8 +58,8 @@
   var StringBuilder = Kotlin.kotlin.text.StringBuilder;
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var unboxChar = Kotlin.unboxChar;
-  var replace = Kotlin.kotlin.text.replace_680rmw$;
   var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
+  var replace = Kotlin.kotlin.text.replace_680rmw$;
   var split_0 = Kotlin.kotlin.text.split_ip8yn$;
   var first = Kotlin.kotlin.collections.first_2p1efm$;
   var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
@@ -144,6 +145,10 @@
   ApplicationKt.prototype.constructor = ApplicationKt;
   BuildFiles.prototype = Object.create(Block.prototype);
   BuildFiles.prototype.constructor = BuildFiles;
+  BuildFilesGradle.prototype = Object.create(Block.prototype);
+  BuildFilesGradle.prototype.constructor = BuildFilesGradle;
+  BuildFilesMaven.prototype = Object.create(Block.prototype);
+  BuildFilesMaven.prototype.constructor = BuildFilesMaven;
   function jsObject(pairs) {
     var tmp$;
     var obj = {};
@@ -367,7 +372,7 @@
   }
   var Map = Kotlin.kotlin.collections.Map;
   function main(args) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10;
     var str = '#include_wrapper';
     jQuery(str).change(main$lambda);
     var str_0 = '#ktor-engine';
@@ -385,11 +390,11 @@
     var str_6 = '#artifact-name';
     jQuery(str_6).keyup(main$lambda_6);
     var str_7 = '#include_wrapper';
-    var tmp$_9 = jQuery(str_7);
+    var tmp$_11 = jQuery(str_7);
     var $receiver = get_hashParams();
     var key = 'no_wrapper';
-    var tmp$_10;
-    tmp$_9.prop('checked', (Kotlin.isType(tmp$_10 = $receiver, Map) ? tmp$_10 : throwCCE()).containsKey_11rb$(key) ? '' : 'checked');
+    var tmp$_12;
+    tmp$_11.prop('checked', (Kotlin.isType(tmp$_12 = $receiver, Map) ? tmp$_12 : throwCCE()).containsKey_11rb$(key) ? '' : 'checked');
     var str_8 = '#artifact-group';
     jQuery(str_8).val((tmp$_0 = (tmp$ = get_hashParams().get_11rb$('artifact-group')) != null ? firstOrNull(tmp$) : null) != null ? tmp$_0 : 'com.example');
     var str_9 = '#artifact-name';
@@ -400,6 +405,8 @@
     jQuery(str_11).val((tmp$_6 = (tmp$_5 = get_hashParams().get_11rb$('ktor-engine')) != null ? firstOrNull(tmp$_5) : null) != null ? tmp$_6 : defaultKtorEngine);
     var str_12 = '#ktor-version';
     jQuery(str_12).val((tmp$_8 = (tmp$_7 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_7) : null) != null ? tmp$_8 : defaultKtorVersion);
+    var str_13 = '#project-type';
+    jQuery(str_13).val((tmp$_10 = (tmp$_9 = get_hashParams().get_11rb$('project-type')) != null ? firstOrNull(tmp$_9) : null) != null ? tmp$_10 : defaultKtorEngine);
     addDependencies();
     registerBuildButton();
     handleFiltering();
@@ -2190,6 +2197,7 @@
   CssDslFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'kotlinx.html.*');
     addImport($receiver, 'kotlinx.css.*');
+    addImport($receiver, 'io.ktor.http.*');
     addRoute($receiver, CssDslFeature$renderFeature$lambda);
     addExtensionMethods($receiver, CssDslFeature$renderFeature$lambda_0);
   };
@@ -2680,6 +2688,24 @@
         $receiver._indent();
         try {
           $receiver.line_61zpoe$('h1 { +"HTML" }');
+          $receiver.line_61zpoe$('ul'.length === 0 ? '{ ' + '' : 'ul' + ' { ' + '');
+          $receiver._indent();
+          try {
+            var $receiver_2 = 'for (n in 1..10)';
+            $receiver.line_61zpoe$($receiver_2.length === 0 ? '{ ' + '' : $receiver_2 + ' { ' + '');
+            $receiver._indent();
+            try {
+              $receiver.line_61zpoe$('li { +"$n" }');
+            }
+            finally {
+              $receiver._unindent();
+            }
+            $receiver.line_61zpoe$('}' + '');
+          }
+          finally {
+            $receiver._unindent();
+          }
+          $receiver.line_61zpoe$('}' + '');
         }
         finally {
           $receiver._unindent();
@@ -3331,7 +3357,7 @@
         $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
         $receiver._indent();
         try {
-          $receiver.line_61zpoe$('HELLO WORLD!');
+          $receiver.line_61zpoe$('call.respondText("HELLO WORLD!", contentType = ContentType.Text.Plain)');
         }
         finally {
           $receiver._unindent();
@@ -3348,6 +3374,7 @@
   }
   RoutingFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.routing.*');
+    addImport($receiver, 'io.ktor.http.*');
     $receiver.append_qu2wte$(ApplicationKt_getInstance().MODULE_POST, void 0, RoutingFeature$renderFeature$lambda(this, $receiver));
   };
   RoutingFeature.$metadata$ = {
@@ -4119,367 +4146,16 @@
     BuildFiles_instance = this;
     Block.call(this, []);
   }
-  function BuildFiles$render$lambda$lambda$lambda(this$render) {
-    return function ($receiver) {
-      var tmp$, tmp$_0;
-      println('compileDependencies: ' + get_compileDependencies(this$render));
-      tmp$ = get_compileDependencies(this$render).iterator();
-      while (tmp$.hasNext()) {
-        var dep = tmp$.next();
-        $receiver.line_61zpoe$('compile ' + '"' + dep.dependency + '"');
-      }
-      tmp$_0 = get_testDependencies(this$render).iterator();
-      while (tmp$_0.hasNext()) {
-        var dep_0 = tmp$_0.next();
-        $receiver.line_61zpoe$('testCompile ' + '"' + dep_0.dependency + '"');
-      }
-      return Unit;
-    };
-  }
-  function BuildFiles$render$lambda(closure$info_0, this$render_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$BuildFiles$render$lambda(closure$info_0, this$render_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
-  function Coroutine$BuildFiles$render$lambda(closure$info_0, this$render_0, $receiver_0, controller, continuation_0) {
-    CoroutineImpl.call(this, continuation_0);
-    this.$controller = controller;
-    this.exceptionState_0 = 1;
-    this.local$closure$info = closure$info_0;
-    this.local$this$render = this$render_0;
-    this.local$$receiver = $receiver_0;
-  }
-  Coroutine$BuildFiles$render$lambda.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: null,
-    interfaces: [CoroutineImpl]
-  };
-  Coroutine$BuildFiles$render$lambda.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$BuildFiles$render$lambda.prototype.constructor = Coroutine$BuildFiles$render$lambda;
-  Coroutine$BuildFiles$render$lambda.prototype.doResume = function () {
-    do
-      try {
-        switch (this.state_0) {
-          case 0:
-            var $receiver = 'buildscript';
-            this.local$$receiver.line_61zpoe$($receiver.length === 0 ? '{ ' + '' : $receiver + ' { ' + '');
-            this.local$$receiver._indent();
-            try {
-              var closure$info = this.local$closure$info;
-              this.local$$receiver.line_61zpoe$("ext.kotlin_version = '1.2.41'");
-              this.local$$receiver.line_61zpoe$("ext.ktor_version = '" + closure$info.ktorVersion + "'");
-              this.local$$receiver.line_61zpoe$("ext.logback_version = '1.2.1'");
-              this.local$$receiver.line_61zpoe$('');
-              var $receiver_0 = 'repositories';
-              this.local$$receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
-              this.local$$receiver._indent();
-              try {
-                this.local$$receiver.line_61zpoe$('jcenter()');
-              }
-              finally {
-                this.local$$receiver._unindent();
-              }
-              this.local$$receiver.line_61zpoe$('}' + '');
-              this.local$$receiver.line_61zpoe$('');
-              var $receiver_1 = 'dependencies';
-              this.local$$receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + '' : $receiver_1 + ' { ' + '');
-              this.local$$receiver._indent();
-              try {
-                this.local$$receiver.line_61zpoe$('classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"');
-              }
-              finally {
-                this.local$$receiver._unindent();
-              }
-              this.local$$receiver.line_61zpoe$('}' + '');
-            }
-            finally {
-              this.local$$receiver._unindent();
-            }
-
-            this.local$$receiver.line_61zpoe$('}' + '');
-            this.local$$receiver.line_61zpoe$('');
-            this.local$$receiver.line_61zpoe$("apply plugin: 'kotlin'");
-            this.local$$receiver.line_61zpoe$("apply plugin: 'application'");
-            this.local$$receiver.line_61zpoe$('');
-            this.local$$receiver.line_61zpoe$('mainClassName = ' + '"' + this.local$closure$info.developmentEngineFQ + '"');
-            this.local$$receiver.line_61zpoe$('');
-            var $receiver_2 = 'sourceSets';
-            this.local$$receiver.line_61zpoe$($receiver_2.length === 0 ? '{ ' + '' : $receiver_2 + ' { ' + '');
-            this.local$$receiver._indent();
-            try {
-              this.local$$receiver.line_61zpoe$("main.kotlin.srcDirs = ['src']");
-              this.local$$receiver.line_61zpoe$("main.resources.srcDirs = ['resources']");
-            }
-            finally {
-              this.local$$receiver._unindent();
-            }
-
-            this.local$$receiver.line_61zpoe$('}' + '');
-            this.local$$receiver.line_61zpoe$('');
-            var $receiver_3 = 'repositories';
-            this.local$$receiver.line_61zpoe$($receiver_3.length === 0 ? '{ ' + '' : $receiver_3 + ' { ' + '');
-            this.local$$receiver._indent();
-            try {
-              var tmp$;
-              tmp$ = get_reposToInclude(this.local$this$render).iterator();
-              while (tmp$.hasNext()) {
-                var repo = tmp$.next();
-                if (equals(repo, 'jcenter')) {
-                  this.local$$receiver.line_61zpoe$('jcenter()');
-                }
-                 else {
-                  this.local$$receiver.line_61zpoe$("maven { url '" + repo + "' }");
-                }
-              }
-            }
-            finally {
-              this.local$$receiver._unindent();
-            }
-
-            this.local$$receiver.line_61zpoe$('}' + '');
-            this.local$$receiver.line_61zpoe$('');
-            var $receiver_4 = 'dependencies';
-            this.local$$receiver.line_61zpoe$($receiver_4.length === 0 ? '{ ' + '' : $receiver_4 + ' { ' + '');
-            this.local$$receiver._indent();
-            try {
-              this.local$$receiver.linedeferred_yot30u$(BuildFiles$render$lambda$lambda$lambda(this.local$this$render));
-            }
-            finally {
-              this.local$$receiver._unindent();
-            }
-
-            this.local$$receiver.line_61zpoe$('}' + '');
-            this.local$$receiver.line_61zpoe$('');
-            return this.local$$receiver.line_61zpoe$("kotlin.experimental.coroutines = 'enable'");
-          case 1:
-            throw this.exception_0;
-        }
-      }
-       catch (e) {
-        if (this.state_0 === 1) {
-          this.exceptionState_0 = this.state_0;
-          throw e;
-        }
-         else {
-          this.state_0 = this.exceptionState_0;
-          this.exception_0 = e;
-        }
-      }
-     while (true);
-  };
-  function BuildFiles$render$lambda_0(closure$info_0) {
-    return function (continuation_0, suspended) {
-      var instance = new Coroutine$BuildFiles$render$lambda_0(closure$info_0, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
-  function Coroutine$BuildFiles$render$lambda_0(closure$info_0, continuation_0) {
-    CoroutineImpl.call(this, continuation_0);
-    this.exceptionState_0 = 1;
-    this.local$closure$info = closure$info_0;
-  }
-  Coroutine$BuildFiles$render$lambda_0.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: null,
-    interfaces: [CoroutineImpl]
-  };
-  Coroutine$BuildFiles$render$lambda_0.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$BuildFiles$render$lambda_0.prototype.constructor = Coroutine$BuildFiles$render$lambda_0;
-  Coroutine$BuildFiles$render$lambda_0.prototype.doResume = function () {
-    do
-      try {
-        switch (this.state_0) {
-          case 0:
-            this.state_0 = 2;
-            this.result_0 = this.local$closure$info.fetch('gradle/gradlew', this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 1:
-            throw this.exception_0;
-          case 2:
-            return this.result_0;
-        }
-      }
-       catch (e) {
-        if (this.state_0 === 1) {
-          this.exceptionState_0 = this.state_0;
-          throw e;
-        }
-         else {
-          this.state_0 = this.exceptionState_0;
-          this.exception_0 = e;
-        }
-      }
-     while (true);
-  };
-  function BuildFiles$render$lambda_1(closure$info_0) {
-    return function (continuation_0, suspended) {
-      var instance = new Coroutine$BuildFiles$render$lambda_1(closure$info_0, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
-  function Coroutine$BuildFiles$render$lambda_1(closure$info_0, continuation_0) {
-    CoroutineImpl.call(this, continuation_0);
-    this.exceptionState_0 = 1;
-    this.local$closure$info = closure$info_0;
-  }
-  Coroutine$BuildFiles$render$lambda_1.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: null,
-    interfaces: [CoroutineImpl]
-  };
-  Coroutine$BuildFiles$render$lambda_1.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$BuildFiles$render$lambda_1.prototype.constructor = Coroutine$BuildFiles$render$lambda_1;
-  Coroutine$BuildFiles$render$lambda_1.prototype.doResume = function () {
-    do
-      try {
-        switch (this.state_0) {
-          case 0:
-            this.state_0 = 2;
-            this.result_0 = this.local$closure$info.fetch('gradle/gradlew.bat', this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 1:
-            throw this.exception_0;
-          case 2:
-            return this.result_0;
-        }
-      }
-       catch (e) {
-        if (this.state_0 === 1) {
-          this.exceptionState_0 = this.state_0;
-          throw e;
-        }
-         else {
-          this.state_0 = this.exceptionState_0;
-          this.exception_0 = e;
-        }
-      }
-     while (true);
-  };
-  function BuildFiles$render$lambda_2(closure$info_0) {
-    return function (continuation_0, suspended) {
-      var instance = new Coroutine$BuildFiles$render$lambda_2(closure$info_0, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
-  function Coroutine$BuildFiles$render$lambda_2(closure$info_0, continuation_0) {
-    CoroutineImpl.call(this, continuation_0);
-    this.exceptionState_0 = 1;
-    this.local$closure$info = closure$info_0;
-  }
-  Coroutine$BuildFiles$render$lambda_2.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: null,
-    interfaces: [CoroutineImpl]
-  };
-  Coroutine$BuildFiles$render$lambda_2.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$BuildFiles$render$lambda_2.prototype.constructor = Coroutine$BuildFiles$render$lambda_2;
-  Coroutine$BuildFiles$render$lambda_2.prototype.doResume = function () {
-    do
-      try {
-        switch (this.state_0) {
-          case 0:
-            this.state_0 = 2;
-            this.result_0 = this.local$closure$info.fetch('gradle/gradle/wrapper/gradle-wrapper.jar', this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 1:
-            throw this.exception_0;
-          case 2:
-            return this.result_0;
-        }
-      }
-       catch (e) {
-        if (this.state_0 === 1) {
-          this.exceptionState_0 = this.state_0;
-          throw e;
-        }
-         else {
-          this.state_0 = this.exceptionState_0;
-          this.exception_0 = e;
-        }
-      }
-     while (true);
-  };
-  function BuildFiles$render$lambda_3(closure$info_0) {
-    return function (continuation_0, suspended) {
-      var instance = new Coroutine$BuildFiles$render$lambda_3(closure$info_0, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
-  function Coroutine$BuildFiles$render$lambda_3(closure$info_0, continuation_0) {
-    CoroutineImpl.call(this, continuation_0);
-    this.exceptionState_0 = 1;
-    this.local$closure$info = closure$info_0;
-  }
-  Coroutine$BuildFiles$render$lambda_3.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: null,
-    interfaces: [CoroutineImpl]
-  };
-  Coroutine$BuildFiles$render$lambda_3.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$BuildFiles$render$lambda_3.prototype.constructor = Coroutine$BuildFiles$render$lambda_3;
-  Coroutine$BuildFiles$render$lambda_3.prototype.doResume = function () {
-    do
-      try {
-        switch (this.state_0) {
-          case 0:
-            this.state_0 = 2;
-            this.result_0 = this.local$closure$info.fetch('gradle/gradle/wrapper/gradle-wrapper.properties', this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 1:
-            throw this.exception_0;
-          case 2:
-            return this.result_0;
-        }
-      }
-       catch (e) {
-        if (this.state_0 === 1) {
-          this.exceptionState_0 = this.state_0;
-          throw e;
-        }
-         else {
-          this.state_0 = this.exceptionState_0;
-          this.exception_0 = e;
-        }
-      }
-     while (true);
-  };
   var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
   BuildFiles.prototype.render_miqy8c$ = function ($receiver, info) {
-    if (equals(info.projectType, 'gradle')) {
-      $receiver.fileText_7k8vha$('build.gradle', void 0, void 0, BuildFiles$render$lambda(info, $receiver));
-      if (info.includeWrapper) {
-        $receiver.fileBinary_7n0jo0$('gradlew', void 0, toInt('755', 8), BuildFiles$render$lambda_0(info));
-        $receiver.fileBinary_7n0jo0$('gradlew.bat', void 0, void 0, BuildFiles$render$lambda_1(info));
-        $receiver.fileBinary_7n0jo0$('gradle/wrapper/gradle-wrapper.jar', void 0, void 0, BuildFiles$render$lambda_2(info));
-        $receiver.fileBinary_7n0jo0$('gradle/wrapper/gradle-wrapper.properties', void 0, void 0, BuildFiles$render$lambda_3(info));
-      }
-    }
-     else {
-      throw IllegalStateException_init(('Unsupported build type ' + info.projectType).toString());
+    switch (info.projectType) {
+      case 'gradle':
+        BuildFilesGradle_getInstance().render_miqy8c$($receiver, info);
+        break;
+      case 'maven':
+        BuildFilesMaven_getInstance().render_miqy8c$($receiver, info);
+        break;
+      default:throw IllegalStateException_init(('Unsupported build type ' + info.projectType).toString());
     }
     addMavenRepository($receiver, 'jcenter');
     addCompileDependency($receiver, new MvnArtifact('org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version'));
@@ -4600,6 +4276,1204 @@
   }
   function addTestDependency($receiver, dependency) {
     get_testDependencies($receiver).add_11rb$(dependency);
+  }
+  function BuildFilesGradle() {
+    BuildFilesGradle_instance = this;
+    Block.call(this, []);
+  }
+  function BuildFilesGradle$render$lambda$lambda$lambda(this$render) {
+    return function ($receiver) {
+      var tmp$, tmp$_0;
+      println('compileDependencies: ' + get_compileDependencies(this$render));
+      tmp$ = get_compileDependencies(this$render).iterator();
+      while (tmp$.hasNext()) {
+        var dep = tmp$.next();
+        $receiver.line_61zpoe$('compile ' + '"' + dep.dependency + '"');
+      }
+      tmp$_0 = get_testDependencies(this$render).iterator();
+      while (tmp$_0.hasNext()) {
+        var dep_0 = tmp$_0.next();
+        $receiver.line_61zpoe$('testCompile ' + '"' + dep_0.dependency + '"');
+      }
+      return Unit;
+    };
+  }
+  function BuildFilesGradle$render$lambda(closure$info_0, this$render_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesGradle$render$lambda(closure$info_0, this$render_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFilesGradle$render$lambda(closure$info_0, this$render_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+    this.local$this$render = this$render_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$BuildFilesGradle$render$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFilesGradle$render$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFilesGradle$render$lambda.prototype.constructor = Coroutine$BuildFilesGradle$render$lambda;
+  Coroutine$BuildFilesGradle$render$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            var $receiver = 'buildscript';
+            this.local$$receiver.line_61zpoe$($receiver.length === 0 ? '{ ' + '' : $receiver + ' { ' + '');
+            this.local$$receiver._indent();
+            try {
+              var closure$info = this.local$closure$info;
+              this.local$$receiver.line_61zpoe$("ext.kotlin_version = '1.2.41'");
+              this.local$$receiver.line_61zpoe$("ext.ktor_version = '" + closure$info.ktorVersion + "'");
+              this.local$$receiver.line_61zpoe$("ext.logback_version = '1.2.1'");
+              this.local$$receiver.line_61zpoe$('');
+              var $receiver_0 = 'repositories';
+              this.local$$receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+              this.local$$receiver._indent();
+              try {
+                this.local$$receiver.line_61zpoe$('jcenter()');
+              }
+              finally {
+                this.local$$receiver._unindent();
+              }
+              this.local$$receiver.line_61zpoe$('}' + '');
+              this.local$$receiver.line_61zpoe$('');
+              var $receiver_1 = 'dependencies';
+              this.local$$receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + '' : $receiver_1 + ' { ' + '');
+              this.local$$receiver._indent();
+              try {
+                this.local$$receiver.line_61zpoe$('classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"');
+              }
+              finally {
+                this.local$$receiver._unindent();
+              }
+              this.local$$receiver.line_61zpoe$('}' + '');
+            }
+            finally {
+              this.local$$receiver._unindent();
+            }
+
+            this.local$$receiver.line_61zpoe$('}' + '');
+            this.local$$receiver.line_61zpoe$('');
+            this.local$$receiver.line_61zpoe$("apply plugin: 'kotlin'");
+            this.local$$receiver.line_61zpoe$("apply plugin: 'application'");
+            this.local$$receiver.line_61zpoe$('');
+            this.local$$receiver.line_61zpoe$('mainClassName = ' + '"' + this.local$closure$info.developmentEngineFQ + '"');
+            this.local$$receiver.line_61zpoe$('');
+            var $receiver_2 = 'sourceSets';
+            this.local$$receiver.line_61zpoe$($receiver_2.length === 0 ? '{ ' + '' : $receiver_2 + ' { ' + '');
+            this.local$$receiver._indent();
+            try {
+              this.local$$receiver.line_61zpoe$("main.kotlin.srcDirs = ['src']");
+              this.local$$receiver.line_61zpoe$("main.resources.srcDirs = ['resources']");
+            }
+            finally {
+              this.local$$receiver._unindent();
+            }
+
+            this.local$$receiver.line_61zpoe$('}' + '');
+            this.local$$receiver.line_61zpoe$('');
+            var $receiver_3 = 'repositories';
+            this.local$$receiver.line_61zpoe$($receiver_3.length === 0 ? '{ ' + '' : $receiver_3 + ' { ' + '');
+            this.local$$receiver._indent();
+            try {
+              var tmp$;
+              tmp$ = get_reposToInclude(this.local$this$render).iterator();
+              while (tmp$.hasNext()) {
+                var repo = tmp$.next();
+                if (equals(repo, 'jcenter')) {
+                  this.local$$receiver.line_61zpoe$('jcenter()');
+                }
+                 else {
+                  this.local$$receiver.line_61zpoe$("maven { url '" + repo + "' }");
+                }
+              }
+            }
+            finally {
+              this.local$$receiver._unindent();
+            }
+
+            this.local$$receiver.line_61zpoe$('}' + '');
+            this.local$$receiver.line_61zpoe$('');
+            var $receiver_4 = 'dependencies';
+            this.local$$receiver.line_61zpoe$($receiver_4.length === 0 ? '{ ' + '' : $receiver_4 + ' { ' + '');
+            this.local$$receiver._indent();
+            try {
+              this.local$$receiver.linedeferred_yot30u$(BuildFilesGradle$render$lambda$lambda$lambda(this.local$this$render));
+            }
+            finally {
+              this.local$$receiver._unindent();
+            }
+
+            this.local$$receiver.line_61zpoe$('}' + '');
+            this.local$$receiver.line_61zpoe$('');
+            return this.local$$receiver.line_61zpoe$("kotlin.experimental.coroutines = 'enable'");
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function BuildFilesGradle$render$lambda_0(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_0(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFilesGradle$render$lambda_0(closure$info_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+  }
+  Coroutine$BuildFilesGradle$render$lambda_0.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFilesGradle$render$lambda_0.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFilesGradle$render$lambda_0.prototype.constructor = Coroutine$BuildFilesGradle$render$lambda_0;
+  Coroutine$BuildFilesGradle$render$lambda_0.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = this.local$closure$info.fetch('gradle/gradlew', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function BuildFilesGradle$render$lambda_1(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_1(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFilesGradle$render$lambda_1(closure$info_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+  }
+  Coroutine$BuildFilesGradle$render$lambda_1.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFilesGradle$render$lambda_1.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFilesGradle$render$lambda_1.prototype.constructor = Coroutine$BuildFilesGradle$render$lambda_1;
+  Coroutine$BuildFilesGradle$render$lambda_1.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = this.local$closure$info.fetch('gradle/gradlew.bat', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function BuildFilesGradle$render$lambda_2(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_2(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFilesGradle$render$lambda_2(closure$info_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+  }
+  Coroutine$BuildFilesGradle$render$lambda_2.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFilesGradle$render$lambda_2.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFilesGradle$render$lambda_2.prototype.constructor = Coroutine$BuildFilesGradle$render$lambda_2;
+  Coroutine$BuildFilesGradle$render$lambda_2.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = this.local$closure$info.fetch('gradle/gradle/wrapper/gradle-wrapper.jar', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function BuildFilesGradle$render$lambda_3(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_3(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFilesGradle$render$lambda_3(closure$info_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+  }
+  Coroutine$BuildFilesGradle$render$lambda_3.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFilesGradle$render$lambda_3.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFilesGradle$render$lambda_3.prototype.constructor = Coroutine$BuildFilesGradle$render$lambda_3;
+  Coroutine$BuildFilesGradle$render$lambda_3.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = this.local$closure$info.fetch('gradle/gradle/wrapper/gradle-wrapper.properties', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  BuildFilesGradle.prototype.render_miqy8c$ = function ($receiver, info) {
+    $receiver.fileText_7k8vha$('build.gradle', void 0, void 0, BuildFilesGradle$render$lambda(info, $receiver));
+    if (info.includeWrapper) {
+      $receiver.fileBinary_7n0jo0$('gradlew', void 0, toInt('755', 8), BuildFilesGradle$render$lambda_0(info));
+      $receiver.fileBinary_7n0jo0$('gradlew.bat', void 0, void 0, BuildFilesGradle$render$lambda_1(info));
+      $receiver.fileBinary_7n0jo0$('gradle/wrapper/gradle-wrapper.jar', void 0, void 0, BuildFilesGradle$render$lambda_2(info));
+      $receiver.fileBinary_7n0jo0$('gradle/wrapper/gradle-wrapper.properties', void 0, void 0, BuildFilesGradle$render$lambda_3(info));
+    }
+  };
+  BuildFilesGradle.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'BuildFilesGradle',
+    interfaces: [Block]
+  };
+  var BuildFilesGradle_instance = null;
+  function BuildFilesGradle_getInstance() {
+    if (BuildFilesGradle_instance === null) {
+      new BuildFilesGradle();
+    }
+    return BuildFilesGradle_instance;
+  }
+  function BuildFilesMaven() {
+    BuildFilesMaven_instance = this;
+    Block.call(this, []);
+  }
+  function BuildFilesMaven$render$lambda$lambda$lambda$lambda$lambda$lambda(closure$index, this$, closure$repoUrl) {
+    return function ($receiver) {
+      var $receiver_0 = '<repository>';
+      var tmp$, tmp$_0, tmp$_1;
+      var tmp$_2;
+      if ((tmp$_1 = (tmp$_0 = (tmp$ = Regex_init('<(\\w+)').find_905azu$($receiver_0)) != null ? tmp$.groupValues : null) != null ? getOrNull(tmp$_0, 1) : null) != null)
+        tmp$_2 = tmp$_1;
+      else {
+        throw IllegalStateException_init('Invalid XML tag'.toString());
+      }
+      var tagName = tmp$_2;
+      $receiver.indenter.line_61zpoe$($receiver_0);
+      var $this = $receiver.indenter;
+      $this._indent();
+      try {
+        var closure$index_0 = closure$index;
+        var this$_0 = this$;
+        var closure$repoUrl_0 = closure$repoUrl;
+        this$_0.line_61zpoe$('<id>repo' + closure$index_0 + '<\/id>');
+        this$_0.line_61zpoe$('<url>' + closure$repoUrl_0 + '<\/url>');
+        this$_0.line_61zpoe$('<releases><enabled>true<\/enabled><\/releases>');
+        this$_0.line_61zpoe$('<snapshots><enabled>true<\/enabled><\/snapshots>');
+      }
+      finally {
+        $this._unindent();
+      }
+      $receiver.indenter.line_61zpoe$('<\/' + tagName + '>');
+      return Unit;
+    };
+  }
+  function BuildFilesMaven$render$lambda$lambda$lambda$lambda$lambda(this$render) {
+    return function ($receiver) {
+      var index = 0;
+      for (var tmp$ = get_reposToInclude(this$render).iterator(); tmp$.hasNext(); ++index) {
+        var repo = tmp$.next();
+        var tmp$_0;
+        if (equals(repo, 'jcenter'))
+          tmp$_0 = 'https://jcenter.bintray.com';
+        else
+          tmp$_0 = repo;
+        var repoUrl = tmp$_0;
+        xml($receiver, BuildFilesMaven$render$lambda$lambda$lambda$lambda$lambda$lambda(index, $receiver, repoUrl));
+      }
+      return Unit;
+    };
+  }
+  function BuildFilesMaven$render$lambda$lambda$lambda$lambda$lambda$lambda_0(closure$dep, this$, closure$mvnVersion, closure$test) {
+    return function ($receiver) {
+      var $receiver_0 = '<dependency>';
+      var tmp$, tmp$_0, tmp$_1;
+      var tmp$_2;
+      if ((tmp$_1 = (tmp$_0 = (tmp$ = Regex_init('<(\\w+)').find_905azu$($receiver_0)) != null ? tmp$.groupValues : null) != null ? getOrNull(tmp$_0, 1) : null) != null)
+        tmp$_2 = tmp$_1;
+      else {
+        throw IllegalStateException_init('Invalid XML tag'.toString());
+      }
+      var tagName = tmp$_2;
+      $receiver.indenter.line_61zpoe$($receiver_0);
+      var $this = $receiver.indenter;
+      $this._indent();
+      try {
+        var closure$dep_0 = closure$dep;
+        var this$_0 = this$;
+        var closure$mvnVersion_0 = closure$mvnVersion;
+        var closure$test_0 = closure$test;
+        this$_0.line_61zpoe$('<groupId>' + toString(closure$dep_0.group) + '<\/groupId>');
+        this$_0.line_61zpoe$('<artifactId>' + toString(closure$dep_0.name) + '<\/artifactId>');
+        this$_0.line_61zpoe$('<version>' + closure$mvnVersion_0 + '<\/version>');
+        if (closure$test_0) {
+          this$_0.line_61zpoe$('<scope>test<\/scope>');
+        }
+      }
+      finally {
+        $this._unindent();
+      }
+      $receiver.indenter.line_61zpoe$('<\/' + tagName + '>');
+      return Unit;
+    };
+  }
+  function BuildFilesMaven$render$lambda$lambda$lambda$lambda$lambda_0(this$render) {
+    return function ($receiver) {
+      var tmp$, tmp$_0, tmp$_1;
+      tmp$ = listOf_0([to(get_compileDependencies(this$render), false), to(get_testDependencies(this$render), true)]).iterator();
+      while (tmp$.hasNext()) {
+        var tmp$_2 = tmp$.next();
+        var deps = tmp$_2.component1()
+        , test = tmp$_2.component2();
+        tmp$_0 = deps.iterator();
+        while (tmp$_0.hasNext()) {
+          var dep = tmp$_0.next();
+          var version = (tmp$_1 = dep.version) != null ? tmp$_1 : '';
+          var mvnVersion = startsWith(version, '$') ? '${' + version.substring(1) + '}' : version;
+          xml($receiver, BuildFilesMaven$render$lambda$lambda$lambda$lambda$lambda$lambda_0(dep, $receiver, mvnVersion, test));
+        }
+      }
+      return Unit;
+    };
+  }
+  function BuildFilesMaven$render$lambda$lambda(this$, closure$info, this$render) {
+    return function ($receiver) {
+      this$.line_61zpoe$('<?xml version="1.0" encoding="UTF-8"?>');
+      var $receiver_0 = '<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">';
+      var tmp$, tmp$_0, tmp$_1;
+      var tmp$_2;
+      if ((tmp$_1 = (tmp$_0 = (tmp$ = Regex_init('<(\\w+)').find_905azu$($receiver_0)) != null ? tmp$.groupValues : null) != null ? getOrNull(tmp$_0, 1) : null) != null)
+        tmp$_2 = tmp$_1;
+      else {
+        throw IllegalStateException_init('Invalid XML tag'.toString());
+      }
+      var tagName = tmp$_2;
+      $receiver.indenter.line_61zpoe$($receiver_0);
+      var $this = $receiver.indenter;
+      $this._indent();
+      try {
+        var this$_0 = this$;
+        var closure$info_0 = closure$info;
+        var this$render_0 = this$render;
+        this$_0.line_61zpoe$('<modelVersion>4.0.0<\/modelVersion>');
+        this$_0.line_61zpoe$('<groupId>' + closure$info_0.artifactGroup + '<\/groupId>');
+        this$_0.line_61zpoe$('<artifactId>' + closure$info_0.artifactName + '<\/artifactId>');
+        this$_0.line_61zpoe$('<version>0.0.1-SNAPSHOT<\/version>');
+        this$_0.line_61zpoe$('<name>' + closure$info_0.artifactName + '<\/name>');
+        this$_0.line_61zpoe$('<description>' + closure$info_0.artifactName + '<\/description>');
+        var $receiver_1 = '<properties>';
+        var tmp$_3, tmp$_4, tmp$_5;
+        var tmp$_6;
+        if ((tmp$_5 = (tmp$_4 = (tmp$_3 = Regex_init('<(\\w+)').find_905azu$($receiver_1)) != null ? tmp$_3.groupValues : null) != null ? getOrNull(tmp$_4, 1) : null) != null)
+          tmp$_6 = tmp$_5;
+        else {
+          throw IllegalStateException_init('Invalid XML tag'.toString());
+        }
+        var tagName_0 = tmp$_6;
+        $receiver.indenter.line_61zpoe$($receiver_1);
+        var $this_0 = $receiver.indenter;
+        $this_0._indent();
+        try {
+          this$_0.line_61zpoe$('<kotlin_version>1.2.41<\/kotlin_version>');
+          this$_0.line_61zpoe$('<ktor_version>' + closure$info_0.ktorVersion + '<\/ktor_version>');
+          this$_0.line_61zpoe$('<logback_version>1.2.1<\/logback_version>');
+          this$_0.line_61zpoe$('<project.build.sourceEncoding>UTF-8<\/project.build.sourceEncoding>');
+          this$_0.line_61zpoe$('<kotlin.compiler.incremental>true<\/kotlin.compiler.incremental>');
+          this$_0.line_61zpoe$('<main.class>' + closure$info_0.developmentEngineFQ + '<\/main.class>');
+        }
+        finally {
+          $this_0._unindent();
+        }
+        $receiver.indenter.line_61zpoe$('<\/' + tagName_0 + '>');
+        var $receiver_2 = '<repositories>';
+        var tmp$_7, tmp$_8, tmp$_9;
+        var tmp$_10;
+        if ((tmp$_9 = (tmp$_8 = (tmp$_7 = Regex_init('<(\\w+)').find_905azu$($receiver_2)) != null ? tmp$_7.groupValues : null) != null ? getOrNull(tmp$_8, 1) : null) != null)
+          tmp$_10 = tmp$_9;
+        else {
+          throw IllegalStateException_init('Invalid XML tag'.toString());
+        }
+        var tagName_1 = tmp$_10;
+        $receiver.indenter.line_61zpoe$($receiver_2);
+        var $this_1 = $receiver.indenter;
+        $this_1._indent();
+        try {
+          this$_0.linedeferred_yot30u$(BuildFilesMaven$render$lambda$lambda$lambda$lambda$lambda(this$render_0));
+        }
+        finally {
+          $this_1._unindent();
+        }
+        $receiver.indenter.line_61zpoe$('<\/' + tagName_1 + '>');
+        var $receiver_3 = '<dependencies>';
+        var tmp$_11, tmp$_12, tmp$_13;
+        var tmp$_14;
+        if ((tmp$_13 = (tmp$_12 = (tmp$_11 = Regex_init('<(\\w+)').find_905azu$($receiver_3)) != null ? tmp$_11.groupValues : null) != null ? getOrNull(tmp$_12, 1) : null) != null)
+          tmp$_14 = tmp$_13;
+        else {
+          throw IllegalStateException_init('Invalid XML tag'.toString());
+        }
+        var tagName_2 = tmp$_14;
+        $receiver.indenter.line_61zpoe$($receiver_3);
+        var $this_2 = $receiver.indenter;
+        $this_2._indent();
+        try {
+          this$_0.linedeferred_yot30u$(BuildFilesMaven$render$lambda$lambda$lambda$lambda$lambda_0(this$render_0));
+        }
+        finally {
+          $this_2._unindent();
+        }
+        $receiver.indenter.line_61zpoe$('<\/' + tagName_2 + '>');
+        var tmp$_15, tmp$_16, tmp$_17;
+        var tmp$_18;
+        if ((tmp$_17 = (tmp$_16 = (tmp$_15 = Regex_init('<(\\w+)').find_905azu$('<build>')) != null ? tmp$_15.groupValues : null) != null ? getOrNull(tmp$_16, 1) : null) != null)
+          tmp$_18 = tmp$_17;
+        else {
+          throw IllegalStateException_init('Invalid XML tag'.toString());
+        }
+        var tagName_3 = tmp$_18;
+        $receiver.indenter.line_61zpoe$('<build>');
+        var $this_3 = $receiver.indenter;
+        $this_3._indent();
+        try {
+          this$_0.line_61zpoe$('<sourceDirectory>${project.basedir}/src<\/sourceDirectory>');
+          this$_0.line_61zpoe$('<testSourceDirectory>${project.basedir}/test<\/testSourceDirectory>');
+          var $receiver_4 = '<resources>';
+          var tmp$_19, tmp$_20, tmp$_21;
+          var tmp$_22;
+          if ((tmp$_21 = (tmp$_20 = (tmp$_19 = Regex_init('<(\\w+)').find_905azu$($receiver_4)) != null ? tmp$_19.groupValues : null) != null ? getOrNull(tmp$_20, 1) : null) != null)
+            tmp$_22 = tmp$_21;
+          else {
+            throw IllegalStateException_init('Invalid XML tag'.toString());
+          }
+          var tagName_4 = tmp$_22;
+          $receiver.indenter.line_61zpoe$($receiver_4);
+          var $this_4 = $receiver.indenter;
+          $this_4._indent();
+          try {
+            var $receiver_5 = '<resource>';
+            var tmp$_23, tmp$_24, tmp$_25;
+            var tmp$_26;
+            if ((tmp$_25 = (tmp$_24 = (tmp$_23 = Regex_init('<(\\w+)').find_905azu$($receiver_5)) != null ? tmp$_23.groupValues : null) != null ? getOrNull(tmp$_24, 1) : null) != null)
+              tmp$_26 = tmp$_25;
+            else {
+              throw IllegalStateException_init('Invalid XML tag'.toString());
+            }
+            var tagName_5 = tmp$_26;
+            $receiver.indenter.line_61zpoe$($receiver_5);
+            var $this_5 = $receiver.indenter;
+            $this_5._indent();
+            try {
+              this$_0.line_61zpoe$('<directory>${project.basedir}/resources<\/directory>');
+            }
+            finally {
+              $this_5._unindent();
+            }
+            $receiver.indenter.line_61zpoe$('<\/' + tagName_5 + '>');
+          }
+          finally {
+            $this_4._unindent();
+          }
+          $receiver.indenter.line_61zpoe$('<\/' + tagName_4 + '>');
+          var $receiver_6 = '<plugins>';
+          var tmp$_27, tmp$_28, tmp$_29;
+          var tmp$_30;
+          if ((tmp$_29 = (tmp$_28 = (tmp$_27 = Regex_init('<(\\w+)').find_905azu$($receiver_6)) != null ? tmp$_27.groupValues : null) != null ? getOrNull(tmp$_28, 1) : null) != null)
+            tmp$_30 = tmp$_29;
+          else {
+            throw IllegalStateException_init('Invalid XML tag'.toString());
+          }
+          var tagName_6 = tmp$_30;
+          $receiver.indenter.line_61zpoe$($receiver_6);
+          var $this_6 = $receiver.indenter;
+          $this_6._indent();
+          try {
+            var $receiver_7 = '<plugin>';
+            var tmp$_31, tmp$_32, tmp$_33;
+            var tmp$_34;
+            if ((tmp$_33 = (tmp$_32 = (tmp$_31 = Regex_init('<(\\w+)').find_905azu$($receiver_7)) != null ? tmp$_31.groupValues : null) != null ? getOrNull(tmp$_32, 1) : null) != null)
+              tmp$_34 = tmp$_33;
+            else {
+              throw IllegalStateException_init('Invalid XML tag'.toString());
+            }
+            var tagName_7 = tmp$_34;
+            $receiver.indenter.line_61zpoe$($receiver_7);
+            var $this_7 = $receiver.indenter;
+            $this_7._indent();
+            try {
+              this$_0.line_61zpoe$('<groupId>org.apache.maven.plugins<\/groupId>');
+              this$_0.line_61zpoe$('<artifactId>maven-surefire-plugin<\/artifactId>');
+            }
+            finally {
+              $this_7._unindent();
+            }
+            $receiver.indenter.line_61zpoe$('<\/' + tagName_7 + '>');
+            var $receiver_8 = '<plugin>';
+            var tmp$_35, tmp$_36, tmp$_37;
+            var tmp$_38;
+            if ((tmp$_37 = (tmp$_36 = (tmp$_35 = Regex_init('<(\\w+)').find_905azu$($receiver_8)) != null ? tmp$_35.groupValues : null) != null ? getOrNull(tmp$_36, 1) : null) != null)
+              tmp$_38 = tmp$_37;
+            else {
+              throw IllegalStateException_init('Invalid XML tag'.toString());
+            }
+            var tagName_8 = tmp$_38;
+            $receiver.indenter.line_61zpoe$($receiver_8);
+            var $this_8 = $receiver.indenter;
+            $this_8._indent();
+            try {
+              this$_0.line_61zpoe$('<artifactId>maven-compiler-plugin<\/artifactId>');
+              this$_0.line_61zpoe$('<configuration><source>1.8<\/source><target>1.8<\/target><\/configuration>');
+            }
+            finally {
+              $this_8._unindent();
+            }
+            $receiver.indenter.line_61zpoe$('<\/' + tagName_8 + '>');
+            var $receiver_9 = '<plugin>';
+            var tmp$_39, tmp$_40, tmp$_41;
+            var tmp$_42;
+            if ((tmp$_41 = (tmp$_40 = (tmp$_39 = Regex_init('<(\\w+)').find_905azu$($receiver_9)) != null ? tmp$_39.groupValues : null) != null ? getOrNull(tmp$_40, 1) : null) != null)
+              tmp$_42 = tmp$_41;
+            else {
+              throw IllegalStateException_init('Invalid XML tag'.toString());
+            }
+            var tagName_9 = tmp$_42;
+            $receiver.indenter.line_61zpoe$($receiver_9);
+            var $this_9 = $receiver.indenter;
+            $this_9._indent();
+            try {
+              this$_0.line_61zpoe$('<artifactId>kotlin-maven-plugin<\/artifactId>');
+              this$_0.line_61zpoe$('<groupId>org.jetbrains.kotlin<\/groupId>');
+              this$_0.line_61zpoe$('<version>${kotlin_version}<\/version>');
+              var $receiver_10 = '<executions>';
+              var tmp$_43, tmp$_44, tmp$_45;
+              var tmp$_46;
+              if ((tmp$_45 = (tmp$_44 = (tmp$_43 = Regex_init('<(\\w+)').find_905azu$($receiver_10)) != null ? tmp$_43.groupValues : null) != null ? getOrNull(tmp$_44, 1) : null) != null)
+                tmp$_46 = tmp$_45;
+              else {
+                throw IllegalStateException_init('Invalid XML tag'.toString());
+              }
+              var tagName_10 = tmp$_46;
+              $receiver.indenter.line_61zpoe$($receiver_10);
+              var $this_10 = $receiver.indenter;
+              $this_10._indent();
+              try {
+                var tmp$_47;
+                tmp$_47 = listOf_0([false, true]).iterator();
+                while (tmp$_47.hasNext()) {
+                  var test = tmp$_47.next();
+                  var name = test ? 'test-compile' : 'compile';
+                  var $receiver_11 = '<execution>';
+                  var tmp$_48, tmp$_49, tmp$_50;
+                  var tmp$_51;
+                  if ((tmp$_50 = (tmp$_49 = (tmp$_48 = Regex_init('<(\\w+)').find_905azu$($receiver_11)) != null ? tmp$_48.groupValues : null) != null ? getOrNull(tmp$_49, 1) : null) != null)
+                    tmp$_51 = tmp$_50;
+                  else {
+                    throw IllegalStateException_init('Invalid XML tag'.toString());
+                  }
+                  var tagName_11 = tmp$_51;
+                  $receiver.indenter.line_61zpoe$($receiver_11);
+                  var $this_11 = $receiver.indenter;
+                  $this_11._indent();
+                  try {
+                    this$_0.line_61zpoe$('<id>' + name + '<\/id>');
+                    this$_0.line_61zpoe$('<goals><goal>' + name + '<\/goal><\/goals>');
+                    var $receiver_12 = '<configuration>';
+                    var tmp$_52, tmp$_53, tmp$_54;
+                    var tmp$_55;
+                    if ((tmp$_54 = (tmp$_53 = (tmp$_52 = Regex_init('<(\\w+)').find_905azu$($receiver_12)) != null ? tmp$_52.groupValues : null) != null ? getOrNull(tmp$_53, 1) : null) != null)
+                      tmp$_55 = tmp$_54;
+                    else {
+                      throw IllegalStateException_init('Invalid XML tag'.toString());
+                    }
+                    var tagName_12 = tmp$_55;
+                    $receiver.indenter.line_61zpoe$($receiver_12);
+                    var $this_12 = $receiver.indenter;
+                    $this_12._indent();
+                    try {
+                      this$_0.line_61zpoe$('<experimentalCoroutines>enable<\/experimentalCoroutines>');
+                    }
+                    finally {
+                      $this_12._unindent();
+                    }
+                    $receiver.indenter.line_61zpoe$('<\/' + tagName_12 + '>');
+                  }
+                  finally {
+                    $this_11._unindent();
+                  }
+                  $receiver.indenter.line_61zpoe$('<\/' + tagName_11 + '>');
+                }
+              }
+              finally {
+                $this_10._unindent();
+              }
+              $receiver.indenter.line_61zpoe$('<\/' + tagName_10 + '>');
+            }
+            finally {
+              $this_9._unindent();
+            }
+            $receiver.indenter.line_61zpoe$('<\/' + tagName_9 + '>');
+            var $receiver_13 = '<plugin>';
+            var tmp$_56, tmp$_57, tmp$_58;
+            var tmp$_59;
+            if ((tmp$_58 = (tmp$_57 = (tmp$_56 = Regex_init('<(\\w+)').find_905azu$($receiver_13)) != null ? tmp$_56.groupValues : null) != null ? getOrNull(tmp$_57, 1) : null) != null)
+              tmp$_59 = tmp$_58;
+            else {
+              throw IllegalStateException_init('Invalid XML tag'.toString());
+            }
+            var tagName_13 = tmp$_59;
+            $receiver.indenter.line_61zpoe$($receiver_13);
+            var $this_13 = $receiver.indenter;
+            $this_13._indent();
+            try {
+              this$_0.line_61zpoe$('<groupId>org.apache.maven.plugins<\/groupId>');
+              this$_0.line_61zpoe$('<artifactId>maven-jar-plugin<\/artifactId>');
+              this$_0.line_61zpoe$('<version>2.6<\/version>');
+              var $receiver_14 = '<configuration>';
+              var tmp$_60, tmp$_61, tmp$_62;
+              var tmp$_63;
+              if ((tmp$_62 = (tmp$_61 = (tmp$_60 = Regex_init('<(\\w+)').find_905azu$($receiver_14)) != null ? tmp$_60.groupValues : null) != null ? getOrNull(tmp$_61, 1) : null) != null)
+                tmp$_63 = tmp$_62;
+              else {
+                throw IllegalStateException_init('Invalid XML tag'.toString());
+              }
+              var tagName_14 = tmp$_63;
+              $receiver.indenter.line_61zpoe$($receiver_14);
+              var $this_14 = $receiver.indenter;
+              $this_14._indent();
+              try {
+                var $receiver_15 = '<archive>';
+                var tmp$_64, tmp$_65, tmp$_66;
+                var tmp$_67;
+                if ((tmp$_66 = (tmp$_65 = (tmp$_64 = Regex_init('<(\\w+)').find_905azu$($receiver_15)) != null ? tmp$_64.groupValues : null) != null ? getOrNull(tmp$_65, 1) : null) != null)
+                  tmp$_67 = tmp$_66;
+                else {
+                  throw IllegalStateException_init('Invalid XML tag'.toString());
+                }
+                var tagName_15 = tmp$_67;
+                $receiver.indenter.line_61zpoe$($receiver_15);
+                var $this_15 = $receiver.indenter;
+                $this_15._indent();
+                try {
+                  var $receiver_16 = '<manifest>';
+                  var tmp$_68, tmp$_69, tmp$_70;
+                  var tmp$_71;
+                  if ((tmp$_70 = (tmp$_69 = (tmp$_68 = Regex_init('<(\\w+)').find_905azu$($receiver_16)) != null ? tmp$_68.groupValues : null) != null ? getOrNull(tmp$_69, 1) : null) != null)
+                    tmp$_71 = tmp$_70;
+                  else {
+                    throw IllegalStateException_init('Invalid XML tag'.toString());
+                  }
+                  var tagName_16 = tmp$_71;
+                  $receiver.indenter.line_61zpoe$($receiver_16);
+                  var $this_16 = $receiver.indenter;
+                  $this_16._indent();
+                  try {
+                    this$_0.line_61zpoe$('<addClasspath>true<\/addClasspath>');
+                    this$_0.line_61zpoe$('<mainClass>${main.class}<\/mainClass>');
+                  }
+                  finally {
+                    $this_16._unindent();
+                  }
+                  $receiver.indenter.line_61zpoe$('<\/' + tagName_16 + '>');
+                }
+                finally {
+                  $this_15._unindent();
+                }
+                $receiver.indenter.line_61zpoe$('<\/' + tagName_15 + '>');
+              }
+              finally {
+                $this_14._unindent();
+              }
+              $receiver.indenter.line_61zpoe$('<\/' + tagName_14 + '>');
+            }
+            finally {
+              $this_13._unindent();
+            }
+            $receiver.indenter.line_61zpoe$('<\/' + tagName_13 + '>');
+            var $receiver_17 = '<plugin>';
+            var tmp$_72, tmp$_73, tmp$_74;
+            var tmp$_75;
+            if ((tmp$_74 = (tmp$_73 = (tmp$_72 = Regex_init('<(\\w+)').find_905azu$($receiver_17)) != null ? tmp$_72.groupValues : null) != null ? getOrNull(tmp$_73, 1) : null) != null)
+              tmp$_75 = tmp$_74;
+            else {
+              throw IllegalStateException_init('Invalid XML tag'.toString());
+            }
+            var tagName_17 = tmp$_75;
+            $receiver.indenter.line_61zpoe$($receiver_17);
+            var $this_17 = $receiver.indenter;
+            $this_17._indent();
+            try {
+              this$_0.line_61zpoe$('<groupId>org.apache.maven.plugins<\/groupId>');
+              this$_0.line_61zpoe$('<artifactId>maven-assembly-plugin<\/artifactId>');
+              this$_0.line_61zpoe$('<version>2.6<\/version>');
+              var $receiver_18 = '<executions>';
+              var tmp$_76, tmp$_77, tmp$_78;
+              var tmp$_79;
+              if ((tmp$_78 = (tmp$_77 = (tmp$_76 = Regex_init('<(\\w+)').find_905azu$($receiver_18)) != null ? tmp$_76.groupValues : null) != null ? getOrNull(tmp$_77, 1) : null) != null)
+                tmp$_79 = tmp$_78;
+              else {
+                throw IllegalStateException_init('Invalid XML tag'.toString());
+              }
+              var tagName_18 = tmp$_79;
+              $receiver.indenter.line_61zpoe$($receiver_18);
+              var $this_18 = $receiver.indenter;
+              $this_18._indent();
+              try {
+                var $receiver_19 = '<execution>';
+                var tmp$_80, tmp$_81, tmp$_82;
+                var tmp$_83;
+                if ((tmp$_82 = (tmp$_81 = (tmp$_80 = Regex_init('<(\\w+)').find_905azu$($receiver_19)) != null ? tmp$_80.groupValues : null) != null ? getOrNull(tmp$_81, 1) : null) != null)
+                  tmp$_83 = tmp$_82;
+                else {
+                  throw IllegalStateException_init('Invalid XML tag'.toString());
+                }
+                var tagName_19 = tmp$_83;
+                $receiver.indenter.line_61zpoe$($receiver_19);
+                var $this_19 = $receiver.indenter;
+                $this_19._indent();
+                try {
+                  this$_0.line_61zpoe$('<id>make-assembly<\/id>');
+                  this$_0.line_61zpoe$('<phase>package<\/phase>');
+                  this$_0.line_61zpoe$('<goals> <goal>single<\/goal> <\/goals>');
+                  var $receiver_20 = '<configuration>';
+                  var tmp$_84, tmp$_85, tmp$_86;
+                  var tmp$_87;
+                  if ((tmp$_86 = (tmp$_85 = (tmp$_84 = Regex_init('<(\\w+)').find_905azu$($receiver_20)) != null ? tmp$_84.groupValues : null) != null ? getOrNull(tmp$_85, 1) : null) != null)
+                    tmp$_87 = tmp$_86;
+                  else {
+                    throw IllegalStateException_init('Invalid XML tag'.toString());
+                  }
+                  var tagName_20 = tmp$_87;
+                  $receiver.indenter.line_61zpoe$($receiver_20);
+                  var $this_20 = $receiver.indenter;
+                  $this_20._indent();
+                  try {
+                    var $receiver_21 = '<archive>';
+                    var tmp$_88, tmp$_89, tmp$_90;
+                    var tmp$_91;
+                    if ((tmp$_90 = (tmp$_89 = (tmp$_88 = Regex_init('<(\\w+)').find_905azu$($receiver_21)) != null ? tmp$_88.groupValues : null) != null ? getOrNull(tmp$_89, 1) : null) != null)
+                      tmp$_91 = tmp$_90;
+                    else {
+                      throw IllegalStateException_init('Invalid XML tag'.toString());
+                    }
+                    var tagName_21 = tmp$_91;
+                    $receiver.indenter.line_61zpoe$($receiver_21);
+                    var $this_21 = $receiver.indenter;
+                    $this_21._indent();
+                    try {
+                      var $receiver_22 = '<manifest>';
+                      var tmp$_92, tmp$_93, tmp$_94;
+                      var tmp$_95;
+                      if ((tmp$_94 = (tmp$_93 = (tmp$_92 = Regex_init('<(\\w+)').find_905azu$($receiver_22)) != null ? tmp$_92.groupValues : null) != null ? getOrNull(tmp$_93, 1) : null) != null)
+                        tmp$_95 = tmp$_94;
+                      else {
+                        throw IllegalStateException_init('Invalid XML tag'.toString());
+                      }
+                      var tagName_22 = tmp$_95;
+                      $receiver.indenter.line_61zpoe$($receiver_22);
+                      var $this_22 = $receiver.indenter;
+                      $this_22._indent();
+                      try {
+                        this$_0.line_61zpoe$('<mainClass>${main.class}<\/mainClass>');
+                      }
+                      finally {
+                        $this_22._unindent();
+                      }
+                      $receiver.indenter.line_61zpoe$('<\/' + tagName_22 + '>');
+                    }
+                    finally {
+                      $this_21._unindent();
+                    }
+                    $receiver.indenter.line_61zpoe$('<\/' + tagName_21 + '>');
+                    var $receiver_23 = '<descriptorRefs>';
+                    var tmp$_96, tmp$_97, tmp$_98;
+                    var tmp$_99;
+                    if ((tmp$_98 = (tmp$_97 = (tmp$_96 = Regex_init('<(\\w+)').find_905azu$($receiver_23)) != null ? tmp$_96.groupValues : null) != null ? getOrNull(tmp$_97, 1) : null) != null)
+                      tmp$_99 = tmp$_98;
+                    else {
+                      throw IllegalStateException_init('Invalid XML tag'.toString());
+                    }
+                    var tagName_23 = tmp$_99;
+                    $receiver.indenter.line_61zpoe$($receiver_23);
+                    var $this_23 = $receiver.indenter;
+                    $this_23._indent();
+                    try {
+                      this$_0.line_61zpoe$('<descriptorRef>jar-with-dependencies<\/descriptorRef>');
+                    }
+                    finally {
+                      $this_23._unindent();
+                    }
+                    $receiver.indenter.line_61zpoe$('<\/' + tagName_23 + '>');
+                  }
+                  finally {
+                    $this_20._unindent();
+                  }
+                  $receiver.indenter.line_61zpoe$('<\/' + tagName_20 + '>');
+                }
+                finally {
+                  $this_19._unindent();
+                }
+                $receiver.indenter.line_61zpoe$('<\/' + tagName_19 + '>');
+              }
+              finally {
+                $this_18._unindent();
+              }
+              $receiver.indenter.line_61zpoe$('<\/' + tagName_18 + '>');
+            }
+            finally {
+              $this_17._unindent();
+            }
+            $receiver.indenter.line_61zpoe$('<\/' + tagName_17 + '>');
+          }
+          finally {
+            $this_6._unindent();
+          }
+          $receiver.indenter.line_61zpoe$('<\/' + tagName_6 + '>');
+        }
+        finally {
+          $this_3._unindent();
+        }
+        $receiver.indenter.line_61zpoe$('<\/' + tagName_3 + '>');
+      }
+      finally {
+        $this._unindent();
+      }
+      $receiver.indenter.line_61zpoe$('<\/' + tagName + '>');
+      return Unit;
+    };
+  }
+  function BuildFilesMaven$render$lambda(closure$info_0, this$render_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesMaven$render$lambda(closure$info_0, this$render_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFilesMaven$render$lambda(closure$info_0, this$render_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+    this.local$this$render = this$render_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$BuildFilesMaven$render$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFilesMaven$render$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFilesMaven$render$lambda.prototype.constructor = Coroutine$BuildFilesMaven$render$lambda;
+  Coroutine$BuildFilesMaven$render$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            return xml(this.local$$receiver, BuildFilesMaven$render$lambda$lambda(this.local$$receiver, this.local$closure$info, this.local$this$render)), Unit;
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function BuildFilesMaven$render$lambda_0(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesMaven$render$lambda_0(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFilesMaven$render$lambda_0(closure$info_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+  }
+  Coroutine$BuildFilesMaven$render$lambda_0.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFilesMaven$render$lambda_0.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFilesMaven$render$lambda_0.prototype.constructor = Coroutine$BuildFilesMaven$render$lambda_0;
+  Coroutine$BuildFilesMaven$render$lambda_0.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = this.local$closure$info.fetch('maven/mvnw', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function BuildFilesMaven$render$lambda_1(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesMaven$render$lambda_1(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFilesMaven$render$lambda_1(closure$info_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+  }
+  Coroutine$BuildFilesMaven$render$lambda_1.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFilesMaven$render$lambda_1.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFilesMaven$render$lambda_1.prototype.constructor = Coroutine$BuildFilesMaven$render$lambda_1;
+  Coroutine$BuildFilesMaven$render$lambda_1.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = this.local$closure$info.fetch('maven/mvnw.cmd', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function BuildFilesMaven$render$lambda_2(closure$info_0, closure$file_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesMaven$render$lambda_2(closure$info_0, closure$file_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFilesMaven$render$lambda_2(closure$info_0, closure$file_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+    this.local$closure$file = closure$file_0;
+  }
+  Coroutine$BuildFilesMaven$render$lambda_2.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFilesMaven$render$lambda_2.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFilesMaven$render$lambda_2.prototype.constructor = Coroutine$BuildFilesMaven$render$lambda_2;
+  Coroutine$BuildFilesMaven$render$lambda_2.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = this.local$closure$info.fetch('maven/wrapper/' + this.local$closure$file, this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  BuildFilesMaven.prototype.render_miqy8c$ = function ($receiver, info) {
+    var tmp$;
+    $receiver.fileText_7k8vha$('pom.xml', void 0, void 0, BuildFilesMaven$render$lambda(info, $receiver));
+    if (info.includeWrapper) {
+      $receiver.fileBinary_7n0jo0$('mvnw', void 0, toInt('755', 8), BuildFilesMaven$render$lambda_0(info));
+      $receiver.fileBinary_7n0jo0$('mvnw.cmd', void 0, void 0, BuildFilesMaven$render$lambda_1(info));
+      tmp$ = listOf_0(['maven-wrapper.jar', 'maven-wrapper.properties', 'MavenWrapperDownloader.java']).iterator();
+      while (tmp$.hasNext()) {
+        var file = tmp$.next();
+        $receiver.fileBinary_7n0jo0$('.mvn/wrapper/' + file, void 0, void 0, BuildFilesMaven$render$lambda_2(info, file));
+      }
+    }
+  };
+  BuildFilesMaven.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'BuildFilesMaven',
+    interfaces: [Block]
+  };
+  var BuildFilesMaven_instance = null;
+  function BuildFilesMaven_getInstance() {
+    if (BuildFilesMaven_instance === null) {
+      new BuildFilesMaven();
+    }
+    return BuildFilesMaven_instance;
   }
   var copyToArray = Kotlin.kotlin.collections.copyToArray;
   function generate(subject, blocks, continuation) {
@@ -5759,6 +6633,31 @@
   Indenter.prototype.unaryPlus_pdl1vz$ = defineInlineFunction('output.io.ktor.start.util.Indenter.unaryPlus_pdl1vz$', function ($receiver) {
     return this.line_61zpoe$($receiver);
   });
+  Indenter.prototype.xml_79xod4$ = defineInlineFunction('output.io.ktor.start.util.Indenter.xml_79xod4$', wrapFunction(function () {
+    var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
+    var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
+    var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
+    return function ($receiver, callback) {
+      var tmp$, tmp$_0, tmp$_1;
+      var tmp$_2;
+      if ((tmp$_1 = (tmp$_0 = (tmp$ = Regex_init('<(\\w+)').find_905azu$($receiver)) != null ? tmp$.groupValues : null) != null ? getOrNull(tmp$_0, 1) : null) != null)
+        tmp$_2 = tmp$_1;
+      else {
+        throw IllegalStateException_init('Invalid XML tag'.toString());
+      }
+      var tagName = tmp$_2;
+      this.line_61zpoe$($receiver);
+      this._indent();
+      try {
+        callback();
+      }
+      finally {
+        this._unindent();
+      }
+      this;
+      this.line_61zpoe$('<\/' + tagName + '>');
+    };
+  }));
   Indenter.prototype.toString_95lvll$ = function (markHandler) {
     return this.toString_l6l5ny$(markHandler, true);
   };
@@ -5778,6 +6677,42 @@
     simpleName: 'Indenter',
     interfaces: []
   };
+  function XmlIndenter(indenter) {
+    this.indenter = indenter;
+  }
+  XmlIndenter.prototype.invoke_79xod4$ = defineInlineFunction('output.io.ktor.start.util.XmlIndenter.invoke_79xod4$', wrapFunction(function () {
+    var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
+    var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
+    var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
+    return function ($receiver, callback) {
+      var tmp$, tmp$_0, tmp$_1;
+      var tmp$_2;
+      if ((tmp$_1 = (tmp$_0 = (tmp$ = Regex_init('<(\\w+)').find_905azu$($receiver)) != null ? tmp$.groupValues : null) != null ? getOrNull(tmp$_0, 1) : null) != null)
+        tmp$_2 = tmp$_1;
+      else {
+        throw IllegalStateException_init('Invalid XML tag'.toString());
+      }
+      var tagName = tmp$_2;
+      this.indenter.line_61zpoe$($receiver);
+      var $this = this.indenter;
+      $this._indent();
+      try {
+        callback();
+      }
+      finally {
+        $this._unindent();
+      }
+      this.indenter.line_61zpoe$('<\/' + tagName + '>');
+    };
+  }));
+  XmlIndenter.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'XmlIndenter',
+    interfaces: []
+  };
+  function xml($receiver, callback) {
+    callback(new XmlIndenter($receiver));
+  }
   function MvnArtifact(dependency) {
     this.dependency = dependency;
     this.parts = split_0(this.dependency, [':']);
@@ -6241,9 +7176,18 @@
   Object.defineProperty(package$project, 'BuildFiles', {
     get: BuildFiles_getInstance
   });
+  package$project.get_reposToInclude_v6fwbs$ = get_reposToInclude;
+  package$project.get_compileDependencies_v6fwbs$ = get_compileDependencies;
+  package$project.get_testDependencies_v6fwbs$ = get_testDependencies;
   package$project.addMavenRepository_zc4wmb$ = addMavenRepository;
   package$project.addCompileDependency_6b55lg$ = addCompileDependency;
   package$project.addTestDependency_6b55lg$ = addTestDependency;
+  Object.defineProperty(package$project, 'BuildFilesGradle', {
+    get: BuildFilesGradle_getInstance
+  });
+  Object.defineProperty(package$project, 'BuildFilesMaven', {
+    get: BuildFilesMaven_getInstance
+  });
   package$util.generate_maf521$ = generate;
   package$util.generate_xte3qv$ = generate_0;
   package$util.BlockSlot = BlockSlot;
@@ -6293,6 +7237,8 @@
     get: Indenter$Companion_getInstance
   });
   package$util.Indenter = Indenter;
+  package$util.XmlIndenter = XmlIndenter;
+  package$util.xml_ldohgd$ = xml;
   package$util.MvnArtifact = MvnArtifact;
   package$util.SemVer = SemVer;
   Object.defineProperty(ZipBuilder, 'Companion', {

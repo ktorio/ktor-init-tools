@@ -15,6 +15,7 @@ object CssDslFeature : Feature(ApplicationKt, RoutingFeature) {
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("kotlinx.html.*")
         addImport("kotlinx.css.*")
+        addImport("io.ktor.http.*")
         addRoute {
             "get(\"/styles.css\")" {
                 "call.respondCss" {

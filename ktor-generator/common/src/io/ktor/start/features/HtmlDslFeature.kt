@@ -20,6 +20,11 @@ object HtmlDslFeature : Feature(ApplicationKt, RoutingFeature) {
                 "call.respondHtml" {
                     "body" {
                         +"h1 { +\"HTML\" }"
+                        "ul" {
+                            "for (n in 1..10)" {
+                                +"li { +\"\$n\" }"
+                            }
+                        }
                     }
                 }
             }

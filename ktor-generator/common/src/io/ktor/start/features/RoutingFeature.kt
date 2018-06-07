@@ -15,10 +15,11 @@ object RoutingFeature : Feature(ApplicationKt) {
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.routing.*")
+        addImport("io.ktor.http.*")
         append(ApplicationKt.MODULE_POST) {
             "routing" {
                 "get(\"/\")" {
-                    +"HELLO WORLD!"
+                    +"call.respondText(\"HELLO WORLD!\", contentType = ContentType.Text.Plain)"
                 }
                 block(BLOCK)
             }
