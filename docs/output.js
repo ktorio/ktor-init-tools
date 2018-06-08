@@ -29,10 +29,11 @@
   var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
   var arrayListOf = Kotlin.kotlin.collections.arrayListOf_i5x0yv$;
   var to = Kotlin.kotlin.to_ujzrz7$;
+  var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var trim = Kotlin.kotlin.text.trim_wqw3xr$;
   var Throwable = Error;
   var split = Kotlin.kotlin.text.split_o64adg$;
-  var listOf = Kotlin.kotlin.collections.listOf_mh5how$;
+  var listOf_0 = Kotlin.kotlin.collections.listOf_mh5how$;
   var plus = Kotlin.kotlin.collections.plus_mydzjv$;
   var toMap = Kotlin.kotlin.collections.toMap_6hr0sd$;
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
@@ -43,8 +44,10 @@
   var contains = Kotlin.kotlin.text.contains_li3zpu$;
   var toInt = Kotlin.kotlin.text.toInt_6ic1pp$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
+  var plus_0 = Kotlin.kotlin.collections.plus_iwxh38$;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
-  var listOf_0 = Kotlin.kotlin.collections.listOf_i5x0yv$;
+  var Enum = Kotlin.kotlin.Enum;
+  var throwISE = Kotlin.throwISE;
   var LinkedHashSet_init = Kotlin.kotlin.collections.LinkedHashSet_init_287e2$;
   var equals = Kotlin.equals;
   var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
@@ -67,6 +70,10 @@
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_8cymmc$;
   Feature.prototype = Object.create(Block.prototype);
   Feature.prototype.constructor = Feature;
+  KtorEngine.prototype = Object.create(Enum.prototype);
+  KtorEngine.prototype.constructor = KtorEngine;
+  ProjectType.prototype = Object.create(Enum.prototype);
+  ProjectType.prototype.constructor = ProjectType;
   AuthBasicFeature.prototype = Object.create(Feature.prototype);
   AuthBasicFeature.prototype.constructor = AuthBasicFeature;
   AuthDigestFeature.prototype = Object.create(Feature.prototype);
@@ -307,6 +314,9 @@
   var jq_0 = defineInlineFunction('output.io.ktor.start.jq_lt8gi4$', function (str) {
     return jQuery(str);
   });
+  var jqId = defineInlineFunction('output.io.ktor.start.jqId_61zpoe$', function (id) {
+    return jQuery('#' + id);
+  });
   var on = defineInlineFunction('output.io.ktor.start.on_nsccip$', function ($receiver, name, event) {
     return $receiver.on(name, event);
   });
@@ -338,6 +348,14 @@
       (tmp$_1 = document.body) != null ? tmp$_1.removeChild(elem) : null;
     }
   }
+  var defaultArtifactGroup;
+  var defaultArtifactName;
+  var defaultArtifactVersion;
+  var defaultKtorVersion;
+  var defaultKtorEngine;
+  var artifactGroupId;
+  var artifactNameId;
+  var artifactVersionId;
   function main$lambda() {
     updateHash();
     return Unit;
@@ -366,13 +384,9 @@
     updateHash();
     return Unit;
   }
-  function main$lambda_6() {
-    updateHash();
-    return Unit;
-  }
   var Map = Kotlin.kotlin.collections.Map;
   function main(args) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12;
     var str = '#include_wrapper';
     jQuery(str).change(main$lambda);
     var str_0 = '#ktor-engine';
@@ -382,41 +396,37 @@
     var str_2 = '#project-type';
     jQuery(str_2).change(main$lambda_2);
     var str_3 = '#artifact-group';
-    jQuery(str_3).change(main$lambda_3);
+    jQuery(str_3).keyup(main$lambda_3);
     var str_4 = '#artifact-name';
-    jQuery(str_4).change(main$lambda_4);
-    var str_5 = '#artifact-group';
-    jQuery(str_5).keyup(main$lambda_5);
-    var str_6 = '#artifact-name';
-    jQuery(str_6).keyup(main$lambda_6);
-    var str_7 = '#include_wrapper';
-    var tmp$_11 = jQuery(str_7);
+    jQuery(str_4).keyup(main$lambda_4);
+    var id = artifactVersionId;
+    jQuery('#' + id).keyup(main$lambda_5);
+    var str_5 = '#include_wrapper';
+    var tmp$_13 = jQuery(str_5);
     var $receiver = get_hashParams();
     var key = 'no_wrapper';
-    var tmp$_12;
-    tmp$_11.prop('checked', (Kotlin.isType(tmp$_12 = $receiver, Map) ? tmp$_12 : throwCCE()).containsKey_11rb$(key) ? '' : 'checked');
-    var str_8 = '#artifact-group';
-    jQuery(str_8).val((tmp$_0 = (tmp$ = get_hashParams().get_11rb$('artifact-group')) != null ? firstOrNull(tmp$) : null) != null ? tmp$_0 : 'com.example');
-    var str_9 = '#artifact-name';
-    jQuery(str_9).val((tmp$_2 = (tmp$_1 = get_hashParams().get_11rb$('artifact-name')) != null ? firstOrNull(tmp$_1) : null) != null ? tmp$_2 : 'ktor-demo');
-    var str_10 = '#ktor-version';
-    jQuery(str_10).val((tmp$_4 = (tmp$_3 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_3) : null) != null ? tmp$_4 : defaultKtorVersion);
-    var str_11 = '#ktor-engine';
-    jQuery(str_11).val((tmp$_6 = (tmp$_5 = get_hashParams().get_11rb$('ktor-engine')) != null ? firstOrNull(tmp$_5) : null) != null ? tmp$_6 : defaultKtorEngine);
-    var str_12 = '#ktor-version';
-    jQuery(str_12).val((tmp$_8 = (tmp$_7 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_7) : null) != null ? tmp$_8 : defaultKtorVersion);
-    var str_13 = '#project-type';
-    jQuery(str_13).val((tmp$_10 = (tmp$_9 = get_hashParams().get_11rb$('project-type')) != null ? firstOrNull(tmp$_9) : null) != null ? tmp$_10 : ProjectTypes_getInstance().gradle);
+    var tmp$_14;
+    tmp$_13.prop('checked', (Kotlin.isType(tmp$_14 = $receiver, Map) ? tmp$_14 : throwCCE()).containsKey_11rb$(key) ? '' : 'checked');
+    var str_6 = '#artifact-group';
+    jQuery(str_6).val((tmp$_0 = (tmp$ = get_hashParams().get_11rb$('artifact-group')) != null ? firstOrNull(tmp$) : null) != null ? tmp$_0 : 'com.example');
+    var str_7 = '#artifact-name';
+    jQuery(str_7).val((tmp$_2 = (tmp$_1 = get_hashParams().get_11rb$('artifact-name')) != null ? firstOrNull(tmp$_1) : null) != null ? tmp$_2 : 'ktor-demo');
+    var str_8 = '#artifact-version';
+    jQuery(str_8).val((tmp$_4 = (tmp$_3 = get_hashParams().get_11rb$(artifactVersionId)) != null ? firstOrNull(tmp$_3) : null) != null ? tmp$_4 : '0.0.1-SNAPSHOT');
+    var str_9 = '#ktor-version';
+    jQuery(str_9).val((tmp$_6 = (tmp$_5 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_5) : null) != null ? tmp$_6 : defaultKtorVersion);
+    var str_10 = '#ktor-engine';
+    jQuery(str_10).val((tmp$_8 = (tmp$_7 = get_hashParams().get_11rb$('ktor-engine')) != null ? firstOrNull(tmp$_7) : null) != null ? tmp$_8 : defaultKtorEngine);
+    var str_11 = '#ktor-version';
+    jQuery(str_11).val((tmp$_10 = (tmp$_9 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_9) : null) != null ? tmp$_10 : defaultKtorVersion);
+    var str_12 = '#project-type';
+    jQuery(str_12).val((tmp$_12 = (tmp$_11 = get_hashParams().get_11rb$('project-type')) != null ? firstOrNull(tmp$_11) : null) != null ? tmp$_12 : ProjectType$Gradle_getInstance().id);
     addDependencies();
     registerBuildButton();
     handleFiltering();
     removeLoading();
     updateHash();
   }
-  var defaultArtifactGroup;
-  var defaultArtifactName;
-  var defaultKtorVersion;
-  var defaultKtorEngine;
   function insideIframe$lambda() {
     try {
       return window.self !== window.top;
@@ -445,7 +455,7 @@
   }
   var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   function updateHash() {
-    var tmp$, tmp$_0, tmp$_1;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2;
     var items = LinkedHashMap_init();
     if (!get_includeWrapper()) {
       var key = 'no_wrapper';
@@ -485,23 +495,20 @@
       var value_2 = arrayListOf([projectType]);
       items.put_xwzc9p$(key_3, value_2);
     }
-    var str_3 = '#artifact-group';
-    var artifactGroup = jQuery(str_3).val();
-    if (artifactGroup != defaultArtifactGroup) {
-      var key_4 = 'artifact-group';
-      var value_3 = arrayListOf([artifactGroup]);
-      items.put_xwzc9p$(key_4, value_3);
+    tmp$_0 = listOf([to(artifactGroupId, defaultArtifactGroup), to(artifactNameId, defaultArtifactName), to(artifactVersionId, defaultArtifactVersion)]).iterator();
+    while (tmp$_0.hasNext()) {
+      var tmp$_3 = tmp$_0.next();
+      var key_4 = tmp$_3.component1()
+      , default_0 = tmp$_3.component2();
+      var str_3 = jQuery('#' + key_4).val();
+      if (str_3 != default_0) {
+        var value_3 = arrayListOf([str_3]);
+        items.put_xwzc9p$(key_4, value_3);
+      }
     }
-    var str_4 = '#artifact-name';
-    var artifactName = jQuery(str_4).val();
-    if (artifactName != defaultArtifactName) {
-      var key_5 = 'artifact-name';
-      var value_4 = arrayListOf([artifactName]);
-      items.put_xwzc9p$(key_5, value_4);
-    }
-    (tmp$_0 = document.location) != null ? (tmp$_0.hash = formUrlEncode_0(items)) : null;
+    (tmp$_1 = document.location) != null ? (tmp$_1.hash = formUrlEncode_0(items)) : null;
     try {
-      window.top.postMessage(jsObject([to('type', 'updateHash'), to('value', (tmp$_1 = document.location) != null ? tmp$_1.hash : null)]), '*');
+      window.top.postMessage(jsObject([to('type', 'updateHash'), to('value', (tmp$_2 = document.location) != null ? tmp$_2.hash : null)]), '*');
     }
      catch (e) {
       console.error(e);
@@ -533,7 +540,7 @@
     while (tmp$.hasNext()) {
       var item = tmp$.next();
       var tmp$_0 = destination.add_11rb$;
-      var tmp$_1 = plus(split(item, Kotlin.charArrayOf(61), void 0, 2), listOf(''));
+      var tmp$_1 = plus(split(item, Kotlin.charArrayOf(61), void 0, 2), listOf_0(''));
       var key = tmp$_1.get_za3lpa$(0);
       var value = tmp$_1.get_za3lpa$(1);
       tmp$_0.call(destination, to(key, value));
@@ -729,23 +736,26 @@
             this.local$ktorEngine = jQuery(str_0).val();
             var str_1 = '#ktor-version';
             var ktorVersion = jQuery(str_1).val();
-            var str_2 = '#artifact-group';
-            this.local$artifactGroup = jQuery(str_2).val();
-            var str_3 = '#artifact-name';
-            this.local$artifactName = jQuery(str_3).val();
+            var id = artifactGroupId;
+            this.local$artifactGroup = jQuery('#' + id).val();
+            var id_0 = artifactNameId;
+            this.local$artifactName = jQuery('#' + id_0).val();
+            var id_1 = artifactVersionId;
+            var artifactVersion = jQuery('#' + id_1).val();
             println('Generating ktor-sample.zip...');
             println('projectType: ' + this.local$projectType);
             println('ktorEngine: ' + this.local$ktorEngine);
             println('artifactGroup: ' + this.local$artifactGroup);
             println('artifactName: ' + this.local$artifactName);
+            println('artifactVersion: ' + artifactVersion);
             var $receiver = ALL_FEATURES;
             var destination = ArrayList_init();
             var tmp$_0;
             tmp$_0 = $receiver.iterator();
             while (tmp$_0.hasNext()) {
               var element = tmp$_0.next();
-              var str_4 = '#artifact-' + element.id;
-              if (jQuery(str_4).prop('checked'))
+              var str_2 = '#artifact-' + element.id;
+              if (jQuery(str_2).prop('checked'))
                 destination.add_11rb$(element);
             }
 
@@ -757,35 +767,22 @@
               println('DEPENDENCY: ' + dependency + ' :: include=' + toInclude);
             }
 
-            var tmp$_1 = plus(listOf('jcenter'), Repos_getInstance().ktor);
-            var destination_0 = ArrayList_init();
-            var tmp$_2;
-            tmp$_2 = dependenciesToInclude.iterator();
-            while (tmp$_2.hasNext()) {
-              var element_0 = tmp$_2.next();
-              var list = element_0.repos;
-              addAll(destination_0, list);
-            }
-
-            var reposToInclude = toSet(plus(tmp$_1, destination_0));
-            var developmentPackage = 'io.ktor.server.' + this.local$ktorEngine;
-            var developmentEngineFQ = developmentPackage + '.DevelopmentEngine';
-            this.local$info = new BuildInfo(get_includeWrapper(), this.local$projectType, ktorVersion, developmentPackage, this.local$artifactName, this.local$artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, this.local$ktorEngine, build$lambda);
+            this.local$info = new BuildInfo(get_includeWrapper(), ProjectType$Companion_getInstance().invoke_61zpoe$(this.local$projectType), new SemVer(ktorVersion), this.local$artifactName, this.local$artifactGroup, artifactVersion, KtorEngine$Companion_getInstance().invoke_61zpoe$(this.local$ktorEngine), build$lambda);
             this.exceptionState_0 = 2;
             this.local$zb = new ZipBuilder();
-            var tmp$_3;
+            var tmp$_1;
             this.state_0 = 1;
-            this.result_0 = generate(this.local$info, plus(listOf(ApplicationKt_getInstance()), dependenciesToInclude), this);
+            this.result_0 = generate(this.local$info, plus(listOf_0(ApplicationKt_getInstance()), dependenciesToInclude), this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;
           case 1:
             var files = this.result_0;
-            tmp$_3 = files.entries.iterator();
-            while (tmp$_3.hasNext()) {
-              var tmp$_4 = tmp$_3.next();
-              var file = tmp$_4.key;
-              var result = tmp$_4.value;
+            tmp$_1 = files.entries.iterator();
+            while (tmp$_1.hasNext()) {
+              var tmp$_2 = tmp$_1.next();
+              var file = tmp$_2.key;
+              var result = tmp$_2.value;
               var rname = this.local$info.artifactName + '/' + file;
               if (this.local$dev) {
                 console.warn('ADD file: ' + rname);
@@ -1015,20 +1012,18 @@
     var tmp$;
     return (Kotlin.isType(tmp$ = $receiver, Date) ? tmp$ : throwCCE()).getSeconds();
   }
-  function BuildInfo(includeWrapper, projectType, ktorVersion, developmentPackage, artifactName, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine, fetch) {
+  function BuildInfo(includeWrapper, projectType, ktorVersion, artifactName, artifactGroup, artifactVersion, ktorEngine, fetch) {
     this.includeWrapper = includeWrapper;
     this.projectType = projectType;
     this.ktorVersion = ktorVersion;
-    this.developmentPackage = developmentPackage;
     this.artifactName = artifactName;
     this.artifactGroup = artifactGroup;
-    this.developmentEngineFQ = developmentEngineFQ;
-    this.reposToInclude = reposToInclude;
-    this.dependenciesToInclude = dependenciesToInclude;
+    this.artifactVersion = artifactVersion;
     this.ktorEngine = ktorEngine;
     this.fetch = fetch;
-    this.featuresToInclude = this.dependenciesToInclude;
-    this.ktorVer = new SemVer(this.ktorVersion);
+    this.ktorVer = this.ktorVersion;
+    this.developmentPackage = 'io.ktor.server.' + this.ktorEngine.id;
+    this.developmentEngineFQ = this.developmentPackage + '.DevelopmentEngine';
   }
   BuildInfo.$metadata$ = {
     kind: Kind_CLASS,
@@ -1045,52 +1040,40 @@
     return this.ktorVersion;
   };
   BuildInfo.prototype.component4 = function () {
-    return this.developmentPackage;
-  };
-  BuildInfo.prototype.component5 = function () {
     return this.artifactName;
   };
-  BuildInfo.prototype.component6 = function () {
+  BuildInfo.prototype.component5 = function () {
     return this.artifactGroup;
   };
+  BuildInfo.prototype.component6 = function () {
+    return this.artifactVersion;
+  };
   BuildInfo.prototype.component7 = function () {
-    return this.developmentEngineFQ;
-  };
-  BuildInfo.prototype.component8 = function () {
-    return this.reposToInclude;
-  };
-  BuildInfo.prototype.component9 = function () {
-    return this.dependenciesToInclude;
-  };
-  BuildInfo.prototype.component10 = function () {
     return this.ktorEngine;
   };
-  BuildInfo.prototype.component11 = function () {
+  BuildInfo.prototype.component8 = function () {
     return this.fetch;
   };
-  BuildInfo.prototype.copy_1zifd9$ = function (includeWrapper, projectType, ktorVersion, developmentPackage, artifactName, artifactGroup, developmentEngineFQ, reposToInclude, dependenciesToInclude, ktorEngine, fetch) {
-    return new BuildInfo(includeWrapper === void 0 ? this.includeWrapper : includeWrapper, projectType === void 0 ? this.projectType : projectType, ktorVersion === void 0 ? this.ktorVersion : ktorVersion, developmentPackage === void 0 ? this.developmentPackage : developmentPackage, artifactName === void 0 ? this.artifactName : artifactName, artifactGroup === void 0 ? this.artifactGroup : artifactGroup, developmentEngineFQ === void 0 ? this.developmentEngineFQ : developmentEngineFQ, reposToInclude === void 0 ? this.reposToInclude : reposToInclude, dependenciesToInclude === void 0 ? this.dependenciesToInclude : dependenciesToInclude, ktorEngine === void 0 ? this.ktorEngine : ktorEngine, fetch === void 0 ? this.fetch : fetch);
+  BuildInfo.prototype.copy_n2juvc$ = function (includeWrapper, projectType, ktorVersion, artifactName, artifactGroup, artifactVersion, ktorEngine, fetch) {
+    return new BuildInfo(includeWrapper === void 0 ? this.includeWrapper : includeWrapper, projectType === void 0 ? this.projectType : projectType, ktorVersion === void 0 ? this.ktorVersion : ktorVersion, artifactName === void 0 ? this.artifactName : artifactName, artifactGroup === void 0 ? this.artifactGroup : artifactGroup, artifactVersion === void 0 ? this.artifactVersion : artifactVersion, ktorEngine === void 0 ? this.ktorEngine : ktorEngine, fetch === void 0 ? this.fetch : fetch);
   };
   BuildInfo.prototype.toString = function () {
-    return 'BuildInfo(includeWrapper=' + Kotlin.toString(this.includeWrapper) + (', projectType=' + Kotlin.toString(this.projectType)) + (', ktorVersion=' + Kotlin.toString(this.ktorVersion)) + (', developmentPackage=' + Kotlin.toString(this.developmentPackage)) + (', artifactName=' + Kotlin.toString(this.artifactName)) + (', artifactGroup=' + Kotlin.toString(this.artifactGroup)) + (', developmentEngineFQ=' + Kotlin.toString(this.developmentEngineFQ)) + (', reposToInclude=' + Kotlin.toString(this.reposToInclude)) + (', dependenciesToInclude=' + Kotlin.toString(this.dependenciesToInclude)) + (', ktorEngine=' + Kotlin.toString(this.ktorEngine)) + (', fetch=' + Kotlin.toString(this.fetch)) + ')';
+    return 'BuildInfo(includeWrapper=' + Kotlin.toString(this.includeWrapper) + (', projectType=' + Kotlin.toString(this.projectType)) + (', ktorVersion=' + Kotlin.toString(this.ktorVersion)) + (', artifactName=' + Kotlin.toString(this.artifactName)) + (', artifactGroup=' + Kotlin.toString(this.artifactGroup)) + (', artifactVersion=' + Kotlin.toString(this.artifactVersion)) + (', ktorEngine=' + Kotlin.toString(this.ktorEngine)) + (', fetch=' + Kotlin.toString(this.fetch)) + ')';
   };
   BuildInfo.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.includeWrapper) | 0;
     result = result * 31 + Kotlin.hashCode(this.projectType) | 0;
     result = result * 31 + Kotlin.hashCode(this.ktorVersion) | 0;
-    result = result * 31 + Kotlin.hashCode(this.developmentPackage) | 0;
     result = result * 31 + Kotlin.hashCode(this.artifactName) | 0;
     result = result * 31 + Kotlin.hashCode(this.artifactGroup) | 0;
-    result = result * 31 + Kotlin.hashCode(this.developmentEngineFQ) | 0;
-    result = result * 31 + Kotlin.hashCode(this.reposToInclude) | 0;
-    result = result * 31 + Kotlin.hashCode(this.dependenciesToInclude) | 0;
+    result = result * 31 + Kotlin.hashCode(this.artifactVersion) | 0;
     result = result * 31 + Kotlin.hashCode(this.ktorEngine) | 0;
     result = result * 31 + Kotlin.hashCode(this.fetch) | 0;
     return result;
   };
   BuildInfo.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.includeWrapper, other.includeWrapper) && Kotlin.equals(this.projectType, other.projectType) && Kotlin.equals(this.ktorVersion, other.ktorVersion) && Kotlin.equals(this.developmentPackage, other.developmentPackage) && Kotlin.equals(this.artifactName, other.artifactName) && Kotlin.equals(this.artifactGroup, other.artifactGroup) && Kotlin.equals(this.developmentEngineFQ, other.developmentEngineFQ) && Kotlin.equals(this.reposToInclude, other.reposToInclude) && Kotlin.equals(this.dependenciesToInclude, other.dependenciesToInclude) && Kotlin.equals(this.ktorEngine, other.ktorEngine) && Kotlin.equals(this.fetch, other.fetch)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.includeWrapper, other.includeWrapper) && Kotlin.equals(this.projectType, other.projectType) && Kotlin.equals(this.ktorVersion, other.ktorVersion) && Kotlin.equals(this.artifactName, other.artifactName) && Kotlin.equals(this.artifactGroup, other.artifactGroup) && Kotlin.equals(this.artifactVersion, other.artifactVersion) && Kotlin.equals(this.ktorEngine, other.ktorEngine) && Kotlin.equals(this.fetch, other.fetch)))));
   };
   function FileContainer() {
   }
@@ -1122,6 +1105,20 @@
     Block.call(this, deps.slice());
     this.documentation_nx4xfm$_0 = null;
   }
+  Object.defineProperty(Feature.prototype, 'featureDeps', {
+    get: function () {
+      var $receiver = this.blockDeps;
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (Kotlin.isType(element, Feature))
+          destination.add_11rb$(element);
+      }
+      return destination;
+    }
+  });
   Object.defineProperty(Feature.prototype, 'documentation', {
     get: function () {
       return this.documentation_nx4xfm$_0;
@@ -1148,28 +1145,205 @@
     simpleName: 'Feature',
     interfaces: [Block]
   };
-  function ProjectTypes() {
-    ProjectTypes_instance = this;
-    this.gradle = 'gradle';
-    this.maven = 'maven';
+  function KtorEngine(name, ordinal, id) {
+    Enum.call(this);
+    this.id = id;
+    this.name$ = name;
+    this.ordinal$ = ordinal;
   }
-  ProjectTypes.$metadata$ = {
+  function KtorEngine_initFields() {
+    KtorEngine_initFields = function () {
+    };
+    KtorEngine$Netty_instance = new KtorEngine('Netty', 0, 'netty');
+    KtorEngine$Jetty_instance = new KtorEngine('Jetty', 1, 'jetty');
+    KtorEngine$Tomcat_instance = new KtorEngine('Tomcat', 2, 'tomcat');
+    KtorEngine$CIO_instance = new KtorEngine('CIO', 3, 'cio');
+    KtorEngine$Companion_getInstance();
+  }
+  var KtorEngine$Netty_instance;
+  function KtorEngine$Netty_getInstance() {
+    KtorEngine_initFields();
+    return KtorEngine$Netty_instance;
+  }
+  var KtorEngine$Jetty_instance;
+  function KtorEngine$Jetty_getInstance() {
+    KtorEngine_initFields();
+    return KtorEngine$Jetty_instance;
+  }
+  var KtorEngine$Tomcat_instance;
+  function KtorEngine$Tomcat_getInstance() {
+    KtorEngine_initFields();
+    return KtorEngine$Tomcat_instance;
+  }
+  var KtorEngine$CIO_instance;
+  function KtorEngine$CIO_getInstance() {
+    KtorEngine_initFields();
+    return KtorEngine$CIO_instance;
+  }
+  var mapCapacity = Kotlin.kotlin.collections.mapCapacity_za3lpa$;
+  var coerceAtLeast = Kotlin.kotlin.ranges.coerceAtLeast_dqglrj$;
+  var LinkedHashMap_init_0 = Kotlin.kotlin.collections.LinkedHashMap_init_xf5xz2$;
+  function KtorEngine$Companion() {
+    KtorEngine$Companion_instance = this;
+    var $receiver = KtorEngine$values();
+    var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
+    var destination = LinkedHashMap_init_0(capacity);
+    var tmp$;
+    for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
+      var element = $receiver[tmp$];
+      destination.put_xwzc9p$(element.id, element);
+    }
+    this.BY_ID = destination;
+    var $receiver_0 = KtorEngine$values();
+    var capacity_0 = coerceAtLeast(mapCapacity($receiver_0.length), 16);
+    var destination_0 = LinkedHashMap_init_0(capacity_0);
+    var tmp$_0;
+    for (tmp$_0 = 0; tmp$_0 !== $receiver_0.length; ++tmp$_0) {
+      var element_0 = $receiver_0[tmp$_0];
+      destination_0.put_xwzc9p$(element_0.name, element_0);
+    }
+    this.BY_NAME = destination_0;
+    this.BY = plus_0(this.BY_ID, this.BY_NAME);
+  }
+  var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
+  KtorEngine$Companion.prototype.invoke_61zpoe$ = function (name) {
+    var tmp$;
+    var tmp$_0;
+    if ((tmp$ = this.BY.get_11rb$(name)) != null)
+      tmp$_0 = tmp$;
+    else {
+      throw IllegalStateException_init(('Unknown engine ' + name).toString());
+    }
+    return tmp$_0;
+  };
+  KtorEngine$Companion.$metadata$ = {
     kind: Kind_OBJECT,
-    simpleName: 'ProjectTypes',
+    simpleName: 'Companion',
     interfaces: []
   };
-  var ProjectTypes_instance = null;
-  function ProjectTypes_getInstance() {
-    if (ProjectTypes_instance === null) {
-      new ProjectTypes();
+  var KtorEngine$Companion_instance = null;
+  function KtorEngine$Companion_getInstance() {
+    KtorEngine_initFields();
+    if (KtorEngine$Companion_instance === null) {
+      new KtorEngine$Companion();
     }
-    return ProjectTypes_instance;
+    return KtorEngine$Companion_instance;
   }
+  KtorEngine.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'KtorEngine',
+    interfaces: [Enum]
+  };
+  function KtorEngine$values() {
+    return [KtorEngine$Netty_getInstance(), KtorEngine$Jetty_getInstance(), KtorEngine$Tomcat_getInstance(), KtorEngine$CIO_getInstance()];
+  }
+  KtorEngine.values = KtorEngine$values;
+  function KtorEngine$valueOf(name) {
+    switch (name) {
+      case 'Netty':
+        return KtorEngine$Netty_getInstance();
+      case 'Jetty':
+        return KtorEngine$Jetty_getInstance();
+      case 'Tomcat':
+        return KtorEngine$Tomcat_getInstance();
+      case 'CIO':
+        return KtorEngine$CIO_getInstance();
+      default:throwISE('No enum constant io.ktor.start.KtorEngine.' + name);
+    }
+  }
+  KtorEngine.valueOf_61zpoe$ = KtorEngine$valueOf;
+  function ProjectType(name, ordinal, id) {
+    Enum.call(this);
+    this.id = id;
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function ProjectType_initFields() {
+    ProjectType_initFields = function () {
+    };
+    ProjectType$Gradle_instance = new ProjectType('Gradle', 0, 'gradle');
+    ProjectType$Maven_instance = new ProjectType('Maven', 1, 'maven');
+    ProjectType$Companion_getInstance();
+  }
+  var ProjectType$Gradle_instance;
+  function ProjectType$Gradle_getInstance() {
+    ProjectType_initFields();
+    return ProjectType$Gradle_instance;
+  }
+  var ProjectType$Maven_instance;
+  function ProjectType$Maven_getInstance() {
+    ProjectType_initFields();
+    return ProjectType$Maven_instance;
+  }
+  function ProjectType$Companion() {
+    ProjectType$Companion_instance = this;
+    var $receiver = ProjectType$values();
+    var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
+    var destination = LinkedHashMap_init_0(capacity);
+    var tmp$;
+    for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
+      var element = $receiver[tmp$];
+      destination.put_xwzc9p$(element.id, element);
+    }
+    this.BY_ID = destination;
+    var $receiver_0 = ProjectType$values();
+    var capacity_0 = coerceAtLeast(mapCapacity($receiver_0.length), 16);
+    var destination_0 = LinkedHashMap_init_0(capacity_0);
+    var tmp$_0;
+    for (tmp$_0 = 0; tmp$_0 !== $receiver_0.length; ++tmp$_0) {
+      var element_0 = $receiver_0[tmp$_0];
+      destination_0.put_xwzc9p$(element_0.name, element_0);
+    }
+    this.BY_NAME = destination_0;
+    this.BY = plus_0(this.BY_ID, this.BY_NAME);
+  }
+  ProjectType$Companion.prototype.invoke_61zpoe$ = function (name) {
+    var tmp$;
+    var tmp$_0;
+    if ((tmp$ = this.BY.get_11rb$(name)) != null)
+      tmp$_0 = tmp$;
+    else {
+      throw IllegalStateException_init(('Unknown project type ' + name).toString());
+    }
+    return tmp$_0;
+  };
+  ProjectType$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var ProjectType$Companion_instance = null;
+  function ProjectType$Companion_getInstance() {
+    ProjectType_initFields();
+    if (ProjectType$Companion_instance === null) {
+      new ProjectType$Companion();
+    }
+    return ProjectType$Companion_instance;
+  }
+  ProjectType.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ProjectType',
+    interfaces: [Enum]
+  };
+  function ProjectType$values() {
+    return [ProjectType$Gradle_getInstance(), ProjectType$Maven_getInstance()];
+  }
+  ProjectType.values = ProjectType$values;
+  function ProjectType$valueOf(name) {
+    switch (name) {
+      case 'Gradle':
+        return ProjectType$Gradle_getInstance();
+      case 'Maven':
+        return ProjectType$Maven_getInstance();
+      default:throwISE('No enum constant io.ktor.start.ProjectType.' + name);
+    }
+  }
+  ProjectType.valueOf_61zpoe$ = ProjectType$valueOf;
   function Repos() {
     Repos_instance = this;
-    this.jcenter = listOf('jcenter');
-    this.ktor = listOf('https://kotlin.bintray.com/ktor');
-    this.kotlin_js_wrappers = listOf('https://kotlin.bintray.com/kotlin-js-wrappers');
+    this.jcenter = listOf_0('jcenter');
+    this.ktor = listOf_0('https://kotlin.bintray.com/ktor');
+    this.kotlin_js_wrappers = listOf_0('https://kotlin.bintray.com/kotlin-js-wrappers');
   }
   Repos.$metadata$ = {
     kind: Kind_OBJECT,
@@ -1187,6 +1361,7 @@
   function Versions() {
     Versions_instance = this;
     this.V092 = new SemVer('0.9.2');
+    this.ALL = [this.V092];
     this.LAST = this.V092;
   }
   Versions.$metadata$ = {
@@ -1205,7 +1380,7 @@
     AuthBasicFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance()]);
     this.repos_gdc384$_0 = Repos_getInstance().ktor;
-    this.artifacts_u3usuk$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
+    this.artifacts_u3usuk$_0 = listOf_0('io.ktor:ktor-auth:$ktor_version');
     this.id_l2z8dw$_0 = 'auth-basic';
     this.title_fcz6ob$_0 = 'Authentication Basic';
     this.description_2o6p01$_0 = 'Handle Basic authentication';
@@ -1267,7 +1442,7 @@
     AuthDigestFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance()]);
     this.repos_c8nfaw$_0 = Repos_getInstance().ktor;
-    this.artifacts_eodlew$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
+    this.artifacts_eodlew$_0 = listOf_0('io.ktor:ktor-auth:$ktor_version');
     this.id_8m6rlc$_0 = 'auth-digest';
     this.title_b8air3$_0 = 'Authentication Digest';
     this.description_jyeoml$_0 = 'Handle Digest authentication';
@@ -1319,7 +1494,7 @@
     AuthFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_7vahic$_0 = Repos_getInstance().ktor;
-    this.artifacts_w3fnd0$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
+    this.artifacts_w3fnd0$_0 = listOf_0('io.ktor:ktor-auth:$ktor_version');
     this.id_2oeams$_0 = 'auth';
     this.title_8vne25$_0 = 'Authentication';
     this.description_4ec9yv$_0 = 'Handle Basic and Digest HTTP Auth, Form authentication and OAuth 1a and 2';
@@ -1388,6 +1563,7 @@
     };
   }
   AuthFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.auth.*');
     addFeatureInstall($receiver, AuthFeature$renderFeature$lambda(info, this, $receiver));
   };
   AuthFeature.$metadata$ = {
@@ -1415,7 +1591,7 @@
     AuthJwtFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance()]);
     this.repos_3yaw91$_0 = Repos_getInstance().ktor;
-    this.artifacts_mpewbp$_0 = listOf('io.ktor:ktor-auth-jwt:$ktor_version');
+    this.artifacts_mpewbp$_0 = listOf_0('io.ktor:ktor-auth-jwt:$ktor_version');
     this.id_96dnzh$_0 = 'auth-jwt';
     this.title_4ynssu$_0 = 'Authentication JWT';
     this.description_6r30ye$_0 = 'Handle JWT authentication';
@@ -1467,7 +1643,7 @@
     AuthLdapFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance()]);
     this.repos_h37k17$_0 = Repos_getInstance().ktor;
-    this.artifacts_u8q64r$_0 = listOf('io.ktor:ktor-auth-ldap:$ktor_version');
+    this.artifacts_u8q64r$_0 = listOf_0('io.ktor:ktor-auth-ldap:$ktor_version');
     this.id_t8ep8z$_0 = 'auth-ldap';
     this.title_i3kgl0$_0 = 'Authentication LDAP';
     this.description_9cnttc$_0 = 'Handle JDAP authentication';
@@ -1519,7 +1695,7 @@
     AuthOauthFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance()]);
     this.repos_kohdg5$_0 = Repos_getInstance().ktor;
-    this.artifacts_iga75h$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
+    this.artifacts_iga75h$_0 = listOf_0('io.ktor:ktor-auth:$ktor_version');
     this.id_mtmshv$_0 = 'auth-oauth';
     this.title_lou9zy$_0 = 'Authentication OAuth';
     this.description_pb06ii$_0 = 'Handle OAuth authentication';
@@ -1571,7 +1747,7 @@
     AutoHeadResponseFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_kkh3f0$_0 = Repos_getInstance().ktor;
-    this.artifacts_bu7kwk$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.artifacts_bu7kwk$_0 = listOf_0('io.ktor:ktor-server-core:$ktor_version');
     this.id_qppt8$_0 = 'caching-headers';
     this.title_lktzyt$_0 = 'CachingHeaders';
     this.description_x6jbpr$_0 = 'Send the headers Cache-Control and Expires used by clients and proxies to cache requests';
@@ -1658,7 +1834,7 @@
     CORSFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_oe5gzt$_0 = Repos_getInstance().ktor;
-    this.artifacts_4k9qv$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.artifacts_4k9qv$_0 = listOf_0('io.ktor:ktor-server-core:$ktor_version');
     this.id_6t1969$_0 = 'cors';
     this.title_peidjm$_0 = 'CORS';
     this.description_f34sy$_0 = 'Enable Cross-Origin Resource Sharing (CORS)';
@@ -1735,7 +1911,7 @@
     CachingHeadersFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_uw8ngd$_0 = Repos_getInstance().ktor;
-    this.artifacts_txevmr$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.artifacts_txevmr$_0 = listOf_0('io.ktor:ktor-server-core:$ktor_version');
     this.id_rntdhx$_0 = 'auto-head-response';
     this.title_tvvqwk$_0 = 'AutoHeadResponse';
     this.description_r8mwew$_0 = 'Provide responses to HEAD requests for existing routes that have the GET verb defined';
@@ -1795,7 +1971,7 @@
     CallLoggingFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_i5jjl3$_0 = Repos_getInstance().ktor;
-    this.artifacts_moa661$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.artifacts_moa661$_0 = listOf_0('io.ktor:ktor-server-core:$ktor_version');
     this.id_f09gfl$_0 = 'call-logging';
     this.title_j5wg4w$_0 = 'CallLogging';
     this.description_4e4v78$_0 = 'Logs client requests';
@@ -1865,7 +2041,7 @@
     CompressionFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_viging$_0 = Repos_getInstance().ktor;
-    this.artifacts_dplvt8$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.artifacts_dplvt8$_0 = listOf_0('io.ktor:ktor-server-core:$ktor_version');
     this.id_1vcik4$_0 = 'compression';
     this.title_witf79$_0 = 'Compression';
     this.description_f74yxd$_0 = 'Compress outgoing content using gzip, deflate or custom encoder and thus reduce the size of the response';
@@ -1952,7 +2128,7 @@
     ConditionalHeadersFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_ty7nmk$_0 = Repos_getInstance().ktor;
-    this.artifacts_wgsw8s$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.artifacts_wgsw8s$_0 = listOf_0('io.ktor:ktor-server-core:$ktor_version');
     this.id_9jyzvg$_0 = 'conditional-headers';
     this.title_uykk6d$_0 = 'ConditionalHeaders';
     this.description_2pafjz$_0 = 'Avoids sending content if the client already has the same content using ETag or LastModified';
@@ -2012,7 +2188,7 @@
     ContentNegotiationFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_n2l5us$_0 = Repos_getInstance().ktor;
-    this.artifacts_bjzgak$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.artifacts_bjzgak$_0 = listOf_0('io.ktor:ktor-server-core:$ktor_version');
     this.id_gizhws$_0 = 'content-negotiation';
     this.title_o2y2el$_0 = 'ContentNegotiation';
     this.description_qp3lmx$_0 = 'Provides automatic content conversion according to Content-Type and Accept headers.';
@@ -2084,7 +2260,7 @@
     CssDslFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.repos_w3vhti$_0 = plus(Repos_getInstance().jcenter, Repos_getInstance().kotlin_js_wrappers);
-    this.artifacts_hbxqui$_0 = listOf('org.jetbrains:kotlin-css-jvm:1.0.0-pre.31-kotlin-1.2.41');
+    this.artifacts_hbxqui$_0 = listOf_0('org.jetbrains:kotlin-css-jvm:1.0.0-pre.31-kotlin-1.2.41');
     this.id_67agn6$_0 = 'css-dsl';
     this.title_x48edb$_0 = 'CSS DSL';
     this.description_fxg5az$_0 = 'Generate CSS using Kotlin code';
@@ -2234,7 +2410,7 @@
     DataConversionFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_8tlujo$_0 = Repos_getInstance().ktor;
-    this.artifacts_u45w58$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.artifacts_u45w58$_0 = listOf_0('io.ktor:ktor-server-core:$ktor_version');
     this.id_2onzc4$_0 = 'data-conversion';
     this.title_7t8xzv$_0 = 'DataConversion';
     this.description_aw9oqp$_0 = 'Allows to serialize and deserialize a list of values (used by the Locations feature)';
@@ -2294,7 +2470,7 @@
     DefaultHeadersFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_919slb$_0 = Repos_getInstance().ktor;
-    this.artifacts_6l0msh$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.artifacts_6l0msh$_0 = listOf_0('io.ktor:ktor-server-core:$ktor_version');
     this.id_if58rb$_0 = 'default-headers';
     this.title_80ww1i$_0 = 'DefaultHeaders';
     this.description_fdbkgq$_0 = 'This feature adds a default set of headers to HTTP responses';
@@ -2363,7 +2539,7 @@
     ForwardedHeaderSupportFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_avmc56$_0 = Repos_getInstance().ktor;
-    this.artifacts_qtfn4q$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.artifacts_qtfn4q$_0 = listOf_0('io.ktor:ktor-server-core:$ktor_version');
     this.id_p6erwi$_0 = 'forwarded-header-support';
     this.title_bvz8oz$_0 = 'ForwardedHeaderSupport';
     this.description_x5iiox$_0 = 'This feature allows you to handle reverse proxy headers to get information about the original request when it\u2019s behind a proxy.';
@@ -2424,7 +2600,7 @@
     FreemarkerFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.repos_csvuzi$_0 = Repos_getInstance().ktor;
-    this.artifacts_u4kg8y$_0 = listOf('io.ktor:ktor-freemarker:$ktor_version');
+    this.artifacts_u4kg8y$_0 = listOf_0('io.ktor:ktor-freemarker:$ktor_version');
     this.id_fl2zti$_0 = 'freemarker';
     this.title_bsiyfp$_0 = 'Freemarker';
     this.description_lowc3r$_0 = "Serve HTML content using Apache's FreeMarker template engine";
@@ -2587,7 +2763,7 @@
     HSTSFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_ekzbmu$_0 = Repos_getInstance().ktor;
-    this.artifacts_q4ud8a$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.artifacts_q4ud8a$_0 = listOf_0('io.ktor:ktor-server-core:$ktor_version');
     this.id_3oa8eq$_0 = 'hsts';
     this.title_flc86n$_0 = 'HSTS';
     this.description_8z16kr$_0 = 'Enable HTTP Strict Transport Security (HSTS)';
@@ -2656,7 +2832,7 @@
     HtmlDslFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.repos_jw6vl4$_0 = Repos_getInstance().jcenter;
-    this.artifacts_mmn820$_0 = listOf('io.ktor:ktor-html-builder:$ktor_version');
+    this.artifacts_mmn820$_0 = listOf_0('io.ktor:ktor-html-builder:$ktor_version');
     this.id_6osof4$_0 = 'html-dsl';
     this.title_ivtz1b$_0 = 'HTML DSL';
     this.description_vpobnn$_0 = 'Generate HTML using Kotlin code like a pure-core template engine';
@@ -2761,7 +2937,7 @@
     HttpClientFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_widcof$_0 = Repos_getInstance().ktor;
-    this.artifacts_7ubutr$_0 = listOf('io.ktor:ktor-client-apache:$ktor_version');
+    this.artifacts_7ubutr$_0 = listOf_0('io.ktor:ktor-client-apache:$ktor_version');
     this.id_5df4yx$_0 = 'ktor-client-apache';
     this.title_xiq988$_0 = 'HTTP Client';
     this.description_dbmzxo$_0 = 'Adds support for doing HTTP requests';
@@ -2813,7 +2989,7 @@
     HttpsRedirectFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_gluhnx$_0 = Repos_getInstance().ktor;
-    this.artifacts_npr6b7$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.artifacts_npr6b7$_0 = listOf_0('io.ktor:ktor-server-core:$ktor_version');
     this.id_wawpbf$_0 = 'https-redirect';
     this.title_hm7e7q$_0 = 'HttpsRedirect';
     this.description_a9gxgu$_0 = 'All the affected HTTP calls perform a redirect to its HTTPS counterpart before processing the call';
@@ -2885,7 +3061,7 @@
     JsonGsonFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance(), ContentNegotiationFeature_getInstance(), RoutingFeature_getInstance()]);
     this.repos_m451m9$_0 = Repos_getInstance().ktor;
-    this.artifacts_vpbenj$_0 = listOf('io.ktor:ktor-gson:$ktor_version');
+    this.artifacts_vpbenj$_0 = listOf_0('io.ktor:ktor-gson:$ktor_version');
     this.id_whgybt$_0 = 'ktor-gson';
     this.title_l3s52g$_0 = 'GSON';
     this.description_q40g24$_0 = 'Handles JSON serialization using GSON library';
@@ -2963,7 +3139,7 @@
     JsonJacksonFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance(), ContentNegotiationFeature_getInstance(), RoutingFeature_getInstance()]);
     this.repos_6gchw1$_0 = Repos_getInstance().ktor;
-    this.artifacts_tziadr$_0 = listOf('io.ktor:ktor-jackson:$ktor_version');
+    this.artifacts_tziadr$_0 = listOf_0('io.ktor:ktor-jackson:$ktor_version');
     this.id_f6uih$_0 = 'ktor-jackson';
     this.title_7gpefu$_0 = 'Jackson';
     this.description_10c27q$_0 = 'Handles JSON serialization using Jackson library';
@@ -3047,7 +3223,7 @@
     LocationsFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance(), StatusPagesFeature_getInstance()]);
     this.repos_krkeos$_0 = Repos_getInstance().ktor;
-    this.artifacts_3l6utg$_0 = listOf('io.ktor:ktor-locations:$ktor_version');
+    this.artifacts_3l6utg$_0 = listOf_0('io.ktor:ktor-locations:$ktor_version');
     this.id_3nq5lg$_0 = 'ktor-locations';
     this.title_jr7i4z$_0 = 'Locations';
     this.description_iieyh5$_0 = 'Allows to define route locations in a typed way';
@@ -3099,7 +3275,7 @@
     MetricsFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_pfso6v$_0 = Repos_getInstance().ktor;
-    this.artifacts_p4lqmv$_0 = listOf('io.ktor:ktor-metrics:$ktor_version');
+    this.artifacts_p4lqmv$_0 = listOf_0('io.ktor:ktor-metrics:$ktor_version');
     this.id_h3qtcf$_0 = 'ktor-metrics';
     this.title_offrn2$_0 = 'Metrics';
     this.description_i28fde$_0 = 'Adds supports for monitoring several metrics';
@@ -3151,7 +3327,7 @@
     PartialContentFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_mhgxh0$_0 = Repos_getInstance().ktor;
-    this.artifacts_4a672s$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.artifacts_4a672s$_0 = listOf_0('io.ktor:ktor-server-core:$ktor_version');
     this.id_ln9vy4$_0 = 'partial-content';
     this.title_nhtu0t$_0 = 'PartialContent';
     this.description_oxbc4n$_0 = 'Handles requests with the Range header. ' + 'Generating Accept-Ranges and the Content-Range headers and slicing the served content when required.';
@@ -3222,7 +3398,7 @@
     RawSocketsFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_6u018$_0 = Repos_getInstance().ktor;
-    this.artifacts_lv9ej0$_0 = listOf('io.ktor:ktor-network:$ktor_version');
+    this.artifacts_lv9ej0$_0 = listOf_0('io.ktor:ktor-network:$ktor_version');
     this.id_k9lq70$_0 = 'ktor-network';
     this.title_tiwil$_0 = 'Raw Sockets';
     this.description_b0vn7r$_0 = 'Adds Raw Socket support for listening and connecting to tcp and udp sockets';
@@ -3274,7 +3450,7 @@
     RawSocketsTlsFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_9ufirt$_0 = Repos_getInstance().ktor;
-    this.artifacts_bme33d$_0 = listOf('io.ktor:ktor-network-tls:$ktor_version');
+    this.artifacts_bme33d$_0 = listOf_0('io.ktor:ktor-network-tls:$ktor_version');
     this.id_lfbjkf$_0 = 'ktor-network-tls';
     this.title_ausfbm$_0 = 'Raw Secure SSL/TLS Sockets';
     this.description_3sv442$_0 = 'Adds Raw Socket support for listening and connecting to tcp and udp sockets with secure sockets';
@@ -3326,7 +3502,7 @@
     RoutingFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_hd5igk$_0 = Repos_getInstance().ktor;
-    this.artifacts_jiqbx0$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
+    this.artifacts_jiqbx0$_0 = listOf_0('io.ktor:ktor-server-core:$ktor_version');
     this.id_l5zff8$_0 = 'routing';
     this.title_gcslwr$_0 = 'Routing';
     this.description_rjcp5b$_0 = 'Allows to define structured routes and associated handlers.';
@@ -3420,7 +3596,7 @@
     SessionsFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_630btl$_0 = Repos_getInstance().ktor;
-    this.artifacts_vzw0ft$_0 = listOf('io.ktor:ktor-sessions:$ktor_version');
+    this.artifacts_vzw0ft$_0 = listOf_0('io.ktor:ktor-sessions:$ktor_version');
     this.id_g5mcan$_0 = 'ktor-sessions';
     this.title_73d8de$_0 = 'Sessions';
     this.description_s0f43m$_0 = 'Adds supports for sessions: with the payload in the client or the server';
@@ -3472,7 +3648,7 @@
     ShutdownUrlFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance(), ApplicationConf_getInstance()]);
     this.repos_ru14ht$_0 = Repos_getInstance().ktor;
-    this.artifacts_jxegkf$_0 = listOf('io.ktor:ktor-server-host-common:$ktor_version');
+    this.artifacts_jxegkf$_0 = listOf_0('io.ktor:ktor-server-host-common:$ktor_version');
     this.id_hv121z$_0 = 'shutdown-url';
     this.title_qto7y0$_0 = 'Shutdown URL';
     this.description_mniexw$_0 = 'This feature enables a URL that when accessed, shutdowns the server.';
@@ -3549,7 +3725,7 @@
     StaticContentFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.repos_r7te0h$_0 = Repos_getInstance().ktor;
-    this.artifacts_983xwv$_0 = listOf('io.ktor:ktor-server-host-common:$ktor_version');
+    this.artifacts_983xwv$_0 = listOf_0('io.ktor:ktor-server-host-common:$ktor_version');
     this.id_cquh7d$_0 = 'static-content';
     this.title_s86aka$_0 = 'Static Content';
     this.description_7aci0a$_0 = 'Serves static files from defined locations.';
@@ -3669,7 +3845,7 @@
     StatusPagesFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.repos_va4em0$_0 = Repos_getInstance().ktor;
-    this.artifacts_tsgcm0$_0 = listOf('io.ktor:ktor-server-host-common:$ktor_version');
+    this.artifacts_tsgcm0$_0 = listOf_0('io.ktor:ktor-server-host-common:$ktor_version');
     this.id_rrlp1c$_0 = 'status-pages';
     this.title_wahb5t$_0 = 'Status Pages';
     this.description_hk4jhf$_0 = 'Allow to respond to thrown exceptions.';
@@ -3765,7 +3941,7 @@
     VelocityFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_pmsk9$_0 = Repos_getInstance().ktor;
-    this.artifacts_fuibnd$_0 = listOf('io.ktor:ktor-velocity:$ktor_version');
+    this.artifacts_fuibnd$_0 = listOf_0('io.ktor:ktor-velocity:$ktor_version');
     this.id_jr50fz$_0 = 'velocity';
     this.title_1pzp42$_0 = 'Velocity';
     this.description_84u56m$_0 = "Serve HTML content using Apache's Velocity template engine";
@@ -3817,7 +3993,7 @@
     WebsocketsFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_r46ofs$_0 = Repos_getInstance().ktor;
-    this.artifacts_nxkzmg$_0 = listOf('io.ktor:ktor-websockets:$ktor_version');
+    this.artifacts_nxkzmg$_0 = listOf_0('io.ktor:ktor-websockets:$ktor_version');
     this.id_jwih4g$_0 = 'ktor-websockets';
     this.title_q3trvz$_0 = 'WebSockets';
     this.description_6508ur$_0 = 'Adds WebSockets support for bidirectional communication with the client';
@@ -4163,20 +4339,20 @@
     BuildFiles_instance = this;
     Block.call(this, []);
   }
-  var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
   BuildFiles.prototype.render_miqy8c$ = function ($receiver, info) {
-    switch (info.projectType) {
-      case 'gradle':
+    switch (info.projectType.name) {
+      case 'Gradle':
         BuildFilesGradle_getInstance().render_miqy8c$($receiver, info);
         break;
-      case 'maven':
+      case 'Maven':
         BuildFilesMaven_getInstance().render_miqy8c$($receiver, info);
         break;
       default:throw IllegalStateException_init(('Unsupported build type ' + info.projectType).toString());
     }
-    addMavenRepository($receiver, 'jcenter');
+    addMavenRepository_0($receiver, Repos_getInstance().jcenter);
+    addMavenRepository_0($receiver, Repos_getInstance().ktor);
     addCompileDependency($receiver, new MvnArtifact('org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version'));
-    addCompileDependency($receiver, new MvnArtifact('io.ktor:ktor-server-' + info.ktorEngine + ':' + '$' + 'ktor_version'));
+    addCompileDependency($receiver, new MvnArtifact('io.ktor:ktor-server-' + info.ktorEngine.id + ':' + '$' + 'ktor_version'));
     addCompileDependency($receiver, new MvnArtifact('ch.qos.logback:logback-classic:$logback_version'));
     addTestDependency($receiver, new MvnArtifact('io.ktor:ktor-server-tests:$ktor_version'));
   };
@@ -4288,6 +4464,9 @@
   function addMavenRepository($receiver, repository) {
     get_reposToInclude($receiver).add_11rb$(repository);
   }
+  function addMavenRepository_0($receiver, repos) {
+    addAll(get_reposToInclude($receiver), repos);
+  }
   function addCompileDependency($receiver, dependency) {
     get_compileDependencies($receiver).add_11rb$(dependency);
   }
@@ -4384,6 +4563,8 @@
             this.local$$receiver.line_61zpoe$("apply plugin: 'kotlin'");
             this.local$$receiver.line_61zpoe$("apply plugin: 'application'");
             this.local$$receiver.line_61zpoe$('');
+            this.local$$receiver.line_61zpoe$("group '" + this.local$closure$info.artifactName + "'");
+            this.local$$receiver.line_61zpoe$("version '" + this.local$closure$info.artifactVersion + "'");
             this.local$$receiver.line_61zpoe$('mainClassName = ' + '"' + this.local$closure$info.developmentEngineFQ + '"');
             this.local$$receiver.line_61zpoe$('');
             var $receiver_2 = 'sourceSets';
@@ -4451,18 +4632,20 @@
      while (true);
   };
   function BuildFilesGradle$render$lambda_0(closure$info_0) {
-    return function (continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_0(closure$info_0, continuation_0);
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_0(closure$info_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
-  function Coroutine$BuildFilesGradle$render$lambda_0(closure$info_0, continuation_0) {
+  function Coroutine$BuildFilesGradle$render$lambda_0(closure$info_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
     this.exceptionState_0 = 1;
     this.local$closure$info = closure$info_0;
+    this.local$$receiver = $receiver_0;
   }
   Coroutine$BuildFilesGradle$render$lambda_0.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -4476,15 +4659,9 @@
       try {
         switch (this.state_0) {
           case 0:
-            this.state_0 = 2;
-            this.result_0 = this.local$closure$info.fetch('gradle/gradlew', this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
+            return this.local$$receiver.line_61zpoe$("rootProject.name = '" + this.local$closure$info.artifactName + "'");
           case 1:
             throw this.exception_0;
-          case 2:
-            return this.result_0;
         }
       }
        catch (e) {
@@ -4526,7 +4703,7 @@
         switch (this.state_0) {
           case 0:
             this.state_0 = 2;
-            this.result_0 = this.local$closure$info.fetch('gradle/gradlew.bat', this);
+            this.result_0 = this.local$closure$info.fetch('gradle/gradlew', this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;
@@ -4575,7 +4752,7 @@
         switch (this.state_0) {
           case 0:
             this.state_0 = 2;
-            this.result_0 = this.local$closure$info.fetch('gradle/gradle/wrapper/gradle-wrapper.jar', this);
+            this.result_0 = this.local$closure$info.fetch('gradle/gradlew.bat', this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;
@@ -4624,6 +4801,55 @@
         switch (this.state_0) {
           case 0:
             this.state_0 = 2;
+            this.result_0 = this.local$closure$info.fetch('gradle/gradle/wrapper/gradle-wrapper.jar', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function BuildFilesGradle$render$lambda_4(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_4(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFilesGradle$render$lambda_4(closure$info_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+  }
+  Coroutine$BuildFilesGradle$render$lambda_4.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFilesGradle$render$lambda_4.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFilesGradle$render$lambda_4.prototype.constructor = Coroutine$BuildFilesGradle$render$lambda_4;
+  Coroutine$BuildFilesGradle$render$lambda_4.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
             this.result_0 = this.local$closure$info.fetch('gradle/gradle/wrapper/gradle-wrapper.properties', this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
@@ -4648,11 +4874,12 @@
   };
   BuildFilesGradle.prototype.render_miqy8c$ = function ($receiver, info) {
     $receiver.fileText_7k8vha$('build.gradle', void 0, void 0, BuildFilesGradle$render$lambda(info, $receiver));
+    $receiver.fileText_7k8vha$('settings.gradle', void 0, void 0, BuildFilesGradle$render$lambda_0(info));
     if (info.includeWrapper) {
-      $receiver.fileBinary_7n0jo0$('gradlew', void 0, toInt('755', 8), BuildFilesGradle$render$lambda_0(info));
-      $receiver.fileBinary_7n0jo0$('gradlew.bat', void 0, void 0, BuildFilesGradle$render$lambda_1(info));
-      $receiver.fileBinary_7n0jo0$('gradle/wrapper/gradle-wrapper.jar', void 0, void 0, BuildFilesGradle$render$lambda_2(info));
-      $receiver.fileBinary_7n0jo0$('gradle/wrapper/gradle-wrapper.properties', void 0, void 0, BuildFilesGradle$render$lambda_3(info));
+      $receiver.fileBinary_7n0jo0$('gradlew', void 0, toInt('755', 8), BuildFilesGradle$render$lambda_1(info));
+      $receiver.fileBinary_7n0jo0$('gradlew.bat', void 0, void 0, BuildFilesGradle$render$lambda_2(info));
+      $receiver.fileBinary_7n0jo0$('gradle/wrapper/gradle-wrapper.jar', void 0, void 0, BuildFilesGradle$render$lambda_3(info));
+      $receiver.fileBinary_7n0jo0$('gradle/wrapper/gradle-wrapper.properties', void 0, void 0, BuildFilesGradle$render$lambda_4(info));
     }
   };
   BuildFilesGradle.$metadata$ = {
@@ -4753,7 +4980,7 @@
   function BuildFilesMaven$render$lambda$lambda$lambda$lambda$lambda_0(this$render) {
     return function ($receiver) {
       var tmp$, tmp$_0, tmp$_1;
-      tmp$ = listOf_0([to(get_compileDependencies(this$render), false), to(get_testDependencies(this$render), true)]).iterator();
+      tmp$ = listOf([to(get_compileDependencies(this$render), false), to(get_testDependencies(this$render), true)]).iterator();
       while (tmp$.hasNext()) {
         var tmp$_2 = tmp$.next();
         var deps = tmp$_2.component1()
@@ -4791,7 +5018,7 @@
         this$_0.line_61zpoe$('<modelVersion>4.0.0<\/modelVersion>');
         this$_0.line_61zpoe$('<groupId>' + closure$info_0.artifactGroup + '<\/groupId>');
         this$_0.line_61zpoe$('<artifactId>' + closure$info_0.artifactName + '<\/artifactId>');
-        this$_0.line_61zpoe$('<version>0.0.1-SNAPSHOT<\/version>');
+        this$_0.line_61zpoe$('<version>' + closure$info_0.artifactVersion + '<\/version>');
         this$_0.line_61zpoe$('<name>' + closure$info_0.artifactName + '<\/name>');
         this$_0.line_61zpoe$('<description>' + closure$info_0.artifactName + '<\/description>');
         var $receiver_1 = '<properties>';
@@ -4990,7 +5217,7 @@
               $this_10._indent();
               try {
                 var tmp$_47;
-                tmp$_47 = listOf_0([false, true]).iterator();
+                tmp$_47 = listOf([false, true]).iterator();
                 while (tmp$_47.hasNext()) {
                   var test = tmp$_47.next();
                   var name = test ? 'test-compile' : 'compile';
@@ -5473,7 +5700,7 @@
     if (info.includeWrapper) {
       $receiver.fileBinary_7n0jo0$('mvnw', void 0, toInt('755', 8), BuildFilesMaven$render$lambda_0(info));
       $receiver.fileBinary_7n0jo0$('mvnw.cmd', void 0, void 0, BuildFilesMaven$render$lambda_1(info));
-      tmp$ = listOf_0(['maven-wrapper.jar', 'maven-wrapper.properties', 'MavenWrapperDownloader.java']).iterator();
+      tmp$ = listOf(['maven-wrapper.jar', 'maven-wrapper.properties', 'MavenWrapperDownloader.java']).iterator();
       while (tmp$.hasNext()) {
         var file = tmp$.next();
         $receiver.fileBinary_7n0jo0$('.mvn/wrapper/' + file, void 0, void 0, BuildFilesMaven$render$lambda_2(info, file));
@@ -6807,6 +7034,9 @@
     }
     return (tmp$_2 = tmp$_5) != null ? tmp$_2 : 0;
   };
+  SemVer.prototype.toString = function () {
+    return this.version;
+  };
   SemVer.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'SemVer',
@@ -6987,13 +7217,12 @@
   package$start.launch_g2bo5h$ = launch;
   package$start.jq_61zpoe$ = jq;
   package$start.jq_lt8gi4$ = jq_0;
+  package$start.jqId_61zpoe$ = jqId;
   package$start.on_nsccip$ = on;
   package$start.each_4tgbmb$ = each;
   package$start.change_tue5ot$ = change;
   package$start.keyup_tue5ot$ = keyup;
   package$start.generateBrowserFile_cyqrs4$ = generateBrowserFile;
-  $$importsForInline$$.output = _;
-  package$start.main_kand9s$ = main;
   Object.defineProperty(package$start, 'defaultArtifactGroup', {
     get: function () {
       return defaultArtifactGroup;
@@ -7002,6 +7231,11 @@
   Object.defineProperty(package$start, 'defaultArtifactName', {
     get: function () {
       return defaultArtifactName;
+    }
+  });
+  Object.defineProperty(package$start, 'defaultArtifactVersion', {
+    get: function () {
+      return defaultArtifactVersion;
     }
   });
   Object.defineProperty(package$start, 'defaultKtorVersion', {
@@ -7014,6 +7248,23 @@
       return defaultKtorEngine;
     }
   });
+  Object.defineProperty(package$start, 'artifactGroupId', {
+    get: function () {
+      return artifactGroupId;
+    }
+  });
+  Object.defineProperty(package$start, 'artifactNameId', {
+    get: function () {
+      return artifactNameId;
+    }
+  });
+  Object.defineProperty(package$start, 'artifactVersionId', {
+    get: function () {
+      return artifactVersionId;
+    }
+  });
+  $$importsForInline$$.output = _;
+  package$start.main_kand9s$ = main;
   Object.defineProperty(package$start, 'insideIframe', {
     get: get_insideIframe
   });
@@ -7050,9 +7301,32 @@
   package$start.FileFetcher = FileFetcher;
   package$start.add_ykoeqs$ = add;
   package$start.Feature = Feature;
-  Object.defineProperty(package$start, 'ProjectTypes', {
-    get: ProjectTypes_getInstance
+  Object.defineProperty(KtorEngine, 'Netty', {
+    get: KtorEngine$Netty_getInstance
   });
+  Object.defineProperty(KtorEngine, 'Jetty', {
+    get: KtorEngine$Jetty_getInstance
+  });
+  Object.defineProperty(KtorEngine, 'Tomcat', {
+    get: KtorEngine$Tomcat_getInstance
+  });
+  Object.defineProperty(KtorEngine, 'CIO', {
+    get: KtorEngine$CIO_getInstance
+  });
+  Object.defineProperty(KtorEngine, 'Companion', {
+    get: KtorEngine$Companion_getInstance
+  });
+  package$start.KtorEngine = KtorEngine;
+  Object.defineProperty(ProjectType, 'Gradle', {
+    get: ProjectType$Gradle_getInstance
+  });
+  Object.defineProperty(ProjectType, 'Maven', {
+    get: ProjectType$Maven_getInstance
+  });
+  Object.defineProperty(ProjectType, 'Companion', {
+    get: ProjectType$Companion_getInstance
+  });
+  package$start.ProjectType = ProjectType;
   Object.defineProperty(package$start, 'Repos', {
     get: Repos_getInstance
   });
@@ -7200,6 +7474,7 @@
   package$project.get_compileDependencies_v6fwbs$ = get_compileDependencies;
   package$project.get_testDependencies_v6fwbs$ = get_testDependencies;
   package$project.addMavenRepository_zc4wmb$ = addMavenRepository;
+  package$project.addMavenRepository_t4tb54$ = addMavenRepository_0;
   package$project.addCompileDependency_6b55lg$ = addCompileDependency;
   package$project.addTestDependency_6b55lg$ = addTestDependency;
   Object.defineProperty(package$project, 'BuildFilesGradle', {
@@ -7270,12 +7545,16 @@
   EmptyContinuation = new EmptyContinuation$ObjectLiteral();
   defaultArtifactGroup = 'com.example';
   defaultArtifactName = 'ktor-demo';
+  defaultArtifactVersion = '0.0.1-SNAPSHOT';
   defaultKtorVersion = Versions_getInstance().LAST.version;
   defaultKtorEngine = 'netty';
+  artifactGroupId = 'artifact-group';
+  artifactNameId = 'artifact-name';
+  artifactVersionId = 'artifact-version';
   insideIframe = lazy(insideIframe$lambda);
   hashParams = lazy(hashParams$lambda);
   KOTLIN_VERSION = '1.2.41';
-  ALL_FEATURES = listOf_0([HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), HttpClientFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
+  ALL_FEATURES = listOf([HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), HttpClientFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
   applicationKtImports = new Extra$PropertyThis(void 0, applicationKtImports$lambda);
   reposToInclude = new Extra$PropertyThis(void 0, reposToInclude$lambda);
   compileDependencies = new Extra$PropertyThis(void 0, compileDependencies$lambda);
