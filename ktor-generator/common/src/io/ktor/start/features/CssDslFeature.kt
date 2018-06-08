@@ -37,11 +37,13 @@ object CssDslFeature : Feature(ApplicationKt, RoutingFeature) {
                     +"+CSSBuilder().apply(builder).toString()"
                 }
             }
-
+        }
+        addExtensionMethods {
             "fun CommonAttributeGroupFacade.style(builder: CSSBuilder.() -> Unit)" {
                 +"this.style = CSSBuilder().apply(builder).toString().trim()"
             }
-
+        }
+        addExtensionMethods {
             "suspend inline fun ApplicationCall.respondCss(builder: CSSBuilder.() -> Unit)" {
                 +"this.respondText(CSSBuilder().apply(builder).toString(), ContentType.Text.CSS)"
             }

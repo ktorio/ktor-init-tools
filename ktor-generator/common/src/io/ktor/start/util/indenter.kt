@@ -1,62 +1,8 @@
 package io.ktor.start.util
 
-/*
-interface BaseIndenter {
-}
-
-interface IndenterGenerator {
-    fun Indenter.generate(): Unit
-}
-
-open class Indenter : BaseIndenter {
-    @PublishedApi
-    internal var indentation = 0
-    private val lines = arrayListOf<Any>()
-
-    object Indents {
-        val indents = arrayListOf<String>()
-        operator fun get(index: Int): String {
-            while (indents.size <= index) indents.add((indents.lastOrNull()?.plus("    ") ?: ""))
-            return indents[index]
-        }
-    }
-
-    fun line(str: String) {
-        lines += Indents[indentation] + str
-    }
-
-    fun line(gen: IndenterGenerator) {
-        lines += gen
-    }
-
-    inline fun line(str: String, suffix: String = "", callback: () -> Unit) {
-        line("$str {$suffix")
-        indent(callback)
-        line("}")
-    }
-
-    inline operator fun String.invoke(suffix: String = "", callback: () -> Unit) = line(this, suffix, callback)
-    inline operator fun String.unaryPlus() = line(this)
-
-    inline fun indent(callback: () -> Unit) {
-        indentation++
-        try {
-            callback()
-        } finally {
-            indentation--
-        }
-    }
-
-    override fun toString() = lines.joinToString("\n")
-}
-
-fun indenter(callback: Indenter.() -> Unit): String = Indenter().apply(callback).toString()
-*/
-
-
-class Indenter(private val actions: ArrayList<Action> = arrayListOf<Indenter.Action>()) {
+class Indenter(internal val actions: ArrayList<Action> = arrayListOf<Indenter.Action>()) {
     object INDENTS {
-        private val INDENTS = arrayListOf<String>("")
+        private val INDENTS = arrayListOf("")
 
         operator fun get(index: Int): String {
             if (index >= INDENTS.size) {
@@ -80,11 +26,13 @@ class Indenter(private val actions: ArrayList<Action> = arrayListOf<Indenter.Act
         data class Inline(override val str: String) : Text
         data class Line(override val str: String) : Text
         data class LineDeferred(val callback: () -> Indenter) : Action
+        object EmptyLineOnce : Action
         object Indent : Action
         object Unindent : Action
     }
 
-    val noIndentEmptyLines = true
+    //val indentEmptyLines = false
+    val indentEmptyLines = true
 
     companion object {
         fun genString(init: Indenter.() -> Unit) = gen(init).toString()
@@ -162,48 +110,64 @@ class Indenter(private val actions: ArrayList<Action> = arrayListOf<Indenter.Act
         actions.add(Action.Unindent)
     }
 
-    fun toString(markHandler: ((sb: StringBuilder, line: Int, data: Any) -> Unit)?, doIndent: Boolean): String {
+    class IndenterEvaluator(val markHandler: ((sb: StringBuilder, line: Int, data: Any) -> Unit)?, val indentEmptyLines: Boolean, val doIndent: Boolean) {
         val out = StringBuilder()
         var line = 0
 
         var newLine = true
         var indentIndex = 0
+        var allowEmptyLine = false
+
+        fun outAppend(str: String) = out.append(str)
+        fun outAppend(str: Char) = out.append(str)
+
+        fun doLine() {
+            if (doIndent) outAppend('\n')
+            line++
+            newLine = true
+        }
 
         fun eval(actions: List<Action>) {
             for (action in actions) {
                 when (action) {
                     is Action.Text -> {
                         if (newLine) {
-                            if (noIndentEmptyLines && action.str.isEmpty()) {
-                                if (doIndent) out.append('\n')
-                                line++
+                            if (!indentEmptyLines && action.str.isEmpty()) {
+                                doLine()
                             } else {
-                                if (doIndent) out.append(INDENTS[indentIndex]) else out.append(" ")
+                                if (doIndent) outAppend(INDENTS[indentIndex]) else outAppend(" ")
                             }
                         }
-                        out.append(action.str)
+                        outAppend(action.str)
                         if (action is Action.Line) {
                             line += action.str.count { it == '\n' }
-                            if (doIndent) out.append('\n')
-                            line++
-                            newLine = true
+                            doLine()
                         } else {
                             newLine = false
                         }
+                        allowEmptyLine = true
                     }
                     is Action.LineDeferred -> eval(action.callback().actions)
-                    Action.Indent -> indentIndex++
-                    Action.Unindent -> indentIndex--
+                    Action.Indent, Action.Unindent -> {
+                        allowEmptyLine = false
+                        indentIndex += if (action == Action.Indent) +1 else -1
+                    }
+                    Action.EmptyLineOnce -> {
+                        if (allowEmptyLine) {
+                            doLine()
+                            allowEmptyLine = false
+                        }
+                    }
                     is Action.Marker -> {
                         markHandler?.invoke(out, line, action.data)
                     }
                 }
             }
         }
+    }
 
-        eval(actions)
-
-        return out.toString()
+    fun toString(markHandler: ((sb: StringBuilder, line: Int, data: Any) -> Unit)?, doIndent: Boolean): String {
+        return IndenterEvaluator(markHandler, indentEmptyLines, doIndent).apply { eval(actions) }.out.toString()
     }
 
     inline operator fun String.invoke(suffix: String = "", callback: () -> Unit) = line(this, after = suffix, callback = callback)
@@ -227,6 +191,18 @@ class Indenter(private val actions: ArrayList<Action> = arrayListOf<Indenter.Act
     }
 
     override fun toString(): String = toString(null, doIndent = true)
+}
+
+val Indenter.SEPARATOR get() = EMPTY_LINE_ONCE()
+
+fun Indenter.EMPTY_LINE_ONCE() {
+    this.actions.add(Indenter.Action.EmptyLineOnce)
+}
+
+fun Indenter.SEPARATOR(callback: Indenter.() -> Unit) {
+    SEPARATOR
+    callback()
+    //SEPARATOR
 }
 
 class XmlIndenter(val indenter: Indenter) {

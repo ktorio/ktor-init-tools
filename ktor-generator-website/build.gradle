@@ -23,9 +23,7 @@ repositories {
     maven { url "https://kotlin.bintray.com/js-externals" }
 }
 
-kotlin {
-    experimental { coroutines 'enable' }
-}
+kotlin.experimental.coroutines 'enable'
 
 dependencies {
     expectedBy project(":ktor-generator-common")

@@ -54,6 +54,14 @@ open class BlockBuilder(val subject: Any) : Extra by Extra.Mixin() {
         instance.blocks += callback
     }
 
+    fun appendSeparated(slot: BlockSlot<*>, once: Boolean = false, callback: Indenter.() -> Unit) {
+        append(slot, once) {
+            SEPARATOR {
+                callback()
+            }
+        }
+    }
+
     fun fileText(name: String, charset: Charset = UTF8, mode: Int = "644".toInt(8), callback: suspend Indenter.() -> Unit) {
         fileBinary(name, type = "text", mode = mode) {
             val indenter = Indenter()

@@ -16,7 +16,7 @@ object RoutingFeature : Feature(ApplicationKt) {
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.routing.*")
         addImport("io.ktor.http.*")
-        append(ApplicationKt.MODULE_POST) {
+        appendSeparated(ApplicationKt.MODULE_POST) {
             "routing" {
                 "get(\"/\")" {
                     +"call.respondText(\"HELLO WORLD!\", contentType = ContentType.Text.Plain)"
@@ -28,8 +28,7 @@ object RoutingFeature : Feature(ApplicationKt) {
 }
 
 fun BlockBuilder.addRoute(callback: Indenter.() -> Unit) {
-    append(RoutingFeature.BLOCK) {
-        +""
+    appendSeparated(RoutingFeature.BLOCK) {
         callback()
     }
 }

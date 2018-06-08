@@ -14,6 +14,7 @@ object CallLoggingFeature : Feature(ApplicationKt) {
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")
+        addImport("org.slf4j.event.*")
         addFeatureInstall {
             "install(CallLogging)" {
                 +"level = Level.INFO"

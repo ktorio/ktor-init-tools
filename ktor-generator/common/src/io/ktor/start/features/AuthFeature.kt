@@ -32,7 +32,7 @@ object AuthFeature : Feature(ApplicationKt) {
 }
 
 fun BlockBuilder.addAuthProvider(callback: Indenter.() -> Unit) {
-    append(AuthFeature.BLOCK) {
+    appendSeparated(AuthFeature.BLOCK) {
         callback()
     }
 }

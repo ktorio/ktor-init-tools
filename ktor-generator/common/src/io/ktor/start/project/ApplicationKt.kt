@@ -12,26 +12,37 @@ object ApplicationKt : BuildInfoBlock(BuildFiles, ApplicationConf) {
     override fun BlockBuilder.render(info: BuildInfo) {
         addImport("io.ktor.application.*")
         addImport("io.ktor.response.*")
+        addImport("io.ktor.request.*")
 
         fileText("src/application.kt") {
             +"package ${info.artifactGroup}"
-            +""
-            linedeferred {
-                for (import in applicationKtImports) {
-                    +"import $import"
+            SEPARATOR {
+                linedeferred {
+                    for (import in applicationKtImports) {
+                        +"import $import"
+                    }
                 }
             }
-            if (info.ktorVer >= Versions.V092) {
-                +"fun main(args: Array<String>): Unit = ${info.developmentEngineFQ}.main(args)"
-            } else {
-                +"fun main(args: Array<String>): Unit = ${info.developmentPackage}.main(args)"
+            SEPARATOR {
+                if (info.ktorVer >= Versions.V092) {
+                    +"fun main(args: Array<String>): Unit = ${info.developmentEngineFQ}.main(args)"
+                } else {
+                    +"fun main(args: Array<String>): Unit = ${info.developmentPackage}.main(args)"
+                }
             }
-            block(APPLICATION_CLASSES)
-            "fun Application.main()" {
-                block(MODULE_INSTALL)
-                block(MODULE_POST)
+            SEPARATOR {
+                block(APPLICATION_CLASSES)
             }
-            block(EXTENSIONS)
+            SEPARATOR {
+                "fun Application.main()" {
+                    block(MODULE_INSTALL)
+                    EMPTY_LINE_ONCE()
+                    block(MODULE_POST)
+                }
+            }
+            SEPARATOR {
+                block(EXTENSIONS)
+            }
         }
     }
 }
@@ -43,22 +54,19 @@ fun BlockBuilder.addImport(import: String) {
 }
 
 fun BlockBuilder.addFeatureInstall(callback: Indenter.() -> Unit) {
-    append(ApplicationKt.MODULE_INSTALL) {
-        +""
+    appendSeparated(ApplicationKt.MODULE_INSTALL) {
         callback()
     }
 }
 
 fun BlockBuilder.addExtensionMethods(callback: Indenter.() -> Unit) {
-    append(ApplicationKt.EXTENSIONS) {
-        +""
+    appendSeparated(ApplicationKt.EXTENSIONS) {
         callback()
     }
 }
 
 fun BlockBuilder.addApplicationClasses(callback: Indenter.() -> Unit) {
-    append(ApplicationKt.APPLICATION_CLASSES) {
-        +""
+    appendSeparated(ApplicationKt.APPLICATION_CLASSES) {
         callback()
     }
 }

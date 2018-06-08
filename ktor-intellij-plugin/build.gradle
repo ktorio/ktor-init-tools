@@ -4,44 +4,23 @@ buildscript {
 
 plugins {
   id "org.jetbrains.intellij" version "0.3.2"
-	//id "org.jetbrains.intellij" version "0.2.17"
 
 }
 
-//apply plugin: 'org.jetbrains.intellij'
 apply plugin: "kotlin"
 apply plugin: "idea"
-
-//configurations {
-//	ideaPlugins
-//}
 
 sourceSets {
 	main.kotlin.srcDirs += "src"
 	main.resources.srcDirs += "resources"
 	test.kotlin.srcDirs += "test"
-	//gradleToolingExtension {
-	//	configurations[compileOnlyConfigurationName].extendsFrom(configurations["gradleToolingExtension"])
-	//}
 }
-
 
 dependencies {
 	compile project(":ktor-generator-jvm")
-	compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5"
 }
-
 
 def intellijVersion = "IC-$intellijBaseVersion"
-
-def intellijPlugin(String name) {
-	return [
-		"group": "org.jetbrains.plugins",
-		"name": name,
-		"version": intellijBaseVersion,
-		"configuration": "compile"
-	]
-}
 
 intellij {
 	version intellijVersion
@@ -66,4 +45,4 @@ repositories {
 	maven { url "https://plugins.gradle.org/m2/" }
 }
 
-println(intellijPlugin("gradle"))
+kotlin.experimental.coroutines 'enable'

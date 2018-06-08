@@ -10,6 +10,14 @@ import java.awt.*
 import java.io.*
 import javax.swing.*
 
+operator fun VirtualFile?.get(path: String?): VirtualFile? {
+    if (this == null || path == null || path == "" || path == ".") return this
+    val parts = path.split('/', limit = 2)
+    val firstName = parts[0]
+    val lastName = parts.getOrNull(1)
+    val child = this.findChild(firstName)
+    return if (lastName != null) child[lastName] else child
+}
 
 fun VirtualFile.createFile(path: String, data: String, charset: Charset = UTF8): VirtualFile =
     createFile(path, data.toByteArray(charset))
@@ -78,4 +86,12 @@ fun JPanel.addAtGrid(
     maximumSize: Dimension = Dimension(-1, -1)
 ) {
     add(item, GridConstraints(row, column, rowSpan, colSpan, anchor, fill, HSizePolicy, VSizePolicy, minimumSize, preferredSize, maximumSize))
+}
+
+inline fun invokeLater(crossinline func: () -> Unit) {
+    if (ApplicationManager.getApplication().isDispatchThread) {
+        func()
+    } else {
+        ApplicationManager.getApplication().invokeLater({ func() }, ModalityState.defaultModalityState())
+    }
 }

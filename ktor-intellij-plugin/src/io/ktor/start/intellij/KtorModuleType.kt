@@ -1,7 +1,12 @@
 package io.ktor.start.intellij
 
+import com.intellij.execution.*
+import com.intellij.ide.actions.*
+import com.intellij.ide.util.newProjectWizard.*
 import com.intellij.ide.util.projectWizard.*
 import com.intellij.openapi.*
+import com.intellij.openapi.components.*
+import com.intellij.openapi.externalSystem.service.project.*
 import com.intellij.openapi.module.*
 import com.intellij.openapi.projectRoots.*
 import com.intellij.openapi.roots.*
@@ -16,6 +21,9 @@ import io.ktor.start.features.*
 import io.ktor.start.project.*
 import io.ktor.start.util.*
 import kotlinx.coroutines.experimental.*
+import org.jetbrains.idea.maven.execution.*
+import org.jetbrains.idea.maven.project.*
+import org.jetbrains.plugins.gradle.service.project.wizard.*
 import java.awt.*
 import java.io.*
 import javax.swing.*
@@ -43,6 +51,9 @@ class KtorModuleType : ModuleType<KtorModuleBuilder>("ktor") {
 // https://github.com/minecraft-dev/MinecraftDev/blob/dev/src/main/kotlin/com/demonwav/mcdev/buildsystem/gradle/GradleBuildSystem.kt
 // https://github.com/joewalnes/idea-community/blob/master/platform/vcs-impl/src/com/intellij/openapi/vcs/impl/VcsInitialization.java
 class KtorModuleBuilder : JavaModuleBuilder() {
+    //val SILENT_GRADLE_IMPORT = true
+    val SILENT_GRADLE_IMPORT = false
+
     override fun getPresentableName() = KtorModuleType.NAME
     override fun getNodeIcon() = KtorModuleType.KTOR_ICON
     override fun getGroupName() = KtorModuleType.NAME
@@ -57,8 +68,6 @@ class KtorModuleBuilder : JavaModuleBuilder() {
         val module = rootModel.module
         rootModel.addContentEntry(root)
         if (moduleJdk != null) rootModel.sdk = moduleJdk
-
-        project.name
 
         project.backgroundTask("Setting Up Project") {
             val info = BuildInfo(
@@ -85,13 +94,49 @@ class KtorModuleBuilder : JavaModuleBuilder() {
                 }
             }
 
-            //if (info.projectType == "gradle") {
-            //    // Tell Gradle to import this project
-            //    // https://github.com/minecraft-dev/MinecraftDev/blob/dev/src/main/kotlin/com/demonwav/mcdev/buildsystem/gradle/GradleBuildSystem.kt#L272
-            //    val projectDataManager = ServiceManager.getService(ProjectDataManager::class.java)
-            //    val gradleProjectImportBuilder = org.jetbrains.plugins.gradle.service.project.wizard.GradleProjectImportBuilder(projectDataManager)
-            //    val gradleProjectImportProvider = org.jetbrains.plugins.gradle.service.project.wizard.GradleProjectImportBuilder(gradleProjectImportBuilder)
-            //}
+
+            when (info.projectType) {
+                ProjectType.Gradle -> {
+                    val buildGradle = root["build.gradle"]
+                    if (buildGradle != null) {
+                        // Tell Gradle to import this project
+                        // https://github.com/minecraft-dev/MinecraftDev/blob/dev/src/main/kotlin/com/demonwav/mcdev/buildsystem/gradle/GradleBuildSystem.kt#L272
+                        val projectDataManager = ServiceManager.getService(ProjectDataManager::class.java)
+                        val gradleProjectImportBuilder = GradleProjectImportBuilder(projectDataManager)
+                        val gradleProjectImportProvider = GradleProjectImportProvider(gradleProjectImportBuilder)
+
+                        invokeLater {
+                            val wizard = AddModuleWizard(project, buildGradle.path, gradleProjectImportProvider)
+                            if (SILENT_GRADLE_IMPORT) {
+                                wizard.commit()
+                                //wizard.clickDefaultButton()
+                            } else {
+                                if (wizard.showAndGet()) {
+                                    ImportModuleAction.createFromWizard(project, wizard)
+                                }
+                            }
+                        }
+                    }
+                }
+                ProjectType.Maven -> {
+                    val pomFile = root["pom.xml"]
+                    if (pomFile != null) {
+                        val manager = MavenProjectsManager.getInstance(project)
+                        manager.addManagedFilesOrUnignore(listOf(pomFile))
+                        manager.importingSettings.isDownloadDocsAutomatically = true
+                        manager.importingSettings.isDownloadSourcesAutomatically = true
+
+                        // Setup the default Maven run config
+                        val params = MavenRunnerParameters()
+                        params.workingDirPath = root.canonicalPath!!
+                        params.goals = listOf("clean", "package")
+                        val runnerSettings = MavenRunConfigurationType
+                            .createRunnerAndConfigurationSettings(null, null, params, project)
+                        runnerSettings.name = module.name + " build"
+                        RunManager.getInstance(project).addConfiguration(runnerSettings, false)
+                    }
+                }
+            }
         }
     }
 

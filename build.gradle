@@ -10,12 +10,10 @@ buildscript {
     }
 }
 
-group 'io.ktor'
+group 'io.ktor.start'
 version '1.0-SNAPSHOT'
 
-//apply plugin: 'kotlin-platform-js'
 apply plugin: 'idea'
-
 
 idea {
     module {

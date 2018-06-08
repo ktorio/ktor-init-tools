@@ -15,7 +15,7 @@ object JsonGsonFeature : Feature(ApplicationKt, ContentNegotiationFeature, Routi
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.gson.*")
         addImport("io.ktor.features.*")
-        append(ContentNegotiationFeature.BLOCK) {
+        appendSeparated(ContentNegotiationFeature.BLOCK) {
             "gson" {
             }
         }

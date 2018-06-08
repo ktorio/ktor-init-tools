@@ -16,7 +16,7 @@ object JsonJacksonFeature : Feature(ApplicationKt, ContentNegotiationFeature, Ro
         addImport("com.fasterxml.jackson.databind.*")
         addImport("io.ktor.jackson.*")
         addImport("io.ktor.features.*")
-        append(ContentNegotiationFeature.BLOCK) {
+        appendSeparated(ContentNegotiationFeature.BLOCK) {
             "jackson" {
                 +"enable(SerializationFeature.INDENT_OUTPUT)"
             }

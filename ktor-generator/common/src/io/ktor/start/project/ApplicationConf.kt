@@ -27,13 +27,13 @@ object ApplicationConf : BuildInfoBlock() {
 }
 
 fun BlockBuilder.addHoconDeployment(block: Indenter.() -> Unit) {
-    append(ApplicationConf.DEPLOYMENT) {
+    appendSeparated(ApplicationConf.DEPLOYMENT) {
         block()
     }
 }
 
 fun BlockBuilder.addHoconKtor(block: Indenter.() -> Unit) {
-    append(ApplicationConf.KTOR) {
+    appendSeparated(ApplicationConf.KTOR) {
         block()
     }
 }
