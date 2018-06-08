@@ -45,9 +45,8 @@ def intellijPlugin(String name) {
 
 intellij {
 	version intellijVersion
-	plugins = ['maven', 'gradle', 'properties', 'junit']
+	plugins = ['maven', 'gradle', 'properties', 'junit', 'coverage']
 	pluginName 'ktor'
-	plugins 'coverage'
 	downloadSources true
 }
 

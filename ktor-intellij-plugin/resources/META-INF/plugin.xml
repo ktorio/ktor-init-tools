@@ -1,11 +1,7 @@
 <idea-plugin>
     <depends>com.intellij.modules.java</depends>
-    <depends>org.jetbrains.plugins.gradle.java</depends>
     <depends>org.jetbrains.plugins.gradle</depends>
-    <!--
     <depends>org.jetbrains.idea.maven</depends>
-    <depends>org.intellij.groovy</depends>
-    -->
     <depends>com.intellij.modules.lang</depends>
 
     <id>io.ktor.intellij.plugin</id>
@@ -13,7 +9,9 @@
     <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
 
     <description><![CDATA[
-    Ktor framework plugin.<br>
+
+        Ktor framework plugin.<br />
+
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
