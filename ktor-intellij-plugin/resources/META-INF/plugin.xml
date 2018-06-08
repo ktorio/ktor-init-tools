@@ -1,5 +1,6 @@
 <idea-plugin>
     <depends>com.intellij.modules.java</depends>
+    <depends>org.jetbrains.plugins.gradle.java</depends>
     <depends>org.jetbrains.plugins.gradle</depends>
     <!--
     <depends>org.jetbrains.idea.maven</depends>
