@@ -1585,7 +1585,7 @@
     };
   }
   function addAuthProvider($receiver, callback) {
-    $receiver.append_qu2wte$(AuthFeature_getInstance().BLOCK, void 0, addAuthProvider$lambda(callback));
+    $receiver.appendSeparated_qu2wte$(AuthFeature_getInstance().BLOCK, void 0, addAuthProvider$lambda(callback));
   }
   function AuthJwtFeature() {
     AuthJwtFeature_instance = this;
@@ -2023,6 +2023,7 @@
   }
   CallLoggingFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.features.*');
+    addImport($receiver, 'org.slf4j.event.*');
     addFeatureInstall($receiver, CallLoggingFeature$renderFeature$lambda);
   };
   CallLoggingFeature.$metadata$ = {
@@ -2365,8 +2366,11 @@
       $receiver._unindent();
     }
     $receiver.line_61zpoe$('}' + '');
-    var $receiver_2 = 'fun CommonAttributeGroupFacade.style(builder: CSSBuilder.() -> Unit)';
-    $receiver.line_61zpoe$($receiver_2.length === 0 ? '{ ' + '' : $receiver_2 + ' { ' + '');
+    return Unit;
+  }
+  function CssDslFeature$renderFeature$lambda_1($receiver) {
+    var $receiver_0 = 'fun CommonAttributeGroupFacade.style(builder: CSSBuilder.() -> Unit)';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('this.style = CSSBuilder().apply(builder).toString().trim()');
@@ -2375,8 +2379,11 @@
       $receiver._unindent();
     }
     $receiver.line_61zpoe$('}' + '');
-    var $receiver_3 = 'suspend inline fun ApplicationCall.respondCss(builder: CSSBuilder.() -> Unit)';
-    $receiver.line_61zpoe$($receiver_3.length === 0 ? '{ ' + '' : $receiver_3 + ' { ' + '');
+    return Unit;
+  }
+  function CssDslFeature$renderFeature$lambda_2($receiver) {
+    var $receiver_0 = 'suspend inline fun ApplicationCall.respondCss(builder: CSSBuilder.() -> Unit)';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('this.respondText(CSSBuilder().apply(builder).toString(), ContentType.Text.CSS)');
@@ -2393,6 +2400,8 @@
     addImport($receiver, 'io.ktor.http.*');
     addRoute($receiver, CssDslFeature$renderFeature$lambda);
     addExtensionMethods($receiver, CssDslFeature$renderFeature$lambda_0);
+    addExtensionMethods($receiver, CssDslFeature$renderFeature$lambda_1);
+    addExtensionMethods($receiver, CssDslFeature$renderFeature$lambda_2);
   };
   CssDslFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -2577,7 +2586,7 @@
   });
   function ForwardedHeaderSupportFeature$renderFeature$lambda($receiver) {
     $receiver.line_61zpoe$('install(ForwardedHeaderSupport) // WARNING: for security, do not include this if not behind a reverse proxy');
-    $receiver.line_61zpoe$('install(XForwardedHeaderSupport) // WARNING: for security, do not include this if not behind a reverse proxy');
+    $receiver.line_61zpoe$('install(XForwardedHeadersSupport) // WARNING: for security, do not include this if not behind a reverse proxy');
     return Unit;
   }
   ForwardedHeaderSupportFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
@@ -3120,7 +3129,7 @@
   JsonGsonFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.gson.*');
     addImport($receiver, 'io.ktor.features.*');
-    $receiver.append_qu2wte$(ContentNegotiationFeature_getInstance().BLOCK, void 0, JsonGsonFeature$renderFeature$lambda);
+    $receiver.appendSeparated_qu2wte$(ContentNegotiationFeature_getInstance().BLOCK, void 0, JsonGsonFeature$renderFeature$lambda);
     addRoute($receiver, JsonGsonFeature$renderFeature$lambda_0);
   };
   JsonGsonFeature.$metadata$ = {
@@ -3204,7 +3213,7 @@
     addImport($receiver, 'com.fasterxml.jackson.databind.*');
     addImport($receiver, 'io.ktor.jackson.*');
     addImport($receiver, 'io.ktor.features.*');
-    $receiver.append_qu2wte$(ContentNegotiationFeature_getInstance().BLOCK, void 0, JsonJacksonFeature$renderFeature$lambda);
+    $receiver.appendSeparated_qu2wte$(ContentNegotiationFeature_getInstance().BLOCK, void 0, JsonJacksonFeature$renderFeature$lambda);
     addRoute($receiver, JsonJacksonFeature$renderFeature$lambda_0);
   };
   JsonJacksonFeature.$metadata$ = {
@@ -3568,7 +3577,7 @@
   RoutingFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.routing.*');
     addImport($receiver, 'io.ktor.http.*');
-    $receiver.append_qu2wte$(ApplicationKt_getInstance().MODULE_POST, void 0, RoutingFeature$renderFeature$lambda(this, $receiver));
+    $receiver.appendSeparated_qu2wte$(ApplicationKt_getInstance().MODULE_POST, void 0, RoutingFeature$renderFeature$lambda(this, $receiver));
   };
   RoutingFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -3584,13 +3593,12 @@
   }
   function addRoute$lambda(closure$callback) {
     return function ($receiver) {
-      $receiver.line_61zpoe$('');
       closure$callback($receiver);
       return Unit;
     };
   }
   function addRoute($receiver, callback) {
-    $receiver.append_qu2wte$(RoutingFeature_getInstance().BLOCK, void 0, addRoute$lambda(callback));
+    $receiver.appendSeparated_qu2wte$(RoutingFeature_getInstance().BLOCK, void 0, addRoute$lambda(callback));
   }
   function SessionsFeature() {
     SessionsFeature_instance = this;
@@ -4152,7 +4160,7 @@
     };
   }
   function addHoconDeployment($receiver, block) {
-    $receiver.append_qu2wte$(ApplicationConf_getInstance().DEPLOYMENT, void 0, addHoconDeployment$lambda(block));
+    $receiver.appendSeparated_qu2wte$(ApplicationConf_getInstance().DEPLOYMENT, void 0, addHoconDeployment$lambda(block));
   }
   function addHoconKtor$lambda(closure$block) {
     return function ($receiver) {
@@ -4161,7 +4169,7 @@
     };
   }
   function addHoconKtor($receiver, block) {
-    $receiver.append_qu2wte$(ApplicationConf_getInstance().KTOR, void 0, addHoconKtor$lambda(block));
+    $receiver.appendSeparated_qu2wte$(ApplicationConf_getInstance().KTOR, void 0, addHoconKtor$lambda(block));
   }
   function ApplicationKt() {
     ApplicationKt_instance = this;
@@ -4171,7 +4179,7 @@
     this.APPLICATION_CLASSES = this.newSlot_pdl1vj$('APPLICATION_CLASSES');
     this.EXTENSIONS = this.newSlot_pdl1vj$('EXTENSIONS');
   }
-  function ApplicationKt$render$lambda$lambda(this$render) {
+  function ApplicationKt$render$lambda$lambda$lambda(this$render) {
     return function ($receiver) {
       var tmp$;
       tmp$ = get_applicationKtImports(this$render).iterator();
@@ -4179,6 +4187,54 @@
         var import_0 = tmp$.next();
         $receiver.line_61zpoe$('import ' + import_0);
       }
+      return Unit;
+    };
+  }
+  function ApplicationKt$render$lambda$lambda(this$render) {
+    return function ($receiver) {
+      $receiver.linedeferred_yot30u$(ApplicationKt$render$lambda$lambda$lambda(this$render));
+      return Unit;
+    };
+  }
+  function ApplicationKt$render$lambda$lambda_0(closure$info) {
+    return function ($receiver) {
+      if (closure$info.ktorVer.compareTo_11rb$(Versions_getInstance().V092) >= 0) {
+        $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + closure$info.developmentEngineFQ + '.main(args)');
+      }
+       else {
+        $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + closure$info.developmentPackage + '.main(args)');
+      }
+      return Unit;
+    };
+  }
+  function ApplicationKt$render$lambda$lambda_1(this$ApplicationKt, this$render) {
+    return function ($receiver) {
+      this$render.block_rsgfsn$($receiver, this$ApplicationKt.APPLICATION_CLASSES);
+      return Unit;
+    };
+  }
+  function ApplicationKt$render$lambda$lambda_2(this$ApplicationKt, this$render) {
+    return function ($receiver) {
+      var $receiver_0 = 'fun Application.main()';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+      $receiver._indent();
+      try {
+        var this$ApplicationKt_0 = this$ApplicationKt;
+        var this$render_0 = this$render;
+        this$render_0.block_rsgfsn$($receiver, this$ApplicationKt_0.MODULE_INSTALL);
+        EMPTY_LINE_ONCE($receiver);
+        this$render_0.block_rsgfsn$($receiver, this$ApplicationKt_0.MODULE_POST);
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      return Unit;
+    };
+  }
+  function ApplicationKt$render$lambda$lambda_3(this$ApplicationKt, this$render) {
+    return function ($receiver) {
+      this$render.block_rsgfsn$($receiver, this$ApplicationKt.EXTENSIONS);
       return Unit;
     };
   }
@@ -4213,31 +4269,11 @@
         switch (this.state_0) {
           case 0:
             this.local$$receiver.line_61zpoe$('package ' + this.local$closure$info.artifactGroup);
-            this.local$$receiver.line_61zpoe$('');
-            this.local$$receiver.linedeferred_yot30u$(ApplicationKt$render$lambda$lambda(this.local$this$render));
-            if (this.local$closure$info.ktorVer.compareTo_11rb$(Versions_getInstance().V092) >= 0) {
-              this.local$$receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + this.local$closure$info.developmentEngineFQ + '.main(args)');
-            }
-             else {
-              this.local$$receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + this.local$closure$info.developmentPackage + '.main(args)');
-            }
-
-            this.local$this$render.block_rsgfsn$(this.local$$receiver, this.local$this$ApplicationKt.APPLICATION_CLASSES);
-            var $receiver = 'fun Application.main()';
-            this.local$$receiver.line_61zpoe$($receiver.length === 0 ? '{ ' + '' : $receiver + ' { ' + '');
-            this.local$$receiver._indent();
-            try {
-              var this$ApplicationKt = this.local$this$ApplicationKt;
-              var this$render = this.local$this$render;
-              this$render.block_rsgfsn$(this.local$$receiver, this$ApplicationKt.MODULE_INSTALL);
-              this$render.block_rsgfsn$(this.local$$receiver, this$ApplicationKt.MODULE_POST);
-            }
-            finally {
-              this.local$$receiver._unindent();
-            }
-
-            this.local$$receiver.line_61zpoe$('}' + '');
-            return this.local$this$render.block_rsgfsn$(this.local$$receiver, this.local$this$ApplicationKt.EXTENSIONS), Unit;
+            SEPARATOR(this.local$$receiver, ApplicationKt$render$lambda$lambda(this.local$this$render));
+            SEPARATOR(this.local$$receiver, ApplicationKt$render$lambda$lambda_0(this.local$closure$info));
+            SEPARATOR(this.local$$receiver, ApplicationKt$render$lambda$lambda_1(this.local$this$ApplicationKt, this.local$this$render));
+            SEPARATOR(this.local$$receiver, ApplicationKt$render$lambda$lambda_2(this.local$this$ApplicationKt, this.local$this$render));
+            return SEPARATOR(this.local$$receiver, ApplicationKt$render$lambda$lambda_3(this.local$this$ApplicationKt, this.local$this$render)), Unit;
           case 1:
             throw this.exception_0;
         }
@@ -4257,6 +4293,7 @@
   ApplicationKt.prototype.render_miqy8c$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.application.*');
     addImport($receiver, 'io.ktor.response.*');
+    addImport($receiver, 'io.ktor.request.*');
     $receiver.fileText_7k8vha$('src/application.kt', void 0, void 0, ApplicationKt$render$lambda(info, $receiver, this));
   };
   ApplicationKt.$metadata$ = {
@@ -4307,33 +4344,30 @@
   }
   function addFeatureInstall$lambda(closure$callback) {
     return function ($receiver) {
-      $receiver.line_61zpoe$('');
       closure$callback($receiver);
       return Unit;
     };
   }
   function addFeatureInstall($receiver, callback) {
-    $receiver.append_qu2wte$(ApplicationKt_getInstance().MODULE_INSTALL, void 0, addFeatureInstall$lambda(callback));
+    $receiver.appendSeparated_qu2wte$(ApplicationKt_getInstance().MODULE_INSTALL, void 0, addFeatureInstall$lambda(callback));
   }
   function addExtensionMethods$lambda(closure$callback) {
     return function ($receiver) {
-      $receiver.line_61zpoe$('');
       closure$callback($receiver);
       return Unit;
     };
   }
   function addExtensionMethods($receiver, callback) {
-    $receiver.append_qu2wte$(ApplicationKt_getInstance().EXTENSIONS, void 0, addExtensionMethods$lambda(callback));
+    $receiver.appendSeparated_qu2wte$(ApplicationKt_getInstance().EXTENSIONS, void 0, addExtensionMethods$lambda(callback));
   }
   function addApplicationClasses$lambda(closure$callback) {
     return function ($receiver) {
-      $receiver.line_61zpoe$('');
       closure$callback($receiver);
       return Unit;
     };
   }
   function addApplicationClasses($receiver, callback) {
-    $receiver.append_qu2wte$(ApplicationKt_getInstance().APPLICATION_CLASSES, void 0, addApplicationClasses$lambda(callback));
+    $receiver.appendSeparated_qu2wte$(ApplicationKt_getInstance().APPLICATION_CLASSES, void 0, addApplicationClasses$lambda(callback));
   }
   function BuildFiles() {
     BuildFiles_instance = this;
@@ -5884,6 +5918,23 @@
     var instance = this.getSlotInstance_aiiv2x$(slot);
     instance.blocks.add_11rb$(callback);
   };
+  function BlockBuilder$appendSeparated$lambda$lambda(closure$callback) {
+    return function ($receiver) {
+      closure$callback($receiver);
+      return Unit;
+    };
+  }
+  function BlockBuilder$appendSeparated$lambda(closure$callback) {
+    return function ($receiver) {
+      SEPARATOR($receiver, BlockBuilder$appendSeparated$lambda$lambda(closure$callback));
+      return Unit;
+    };
+  }
+  BlockBuilder.prototype.appendSeparated_qu2wte$ = function (slot, once, callback) {
+    if (once === void 0)
+      once = false;
+    this.append_qu2wte$(slot, once, BlockBuilder$appendSeparated$lambda(callback));
+  };
   function BlockBuilder$fileText$lambda(closure$callback_0, closure$charset_0) {
     return function (continuation_0, suspended) {
       var instance = new Coroutine$BlockBuilder$fileText$lambda(closure$callback_0, closure$charset_0, continuation_0);
@@ -6450,8 +6501,8 @@
     if (actions === void 0) {
       actions = ArrayList_init();
     }
-    this.actions_0 = actions;
-    this.noIndentEmptyLines = true;
+    this.actions_8be2vx$ = actions;
+    this.indentEmptyLines = true;
     this.out = '';
   }
   function Indenter$INDENTS() {
@@ -6600,6 +6651,21 @@
   Indenter$Action$LineDeferred.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.callback, other.callback))));
   };
+  function Indenter$Action$EmptyLineOnce() {
+    Indenter$Action$EmptyLineOnce_instance = this;
+  }
+  Indenter$Action$EmptyLineOnce.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'EmptyLineOnce',
+    interfaces: [Indenter$Action]
+  };
+  var Indenter$Action$EmptyLineOnce_instance = null;
+  function Indenter$Action$EmptyLineOnce_getInstance() {
+    if (Indenter$Action$EmptyLineOnce_instance === null) {
+      new Indenter$Action$EmptyLineOnce();
+    }
+    return Indenter$Action$EmptyLineOnce_instance;
+  }
   function Indenter$Action$Indent() {
     Indenter$Action$Indent_instance = this;
   }
@@ -6707,15 +6773,15 @@
     return Indenter$Companion_instance;
   }
   Indenter.prototype.inline_61zpoe$ = function (str) {
-    this.actions_0.add_11rb$(new Indenter$Action$Inline(str));
+    this.actions_8be2vx$.add_11rb$(new Indenter$Action$Inline(str));
     return this;
   };
   Indenter.prototype.line_oryfgh$ = function (indenter) {
-    this.actions_0.addAll_brywnq$(indenter.actions_0);
+    this.actions_8be2vx$.addAll_brywnq$(indenter.actions_8be2vx$);
     return this;
   };
   Indenter.prototype.line_61zpoe$ = function (str) {
-    this.actions_0.add_11rb$(new Indenter$Action$Line(str));
+    this.actions_8be2vx$.add_11rb$(new Indenter$Action$Line(str));
     return this;
   };
   Indenter.prototype.line_pdl1vj$ = function (str) {
@@ -6723,7 +6789,7 @@
       this.line_61zpoe$(str);
   };
   Indenter.prototype.mark_za3rmp$ = function (data) {
-    this.actions_0.add_11rb$(new Indenter$Action$Marker(data));
+    this.actions_8be2vx$.add_11rb$(new Indenter$Action$Marker(data));
     return this;
   };
   function Indenter$linedeferred$lambda(closure$init) {
@@ -6734,7 +6800,7 @@
     };
   }
   Indenter.prototype.linedeferred_yot30u$ = function (init) {
-    this.actions_0.add_11rb$(new Indenter$Action$LineDeferred(Indenter$linedeferred$lambda(init)));
+    this.actions_8be2vx$.add_11rb$(new Indenter$Action$LineDeferred(Indenter$linedeferred$lambda(init)));
     return this;
   };
   Indenter.prototype.line_a4mwiz$ = defineInlineFunction('output.io.ktor.start.util.Indenter.line_a4mwiz$', function (str, callback) {
@@ -6778,86 +6844,101 @@
     return this;
   });
   Indenter.prototype._indent = function () {
-    this.actions_0.add_11rb$(Indenter$Action$Indent_getInstance());
+    this.actions_8be2vx$.add_11rb$(Indenter$Action$Indent_getInstance());
   };
   Indenter.prototype._unindent = function () {
-    this.actions_0.add_11rb$(Indenter$Action$Unindent_getInstance());
+    this.actions_8be2vx$.add_11rb$(Indenter$Action$Unindent_getInstance());
   };
-  function Indenter$toString$eval(closure$newLine, this$Indenter, closure$doIndent, closure$out, closure$line, closure$indentIndex, closure$markHandler) {
-    var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
-    var toBoxedChar = Kotlin.toBoxedChar;
-    var unboxChar_0 = Kotlin.unboxChar;
-    return function closure$eval(actions) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
-      tmp$ = actions.iterator();
-      while (tmp$.hasNext()) {
-        var action = tmp$.next();
-        if (Kotlin.isType(action, Indenter$Action$Text)) {
-          if (closure$newLine.v) {
-            var tmp$_4 = this$Indenter.noIndentEmptyLines;
-            if (tmp$_4) {
-              tmp$_4 = action.str.length === 0;
-            }
-            if (tmp$_4) {
-              if (closure$doIndent)
-                closure$out.append_s8itvh$(10);
-              tmp$_0 = closure$line.v;
-              closure$line.v = tmp$_0 + 1 | 0;
-            }
-             else {
-              if (closure$doIndent)
-                closure$out.append_gw00v9$(Indenter$INDENTS_getInstance().get_za3lpa$(closure$indentIndex.v));
-              else
-                closure$out.append_gw00v9$(' ');
-            }
+  function Indenter$IndenterEvaluator(markHandler, indentEmptyLines, doIndent) {
+    this.markHandler = markHandler;
+    this.indentEmptyLines = indentEmptyLines;
+    this.doIndent = doIndent;
+    this.out = new StringBuilder();
+    this.line = 0;
+    this.newLine = true;
+    this.indentIndex = 0;
+    this.allowEmptyLine = false;
+  }
+  Indenter$IndenterEvaluator.prototype.outAppend_61zpoe$ = function (str) {
+    return this.out.append_gw00v9$(str);
+  };
+  Indenter$IndenterEvaluator.prototype.outAppend_s8itvh$ = function (str) {
+    return this.out.append_s8itvh$(str);
+  };
+  Indenter$IndenterEvaluator.prototype.doLine = function () {
+    if (this.doIndent)
+      this.outAppend_s8itvh$(10);
+    this.line = this.line + 1 | 0;
+    this.newLine = true;
+  };
+  var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
+  var toBoxedChar = Kotlin.toBoxedChar;
+  Indenter$IndenterEvaluator.prototype.eval_j0l46$ = function (actions) {
+    var tmp$, tmp$_0;
+    tmp$ = actions.iterator();
+    while (tmp$.hasNext()) {
+      var action = tmp$.next();
+      if (Kotlin.isType(action, Indenter$Action$Text)) {
+        if (this.newLine) {
+          var tmp$_1 = !this.indentEmptyLines;
+          if (tmp$_1) {
+            tmp$_1 = action.str.length === 0;
           }
-          closure$out.append_gw00v9$(action.str);
-          if (Kotlin.isType(action, Indenter$Action$Line)) {
-            var tmp$_5 = closure$line;
-            var tmp$_6 = closure$line.v;
-            var tmp$_7;
-            var count = 0;
-            tmp$_7 = iterator(action.str);
-            while (tmp$_7.hasNext()) {
-              var element = unboxChar_0(tmp$_7.next());
-              if (unboxChar(toBoxedChar(element)) === 10) {
-                count = count + 1 | 0;
-              }
-            }
-            tmp$_5.v = tmp$_6 + count | 0;
-            if (closure$doIndent)
-              closure$out.append_s8itvh$(10);
-            tmp$_1 = closure$line.v;
-            closure$line.v = tmp$_1 + 1 | 0;
-            closure$newLine.v = true;
+          if (tmp$_1) {
+            this.doLine();
           }
            else {
-            closure$newLine.v = false;
+            if (this.doIndent)
+              this.outAppend_61zpoe$(Indenter$INDENTS_getInstance().get_za3lpa$(this.indentIndex));
+            else
+              this.outAppend_61zpoe$(' ');
           }
         }
-         else if (Kotlin.isType(action, Indenter$Action$LineDeferred))
-          closure$eval(action.callback().actions_0);
-        else if (equals(action, Indenter$Action$Indent_getInstance())) {
-          tmp$_2 = closure$indentIndex.v;
-          closure$indentIndex.v = tmp$_2 + 1 | 0;
+        this.outAppend_61zpoe$(action.str);
+        if (Kotlin.isType(action, Indenter$Action$Line)) {
+          var tmp$_2 = this.line;
+          var tmp$_3;
+          var count = 0;
+          tmp$_3 = iterator(action.str);
+          while (tmp$_3.hasNext()) {
+            var element = unboxChar(tmp$_3.next());
+            if (unboxChar(toBoxedChar(element)) === 10) {
+              count = count + 1 | 0;
+            }
+          }
+          this.line = tmp$_2 + count | 0;
+          this.doLine();
         }
-         else if (equals(action, Indenter$Action$Unindent_getInstance())) {
-          tmp$_3 = closure$indentIndex.v;
-          closure$indentIndex.v = tmp$_3 - 1 | 0;
+         else {
+          this.newLine = false;
         }
-         else if (Kotlin.isType(action, Indenter$Action$Marker))
-          closure$markHandler != null ? closure$markHandler(closure$out, closure$line.v, action.data) : null;
+        this.allowEmptyLine = true;
       }
-    };
-  }
+       else if (Kotlin.isType(action, Indenter$Action$LineDeferred))
+        this.eval_j0l46$(action.callback().actions_8be2vx$);
+      else if (equals(action, Indenter$Action$Indent_getInstance()) || equals(action, Indenter$Action$Unindent_getInstance())) {
+        this.allowEmptyLine = false;
+        this.indentIndex = this.indentIndex + (equals(action, Indenter$Action$Indent_getInstance()) ? 1 : -1) | 0;
+      }
+       else if (equals(action, Indenter$Action$EmptyLineOnce_getInstance())) {
+        if (this.allowEmptyLine) {
+          this.doLine();
+          this.allowEmptyLine = false;
+        }
+      }
+       else if (Kotlin.isType(action, Indenter$Action$Marker))
+        (tmp$_0 = this.markHandler) != null ? tmp$_0(this.out, this.line, action.data) : null;
+    }
+  };
+  Indenter$IndenterEvaluator.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'IndenterEvaluator',
+    interfaces: []
+  };
   Indenter.prototype.toString_l6l5ny$ = function (markHandler, doIndent) {
-    var out = new StringBuilder();
-    var line = {v: 0};
-    var newLine = {v: true};
-    var indentIndex = {v: 0};
-    var eval_0 = Indenter$toString$eval(newLine, this, doIndent, out, line, indentIndex, markHandler);
-    eval_0(this.actions_0);
-    return out.toString();
+    var $receiver = new Indenter$IndenterEvaluator(markHandler, this.indentEmptyLines, doIndent);
+    $receiver.eval_j0l46$(this.actions_8be2vx$);
+    return $receiver.out.toString();
   };
   Indenter.prototype.invoke_44doqu$ = defineInlineFunction('output.io.ktor.start.util.Indenter.invoke_44doqu$', function ($receiver, suffix, callback) {
     if (suffix === void 0)
@@ -6921,6 +7002,16 @@
     simpleName: 'Indenter',
     interfaces: []
   };
+  function get_SEPARATOR($receiver) {
+    EMPTY_LINE_ONCE($receiver);
+  }
+  function EMPTY_LINE_ONCE($receiver) {
+    $receiver.actions_8be2vx$.add_11rb$(Indenter$Action$EmptyLineOnce_getInstance());
+  }
+  function SEPARATOR($receiver, callback) {
+    get_SEPARATOR($receiver);
+    callback($receiver);
+  }
   function XmlIndenter(indenter) {
     this.indenter = indenter;
   }
@@ -7521,6 +7612,9 @@
   Indenter$Action.Inline = Indenter$Action$Inline;
   Indenter$Action.Line = Indenter$Action$Line;
   Indenter$Action.LineDeferred = Indenter$Action$LineDeferred;
+  Object.defineProperty(Indenter$Action, 'EmptyLineOnce', {
+    get: Indenter$Action$EmptyLineOnce_getInstance
+  });
   Object.defineProperty(Indenter$Action, 'Indent', {
     get: Indenter$Action$Indent_getInstance
   });
@@ -7531,7 +7625,11 @@
   Object.defineProperty(Indenter, 'Companion', {
     get: Indenter$Companion_getInstance
   });
+  Indenter.IndenterEvaluator = Indenter$IndenterEvaluator;
   package$util.Indenter = Indenter;
+  package$util.get_SEPARATOR_d9lakw$ = get_SEPARATOR;
+  package$util.EMPTY_LINE_ONCE_d9lakw$ = EMPTY_LINE_ONCE;
+  package$util.SEPARATOR_s3zzuq$ = SEPARATOR;
   package$util.XmlIndenter = XmlIndenter;
   package$util.xml_ldohgd$ = xml;
   package$util.MvnArtifact = MvnArtifact;
