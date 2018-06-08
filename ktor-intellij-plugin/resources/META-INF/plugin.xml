@@ -1,11 +1,18 @@
 <idea-plugin>
-    <id>com.soywiz.myintellijplugin1</id>
-    <name>Plugin display name here</name>
+    <depends>com.intellij.modules.java</depends>
+    <!--
+    <depends>org.jetbrains.idea.maven</depends>
+    <depends>org.jetbrains.plugins.gradle</depends>
+    <depends>org.intellij.groovy</depends>
+    -->
+    <depends>com.intellij.modules.lang</depends>
+
+    <id>io.ktor.intellij.plugin</id>
+    <name>Ktor</name>
     <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
 
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    Ktor framework plugin.<br>
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
@@ -19,11 +26,12 @@
         <moduleType id="KTOR_MODULE" implementationClass="io.ktor.start.intellij.KtorModuleType"/>
     </extensions>
 
+    <!--
     <actions>
         <group id="MyPlugin.SampleMenu" text="Greeting" description="Greeting menu">
             <add-to-group group-id="MainMenu" anchor="last"/>
             <action id="Myplugin.Textboxes" class="io.ktor.start.intellij.HelloAction" text="Hello" description="Says hello"/>
         </group>
-        <!-- Add your actions here -->
     </actions>
+    -->
 </idea-plugin>

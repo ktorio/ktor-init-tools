@@ -6,6 +6,16 @@ import io.ktor.start.util.*
 import js.externals.jquery.*
 import kotlin.browser.*
 
+val defaultArtifactGroup = "com.example"
+val defaultArtifactName = "ktor-demo"
+val defaultArtifactVersion = "0.0.1-SNAPSHOT"
+val defaultKtorVersion = Versions.LAST.version
+val defaultKtorEngine = "netty"
+
+val artifactGroupId = "artifact-group"
+val artifactNameId = "artifact-name"
+val artifactVersionId = "artifact-version"
+
 @Suppress("unused")
 fun main(args: Array<String>) {
     //println("TEST2")
@@ -15,18 +25,19 @@ fun main(args: Array<String>) {
     jq("#ktor-engine").change { updateHash() }
     jq("#ktor-version").change { updateHash() }
     jq("#project-type").change { updateHash() }
-    jq("#artifact-group").change { updateHash() }
-    jq("#artifact-name").change { updateHash() }
+
     jq("#artifact-group").keyup { updateHash() }
     jq("#artifact-name").keyup { updateHash() }
+    jqId(artifactVersionId).keyup { updateHash() }
 
     jq("#include_wrapper").prop("checked", if ("no_wrapper" in hashParams) "" else "checked")
     jq("#artifact-group").`val`(hashParams["artifact-group"]?.firstOrNull() ?: "com.example")
     jq("#artifact-name").`val`(hashParams["artifact-name"]?.firstOrNull() ?: "ktor-demo")
+    jq("#$artifactVersionId").`val`(hashParams[artifactVersionId]?.firstOrNull() ?: "0.0.1-SNAPSHOT")
     jq("#ktor-version").`val`(hashParams["ktor-version"]?.firstOrNull() ?: defaultKtorVersion)
     jq("#ktor-engine").`val`(hashParams["ktor-engine"]?.firstOrNull() ?: defaultKtorEngine)
     jq("#ktor-version").`val`(hashParams["ktor-version"]?.firstOrNull() ?: defaultKtorVersion)
-    jq("#project-type").`val`(hashParams["project-type"]?.firstOrNull() ?: ProjectTypes.gradle)
+    jq("#project-type").`val`(hashParams["project-type"]?.firstOrNull() ?: ProjectType.Gradle.id)
 
     addDependencies()
     registerBuildButton()
@@ -34,11 +45,6 @@ fun main(args: Array<String>) {
     removeLoading()
     updateHash()
 }
-
-val defaultArtifactGroup = "com.example"
-val defaultArtifactName = "ktor-demo"
-val defaultKtorVersion = Versions.LAST.version
-val defaultKtorEngine = "netty"
 
 val insideIframe: Boolean by lazy {
     try {
@@ -78,11 +84,14 @@ fun updateHash() {
     val projectType = jq("#project-type").`val`()
     if (projectType != "gradle") items["project-type"] = arrayListOf(projectType)
 
-    val artifactGroup = jq("#artifact-group").`val`()
-    if (artifactGroup != defaultArtifactGroup) items["artifact-group"] = arrayListOf(artifactGroup)
-
-    val artifactName = jq("#artifact-name").`val`()
-    if (artifactName != defaultArtifactName) items["artifact-name"] = arrayListOf(artifactName)
+    for ((key, default) in listOf(
+        artifactGroupId to defaultArtifactGroup,
+        artifactNameId to defaultArtifactName,
+        artifactVersionId to defaultArtifactVersion
+    )) {
+        val str = jqId(key).`val`()
+        if (str != default) items[key] = arrayListOf(str)
+    }
 
     document.location?.hash = items.formUrlEncode()
 
@@ -165,13 +174,15 @@ suspend fun build(dev: Boolean) {
     val projectType = jq("#project-type").`val`().unsafeCast<String>()
     val ktorEngine = jq("#ktor-engine").`val`().unsafeCast<String>()
     val ktorVersion = jq("#ktor-version").`val`().unsafeCast<String>()
-    val artifactGroup = jq("#artifact-group").`val`().unsafeCast<String>()
-    val artifactName = jq("#artifact-name").`val`().unsafeCast<String>()
+    val artifactGroup = jqId(artifactGroupId).`val`().unsafeCast<String>()
+    val artifactName = jqId(artifactNameId).`val`().unsafeCast<String>()
+    val artifactVersion = jqId(artifactVersionId).`val`().unsafeCast<String>()
     println("Generating ktor-sample.zip...")
     println("projectType: $projectType")
     println("ktorEngine: $ktorEngine")
     println("artifactGroup: $artifactGroup")
     println("artifactName: $artifactName")
+    println("artifactVersion: $artifactVersion")
 
     val dependenciesToInclude = ALL_FEATURES.filter {
         jq("#artifact-${it.id}").prop("checked").unsafeCast<Boolean>()
@@ -184,11 +195,12 @@ suspend fun build(dev: Boolean) {
 
     val info = BuildInfo(
         includeWrapper = includeWrapper,
-        projectType = projectType,
-        ktorVersion = ktorVersion,
+        projectType = ProjectType(projectType),
+        ktorVersion = SemVer(ktorVersion),
         artifactName = artifactName,
         artifactGroup = artifactGroup,
-        ktorEngine = ktorEngine,
+        artifactVersion = artifactVersion,
+        ktorEngine = KtorEngine(ktorEngine),
         fetch = { fetchFile(it) }
     )
     try {

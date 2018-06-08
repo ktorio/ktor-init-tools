@@ -23,6 +23,9 @@ internal object BuildFilesGradle : BuildInfoBlock() {
             +"apply plugin: 'kotlin'"
             +"apply plugin: 'application'"
             +""
+            +"group '${info.artifactName}'"
+            +"version '${info.artifactVersion}'"
+
             +"mainClassName = \"${info.developmentEngineFQ}\""
             +""
             "sourceSets" {
@@ -52,6 +55,9 @@ internal object BuildFilesGradle : BuildInfoBlock() {
             }
             +""
             +"kotlin.experimental.coroutines = 'enable'"
+        }
+        fileText("settings.gradle") {
+            +"rootProject.name = '${info.artifactName}'"
         }
         if (info.includeWrapper) {
             fileBinary("gradlew", mode = "755".toInt(8)) { info.fetch("gradle/gradlew") }

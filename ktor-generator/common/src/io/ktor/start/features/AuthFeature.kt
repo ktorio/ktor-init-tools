@@ -15,6 +15,7 @@ object AuthFeature : Feature(ApplicationKt) {
     val BLOCK = newSlot("BLOCK")
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addImport("io.ktor.auth.*")
         addFeatureInstall {
             if (info.ktorVer >= Versions.V092) {
                 "install(Authentication)" {

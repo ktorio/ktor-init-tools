@@ -43,6 +43,7 @@ external val jQuery: JQueryStatic<HTMLElement> = definedExternally
 
 inline fun jq(str: String) = jQuery(str)
 inline fun jq(str: HTMLElement) = jQuery(str)
+inline fun jqId(id: String) = jQuery("#$id")
 
 //external fun JQuery.io.ktor.start.on(name: String, event: dynamic)
 //inline fun JQuery<HTMLElement>.io.ktor.start.on(name: String, event: dynamic) = this.asDynamic().io.ktor.start.on(name, event)

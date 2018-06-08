@@ -4,15 +4,16 @@ import io.ktor.start.util.*
 
 data class BuildInfo(
     val includeWrapper: Boolean,
-    val projectType: String,
-    val ktorVersion: String,
+    val projectType: ProjectType,
+    val ktorVersion: SemVer,
     val artifactName: String,
     val artifactGroup: String,
-    val ktorEngine: String,
+    val artifactVersion: String,
+    val ktorEngine: KtorEngine,
     val fetch: suspend (path: String) -> ByteArray
 ) {
-    val ktorVer = SemVer(ktorVersion)
-    val developmentPackage = "io.ktor.server.$ktorEngine"
+    val ktorVer = ktorVersion
+    val developmentPackage = "io.ktor.server.${ktorEngine.id}"
     val developmentEngineFQ = "$developmentPackage.DevelopmentEngine"
 }
 

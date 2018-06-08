@@ -2,21 +2,21 @@ package io.ktor.start.intellij
 
 import com.intellij.ide.util.projectWizard.*
 import com.intellij.openapi.*
-import com.intellij.openapi.application.*
 import com.intellij.openapi.module.*
-import com.intellij.openapi.progress.*
-import com.intellij.openapi.project.*
 import com.intellij.openapi.projectRoots.*
 import com.intellij.openapi.roots.*
+import com.intellij.openapi.roots.ui.configuration.*
 import com.intellij.openapi.util.*
 import com.intellij.openapi.util.io.*
 import com.intellij.openapi.vfs.*
 import com.intellij.ui.components.*
+import com.intellij.uiDesigner.core.*
 import io.ktor.start.*
 import io.ktor.start.features.*
 import io.ktor.start.project.*
 import io.ktor.start.util.*
 import kotlinx.coroutines.experimental.*
+import java.awt.*
 import java.io.*
 import javax.swing.*
 
@@ -49,6 +49,7 @@ class KtorModuleBuilder : JavaModuleBuilder() {
     override fun getWeight() = JavaModuleBuilder.BUILD_SYSTEM_WEIGHT - 1
     override fun getBuilderId() = "KTOR_MODULE"
     override fun isSuitableSdkType(sdk: SdkTypeId?) = sdk === JavaSdk.getInstance()
+    val config = KtorModuleConfig()
 
     override fun setupRootModel(rootModel: ModifiableRootModel) {
         val project = rootModel.project
@@ -57,32 +58,40 @@ class KtorModuleBuilder : JavaModuleBuilder() {
         rootModel.addContentEntry(root)
         if (moduleJdk != null) rootModel.sdk = moduleJdk
 
-        //val configuration = settings.values.iterator().next()
-        //addDependencies(configuration, buildSystem)
+        project.name
 
         project.backgroundTask("Setting Up Project") {
             val info = BuildInfo(
-                includeWrapper = true,
-                projectType = "gradle",
-                ktorVersion = "0.9.2",
-                artifactName = "sample",
-                artifactGroup = "com.sample",
-                ktorEngine = "netty",
+                includeWrapper = config.wrapper,
+                projectType = config.projectType,
+                ktorVersion = config.ktorVersion,
+                artifactName = config.artifactId,
+                artifactGroup = config.artifactGroup,
+                artifactVersion = config.artifactVersion,
+                ktorEngine = config.engine,
                 fetch = {
                     val url =
                         KtorModuleType::class.java.getResourceAsStream(it)
                                 ?: KtorModuleType::class.java.getResourceAsStream("/$it")
                                 ?: ClassLoader.getSystemClassLoader().getResourceAsStream("/$it")
-                                ?: ClassLoader.getSystemClassLoader().getResourceAsStream("$it")
+                                ?: ClassLoader.getSystemClassLoader().getResourceAsStream(it)
                     url?.readBytes() ?: error("Can't find resource '$it'")
                 }
             )
 
             runBlocking {
-                for ((_, content) in generate(info, ApplicationKt)) {
+                for ((_, content) in generate(info, listOf(ApplicationKt) + config.featuresToInstall)) {
                     root.createFile(content.name, content.data)
                 }
             }
+
+            //if (info.projectType == "gradle") {
+            //    // Tell Gradle to import this project
+            //    // https://github.com/minecraft-dev/MinecraftDev/blob/dev/src/main/kotlin/com/demonwav/mcdev/buildsystem/gradle/GradleBuildSystem.kt#L272
+            //    val projectDataManager = ServiceManager.getService(ProjectDataManager::class.java)
+            //    val gradleProjectImportBuilder = org.jetbrains.plugins.gradle.service.project.wizard.GradleProjectImportBuilder(projectDataManager)
+            //    val gradleProjectImportProvider = org.jetbrains.plugins.gradle.service.project.wizard.GradleProjectImportBuilder(gradleProjectImportBuilder)
+            //}
         }
     }
 
@@ -96,83 +105,96 @@ class KtorModuleBuilder : JavaModuleBuilder() {
     override fun getModuleType(): ModuleType<*> = JavaModuleType.getModuleType()
     override fun getParentGroup() = KtorModuleType.NAME
 
-    override fun getCustomOptionsStep(context: WizardContext, parentDisposable: Disposable?): ModuleWizardStep? {
-        //return ProjectJdkForModuleStep(context, JavaSdk.getInstance())
-        return KtorModuleWizardStep(context)
-    }
+    override fun createWizardSteps(
+        wizardContext: WizardContext, modulesProvider: ModulesProvider
+    ) = arrayOf(
+        KtorArtifactWizardStep(config)
+    )
+
+    override fun getCustomOptionsStep(context: WizardContext, parentDisposable: Disposable?) =
+        KtorModuleWizardStep(config)
+
 }
 
-fun VirtualFile.createFile(path: String, data: String, charset: Charset = UTF8): VirtualFile =
-    createFile(path, data.toByteArray(charset))
+class KtorModuleConfig {
+    var artifactGroup = "com.example"
+    var artifactId = "example"
+    var artifactVersion = "0.0.1"
+    var projectType = ProjectType.Gradle
+    var featuresToInstall = listOf<Feature>()
+    var ktorVersion = Versions.LAST
+    var wrapper = true
+    var engine = KtorEngine.Netty
+}
 
-fun VirtualFile.createFile(path: String, data: ByteArray): VirtualFile {
-    val file = File(path)
-    val dir = this.createDirectories(file.parent)
-    return runWriteAction {
-        dir.createChildData(null, file.name).apply {
-            setBinaryContent(data)
+class KtorArtifactWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
+    lateinit var groupId: JTextField
+    lateinit var artifactId: JTextField
+    lateinit var version: JTextField
+
+    val panel = JPanel().apply {
+        layout = GridLayoutManager(5, 2)
+        fun addLabelText(name: String, value: String, row: Int): JTextField {
+            val tfield = JTextField(value)
+            addAtGrid(JLabel(name), row = row, column = 0, anchor = GridConstraints.ANCHOR_WEST, fill = GridConstraints.FILL_NONE, HSizePolicy = GridConstraints.SIZEPOLICY_FIXED, VSizePolicy = GridConstraints.SIZEPOLICY_FIXED)
+            addAtGrid(tfield, row = row, column = 1, anchor = GridConstraints.ANCHOR_WEST, fill = GridConstraints.FILL_HORIZONTAL, HSizePolicy = GridConstraints.SIZEPOLICY_CAN_GROW or GridConstraints.SIZEPOLICY_WANT_GROW, VSizePolicy = GridConstraints.SIZEPOLICY_FIXED)
+            return tfield
         }
+        addAtGrid(JLabel(""), row = 0, column = 0, HSizePolicy = GridConstraints.SIZEPOLICY_FIXED, VSizePolicy = GridConstraints.SIZEPOLICY_FIXED)
+        groupId = addLabelText("GroupId", config.artifactGroup, row = 1)
+        artifactId = addLabelText("ArtifactId", config.artifactId, row = 2)
+        version = addLabelText("Version", config.artifactVersion, row = 3)
+        add(Spacer().apply {}, GridConstraints().apply { row = 4; column = 0; fill = GridConstraints.FILL_VERTICAL })
     }
-}
 
-fun VirtualFile.createDirectories(path: String?): VirtualFile {
-    if (path == null) return this
-    return runWriteAction {
-        val parts = path.split('/', limit = 2)
-        val firstName = parts[0]
-        val lastName = parts.getOrNull(1)
-        val child = this.findChild(firstName) ?: this.createChildDirectory(null, firstName)
-        if (lastName != null) child.createDirectories(lastName) else child
+    override fun updateDataModel() {
+        config.artifactGroup = groupId.text
+        config.artifactId = artifactId.text
+        config.artifactVersion = version.text
     }
+
+    override fun getComponent() = panel
 }
 
-fun Project.backgroundTask(
-    name: String,
-    indeterminate: Boolean = true,
-    cancellable: Boolean = false,
-    background: Boolean = false,
-    callback: (indicator: ProgressIndicator) -> Unit
-) {
-    ProgressManager.getInstance().run(object : Task.Backgroundable(this, name, cancellable, { background }) {
-        override fun shouldStartInBackground() = background
-
-        override fun run(indicator: ProgressIndicator) {
-            if (indeterminate) indicator.isIndeterminate = true
-            callback(indicator)
-        }
-    })
-}
-
-inline fun <T> runWriteAction(crossinline runnable: () -> T): T {
-    //return ApplicationManager.getApplication().runWriteAction(Computable { runnable() })
-    return object : WriteAction<T>() {
-        @Throws(Throwable::class)
-        override fun run(result: Result<T>) {
-            val res = runnable()
-            result.setResult(res)
-        }
-    }.execute().throwException().resultObject
-}
-
-class KtorModuleWizardStep(val context: WizardContext) : ModuleWizardStep() {
+class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
     override fun updateDataModel() {
         println("updateDataModel")
         //context.projectJdk = JavaSdkUtil.getIdeaRtJarPath()
+        config.projectType = projectTypeCB.selectedItem as ProjectType
+        config.featuresToInstall = featuresToCheckbox.keys.filter { it.selected }
+        config.ktorVersion = versionCB.selected
+        config.wrapper = wrapperCheckBox.isSelected
+        config.engine = engineCB.selected
     }
 
+    lateinit var projectTypeCB: JComboBox<ProjectType>
+    lateinit var engineCB: JComboBox<KtorEngine>
+    lateinit var versionCB: JComboBox<SemVer>
+    lateinit var wrapperCheckBox: JCheckBox
     val featuresToCheckbox = LinkedHashMap<Feature, JCheckBox>()
     val panel = JPanel().apply {
         layout = BoxLayout(this, BoxLayout.Y_AXIS)
         add(JPanel().apply {
+            layout = BoxLayout(this, BoxLayout.X_AXIS)
             add(JLabel("Project:"))
-            add(JComboBox(arrayOf("gradle", "maven")))
-            add(JCheckBox("Wrapper", true))
+            add(JComboBox(ProjectType.values()).apply {
+                projectTypeCB = this
+            })
+            add(JCheckBox("Wrapper", true).apply {
+                wrapperCheckBox = this
+            })
             add(JLabel("Using:"))
-            add(JComboBox(arrayOf("netty", "jetty", "tomcat", "cio")))
+            add(JComboBox(KtorEngine.values()).apply {
+                engineCB = this
+            })
             add(JLabel("Ktor Version:"))
-            add(JComboBox(arrayOf("0.9.2")))
+            add(JComboBox(Versions.ALL).apply {
+                versionCB = this
+            })
         })
-        add(JLabel("Features:"))
+        add(JLabel("Features:", SwingConstants.LEFT).apply {
+            alignmentX = Component.LEFT_ALIGNMENT
+        })
         add(JBScrollPane(JPanel().apply {
             layout = BoxLayout(this, BoxLayout.Y_AXIS)
             //border = IdeBorderFactory.createBorder()

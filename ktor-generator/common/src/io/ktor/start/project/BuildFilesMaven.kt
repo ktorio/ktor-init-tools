@@ -12,7 +12,7 @@ internal object BuildFilesMaven : BuildInfoBlock() {
                     +"<modelVersion>4.0.0</modelVersion>"
                     +"<groupId>${info.artifactGroup}</groupId>"
                     +"<artifactId>${info.artifactName}</artifactId>"
-                    +"<version>0.0.1-SNAPSHOT</version>"
+                    +"<version>${info.artifactVersion}</version>"
                     +"<name>${info.artifactName}</name>"
                     +"<description>${info.artifactName}</description>"
                     "<properties>" {

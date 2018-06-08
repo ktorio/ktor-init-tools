@@ -16,4 +16,6 @@ class SemVer(val version: String) : Comparable<SemVer> {
                 ?: this.info.compareTo(other.info).takeIf { it != 0 }
                 ?: 0
     }
+
+    override fun toString(): String = version
 }
