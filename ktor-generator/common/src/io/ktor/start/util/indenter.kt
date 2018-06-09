@@ -86,7 +86,8 @@ class Indenter(internal val actions: ArrayList<Action> = arrayListOf<Indenter.Ac
     }
 
     inline fun line(str: String, after: String = "", after2: String = "", callback: () -> Unit): Indenter {
-        line(if (str.isEmpty()) "{ $after" else "$str { $after")
+        val rafter = if (after.isEmpty()) "" else " $after"
+        line(if (str.isEmpty()) "{$rafter" else "$str {$rafter")
         indent(callback)
         line("}$after2")
         return this

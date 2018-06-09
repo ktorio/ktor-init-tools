@@ -35,4 +35,14 @@ class IndenterTest {
         }
         assertEquals("HELLO\n\nWORLD\n", indenter.toString())
     }
+
+    @Test
+    fun testBlock() {
+        val indenter = Indenter {
+            "hello" {
+                +"world"
+            }
+        }
+        assertEquals("hello {\n\tworld\n}\n", indenter.toString())
+    }
 }
