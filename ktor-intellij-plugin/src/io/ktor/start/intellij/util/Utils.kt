@@ -1,4 +1,4 @@
-package io.ktor.start.intellij
+package io.ktor.start.intellij.util
 
 import com.intellij.openapi.application.*
 import com.intellij.openapi.progress.*
@@ -85,7 +85,22 @@ fun JPanel.addAtGrid(
     preferredSize: Dimension = Dimension(-1, -1),
     maximumSize: Dimension = Dimension(-1, -1)
 ) {
-    add(item, GridConstraints(row, column, rowSpan, colSpan, anchor, fill, HSizePolicy, VSizePolicy, minimumSize, preferredSize, maximumSize))
+    add(
+        item,
+        GridConstraints(
+            row,
+            column,
+            rowSpan,
+            colSpan,
+            anchor,
+            fill,
+            HSizePolicy,
+            VSizePolicy,
+            minimumSize,
+            preferredSize,
+            maximumSize
+        )
+    )
 }
 
 inline fun invokeLater(crossinline func: () -> Unit) {

@@ -15,6 +15,7 @@
     <vendor>JetBrains</vendor>
 
     <depends>com.intellij.modules.java</depends>
+    <depends>org.jetbrains.kotlin</depends>
     <depends>org.jetbrains.plugins.gradle</depends>
     <depends>org.jetbrains.idea.maven</depends>
     <depends>com.intellij.modules.lang</depends>
