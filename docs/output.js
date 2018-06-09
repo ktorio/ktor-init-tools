@@ -1087,13 +1087,6 @@
     simpleName: 'FileContainer',
     interfaces: []
   };
-  function FileFetcher() {
-  }
-  FileFetcher.$metadata$ = {
-    kind: Kind_INTERFACE,
-    simpleName: 'FileFetcher',
-    interfaces: []
-  };
   function add($receiver, name, content, charset, mode) {
     if (charset === void 0)
       charset = UTF8_getInstance();
@@ -1417,7 +1410,8 @@
     }
   });
   function AuthBasicFeature$renderFeature$lambda($receiver) {
-    $receiver.line_61zpoe$('basic'.length === 0 ? '{ ' + '' : 'basic' + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$('basic'.length === 0 ? '{' + rafter : 'basic' + ' {' + rafter);
     $receiver._indent();
     $receiver._unindent();
     $receiver.line_61zpoe$('}' + '');
@@ -1535,7 +1529,8 @@
     return function ($receiver) {
       if (closure$info.ktorVer.compareTo_11rb$(Versions_getInstance().V092) >= 0) {
         var $receiver_0 = 'install(Authentication)';
-        $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+        var rafter = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
         $receiver._indent();
         try {
           var this$AuthFeature_0 = this$AuthFeature;
@@ -1548,7 +1543,8 @@
       }
        else {
         var $receiver_1 = 'install(Authentication)';
-        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + '' : $receiver_1 + ' { ' + '');
+        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
         $receiver._indent();
         try {
           var this$AuthFeature_1 = this$AuthFeature;
@@ -1785,14 +1781,16 @@
   });
   function AutoHeadResponseFeature$renderFeature$lambda($receiver) {
     var $receiver_0 = 'install(CachingHeaders)';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('options { outgoingContent ->');
       $receiver._indent();
       try {
         var $receiver_1 = 'when (outgoingContent.contentType?.withoutParameters())';
-        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + '' : $receiver_1 + ' { ' + '');
+        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
         $receiver._indent();
         try {
           $receiver.line_61zpoe$('ContentType.Text.CSS -> CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 24 * 60 * 60))');
@@ -1872,7 +1870,8 @@
   });
   function CORSFeature$renderFeature$lambda($receiver) {
     var $receiver_0 = 'install(CORS)';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('method(HttpMethod.Options)');
@@ -2009,7 +2008,8 @@
   });
   function CallLoggingFeature$renderFeature$lambda($receiver) {
     var $receiver_0 = 'install(CallLogging)';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('level = Level.INFO');
@@ -2080,10 +2080,12 @@
   });
   function CompressionFeature$renderFeature$lambda($receiver) {
     var $receiver_0 = 'install(Compression)';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
-      $receiver.line_61zpoe$('gzip'.length === 0 ? '{ ' + '' : 'gzip' + ' { ' + '');
+      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$('gzip'.length === 0 ? '{' + rafter_0 : 'gzip' + ' {' + rafter_0);
       $receiver._indent();
       try {
         $receiver.line_61zpoe$('priority = 1.0');
@@ -2092,7 +2094,8 @@
         $receiver._unindent();
       }
       $receiver.line_61zpoe$('}' + '');
-      $receiver.line_61zpoe$('deflate'.length === 0 ? '{ ' + '' : 'deflate' + ' { ' + '');
+      var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$('deflate'.length === 0 ? '{' + rafter_1 : 'deflate' + ' {' + rafter_1);
       $receiver._indent();
       try {
         $receiver.line_61zpoe$('priority = 10.0');
@@ -2229,7 +2232,8 @@
   function ContentNegotiationFeature$renderFeature$lambda(this$ContentNegotiationFeature, this$renderFeature) {
     return function ($receiver) {
       var $receiver_0 = 'install(ContentNegotiation)';
-      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
       $receiver._indent();
       try {
         var this$ContentNegotiationFeature_0 = this$ContentNegotiationFeature;
@@ -2299,14 +2303,17 @@
   });
   function CssDslFeature$renderFeature$lambda($receiver) {
     var $receiver_0 = 'get("/styles.css")';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       var $receiver_1 = 'call.respondCss';
-      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + '' : $receiver_1 + ' { ' + '');
+      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
       $receiver._indent();
       try {
-        $receiver.line_61zpoe$('body'.length === 0 ? '{ ' + '' : 'body' + ' { ' + '');
+        var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$('body'.length === 0 ? '{' + rafter_1 : 'body' + ' {' + rafter_1);
         $receiver._indent();
         try {
           $receiver.line_61zpoe$('backgroundColor = Color.red');
@@ -2315,7 +2322,8 @@
           $receiver._unindent();
         }
         $receiver.line_61zpoe$('}' + '');
-        $receiver.line_61zpoe$('p'.length === 0 ? '{ ' + '' : 'p' + ' { ' + '');
+        var rafter_2 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$('p'.length === 0 ? '{' + rafter_2 : 'p' + ' {' + rafter_2);
         $receiver._indent();
         try {
           $receiver.line_61zpoe$('fontSize = 2.em');
@@ -2325,7 +2333,8 @@
         }
         $receiver.line_61zpoe$('}' + '');
         var $receiver_2 = 'rule("p.myclass")';
-        $receiver.line_61zpoe$($receiver_2.length === 0 ? '{ ' + '' : $receiver_2 + ' { ' + '');
+        var rafter_3 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_3 : $receiver_2 + ' {' + rafter_3);
         $receiver._indent();
         try {
           $receiver.line_61zpoe$('color = Color.blue');
@@ -2348,11 +2357,13 @@
   }
   function CssDslFeature$renderFeature$lambda_0($receiver) {
     var $receiver_0 = 'fun FlowOrMetaDataContent.styleCss(builder: CSSBuilder.() -> Unit)';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       var $receiver_1 = 'style(type = ContentType.Text.CSS.toString())';
-      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + '' : $receiver_1 + ' { ' + '');
+      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
       $receiver._indent();
       try {
         $receiver.line_61zpoe$('+CSSBuilder().apply(builder).toString()');
@@ -2370,7 +2381,8 @@
   }
   function CssDslFeature$renderFeature$lambda_1($receiver) {
     var $receiver_0 = 'fun CommonAttributeGroupFacade.style(builder: CSSBuilder.() -> Unit)';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('this.style = CSSBuilder().apply(builder).toString().trim()');
@@ -2383,7 +2395,8 @@
   }
   function CssDslFeature$renderFeature$lambda_2($receiver) {
     var $receiver_0 = 'suspend inline fun ApplicationCall.respondCss(builder: CSSBuilder.() -> Unit)';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('this.respondText(CSSBuilder().apply(builder).toString(), ContentType.Text.CSS)');
@@ -2517,7 +2530,8 @@
   });
   function DefaultHeadersFeature$renderFeature$lambda($receiver) {
     var $receiver_0 = 'install(DefaultHeaders)';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('header("X-Engine", "Ktor") // will send this header with each response');
@@ -2651,7 +2665,8 @@
   }
   function FreemarkerFeature$renderFeature$lambda_0($receiver) {
     var $receiver_0 = 'install(FreeMarker)';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")');
@@ -2664,7 +2679,8 @@
   }
   function FreemarkerFeature$renderFeature$lambda_1($receiver) {
     var $receiver_0 = 'get("/html-freemarker")';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('call.respond(FreeMarkerContent("index.ftl", mapOf("data" to IndexData(listOf(1, 2, 3))), ""))');
@@ -2810,7 +2826,8 @@
   });
   function HSTSFeature$renderFeature$lambda($receiver) {
     var $receiver_0 = 'install(HSTS)';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('includeSubDomains = true');
@@ -2879,22 +2896,27 @@
   });
   function HtmlDslFeature$renderFeature$lambda($receiver) {
     var $receiver_0 = 'get("/html-dsl")';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       var $receiver_1 = 'call.respondHtml';
-      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + '' : $receiver_1 + ' { ' + '');
+      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
       $receiver._indent();
       try {
-        $receiver.line_61zpoe$('body'.length === 0 ? '{ ' + '' : 'body' + ' { ' + '');
+        var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$('body'.length === 0 ? '{' + rafter_1 : 'body' + ' {' + rafter_1);
         $receiver._indent();
         try {
           $receiver.line_61zpoe$('h1 { +"HTML" }');
-          $receiver.line_61zpoe$('ul'.length === 0 ? '{ ' + '' : 'ul' + ' { ' + '');
+          var rafter_2 = ''.length === 0 ? '' : ' ' + '';
+          $receiver.line_61zpoe$('ul'.length === 0 ? '{' + rafter_2 : 'ul' + ' {' + rafter_2);
           $receiver._indent();
           try {
             var $receiver_2 = 'for (n in 1..10)';
-            $receiver.line_61zpoe$($receiver_2.length === 0 ? '{ ' + '' : $receiver_2 + ' { ' + '');
+            var rafter_3 = ''.length === 0 ? '' : ' ' + '';
+            $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_3 : $receiver_2 + ' {' + rafter_3);
             $receiver._indent();
             try {
               $receiver.line_61zpoe$('li { +"$n" }');
@@ -3036,7 +3058,8 @@
   });
   function HttpsRedirectFeature$renderFeature$lambda($receiver) {
     var $receiver_0 = 'install(HttpsRedirect)';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('// The port to redirect to. By default 443, the default HTTPS port.');
@@ -3107,7 +3130,8 @@
     }
   });
   function JsonGsonFeature$renderFeature$lambda($receiver) {
-    $receiver.line_61zpoe$('gson'.length === 0 ? '{ ' + '' : 'gson' + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$('gson'.length === 0 ? '{' + rafter : 'gson' + ' {' + rafter);
     $receiver._indent();
     $receiver._unindent();
     $receiver.line_61zpoe$('}' + '');
@@ -3115,7 +3139,8 @@
   }
   function JsonGsonFeature$renderFeature$lambda_0($receiver) {
     var $receiver_0 = 'get("/json/gson")';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('call.respond(mapOf("hello" to "world"))');
@@ -3185,7 +3210,8 @@
     }
   });
   function JsonJacksonFeature$renderFeature$lambda($receiver) {
-    $receiver.line_61zpoe$('jackson'.length === 0 ? '{ ' + '' : 'jackson' + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$('jackson'.length === 0 ? '{' + rafter : 'jackson' + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('enable(SerializationFeature.INDENT_OUTPUT)');
@@ -3198,7 +3224,8 @@
   }
   function JsonJacksonFeature$renderFeature$lambda_0($receiver) {
     var $receiver_0 = 'get("/json/jackson")';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('call.respond(mapOf("hello" to "world"))');
@@ -3374,7 +3401,8 @@
   });
   function PartialContentFeature$renderFeature$lambda($receiver) {
     var $receiver_0 = 'install(PartialContent)';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('// Maximum number of ranges that will be accepted from a HTTP request.');
@@ -3550,13 +3578,15 @@
   });
   function RoutingFeature$renderFeature$lambda(this$RoutingFeature, this$renderFeature) {
     return function ($receiver) {
-      $receiver.line_61zpoe$('routing'.length === 0 ? '{ ' + '' : 'routing' + ' { ' + '');
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$('routing'.length === 0 ? '{' + rafter : 'routing' + ' {' + rafter);
       $receiver._indent();
       try {
         var this$RoutingFeature_0 = this$RoutingFeature;
         var this$renderFeature_0 = this$renderFeature;
         var $receiver_0 = 'get("/")';
-        $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter_0 : $receiver_0 + ' {' + rafter_0);
         $receiver._indent();
         try {
           $receiver.line_61zpoe$('call.respondText("HELLO WORLD!", contentType = ContentType.Text.Plain)');
@@ -3698,7 +3728,8 @@
   }
   function ShutdownUrlFeature$renderFeature$lambda_0($receiver) {
     var $receiver_0 = 'install(ShutDownUrl.ApplicationCallFeature)';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$("// The URL that will be intercepted (you can also use the application.conf's ktor.deployment.shutdown.url key)");
@@ -3772,7 +3803,8 @@
   function StaticContentFeature$renderFeature$lambda($receiver) {
     $receiver.line_61zpoe$('// Static feature. Try to access `/static/ktor_logo.svg`');
     var $receiver_0 = 'static("static")';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('resources("static")');
@@ -3896,12 +3928,14 @@
   }
   function StatusPagesFeature$renderFeature$lambda_0($receiver) {
     var $receiver_0 = 'install(StatusPages)';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
       var $receiver_1 = 'exception<AuthenticationException>';
       var suffix = ' cause ->';
-      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + suffix : $receiver_1 + ' { ' + suffix);
+      var rafter_0 = suffix.length === 0 ? '' : ' ' + suffix;
+      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
       $receiver._indent();
       try {
         $receiver.line_61zpoe$('call.respond(HttpStatusCode.Unauthorized)');
@@ -3912,7 +3946,8 @@
       $receiver.line_61zpoe$('}' + '');
       var $receiver_2 = 'exception<AuthorizationException>';
       var suffix_0 = ' cause ->';
-      $receiver.line_61zpoe$($receiver_2.length === 0 ? '{ ' + suffix_0 : $receiver_2 + ' { ' + suffix_0);
+      var rafter_1 = suffix_0.length === 0 ? '' : ' ' + suffix_0;
+      $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_1 : $receiver_2 + ' {' + rafter_1);
       $receiver._indent();
       try {
         $receiver.line_61zpoe$('call.respond(HttpStatusCode.Forbidden)');
@@ -4086,14 +4121,16 @@
       try {
         switch (this.state_0) {
           case 0:
-            this.local$$receiver.line_61zpoe$('ktor'.length === 0 ? '{ ' + '' : 'ktor' + ' { ' + '');
+            var rafter = ''.length === 0 ? '' : ' ' + '';
+            this.local$$receiver.line_61zpoe$('ktor'.length === 0 ? '{' + rafter : 'ktor' + ' {' + rafter);
             this.local$$receiver._indent();
             try {
               var this$ApplicationConf = this.local$this$ApplicationConf;
               var this$render = this.local$this$render;
               var closure$info = this.local$closure$info;
               var $receiver = 'deployment';
-              this.local$$receiver.line_61zpoe$($receiver.length === 0 ? '{ ' + '' : $receiver + ' { ' + '');
+              var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+              this.local$$receiver.line_61zpoe$($receiver.length === 0 ? '{' + rafter_0 : $receiver + ' {' + rafter_0);
               this.local$$receiver._indent();
               try {
                 this.local$$receiver.line_61zpoe$('port = 8080');
@@ -4105,7 +4142,8 @@
               }
               this.local$$receiver.line_61zpoe$('}' + '');
               var $receiver_0 = 'application';
-              this.local$$receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+              var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+              this.local$$receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter_1 : $receiver_0 + ' {' + rafter_1);
               this.local$$receiver._indent();
               try {
                 this.local$$receiver.line_61zpoe$('modules = [ ' + closure$info.artifactGroup + '.ApplicationKt.main ]');
@@ -4216,7 +4254,8 @@
   function ApplicationKt$render$lambda$lambda_2(this$ApplicationKt, this$render) {
     return function ($receiver) {
       var $receiver_0 = 'fun Application.main()';
-      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
       $receiver._indent();
       try {
         var this$ApplicationKt_0 = this$ApplicationKt;
@@ -4558,7 +4597,8 @@
         switch (this.state_0) {
           case 0:
             var $receiver = 'buildscript';
-            this.local$$receiver.line_61zpoe$($receiver.length === 0 ? '{ ' + '' : $receiver + ' { ' + '');
+            var rafter = ''.length === 0 ? '' : ' ' + '';
+            this.local$$receiver.line_61zpoe$($receiver.length === 0 ? '{' + rafter : $receiver + ' {' + rafter);
             this.local$$receiver._indent();
             try {
               var closure$info = this.local$closure$info;
@@ -4567,7 +4607,8 @@
               this.local$$receiver.line_61zpoe$("ext.logback_version = '1.2.1'");
               this.local$$receiver.line_61zpoe$('');
               var $receiver_0 = 'repositories';
-              this.local$$receiver.line_61zpoe$($receiver_0.length === 0 ? '{ ' + '' : $receiver_0 + ' { ' + '');
+              var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+              this.local$$receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter_0 : $receiver_0 + ' {' + rafter_0);
               this.local$$receiver._indent();
               try {
                 this.local$$receiver.line_61zpoe$('jcenter()');
@@ -4578,7 +4619,8 @@
               this.local$$receiver.line_61zpoe$('}' + '');
               this.local$$receiver.line_61zpoe$('');
               var $receiver_1 = 'dependencies';
-              this.local$$receiver.line_61zpoe$($receiver_1.length === 0 ? '{ ' + '' : $receiver_1 + ' { ' + '');
+              var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+              this.local$$receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_1 : $receiver_1 + ' {' + rafter_1);
               this.local$$receiver._indent();
               try {
                 this.local$$receiver.line_61zpoe$('classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"');
@@ -4602,7 +4644,8 @@
             this.local$$receiver.line_61zpoe$('mainClassName = ' + '"' + this.local$closure$info.developmentEngineFQ + '"');
             this.local$$receiver.line_61zpoe$('');
             var $receiver_2 = 'sourceSets';
-            this.local$$receiver.line_61zpoe$($receiver_2.length === 0 ? '{ ' + '' : $receiver_2 + ' { ' + '');
+            var rafter_2 = ''.length === 0 ? '' : ' ' + '';
+            this.local$$receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_2 : $receiver_2 + ' {' + rafter_2);
             this.local$$receiver._indent();
             try {
               this.local$$receiver.line_61zpoe$("main.kotlin.srcDirs = ['src']");
@@ -4615,7 +4658,8 @@
             this.local$$receiver.line_61zpoe$('}' + '');
             this.local$$receiver.line_61zpoe$('');
             var $receiver_3 = 'repositories';
-            this.local$$receiver.line_61zpoe$($receiver_3.length === 0 ? '{ ' + '' : $receiver_3 + ' { ' + '');
+            var rafter_3 = ''.length === 0 ? '' : ' ' + '';
+            this.local$$receiver.line_61zpoe$($receiver_3.length === 0 ? '{' + rafter_3 : $receiver_3 + ' {' + rafter_3);
             this.local$$receiver._indent();
             try {
               var tmp$;
@@ -4637,7 +4681,8 @@
             this.local$$receiver.line_61zpoe$('}' + '');
             this.local$$receiver.line_61zpoe$('');
             var $receiver_4 = 'dependencies';
-            this.local$$receiver.line_61zpoe$($receiver_4.length === 0 ? '{ ' + '' : $receiver_4 + ' { ' + '');
+            var rafter_4 = ''.length === 0 ? '' : ' ' + '';
+            this.local$$receiver.line_61zpoe$($receiver_4.length === 0 ? '{' + rafter_4 : $receiver_4 + ' {' + rafter_4);
             this.local$$receiver._indent();
             try {
               this.local$$receiver.linedeferred_yot30u$(BuildFilesGradle$render$lambda$lambda$lambda(this.local$this$render));
@@ -6821,7 +6866,8 @@
       after = '';
     if (after2 === void 0)
       after2 = '';
-    this.line_61zpoe$(str.length === 0 ? '{ ' + after : str + ' { ' + after);
+    var rafter = after.length === 0 ? '' : ' ' + after;
+    this.line_61zpoe$(str.length === 0 ? '{' + rafter : str + ' {' + rafter);
     this._indent();
     try {
       callback();
@@ -6943,7 +6989,8 @@
   Indenter.prototype.invoke_44doqu$ = defineInlineFunction('output.io.ktor.start.util.Indenter.invoke_44doqu$', function ($receiver, suffix, callback) {
     if (suffix === void 0)
       suffix = '';
-    this.line_61zpoe$($receiver.length === 0 ? '{ ' + suffix : $receiver + ' { ' + suffix);
+    var rafter = suffix.length === 0 ? '' : ' ' + suffix;
+    this.line_61zpoe$($receiver.length === 0 ? '{' + rafter : $receiver + ' {' + rafter);
     this._indent();
     try {
       callback();
@@ -7389,7 +7436,6 @@
   package$util.get_seconds_t5kl13$ = get_seconds;
   package$start.BuildInfo = BuildInfo;
   package$start.FileContainer = FileContainer;
-  package$start.FileFetcher = FileFetcher;
   package$start.add_ykoeqs$ = add;
   package$start.Feature = Feature;
   Object.defineProperty(KtorEngine, 'Netty', {
