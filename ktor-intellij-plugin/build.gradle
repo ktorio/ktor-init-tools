@@ -24,7 +24,10 @@ def intellijVersion = "IC-$intellijBaseVersion"
 
 intellij {
 	version intellijVersion
-	plugins = ['maven', 'gradle', 'properties', 'junit', 'coverage', 'kotlin']
+	plugins = [
+			'maven', 'gradle', 'properties', 'junit', 'coverage', 'kotlin',
+			'org.jetbrains.plugins.hocon:0.0.1' // Supporting `application.conf`
+	]
 	pluginName 'ktor'
 	downloadSources true
 }
