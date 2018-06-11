@@ -1,88 +1,104 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="styles.css"/>
 
-    <title>Ktor start</title>
+    <title>Ktor Project Generator</title>
 </head>
 <body>
 
 <header class="navbar navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">Ktor start</a>
+    <a class="navbar-brand" href="#"><img src="ktor_logo_box.svg" style="width:1.6em;height:1.6em;padding-right:0.5em;" />Ktor Project Generator</a>
 </header>
 
-<div class="container-fluid" style="margin-top:64px;">
+<div class="container-fluid" style="margin-top:84px;">
     <form>
         <div class="row">
             <div class="col-sm">
-                <h2 class="rwd-line form-inline">
-                    Generate a
-                    &nbsp;
-                    <select id="project-type" class="form-control">
-                        <option value="gradle">Gradle project</option>
-                        <option value="maven">Maven project</option>
-                    </select>
-                    &nbsp;
-                    <label for="include_wrapper"><input type="checkbox" id="include_wrapper" checked />&nbsp;with Wrapper</label>
-                    &nbsp;
-                    using
-                    &nbsp;
-                    <select id="ktor-engine" class="form-control">
-                        <option value="netty">Netty</option>
-                        <option value="jetty">Jetty</option>
-                        <option value="tomcat">Tomcat</option>
-                        <option value="cio">CIO</option>
-                    </select>
-                    &nbsp;
-                    <!--
-                    ,
-                    <select id="ktor-config" class="form-control">
-                        <option value="hocon">HOCON</option>
-                        <option value="embeddedServer">embedServ.</option>
-                    </select>
-                    -->
-                    and Ktor
-                    &nbsp;
-                    <select id="ktor-version" class="form-control">
-                        <option value="0.9.2" selected>0.9.2</option>
-                        <!--<option value="0.9.1">0.9.1</option>-->
-                    </select>
-                </h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm">
-                <h3>Project information</h3>
-                <div class="form-group">
-                    <label for="artifact-group">Group</label>
-                    <input type="text" id="artifact-group" class="form-control" placeholder="com.example"
-                           value="com.example"/>
+                <h4>Configuration</h4>
+
+                <div class="row">
+                    <div class="col-4">
+
+                        <div class="form-group">
+                            <label for="project-type">Project type</label>
+                            <select id="project-type" class="form-control">
+                                <option value="gradle">Gradle project</option>
+                                <option value="maven">Maven project</option>
+                            </select>
+                            <label for="include_wrapper"><input type="checkbox" id="include_wrapper" checked/>&nbsp;with
+                                Wrapper</label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="ktor-engine">Engine</label>
+                            <select id="ktor-engine" class="form-control">
+                                <option value="netty">Netty</option>
+                                <option value="jetty">Jetty</option>
+                                <option value="tomcat">Tomcat</option>
+                                <option value="cio">CIO</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="ktor-version">Ktor</label>
+                            <select id="ktor-version" class="form-control">
+                                <option value="0.9.2" selected>0.9.2</option>
+                                <!--<option value="0.9.1">0.9.1</option>-->
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="artifact-name">Name</label>
-                    <input type="text" id="artifact-name" class="form-control" placeholder="ktor-demo"
-                           value="ktor-demo"/>
+
+                <h4>Artifact</h4>
+
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="artifact-group">Group</label>
+                            <input type="text" id="artifact-group" class="form-control" placeholder="com.example"
+                                   value="com.example"/>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="artifact-name">Name</label>
+                            <input type="text" id="artifact-name" class="form-control" placeholder="ktor-demo"
+                                   value="ktor-demo"/>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="artifact-version">Version</label>
+                            <input type="text" id="artifact-version" class="form-control"
+                                   placeholder="0.0.1-SNAPSHOT"
+                                   value="0.0.1-SNAPSHOT"/>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="artifact-version">Version</label>
-                    <input type="text" id="artifact-version" class="form-control" placeholder="0.0.1-SNAPSHOT"
-                           value="0.0.1-SNAPSHOT"/>
-                </div>
+
                 <div class="form-group">
                     <button type="button" id="buildButton" class="btn btn-primary" disabled>Build</button>
-                    <button type="button" id="buildButtonDev" class="btn btn-danger" disabled style="display:none;">BuildDev</button>
+                    <button type="button" id="buildButtonDev" class="btn btn-danger" disabled style="display:none;">
+                        BuildDev
+                    </button>
                     <span class="loading">Waiting JavaScript...</span>
                 </div>
             </div>
+
             <div class="col-sm">
-                <h3>Features</h3>
-                <div><input id="dependency-filter" type="text" placeholder="Filter" accesskey="f" /></div>
-                <div id="dependencies" style="height:250px;overflow:auto;"><div style="padding: 8px;">Loading dependencies...</div></div>
+                <h4>Features</h4>
+                <div><input id="dependency-filter" type="text" placeholder="Filter" accesskey="f" class="form-control"/></div>
+                <div id="dependencies" style="height:250px;overflow:auto;margin-top: 8px;border-radius:6px;">
+                    <div style="padding: 8px;">Loading dependencies...</div>
+                </div>
             </div>
         </div>
     </form>
