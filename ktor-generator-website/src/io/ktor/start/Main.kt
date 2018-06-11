@@ -44,6 +44,7 @@ fun main(args: Array<String>) {
     handleFiltering()
     removeLoading()
     updateHash()
+    registerKeyboardUsability()
 }
 
 val insideIframe: Boolean by lazy {

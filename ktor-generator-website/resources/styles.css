@@ -1,0 +1,40 @@
+.loading {
+    color: #aaa;
+}
+
+.loaded {
+    display: none;
+}
+
+label.artifact {
+    display: block;
+    padding: 0 8px;
+}
+
+label.artifact .subtitle {
+}
+
+.artifact .subtitle {
+    font-size: 0.75em;
+    color: #777;
+}
+
+.artifact .artifact-name {
+    font-size: 0.75em;
+    color: #aaa;
+}
+
+.artifact:hover {
+    background: #fafafa;
+}
+
+.artifact.active {
+    background: #f7f7f7;
+}
+
+#dependencies {
+    border: 1px solid #ddd;
+}
+h2 {
+    font-size: 1.7em;
+}
