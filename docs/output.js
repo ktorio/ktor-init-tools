@@ -42,6 +42,8 @@
   var setOf = Kotlin.kotlin.collections.setOf_i5x0yv$;
   var ensureNotNull = Kotlin.ensureNotNull;
   var contains = Kotlin.kotlin.text.contains_li3zpu$;
+  var equals = Kotlin.equals;
+  var numberToInt = Kotlin.numberToInt;
   var toInt = Kotlin.kotlin.text.toInt_6ic1pp$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var plus_0 = Kotlin.kotlin.collections.plus_iwxh38$;
@@ -49,7 +51,6 @@
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
   var LinkedHashSet_init = Kotlin.kotlin.collections.LinkedHashSet_init_287e2$;
-  var equals = Kotlin.equals;
   var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
   var toString = Kotlin.toString;
   var toList = Kotlin.kotlin.collections.toList_7wnvza$;
@@ -426,6 +427,7 @@
     handleFiltering();
     removeLoading();
     updateHash();
+    registerKeyboardUsability();
   }
   function insideIframe$lambda() {
     try {
@@ -977,6 +979,73 @@
   function removeLoading() {
     var str = '.loading';
     jQuery(str).removeClass('loading').addClass('loaded');
+  }
+  function registerKeyboardUsability$lambda(be) {
+    var tmp$, tmp$_0;
+    var e = Kotlin.isType(tmp$ = be, KeyboardEvent) ? tmp$ : throwCCE();
+    var active = document.activeElement;
+    var dependencyFilter = document.getElementById('dependency-filter');
+    var body = document.body;
+    if (!equals(active != null ? active.tagName : null, 'INPUT') && !equals(active != null ? active.tagName : null, 'TEXTAREA') && e.key === 'f') {
+      dependencyFilter != null ? dependencyFilter.focus() : null;
+      e.preventDefault();
+    }
+    if (active === dependencyFilter) {
+      var str = '.artifact.active:visible';
+      var current = jQuery(str);
+      switch (e.key) {
+        case 'Escape':
+          dependencyFilter != null ? dependencyFilter.blur() : null;
+          e.preventDefault();
+          break;
+        case 'Enter':
+          var checkbox = current.find('[type=checkbox]');
+          checkbox.prop('checked', !checkbox.prop('checked'));
+          e.preventDefault();
+          break;
+        case 'ArrowUp':
+        case 'ArrowDown':
+          var up = e.key === 'ArrowUp';
+          var count = current.length;
+          var next;
+          if (equals(count, 0)) {
+            var str_0 = '.artifact:visible';
+            next = jQuery(str_0).first();
+          }
+           else {
+            next = current;
+            do {
+              next = up ? next.prev('.artifact') : next.next('.artifact');
+            }
+             while (numberToInt(next.length) >= 1 && !next.is(':visible'));
+            if (equals(next.length, 0)) {
+              var tmp$_1;
+              if (up) {
+                var str_1 = '.artifact:visible';
+                tmp$_1 = jQuery(str_1).last();
+              }
+               else {
+                var str_2 = '.artifact:visible';
+                tmp$_1 = jQuery(str_2).first();
+              }
+              next = tmp$_1;
+            }
+          }
+
+          next.addClass('active');
+          current.removeClass('active');
+          if (numberToInt(next.length) >= 1) {
+            (tmp$_0 = next[0]) != null ? (tmp$_0.scrollIntoView(jsObject([to('behavior', 'instant'), to('block', 'center'), to('inline', 'center')])), Unit) : null;
+          }
+
+          e.preventDefault();
+          break;
+      }
+    }
+    return Unit;
+  }
+  function registerKeyboardUsability() {
+    document.addEventListener('keydown', registerKeyboardUsability$lambda);
   }
   function NewDateTime() {
     return new Date();
@@ -7424,6 +7493,7 @@
   package$start.registerBuildButton = registerBuildButton;
   package$start.handleFiltering = handleFiltering;
   package$start.removeLoading = removeLoading;
+  package$start.registerKeyboardUsability = registerKeyboardUsability;
   var package$util = package$start.util || (package$start.util = {});
   package$util.NewDateTime = NewDateTime;
   package$util.NewDateTime_s8cxhz$ = NewDateTime_0;
