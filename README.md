@@ -1,11 +1,11 @@
-# ktor-dev-tools
+# ktor-init-tools
 
-A set of development tools for the Ktor framework sharing code.
+A set of tools for creating Ktor projects.
 
 This includes:
 * A MPP library shared for Ktor project generation.
-* A website for generating Ktor projects as ZIP files client-side *(Kotlin-JS)*.
-* A intelliJ plugin generating Ktor projects *(Kotlin-JVM)*.
+* A Website for generating Ktor projects as ZIP files client-side *(Kotlin-JS)*.
+* A IntelliJ plugin generating Ktor projects *(Kotlin-JVM)*.
 
 The code generation features:
 * Maven and Gradle support including wrappers.
