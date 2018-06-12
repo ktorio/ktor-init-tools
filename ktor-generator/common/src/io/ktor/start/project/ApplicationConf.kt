@@ -34,7 +34,7 @@ object ApplicationConf : BuildInfoBlock() {
                 }
 
                 "application" {
-                    +"modules = [ ${info.artifactGroup}.ApplicationKt.main ]"
+                    +"modules = [ ${info.artifactGroup}.ApplicationKt.module ]"
                 }
 
                 block(KTOR)

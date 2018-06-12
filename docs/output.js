@@ -4222,7 +4222,7 @@
               this.local$$receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter_1 : $receiver_0 + ' {' + rafter_1);
               this.local$$receiver._indent();
               try {
-                this.local$$receiver.line_61zpoe$('modules = [ ' + closure$info.artifactGroup + '.ApplicationKt.main ]');
+                this.local$$receiver.line_61zpoe$('modules = [ ' + closure$info.artifactGroup + '.ApplicationKt.module ]');
               }
               finally {
                 this.local$$receiver._unindent();
@@ -4329,7 +4329,7 @@
   }
   function ApplicationKt$render$lambda$lambda_2(this$ApplicationKt, this$render) {
     return function ($receiver) {
-      var $receiver_0 = 'fun Application.main()';
+      var $receiver_0 = 'fun Application.module()';
       var rafter = ''.length === 0 ? '' : ' ' + '';
       $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
       $receiver._indent();

@@ -51,7 +51,7 @@ object ApplicationKt : BuildInfoBlock(BuildFiles, ApplicationConf) {
                 block(APPLICATION_CLASSES)
             }
             SEPARATOR {
-                "fun Application.main()" {
+                "fun Application.module()" {
                     block(MODULE_INSTALL)
                     EMPTY_LINE_ONCE()
                     block(MODULE_POST)
