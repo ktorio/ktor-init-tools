@@ -31,12 +31,12 @@ intellij {
 	downloadSources true
 }
 
-//publishPlugin {
-//	if (globalProps.jetbrainsUsername != null) {
-//		username globalProps.jetbrainsUsername
-//		password globalProps.jetbrainsPassword
-//	}
-//}
+publishPlugin {
+	if (rootProject.properties.jetbrainsUsername != null) {
+		username rootProject.properties.jetbrainsUsername
+		password rootProject.properties.jetbrainsPassword
+	}
+}
 
 runIde {
 	maxHeapSize = "2g"

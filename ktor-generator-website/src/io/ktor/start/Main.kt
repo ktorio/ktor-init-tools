@@ -35,6 +35,10 @@ val artifactVersionId = "artifact-version"
 
 @Suppress("unused")
 fun main(args: Array<String>) {
+    if (isLocalEnv) {
+        jq(".intellij-plugin").css("display", "inline-block")
+    }
+
     //println("TEST2")
     //println(localLocation)
     //println(globalLocation)
@@ -249,8 +253,10 @@ suspend fun build(dev: Boolean) {
     }
 }
 
+val isLocalEnv get() = document.location!!.hostname in setOf("127.0.0.1", "localhost")
+
 fun registerBuildButton() {
-    if (document.location!!.hostname in setOf("127.0.0.1", "localhost")) {
+    if (isLocalEnv) {
         jq("#buildButtonDev").removeAttr("disabled").css("display", "inline-block").on("click", {
             launch {
                 build(dev = true)

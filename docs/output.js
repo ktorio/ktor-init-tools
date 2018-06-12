@@ -388,40 +388,44 @@
   var Map = Kotlin.kotlin.collections.Map;
   function main(args) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12;
-    var str = '#include_wrapper';
-    jQuery(str).change(main$lambda);
-    var str_0 = '#ktor-engine';
-    jQuery(str_0).change(main$lambda_0);
-    var str_1 = '#ktor-version';
-    jQuery(str_1).change(main$lambda_1);
-    var str_2 = '#project-type';
-    jQuery(str_2).change(main$lambda_2);
-    var str_3 = '#artifact-group';
-    jQuery(str_3).keyup(main$lambda_3);
-    var str_4 = '#artifact-name';
-    jQuery(str_4).keyup(main$lambda_4);
+    if (get_isLocalEnv()) {
+      var str = '.intellij-plugin';
+      jQuery(str).css('display', 'inline-block');
+    }
+    var str_0 = '#include_wrapper';
+    jQuery(str_0).change(main$lambda);
+    var str_1 = '#ktor-engine';
+    jQuery(str_1).change(main$lambda_0);
+    var str_2 = '#ktor-version';
+    jQuery(str_2).change(main$lambda_1);
+    var str_3 = '#project-type';
+    jQuery(str_3).change(main$lambda_2);
+    var str_4 = '#artifact-group';
+    jQuery(str_4).keyup(main$lambda_3);
+    var str_5 = '#artifact-name';
+    jQuery(str_5).keyup(main$lambda_4);
     var id = artifactVersionId;
     jQuery('#' + id).keyup(main$lambda_5);
-    var str_5 = '#include_wrapper';
-    var tmp$_13 = jQuery(str_5);
+    var str_6 = '#include_wrapper';
+    var tmp$_13 = jQuery(str_6);
     var $receiver = get_hashParams();
     var key = 'no_wrapper';
     var tmp$_14;
     tmp$_13.prop('checked', (Kotlin.isType(tmp$_14 = $receiver, Map) ? tmp$_14 : throwCCE()).containsKey_11rb$(key) ? '' : 'checked');
-    var str_6 = '#artifact-group';
-    jQuery(str_6).val((tmp$_0 = (tmp$ = get_hashParams().get_11rb$('artifact-group')) != null ? firstOrNull(tmp$) : null) != null ? tmp$_0 : 'com.example');
-    var str_7 = '#artifact-name';
-    jQuery(str_7).val((tmp$_2 = (tmp$_1 = get_hashParams().get_11rb$('artifact-name')) != null ? firstOrNull(tmp$_1) : null) != null ? tmp$_2 : 'ktor-demo');
-    var str_8 = '#artifact-version';
-    jQuery(str_8).val((tmp$_4 = (tmp$_3 = get_hashParams().get_11rb$(artifactVersionId)) != null ? firstOrNull(tmp$_3) : null) != null ? tmp$_4 : '0.0.1-SNAPSHOT');
-    var str_9 = '#ktor-version';
-    jQuery(str_9).val((tmp$_6 = (tmp$_5 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_5) : null) != null ? tmp$_6 : defaultKtorVersion);
-    var str_10 = '#ktor-engine';
-    jQuery(str_10).val((tmp$_8 = (tmp$_7 = get_hashParams().get_11rb$('ktor-engine')) != null ? firstOrNull(tmp$_7) : null) != null ? tmp$_8 : defaultKtorEngine);
-    var str_11 = '#ktor-version';
-    jQuery(str_11).val((tmp$_10 = (tmp$_9 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_9) : null) != null ? tmp$_10 : defaultKtorVersion);
-    var str_12 = '#project-type';
-    jQuery(str_12).val((tmp$_12 = (tmp$_11 = get_hashParams().get_11rb$('project-type')) != null ? firstOrNull(tmp$_11) : null) != null ? tmp$_12 : ProjectType$Gradle_getInstance().id);
+    var str_7 = '#artifact-group';
+    jQuery(str_7).val((tmp$_0 = (tmp$ = get_hashParams().get_11rb$('artifact-group')) != null ? firstOrNull(tmp$) : null) != null ? tmp$_0 : 'com.example');
+    var str_8 = '#artifact-name';
+    jQuery(str_8).val((tmp$_2 = (tmp$_1 = get_hashParams().get_11rb$('artifact-name')) != null ? firstOrNull(tmp$_1) : null) != null ? tmp$_2 : 'ktor-demo');
+    var str_9 = '#artifact-version';
+    jQuery(str_9).val((tmp$_4 = (tmp$_3 = get_hashParams().get_11rb$(artifactVersionId)) != null ? firstOrNull(tmp$_3) : null) != null ? tmp$_4 : '0.0.1-SNAPSHOT');
+    var str_10 = '#ktor-version';
+    jQuery(str_10).val((tmp$_6 = (tmp$_5 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_5) : null) != null ? tmp$_6 : defaultKtorVersion);
+    var str_11 = '#ktor-engine';
+    jQuery(str_11).val((tmp$_8 = (tmp$_7 = get_hashParams().get_11rb$('ktor-engine')) != null ? firstOrNull(tmp$_7) : null) != null ? tmp$_8 : defaultKtorEngine);
+    var str_12 = '#ktor-version';
+    jQuery(str_12).val((tmp$_10 = (tmp$_9 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_9) : null) != null ? tmp$_10 : defaultKtorVersion);
+    var str_13 = '#project-type';
+    jQuery(str_13).val((tmp$_12 = (tmp$_11 = get_hashParams().get_11rb$('project-type')) != null ? firstOrNull(tmp$_11) : null) != null ? tmp$_12 : ProjectType$Gradle_getInstance().id);
     addDependencies();
     registerBuildButton();
     handleFiltering();
@@ -839,6 +843,9 @@
       }
      while (true);
   };
+  function get_isLocalEnv() {
+    return setOf(['127.0.0.1', 'localhost']).contains_11rb$(ensureNotNull(document.location).hostname);
+  }
   function registerBuildButton$lambda$lambda(continuation_0, suspended) {
     var instance = new Coroutine$registerBuildButton$lambda$lambda(continuation_0);
     if (suspended)
@@ -940,7 +947,7 @@
     return Unit;
   }
   function registerBuildButton() {
-    if (setOf(['127.0.0.1', 'localhost']).contains_11rb$(ensureNotNull(document.location).hostname)) {
+    if (get_isLocalEnv()) {
       var str = '#buildButtonDev';
       jQuery(str).removeAttr('disabled').css('display', 'inline-block').on('click', registerBuildButton$lambda);
     }
@@ -7490,6 +7497,9 @@
   package$start.formUrlEncode_jgmxsd$ = formUrlEncode_0;
   package$start.addDependencies = addDependencies;
   package$start.build_6taknv$ = build;
+  Object.defineProperty(package$start, 'isLocalEnv', {
+    get: get_isLocalEnv
+  });
   package$start.registerBuildButton = registerBuildButton;
   package$start.handleFiltering = handleFiltering;
   package$start.removeLoading = removeLoading;
