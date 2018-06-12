@@ -3878,7 +3878,7 @@
   });
   function StaticContentFeature$renderFeature$lambda($receiver) {
     $receiver.line_61zpoe$('// Static feature. Try to access `/static/ktor_logo.svg`');
-    var $receiver_0 = 'static("static")';
+    var $receiver_0 = 'static("/static")';
     var rafter = ''.length === 0 ? '' : ' ' + '';
     $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();

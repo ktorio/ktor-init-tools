@@ -33,7 +33,7 @@ object StaticContentFeature : Feature(ApplicationKt, RoutingFeature) {
         addImport("io.ktor.content.*")
         addRoute {
             +"// Static feature. Try to access `/static/ktor_logo.svg`"
-            "static(\"static\")" {
+            "static(\"/static\")" {
                 +"resources(\"static\")"
             }
         }
