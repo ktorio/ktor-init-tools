@@ -22,7 +22,7 @@ import io.ktor.start.project.*
 
 object SessionsFeature : Feature(ApplicationKt) {
     override val repos = Repos.ktor
-    override val artifacts = listOf("io.ktor:ktor-sessions:\$ktor_version")
+    override val artifacts = listOf("io.ktor:ktor-server-sessions:\$ktor_version") // Only required for Cache and Directory storages
     override val id = "ktor-sessions"
     override val title = "Sessions"
     override val description = "Adds supports for sessions: with the payload in the client or the server"

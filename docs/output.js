@@ -3710,7 +3710,7 @@
     SessionsFeature_instance = this;
     Feature.call(this, [ApplicationKt_getInstance()]);
     this.repos_630btl$_0 = Repos_getInstance().ktor;
-    this.artifacts_vzw0ft$_0 = listOf_0('io.ktor:ktor-sessions:$ktor_version');
+    this.artifacts_vzw0ft$_0 = listOf_0('io.ktor:ktor-server-sessions:$ktor_version');
     this.id_g5mcan$_0 = 'ktor-sessions';
     this.title_73d8de$_0 = 'Sessions';
     this.description_s0f43m$_0 = 'Adds supports for sessions: with the payload in the client or the server';
