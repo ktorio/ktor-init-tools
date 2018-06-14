@@ -19,7 +19,7 @@ package io.ktor.start
 
 import io.ktor.start.util.*
 
-val KOTLIN_VERSION = "1.2.41"
+val KOTLIN_VERSION = "1.2.50"
 
 object Versions {
     val V092 = SemVer("0.9.2")
