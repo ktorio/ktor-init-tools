@@ -24,14 +24,14 @@
   var wrapFunction = Kotlin.wrapFunction;
   var throwCCE = Kotlin.throwCCE;
   var firstOrNull = Kotlin.kotlin.collections.firstOrNull_2p1efm$;
-  var lazy = Kotlin.kotlin.lazy_klfg04$;
-  var PropertyMetadata = Kotlin.PropertyMetadata;
   var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
   var arrayListOf = Kotlin.kotlin.collections.arrayListOf_i5x0yv$;
   var to = Kotlin.kotlin.to_ujzrz7$;
   var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var trim = Kotlin.kotlin.text.trim_wqw3xr$;
   var Throwable = Error;
+  var lazy = Kotlin.kotlin.lazy_klfg04$;
+  var PropertyMetadata = Kotlin.PropertyMetadata;
   var split = Kotlin.kotlin.text.split_o64adg$;
   var listOf_0 = Kotlin.kotlin.collections.listOf_mh5how$;
   var plus = Kotlin.kotlin.collections.plus_mydzjv$;
@@ -59,7 +59,7 @@
   var copyOf = Kotlin.kotlin.collections.copyOf_mrm5p$;
   var numberToByte = Kotlin.numberToByte;
   var toChar = Kotlin.toChar;
-  var StringBuilder = Kotlin.kotlin.text.StringBuilder;
+  var StringBuilder_init = Kotlin.kotlin.text.StringBuilder_init;
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var unboxChar = Kotlin.unboxChar;
   var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
@@ -349,14 +349,6 @@
       (tmp$_1 = document.body) != null ? tmp$_1.removeChild(elem) : null;
     }
   }
-  var defaultArtifactGroup;
-  var defaultArtifactName;
-  var defaultArtifactVersion;
-  var defaultKtorVersion;
-  var defaultKtorEngine;
-  var artifactGroupId;
-  var artifactNameId;
-  var artifactVersionId;
   function main$lambda() {
     updateHash();
     return Unit;
@@ -388,10 +380,8 @@
   var Map = Kotlin.kotlin.collections.Map;
   function main(args) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12;
-    if (get_isLocalEnv()) {
-      var str = '.intellij-plugin';
-      jQuery(str).css('display', 'inline-block');
-    }
+    var str = '.intellij-plugin';
+    jQuery(str).css('display', 'inline-block');
     var str_0 = '#include_wrapper';
     jQuery(str_0).change(main$lambda);
     var str_1 = '#ktor-engine';
@@ -433,18 +423,14 @@
     updateHash();
     registerKeyboardUsability();
   }
-  function insideIframe$lambda() {
-    try {
-      return window.self !== window.top;
-    }
-     catch (e) {
-      return true;
-    }
-  }
-  var insideIframe;
-  function get_insideIframe() {
-    return insideIframe.value;
-  }
+  var defaultArtifactGroup;
+  var defaultArtifactName;
+  var defaultArtifactVersion;
+  var defaultKtorVersion;
+  var defaultKtorEngine;
+  var artifactGroupId;
+  var artifactNameId;
+  var artifactVersionId;
   function get_checked($receiver) {
     return !!$receiver.prop('checked');
   }
@@ -459,7 +445,7 @@
     var str = '#include_wrapper';
     set_checked(jQuery(str), value);
   }
-  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
   function updateHash() {
     var tmp$, tmp$_0, tmp$_1, tmp$_2;
     var items = LinkedHashMap_init();
@@ -538,9 +524,10 @@
     return hashParams.value;
   }
   var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
+  var ArrayList_init_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   function formUrlDecode($receiver) {
     var $receiver_0 = split($receiver, Kotlin.charArrayOf(38));
-    var destination = ArrayList_init(collectionSizeOrDefault($receiver_0, 10));
+    var destination = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
     var tmp$;
     tmp$ = $receiver_0.iterator();
     while (tmp$.hasNext()) {
@@ -570,7 +557,7 @@
       var list = tmp$_0_0;
       list.add_11rb$(element);
     }
-    var destination_1 = ArrayList_init(destination_0.size);
+    var destination_1 = ArrayList_init_0(destination_0.size);
     var tmp$_3;
     tmp$_3 = destination_0.entries.iterator();
     while (tmp$_3.hasNext()) {
@@ -578,7 +565,7 @@
       var tmp$_4 = destination_1.add_11rb$;
       var tmp$_5 = item_0.key;
       var $receiver_1 = item_0.value;
-      var destination_2 = ArrayList_init(collectionSizeOrDefault($receiver_1, 10));
+      var destination_2 = ArrayList_init_0(collectionSizeOrDefault($receiver_1, 10));
       var tmp$_6;
       tmp$_6 = $receiver_1.iterator();
       while (tmp$_6.hasNext()) {
@@ -604,7 +591,7 @@
     while (tmp$.hasNext()) {
       var element = tmp$.next();
       var $receiver_1 = element.value;
-      var destination_0 = ArrayList_init(collectionSizeOrDefault($receiver_1, 10));
+      var destination_0 = ArrayList_init_0(collectionSizeOrDefault($receiver_1, 10));
       var tmp$_0;
       tmp$_0 = $receiver_1.iterator();
       while (tmp$_0.hasNext()) {
@@ -992,7 +979,6 @@
     var e = Kotlin.isType(tmp$ = be, KeyboardEvent) ? tmp$ : throwCCE();
     var active = document.activeElement;
     var dependencyFilter = document.getElementById('dependency-filter');
-    var body = document.body;
     if (!equals(active != null ? active.tagName : null, 'INPUT') && !equals(active != null ? active.tagName : null, 'TEXTAREA') && e.key === 'f') {
       dependencyFilter != null ? dependencyFilter.focus() : null;
       e.preventDefault();
@@ -1251,7 +1237,7 @@
   }
   var mapCapacity = Kotlin.kotlin.collections.mapCapacity_za3lpa$;
   var coerceAtLeast = Kotlin.kotlin.ranges.coerceAtLeast_dqglrj$;
-  var LinkedHashMap_init_0 = Kotlin.kotlin.collections.LinkedHashMap_init_xf5xz2$;
+  var LinkedHashMap_init_0 = Kotlin.kotlin.collections.LinkedHashMap_init_bwtc7$;
   function KtorEngine$Companion() {
     KtorEngine$Companion_instance = this;
     var $receiver = KtorEngine$values();
@@ -4678,7 +4664,7 @@
             this.local$$receiver._indent();
             try {
               var closure$info = this.local$closure$info;
-              this.local$$receiver.line_61zpoe$("ext.kotlin_version = '1.2.41'");
+              this.local$$receiver.line_61zpoe$("ext.kotlin_version = '1.2.50'");
               this.local$$receiver.line_61zpoe$("ext.ktor_version = '" + closure$info.ktorVersion + "'");
               this.local$$receiver.line_61zpoe$("ext.logback_version = '1.2.1'");
               this.local$$receiver.line_61zpoe$('');
@@ -5189,7 +5175,7 @@
         var $this_0 = $receiver.indenter;
         $this_0._indent();
         try {
-          this$_0.line_61zpoe$('<kotlin_version>1.2.41<\/kotlin_version>');
+          this$_0.line_61zpoe$('<kotlin_version>1.2.50<\/kotlin_version>');
           this$_0.line_61zpoe$('<ktor_version>' + closure$info_0.ktorVersion + '<\/ktor_version>');
           this$_0.line_61zpoe$('<logback_version>1.2.1<\/logback_version>');
           this$_0.line_61zpoe$('<project.build.sourceEncoding>UTF-8<\/project.build.sourceEncoding>');
@@ -6432,7 +6418,7 @@
     return ASCII_instance;
   }
   function toString_0($receiver, charset) {
-    var $receiver_0 = new StringBuilder();
+    var $receiver_0 = StringBuilder_init();
     charset.decode_9w11d2$($receiver_0, $receiver, 0, $receiver.length);
     return $receiver_0.toString();
   }
@@ -6851,7 +6837,7 @@
   Indenter$Companion.prototype.invoke_61zpoe$ = function (str) {
     return this.single_61zpoe$(str);
   };
-  var StringBuilder_init = Kotlin.kotlin.text.StringBuilder_init_za3lpa$;
+  var StringBuilder_init_0 = Kotlin.kotlin.text.StringBuilder_init_za3lpa$;
   Indenter$Companion.prototype.replaceString_mvjluj$ = function (templateString, replacements) {
     var pattern = Regex_init('\\$(\\w+)');
     var replace_20wsma$result;
@@ -6863,7 +6849,7 @@
       }
       var lastStart = 0;
       var length = templateString.length;
-      var sb = StringBuilder_init(length);
+      var sb = StringBuilder_init_0(length);
       do {
         var foundMatch = ensureNotNull(match);
         sb.append_ezbsdh$(templateString, lastStart, foundMatch.range.start);
@@ -6975,7 +6961,7 @@
     this.markHandler = markHandler;
     this.indentEmptyLines = indentEmptyLines;
     this.doIndent = doIndent;
-    this.out = new StringBuilder();
+    this.out = StringBuilder_init();
     this.line = 0;
     this.newLine = true;
     this.indentIndex = 0;
@@ -7437,6 +7423,8 @@
   package$start.change_tue5ot$ = change;
   package$start.keyup_tue5ot$ = keyup;
   package$start.generateBrowserFile_cyqrs4$ = generateBrowserFile;
+  $$importsForInline$$.output = _;
+  package$start.main_kand9s$ = main;
   Object.defineProperty(package$start, 'defaultArtifactGroup', {
     get: function () {
       return defaultArtifactGroup;
@@ -7476,11 +7464,6 @@
     get: function () {
       return artifactVersionId;
     }
-  });
-  $$importsForInline$$.output = _;
-  package$start.main_kand9s$ = main;
-  Object.defineProperty(package$start, 'insideIframe', {
-    get: get_insideIframe
   });
   package$start.get_checked_pzor9e$ = get_checked;
   package$start.set_checked_4n8m03$ = set_checked;
@@ -7775,9 +7758,8 @@
   artifactGroupId = 'artifact-group';
   artifactNameId = 'artifact-name';
   artifactVersionId = 'artifact-version';
-  insideIframe = lazy(insideIframe$lambda);
   hashParams = lazy(hashParams$lambda);
-  KOTLIN_VERSION = '1.2.41';
+  KOTLIN_VERSION = '1.2.50';
   ALL_FEATURES = listOf([HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), HttpClientFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
   applicationKtImports = new Extra$PropertyThis(void 0, applicationKtImports$lambda);
   reposToInclude = new Extra$PropertyThis(void 0, reposToInclude$lambda);
