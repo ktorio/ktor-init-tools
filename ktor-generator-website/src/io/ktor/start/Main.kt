@@ -23,25 +23,10 @@ import io.ktor.start.util.*
 import js.externals.jquery.*
 import kotlin.browser.*
 
-val defaultArtifactGroup = "com.example"
-val defaultArtifactName = "ktor-demo"
-val defaultArtifactVersion = "0.0.1-SNAPSHOT"
-val defaultKtorVersion = Versions.LAST.version
-val defaultKtorEngine = "netty"
-
-val artifactGroupId = "artifact-group"
-val artifactNameId = "artifact-name"
-val artifactVersionId = "artifact-version"
-
 @Suppress("unused")
 fun main(args: Array<String>) {
-    if (isLocalEnv) {
-        jq(".intellij-plugin").css("display", "inline-block")
-    }
+    jq(".intellij-plugin").css("display", "inline-block")
 
-    //println("TEST2")
-    //println(localLocation)
-    //println(globalLocation)
     jq("#include_wrapper").change { updateHash() }
     jq("#ktor-engine").change { updateHash() }
     jq("#ktor-version").change { updateHash() }
@@ -68,20 +53,19 @@ fun main(args: Array<String>) {
     registerKeyboardUsability()
 }
 
-val insideIframe: Boolean by lazy {
-    try {
-        window.self !== window.top
-    } catch (e: dynamic) {
-        true
-    }
-}
+val defaultArtifactGroup = "com.example"
+val defaultArtifactName = "ktor-demo"
+val defaultArtifactVersion = "0.0.1-SNAPSHOT"
+val defaultKtorVersion = Versions.LAST.version
+val defaultKtorEngine = "netty"
 
-//val globalLocation get() = window.top.location
-//val localLocation get() = window.location
+val artifactGroupId = "artifact-group"
+val artifactNameId = "artifact-name"
+val artifactVersionId = "artifact-version"
 
-var JQuery<*>.checked
-    get(): Boolean = !!this.prop("checked").asDynamic()
-    set(value: Boolean) = run { this.prop("checked", if (value) "checked" else "") }
+var JQuery<*>.checked: Boolean
+    get() = !!this.prop("checked").asDynamic()
+    set(value) = run { this.prop("checked", if (value) "checked" else "") }
 
 var includeWrapper
     get() = jq("#include_wrapper").checked
@@ -257,18 +241,18 @@ val isLocalEnv get() = document.location!!.hostname in setOf("127.0.0.1", "local
 
 fun registerBuildButton() {
     if (isLocalEnv) {
-        jq("#buildButtonDev").removeAttr("disabled").css("display", "inline-block").on("click", {
+        jq("#buildButtonDev").removeAttr("disabled").css("display", "inline-block").on("click") {
             launch {
                 build(dev = true)
             }
-        })
+        }
     }
 
-    jq("#buildButton").removeAttr("disabled").on("click", {
+    jq("#buildButton").removeAttr("disabled").on("click") {
         launch {
             build(dev = false)
         }
-    })
+    }
 }
 
 

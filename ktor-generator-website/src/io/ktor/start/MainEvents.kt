@@ -10,7 +10,7 @@ fun registerKeyboardUsability() {
         val e = be as KeyboardEvent
         val active = document.activeElement
         val dependencyFilter = document.getElementById("dependency-filter")
-        var body = document.body
+
         if ((active?.tagName != "INPUT") && (active?.tagName != "TEXTAREA") && e.key === "f") {
             dependencyFilter.asDynamic()?.focus()
             e.preventDefault()
