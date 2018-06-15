@@ -19,7 +19,6 @@ compileKotlin2Js {
 }
 
 repositories {
-    jcenter()
     maven { url "https://kotlin.bintray.com/js-externals" }
 }
 

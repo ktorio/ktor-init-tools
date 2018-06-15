@@ -12,10 +12,6 @@ sourceSets {
     kotlinOptions.metaInfo = false
 }
 
-repositories {
-    jcenter()
-}
-
 dependencies {
     expectedBy project(":ktor-generator-common")
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
