@@ -57,6 +57,9 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
         fun showFeatureDocumentation(feature: Feature) {
             description.removeAll()
             description.add(JLabel(feature.description, SwingConstants.LEFT))
+            for (artifact in feature.artifacts) {
+                description.add(JLabel(artifact))
+            }
             val doc = feature.documentation
             if (doc != null) {
                 description.add(Link(doc, URL(doc)))
