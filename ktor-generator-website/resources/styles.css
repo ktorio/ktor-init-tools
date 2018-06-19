@@ -46,3 +46,20 @@ label.artifact .subtitle {
 h2 {
     font-size: 1.7em;
 }
+
+label.selected {
+    background: #e7e7ff !important;
+}
+
+label.indeterminate {
+    background: #ffe7ff !important;
+    color: #777;
+}
+
+label.artifact {
+    margin: 0;
+}
+
+.dependencies h2 {
+    margin: 0;
+}

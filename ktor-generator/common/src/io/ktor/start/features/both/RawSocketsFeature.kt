@@ -21,6 +21,8 @@ import io.ktor.start.*
 import io.ktor.start.project.*
 
 object RawSocketsFeature : ServerFeature(ApplicationKt) {
+    override val group = "Sockets"
+
     override val repos = Repos.ktor
     override val id = "ktor-network"
     override val title = "Raw Sockets"

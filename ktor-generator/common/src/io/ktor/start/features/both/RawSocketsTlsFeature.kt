@@ -20,7 +20,9 @@ package io.ktor.start.features.both
 import io.ktor.start.*
 import io.ktor.start.project.*
 
-object RawSocketsTlsFeature : ServerFeature(ApplicationKt) {
+object RawSocketsTlsFeature : ServerFeature(ApplicationKt, RawSocketsFeature) {
+    override val group = "Sockets"
+
     override val repos = Repos.ktor
     override val id = "ktor-network-tls"
     override val title = "Raw Secure SSL/TLS Sockets"

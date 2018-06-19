@@ -25,6 +25,8 @@ object JsonJacksonFeature : ServerFeature(ApplicationKt,
     ContentNegotiationFeature,
     RoutingFeature
 ) {
+    override val group: String = "Content Negotiation"
+
     override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-jackson:\$ktor_version")
     override val id = "ktor-jackson"

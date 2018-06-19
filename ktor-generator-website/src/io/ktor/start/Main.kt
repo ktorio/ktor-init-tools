@@ -106,6 +106,25 @@ fun updateHash() {
     } catch (e: dynamic) {
         console.error(e)
     }
+    updateIndeterminate()
+}
+
+fun updateIndeterminate() {
+    val directFeatures = ALL_FEATURES.filter { jq("#artifact-${it.id}").checked }.toSet()
+    val allFeatures = directFeatures.flatMap { it.getAllDependantBlocks().filterIsInstance<Feature>() }.toSet()
+    val transitiveFeatures = allFeatures - directFeatures
+    //println("directFeatures:$directFeatures")
+    //println("allFeatures:$allFeatures")
+    //println("transitiveFeatures:$transitiveFeatures")
+    for (feature in ALL_FEATURES) {
+        val selector = jq("#artifact-${feature.id}")
+        val selected = feature in allFeatures
+        val indeterminate = feature in transitiveFeatures
+        selector.prop("indeterminate", indeterminate)
+        selector.closest("label")
+            .toggleClass("indeterminate", indeterminate)
+            .toggleClass("selected", selected)
+    }
 }
 
 val hashParams: Map<String, List<String>> by lazy {

@@ -18,20 +18,20 @@ object CoreClientEngine : ClientEngine() {
 object ApacheClientEngine : ClientEngine(CoreClientEngine) {
     override val id: String = "ktor-client-apache"
     override val title = "Apache HttpClient Engine"
-    override val description = "Engine for the Ktor HttpClient using Apache."
+    override val description = "Engine for the Ktor HttpClient using Apache. Supports HTTP 1.x and HTTP 2.0."
     override val documentation = "https://ktor.io/clients/http-client.html#apache"
 }
 
 object CioClientEngine : ClientEngine(CoreClientEngine) {
     override val id: String = "ktor-client-cio"
     override val title = "CIO HttpClient Engine"
-    override val description = "Engine for the Ktor HttpClient using CIO (Corroutine I/O)."
+    override val description = "Engine for the Ktor HttpClient using CIO (Corroutine I/O). Only supports HTTP 1.x."
     override val documentation = "https://ktor.io/clients/http-client.html#cio"
 }
 
 object JettyClientEngine : ClientEngine(CoreClientEngine) {
     override val id: String = "ktor-client-jetty"
     override val title = "Jetty HttpClient Engine"
-    override val description = "Engine for the Ktor HttpClient using Jetty."
+    override val description = "Engine for the Ktor HttpClient using Jetty. Only supports HTTP 2.x."
     override val documentation = "https://ktor.io/clients/http-client.html#jetty"
 }
