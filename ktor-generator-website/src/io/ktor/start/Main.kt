@@ -110,16 +110,14 @@ fun updateHash() {
 }
 
 fun updateIndeterminate() {
-    val directFeatures = ALL_FEATURES.filter { jq("#artifact-${it.id}").checked }.toSet()
-    val allFeatures = directFeatures.flatMap { it.getAllDependantBlocks().filterIsInstance<Feature>() }.toSet()
-    val transitiveFeatures = allFeatures - directFeatures
+    val features = FeatureSet(ALL_FEATURES.filter { jq("#artifact-${it.id}").checked })
     //println("directFeatures:$directFeatures")
     //println("allFeatures:$allFeatures")
     //println("transitiveFeatures:$transitiveFeatures")
     for (feature in ALL_FEATURES) {
         val selector = jq("#artifact-${feature.id}")
-        val selected = feature in allFeatures
-        val indeterminate = feature in transitiveFeatures
+        val selected = feature in features.all
+        val indeterminate = feature in features.transitive
         selector.prop("indeterminate", indeterminate)
         selector.closest("label")
             .toggleClass("indeterminate", indeterminate)

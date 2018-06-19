@@ -59,4 +59,12 @@ abstract class Feature(vararg deps: Block<BuildInfo>) : Block<BuildInfo>(*deps) 
 
     open fun BlockBuilder.renderFeature(info: BuildInfo) {
     }
+
+    override fun toString(): String = "Feature($id)"
+}
+
+class FeatureSet(features: Iterable<Feature>) {
+    val direct = features.toSet()
+    val all = direct.flatMap { it.getAllDependantBlocks().filterIsInstance<Feature>() }.toSet()
+    val transitive = all - direct
 }
