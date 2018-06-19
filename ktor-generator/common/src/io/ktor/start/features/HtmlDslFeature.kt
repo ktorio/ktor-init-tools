@@ -21,7 +21,8 @@ import io.ktor.start.*
 import io.ktor.start.project.*
 import io.ktor.start.util.*
 
-object HtmlDslFeature : Feature(ApplicationKt, RoutingFeature) {
+object HtmlDslFeature : ServerFeature(ApplicationKt, RoutingFeature) {
+    override val group: String = "Templating"
     override val repos = Repos.jcenter
     override val artifacts = listOf("io.ktor:ktor-html-builder:\$ktor_version")
     override val id = "html-dsl"

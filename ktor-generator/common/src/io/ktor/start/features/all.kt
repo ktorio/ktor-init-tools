@@ -17,7 +17,24 @@
 
 package io.ktor.start.features
 
-val ALL_FEATURES = listOf(
+import io.ktor.start.*
+import io.ktor.start.features.both.*
+import io.ktor.start.features.client.*
+
+val ALL_SERVER_FEATURES by lazy { ALL_FEATURES.filterIsInstance<ServerFeature>() }
+val ALL_CLIENT_FEATURES by lazy { ALL_FEATURES.filterIsInstance<ClientFeature>() }
+
+val ALL_FEATURES: List<Feature> = listOf(
+    // Client Features
+    ApacheClientEngine,
+    CioClientEngine,
+    JettyClientEngine,
+    CoreClientEngine,
+    AuthBasicClientFeature,
+    JsonClientFeature,
+    WebSocketClientFeature,
+
+    // Server Features
     HtmlDslFeature,
     CssDslFeature,
     FreemarkerFeature,
@@ -50,7 +67,6 @@ val ALL_FEATURES = listOf(
     HttpsRedirectFeature,
     ShutdownUrlFeature,
     WebsocketsFeature,
-    HttpClientFeature,
     RawSocketsFeature,
     PartialContentFeature,
     RawSocketsTlsFeature

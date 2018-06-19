@@ -21,7 +21,7 @@ import io.ktor.start.*
 import io.ktor.start.project.*
 import io.ktor.start.util.*
 
-object JsonGsonFeature : Feature(ApplicationKt, ContentNegotiationFeature, RoutingFeature) {
+object JsonGsonFeature : ServerFeature(ApplicationKt, ContentNegotiationFeature, RoutingFeature) {
     override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-gson:\$ktor_version")
     override val id = "ktor-gson"

@@ -132,45 +132,57 @@ fun Map<String, List<String>>.formUrlEncode(): String {
 }
 
 fun addDependencies() {
-    val deps = jq("#dependencies")
-    deps.text("")
+    addDependenciesKind("server", ALL_SERVER_FEATURES)
+    addDependenciesKind("client", ALL_CLIENT_FEATURES)
+}
 
+fun addDependenciesKind(kind: String, features: List<Feature>) {
     val dependencyIds = (hashParams["dependency"] ?: listOf()).toSet()
 
-    for (dependency in ALL_FEATURES) {
-        //console.log(dependency)
-        val checkedBool = dependency.id in dependencyIds
-        val checked = if (checkedBool) "checked" else ""
-        deps.append(
-            jq("<label for='artifact-${dependency.id}' class='artifact' />")
-                .append(
-                    jq("<div class='title' />")
-                        .append(jq("<input id='artifact-${dependency.id}' type='checkbox' $checked />"))
-                        .append(jq("<span />").text(" ${dependency.title}"))
-                        .append(jq("<span class='artifact-name' />").text(" (${dependency.artifacts.joinToString(", ")})"))
-                )
-                .append(
-                    jq("<div class='subtitle' />")
-                        .append(jq("<div />").text(dependency.description))
-                        .append(
-                            jq("<div />")
-                                .apply {
-                                    if (dependency.documentation != null) {
-                                        append(
-                                            jq("<a />").attr("href", dependency.documentation ?: "").attr(
-                                                "target",
-                                                "_blank"
-                                            ).text("Documentation")
-                                        )
+    val deps = jq("#dependencies-$kind")
+    deps.text("")
+
+    for ((group, subfeatures) in features.groupBy { it.group }) {
+        deps.append(jq("<h2 class='artifact-group' />").text(group))
+        for (feature in subfeatures) {
+            //console.log(dependency)
+            val checkedBool = feature.id in dependencyIds
+            val checked = if (checkedBool) "checked" else ""
+
+            val artifacts = feature.artifacts
+            val simplifiedArtifacts = artifacts.map { it.removePrefix("io.ktor:").removeSuffix(":\$ktor_version") }
+
+            deps.append(
+                jq("<label for='artifact-${feature.id}' class='artifact' />")
+                    .append(
+                        jq("<div class='title' />")
+                            .append(jq("<input id='artifact-${feature.id}' type='checkbox' $checked />"))
+                            .append(jq("<span />").text(" ${feature.title}"))
+                            .append(jq("<span class='artifact-name' />").text(" (${simplifiedArtifacts.joinToString(", ")})"))
+                    )
+                    .append(
+                        jq("<div class='subtitle' />")
+                            .append(jq("<div />").text(feature.description))
+                            .append(
+                                jq("<div />")
+                                    .apply {
+                                        if (feature.documentation != null) {
+                                            append(
+                                                jq("<a />").attr("href", feature.documentation ?: "").attr(
+                                                    "target",
+                                                    "_blank"
+                                                ).text("Documentation")
+                                            )
+                                        }
                                     }
-                                }
-                        )
-                )
-        )
+                            )
+                    )
+            )
+        }
     }
 
-    for (dependency in ALL_FEATURES) {
-        jq("#artifact-${dependency.id}").change {
+    for (feature in features) {
+        jq("#artifact-${feature.id}").change {
             updateHash()
         }
     }
@@ -255,12 +267,16 @@ fun registerBuildButton() {
     }
 }
 
-
 fun handleFiltering() {
-    val dependencyFilter = jq("#dependency-filter")
+    handleFiltering("server")
+    handleFiltering("client")
+}
+
+fun handleFiltering(kind: String) {
+    val dependencyFilter = jq("#dependency-filter-$kind")
     dependencyFilter.on("keyup") {
         val filter = dependencyFilter.`val`().unsafeCast<String>().toLowerCase()
-        jq("label.artifact").each { index, element ->
+        jq("#dependencies-$kind label.artifact").each { index, element ->
             //console.log(thiz, element)
             val visible = (filter.isEmpty() || jq(element).text().toLowerCase().contains(filter))
             if (visible) jq(element).show() else jq(element).hide()

@@ -15,16 +15,16 @@
  *
  */
 
-package io.ktor.start.features
+package io.ktor.start.features.both
 
 import io.ktor.start.*
 import io.ktor.start.project.*
 
-object HttpClientFeature : Feature(ApplicationKt) {
+object RawSocketsTlsFeature : ServerFeature(ApplicationKt) {
     override val repos = Repos.ktor
-    override val artifacts = listOf("io.ktor:ktor-client-apache:\$ktor_version")
-    override val id = "ktor-client-apache"
-    override val title = "HTTP Client"
-    override val description = "Adds support for doing HTTP requests"
-    override val documentation = "https://ktor.io/clients/http-client.html"
+    override val id = "ktor-network-tls"
+    override val title = "Raw Secure SSL/TLS Sockets"
+    override val description =
+        "Adds Raw Socket support for listening and connecting to tcp and udp sockets with secure sockets"
+    override val documentation = "https://ktor.io/servers/raw-sockets.html#secure"
 }

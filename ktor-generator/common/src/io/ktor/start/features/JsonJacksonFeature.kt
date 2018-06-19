@@ -21,7 +21,7 @@ import io.ktor.start.*
 import io.ktor.start.project.*
 import io.ktor.start.util.*
 
-object JsonJacksonFeature : Feature(ApplicationKt, ContentNegotiationFeature, RoutingFeature) {
+object JsonJacksonFeature : ServerFeature(ApplicationKt, ContentNegotiationFeature, RoutingFeature) {
     override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-jackson:\$ktor_version")
     override val id = "ktor-jackson"

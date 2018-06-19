@@ -12,101 +12,126 @@
 <body>
 
 <header class="navbar navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#"><img src="ktor_logo_box.svg" style="width:1.6em;height:1.6em;padding-right:0.5em;" />Ktor Project Generator</a>
+    <a class="navbar-brand" href="#"><img src="ktor_logo_box.svg"
+                                          style="width:1.6em;height:1.6em;padding-right:0.5em;"/>Ktor Project Generator</a>
 </header>
 
 <div class="container-fluid" style="margin-top:84px;">
     <form>
         <div class="row">
-            <div class="col-sm">
+            <div class="col-sm-4">
                 <h4>Configuration</h4>
 
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="form-group">
+                                    <select id="project-type" class="form-control">
+                                        <option value="gradle">Gradle project</option>
+                                        <option value="maven">Maven project</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <label for="include_wrapper">
+                                    <input type="checkbox" id="include_wrapper" checked/>&nbsp;with Wrapper
+                                </label>
+                            </div>
+                        </div>
 
                         <div class="form-group">
-                            <label for="project-type">Project type</label>
-                            <select id="project-type" class="form-control">
-                                <option value="gradle">Gradle project</option>
-                                <option value="maven">Maven project</option>
-                            </select>
-                            <label for="include_wrapper"><input type="checkbox" id="include_wrapper" checked/>&nbsp;with
-                                Wrapper</label>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label for="ktor-engine">Engine</label>
                             <select id="ktor-engine" class="form-control">
-                                <option value="netty">Netty</option>
-                                <option value="jetty">Jetty</option>
-                                <option value="tomcat">Tomcat</option>
-                                <option value="cio">CIO</option>
+                                <option value="netty">Server Engine: Netty</option>
+                                <option value="jetty">Server Engine: Jetty</option>
+                                <option value="tomcat">Server Engine: Tomcat</option>
+                                <option value="cio">Server Engine: CIO</option>
                             </select>
                         </div>
-                    </div>
 
-                    <div class="col-4">
                         <div class="form-group">
-                            <label for="ktor-version">Ktor</label>
                             <select id="ktor-version" class="form-control">
-                                <option value="0.9.2" selected>0.9.2</option>
-                                <!--<option value="0.9.1">0.9.1</option>-->
+                                <option value="0.9.2" selected>Ktor 0.9.2</option>
+                                <!--<option value="0.9.1">Ktor 0.9.1</option>-->
                             </select>
                         </div>
                     </div>
                 </div>
-
-                <h4>Artifact</h4>
 
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="form-group">
                             <label for="artifact-group">Group</label>
-                            <input type="text" id="artifact-group" class="form-control" placeholder="com.example"
-                                   value="com.example"/>
                         </div>
                     </div>
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label for="artifact-name">Name</label>
-                            <input type="text" id="artifact-name" class="form-control" placeholder="ktor-demo"
-                                   value="ktor-demo"/>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label for="artifact-version">Version</label>
-                            <input type="text" id="artifact-version" class="form-control"
-                                   placeholder="0.0.1-SNAPSHOT"
-                                   value="0.0.1-SNAPSHOT"/>
-                        </div>
+
+                    <div class="col-9">
+                        <input type="text" id="artifact-group" class="form-control" placeholder="com.example"
+                               value="com.example"/>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <button type="button" id="buildButton" class="btn btn-primary" disabled>Build</button>
-                    <button type="button" id="buildButtonDev" class="btn btn-danger" disabled style="display:none;">
-                        BuildDev
-                    </button>
-                    <span class="loading">Waiting JavaScript...</span>
-                    <div class="intellij-plugin" style="display:none;">
-                    or
-                    <button type="button" id="pluginButton" class="btn btn-success" data-toggle="modal" data-target="#intellijModalPlugin">Install IntelliJ plugin</button>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="artifact-name">Name</label>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <input type="text" id="artifact-name" class="form-control" placeholder="ktor-demo"
+                               value="ktor-demo"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="artifact-version">Version</label>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <input type="text" id="artifact-version" class="form-control"
+                               placeholder="0.0.1-SNAPSHOT"
+                               value="0.0.1-SNAPSHOT"/>
                     </div>
                 </div>
             </div>
 
-            <div class="col-sm">
-                <h4>Features</h4>
-                <div><input id="dependency-filter" type="text" placeholder="Filter" accesskey="f" class="form-control"/></div>
-                <div id="dependencies" style="height:250px;overflow:auto;margin-top: 8px;border-radius:6px;">
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h4>Server</h4>
+                    </div>
+                    <div class="col-sm-9">
+                        <input id="dependency-filter-server" type="text" placeholder="Filter Server Features"
+                               accesskey="f" class="form-control"/>
+                    </div>
+                </div>
+                <div id="dependencies-server" class="dependencies"
+                     style="height:287px;overflow:auto;margin-top: 8px;border-radius:6px;">
+                    <div style="padding: 8px;">Loading dependencies...</div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h4>Client</h4>
+                    </div>
+                    <div class="col-sm-9">
+                        <input id="dependency-filter-client" type="text" placeholder="Filter Client Features"
+                               accesskey="f" class="form-control"/>
+                    </div>
+                </div>
+                <div id="dependencies-client" class="dependencies"
+                     style="height:287px;overflow:auto;margin-top: 8px;border-radius:6px;">
                     <div style="padding: 8px;">Loading dependencies...</div>
                 </div>
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="intellijModalPlugin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal fade" id="intellijModalPlugin" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -116,37 +141,49 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>There is a <a href="https://plugins.jetbrains.com/plugin/10823-ktor" target="_blank">IntelliJ plugin adding a project wizard for Ktor projects</a>.</p>
+                            <p>There is a <a href="https://plugins.jetbrains.com/plugin/10823-ktor" target="_blank">IntelliJ
+                                plugin adding a project wizard for Ktor projects</a>.</p>
 
                             <h4>Using the plugin</h4>
 
-                            <p>Like this website, the plugin allows you to create a Ktor project, but with the additional convenience of being fully integrated in the IDE and automatically setting up the project.</p>
+                            <p>Like this website, the plugin allows you to create a Ktor project, but with the
+                                additional convenience of being fully integrated in the IDE and automatically setting up
+                                the project.</p>
 
                             <p>Creating a new project a <code>Ktor</code> section will appear:</p>
 
                             <ol>
                                 <li>
-                                    <p>In a first step, you can configure the project to generate and select features to install:</p>
-                                    <div><img src="ktor-plugin/ktor-plugin-1.png" style="max-width:100%;height:auto;" /></div>
+                                    <p>In a first step, you can configure the project to generate and select features to
+                                        install:</p>
+                                    <div><img src="ktor-plugin/ktor-plugin-1.png" style="max-width:100%;height:auto;"/>
+                                    </div>
                                 </li>
                                 <li>
                                     <p>In a second step, you can configure the project artifacts:</p>
-                                    <div><img src="ktor-plugin/ktor-plugin-2.png" style="max-width:100%;height:auto;" /></div>
+                                    <div><img src="ktor-plugin/ktor-plugin-2.png" style="max-width:100%;height:auto;"/>
+                                    </div>
                                 </li>
                             </ol>
 
                             <h4>Installing the plugin</h4>
                             <p>You can get the plugin from:</p>
                             <ul>
-                                <li>Plugin Website: <a href="https://plugins.jetbrains.com/plugin/10823-ktor" target="_blank">https://plugins.jetbrains.com/plugin/10823-ktor</a></li>
-                                <li>Inside IntelliJ: <code>IntelliJ IDEA</code> → <code>Preferences...</code> → <code>Plugins</code> → <code>Install JetBrains Plugin...</code> → <code>Ktor</code> → <code>Install</code></li>
-                                <li>IntelliJ Welcome Screen: <code>Configure</code> → <code>Plugins</code> → <code>Install JetBrains Plugin...</code> → <code>Ktor</code> → <code>Install</code></li>
+                                <li>Plugin Website: <a href="https://plugins.jetbrains.com/plugin/10823-ktor"
+                                                       target="_blank">https://plugins.jetbrains.com/plugin/10823-ktor</a>
+                                </li>
+                                <li>Inside IntelliJ: <code>IntelliJ IDEA</code> → <code>Preferences...</code> → <code>Plugins</code>
+                                    → <code>Install JetBrains Plugin...</code> → <code>Ktor</code> →
+                                    <code>Install</code></li>
+                                <li>IntelliJ Welcome Screen: <code>Configure</code> → <code>Plugins</code> → <code>Install
+                                    JetBrains Plugin...</code> → <code>Ktor</code> → <code>Install</code></li>
                             </ul>
 
-                            <div><img src="ktor-plugin/install0.png" style="max-width:100%;height:auto;" /></div>
-                            <div><img src="ktor-plugin/install1.png" style="max-width:100%;float:right;height:auto;" /></div>
-                            <div><img src="ktor-plugin/install2.png" style="max-width:100%;height:auto;" /></div>
-                            <div><img src="ktor-plugin/install3.png" style="max-width:100%;height:auto;" /></div>
+                            <div><img src="ktor-plugin/install0.png" style="max-width:100%;height:auto;"/></div>
+                            <div><img src="ktor-plugin/install1.png" style="max-width:100%;float:right;height:auto;"/>
+                            </div>
+                            <div><img src="ktor-plugin/install2.png" style="max-width:100%;height:auto;"/></div>
+                            <div><img src="ktor-plugin/install3.png" style="max-width:100%;height:auto;"/></div>
 
                         </div>
                         <div class="modal-footer">
@@ -156,6 +193,23 @@
                 </div>
             </div>
 
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <button type="button" id="buildButton" class="btn btn-primary" disabled>Build</button>
+                    <button type="button" id="buildButtonDev" class="btn btn-danger" disabled style="display:none;">
+                        BuildDev
+                    </button>
+                    <span class="loading">Waiting JavaScript...</span>
+                    <div class="intellij-plugin" style="display:none;">
+                        or
+                        <button type="button" id="pluginButton" class="btn btn-success" data-toggle="modal"
+                                data-target="#intellijModalPlugin">Install IntelliJ plugin
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 </div>

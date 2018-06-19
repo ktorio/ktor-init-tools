@@ -21,7 +21,8 @@ import io.ktor.start.*
 import io.ktor.start.project.*
 import io.ktor.start.util.*
 
-object CssDslFeature : Feature(ApplicationKt, RoutingFeature) {
+object CssDslFeature : ServerFeature(ApplicationKt, RoutingFeature) {
+    override val group: String = "Templating"
     override val repos = Repos.jcenter + Repos.kotlin_js_wrappers
     override val artifacts = listOf("org.jetbrains:kotlin-css-jvm:1.0.0-pre.31-kotlin-1.2.41")
     override val id = "css-dsl"

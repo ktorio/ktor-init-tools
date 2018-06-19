@@ -21,7 +21,8 @@ import io.ktor.start.*
 import io.ktor.start.project.*
 import io.ktor.start.util.*
 
-object AuthBasicFeature : Feature(ApplicationKt, AuthFeature) {
+object AuthBasicFeature : ServerFeature(ApplicationKt, AuthFeature) {
+    override val group: String = "Authentication"
     override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-auth:\$ktor_version")
     override val id = "auth-basic"

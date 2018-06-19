@@ -11,6 +11,13 @@ label.artifact {
     padding: 0 8px;
 }
 
+.artifact-group {
+    padding: 3px 8px;
+    font: 18px Arial;
+    background: #aaa;
+    color: white;
+}
+
 label.artifact .subtitle {
 }
 
@@ -32,9 +39,10 @@ label.artifact .subtitle {
     background: #f7f7f7;
 }
 
-#dependencies {
+.dependencies {
     border: 1px solid #ddd;
 }
+
 h2 {
     font-size: 1.7em;
 }

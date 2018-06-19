@@ -132,5 +132,13 @@ open class Block<TSubject>(vararg blockDeps: Block<TSubject>) {
     open fun BlockBuilder.render(info: TSubject) {
     }
 
+    fun getAllDependantBlocks(out: LinkedHashSet<Block<TSubject>> = LinkedHashSet()): Set<Block<TSubject>> {
+        if (this !in out) {
+            out += this
+            for (dep in blockDeps) dep.getAllDependantBlocks(out)
+        }
+        return out
+    }
+
     override fun toString(): String = "Block(${this::class.simpleName})"
 }
