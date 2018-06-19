@@ -20,7 +20,6 @@ package io.ktor.start.intellij
 import com.intellij.ide.util.projectWizard.*
 import com.intellij.openapi.ui.*
 import com.intellij.ui.*
-import com.intellij.ui.components.labels.*
 import io.ktor.start.*
 import io.ktor.start.features.*
 import io.ktor.start.intellij.util.*
@@ -50,29 +49,6 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
     lateinit var wrapperCheckBox: JCheckBox
     val featuresToCheckbox = LinkedHashMap<Feature, CheckedTreeNode>()
     val panel = JPanel().apply {
-        layout = BoxLayout(this, BoxLayout.Y_AXIS)
-        add(JPanel().apply {
-            layout = BoxLayout(this, BoxLayout.X_AXIS)
-            add(JLabel("Project:"))
-            add(JComboBox(ProjectType.values()).apply {
-                projectTypeCB = this
-            })
-            add(JCheckBox("Wrapper", true).apply {
-                wrapperCheckBox = this
-            })
-            //add(TristateCheckBox("Wrapper", initial = TristateState.INDETERMINATE).apply {
-            //    wrapperCheckBox = this
-            //})
-            add(JLabel("Using:"))
-            add(JComboBox(KtorEngine.values()).apply {
-                engineCB = this
-            })
-            add(JLabel("Ktor Version:"))
-            add(JComboBox(Versions.ALL).apply {
-                versionCB = this
-            })
-        })
-
         val description = JPanel().apply {
             layout = BoxLayout(this, BoxLayout.Y_AXIS)
             border = IdeBorderFactory.createBorder()
@@ -83,26 +59,63 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
             description.add(JLabel(feature.description, SwingConstants.LEFT))
             val doc = feature.documentation
             if (doc != null) {
-                description.add(Link("Documentation", URL(doc)))
+                description.add(Link(doc, URL(doc)))
             }
             description.doLayout()
+            description.repaint()
         }
 
         val featureServerList = object : FeatureCheckboxList(ALL_SERVER_FEATURES) {
-            override fun onSelected(feature: Feature, node: CheckedTreeNode, checked: Boolean) {
+            override fun onSelected(feature: Feature, node: CheckedTreeNode) {
                 showFeatureDocumentation(feature)
+            }
+
+            override fun onChanged(feature: Feature, node: CheckedTreeNode) {
+                updatedFeature(feature)
             }
         }
 
         val featureClientList = object : FeatureCheckboxList(ALL_CLIENT_FEATURES) {
-            override fun onSelected(feature: Feature, node: CheckedTreeNode, checked: Boolean) {
+            override fun onSelected(feature: Feature, node: CheckedTreeNode) {
                 showFeatureDocumentation(feature)
+            }
+
+            override fun onChanged(feature: Feature, node: CheckedTreeNode) {
+                updatedFeature(feature)
             }
         }
 
-        add(Splitter(true, 0.6f, 0.2f, 0.8f).apply {
+        featuresToCheckbox += featureServerList.featuresToCheckbox
+        featuresToCheckbox += featureClientList.featuresToCheckbox
+
+        this.layout = BorderLayout(0, 0)
+
+        add(table {
+            tr(
+                policy = TdSize.FIXED,
+                maxHeight = 26,
+                fill = TdFill.NONE,
+                align = TdAlign.CENTER_LEFT
+            ) {
+                td(JLabel("Project:"))
+                td(JComboBox(ProjectType.values()).apply { projectTypeCB = this })
+                td(JCheckBox("Wrapper", true).apply { wrapperCheckBox = this })
+                td(JLabel("Using:"))
+                td(JComboBox(KtorEngine.values()).apply { engineCB = this })
+                td(JLabel("Ktor Version:"))
+                td(JComboBox(Versions.ALL).apply { versionCB = this })
+            }
+        }, BorderLayout.NORTH)
+
+        add(Splitter(true, 0.8f, 0.2f, 0.8f).apply {
             this.firstComponent = table {
-                tr(policy = TdSize.FIXED, minHeight = 24, maxHeight = 24, fill = TdFill.NONE) {
+                tr(
+                    policy = TdSize.FIXED,
+                    minHeight = 24,
+                    maxHeight = 24,
+                    fill = TdFill.NONE,
+                    align = TdAlign.CENTER_LEFT
+                ) {
                     td(JLabel("Server:"))
                     td(JLabel("Client:"))
                 }
@@ -112,8 +125,7 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
                 }
             }
             this.secondComponent = description
-        })
-
+        }, BorderLayout.CENTER)
     }
 
     var Feature.selected: Boolean
@@ -161,9 +173,24 @@ abstract class FeatureCheckboxList(val features: List<Feature>) : CheckboxTree(
     },
     CheckedTreeNode()
 ) {
-    val root = (this.model as DefaultTreeModel).root as CheckedTreeNode
+    val CheckedTreeNode?.feature: Feature? get() = this?.userObject as? Feature?
 
     val featuresToCheckbox = LinkedHashMap<Feature, CheckedTreeNode>()
+    val root = (this.model as DefaultTreeModel).root as CheckedTreeNode
+    init {
+        this.model = object : DefaultTreeModel(root) {
+            override fun valueForPathChanged(path: TreePath, newValue: Any) {
+                super.valueForPathChanged(path, newValue)
+                val node = path.lastPathComponent as CheckedTreeNode
+                val feature = node.feature
+                if (feature != null) {
+                    onChanged(feature, node)
+                }
+            }
+        }
+    }
+
+
 
     init {
         for (feature in features) {
@@ -175,18 +202,13 @@ abstract class FeatureCheckboxList(val features: List<Feature>) : CheckboxTree(
             val node = (e.newLeadSelectionPath.lastPathComponent as? CheckedTreeNode)
             val feature = node?.userObject as? Feature?
 
-            //println("node=$node, feature=$feature")
             if (node != null && feature != null) {
-                onSelected(feature, node, node.isChecked)
+                onSelected(feature, node)
             }
         }
     }
 
-    abstract fun onSelected(feature: Feature, node: CheckedTreeNode, checked: Boolean)
-}
-
-fun Link(text: String, url: URL) = LinkLabel<URL>(text, null, { _, data ->
-    if (Desktop.isDesktopSupported()) {
-        Desktop.getDesktop().browse(data.toURI())
+    abstract fun onSelected(feature: Feature, node: CheckedTreeNode)
+    open fun onChanged(feature: Feature, node: CheckedTreeNode) {
     }
-}, url)
+}

@@ -6,13 +6,17 @@ import javax.swing.*
 
 data class TdPos(val col: Int, val row: Int)
 
+@DslMarker
+annotation class TableTagMarker
+
+@TableTagMarker
 class TableBuilder {
     val items = LinkedHashMap<TdPos, Pair<Component, GridConstraints>>()
     var row = 0
     var col = 0
 
     var fill: TdFill = TdFill.BOTH
-    var anchor: TdAnchor = TdAnchor.CENTER_CENTER
+    var anchor: TdAlign = TdAlign.CENTER_CENTER
     var hpolicy: TdSize = TdSize.CAN_SHRINK_GROW
     var vpolicy: TdSize = TdSize.CAN_SHRINK_GROW
     var minWidth: Int? = null
@@ -27,7 +31,7 @@ class TableBuilder {
 fun table(callback: TableBuilder.() -> Unit): JPanel {
     val tb = TableBuilder()
     tb.callback()
-    val panel = JPanel(GridLayoutManager(tb.nrows, tb.ncols))
+    val panel = JPanel(GridLayoutManager(tb.nrows, tb.ncols, Insets(0, 0, 0, 0), 0, 0, false, false))
     for (item in tb.items.values) {
         panel.add(item.first, item.second)
     }
@@ -37,7 +41,7 @@ fun table(callback: TableBuilder.() -> Unit): JPanel {
 
 fun TableBuilder.tr(
     fill: TdFill = TdFill.BOTH,
-    anchor: TdAnchor = TdAnchor.CENTER_CENTER,
+    align: TdAlign = TdAlign.CENTER_CENTER,
     policy: TdSize = TdSize.CAN_SHRINK_GROW,
     hpolicy: TdSize = policy,
     vpolicy: TdSize = policy,
@@ -48,7 +52,7 @@ fun TableBuilder.tr(
     callback: TableBuilder.() -> Unit
 ) {
     this.fill = fill
-    this.anchor = anchor
+    this.anchor = align
     this.hpolicy = hpolicy
     this.vpolicy = vpolicy
     this.minWidth = minWidth
@@ -67,7 +71,7 @@ fun TableBuilder.tr(
 fun TableBuilder.td(
     component: Component, colspan: Int = 1, rowspan: Int = 1,
     fill: TdFill? = null,
-    anchor: TdAnchor? = null,
+    anchor: TdAlign? = null,
     hpolicy: TdSize? = null,
     vpolicy: TdSize? = null,
     minWidth: Int? = null,
@@ -85,7 +89,9 @@ fun TableBuilder.td(
             (vpolicy ?: this.vpolicy).value,
             Dimension((minWidth ?: this.minWidth) ?: -1, (minHeight ?: this.minHeight) ?: -1),
             Dimension(-1, -1),
-            Dimension((maxWidth ?: this.maxWidth) ?: -1, (maxHeight ?: this.maxHeight) ?: -1)
+            Dimension((maxWidth ?: this.maxWidth) ?: -1, (maxHeight ?: this.maxHeight) ?: -1),
+            0,
+            false
         )
     )
     col++
@@ -98,7 +104,7 @@ enum class TdFill(val value: Int) {
     BOTH(GridConstraints.FILL_BOTH)
 }
 
-enum class TdAnchor(val value: Int) {
+enum class TdAlign(val value: Int) {
     TOP_LEFT(GridConstraints.ANCHOR_NORTHWEST),
     TOP_CENTER(GridConstraints.ANCHOR_NORTH),
     TOP_RIGHT(GridConstraints.ANCHOR_NORTHEAST),

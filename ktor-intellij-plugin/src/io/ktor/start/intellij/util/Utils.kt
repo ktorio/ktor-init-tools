@@ -23,10 +23,12 @@ import com.intellij.openapi.project.*
 import com.intellij.openapi.vfs.*
 import com.intellij.ui.*
 import com.intellij.ui.components.*
+import com.intellij.ui.components.labels.*
 import com.intellij.uiDesigner.core.*
 import io.ktor.start.util.*
 import java.awt.*
 import java.io.*
+import java.net.*
 import javax.swing.*
 
 operator fun VirtualFile?.get(path: String?): VirtualFile? {
@@ -147,3 +149,9 @@ fun Component.scrollBoth() = ScrollPaneFactory.createScrollPane(
     JBScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
     JBScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS
 )
+
+fun Link(text: String, url: URL) = LinkLabel<URL>(text, null, { _, data ->
+    if (Desktop.isDesktopSupported()) {
+        Desktop.getDesktop().browse(data.toURI())
+    }
+}, url)
