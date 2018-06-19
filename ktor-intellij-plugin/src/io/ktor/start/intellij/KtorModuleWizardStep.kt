@@ -20,13 +20,15 @@ package io.ktor.start.intellij
 import com.intellij.ide.util.projectWizard.*
 import com.intellij.openapi.ui.*
 import com.intellij.ui.*
-import com.intellij.ui.components.*
+import com.intellij.ui.components.labels.*
 import io.ktor.start.*
 import io.ktor.start.features.*
 import io.ktor.start.intellij.util.*
 import io.ktor.start.util.*
 import java.awt.*
+import java.net.*
 import javax.swing.*
+import javax.swing.tree.*
 
 // https://github.com/JetBrains/intellij-community/blob/master/java/idea-ui/src/com/intellij/ide/util/newProjectWizard/AddSupportForFrameworksPanel.java
 // https://github.com/JetBrains/intellij-community/blob/master/java/idea-ui/src/com/intellij/ide/util/newProjectWizard/FrameworksTree.java
@@ -70,54 +72,45 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
                 versionCB = this
             })
         })
-        add(JLabel("Features:", SwingConstants.LEFT).apply {
-            alignmentX = Component.LEFT_ALIGNMENT
-        })
-
-        val root = CheckedTreeNode()
-        for (feature in ALL_FEATURES) {
-            val node = CheckedTreeNode(feature).apply { isChecked = false }
-            featuresToCheckbox[feature] = node
-            root.add(node)
-        }
-        val cbt = CheckboxTree(object : CheckboxTree.CheckboxTreeCellRenderer() {
-            override fun customizeRenderer(
-                tree: JTree?,
-                value: Any?,
-                selected: Boolean,
-                expanded: Boolean,
-                leaf: Boolean,
-                row: Int,
-                hasFocus: Boolean
-            ) {
-                if (value is CheckedTreeNode) {
-                    val feature = value.userObject
-                    if (feature is Feature) {
-                        textRenderer.append(feature.title)
-                        checkbox.isVisible = true
-                    }
-                }
-            }
-        }, root)
 
         val description = JPanel().apply {
+            layout = BoxLayout(this, BoxLayout.Y_AXIS)
             border = IdeBorderFactory.createBorder()
         }
 
-        cbt.addTreeSelectionListener { e ->
-            val node = (e.newLeadSelectionPath.lastPathComponent as? CheckedTreeNode)
-            val feature = node?.userObject as? Feature?
-            println("node=$node, feature=$feature")
-            if (feature != null) {
-                description.removeAll()
-                description.add(JTextField("${feature.description}"))
-                description.repaint()
-                //description.doLayout()
+        fun showFeatureDocumentation(feature: Feature) {
+            description.removeAll()
+            description.add(JLabel(feature.description, SwingConstants.LEFT))
+            val doc = feature.documentation
+            if (doc != null) {
+                description.add(Link("Documentation", URL(doc)))
+            }
+            description.doLayout()
+        }
+
+        val featureServerList = object : FeatureCheckboxList(ALL_SERVER_FEATURES) {
+            override fun onSelected(feature: Feature, node: CheckedTreeNode, checked: Boolean) {
+                showFeatureDocumentation(feature)
+            }
+        }
+
+        val featureClientList = object : FeatureCheckboxList(ALL_CLIENT_FEATURES) {
+            override fun onSelected(feature: Feature, node: CheckedTreeNode, checked: Boolean) {
+                showFeatureDocumentation(feature)
             }
         }
 
         add(Splitter(true, 0.6f, 0.2f, 0.8f).apply {
-            this.firstComponent = ScrollPaneFactory.createScrollPane(cbt, JBScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER)
+            this.firstComponent = table {
+                tr(policy = TdSize.FIXED, minHeight = 24, maxHeight = 24, fill = TdFill.NONE) {
+                    td(JLabel("Server:"))
+                    td(JLabel("Client:"))
+                }
+                tr {
+                    td(featureServerList.scrollVertical())
+                    td(featureClientList.scrollVertical())
+                }
+            }
             this.secondComponent = description
         })
 
@@ -138,7 +131,6 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
     fun updatedFeature(feature: Feature) {
         if (feature.selected) {
             for (feat in feature.featureDeps) {
-                feat.selected
                 feat.selected = true
             }
         }
@@ -146,3 +138,55 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
 
     override fun getComponent() = panel
 }
+
+abstract class FeatureCheckboxList(val features: List<Feature>) : CheckboxTree(
+    object : CheckboxTree.CheckboxTreeCellRenderer() {
+        override fun customizeRenderer(
+            tree: JTree?,
+            value: Any?,
+            selected: Boolean,
+            expanded: Boolean,
+            leaf: Boolean,
+            row: Int,
+            hasFocus: Boolean
+        ) {
+            if (value is CheckedTreeNode) {
+                val feature = value.userObject
+                if (feature is Feature) {
+                    textRenderer.append(feature.title)
+                    checkbox.isVisible = true
+                }
+            }
+        }
+    },
+    CheckedTreeNode()
+) {
+    val root = (this.model as DefaultTreeModel).root as CheckedTreeNode
+
+    val featuresToCheckbox = LinkedHashMap<Feature, CheckedTreeNode>()
+
+    init {
+        for (feature in features) {
+            root.add(CheckedTreeNode(feature).apply { isChecked = false; featuresToCheckbox[feature] = this })
+        }
+        (this.model as DefaultTreeModel).reload(root)
+
+        addTreeSelectionListener { e ->
+            val node = (e.newLeadSelectionPath.lastPathComponent as? CheckedTreeNode)
+            val feature = node?.userObject as? Feature?
+
+            //println("node=$node, feature=$feature")
+            if (node != null && feature != null) {
+                onSelected(feature, node, node.isChecked)
+            }
+        }
+    }
+
+    abstract fun onSelected(feature: Feature, node: CheckedTreeNode, checked: Boolean)
+}
+
+fun Link(text: String, url: URL) = LinkLabel<URL>(text, null, { _, data ->
+    if (Desktop.isDesktopSupported()) {
+        Desktop.getDesktop().browse(data.toURI())
+    }
+}, url)

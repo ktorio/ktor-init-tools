@@ -21,6 +21,8 @@ import com.intellij.openapi.application.*
 import com.intellij.openapi.progress.*
 import com.intellij.openapi.project.*
 import com.intellij.openapi.vfs.*
+import com.intellij.ui.*
+import com.intellij.ui.components.*
 import com.intellij.uiDesigner.core.*
 import io.ktor.start.util.*
 import java.awt.*
@@ -127,3 +129,21 @@ inline fun invokeLater(crossinline func: () -> Unit) {
         ApplicationManager.getApplication().invokeLater({ func() }, ModalityState.defaultModalityState())
     }
 }
+
+fun Component.scrollVertical() = ScrollPaneFactory.createScrollPane(
+    this,
+    JBScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+    JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+)
+
+fun Component.scrollHorizontal() = ScrollPaneFactory.createScrollPane(
+    this,
+    JBScrollPane.VERTICAL_SCROLLBAR_NEVER,
+    JBScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS
+)
+
+fun Component.scrollBoth() = ScrollPaneFactory.createScrollPane(
+    this,
+    JBScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+    JBScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS
+)
