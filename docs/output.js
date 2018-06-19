@@ -28,6 +28,8 @@
   var arrayListOf = Kotlin.kotlin.collections.arrayListOf_i5x0yv$;
   var to = Kotlin.kotlin.to_ujzrz7$;
   var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
+  var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
+  var minus = Kotlin.kotlin.collections.minus_khz7k3$;
   var trim = Kotlin.kotlin.text.trim_wqw3xr$;
   var Throwable = Error;
   var lazy = Kotlin.kotlin.lazy_klfg04$;
@@ -37,7 +39,6 @@
   var plus = Kotlin.kotlin.collections.plus_mydzjv$;
   var toMap = Kotlin.kotlin.collections.toMap_6hr0sd$;
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
-  var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
   var removePrefix = Kotlin.kotlin.text.removePrefix_gsj5wt$;
   var removeSuffix = Kotlin.kotlin.text.removeSuffix_gsj5wt$;
   var println = Kotlin.kotlin.io.println_s8jyv4$;
@@ -525,6 +526,51 @@
      catch (e) {
       console.error(e);
     }
+    updateIndeterminate();
+  }
+  var addAll = Kotlin.kotlin.collections.addAll_ipc267$;
+  function updateIndeterminate() {
+    var tmp$;
+    var $receiver = ALL_FEATURES;
+    var destination = ArrayList_init();
+    var tmp$_0;
+    tmp$_0 = $receiver.iterator();
+    while (tmp$_0.hasNext()) {
+      var element = tmp$_0.next();
+      var str = '#artifact-' + element.id;
+      if (get_checked(jQuery(str)))
+        destination.add_11rb$(element);
+    }
+    var directFeatures = toSet(destination);
+    var destination_0 = ArrayList_init();
+    var tmp$_1;
+    tmp$_1 = directFeatures.iterator();
+    while (tmp$_1.hasNext()) {
+      var element_0 = tmp$_1.next();
+      var $receiver_0 = element_0.getAllDependantBlocks_7onwc9$();
+      var destination_1 = ArrayList_init();
+      var tmp$_2;
+      tmp$_2 = $receiver_0.iterator();
+      while (tmp$_2.hasNext()) {
+        var element_1 = tmp$_2.next();
+        if (Kotlin.isType(element_1, Feature))
+          destination_1.add_11rb$(element_1);
+      }
+      var list = destination_1;
+      addAll(destination_0, list);
+    }
+    var allFeatures = toSet(destination_0);
+    var transitiveFeatures = minus(allFeatures, directFeatures);
+    tmp$ = ALL_FEATURES.iterator();
+    while (tmp$.hasNext()) {
+      var feature = tmp$.next();
+      var str_0 = '#artifact-' + feature.id;
+      var selector = jQuery(str_0);
+      var selected = allFeatures.contains_11rb$(feature);
+      var indeterminate = transitiveFeatures.contains_11rb$(feature);
+      selector.prop('indeterminate', indeterminate);
+      selector.closest('label').toggleClass('indeterminate', indeterminate).toggleClass('selected', selected);
+    }
   }
   var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
   function hashParams$lambda() {
@@ -602,7 +648,6 @@
   function formUrlEncode($receiver) {
     return joinToString($receiver, '&', void 0, void 0, void 0, void 0, formUrlEncode$lambda);
   }
-  var addAll = Kotlin.kotlin.collections.addAll_ipc267$;
   function formUrlEncode_0($receiver) {
     var $receiver_0 = $receiver.entries;
     var destination = ArrayList_init();
@@ -1582,12 +1627,18 @@
   function RawSocketsFeature() {
     RawSocketsFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
+    this.group_yhj2r1$_0 = 'Sockets';
     this.repos_vj7xzp$_0 = Repos_getInstance().ktor;
     this.id_4qus7n$_0 = 'ktor-network';
     this.title_uiv1fw$_0 = 'Raw Sockets';
     this.description_mr4lsg$_0 = 'Adds Raw Socket support for listening and connecting to tcp and udp sockets';
     this.documentation_dqqdw2$_0 = 'https://ktor.io/servers/raw-sockets.html';
   }
+  Object.defineProperty(RawSocketsFeature.prototype, 'group', {
+    get: function () {
+      return this.group_yhj2r1$_0;
+    }
+  });
   Object.defineProperty(RawSocketsFeature.prototype, 'repos', {
     get: function () {
       return this.repos_vj7xzp$_0;
@@ -1627,13 +1678,19 @@
   }
   function RawSocketsTlsFeature() {
     RawSocketsTlsFeature_instance = this;
-    ServerFeature.call(this, [ApplicationKt_getInstance()]);
+    ServerFeature.call(this, [ApplicationKt_getInstance(), RawSocketsFeature_getInstance()]);
+    this.group_5abz84$_0 = 'Sockets';
     this.repos_aap0gi$_0 = Repos_getInstance().ktor;
     this.id_9x2ee2$_0 = 'ktor-network-tls';
     this.title_bb1x0b$_0 = 'Raw Secure SSL/TLS Sockets';
     this.description_j4k8eh$_0 = 'Adds Raw Socket support for listening and connecting to tcp and udp sockets with secure sockets';
     this.documentation_tpkipz$_0 = 'https://ktor.io/servers/raw-sockets.html#secure';
   }
+  Object.defineProperty(RawSocketsTlsFeature.prototype, 'group', {
+    get: function () {
+      return this.group_5abz84$_0;
+    }
+  });
   Object.defineProperty(RawSocketsTlsFeature.prototype, 'repos', {
     get: function () {
       return this.repos_aap0gi$_0;
@@ -1730,7 +1787,7 @@
     ClientEngine.call(this, [CoreClientEngine_getInstance()]);
     this.id_jt5mgs$_0 = 'ktor-client-apache';
     this.title_qhya4j$_0 = 'Apache HttpClient Engine';
-    this.description_4x0fyx$_0 = 'Engine for the Ktor HttpClient using Apache.';
+    this.description_4x0fyx$_0 = 'Engine for the Ktor HttpClient using Apache. Supports HTTP 1.x and HTTP 2.0.';
     this.documentation_8q7rad$_0 = 'https://ktor.io/clients/http-client.html#apache';
   }
   Object.defineProperty(ApacheClientEngine.prototype, 'id', {
@@ -1770,7 +1827,7 @@
     ClientEngine.call(this, [CoreClientEngine_getInstance()]);
     this.id_z106rz$_0 = 'ktor-client-cio';
     this.title_74e7ma$_0 = 'CIO HttpClient Engine';
-    this.description_tan2zy$_0 = 'Engine for the Ktor HttpClient using CIO (Corroutine I/O).';
+    this.description_tan2zy$_0 = 'Engine for the Ktor HttpClient using CIO (Corroutine I/O). Only supports HTTP 1.x.';
     this.documentation_l414pc$_0 = 'https://ktor.io/clients/http-client.html#cio';
   }
   Object.defineProperty(CioClientEngine.prototype, 'id', {
@@ -1810,7 +1867,7 @@
     ClientEngine.call(this, [CoreClientEngine_getInstance()]);
     this.id_wqanbw$_0 = 'ktor-client-jetty';
     this.title_px338j$_0 = 'Jetty HttpClient Engine';
-    this.description_sfwk93$_0 = 'Engine for the Ktor HttpClient using Jetty.';
+    this.description_sfwk93$_0 = 'Engine for the Ktor HttpClient using Jetty. Only supports HTTP 2.x.';
     this.documentation_vlhxz9$_0 = 'https://ktor.io/clients/http-client.html#jetty';
   }
   Object.defineProperty(JettyClientEngine.prototype, 'id', {
@@ -2823,6 +2880,7 @@
   function ContentNegotiationFeature() {
     ContentNegotiationFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
+    this.group_77yfet$_0 = 'Content Negotiation';
     this.repos_27le6f$_0 = Repos_getInstance().ktor;
     this.artifacts_xpb4br$_0 = listOf_0('io.ktor:ktor-server-core:$ktor_version');
     this.id_1tud0h$_0 = 'content-negotiation';
@@ -2831,6 +2889,11 @@
     this.documentation_f9k7z4$_0 = 'https://ktor.io/features/content-negotiation.html';
     this.BLOCK = this.newSlot_pdl1vj$('BLOCK');
   }
+  Object.defineProperty(ContentNegotiationFeature.prototype, 'group', {
+    get: function () {
+      return this.group_77yfet$_0;
+    }
+  });
   Object.defineProperty(ContentNegotiationFeature.prototype, 'repos', {
     get: function () {
       return this.repos_27le6f$_0;
@@ -2895,7 +2958,7 @@
   }
   function CssDslFeature() {
     CssDslFeature_instance = this;
-    ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
+    ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance(), HtmlDslFeature_getInstance()]);
     this.group_veryml$_0 = 'Templating';
     this.repos_ylz245$_0 = plus(Repos_getInstance().jcenter, Repos_getInstance().kotlin_js_wrappers);
     this.artifacts_xzvytx$_0 = listOf_0('org.jetbrains:kotlin-css-jvm:1.0.0-pre.31-kotlin-1.2.41');
@@ -3690,6 +3753,7 @@
   function JsonGsonFeature() {
     JsonGsonFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), ContentNegotiationFeature_getInstance(), RoutingFeature_getInstance()]);
+    this.group_28eo4a$_0 = 'Content Negotiation';
     this.repos_2ryd44$_0 = Repos_getInstance().ktor;
     this.artifacts_1ovdbw$_0 = listOf_0('io.ktor:ktor-gson:$ktor_version');
     this.id_ngj250$_0 = 'ktor-gson';
@@ -3697,6 +3761,11 @@
     this.description_bw0nnb$_0 = 'Handles JSON serialization using GSON library';
     this.documentation_zd36vf$_0 = 'https://ktor.io/features/content-negotiation/gson.html';
   }
+  Object.defineProperty(JsonGsonFeature.prototype, 'group', {
+    get: function () {
+      return this.group_28eo4a$_0;
+    }
+  });
   Object.defineProperty(JsonGsonFeature.prototype, 'repos', {
     get: function () {
       return this.repos_2ryd44$_0;
@@ -3770,6 +3839,7 @@
   function JsonJacksonFeature() {
     JsonJacksonFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), ContentNegotiationFeature_getInstance(), RoutingFeature_getInstance()]);
+    this.group_hyp10i$_0 = 'Content Negotiation';
     this.repos_cybzs4$_0 = Repos_getInstance().ktor;
     this.artifacts_fad5hg$_0 = listOf_0('io.ktor:ktor-jackson:$ktor_version');
     this.id_ogwk7w$_0 = 'ktor-jackson';
@@ -3777,6 +3847,11 @@
     this.description_8yz4hr$_0 = 'Handles JSON serialization using Jackson library';
     this.documentation_1tiou5$_0 = 'https://ktor.io/features/content-negotiation/jackson.html';
   }
+  Object.defineProperty(JsonJacksonFeature.prototype, 'group', {
+    get: function () {
+      return this.group_hyp10i$_0;
+    }
+  });
   Object.defineProperty(JsonJacksonFeature.prototype, 'repos', {
     get: function () {
       return this.repos_cybzs4$_0;
@@ -7923,6 +7998,7 @@
     set: set_includeWrapper
   });
   package$start.updateHash = updateHash;
+  package$start.updateIndeterminate = updateIndeterminate;
   Object.defineProperty(package$start, 'hashParams', {
     get: get_hashParams
   });
@@ -8245,7 +8321,7 @@
   KOTLIN_VERSION = '1.2.50';
   ALL_SERVER_FEATURES = lazy(ALL_SERVER_FEATURES$lambda);
   ALL_CLIENT_FEATURES = lazy(ALL_CLIENT_FEATURES$lambda);
-  ALL_FEATURES = listOf([ApacheClientEngine_getInstance(), CioClientEngine_getInstance(), JettyClientEngine_getInstance(), CoreClientEngine_getInstance(), AuthBasicClientFeature_getInstance(), JsonClientFeature_getInstance(), WebSocketClientFeature_getInstance(), HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
+  ALL_FEATURES = listOf([ApacheClientEngine_getInstance(), CioClientEngine_getInstance(), JettyClientEngine_getInstance(), CoreClientEngine_getInstance(), AuthBasicClientFeature_getInstance(), JsonClientFeature_getInstance(), WebSocketClientFeature_getInstance(), HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), AuthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
   applicationKtImports = new Extra$PropertyThis(void 0, applicationKtImports$lambda);
   reposToInclude = new Extra$PropertyThis(void 0, reposToInclude$lambda);
   compileDependencies = new Extra$PropertyThis(void 0, compileDependencies$lambda);
