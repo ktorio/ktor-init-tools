@@ -20,6 +20,7 @@ package io.ktor.start.features
 import io.ktor.start.*
 import io.ktor.start.features.both.*
 import io.ktor.start.features.client.*
+import io.ktor.start.features.server.*
 
 val ALL_SERVER_FEATURES by lazy { ALL_FEATURES.filterIsInstance<ServerFeature>() }
 val ALL_CLIENT_FEATURES by lazy { ALL_FEATURES.filterIsInstance<ClientFeature>() }
