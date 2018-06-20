@@ -54,22 +54,24 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
             border = IdeBorderFactory.createBorder()
         }
 
-        fun showFeatureDocumentation(feature: Feature) {
+        fun showFeatureDocumentation(feature: Feature?) {
             description.removeAll()
-            description.add(JLabel(feature.description, SwingConstants.LEFT))
-            for (artifact in feature.artifacts) {
-                description.add(JLabel(artifact))
-            }
-            val doc = feature.documentation
-            if (doc != null) {
-                description.add(Link(doc, URL(doc)))
+            if (feature != null) {
+                description.add(JLabel(feature.description, SwingConstants.LEFT))
+                for (artifact in feature.artifacts) {
+                    description.add(JLabel(artifact))
+                }
+                val doc = feature.documentation
+                if (doc != null) {
+                    description.add(Link(doc, URL(doc)))
+                }
             }
             description.doLayout()
             description.repaint()
         }
 
         val featureServerList = object : FeatureCheckboxList(ALL_SERVER_FEATURES) {
-            override fun onSelected(feature: Feature, node: CheckedTreeNode) {
+            override fun onSelected(feature: Feature?, node: CheckedTreeNode) {
                 showFeatureDocumentation(feature)
             }
 
@@ -79,7 +81,7 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
         }
 
         val featureClientList = object : FeatureCheckboxList(ALL_CLIENT_FEATURES) {
-            override fun onSelected(feature: Feature, node: CheckedTreeNode) {
+            override fun onSelected(feature: Feature?, node: CheckedTreeNode) {
                 showFeatureDocumentation(feature)
             }
 
@@ -169,7 +171,13 @@ abstract class FeatureCheckboxList(val features: List<Feature>) : CheckboxTree(
                 val feature = value.userObject
                 if (feature is Feature) {
                     textRenderer.append(feature.title)
+                    textRenderer.isEnabled = true
                     checkbox.isVisible = true
+                } else if (feature is String) {
+                    textRenderer.append(feature)
+                    textRenderer.isEnabled = false
+                    isEnabled = false
+                    checkbox.isVisible = false
                 }
             }
         }
@@ -196,8 +204,11 @@ abstract class FeatureCheckboxList(val features: List<Feature>) : CheckboxTree(
 
 
     init {
-        for (feature in features) {
-            root.add(CheckedTreeNode(feature).apply { isChecked = false; featuresToCheckbox[feature] = this })
+        for ((group, gfeatures) in features.groupBy { it.group }) {
+            root.add(CheckedTreeNode(group).apply { isChecked = false })
+            for (feature in gfeatures) {
+                root.add(CheckedTreeNode(feature).apply { isChecked = false; featuresToCheckbox[feature] = this })
+            }
         }
         (this.model as DefaultTreeModel).reload(root)
 
@@ -205,13 +216,13 @@ abstract class FeatureCheckboxList(val features: List<Feature>) : CheckboxTree(
             val node = (e.newLeadSelectionPath.lastPathComponent as? CheckedTreeNode)
             val feature = node?.userObject as? Feature?
 
-            if (node != null && feature != null) {
+            if (node != null) {
                 onSelected(feature, node)
             }
         }
     }
 
-    abstract fun onSelected(feature: Feature, node: CheckedTreeNode)
+    abstract fun onSelected(feature: Feature?, node: CheckedTreeNode)
     open fun onChanged(feature: Feature, node: CheckedTreeNode) {
     }
 }
