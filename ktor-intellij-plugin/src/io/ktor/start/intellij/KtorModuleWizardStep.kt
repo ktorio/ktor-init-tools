@@ -183,20 +183,19 @@ abstract class FeatureCheckboxList(val features: List<Feature>) : CheckboxTree(
                 val feature = value.userObject
                 val tscheckbox = checkbox as ThreeStateCheckBox
                 if (feature is Feature) {
-                    textRenderer.append(feature.title)
+                    val style: SimpleTextAttributes = when {
+                        value.indeterminate -> SimpleTextAttributes.REGULAR_ITALIC_ATTRIBUTES
+                        else -> SimpleTextAttributes.REGULAR_ATTRIBUTES
+                    }
+                    textRenderer.append(feature.title, style)
                     textRenderer.isEnabled = true
                     tscheckbox.isVisible = true
-                    //tscheckbox.isThirdStateEnabled = true
                     tscheckbox.state = when {
                         value.indeterminate -> ThreeStateCheckBox.State.DONT_CARE
                         value.isChecked -> ThreeStateCheckBox.State.SELECTED
                         else -> ThreeStateCheckBox.State.NOT_SELECTED
                     }
-                    textRenderer.foreground = when {
-                        value.indeterminate -> Color(160, 0, 160)
-                        value.isChecked -> Color(0, 0, 160)
-                        else -> Color(0, 0, 0)
-                    }
+                    textRenderer.foreground = UIUtil.getTreeForeground()
                 } else if (feature is String) {
                     textRenderer.append(feature)
                     textRenderer.isEnabled = false
