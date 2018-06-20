@@ -48,89 +48,91 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
     lateinit var versionCB: JComboBox<SemVer>
     lateinit var wrapperCheckBox: JCheckBox
     val featuresToCheckbox = LinkedHashMap<Feature, CheckedTreeNode>()
-    val panel = JPanel().apply {
-        val description = JPanel().apply {
-            layout = BoxLayout(this, BoxLayout.Y_AXIS)
-            border = IdeBorderFactory.createBorder()
-        }
+    val panel by lazy {
+        JPanel().apply {
+            val description = JPanel().apply {
+                layout = BoxLayout(this, BoxLayout.Y_AXIS)
+                border = IdeBorderFactory.createBorder()
+            }
 
-        fun showFeatureDocumentation(feature: Feature?) {
-            description.removeAll()
-            if (feature != null) {
-                description.add(JLabel(feature.description, SwingConstants.LEFT))
-                for (artifact in feature.artifacts) {
-                    description.add(JLabel(artifact))
+            fun showFeatureDocumentation(feature: Feature?) {
+                description.removeAll()
+                if (feature != null) {
+                    description.add(JLabel(feature.description, SwingConstants.LEFT))
+                    for (artifact in feature.artifacts) {
+                        description.add(JLabel(artifact))
+                    }
+                    val doc = feature.documentation
+                    if (doc != null) {
+                        description.add(Link(doc, URL(doc)))
+                    }
                 }
-                val doc = feature.documentation
-                if (doc != null) {
-                    description.add(Link(doc, URL(doc)))
+                description.doLayout()
+                description.repaint()
+            }
+
+            val featureServerList = object : FeatureCheckboxList(ALL_SERVER_FEATURES) {
+                override fun onSelected(feature: Feature?, node: CheckedTreeNode) {
+                    showFeatureDocumentation(feature)
+                }
+
+                override fun onChanged(feature: Feature, node: CheckedTreeNode) {
+                    updatedFeature(feature)
                 }
             }
-            description.doLayout()
-            description.repaint()
-        }
 
-        val featureServerList = object : FeatureCheckboxList(ALL_SERVER_FEATURES) {
-            override fun onSelected(feature: Feature?, node: CheckedTreeNode) {
-                showFeatureDocumentation(feature)
+            val featureClientList = object : FeatureCheckboxList(ALL_CLIENT_FEATURES) {
+                override fun onSelected(feature: Feature?, node: CheckedTreeNode) {
+                    showFeatureDocumentation(feature)
+                }
+
+                override fun onChanged(feature: Feature, node: CheckedTreeNode) {
+                    updatedFeature(feature)
+                }
             }
 
-            override fun onChanged(feature: Feature, node: CheckedTreeNode) {
-                updatedFeature(feature)
-            }
-        }
+            featuresToCheckbox += featureServerList.featuresToCheckbox
+            featuresToCheckbox += featureClientList.featuresToCheckbox
 
-        val featureClientList = object : FeatureCheckboxList(ALL_CLIENT_FEATURES) {
-            override fun onSelected(feature: Feature?, node: CheckedTreeNode) {
-                showFeatureDocumentation(feature)
-            }
+            this.layout = BorderLayout(0, 0)
 
-            override fun onChanged(feature: Feature, node: CheckedTreeNode) {
-                updatedFeature(feature)
-            }
-        }
-
-        featuresToCheckbox += featureServerList.featuresToCheckbox
-        featuresToCheckbox += featureClientList.featuresToCheckbox
-
-        this.layout = BorderLayout(0, 0)
-
-        add(table {
-            tr(
-                policy = TdSize.FIXED,
-                maxHeight = 26,
-                fill = TdFill.NONE,
-                align = TdAlign.CENTER_LEFT
-            ) {
-                td(JLabel("Project:"))
-                td(JComboBox(ProjectType.values()).apply { projectTypeCB = this })
-                td(JCheckBox("Wrapper", true).apply { wrapperCheckBox = this })
-                td(JLabel("Using:"))
-                td(JComboBox(KtorEngine.values()).apply { engineCB = this })
-                td(JLabel("Ktor Version:"))
-                td(JComboBox(Versions.ALL).apply { versionCB = this })
-            }
-        }, BorderLayout.NORTH)
-
-        add(Splitter(true, 0.8f, 0.2f, 0.8f).apply {
-            this.firstComponent = table {
+            add(table {
                 tr(
                     policy = TdSize.FIXED,
-                    minHeight = 24,
-                    maxHeight = 24,
+                    maxHeight = 26,
                     fill = TdFill.NONE,
                     align = TdAlign.CENTER_LEFT
                 ) {
-                    td(JLabel("Server:"))
-                    td(JLabel("Client:"))
+                    td(JLabel("Project:"))
+                    td(JComboBox(ProjectType.values()).apply { projectTypeCB = this })
+                    td(JCheckBox("Wrapper", true).apply { wrapperCheckBox = this })
+                    td(JLabel("Using:"))
+                    td(JComboBox(KtorEngine.values()).apply { engineCB = this })
+                    td(JLabel("Ktor Version:"))
+                    td(JComboBox(Versions.ALL).apply { versionCB = this })
                 }
-                tr {
-                    td(featureServerList.scrollVertical())
-                    td(featureClientList.scrollVertical())
+            }, BorderLayout.NORTH)
+
+            add(Splitter(true, 0.8f, 0.2f, 0.8f).apply {
+                this.firstComponent = table {
+                    tr(
+                        policy = TdSize.FIXED,
+                        minHeight = 24,
+                        maxHeight = 24,
+                        fill = TdFill.NONE,
+                        align = TdAlign.CENTER_LEFT
+                    ) {
+                        td(JLabel("Server:"))
+                        td(JLabel("Client:"))
+                    }
+                    tr {
+                        td(featureServerList.scrollVertical())
+                        td(featureClientList.scrollVertical())
+                    }
                 }
-            }
-            this.secondComponent = description
-        }, BorderLayout.CENTER)
+                this.secondComponent = description
+            }, BorderLayout.CENTER)
+        }
     }
 
     var Feature.selected: Boolean
