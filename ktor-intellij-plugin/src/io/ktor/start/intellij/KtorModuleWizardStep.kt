@@ -20,6 +20,7 @@ package io.ktor.start.intellij
 import com.intellij.ide.util.projectWizard.*
 import com.intellij.openapi.ui.*
 import com.intellij.ui.*
+import com.intellij.util.ui.*
 import io.ktor.start.*
 import io.ktor.start.features.*
 import io.ktor.start.intellij.util.*
@@ -47,7 +48,7 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
     lateinit var engineCB: JComboBox<KtorEngine>
     lateinit var versionCB: JComboBox<SemVer>
     lateinit var wrapperCheckBox: JCheckBox
-    val featuresToCheckbox = LinkedHashMap<Feature, CheckedTreeNode>()
+    val featuresToCheckbox = LinkedHashMap<Feature, ThreeStateCheckedTreeNode>()
     val panel by lazy {
         JPanel().apply {
             val description = JPanel().apply {
@@ -72,22 +73,22 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
             }
 
             val featureServerList = object : FeatureCheckboxList(ALL_SERVER_FEATURES) {
-                override fun onSelected(feature: Feature?, node: CheckedTreeNode) {
+                override fun onSelected(feature: Feature?, node: ThreeStateCheckedTreeNode) {
                     showFeatureDocumentation(feature)
                 }
 
-                override fun onChanged(feature: Feature, node: CheckedTreeNode) {
-                    updatedFeature(feature)
+                override fun onChanged(feature: Feature, node: ThreeStateCheckedTreeNode) {
+                    updateTransitive()
                 }
             }
 
             val featureClientList = object : FeatureCheckboxList(ALL_CLIENT_FEATURES) {
-                override fun onSelected(feature: Feature?, node: CheckedTreeNode) {
+                override fun onSelected(feature: Feature?, node: ThreeStateCheckedTreeNode) {
                     showFeatureDocumentation(feature)
                 }
 
-                override fun onChanged(feature: Feature, node: CheckedTreeNode) {
-                    updatedFeature(feature)
+                override fun onChanged(feature: Feature, node: ThreeStateCheckedTreeNode) {
+                    updateTransitive()
                 }
             }
 
@@ -137,9 +138,11 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
 
     var Feature.selected: Boolean
         get() = featuresToCheckbox[this]?.isChecked ?: false
-        set(value) {
-            featuresToCheckbox[this]?.isChecked = value
-        }
+        set(value) = run { featuresToCheckbox[this]?.isChecked = value }
+
+    var Feature.indeterminate: Boolean
+        get() = featuresToCheckbox[this]?.indeterminate ?: false
+        set(value) = run { featuresToCheckbox[this]?.indeterminate = value }
 
     //var Feature.indeterminate : Boolean
     //    get() = featuresToCheckbox[this]?. ?: false
@@ -147,15 +150,22 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
     //        featuresToCheckbox[this]?.isSelected = value
     //    }
 
-    fun updatedFeature(feature: Feature) {
-        if (feature.selected) {
-            for (feat in feature.featureDeps) {
-                feat.selected = true
-            }
+    fun updateTransitive() {
+        val featureSet = FeatureSet(ALL_FEATURES.filter { it.selected })
+
+        for (feature in ALL_FEATURES) {
+            feature.indeterminate = (feature in featureSet.transitive)
         }
     }
 
     override fun getComponent() = panel
+}
+
+open class ThreeStateCheckedTreeNode : CheckedTreeNode {
+    constructor() : super()
+    constructor(userObject: Any?) : super(userObject)
+
+    var indeterminate = false
 }
 
 abstract class FeatureCheckboxList(val features: List<Feature>) : CheckboxTree(
@@ -169,32 +179,44 @@ abstract class FeatureCheckboxList(val features: List<Feature>) : CheckboxTree(
             row: Int,
             hasFocus: Boolean
         ) {
-            if (value is CheckedTreeNode) {
+            if (value is ThreeStateCheckedTreeNode) {
                 val feature = value.userObject
+                val tscheckbox = checkbox as ThreeStateCheckBox
                 if (feature is Feature) {
                     textRenderer.append(feature.title)
                     textRenderer.isEnabled = true
-                    checkbox.isVisible = true
+                    tscheckbox.isVisible = true
+                    //tscheckbox.isThirdStateEnabled = true
+                    tscheckbox.state = when {
+                        value.indeterminate -> ThreeStateCheckBox.State.DONT_CARE
+                        value.isChecked -> ThreeStateCheckBox.State.SELECTED
+                        else -> ThreeStateCheckBox.State.NOT_SELECTED
+                    }
+                    textRenderer.foreground = when {
+                        value.indeterminate -> Color(160, 0, 160)
+                        value.isChecked -> Color(0, 0, 160)
+                        else -> Color(0, 0, 0)
+                    }
                 } else if (feature is String) {
                     textRenderer.append(feature)
                     textRenderer.isEnabled = false
                     isEnabled = false
-                    checkbox.isVisible = false
+                    tscheckbox.isVisible = false
                 }
             }
         }
     },
-    CheckedTreeNode()
+    ThreeStateCheckedTreeNode()
 ) {
     val CheckedTreeNode?.feature: Feature? get() = this?.userObject as? Feature?
 
-    val featuresToCheckbox = LinkedHashMap<Feature, CheckedTreeNode>()
-    val root = (this.model as DefaultTreeModel).root as CheckedTreeNode
+    val featuresToCheckbox = LinkedHashMap<Feature, ThreeStateCheckedTreeNode>()
+    val root = (this.model as DefaultTreeModel).root as ThreeStateCheckedTreeNode
     init {
         this.model = object : DefaultTreeModel(root) {
             override fun valueForPathChanged(path: TreePath, newValue: Any) {
                 super.valueForPathChanged(path, newValue)
-                val node = path.lastPathComponent as CheckedTreeNode
+                val node = path.lastPathComponent as ThreeStateCheckedTreeNode
                 val feature = node.feature
                 if (feature != null) {
                     onChanged(feature, node)
@@ -203,19 +225,17 @@ abstract class FeatureCheckboxList(val features: List<Feature>) : CheckboxTree(
         }
     }
 
-
-
     init {
         for ((group, gfeatures) in features.groupBy { it.group }) {
-            root.add(CheckedTreeNode(group).apply { isChecked = false })
+            root.add(ThreeStateCheckedTreeNode(group).apply { isChecked = false })
             for (feature in gfeatures) {
-                root.add(CheckedTreeNode(feature).apply { isChecked = false; featuresToCheckbox[feature] = this })
+                root.add(ThreeStateCheckedTreeNode(feature).apply { isChecked = false; featuresToCheckbox[feature] = this })
             }
         }
         (this.model as DefaultTreeModel).reload(root)
 
         addTreeSelectionListener { e ->
-            val node = (e.newLeadSelectionPath.lastPathComponent as? CheckedTreeNode)
+            val node = (e.newLeadSelectionPath.lastPathComponent as? ThreeStateCheckedTreeNode)
             val feature = node?.userObject as? Feature?
 
             if (node != null) {
@@ -224,7 +244,7 @@ abstract class FeatureCheckboxList(val features: List<Feature>) : CheckboxTree(
         }
     }
 
-    abstract fun onSelected(feature: Feature?, node: CheckedTreeNode)
-    open fun onChanged(feature: Feature, node: CheckedTreeNode) {
+    abstract fun onSelected(feature: Feature?, node: ThreeStateCheckedTreeNode)
+    open fun onChanged(feature: Feature, node: ThreeStateCheckedTreeNode) {
     }
 }
