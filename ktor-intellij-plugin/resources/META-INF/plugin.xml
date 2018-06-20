@@ -9,9 +9,26 @@
             <ul>
                 <li>Ability to create preconfigured Ktor projects.</li>
             </ul>
+
+            <h2>Changelog</h2>
+
+            <h3>0.0.2</h2>
+            <ul>
+                <li>Redesigned Wizard.</li>
+                <li>Split features into server and client.</li>
+                <li>Group features in categories.</li>
+                <li>Description, artifact, and documentation about features.</li>
+                <li>Display transitive dependencies between features.</li>
+                <li>Additional samples for some features.</li>
+            </ul>
+
+            <h3>0.0.1</h2>
+            <ul>
+                <li>First public version.</li>
+            </ul>
         ]]>
     </description>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <vendor url="http://www.jetbrains.com">JetBrains</vendor>
 
     <depends>org.jetbrains.plugins.gradle</depends>
