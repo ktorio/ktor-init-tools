@@ -27,10 +27,11 @@ val ALL_CLIENT_FEATURES by lazy { ALL_FEATURES.filterIsInstance<ClientFeature>()
 
 val ALL_FEATURES: List<Feature> = listOf(
     // Client Features
+    CoreClientEngine,
     ApacheClientEngine,
     CioClientEngine,
     JettyClientEngine,
-    CoreClientEngine,
+    MockClientEngine,
     AuthBasicClientFeature,
     JsonClientFeature,
     WebSocketClientFeature,

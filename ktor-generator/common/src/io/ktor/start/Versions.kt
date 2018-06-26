@@ -23,6 +23,8 @@ val KOTLIN_VERSION = "1.2.50"
 
 object Versions {
     val V092 = SemVer("0.9.2")
-    val ALL = arrayOf(V092)
-    val LAST = V092
+    val V093 = SemVer("0.9.3")
+    //val ALL = arrayOf(V092, V093)
+    val ALL = arrayOf(V093)
+    val LAST = V093
 }

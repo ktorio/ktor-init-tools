@@ -35,3 +35,13 @@ object JettyClientEngine : ClientEngine(CoreClientEngine) {
     override val description = "Engine for the Ktor HttpClient using Jetty. Only supports HTTP 2.x."
     override val documentation = "https://ktor.io/clients/http-client.html#jetty"
 }
+
+object MockClientEngine : ClientEngine(CoreClientEngine) {
+    override val id: String = "ktor-client-mock"
+    override val title = "Mock HttpClient Engine"
+    override val description = "Engine for using in tests to simulate HTTP responses programmatically."
+    override val documentation = "https://ktor.io/clients/http-client.html#mock"
+
+    override val artifacts = listOf<String>()
+    override val testArtifacts = listOf("io.ktor:ktor-client-mock:\$ktor_version")
+}

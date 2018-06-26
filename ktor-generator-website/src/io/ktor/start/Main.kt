@@ -25,6 +25,11 @@ import kotlin.browser.*
 
 @Suppress("unused")
 fun main(args: Array<String>) {
+    jq("#ktor-version").text("")
+    for (version in Versions.ALL) {
+        jq("#ktor-version").append(jq("<option>").attr("value", version.version).text("Ktor ${version.version}"))
+    }
+
     jq(".intellij-plugin").css("display", "inline-block")
 
     jq("#include_wrapper").change { updateHash() }
@@ -41,8 +46,8 @@ fun main(args: Array<String>) {
     jq("#artifact-name").`val`(hashParams["artifact-name"]?.firstOrNull() ?: "ktor-demo")
     jq("#$artifactVersionId").`val`(hashParams[artifactVersionId]?.firstOrNull() ?: "0.0.1-SNAPSHOT")
     jq("#ktor-version").`val`(hashParams["ktor-version"]?.firstOrNull() ?: defaultKtorVersion)
-    jq("#ktor-engine").`val`(hashParams["ktor-engine"]?.firstOrNull() ?: defaultKtorEngine)
     jq("#ktor-version").`val`(hashParams["ktor-version"]?.firstOrNull() ?: defaultKtorVersion)
+    jq("#ktor-engine").`val`(hashParams["ktor-engine"]?.firstOrNull() ?: defaultKtorEngine)
     jq("#project-type").`val`(hashParams["project-type"]?.firstOrNull() ?: ProjectType.Gradle.id)
 
     addDependencies()
@@ -166,8 +171,9 @@ fun addDependenciesKind(kind: String, features: List<Feature>) {
             val checkedBool = feature.id in dependencyIds
             val checked = if (checkedBool) "checked" else ""
 
-            val artifacts = feature.artifacts
-            val simplifiedArtifacts = artifacts.map { it.removePrefix("io.ktor:").removeSuffix(":\$ktor_version") }
+            val simplifiedArtifacts = (feature.artifacts + feature.testArtifacts)
+                .map { it.removePrefix("io.ktor:")
+                .removeSuffix(":\$ktor_version") }
 
             deps.append(
                 jq("<label for='artifact-${feature.id}' class='artifact' />")

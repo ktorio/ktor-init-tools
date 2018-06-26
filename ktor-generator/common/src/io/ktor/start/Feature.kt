@@ -43,6 +43,7 @@ abstract class Feature(vararg deps: Block<BuildInfo>) : Block<BuildInfo>(*deps) 
     open val repos: List<String> = Repos.ktor
     abstract val id: String
     open val artifacts: List<String> by lazy { listOf("io.ktor:$id:\$ktor_version") }
+    open val testArtifacts: List<String> by lazy { listOf<String>() }
     abstract val title: String
     abstract val description: String
     open val documentation: String? = null
@@ -53,6 +54,9 @@ abstract class Feature(vararg deps: Block<BuildInfo>) : Block<BuildInfo>(*deps) 
         }
         for (artifact in artifacts) {
             addCompileDependency(MvnArtifact(artifact))
+        }
+        for (artifact in artifacts) {
+            addTestDependency(MvnArtifact(artifact))
         }
         renderFeature(info)
     }

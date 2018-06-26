@@ -35,15 +35,8 @@ object AuthFeature : ServerFeature(ApplicationKt) {
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.auth.*")
         addFeatureInstall {
-            if (info.ktorVer >= Versions.V092) {
-                "install(Authentication)" {
-                    block(BLOCK)
-                }
-            } else {
-                // @TODO: Update to 0.9.1
-                "install(Authentication)" {
-                    block(BLOCK)
-                }
+            "install(Authentication)" {
+                block(BLOCK)
             }
         }
     }

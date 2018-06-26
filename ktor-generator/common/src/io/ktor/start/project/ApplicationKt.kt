@@ -41,11 +41,7 @@ object ApplicationKt : BuildInfoBlock(BuildFiles, ApplicationConf) {
                 }
             }
             SEPARATOR {
-                if (info.ktorVer >= Versions.V092) {
-                    +"fun main(args: Array<String>): Unit = ${info.developmentEngineFQ}.main(args)"
-                } else {
-                    +"fun main(args: Array<String>): Unit = ${info.developmentPackage}.main(args)"
-                }
+                +"fun main(args: Array<String>): Unit = ${info.developmentEngineFQ}.main(args)"
             }
             SEPARATOR {
                 block(APPLICATION_CLASSES)
