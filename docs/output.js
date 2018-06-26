@@ -28,8 +28,6 @@
   var arrayListOf = Kotlin.kotlin.collections.arrayListOf_i5x0yv$;
   var to = Kotlin.kotlin.to_ujzrz7$;
   var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
-  var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
-  var minus = Kotlin.kotlin.collections.minus_khz7k3$;
   var trim = Kotlin.kotlin.text.trim_wqw3xr$;
   var Throwable = Error;
   var lazy = Kotlin.kotlin.lazy_klfg04$;
@@ -39,6 +37,7 @@
   var plus = Kotlin.kotlin.collections.plus_mydzjv$;
   var toMap = Kotlin.kotlin.collections.toMap_6hr0sd$;
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
+  var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
   var removePrefix = Kotlin.kotlin.text.removePrefix_gsj5wt$;
   var removeSuffix = Kotlin.kotlin.text.removeSuffix_gsj5wt$;
   var println = Kotlin.kotlin.io.println_s8jyv4$;
@@ -49,6 +48,7 @@
   var numberToInt = Kotlin.numberToInt;
   var toInt = Kotlin.kotlin.text.toInt_6ic1pp$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
+  var minus = Kotlin.kotlin.collections.minus_khz7k3$;
   var plus_0 = Kotlin.kotlin.collections.plus_iwxh38$;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var Enum = Kotlin.kotlin.Enum;
@@ -62,7 +62,7 @@
   var copyOf = Kotlin.kotlin.collections.copyOf_mrm5p$;
   var numberToByte = Kotlin.numberToByte;
   var toChar = Kotlin.toChar;
-  var StringBuilder_init = Kotlin.kotlin.text.StringBuilder_init;
+  var StringBuilder = Kotlin.kotlin.text.StringBuilder;
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var unboxChar = Kotlin.unboxChar;
   var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
@@ -96,6 +96,8 @@
   CioClientEngine.prototype.constructor = CioClientEngine;
   JettyClientEngine.prototype = Object.create(ClientEngine.prototype);
   JettyClientEngine.prototype.constructor = JettyClientEngine;
+  MockClientEngine.prototype = Object.create(ClientEngine.prototype);
+  MockClientEngine.prototype.constructor = MockClientEngine;
   AuthBasicClientFeature.prototype = Object.create(ClientFeature.prototype);
   AuthBasicClientFeature.prototype.constructor = AuthBasicClientFeature;
   JsonClientFeature.prototype = Object.create(ClientFeature.prototype);
@@ -400,43 +402,53 @@
   }
   var Map = Kotlin.kotlin.collections.Map;
   function main(args) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12;
-    var str = '.intellij-plugin';
-    jQuery(str).css('display', 'inline-block');
-    var str_0 = '#include_wrapper';
-    jQuery(str_0).change(main$lambda);
-    var str_1 = '#ktor-engine';
-    jQuery(str_1).change(main$lambda_0);
-    var str_2 = '#ktor-version';
-    jQuery(str_2).change(main$lambda_1);
-    var str_3 = '#project-type';
-    jQuery(str_3).change(main$lambda_2);
-    var str_4 = '#artifact-group';
-    jQuery(str_4).keyup(main$lambda_3);
-    var str_5 = '#artifact-name';
-    jQuery(str_5).keyup(main$lambda_4);
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12, tmp$_13, tmp$_14;
+    var str = '#ktor-version';
+    jQuery(str).text('');
+    tmp$ = Versions_getInstance().ALL;
+    for (tmp$_0 = 0; tmp$_0 !== tmp$.length; ++tmp$_0) {
+      var version = tmp$[tmp$_0];
+      var str_0 = '#ktor-version';
+      var tmp$_15 = jQuery(str_0);
+      var str_1 = '<option>';
+      tmp$_15.append(jQuery(str_1).attr('value', version.version).text('Ktor ' + version.version));
+    }
+    var str_2 = '.intellij-plugin';
+    jQuery(str_2).css('display', 'inline-block');
+    var str_3 = '#include_wrapper';
+    jQuery(str_3).change(main$lambda);
+    var str_4 = '#ktor-engine';
+    jQuery(str_4).change(main$lambda_0);
+    var str_5 = '#ktor-version';
+    jQuery(str_5).change(main$lambda_1);
+    var str_6 = '#project-type';
+    jQuery(str_6).change(main$lambda_2);
+    var str_7 = '#artifact-group';
+    jQuery(str_7).keyup(main$lambda_3);
+    var str_8 = '#artifact-name';
+    jQuery(str_8).keyup(main$lambda_4);
     var id = artifactVersionId;
     jQuery('#' + id).keyup(main$lambda_5);
-    var str_6 = '#include_wrapper';
-    var tmp$_13 = jQuery(str_6);
+    var str_9 = '#include_wrapper';
+    var tmp$_16 = jQuery(str_9);
     var $receiver = get_hashParams();
     var key = 'no_wrapper';
-    var tmp$_14;
-    tmp$_13.prop('checked', (Kotlin.isType(tmp$_14 = $receiver, Map) ? tmp$_14 : throwCCE()).containsKey_11rb$(key) ? '' : 'checked');
-    var str_7 = '#artifact-group';
-    jQuery(str_7).val((tmp$_0 = (tmp$ = get_hashParams().get_11rb$('artifact-group')) != null ? firstOrNull(tmp$) : null) != null ? tmp$_0 : 'com.example');
-    var str_8 = '#artifact-name';
-    jQuery(str_8).val((tmp$_2 = (tmp$_1 = get_hashParams().get_11rb$('artifact-name')) != null ? firstOrNull(tmp$_1) : null) != null ? tmp$_2 : 'ktor-demo');
-    var str_9 = '#artifact-version';
-    jQuery(str_9).val((tmp$_4 = (tmp$_3 = get_hashParams().get_11rb$(artifactVersionId)) != null ? firstOrNull(tmp$_3) : null) != null ? tmp$_4 : '0.0.1-SNAPSHOT');
-    var str_10 = '#ktor-version';
-    jQuery(str_10).val((tmp$_6 = (tmp$_5 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_5) : null) != null ? tmp$_6 : defaultKtorVersion);
-    var str_11 = '#ktor-engine';
-    jQuery(str_11).val((tmp$_8 = (tmp$_7 = get_hashParams().get_11rb$('ktor-engine')) != null ? firstOrNull(tmp$_7) : null) != null ? tmp$_8 : defaultKtorEngine);
-    var str_12 = '#ktor-version';
-    jQuery(str_12).val((tmp$_10 = (tmp$_9 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_9) : null) != null ? tmp$_10 : defaultKtorVersion);
-    var str_13 = '#project-type';
-    jQuery(str_13).val((tmp$_12 = (tmp$_11 = get_hashParams().get_11rb$('project-type')) != null ? firstOrNull(tmp$_11) : null) != null ? tmp$_12 : ProjectType$Gradle_getInstance().id);
+    var tmp$_17;
+    tmp$_16.prop('checked', (Kotlin.isType(tmp$_17 = $receiver, Map) ? tmp$_17 : throwCCE()).containsKey_11rb$(key) ? '' : 'checked');
+    var str_10 = '#artifact-group';
+    jQuery(str_10).val((tmp$_2 = (tmp$_1 = get_hashParams().get_11rb$('artifact-group')) != null ? firstOrNull(tmp$_1) : null) != null ? tmp$_2 : 'com.example');
+    var str_11 = '#artifact-name';
+    jQuery(str_11).val((tmp$_4 = (tmp$_3 = get_hashParams().get_11rb$('artifact-name')) != null ? firstOrNull(tmp$_3) : null) != null ? tmp$_4 : 'ktor-demo');
+    var str_12 = '#artifact-version';
+    jQuery(str_12).val((tmp$_6 = (tmp$_5 = get_hashParams().get_11rb$(artifactVersionId)) != null ? firstOrNull(tmp$_5) : null) != null ? tmp$_6 : '0.0.1-SNAPSHOT');
+    var str_13 = '#ktor-version';
+    jQuery(str_13).val((tmp$_8 = (tmp$_7 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_7) : null) != null ? tmp$_8 : defaultKtorVersion);
+    var str_14 = '#ktor-version';
+    jQuery(str_14).val((tmp$_10 = (tmp$_9 = get_hashParams().get_11rb$('ktor-version')) != null ? firstOrNull(tmp$_9) : null) != null ? tmp$_10 : defaultKtorVersion);
+    var str_15 = '#ktor-engine';
+    jQuery(str_15).val((tmp$_12 = (tmp$_11 = get_hashParams().get_11rb$('ktor-engine')) != null ? firstOrNull(tmp$_11) : null) != null ? tmp$_12 : defaultKtorEngine);
+    var str_16 = '#project-type';
+    jQuery(str_16).val((tmp$_14 = (tmp$_13 = get_hashParams().get_11rb$('project-type')) != null ? firstOrNull(tmp$_13) : null) != null ? tmp$_14 : ProjectType$Gradle_getInstance().id);
     addDependencies();
     registerBuildButton();
     handleFiltering();
@@ -466,7 +478,7 @@
     var str = '#include_wrapper';
     set_checked(jQuery(str), value);
   }
-  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   function updateHash() {
     var tmp$, tmp$_0, tmp$_1, tmp$_2;
     var items = LinkedHashMap_init();
@@ -528,7 +540,6 @@
     }
     updateIndeterminate();
   }
-  var addAll = Kotlin.kotlin.collections.addAll_ipc267$;
   function updateIndeterminate() {
     var tmp$;
     var $receiver = ALL_FEATURES;
@@ -541,33 +552,14 @@
       if (get_checked(jQuery(str)))
         destination.add_11rb$(element);
     }
-    var directFeatures = toSet(destination);
-    var destination_0 = ArrayList_init();
-    var tmp$_1;
-    tmp$_1 = directFeatures.iterator();
-    while (tmp$_1.hasNext()) {
-      var element_0 = tmp$_1.next();
-      var $receiver_0 = element_0.getAllDependantBlocks_7onwc9$();
-      var destination_1 = ArrayList_init();
-      var tmp$_2;
-      tmp$_2 = $receiver_0.iterator();
-      while (tmp$_2.hasNext()) {
-        var element_1 = tmp$_2.next();
-        if (Kotlin.isType(element_1, Feature))
-          destination_1.add_11rb$(element_1);
-      }
-      var list = destination_1;
-      addAll(destination_0, list);
-    }
-    var allFeatures = toSet(destination_0);
-    var transitiveFeatures = minus(allFeatures, directFeatures);
+    var features = new FeatureSet(destination);
     tmp$ = ALL_FEATURES.iterator();
     while (tmp$.hasNext()) {
       var feature = tmp$.next();
       var str_0 = '#artifact-' + feature.id;
       var selector = jQuery(str_0);
-      var selected = allFeatures.contains_11rb$(feature);
-      var indeterminate = transitiveFeatures.contains_11rb$(feature);
+      var selected = features.all.contains_11rb$(feature);
+      var indeterminate = features.transitive.contains_11rb$(feature);
       selector.prop('indeterminate', indeterminate);
       selector.closest('label').toggleClass('indeterminate', indeterminate).toggleClass('selected', selected);
     }
@@ -590,10 +582,9 @@
     return hashParams.value;
   }
   var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
-  var ArrayList_init_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   function formUrlDecode($receiver) {
     var $receiver_0 = split($receiver, Kotlin.charArrayOf(38));
-    var destination = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
+    var destination = ArrayList_init(collectionSizeOrDefault($receiver_0, 10));
     var tmp$;
     tmp$ = $receiver_0.iterator();
     while (tmp$.hasNext()) {
@@ -623,7 +614,7 @@
       var list = tmp$_0_0;
       list.add_11rb$(element);
     }
-    var destination_1 = ArrayList_init_0(destination_0.size);
+    var destination_1 = ArrayList_init(destination_0.size);
     var tmp$_3;
     tmp$_3 = destination_0.entries.iterator();
     while (tmp$_3.hasNext()) {
@@ -631,7 +622,7 @@
       var tmp$_4 = destination_1.add_11rb$;
       var tmp$_5 = item_0.key;
       var $receiver_1 = item_0.value;
-      var destination_2 = ArrayList_init_0(collectionSizeOrDefault($receiver_1, 10));
+      var destination_2 = ArrayList_init(collectionSizeOrDefault($receiver_1, 10));
       var tmp$_6;
       tmp$_6 = $receiver_1.iterator();
       while (tmp$_6.hasNext()) {
@@ -648,6 +639,7 @@
   function formUrlEncode($receiver) {
     return joinToString($receiver, '&', void 0, void 0, void 0, void 0, formUrlEncode$lambda);
   }
+  var addAll = Kotlin.kotlin.collections.addAll_ipc267$;
   function formUrlEncode_0($receiver) {
     var $receiver_0 = $receiver.entries;
     var destination = ArrayList_init();
@@ -656,7 +648,7 @@
     while (tmp$.hasNext()) {
       var element = tmp$.next();
       var $receiver_1 = element.value;
-      var destination_0 = ArrayList_init_0(collectionSizeOrDefault($receiver_1, 10));
+      var destination_0 = ArrayList_init(collectionSizeOrDefault($receiver_1, 10));
       var tmp$_0;
       tmp$_0 = $receiver_1.iterator();
       while (tmp$_0.hasNext()) {
@@ -714,10 +706,10 @@
         var feature = tmp$_1.next();
         var checkedBool = dependencyIds.contains_11rb$(feature.id);
         var checked = checkedBool ? 'checked' : '';
-        var artifacts = feature.artifacts;
-        var destination_0 = ArrayList_init_0(collectionSizeOrDefault(artifacts, 10));
+        var $receiver = plus(feature.artifacts, feature.testArtifacts);
+        var destination_0 = ArrayList_init(collectionSizeOrDefault($receiver, 10));
         var tmp$_5;
-        tmp$_5 = artifacts.iterator();
+        tmp$_5 = $receiver.iterator();
         while (tmp$_5.hasNext()) {
           var item = tmp$_5.next();
           destination_0.add_11rb$(removeSuffix(removePrefix(item, 'io.ktor:'), ':$ktor_version'));
@@ -735,12 +727,12 @@
         var tmp$_10 = tmp$_6.append(tmp$_9.append(jQuery(str_5).text(' (' + joinToString(simplifiedArtifacts, ', ') + ')')));
         var str_6 = "<div class='subtitle' />";
         var tmp$_11 = jQuery(str_6).append(jQuery('<div />').text(feature.description));
-        var $receiver = jQuery('<div />');
+        var $receiver_0 = jQuery('<div />');
         var tmp$_12;
         if (feature.documentation != null) {
-          $receiver.append(jQuery('<a />').attr('href', (tmp$_12 = feature.documentation) != null ? tmp$_12 : '').attr('target', '_blank').text('Documentation'));
+          $receiver_0.append(jQuery('<a />').attr('href', (tmp$_12 = feature.documentation) != null ? tmp$_12 : '').attr('target', '_blank').text('Documentation'));
         }
-        deps.append(tmp$_10.append(tmp$_11.append($receiver)));
+        deps.append(tmp$_10.append(tmp$_11.append($receiver_0)));
       }
     }
     tmp$_2 = features.iterator();
@@ -1293,6 +1285,7 @@
     this.tags_4pwcxp$_0 = emptyList();
     this.repos_54de5l$_0 = Repos_getInstance().ktor;
     this.artifacts_g5f33r$_0 = lazy(Feature$artifacts$lambda(this));
+    this.testArtifacts_6s9xgp$_0 = lazy(Feature$testArtifacts$lambda);
     this.documentation_nx4xfm$_0 = null;
   }
   Object.defineProperty(Feature.prototype, 'featureDeps', {
@@ -1329,13 +1322,18 @@
       return this.artifacts_g5f33r$_0.value;
     }
   });
+  Object.defineProperty(Feature.prototype, 'testArtifacts', {
+    get: function () {
+      return this.testArtifacts_6s9xgp$_0.value;
+    }
+  });
   Object.defineProperty(Feature.prototype, 'documentation', {
     get: function () {
       return this.documentation_nx4xfm$_0;
     }
   });
   Feature.prototype.render_miqy8c$ = function ($receiver, info) {
-    var tmp$, tmp$_0;
+    var tmp$, tmp$_0, tmp$_1;
     tmp$ = this.repos.iterator();
     while (tmp$.hasNext()) {
       var repo = tmp$.next();
@@ -1346,19 +1344,58 @@
       var artifact = tmp$_0.next();
       addCompileDependency($receiver, new MvnArtifact(artifact));
     }
+    tmp$_1 = this.artifacts.iterator();
+    while (tmp$_1.hasNext()) {
+      var artifact_0 = tmp$_1.next();
+      addTestDependency($receiver, new MvnArtifact(artifact_0));
+    }
     this.renderFeature_gtq0m3$($receiver, info);
   };
   Feature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+  };
+  Feature.prototype.toString = function () {
+    return 'Feature(' + this.id + ')';
   };
   function Feature$artifacts$lambda(this$Feature) {
     return function () {
       return listOf_0('io.ktor:' + this$Feature.id + ':' + '$' + 'ktor_version');
     };
   }
+  function Feature$testArtifacts$lambda() {
+    return emptyList();
+  }
   Feature.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'Feature',
     interfaces: [Block]
+  };
+  function FeatureSet(features) {
+    this.direct = toSet(features);
+    var $receiver = this.direct;
+    var destination = ArrayList_init();
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      var $receiver_0 = element.getAllDependantBlocks_7onwc9$();
+      var destination_0 = ArrayList_init();
+      var tmp$_0;
+      tmp$_0 = $receiver_0.iterator();
+      while (tmp$_0.hasNext()) {
+        var element_0 = tmp$_0.next();
+        if (Kotlin.isType(element_0, Feature))
+          destination_0.add_11rb$(element_0);
+      }
+      var list = destination_0;
+      addAll(destination, list);
+    }
+    this.all = toSet(destination);
+    this.transitive = minus(this.all, this.direct);
+  }
+  FeatureSet.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'FeatureSet',
+    interfaces: []
   };
   function KtorEngine(name, ordinal, id) {
     Enum.call(this);
@@ -1397,7 +1434,7 @@
   }
   var mapCapacity = Kotlin.kotlin.collections.mapCapacity_za3lpa$;
   var coerceAtLeast = Kotlin.kotlin.ranges.coerceAtLeast_dqglrj$;
-  var LinkedHashMap_init_0 = Kotlin.kotlin.collections.LinkedHashMap_init_bwtc7$;
+  var LinkedHashMap_init_0 = Kotlin.kotlin.collections.LinkedHashMap_init_xf5xz2$;
   function KtorEngine$Companion() {
     KtorEngine$Companion_instance = this;
     var $receiver = KtorEngine$values();
@@ -1576,8 +1613,9 @@
   function Versions() {
     Versions_instance = this;
     this.V092 = new SemVer('0.9.2');
-    this.ALL = [this.V092];
-    this.LAST = this.V092;
+    this.V093 = new SemVer('0.9.3');
+    this.ALL = [this.V093];
+    this.LAST = this.V093;
   }
   Versions.$metadata$ = {
     kind: Kind_OBJECT,
@@ -1902,6 +1940,58 @@
     }
     return JettyClientEngine_instance;
   }
+  function MockClientEngine() {
+    MockClientEngine_instance = this;
+    ClientEngine.call(this, [CoreClientEngine_getInstance()]);
+    this.id_541874$_0 = 'ktor-client-mock';
+    this.title_28v3i9$_0 = 'Mock HttpClient Engine';
+    this.description_w4am8t$_0 = 'Engine for using in tests to simulate HTTP responses programmatically.';
+    this.documentation_6p2g81$_0 = 'https://ktor.io/clients/http-client.html#mock';
+    this.artifacts_50995k$_0 = emptyList();
+    this.testArtifacts_o0ceoa$_0 = listOf_0('io.ktor:ktor-client-mock:$ktor_version');
+  }
+  Object.defineProperty(MockClientEngine.prototype, 'id', {
+    get: function () {
+      return this.id_541874$_0;
+    }
+  });
+  Object.defineProperty(MockClientEngine.prototype, 'title', {
+    get: function () {
+      return this.title_28v3i9$_0;
+    }
+  });
+  Object.defineProperty(MockClientEngine.prototype, 'description', {
+    get: function () {
+      return this.description_w4am8t$_0;
+    }
+  });
+  Object.defineProperty(MockClientEngine.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_6p2g81$_0;
+    }
+  });
+  Object.defineProperty(MockClientEngine.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_50995k$_0;
+    }
+  });
+  Object.defineProperty(MockClientEngine.prototype, 'testArtifacts', {
+    get: function () {
+      return this.testArtifacts_o0ceoa$_0;
+    }
+  });
+  MockClientEngine.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'MockClientEngine',
+    interfaces: [ClientEngine]
+  };
+  var MockClientEngine_instance = null;
+  function MockClientEngine_getInstance() {
+    if (MockClientEngine_instance === null) {
+      new MockClientEngine();
+    }
+    return MockClientEngine_instance;
+  }
   function AuthBasicClientFeature() {
     AuthBasicClientFeature_instance = this;
     ClientFeature.call(this, [CoreClientEngine_getInstance()]);
@@ -2196,42 +2286,26 @@
       return this.documentation_qqc0ww$_0;
     }
   });
-  function AuthFeature$renderFeature$lambda(closure$info, this$AuthFeature, this$renderFeature) {
+  function AuthFeature$renderFeature$lambda(this$AuthFeature, this$renderFeature) {
     return function ($receiver) {
-      if (closure$info.ktorVer.compareTo_11rb$(Versions_getInstance().V092) >= 0) {
-        var $receiver_0 = 'install(Authentication)';
-        var rafter = ''.length === 0 ? '' : ' ' + '';
-        $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
-        $receiver._indent();
-        try {
-          var this$AuthFeature_0 = this$AuthFeature;
-          this$renderFeature.block_rsgfsn$($receiver, this$AuthFeature_0.BLOCK);
-        }
-        finally {
-          $receiver._unindent();
-        }
-        $receiver.line_61zpoe$('}' + '');
+      var $receiver_0 = 'install(Authentication)';
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+      $receiver._indent();
+      try {
+        var this$AuthFeature_0 = this$AuthFeature;
+        this$renderFeature.block_rsgfsn$($receiver, this$AuthFeature_0.BLOCK);
       }
-       else {
-        var $receiver_1 = 'install(Authentication)';
-        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
-        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
-        $receiver._indent();
-        try {
-          var this$AuthFeature_1 = this$AuthFeature;
-          this$renderFeature.block_rsgfsn$($receiver, this$AuthFeature_1.BLOCK);
-        }
-        finally {
-          $receiver._unindent();
-        }
-        $receiver.line_61zpoe$('}' + '');
+      finally {
+        $receiver._unindent();
       }
+      $receiver.line_61zpoe$('}' + '');
       return Unit;
     };
   }
   AuthFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.auth.*');
-    addFeatureInstall($receiver, AuthFeature$renderFeature$lambda(info, this, $receiver));
+    addFeatureInstall($receiver, AuthFeature$renderFeature$lambda(this, $receiver));
   };
   AuthFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -4810,12 +4884,7 @@
   }
   function ApplicationKt$render$lambda$lambda_0(closure$info) {
     return function ($receiver) {
-      if (closure$info.ktorVer.compareTo_11rb$(Versions_getInstance().V092) >= 0) {
-        $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + closure$info.developmentEngineFQ + '.main(args)');
-      }
-       else {
-        $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + closure$info.developmentPackage + '.main(args)');
-      }
+      $receiver.line_61zpoe$('fun main(args: Array<String>): Unit = ' + closure$info.developmentEngineFQ + '.main(args)');
       return Unit;
     };
   }
@@ -6944,7 +7013,7 @@
     return ASCII_instance;
   }
   function toString_0($receiver, charset) {
-    var $receiver_0 = StringBuilder_init();
+    var $receiver_0 = new StringBuilder();
     charset.decode_9w11d2$($receiver_0, $receiver, 0, $receiver.length);
     return $receiver_0.toString();
   }
@@ -7363,7 +7432,7 @@
   Indenter$Companion.prototype.invoke_61zpoe$ = function (str) {
     return this.single_61zpoe$(str);
   };
-  var StringBuilder_init_0 = Kotlin.kotlin.text.StringBuilder_init_za3lpa$;
+  var StringBuilder_init = Kotlin.kotlin.text.StringBuilder_init_za3lpa$;
   Indenter$Companion.prototype.replaceString_mvjluj$ = function (templateString, replacements) {
     var pattern = Regex_init('\\$(\\w+)');
     var replace_20wsma$result;
@@ -7375,7 +7444,7 @@
       }
       var lastStart = 0;
       var length = templateString.length;
-      var sb = StringBuilder_init_0(length);
+      var sb = StringBuilder_init(length);
       do {
         var foundMatch = ensureNotNull(match);
         sb.append_ezbsdh$(templateString, lastStart, foundMatch.range.start);
@@ -7487,7 +7556,7 @@
     this.markHandler = markHandler;
     this.indentEmptyLines = indentEmptyLines;
     this.doIndent = doIndent;
-    this.out = StringBuilder_init();
+    this.out = new StringBuilder();
     this.line = 0;
     this.newLine = true;
     this.indentIndex = 0;
@@ -8032,6 +8101,7 @@
   package$start.ServerFeature = ServerFeature;
   package$start.ClientFeature = ClientFeature;
   package$start.Feature = Feature;
+  package$start.FeatureSet = FeatureSet;
   Object.defineProperty(KtorEngine, 'Netty', {
     get: KtorEngine$Netty_getInstance
   });
@@ -8101,6 +8171,9 @@
   });
   Object.defineProperty(package$client, 'JettyClientEngine', {
     get: JettyClientEngine_getInstance
+  });
+  Object.defineProperty(package$client, 'MockClientEngine', {
+    get: MockClientEngine_getInstance
   });
   Object.defineProperty(package$client, 'AuthBasicClientFeature', {
     get: AuthBasicClientFeature_getInstance
@@ -8321,7 +8394,7 @@
   KOTLIN_VERSION = '1.2.50';
   ALL_SERVER_FEATURES = lazy(ALL_SERVER_FEATURES$lambda);
   ALL_CLIENT_FEATURES = lazy(ALL_CLIENT_FEATURES$lambda);
-  ALL_FEATURES = listOf([ApacheClientEngine_getInstance(), CioClientEngine_getInstance(), JettyClientEngine_getInstance(), CoreClientEngine_getInstance(), AuthBasicClientFeature_getInstance(), JsonClientFeature_getInstance(), WebSocketClientFeature_getInstance(), HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), AuthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
+  ALL_FEATURES = listOf([CoreClientEngine_getInstance(), ApacheClientEngine_getInstance(), CioClientEngine_getInstance(), JettyClientEngine_getInstance(), MockClientEngine_getInstance(), AuthBasicClientFeature_getInstance(), JsonClientFeature_getInstance(), WebSocketClientFeature_getInstance(), HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), AuthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
   applicationKtImports = new Extra$PropertyThis(void 0, applicationKtImports$lambda);
   reposToInclude = new Extra$PropertyThis(void 0, reposToInclude$lambda);
   compileDependencies = new Extra$PropertyThis(void 0, compileDependencies$lambda);
