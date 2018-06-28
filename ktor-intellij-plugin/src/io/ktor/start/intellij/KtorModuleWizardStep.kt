@@ -48,6 +48,8 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
     lateinit var engineCB: JComboBox<KtorEngine>
     lateinit var versionCB: JComboBox<SemVer>
     lateinit var wrapperCheckBox: JCheckBox
+    lateinit var featureServerList: FeatureCheckboxList
+    lateinit var featureClientList: FeatureCheckboxList
     val featuresToCheckbox = LinkedHashMap<Feature, ThreeStateCheckedTreeNode>()
     val panel by lazy {
         JPanel().apply {
@@ -72,24 +74,14 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
                 description.repaint()
             }
 
-            val featureServerList = object : FeatureCheckboxList(ALL_SERVER_FEATURES) {
-                override fun onSelected(feature: Feature?, node: ThreeStateCheckedTreeNode) {
-                    showFeatureDocumentation(feature)
-                }
-
-                override fun onChanged(feature: Feature, node: ThreeStateCheckedTreeNode) {
-                    updateTransitive()
-                }
+            featureServerList = object : FeatureCheckboxList(ALL_SERVER_FEATURES) {
+                override fun onSelected(feature: Feature?, node: ThreeStateCheckedTreeNode) = showFeatureDocumentation(feature)
+                override fun onChanged(feature: Feature, node: ThreeStateCheckedTreeNode) = updateTransitive()
             }
 
-            val featureClientList = object : FeatureCheckboxList(ALL_CLIENT_FEATURES) {
-                override fun onSelected(feature: Feature?, node: ThreeStateCheckedTreeNode) {
-                    showFeatureDocumentation(feature)
-                }
-
-                override fun onChanged(feature: Feature, node: ThreeStateCheckedTreeNode) {
-                    updateTransitive()
-                }
+            featureClientList = object : FeatureCheckboxList(ALL_CLIENT_FEATURES) {
+                override fun onSelected(feature: Feature?, node: ThreeStateCheckedTreeNode) = showFeatureDocumentation(feature)
+                override fun onChanged(feature: Feature, node: ThreeStateCheckedTreeNode) = updateTransitive()
             }
 
             featuresToCheckbox += featureServerList.featuresToCheckbox
@@ -156,6 +148,9 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
         for (feature in ALL_FEATURES) {
             feature.indeterminate = (feature in featureSet.transitive)
         }
+
+        featureServerList.repaint()
+        featureClientList.repaint()
     }
 
     override fun getComponent() = panel
