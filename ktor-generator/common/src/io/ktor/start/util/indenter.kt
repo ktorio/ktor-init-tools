@@ -211,6 +211,9 @@ class Indenter(internal val actions: ArrayList<Action> = arrayListOf<Indenter.Ac
     override fun toString(): String = toString(null, doIndent = true)
 }
 
+operator fun Unit.unaryPlus(): Unit = this
+operator fun Indenter.unaryPlus(): Indenter = this
+
 val Indenter.SEPARATOR get() = EMPTY_LINE_ONCE()
 
 fun Indenter.EMPTY_LINE_ONCE() {

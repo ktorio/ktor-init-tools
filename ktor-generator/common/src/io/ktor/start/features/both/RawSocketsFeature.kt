@@ -19,6 +19,7 @@ package io.ktor.start.features.both
 
 import io.ktor.start.*
 import io.ktor.start.project.*
+import io.ktor.start.util.*
 
 object RawSocketsFeature : ServerFeature(ApplicationKt) {
     override val group = "Sockets"
@@ -28,4 +29,103 @@ object RawSocketsFeature : ServerFeature(ApplicationKt) {
     override val title = "Raw Sockets"
     override val description = "Adds Raw Socket support for listening and connecting to tcp and udp sockets"
     override val documentation = "https://ktor.io/servers/raw-sockets.html"
+
+    val SERVER_SOCKET = newSlot("SERVER_SOCKET")
+    val CLIENT_SOCKET = newSlot("CLIENT_SOCKET")
+
+    override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addImport("java.io.*")
+        addImport("java.util.*")
+        addImport("io.ktor.network.selector.*")
+        addImport("io.ktor.network.sockets.*")
+        addImport("io.ktor.network.util.*")
+        addImport("kotlin.coroutines.experimental.*")
+        addImport("kotlinx.coroutines.experimental.*")
+        addImport("kotlinx.coroutines.experimental.io.*")
+
+        fileText("src/EchoApp.kt") {
+            +"package ${info.artifactGroup}"
+            putImports(applicationKtImports)
+            SEPARATOR {
+                +"/**"
+                +" * Two mains are provided, you must first start EchoApp.Server, and then EchoApp.Client."
+                +" * You can also start EchoApp.Server and then use a telnet client to connect to the echo server."
+                +" */"
+                +"object EchoApp" {
+                    +"val selectorManager = ActorSelectorManager(ioCoroutineDispatcher)"
+                    +"val DefaultPort = 9002"
+                    SEPARATOR {
+                        +"object Server" {
+                            +"@JvmStatic"
+                            +"fun main(args: Array<String>)" {
+                                +"runBlocking" {
+                                    block(SERVER_SOCKET) {
+                                        +"val serverSocket = aSocket(selectorManager).tcp().bind(port = DefaultPort)"
+                                    }
+
+                                    +"println(\"Echo Server listening at \${serverSocket.localAddress}\")"
+                                    +"while (true)" {
+                                        +"val socket = serverSocket.accept()"
+                                        +"println(\"Accepted \$socket\")"
+                                        +"launch" {
+                                            +"val read = socket.openReadChannel()"
+                                            +"val write = socket.openWriteChannel(autoFlush = true)"
+                                            +"try" {
+                                                +"while (true)" {
+                                                    +"val line = read.readUTF8Line()"
+                                                    +"write.writeStringUtf8(\"\$line\\n\")"
+                                                }
+                                            }
+                                            +"catch (e: Throwable)" {
+                                                +"socket.close()"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    SEPARATOR {
+                        +"object Client" {
+                            +"@JvmStatic"
+                            +"fun main(args: Array<String>)" {
+                                +"runBlocking" {
+                                    block(CLIENT_SOCKET) {
+                                        +"val socket = aSocket(selectorManager).tcp().connect(\"127.0.0.1\", port = DefaultPort)"
+                                    }
+
+                                    +"val read = socket.openReadChannel()"
+                                    +"val write = socket.openWriteChannel(autoFlush = true)"
+                                    SEPARATOR {
+                                        +"launch" {
+                                            +"while (true)" {
+                                                +"val line = read.readUTF8Line()"
+                                                +"println(\"server: \$line\")"
+                                            }
+                                        }
+                                    }
+                                    SEPARATOR {
+                                        +"for (line in System.`in`.lines())" {
+                                            +"println(\"client: \$line\")"
+                                            +"write.writeStringUtf8(\"\$line\\n\")"
+                                        }
+                                    }
+                                }
+                            }
+                            SEPARATOR {
+                                +"private fun InputStream.lines() = Scanner(this).lines()"
+                            }
+                            SEPARATOR {
+                                +"private fun Scanner.lines() = buildSequence" {
+                                    +"while (hasNext())" {
+                                        +"yield(readLine())"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

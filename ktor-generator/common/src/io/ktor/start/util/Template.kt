@@ -34,11 +34,18 @@ open class BlockSlot<TSubject>(val name: String, val block: Block<TSubject>) {
 }
 
 class SlotInstance<TSubject>(val slot: BlockSlot<TSubject>) : Extra by Extra.Mixin() {
-    val blocks = arrayListOf<Indenter.() -> Unit>()
+    class RenderBlock(val replace: Boolean, val indenter: Indenter.() -> Unit)
+
+    val blocks = arrayListOf<RenderBlock>()
 
     fun render(indenter: Indenter) {
-        for (block in blocks) {
-            block(indenter)
+        val only = blocks.lastOrNull { it.replace }
+        if (only != null) {
+            only.indenter(indenter)
+        } else {
+            for (block in blocks) {
+                block.indenter(indenter)
+            }
         }
     }
 
@@ -65,14 +72,24 @@ open class BlockBuilder(val subject: Any) : Extra by Extra.Mixin() {
         return blockInstances.getOrPut(slot) { SlotInstance(slot) } as SlotInstance<TSubject>
     }
 
-    fun append(slot: BlockSlot<*>, once: Boolean = false, callback: Indenter.() -> Unit) {
-        if (slot.block !in currentBlock!!.blockDeps) {
+    fun _gen(slot: BlockSlot<*>): SlotInstance<*> {
+        if (currentBlock == null) error("currentBlock==null")
+        if (slot.block !in currentBlock!!.blockDeps && slot.block != currentBlock) {
             error("To use $slot, must directly depend on block ${slot.block}")
         }
         // @TODO: ONCE: Lines added should appear only once
         //val instance = blockInstances[slot] ?: error("Slot $slot not defined. Must depend on block ${slot.block}. currentBlock=$currentBlock")
-        val instance = getSlotInstance(slot)
-        instance.blocks += callback
+        return getSlotInstance(slot)
+    }
+
+    fun replace(slot: BlockSlot<*>, callback: Indenter.() -> Unit) {
+        val instance = _gen(slot)
+        instance.blocks += SlotInstance.RenderBlock(true, callback)
+    }
+
+    fun append(slot: BlockSlot<*>, once: Boolean = false, callback: Indenter.() -> Unit) {
+        val instance = _gen(slot)
+        instance.blocks += SlotInstance.RenderBlock(false, callback)
     }
 
     fun appendSeparated(slot: BlockSlot<*>, once: Boolean = false, callback: Indenter.() -> Unit) {
@@ -97,10 +114,15 @@ open class BlockBuilder(val subject: Any) : Extra by Extra.Mixin() {
         }
     }
 
-    fun <TSubject> Indenter.block(slot: BlockSlot<TSubject>) {
+    fun <TSubject> Indenter.block(slot: BlockSlot<TSubject>, callback: (Indenter.() -> Unit)? = null) {
         val instance = getSlotInstance(slot)
         linedeferred {
             instance.render(this)
+        }
+        if (callback != null) {
+            currentBlock(slot.block) {
+                append(slot, callback = callback)
+            }
         }
     }
 

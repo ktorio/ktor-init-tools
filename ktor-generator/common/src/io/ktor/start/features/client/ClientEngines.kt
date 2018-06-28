@@ -19,6 +19,8 @@ object CoreClientEngine : ClientEngine(ApplicationKt) {
     val CLIENT_FEATURES = newSlot("CLIENT_FEATURES")
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addImport("io.ktor.client.*")
+
         appendSeparated(ApplicationKt.MODULE_INSTALL) {
             linedeferred {
                 "val client = HttpClient($clientEngine)" {
@@ -52,7 +54,7 @@ object CioClientEngine : ClientEngine(CoreClientEngine) {
     override val documentation = "https://ktor.io/clients/http-client.html#cio"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
-        addImport("io.ktor.server.cio.*")
+        addImport("io.ktor.client.engine.cio.*")
         clientEngine = "CIO"
     }
 }
@@ -64,7 +66,7 @@ object JettyClientEngine : ClientEngine(CoreClientEngine) {
     override val documentation = "https://ktor.io/clients/http-client.html#jetty"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
-        addImport("io.ktor.server.jetty.*")
+        addImport("io.ktor.client.engine.jetty.*")
         clientEngine = "Jetty"
     }
 }

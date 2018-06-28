@@ -39,7 +39,7 @@ object AuthBasicFeature : ServerFeature(ApplicationKt, AuthFeature, RoutingFeatu
         }
         addRoute {
             "authenticate(\"myBasicAuth\")" {
-                "get(\"/protected/route\")" {
+                "get(\"/protected/route/basic\")" {
                     +"val principal = call.principal<UserIdPrincipal>()!!"
                     +"call.respondText(\"Hello \${principal.name}\")"
                 }

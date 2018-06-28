@@ -19,12 +19,40 @@ package io.ktor.start.features.server
 
 import io.ktor.start.*
 import io.ktor.start.project.*
+import io.ktor.start.util.*
 
-object WebsocketsFeature : ServerFeature(ApplicationKt) {
+object WebsocketsFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-websockets:\$ktor_version")
     override val id = "ktor-websockets"
     override val title = "WebSockets"
     override val description = "Adds WebSockets support for bidirectional communication with the client"
     override val documentation = "https://ktor.io/features/websockets.html"
+
+    override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addImport("io.ktor.websocket.*")
+        addImport("io.ktor.http.cio.websocket.*")
+        addImport("java.time.*")
+
+        addFeatureInstall {
+            +"install(io.ktor.websocket.WebSockets)" {
+                +"pingPeriod = Duration.ofSeconds(15)"
+                +"timeout = Duration.ofSeconds(15)"
+                +"maxFrameSize = Long.MAX_VALUE"
+                +"masking = false"
+            }
+        }
+        
+        addRoute {
+            +"webSocket(\"/myws/echo\")" {
+                +"send(Frame.Text(\"Hi from server\"))"
+                +"while (true)" {
+                    +"val frame = incoming.receive()"
+                    +"if (frame is Frame.Text)" {
+                        +"send(Frame.Text(\"Client said: \" + frame.readText()))"
+                    }
+                }
+            }
+        }
+    }
 }

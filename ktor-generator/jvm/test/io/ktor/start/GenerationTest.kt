@@ -1,10 +1,13 @@
 package io.ktor.start
 
+import io.ktor.start.features.*
+import io.ktor.start.features.both.*
 import io.ktor.start.features.client.*
 import io.ktor.start.features.server.*
 import io.ktor.start.util.*
 import kotlinx.coroutines.experimental.*
 import org.junit.*
+import java.io.*
 import kotlin.test.*
 
 class GenerationTest {
@@ -16,20 +19,21 @@ class GenerationTest {
         artifactGroup = "com.example",
         artifactVersion = "0.1.0-SNAPSHOT",
         ktorEngine = KtorEngine.Netty,
-        fetch = {
-            val url =
-                GenerationTest::class.java.getResourceAsStream(it)
-                        ?: GenerationTest::class.java.getResourceAsStream("/$it")
-                        ?: ClassLoader.getSystemClassLoader().getResourceAsStream("/$it")
-                        ?: ClassLoader.getSystemClassLoader().getResourceAsStream(it)
-            url?.readBytes() ?: error("Can't find resource '$it'")
+        fetch = { name ->
+            val loaders = listOf(RoutingFeature::class.java.classLoader, GenerationTest::class.java.classLoader, ClassLoader.getSystemClassLoader())
+            val url = loaders.mapNotNull { it.getResource(name) ?: it.getResource("/$name") }.firstOrNull()
+            val file = File(File("../common/resources"), name)
+            url?.readBytes() ?: file.takeIf { it.exists() }?.readBytes() ?: error("Can't find resource '$name'")
         }
     )
 
     @Test
     fun testSmoke() = suspendTest {
         val files = generate(info, RoutingFeature)
-        assertEquals(setOf("build.gradle", "settings.gradle", "resources/application.conf", "src/application.kt"), files.keys)
+        assertEquals(
+            setOf("build.gradle", "settings.gradle", "resources/application.conf", "src/application.kt"),
+            files.keys
+        )
         assertEquals(
             """
                 package com.example
@@ -54,6 +58,11 @@ class GenerationTest {
             """.trimIndent(),
             files["src/application.kt"]!!.string.replace("\t", " ".repeat(4))
         )
+    }
+
+    @Test
+    fun testSmoke2() = suspendTest {
+        generate(info, ALL_FEATURES) // Check that no exception is thrown
     }
 
     @Test
@@ -84,6 +93,12 @@ class GenerationTest {
             """.trimIndent(),
             files["src/application.kt"]!!.string.replace("\t", " ".repeat(4))
         )
+    }
+
+    @Test
+    fun testSockets() = suspendTest {
+        val str = generate(info, RawSocketsTlsFeature)["src/EchoApp.kt"]!!.string
+        assertTrue { str.contains("val serverSocket = aSocket(selectorManager).tcp().bind(port = DefaultPort)") }
     }
 }
 

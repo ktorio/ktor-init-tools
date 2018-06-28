@@ -66,6 +66,16 @@ fun BlockBuilder.addImport(import: String) {
     applicationKtImports += import
 }
 
+fun Indenter.putImports(imports: Set<String>) {
+    SEPARATOR {
+        linedeferred {
+            for (import in imports) {
+                +"import $import"
+            }
+        }
+    }
+}
+
 fun BlockBuilder.addFeatureInstall(callback: Indenter.() -> Unit) {
     appendSeparated(ApplicationKt.MODULE_INSTALL) {
         callback()
