@@ -54,6 +54,7 @@
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
   var LinkedHashSet_init = Kotlin.kotlin.collections.LinkedHashSet_init_287e2$;
+  var plus_1 = Kotlin.kotlin.collections.plus_khz7k3$;
   var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
   var toString = Kotlin.toString;
   var toList = Kotlin.kotlin.collections.toList_7wnvza$;
@@ -63,10 +64,15 @@
   var numberToByte = Kotlin.numberToByte;
   var toChar = Kotlin.toChar;
   var StringBuilder = Kotlin.kotlin.text.StringBuilder;
-  var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
+  var CharRange = Kotlin.kotlin.ranges.CharRange;
+  var toBoxedChar = Kotlin.toBoxedChar;
+  var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
+  var toByte = Kotlin.toByte;
   var unboxChar = Kotlin.unboxChar;
-  var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
+  var StringBuilder_init = Kotlin.kotlin.text.StringBuilder_init_za3lpa$;
   var replace = Kotlin.kotlin.text.replace_680rmw$;
+  var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
+  var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
   var split_0 = Kotlin.kotlin.text.split_ip8yn$;
   var first = Kotlin.kotlin.collections.first_2p1efm$;
   var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
@@ -174,6 +180,8 @@
   ApplicationConf.prototype.constructor = ApplicationConf;
   ApplicationKt.prototype = Object.create(Block.prototype);
   ApplicationKt.prototype.constructor = ApplicationKt;
+  ApplicationTestKt.prototype = Object.create(Block.prototype);
+  ApplicationTestKt.prototype.constructor = ApplicationTestKt;
   BuildFiles.prototype = Object.create(Block.prototype);
   BuildFiles.prototype.constructor = BuildFiles;
   BuildFilesGradle.prototype = Object.create(Block.prototype);
@@ -1671,6 +1679,8 @@
     this.title_uiv1fw$_0 = 'Raw Sockets';
     this.description_mr4lsg$_0 = 'Adds Raw Socket support for listening and connecting to tcp and udp sockets';
     this.documentation_dqqdw2$_0 = 'https://ktor.io/servers/raw-sockets.html';
+    this.SERVER_SOCKET = this.newSlot_pdl1vj$('SERVER_SOCKET');
+    this.CLIENT_SOCKET = this.newSlot_pdl1vj$('CLIENT_SOCKET');
   }
   Object.defineProperty(RawSocketsFeature.prototype, 'group', {
     get: function () {
@@ -1702,6 +1712,323 @@
       return this.documentation_dqqdw2$_0;
     }
   });
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda($receiver) {
+    $receiver.line_61zpoe$('val serverSocket = aSocket(selectorManager).tcp().bind(port = DefaultPort)');
+    return Unit;
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda(this$RawSocketsFeature, this$renderFeature) {
+    return function ($receiver) {
+      var $receiver_0 = 'object Server';
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+      $receiver._indent();
+      try {
+        var this$RawSocketsFeature_0 = this$RawSocketsFeature;
+        var this$renderFeature_0 = this$renderFeature;
+        $receiver.line_61zpoe$('@JvmStatic');
+        var $receiver_1 = 'fun main(args: Array<String>)';
+        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+        $receiver._indent();
+        try {
+          var $receiver_2 = 'runBlocking';
+          var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+          $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_1 : $receiver_2 + ' {' + rafter_1);
+          $receiver._indent();
+          try {
+            this$renderFeature_0.block_1s7wi0$($receiver, this$RawSocketsFeature_0.SERVER_SOCKET, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda);
+            $receiver.line_61zpoe$('println("Echo Server listening at ${serverSocket.localAddress}")');
+            var $receiver_3 = 'while (true)';
+            var rafter_2 = ''.length === 0 ? '' : ' ' + '';
+            $receiver.line_61zpoe$($receiver_3.length === 0 ? '{' + rafter_2 : $receiver_3 + ' {' + rafter_2);
+            $receiver._indent();
+            try {
+              $receiver.line_61zpoe$('val socket = serverSocket.accept()');
+              $receiver.line_61zpoe$('println("Accepted $socket")');
+              var rafter_3 = ''.length === 0 ? '' : ' ' + '';
+              $receiver.line_61zpoe$('launch'.length === 0 ? '{' + rafter_3 : 'launch' + ' {' + rafter_3);
+              $receiver._indent();
+              try {
+                $receiver.line_61zpoe$('val read = socket.openReadChannel()');
+                $receiver.line_61zpoe$('val write = socket.openWriteChannel(autoFlush = true)');
+                var rafter_4 = ''.length === 0 ? '' : ' ' + '';
+                $receiver.line_61zpoe$('try'.length === 0 ? '{' + rafter_4 : 'try' + ' {' + rafter_4);
+                $receiver._indent();
+                try {
+                  var $receiver_4 = 'while (true)';
+                  var rafter_5 = ''.length === 0 ? '' : ' ' + '';
+                  $receiver.line_61zpoe$($receiver_4.length === 0 ? '{' + rafter_5 : $receiver_4 + ' {' + rafter_5);
+                  $receiver._indent();
+                  try {
+                    $receiver.line_61zpoe$('val line = read.readUTF8Line()');
+                    $receiver.line_61zpoe$('write.writeStringUtf8("$line\\n")');
+                  }
+                  finally {
+                    $receiver._unindent();
+                  }
+                  $receiver.line_61zpoe$('}' + '');
+                  unaryPlus_0($receiver);
+                }
+                finally {
+                  $receiver._unindent();
+                }
+                $receiver.line_61zpoe$('}' + '');
+                unaryPlus_0($receiver);
+                var $receiver_5 = 'catch (e: Throwable)';
+                var rafter_6 = ''.length === 0 ? '' : ' ' + '';
+                $receiver.line_61zpoe$($receiver_5.length === 0 ? '{' + rafter_6 : $receiver_5 + ' {' + rafter_6);
+                $receiver._indent();
+                try {
+                  $receiver.line_61zpoe$('socket.close()');
+                }
+                finally {
+                  $receiver._unindent();
+                }
+                $receiver.line_61zpoe$('}' + '');
+                unaryPlus_0($receiver);
+              }
+              finally {
+                $receiver._unindent();
+              }
+              $receiver.line_61zpoe$('}' + '');
+              unaryPlus_0($receiver);
+            }
+            finally {
+              $receiver._unindent();
+            }
+            $receiver.line_61zpoe$('}' + '');
+            unaryPlus_0($receiver);
+          }
+          finally {
+            $receiver._unindent();
+          }
+          $receiver.line_61zpoe$('}' + '');
+          unaryPlus_0($receiver);
+        }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$('}' + '');
+        unaryPlus_0($receiver);
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+      return Unit;
+    };
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_0($receiver) {
+    $receiver.line_61zpoe$('val socket = aSocket(selectorManager).tcp().connect("127.0.0.1", port = DefaultPort)');
+    return Unit;
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_1($receiver) {
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$('launch'.length === 0 ? '{' + rafter : 'launch' + ' {' + rafter);
+    $receiver._indent();
+    try {
+      var $receiver_0 = 'while (true)';
+      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter_0 : $receiver_0 + ' {' + rafter_0);
+      $receiver._indent();
+      try {
+        $receiver.line_61zpoe$('val line = read.readUTF8Line()');
+        $receiver.line_61zpoe$('println("server: $line")');
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+    return Unit;
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_2($receiver) {
+    var $receiver_0 = 'for (line in System.`in`.lines())';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('println("client: $line")');
+      $receiver.line_61zpoe$('write.writeStringUtf8("$line\\n")');
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+    return Unit;
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda($receiver) {
+    $receiver.line_61zpoe$('private fun InputStream.lines() = Scanner(this).lines()');
+    return Unit;
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda_0($receiver) {
+    var $receiver_0 = 'private fun Scanner.lines() = buildSequence';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      var $receiver_1 = 'while (hasNext())';
+      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+      $receiver._indent();
+      try {
+        $receiver.line_61zpoe$('yield(readLine())');
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+    return Unit;
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda_0(this$RawSocketsFeature, this$renderFeature) {
+    return function ($receiver) {
+      var $receiver_0 = 'object Client';
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+      $receiver._indent();
+      try {
+        var this$RawSocketsFeature_0 = this$RawSocketsFeature;
+        var this$renderFeature_0 = this$renderFeature;
+        $receiver.line_61zpoe$('@JvmStatic');
+        var $receiver_1 = 'fun main(args: Array<String>)';
+        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+        $receiver._indent();
+        try {
+          var $receiver_2 = 'runBlocking';
+          var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+          $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_1 : $receiver_2 + ' {' + rafter_1);
+          $receiver._indent();
+          try {
+            this$renderFeature_0.block_1s7wi0$($receiver, this$RawSocketsFeature_0.CLIENT_SOCKET, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_0);
+            $receiver.line_61zpoe$('val read = socket.openReadChannel()');
+            $receiver.line_61zpoe$('val write = socket.openWriteChannel(autoFlush = true)');
+            SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_1);
+            SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_2);
+          }
+          finally {
+            $receiver._unindent();
+          }
+          $receiver.line_61zpoe$('}' + '');
+          unaryPlus_0($receiver);
+        }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$('}' + '');
+        unaryPlus_0($receiver);
+        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda);
+        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda_0);
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+      return Unit;
+    };
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda(this$RawSocketsFeature, this$renderFeature) {
+    return function ($receiver) {
+      $receiver.line_61zpoe$('/**');
+      $receiver.line_61zpoe$(' * Two mains are provided, you must first start EchoApp.Server, and then EchoApp.Client.');
+      $receiver.line_61zpoe$(' * You can also start EchoApp.Server and then use a telnet client to connect to the echo server.');
+      $receiver.line_61zpoe$(' */');
+      var $receiver_0 = 'object EchoApp';
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+      $receiver._indent();
+      try {
+        var this$RawSocketsFeature_0 = this$RawSocketsFeature;
+        var this$renderFeature_0 = this$renderFeature;
+        $receiver.line_61zpoe$('val selectorManager = ActorSelectorManager(ioCoroutineDispatcher)');
+        $receiver.line_61zpoe$('val DefaultPort = 9002');
+        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda(this$RawSocketsFeature_0, this$renderFeature_0));
+        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda_0(this$RawSocketsFeature_0, this$renderFeature_0));
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+      return Unit;
+    };
+  }
+  function RawSocketsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, this$RawSocketsFeature_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$RawSocketsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, this$RawSocketsFeature_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$RawSocketsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, this$RawSocketsFeature_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+    this.local$this$renderFeature = this$renderFeature_0;
+    this.local$this$RawSocketsFeature = this$RawSocketsFeature_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$RawSocketsFeature$renderFeature$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$RawSocketsFeature$renderFeature$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$RawSocketsFeature$renderFeature$lambda.prototype.constructor = Coroutine$RawSocketsFeature$renderFeature$lambda;
+  Coroutine$RawSocketsFeature$renderFeature$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.local$$receiver.line_61zpoe$('package ' + this.local$closure$info.artifactGroup);
+            putImports(this.local$$receiver, get_applicationKtImports(this.local$this$renderFeature));
+            return SEPARATOR(this.local$$receiver, RawSocketsFeature$renderFeature$lambda$lambda(this.local$this$RawSocketsFeature, this.local$this$renderFeature)), Unit;
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  RawSocketsFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'java.io.*');
+    addImport($receiver, 'java.util.*');
+    addImport($receiver, 'io.ktor.network.selector.*');
+    addImport($receiver, 'io.ktor.network.sockets.*');
+    addImport($receiver, 'io.ktor.network.util.*');
+    addImport($receiver, 'kotlin.coroutines.experimental.*');
+    addImport($receiver, 'kotlinx.coroutines.experimental.*');
+    addImport($receiver, 'kotlinx.coroutines.experimental.io.*');
+    $receiver.fileText_7k8vha$('src/EchoApp.kt', void 0, void 0, RawSocketsFeature$renderFeature$lambda(info, $receiver, this));
+  };
   RawSocketsFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'RawSocketsFeature',
@@ -1754,6 +2081,103 @@
       return this.documentation_tpkipz$_0;
     }
   });
+  function RawSocketsTlsFeature$renderFeature$lambda$lambda($receiver) {
+    var $receiver_0 = 'object TlsRawSocket';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('@JvmStatic');
+      var $receiver_1 = 'fun main(args: Array<String>)';
+      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+      $receiver._indent();
+      try {
+        var $receiver_2 = 'runBlocking';
+        var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_1 : $receiver_2 + ' {' + rafter_1);
+        $receiver._indent();
+        try {
+          $receiver.line_61zpoe$('val selectorManager = ActorSelectorManager(ioCoroutineDispatcher)');
+          $receiver.line_61zpoe$('val socket = aSocket(selectorManager).tcp().connect("www.google.com", port = 443).tls()');
+          $receiver.line_61zpoe$('val write = socket.openWriteChannel()');
+          $receiver.line_61zpoe$('val LINE = "\\r\\n"');
+          $receiver.line_61zpoe$('write.writeStringUtf8("GET / HTTP/1.1${LINE}Host: www.google.com${LINE}Connection: close${LINE}${LINE}")');
+          $receiver.line_61zpoe$('write.flush()');
+          $receiver.line_61zpoe$('println(socket.openReadChannel().readRemaining().readBytes().toString(Charsets.UTF_8))');
+        }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$('}' + '');
+        unaryPlus_0($receiver);
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+    return Unit;
+  }
+  function RawSocketsTlsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$RawSocketsTlsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$RawSocketsTlsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+    this.local$this$renderFeature = this$renderFeature_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$RawSocketsTlsFeature$renderFeature$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$RawSocketsTlsFeature$renderFeature$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$RawSocketsTlsFeature$renderFeature$lambda.prototype.constructor = Coroutine$RawSocketsTlsFeature$renderFeature$lambda;
+  Coroutine$RawSocketsTlsFeature$renderFeature$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.local$$receiver.line_61zpoe$('package ' + this.local$closure$info.artifactGroup);
+            putImports(this.local$$receiver, get_applicationKtImports(this.local$this$renderFeature));
+            return SEPARATOR(this.local$$receiver, RawSocketsTlsFeature$renderFeature$lambda$lambda), Unit;
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  RawSocketsTlsFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.network.tls.*');
+    addImport($receiver, 'kotlinx.io.core.*');
+    $receiver.fileText_7k8vha$('src/TlsRawSocket.kt', void 0, void 0, RawSocketsTlsFeature$renderFeature$lambda(info, $receiver));
+  };
   RawSocketsTlsFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'RawSocketsTlsFeature',
@@ -1782,11 +2206,13 @@
   };
   function CoreClientEngine() {
     CoreClientEngine_instance = this;
-    ClientEngine.call(this, []);
+    ClientEngine.call(this, [ApplicationKt_getInstance()]);
     this.id_z0dcbv$_0 = 'ktor-client-core';
     this.title_vfzv4c$_0 = 'HttpClient Engine';
     this.description_awih0o$_0 = 'Core of the HttpClient. Required for libraries.';
     this.documentation_9k27km$_0 = 'https://ktor.io/clients/http-client.html';
+    this.CLIENT_USAGE = this.newSlot_pdl1vj$('CLIENT');
+    this.CLIENT_FEATURES = this.newSlot_pdl1vj$('CLIENT_FEATURES');
   }
   Object.defineProperty(CoreClientEngine.prototype, 'id', {
     get: function () {
@@ -1808,6 +2234,34 @@
       return this.documentation_9k27km$_0;
     }
   });
+  function CoreClientEngine$renderFeature$lambda$lambda(this$renderFeature, this$CoreClientEngine) {
+    return function ($receiver) {
+      var $receiver_0 = 'val client = HttpClient(' + get_clientEngine(this$renderFeature) + ')';
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+      $receiver._indent();
+      try {
+        var this$CoreClientEngine_0 = this$CoreClientEngine;
+        this$renderFeature.block_1s7wi0$($receiver, this$CoreClientEngine_0.CLIENT_FEATURES);
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      return Unit;
+    };
+  }
+  function CoreClientEngine$renderFeature$lambda(this$renderFeature, this$CoreClientEngine) {
+    return function ($receiver) {
+      $receiver.linedeferred_yot30u$(CoreClientEngine$renderFeature$lambda$lambda(this$renderFeature, this$CoreClientEngine));
+      this$renderFeature.block_1s7wi0$($receiver, this$CoreClientEngine.CLIENT_USAGE);
+      return Unit;
+    };
+  }
+  CoreClientEngine.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.client.*');
+    $receiver.appendSeparated_qu2wte$(ApplicationKt_getInstance().MODULE_INSTALL, void 0, CoreClientEngine$renderFeature$lambda($receiver, this));
+  };
   CoreClientEngine.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'CoreClientEngine',
@@ -1819,6 +2273,48 @@
       new CoreClientEngine();
     }
     return CoreClientEngine_instance;
+  }
+  function clientEngine$lambda($receiver) {
+    return '';
+  }
+  var clientEngine;
+  var clientEngine_metadata = new PropertyMetadata('clientEngine');
+  function get_clientEngine($receiver) {
+    var getValue_tv2abg$result;
+    getValue_tv2abg$break: do {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2;
+      tmp$_1 = $receiver.extra;
+      tmp$_0 = (tmp$ = clientEngine.name) != null ? tmp$ : clientEngine_metadata.callableName;
+      var res = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE();
+      if (res == null) {
+        var r = clientEngine.defaultGen($receiver);
+        var tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
+        if ($receiver.extra == null)
+          $receiver.extra = LinkedHashMap_init();
+        tmp$_7 = $receiver.extra;
+        tmp$_4 = (tmp$_3 = clientEngine.name) != null ? tmp$_3 : clientEngine_metadata.callableName;
+        tmp$_6 = (tmp$_5 = r) == null || Kotlin.isType(tmp$_5, Any) ? tmp$_5 : throwCCE();
+        if (tmp$_7 != null) {
+          tmp$_7.put_xwzc9p$(tmp$_4, tmp$_6);
+        }
+        getValue_tv2abg$result = r;
+        break getValue_tv2abg$break;
+      }
+      getValue_tv2abg$result = res;
+    }
+     while (false);
+    return getValue_tv2abg$result;
+  }
+  function set_clientEngine($receiver, clientEngine_0) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+    if ($receiver.extra == null)
+      $receiver.extra = LinkedHashMap_init();
+    tmp$_3 = $receiver.extra;
+    tmp$_0 = (tmp$ = clientEngine.name) != null ? tmp$ : clientEngine_metadata.callableName;
+    tmp$_2 = (tmp$_1 = clientEngine_0) == null || Kotlin.isType(tmp$_1, Any) ? tmp$_1 : throwCCE();
+    if (tmp$_3 != null) {
+      tmp$_3.put_xwzc9p$(tmp$_0, tmp$_2);
+    }
   }
   function ApacheClientEngine() {
     ApacheClientEngine_instance = this;
@@ -1848,6 +2344,10 @@
       return this.documentation_8q7rad$_0;
     }
   });
+  ApacheClientEngine.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.client.engine.apache.*');
+    set_clientEngine($receiver, 'Apache');
+  };
   ApacheClientEngine.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'ApacheClientEngine',
@@ -1888,6 +2388,10 @@
       return this.documentation_l414pc$_0;
     }
   });
+  CioClientEngine.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.client.engine.cio.*');
+    set_clientEngine($receiver, 'CIO');
+  };
   CioClientEngine.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'CioClientEngine',
@@ -1928,6 +2432,10 @@
       return this.documentation_vlhxz9$_0;
     }
   });
+  JettyClientEngine.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.client.engine.jetty.*');
+    set_clientEngine($receiver, 'Jetty');
+  };
   JettyClientEngine.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'JettyClientEngine',
@@ -1980,6 +2488,8 @@
       return this.testArtifacts_o0ceoa$_0;
     }
   });
+  MockClientEngine.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+  };
   MockClientEngine.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'MockClientEngine',
@@ -2020,6 +2530,36 @@
       return this.documentation_o7l9db$_0;
     }
   });
+  function AuthBasicClientFeature$renderFeature$lambda($receiver) {
+    var $receiver_0 = 'install(JsonFeature)';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      var $receiver_1 = 'install(BasicAuth)';
+      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+      $receiver._indent();
+      try {
+        $receiver.line_61zpoe$('username = "test"');
+        $receiver.line_61zpoe$('password = "pass"');
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  AuthBasicClientFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.client.features.json.*');
+    $receiver.append_qu2wte$(CoreClientEngine_getInstance().CLIENT_FEATURES, void 0, AuthBasicClientFeature$renderFeature$lambda);
+  };
   AuthBasicClientFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'AuthBasicClientFeature',
@@ -2060,6 +2600,24 @@
       return this.documentation_c1tfk3$_0;
     }
   });
+  function JsonClientFeature$renderFeature$lambda($receiver) {
+    var $receiver_0 = 'install(JsonFeature)';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('serializer = GsonSerializer()');
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  JsonClientFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.client.features.json.*');
+    $receiver.append_qu2wte$(CoreClientEngine_getInstance().CLIENT_FEATURES, void 0, JsonClientFeature$renderFeature$lambda);
+  };
   JsonClientFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'JsonClientFeature',
@@ -2074,7 +2632,7 @@
   }
   function WebSocketClientFeature() {
     WebSocketClientFeature_instance = this;
-    ClientFeature.call(this, [CoreClientEngine_getInstance()]);
+    ClientFeature.call(this, [CoreClientEngine_getInstance(), CioClientEngine_getInstance(), WebsocketsFeature_getInstance()]);
     this.id_vy1rrn$_0 = 'ktor-client-websocket';
     this.title_k9eaoc$_0 = 'WebSockets HttpClient support';
     this.description_91aqeo$_0 = 'HttpClient feature to establish bidirectional communication using WebSockets';
@@ -2100,6 +2658,125 @@
       return this.documentation_77pdg2$_0;
     }
   });
+  function WebSocketClientFeature$renderFeature$lambda$lambda($receiver) {
+    var $receiver_0 = 'object WsClientApp';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('@JvmStatic');
+      var $receiver_1 = 'fun main(args: Array<String>)';
+      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+      $receiver._indent();
+      try {
+        var $receiver_2 = 'runBlocking';
+        var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_1 : $receiver_2 + ' {' + rafter_1);
+        $receiver._indent();
+        try {
+          $receiver.line_61zpoe$('val client = HttpClient(CIO).config { install(WebSockets) }');
+          var $receiver_3 = 'client.ws(method = HttpMethod.Get, host = "127.0.0.1", port = 8080, path = "/myws/echo")';
+          var rafter_2 = ''.length === 0 ? '' : ' ' + '';
+          $receiver.line_61zpoe$($receiver_3.length === 0 ? '{' + rafter_2 : $receiver_3 + ' {' + rafter_2);
+          $receiver._indent();
+          try {
+            $receiver.line_61zpoe$('send(Frame.Text("Hello World"))');
+            var $receiver_4 = 'for (message in incoming.map { it as? Frame.Text }.filterNotNull())';
+            var rafter_3 = ''.length === 0 ? '' : ' ' + '';
+            $receiver.line_61zpoe$($receiver_4.length === 0 ? '{' + rafter_3 : $receiver_4 + ' {' + rafter_3);
+            $receiver._indent();
+            try {
+              $receiver.line_61zpoe$('println("Server said: " + message.readText())');
+            }
+            finally {
+              $receiver._unindent();
+            }
+            $receiver.line_61zpoe$('}' + '');
+            unaryPlus_0($receiver);
+          }
+          finally {
+            $receiver._unindent();
+          }
+          $receiver.line_61zpoe$('}' + '');
+          unaryPlus_0($receiver);
+        }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$('}' + '');
+        unaryPlus_0($receiver);
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+    return Unit;
+  }
+  function WebSocketClientFeature$renderFeature$lambda(this$renderFeature_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$WebSocketClientFeature$renderFeature$lambda(this$renderFeature_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$WebSocketClientFeature$renderFeature$lambda(this$renderFeature_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$this$renderFeature = this$renderFeature_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$WebSocketClientFeature$renderFeature$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$WebSocketClientFeature$renderFeature$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$WebSocketClientFeature$renderFeature$lambda.prototype.constructor = Coroutine$WebSocketClientFeature$renderFeature$lambda;
+  Coroutine$WebSocketClientFeature$renderFeature$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            putImports(this.local$$receiver, get_applicationKtImports(this.local$this$renderFeature));
+            return SEPARATOR(this.local$$receiver, WebSocketClientFeature$renderFeature$lambda$lambda), Unit;
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  WebSocketClientFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.client.*');
+    addImport($receiver, 'io.ktor.client.features.websocket.*');
+    addImport($receiver, 'io.ktor.client.features.websocket.WebSockets');
+    addImport($receiver, 'io.ktor.http.*');
+    addImport($receiver, 'io.ktor.http.cio.websocket.*');
+    addImport($receiver, 'io.ktor.http.cio.websocket.Frame');
+    addImport($receiver, 'kotlinx.coroutines.experimental.*');
+    addImport($receiver, 'kotlinx.coroutines.experimental.channels.*');
+    $receiver.fileText_7k8vha$('src/WsClientApp.kt', void 0, void 0, WebSocketClientFeature$renderFeature$lambda($receiver));
+  };
   WebSocketClientFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'WebSocketClientFeature',
@@ -2114,7 +2791,7 @@
   }
   function AuthBasicFeature() {
     AuthBasicFeature_instance = this;
-    ServerFeature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance()]);
+    ServerFeature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance(), RoutingFeature_getInstance()]);
     this.group_v301hj$_0 = 'Authentication';
     this.repos_q2n095$_0 = Repos_getInstance().ktor;
     this.artifacts_aoeizt$_0 = listOf_0('io.ktor:ktor-auth:$ktor_version');
@@ -2159,15 +2836,48 @@
     }
   });
   function AuthBasicFeature$renderFeature$lambda($receiver) {
+    var $receiver_0 = 'basic("myBasicAuth")';
     var rafter = ''.length === 0 ? '' : ' ' + '';
-    $receiver.line_61zpoe$('basic'.length === 0 ? '{' + rafter : 'basic' + ' {' + rafter);
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
-    $receiver._unindent();
+    try {
+      $receiver.line_61zpoe$('realm = "Ktor Server"');
+      $receiver.line_61zpoe$('validate { if (it.name == "test" && it.password == "password") UserIdPrincipal(it.name) else null }');
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  function AuthBasicFeature$renderFeature$lambda_0($receiver) {
+    var $receiver_0 = 'authenticate("myBasicAuth")';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      var $receiver_1 = 'get("/protected/route/basic")';
+      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+      $receiver._indent();
+      try {
+        $receiver.line_61zpoe$('val principal = call.principal<UserIdPrincipal>()!!');
+        $receiver.line_61zpoe$('call.respondText("Hello ${principal.name}")');
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+    }
+    finally {
+      $receiver._unindent();
+    }
     $receiver.line_61zpoe$('}' + '');
     return Unit;
   }
   AuthBasicFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addAuthProvider($receiver, AuthBasicFeature$renderFeature$lambda);
+    addRoute($receiver, AuthBasicFeature$renderFeature$lambda_0);
   };
   AuthBasicFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -2241,7 +2951,7 @@
   }
   function AuthFeature() {
     AuthFeature_instance = this;
-    ServerFeature.call(this, [ApplicationKt_getInstance()]);
+    ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.group_kwci2j$_0 = 'Authentication';
     this.repos_pwpjax$_0 = Repos_getInstance().ktor;
     this.artifacts_e1kzvr$_0 = listOf_0('io.ktor:ktor-auth:$ktor_version');
@@ -2294,7 +3004,7 @@
       $receiver._indent();
       try {
         var this$AuthFeature_0 = this$AuthFeature;
-        this$renderFeature.block_rsgfsn$($receiver, this$AuthFeature_0.BLOCK);
+        this$renderFeature.block_1s7wi0$($receiver, this$AuthFeature_0.BLOCK);
       }
       finally {
         $receiver._unindent();
@@ -3006,7 +3716,7 @@
       $receiver._indent();
       try {
         var this$ContentNegotiationFeature_0 = this$ContentNegotiationFeature;
-        this$renderFeature.block_rsgfsn$($receiver, this$ContentNegotiationFeature_0.BLOCK);
+        this$renderFeature.block_1s7wi0$($receiver, this$ContentNegotiationFeature_0.BLOCK);
       }
       finally {
         $receiver._unindent();
@@ -4238,7 +4948,7 @@
           $receiver._unindent();
         }
         $receiver.line_61zpoe$('}' + '');
-        this$renderFeature_0.block_rsgfsn$($receiver, this$RoutingFeature_0.BLOCK);
+        this$renderFeature_0.block_1s7wi0$($receiver, this$RoutingFeature_0.BLOCK);
       }
       finally {
         $receiver._unindent();
@@ -4510,7 +5220,7 @@
   StaticContentFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.content.*');
     addRoute($receiver, StaticContentFeature$renderFeature$lambda);
-    $receiver.fileBinary_7n0jo0$('resources/static/ktor_logo.svg', void 0, void 0, StaticContentFeature$renderFeature$lambda_0(info));
+    $receiver.fileBinary_qk5z91$('resources/static/ktor_logo.svg', void 0, void 0, StaticContentFeature$renderFeature$lambda_0(info));
   };
   StaticContentFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -4683,7 +5393,7 @@
   }
   function WebsocketsFeature() {
     WebsocketsFeature_instance = this;
-    ServerFeature.call(this, [ApplicationKt_getInstance()]);
+    ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.repos_r8z5jx$_0 = Repos_getInstance().ktor;
     this.artifacts_9pl77n$_0 = listOf_0('io.ktor:ktor-websockets:$ktor_version');
     this.id_bjgwfv$_0 = 'ktor-websockets';
@@ -4721,6 +5431,70 @@
       return this.documentation_49wqyk$_0;
     }
   });
+  function WebsocketsFeature$renderFeature$lambda($receiver) {
+    var $receiver_0 = 'install(io.ktor.websocket.WebSockets)';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('pingPeriod = Duration.ofSeconds(15)');
+      $receiver.line_61zpoe$('timeout = Duration.ofSeconds(15)');
+      $receiver.line_61zpoe$('maxFrameSize = Long.MAX_VALUE');
+      $receiver.line_61zpoe$('masking = false');
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+    return Unit;
+  }
+  function WebsocketsFeature$renderFeature$lambda_0($receiver) {
+    var $receiver_0 = 'webSocket("/myws/echo")';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('send(Frame.Text("Hi from server"))');
+      var $receiver_1 = 'while (true)';
+      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+      $receiver._indent();
+      try {
+        $receiver.line_61zpoe$('val frame = incoming.receive()');
+        var $receiver_2 = 'if (frame is Frame.Text)';
+        var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_1 : $receiver_2 + ' {' + rafter_1);
+        $receiver._indent();
+        try {
+          $receiver.line_61zpoe$('send(Frame.Text("Client said: " + frame.readText()))');
+        }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$('}' + '');
+        unaryPlus_0($receiver);
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+    return Unit;
+  }
+  WebsocketsFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.websocket.*');
+    addImport($receiver, 'io.ktor.http.cio.websocket.*');
+    addImport($receiver, 'java.time.*');
+    addFeatureInstall($receiver, WebsocketsFeature$renderFeature$lambda);
+    addRoute($receiver, WebsocketsFeature$renderFeature$lambda_0);
+  };
   WebsocketsFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'WebsocketsFeature',
@@ -4783,7 +5557,7 @@
               try {
                 this.local$$receiver.line_61zpoe$('port = 8080');
                 this.local$$receiver.line_61zpoe$('port = ${?PORT}');
-                this$render.block_rsgfsn$(this.local$$receiver, this$ApplicationConf.DEPLOYMENT);
+                this$render.block_1s7wi0$(this.local$$receiver, this$ApplicationConf.DEPLOYMENT);
               }
               finally {
                 this.local$$receiver._unindent();
@@ -4800,7 +5574,7 @@
                 this.local$$receiver._unindent();
               }
               this.local$$receiver.line_61zpoe$('}' + '');
-              this$render.block_rsgfsn$(this.local$$receiver, this$ApplicationConf.KTOR);
+              this$render.block_1s7wi0$(this.local$$receiver, this$ApplicationConf.KTOR);
             }
             finally {
               this.local$$receiver._unindent();
@@ -4890,7 +5664,7 @@
   }
   function ApplicationKt$render$lambda$lambda_1(this$ApplicationKt, this$render) {
     return function ($receiver) {
-      this$render.block_rsgfsn$($receiver, this$ApplicationKt.APPLICATION_CLASSES);
+      this$render.block_1s7wi0$($receiver, this$ApplicationKt.APPLICATION_CLASSES);
       return Unit;
     };
   }
@@ -4903,9 +5677,9 @@
       try {
         var this$ApplicationKt_0 = this$ApplicationKt;
         var this$render_0 = this$render;
-        this$render_0.block_rsgfsn$($receiver, this$ApplicationKt_0.MODULE_INSTALL);
+        this$render_0.block_1s7wi0$($receiver, this$ApplicationKt_0.MODULE_INSTALL);
         EMPTY_LINE_ONCE($receiver);
-        this$render_0.block_rsgfsn$($receiver, this$ApplicationKt_0.MODULE_POST);
+        this$render_0.block_1s7wi0$($receiver, this$ApplicationKt_0.MODULE_POST);
       }
       finally {
         $receiver._unindent();
@@ -4916,7 +5690,7 @@
   }
   function ApplicationKt$render$lambda$lambda_3(this$ApplicationKt, this$render) {
     return function ($receiver) {
-      this$render.block_rsgfsn$($receiver, this$ApplicationKt.EXTENSIONS);
+      this$render.block_1s7wi0$($receiver, this$ApplicationKt.EXTENSIONS);
       return Unit;
     };
   }
@@ -5024,6 +5798,26 @@
   function addImport($receiver, import_0) {
     get_applicationKtImports($receiver).add_11rb$(import_0);
   }
+  function putImports$lambda$lambda(closure$imports) {
+    return function ($receiver) {
+      var tmp$;
+      tmp$ = closure$imports.iterator();
+      while (tmp$.hasNext()) {
+        var import_0 = tmp$.next();
+        $receiver.line_61zpoe$('import ' + import_0);
+      }
+      return Unit;
+    };
+  }
+  function putImports$lambda(closure$imports) {
+    return function ($receiver) {
+      $receiver.linedeferred_yot30u$(putImports$lambda$lambda(closure$imports));
+      return Unit;
+    };
+  }
+  function putImports($receiver, imports) {
+    SEPARATOR($receiver, putImports$lambda(imports));
+  }
   function addFeatureInstall$lambda(closure$callback) {
     return function ($receiver) {
       closure$callback($receiver);
@@ -5050,6 +5844,164 @@
   }
   function addApplicationClasses($receiver, callback) {
     $receiver.appendSeparated_qu2wte$(ApplicationKt_getInstance().APPLICATION_CLASSES, void 0, addApplicationClasses$lambda(callback));
+  }
+  function ApplicationTestKt() {
+    ApplicationTestKt_instance = this;
+    Block.call(this, [ApplicationKt_getInstance()]);
+    this.TESTS = this.newSlot_pdl1vj$('TESTS');
+  }
+  function ApplicationTestKt$render$lambda$lambda$lambda(this$render) {
+    return function ($receiver) {
+      var tmp$;
+      tmp$ = plus_1(get_applicationKtImports(this$render), get_applicationTestKtImports(this$render)).iterator();
+      while (tmp$.hasNext()) {
+        var import_0 = tmp$.next();
+        $receiver.line_61zpoe$('import ' + import_0);
+      }
+      return Unit;
+    };
+  }
+  function ApplicationTestKt$render$lambda$lambda(this$render) {
+    return function ($receiver) {
+      $receiver.linedeferred_yot30u$(ApplicationTestKt$render$lambda$lambda$lambda(this$render));
+      return Unit;
+    };
+  }
+  function ApplicationTestKt$render$lambda$lambda_0(this$ApplicationTestKt, this$render) {
+    return function ($receiver) {
+      var $receiver_0 = 'class ApplicationTest';
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+      $receiver._indent();
+      try {
+        var this$ApplicationTestKt_0 = this$ApplicationTestKt;
+        this$render.block_1s7wi0$($receiver, this$ApplicationTestKt_0.TESTS);
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      return Unit;
+    };
+  }
+  function ApplicationTestKt$render$lambda(closure$info_0, this$render_0, this$ApplicationTestKt_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$ApplicationTestKt$render$lambda(closure$info_0, this$render_0, this$ApplicationTestKt_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$ApplicationTestKt$render$lambda(closure$info_0, this$render_0, this$ApplicationTestKt_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+    this.local$this$render = this$render_0;
+    this.local$this$ApplicationTestKt = this$ApplicationTestKt_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$ApplicationTestKt$render$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$ApplicationTestKt$render$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$ApplicationTestKt$render$lambda.prototype.constructor = Coroutine$ApplicationTestKt$render$lambda;
+  Coroutine$ApplicationTestKt$render$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.local$$receiver.line_61zpoe$('package ' + this.local$closure$info.artifactGroup);
+            SEPARATOR(this.local$$receiver, ApplicationTestKt$render$lambda$lambda(this.local$this$render));
+            return SEPARATOR(this.local$$receiver, ApplicationTestKt$render$lambda$lambda_0(this.local$this$ApplicationTestKt, this.local$this$render)), Unit;
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  ApplicationTestKt.prototype.render_miqy8c$ = function ($receiver, info) {
+    addTestImport($receiver, 'kotlin.test.*');
+    $receiver.fileText_7k8vha$('test/ApplicationTest.kt', void 0, void 0, ApplicationTestKt$render$lambda(info, $receiver, this));
+  };
+  ApplicationTestKt.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'ApplicationTestKt',
+    interfaces: [Block]
+  };
+  var ApplicationTestKt_instance = null;
+  function ApplicationTestKt_getInstance() {
+    if (ApplicationTestKt_instance === null) {
+      new ApplicationTestKt();
+    }
+    return ApplicationTestKt_instance;
+  }
+  function applicationTestKtImports$lambda($receiver) {
+    return LinkedHashSet_init();
+  }
+  var applicationTestKtImports;
+  var applicationTestKtImports_metadata = new PropertyMetadata('applicationTestKtImports');
+  function get_applicationTestKtImports($receiver) {
+    var getValue_tv2abg$result;
+    getValue_tv2abg$break: do {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2;
+      tmp$_1 = $receiver.extra;
+      tmp$_0 = (tmp$ = applicationTestKtImports.name) != null ? tmp$ : applicationTestKtImports_metadata.callableName;
+      var res = (tmp$_2 = tmp$_1 != null ? tmp$_1.get_11rb$(tmp$_0) : null) == null || Kotlin.isType(tmp$_2, Any) ? tmp$_2 : throwCCE();
+      if (res == null) {
+        var r = applicationTestKtImports.defaultGen($receiver);
+        var tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
+        if ($receiver.extra == null)
+          $receiver.extra = LinkedHashMap_init();
+        tmp$_7 = $receiver.extra;
+        tmp$_4 = (tmp$_3 = applicationTestKtImports.name) != null ? tmp$_3 : applicationTestKtImports_metadata.callableName;
+        tmp$_6 = (tmp$_5 = r) == null || Kotlin.isType(tmp$_5, Any) ? tmp$_5 : throwCCE();
+        if (tmp$_7 != null) {
+          tmp$_7.put_xwzc9p$(tmp$_4, tmp$_6);
+        }
+        getValue_tv2abg$result = r;
+        break getValue_tv2abg$break;
+      }
+      getValue_tv2abg$result = res;
+    }
+     while (false);
+    return getValue_tv2abg$result;
+  }
+  function addTestImport($receiver, import_0) {
+    get_applicationTestKtImports($receiver).add_11rb$(import_0);
+  }
+  function addTestMethod$lambda(closure$name, closure$block) {
+    return function ($receiver) {
+      $receiver.line_61zpoe$('@Test');
+      var $receiver_0 = 'fun ' + closure$name + '()';
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+      $receiver._indent();
+      try {
+        closure$block($receiver);
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      return Unit;
+    };
+  }
+  function addTestMethod($receiver, name, block) {
+    $receiver.appendSeparated_qu2wte$(ApplicationTestKt_getInstance().TESTS, void 0, addTestMethod$lambda(name, block));
   }
   function BuildFiles() {
     BuildFiles_instance = this;
@@ -5245,7 +6197,7 @@
             this.local$$receiver._indent();
             try {
               var closure$info = this.local$closure$info;
-              this.local$$receiver.line_61zpoe$("ext.kotlin_version = '1.2.50'");
+              this.local$$receiver.line_61zpoe$("ext.kotlin_version = '1.2.41'");
               this.local$$receiver.line_61zpoe$("ext.ktor_version = '" + closure$info.ktorVersion + "'");
               this.local$$receiver.line_61zpoe$("ext.logback_version = '1.2.1'");
               this.local$$receiver.line_61zpoe$('');
@@ -5598,10 +6550,10 @@
     $receiver.fileText_7k8vha$('build.gradle', void 0, void 0, BuildFilesGradle$render$lambda(info, $receiver));
     $receiver.fileText_7k8vha$('settings.gradle', void 0, void 0, BuildFilesGradle$render$lambda_0(info));
     if (info.includeWrapper) {
-      $receiver.fileBinary_7n0jo0$('gradlew', void 0, toInt('755', 8), BuildFilesGradle$render$lambda_1(info));
-      $receiver.fileBinary_7n0jo0$('gradlew.bat', void 0, void 0, BuildFilesGradle$render$lambda_2(info));
-      $receiver.fileBinary_7n0jo0$('gradle/wrapper/gradle-wrapper.jar', void 0, void 0, BuildFilesGradle$render$lambda_3(info));
-      $receiver.fileBinary_7n0jo0$('gradle/wrapper/gradle-wrapper.properties', void 0, void 0, BuildFilesGradle$render$lambda_4(info));
+      $receiver.fileBinary_qk5z91$('gradlew', void 0, toInt('755', 8), BuildFilesGradle$render$lambda_1(info));
+      $receiver.fileBinary_qk5z91$('gradlew.bat', void 0, void 0, BuildFilesGradle$render$lambda_2(info));
+      $receiver.fileBinary_qk5z91$('gradle/wrapper/gradle-wrapper.jar', void 0, void 0, BuildFilesGradle$render$lambda_3(info));
+      $receiver.fileBinary_qk5z91$('gradle/wrapper/gradle-wrapper.properties', void 0, void 0, BuildFilesGradle$render$lambda_4(info));
     }
   };
   BuildFilesGradle.$metadata$ = {
@@ -5756,7 +6708,7 @@
         var $this_0 = $receiver.indenter;
         $this_0._indent();
         try {
-          this$_0.line_61zpoe$('<kotlin_version>1.2.50<\/kotlin_version>');
+          this$_0.line_61zpoe$('<kotlin_version>1.2.41<\/kotlin_version>');
           this$_0.line_61zpoe$('<ktor_version>' + closure$info_0.ktorVersion + '<\/ktor_version>');
           this$_0.line_61zpoe$('<logback_version>1.2.1<\/logback_version>');
           this$_0.line_61zpoe$('<project.build.sourceEncoding>UTF-8<\/project.build.sourceEncoding>');
@@ -6420,12 +7372,12 @@
     var tmp$;
     $receiver.fileText_7k8vha$('pom.xml', void 0, void 0, BuildFilesMaven$render$lambda(info, $receiver));
     if (info.includeWrapper) {
-      $receiver.fileBinary_7n0jo0$('mvnw', void 0, toInt('755', 8), BuildFilesMaven$render$lambda_0(info));
-      $receiver.fileBinary_7n0jo0$('mvnw.cmd', void 0, void 0, BuildFilesMaven$render$lambda_1(info));
+      $receiver.fileBinary_qk5z91$('mvnw', void 0, toInt('755', 8), BuildFilesMaven$render$lambda_0(info));
+      $receiver.fileBinary_qk5z91$('mvnw.cmd', void 0, void 0, BuildFilesMaven$render$lambda_1(info));
       tmp$ = listOf(['maven-wrapper.jar', 'maven-wrapper.properties', 'MavenWrapperDownloader.java']).iterator();
       while (tmp$.hasNext()) {
         var file = tmp$.next();
-        $receiver.fileBinary_7n0jo0$('.mvn/wrapper/' + file, void 0, void 0, BuildFilesMaven$render$lambda_2(info, file));
+        $receiver.fileBinary_qk5z91$('.mvn/wrapper/' + file, void 0, void 0, BuildFilesMaven$render$lambda_2(info, file));
       }
     }
   };
@@ -6538,12 +7490,41 @@
     this.$delegate_frufmh$_0 = new Extra$Mixin();
     this.blocks = ArrayList_init();
   }
+  function SlotInstance$RenderBlock(replace, indenter) {
+    this.replace = replace;
+    this.indenter = indenter;
+  }
+  SlotInstance$RenderBlock.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'RenderBlock',
+    interfaces: []
+  };
   SlotInstance.prototype.render_oryfgh$ = function (indenter) {
     var tmp$;
-    tmp$ = this.blocks.iterator();
-    while (tmp$.hasNext()) {
-      var block = tmp$.next();
-      block(indenter);
+    var $receiver = this.blocks;
+    var lastOrNull$result;
+    lastOrNull$break: do {
+      var iterator = $receiver.listIterator_za3lpa$($receiver.size);
+      while (iterator.hasPrevious()) {
+        var element = iterator.previous();
+        if (element.replace) {
+          lastOrNull$result = element;
+          break lastOrNull$break;
+        }
+      }
+      lastOrNull$result = null;
+    }
+     while (false);
+    var only = lastOrNull$result;
+    if (only != null) {
+      only.indenter(indenter);
+    }
+     else {
+      tmp$ = this.blocks.iterator();
+      while (tmp$.hasNext()) {
+        var block = tmp$.next();
+        block.indenter(indenter);
+      }
     }
   };
   SlotInstance.prototype.toString = function () {
@@ -6562,11 +7543,25 @@
     simpleName: 'SlotInstance',
     interfaces: [Extra]
   };
-  function FileResult(name, data, type, mode) {
+  function FileResult(name, data, mode, charset) {
     this.name = name;
     this.data = data;
-    this.type = type;
     this.mode = mode;
+    this.charset = charset;
+    this.string_1nurgm$_0 = lazy(FileResult$string$lambda(this));
+  }
+  Object.defineProperty(FileResult.prototype, 'string', {
+    get: function () {
+      return this.string_1nurgm$_0.value;
+    }
+  });
+  function FileResult$string$lambda(this$FileResult) {
+    return function () {
+      var tmp$, tmp$_0;
+      var tmp$_1;
+      tmp$_1 = (tmp$ = this$FileResult.charset) != null ? toString_0(this$FileResult.data, tmp$) : null;
+      return (tmp$_0 = tmp$_1) != null ? tmp$_0 : get_hex(this$FileResult.data);
+    };
   }
   FileResult.$metadata$ = {
     kind: Kind_CLASS,
@@ -6597,14 +7592,28 @@
     }
     return Kotlin.isType(tmp$ = tmp$_0, SlotInstance) ? tmp$ : throwCCE();
   };
+  BlockBuilder.prototype._gen_2hbfcb$ = function (slot) {
+    if (this.currentBlock == null) {
+      throw IllegalStateException_init('currentBlock==null'.toString());
+    }
+    if (!ensureNotNull(this.currentBlock).blockDeps.contains_11rb$(slot.block) && !equals(slot.block, this.currentBlock)) {
+      throw IllegalStateException_init(('To use ' + slot + ', must directly depend on block ' + slot.block).toString());
+    }
+    return this.getSlotInstance_aiiv2x$(slot);
+  };
+  BlockBuilder.prototype.replace_hwf8z$ = function (slot, callback) {
+    var instance = this._gen_2hbfcb$(slot);
+    var $receiver = instance.blocks;
+    var element = new SlotInstance$RenderBlock(true, callback);
+    $receiver.add_11rb$(element);
+  };
   BlockBuilder.prototype.append_qu2wte$ = function (slot, once, callback) {
     if (once === void 0)
       once = false;
-    if (!ensureNotNull(this.currentBlock).blockDeps.contains_11rb$(slot.block)) {
-      throw IllegalStateException_init(('To use ' + slot + ', must directly depend on block ' + slot.block).toString());
-    }
-    var instance = this.getSlotInstance_aiiv2x$(slot);
-    instance.blocks.add_11rb$(callback);
+    var instance = this._gen_2hbfcb$(slot);
+    var $receiver = instance.blocks;
+    var element = new SlotInstance$RenderBlock(false, callback);
+    $receiver.add_11rb$(element);
   };
   function BlockBuilder$appendSeparated$lambda$lambda(closure$callback) {
     return function ($receiver) {
@@ -6680,24 +7689,24 @@
       charset = UTF8_getInstance();
     if (mode === void 0)
       mode = toInt('644', 8);
-    this.fileBinary_7n0jo0$(name, 'text', mode, BlockBuilder$fileText$lambda(callback, charset));
+    this.fileBinary_qk5z91$(name, charset, mode, BlockBuilder$fileText$lambda(callback, charset));
   };
-  function BlockBuilder$fileBinary$lambda(closure$name_0, closure$callback_0, closure$type_0, closure$mode_0) {
+  function BlockBuilder$fileBinary$lambda(closure$name_0, closure$callback_0, closure$mode_0, closure$charset_0) {
     return function (continuation_0, suspended) {
-      var instance = new Coroutine$BlockBuilder$fileBinary$lambda(closure$name_0, closure$callback_0, closure$type_0, closure$mode_0, continuation_0);
+      var instance = new Coroutine$BlockBuilder$fileBinary$lambda(closure$name_0, closure$callback_0, closure$mode_0, closure$charset_0, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
-  function Coroutine$BlockBuilder$fileBinary$lambda(closure$name_0, closure$callback_0, closure$type_0, closure$mode_0, continuation_0) {
+  function Coroutine$BlockBuilder$fileBinary$lambda(closure$name_0, closure$callback_0, closure$mode_0, closure$charset_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
     this.local$closure$name = closure$name_0;
     this.local$closure$callback = closure$callback_0;
-    this.local$closure$type = closure$type_0;
     this.local$closure$mode = closure$mode_0;
+    this.local$closure$charset = closure$charset_0;
   }
   Coroutine$BlockBuilder$fileBinary$lambda.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -6721,7 +7730,7 @@
             throw this.exception_0;
           case 2:
             tmp$ = this.result_0;
-            return new FileResult(this.local$closure$name, tmp$, this.local$closure$type, this.local$closure$mode);
+            return new FileResult(this.local$closure$name, tmp$, this.local$closure$mode, this.local$closure$charset);
         }
       }
        catch (e) {
@@ -6736,12 +7745,12 @@
       }
      while (true);
   };
-  BlockBuilder.prototype.fileBinary_7n0jo0$ = function (name, type, mode, callback) {
-    if (type === void 0)
-      type = 'binary';
+  BlockBuilder.prototype.fileBinary_qk5z91$ = function (name, charset, mode, callback) {
+    if (charset === void 0)
+      charset = null;
     if (mode === void 0)
       mode = toInt('644', 8);
-    this.files.put_xwzc9p$(name, BlockBuilder$fileBinary$lambda(name, callback, type, mode));
+    this.files.put_xwzc9p$(name, BlockBuilder$fileBinary$lambda(name, callback, mode, charset));
   };
   function BlockBuilder$block$lambda(closure$instance) {
     return function ($receiver) {
@@ -6749,9 +7758,20 @@
       return Unit;
     };
   }
-  BlockBuilder.prototype.block_rsgfsn$ = function ($receiver, slot) {
+  function BlockBuilder$block$lambda_0(closure$slot, closure$callback, this$BlockBuilder) {
+    return function () {
+      this$BlockBuilder.append_qu2wte$(closure$slot, void 0, closure$callback);
+      return Unit;
+    };
+  }
+  BlockBuilder.prototype.block_1s7wi0$ = function ($receiver, slot, callback) {
+    if (callback === void 0)
+      callback = null;
     var instance = this.getSlotInstance_aiiv2x$(slot);
     $receiver.linedeferred_yot30u$(BlockBuilder$block$lambda(instance));
+    if (callback != null) {
+      this.currentBlock_dxbwye$(slot.block, BlockBuilder$block$lambda_0(slot, callback, this));
+    }
   };
   BlockBuilder.prototype.currentBlock_dxbwye$ = function (temporal, callback) {
     var old = this.currentBlock;
@@ -7198,6 +8218,105 @@
       tmp$.put_xwzc9p$(name, value);
     }
   }
+  function Hex() {
+    Hex_instance = this;
+    this.DIGITS_0 = '0123456789ABCDEF';
+    this.DIGITS_UPPER_0 = this.DIGITS_0.toUpperCase();
+    this.DIGITS_LOWER_0 = this.DIGITS_0.toLowerCase();
+  }
+  Hex.prototype.decodeChar_s8itvh$ = function (c) {
+    if ((new CharRange(48, 57)).contains_mef7kx$(c))
+      return c - 48;
+    else if ((new CharRange(97, 102)).contains_mef7kx$(c))
+      return c - 97 + 10 | 0;
+    else if ((new CharRange(65, 70)).contains_mef7kx$(c))
+      return c - 65 + 10 | 0;
+    else
+      return -1;
+  };
+  Hex.prototype.encodeCharLower_za3lpa$ = function (v) {
+    return toBoxedChar(this.DIGITS_LOWER_0.charCodeAt(v));
+  };
+  Hex.prototype.encodeCharUpper_za3lpa$ = function (v) {
+    return toBoxedChar(this.DIGITS_UPPER_0.charCodeAt(v));
+  };
+  Hex.prototype.isHexDigit_s8itvh$ = function (c) {
+    return this.decodeChar_s8itvh$(c) >= 0;
+  };
+  Hex.prototype.decode_61zpoe$ = function (str) {
+    var tmp$, tmp$_0;
+    var out = new Int8Array((str.length + 1 | 0) / 2 | 0);
+    var opos = 0;
+    var nibbles = 0;
+    var value = 0;
+    tmp$ = iterator(str);
+    while (tmp$.hasNext()) {
+      var c = unboxChar(tmp$.next());
+      var vv = this.decodeChar_s8itvh$(c);
+      if (vv >= 0) {
+        value = value << 4 | vv;
+        nibbles = nibbles + 1 | 0;
+      }
+      if (nibbles === 2) {
+        out[tmp$_0 = opos, opos = tmp$_0 + 1 | 0, tmp$_0] = toByte(value);
+        nibbles = 0;
+        value = 0;
+      }
+    }
+    return opos !== out.length ? copyOf(out, opos) : out;
+  };
+  Hex.prototype.encodeLower_fqrh44$ = function (src) {
+    return this.encodeBase_0(src, this.DIGITS_LOWER_0);
+  };
+  Hex.prototype.encodeUpper_fqrh44$ = function (src) {
+    return this.encodeBase_0(src, this.DIGITS_UPPER_0);
+  };
+  Hex.prototype.encodeBase_0 = function (data, digits) {
+    if (digits === void 0)
+      digits = this.DIGITS_0;
+    var out = StringBuilder_init(data.length * 2 | 0);
+    for (var n = 0; n !== data.length; ++n) {
+      var v = data[n] & 255;
+      out.append_s8itvh$(digits.charCodeAt(v >>> 4 & 15));
+      out.append_s8itvh$(digits.charCodeAt(v >>> 0 & 15));
+    }
+    return out.toString();
+  };
+  Hex.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Hex',
+    interfaces: []
+  };
+  var Hex_instance = null;
+  function Hex_getInstance() {
+    if (Hex_instance === null) {
+      new Hex();
+    }
+    return Hex_instance;
+  }
+  function get_unhexIgnoreSpaces($receiver) {
+    return get_unhexIgnoreSpaces_0(joinToString($receiver, ''));
+  }
+  function get_unhexIgnoreSpaces_0($receiver) {
+    return get_unhex(replace($receiver, ' ', ''));
+  }
+  function get_unhex($receiver) {
+    return Hex_getInstance().decode_61zpoe$($receiver);
+  }
+  function get_hex($receiver) {
+    return Hex_getInstance().encodeLower_fqrh44$($receiver);
+  }
+  function get_hex_0($receiver) {
+    return '0x' + get_shex($receiver);
+  }
+  function get_shex($receiver) {
+    var out = '';
+    for (var n = 0; n < 8; n++) {
+      var v = $receiver >>> ((7 - n | 0) * 4 | 0) & 15;
+      out += String.fromCharCode(unboxChar(Hex_getInstance().encodeCharUpper_za3lpa$(v)));
+    }
+    return out;
+  }
   function Indenter(actions) {
     Indenter$Companion_getInstance();
     if (actions === void 0) {
@@ -7432,7 +8551,6 @@
   Indenter$Companion.prototype.invoke_61zpoe$ = function (str) {
     return this.single_61zpoe$(str);
   };
-  var StringBuilder_init = Kotlin.kotlin.text.StringBuilder_init_za3lpa$;
   Indenter$Companion.prototype.replaceString_mvjluj$ = function (templateString, replacements) {
     var pattern = Regex_init('\\$(\\w+)');
     var replace_20wsma$result;
@@ -7574,8 +8692,6 @@
     this.line = this.line + 1 | 0;
     this.newLine = true;
   };
-  var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
-  var toBoxedChar = Kotlin.toBoxedChar;
   Indenter$IndenterEvaluator.prototype.eval_j0l46$ = function (actions) {
     var tmp$, tmp$_0;
     tmp$ = actions.iterator();
@@ -7706,6 +8822,11 @@
     simpleName: 'Indenter',
     interfaces: []
   };
+  function unaryPlus($receiver) {
+  }
+  function unaryPlus_0($receiver) {
+    return $receiver;
+  }
   function get_SEPARATOR($receiver) {
     EMPTY_LINE_ONCE($receiver);
   }
@@ -8163,6 +9284,8 @@
   Object.defineProperty(package$client, 'CoreClientEngine', {
     get: CoreClientEngine_getInstance
   });
+  package$client.get_clientEngine_v6fwbs$ = get_clientEngine;
+  package$client.set_clientEngine_eoz486$ = set_clientEngine;
   Object.defineProperty(package$client, 'ApacheClientEngine', {
     get: ApacheClientEngine_getInstance
   });
@@ -8295,10 +9418,18 @@
   Object.defineProperty(package$project, 'ApplicationKt', {
     get: ApplicationKt_getInstance
   });
+  package$project.get_applicationKtImports_7bmuz$ = get_applicationKtImports;
   package$project.addImport_zc4wmb$ = addImport;
+  package$project.putImports_etuuyt$ = putImports;
   package$project.addFeatureInstall_xi0fd9$ = addFeatureInstall;
   package$project.addExtensionMethods_xi0fd9$ = addExtensionMethods;
   package$project.addApplicationClasses_xi0fd9$ = addApplicationClasses;
+  Object.defineProperty(package$project, 'ApplicationTestKt', {
+    get: ApplicationTestKt_getInstance
+  });
+  package$project.get_applicationTestKtImports_7bmuz$ = get_applicationTestKtImports;
+  package$project.addTestImport_zc4wmb$ = addTestImport;
+  package$project.addTestMethod_k546th$ = addTestMethod;
   Object.defineProperty(package$project, 'BuildFiles', {
     get: BuildFiles_getInstance
   });
@@ -8318,6 +9449,7 @@
   package$util.generate_maf521$ = generate;
   package$util.generate_xte3qv$ = generate_0;
   package$util.BlockSlot = BlockSlot;
+  SlotInstance.RenderBlock = SlotInstance$RenderBlock;
   package$util.SlotInstance = SlotInstance;
   package$util.FileResult = FileResult;
   package$util.BlockBuilder = BlockBuilder;
@@ -8345,6 +9477,15 @@
   package$util.Extra = Extra;
   package$util.getExtraTyped_p4ogyo$ = getExtraTyped;
   package$util.getExtra_vj42u1$ = getExtra;
+  Object.defineProperty(package$util, 'Hex', {
+    get: Hex_getInstance
+  });
+  package$util.get_unhexIgnoreSpaces_d2950k$ = get_unhexIgnoreSpaces;
+  package$util.get_unhexIgnoreSpaces_pdl1vz$ = get_unhexIgnoreSpaces_0;
+  package$util.get_unhex_pdl1vz$ = get_unhex;
+  package$util.get_hex_964n91$ = get_hex;
+  package$util.get_hex_s8ev3n$ = get_hex_0;
+  package$util.get_shex_s8ev3n$ = get_shex;
   Object.defineProperty(Indenter, 'INDENTS', {
     get: Indenter$INDENTS_getInstance
   });
@@ -8368,6 +9509,8 @@
   });
   Indenter.IndenterEvaluator = Indenter$IndenterEvaluator;
   package$util.Indenter = Indenter;
+  package$util.unaryPlus_mours2$ = unaryPlus;
+  package$util.unaryPlus_d9lakw$ = unaryPlus_0;
   package$util.get_SEPARATOR_d9lakw$ = get_SEPARATOR;
   package$util.EMPTY_LINE_ONCE_d9lakw$ = EMPTY_LINE_ONCE;
   package$util.SEPARATOR_s3zzuq$ = SEPARATOR;
@@ -8391,11 +9534,13 @@
   artifactNameId = 'artifact-name';
   artifactVersionId = 'artifact-version';
   hashParams = lazy(hashParams$lambda);
-  KOTLIN_VERSION = '1.2.50';
+  KOTLIN_VERSION = '1.2.41';
   ALL_SERVER_FEATURES = lazy(ALL_SERVER_FEATURES$lambda);
   ALL_CLIENT_FEATURES = lazy(ALL_CLIENT_FEATURES$lambda);
   ALL_FEATURES = listOf([CoreClientEngine_getInstance(), ApacheClientEngine_getInstance(), CioClientEngine_getInstance(), JettyClientEngine_getInstance(), MockClientEngine_getInstance(), AuthBasicClientFeature_getInstance(), JsonClientFeature_getInstance(), WebSocketClientFeature_getInstance(), HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), AuthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
+  clientEngine = new Extra$PropertyThis(void 0, clientEngine$lambda);
   applicationKtImports = new Extra$PropertyThis(void 0, applicationKtImports$lambda);
+  applicationTestKtImports = new Extra$PropertyThis(void 0, applicationTestKtImports$lambda);
   reposToInclude = new Extra$PropertyThis(void 0, reposToInclude$lambda);
   compileDependencies = new Extra$PropertyThis(void 0, compileDependencies$lambda);
   testDependencies = new Extra$PropertyThis(void 0, testDependencies$lambda);
