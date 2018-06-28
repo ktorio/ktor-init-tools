@@ -21,7 +21,7 @@ import io.ktor.start.*
 import io.ktor.start.project.*
 import io.ktor.start.util.*
 
-object AuthBasicFeature : ServerFeature(ApplicationKt, AuthFeature) {
+object AuthBasicFeature : ServerFeature(ApplicationKt, AuthFeature, RoutingFeature) {
     override val group: String = "Authentication"
     override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-auth:\$ktor_version")
@@ -32,8 +32,17 @@ object AuthBasicFeature : ServerFeature(ApplicationKt, AuthFeature) {
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addAuthProvider {
-            "basic" {
-
+            "basic(\"myBasicAuth\")" {
+                +"realm = \"Ktor Server\""
+                +"validate { if (it.name == \"test\" && it.password == \"password\") UserIdPrincipal(it.name) else null }"
+            }
+        }
+        addRoute {
+            "authenticate(\"myBasicAuth\")" {
+                "get(\"/protected/route\")" {
+                    +"val principal = call.principal<UserIdPrincipal>()!!"
+                    +"call.respondText(\"Hello \${principal.name}\")"
+                }
             }
         }
     }

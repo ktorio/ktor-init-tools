@@ -60,7 +60,7 @@ object ApplicationKt : BuildInfoBlock(BuildFiles, ApplicationConf) {
     }
 }
 
-private val BlockBuilder.applicationKtImports: LinkedHashSet<String> by Extra.PropertyThis { LinkedHashSet<String>() }
+val BlockBuilder.applicationKtImports: LinkedHashSet<String> by Extra.PropertyThis { LinkedHashSet<String>() }
 
 fun BlockBuilder.addImport(import: String) {
     applicationKtImports += import

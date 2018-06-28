@@ -1,6 +1,8 @@
 package io.ktor.start.features.client
 
 import io.ktor.start.*
+import io.ktor.start.project.*
+import io.ktor.start.util.*
 
 object AuthBasicClientFeature : ClientFeature(CoreClientEngine) {
     override val id = "ktor-client-auth-basic"
@@ -14,6 +16,15 @@ object JsonClientFeature : ClientFeature(CoreClientEngine) {
     override val title = "Json serialization for HttpClient"
     override val description = "Supports basic authentication for the Http Client"
     override val documentation = "https://ktor.io/clients/http-client.html#jsonfeature"
+
+    override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addImport("io.ktor.client.features.json.*")
+        append(CoreClientEngine.CLIENT_FEATURES) {
+            "install(JsonFeature)" {
+                +"serializer = GsonSerializer()"
+            }
+        }
+    }
 }
 
 object WebSocketClientFeature : ClientFeature(CoreClientEngine) {
