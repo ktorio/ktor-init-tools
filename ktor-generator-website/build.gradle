@@ -4,7 +4,7 @@ apply plugin: 'kotlin-platform-js'
 sourceSets {
     main.kotlin.srcDirs += "src"
     main.resources.srcDirs += "resources"
-    //main.resources.srcDirs += "../ktor-generator-website/resources"
+    main.resources.srcDirs += "../ktor-generator/resources"
     test.kotlin.srcDirs += "test"
 }
 
@@ -57,6 +57,10 @@ task buildAndCopy(type: Copy, dependsOn: ['build']) {
     //    //    !(path.startsWith("META-INF/") || path.startsWith("${project.name}"))
     //    //}
     //}
+
+    from(new File("${projectDir}/../ktor-generator/common/resources")) {
+        exclude "**/*.meta.js", "**/*.kjsm"
+    }
 
     from(new File("${buildDir}/resources/main")) {
         exclude "**/*.meta.js", "**/*.kjsm"

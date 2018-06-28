@@ -1,4 +1,4 @@
-rootProject.name = 'start.ktor.io'
+rootProject.name = 'ktor-init-tools'
 
 include "ktor-intellij-plugin"
 include "ktor-generator-website"

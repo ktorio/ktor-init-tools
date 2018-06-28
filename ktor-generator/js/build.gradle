@@ -2,8 +2,10 @@ apply plugin: 'kotlin-platform-js'
 
 sourceSets {
     main.kotlin.srcDirs += "src"
-    main.resources.srcDirs += "resources"
+    //main.resources.srcDirs += "resources"
+    main.resources.srcDirs += ["resources", "../common/resources"]
     test.kotlin.srcDirs += "test"
+    test.resources.srcDirs += "testresources"
 }
 
 [compileKotlin2Js, compileTestKotlin2Js]*.configure {
