@@ -46,8 +46,10 @@ internal object BuildFilesGradle : BuildInfoBlock() {
             +"mainClassName = \"${info.developmentEngineFQ}\""
             +""
             "sourceSets" {
-                +"main.kotlin.srcDirs = ['src']"
+                +"main.kotlin.srcDirs = main.java.srcDirs = ['src']"
+                +"test.kotlin.srcDirs = test.java.srcDirs = ['test']"
                 +"main.resources.srcDirs = ['resources']"
+                +"test.resources.srcDirs = ['testresources']"
             }
             +""
             "repositories" {

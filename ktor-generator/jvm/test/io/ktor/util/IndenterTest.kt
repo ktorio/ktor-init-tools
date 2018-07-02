@@ -18,7 +18,7 @@
 package io.ktor.util
 
 import io.ktor.start.util.*
-import org.junit.*
+import org.junit.Test
 import kotlin.test.*
 
 class IndenterTest {
