@@ -22,7 +22,7 @@ object AuthBasicClientFeature : ClientFeature(CoreClientEngine) {
     }
 }
 
-object JsonClientFeature : ClientFeature(CoreClientEngine) {
+object JsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
     override val id = "ktor-client-json"
     override val title = "Json serialization for HttpClient"
     override val description = "Supports basic authentication for the Http Client"

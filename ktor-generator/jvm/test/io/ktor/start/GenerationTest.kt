@@ -80,11 +80,18 @@ class GenerationTest {
 
                 fun main(args: Array<String>): Unit = io.ktor.server.netty.DevelopmentEngine.main(args)
 
+                data class JsonSampleClass(val hello: String)
+
                 fun Application.module() {
                     val client = HttpClient(Apache) {
                         install(JsonFeature) {
                             serializer = GsonSerializer()
                         }
+                    }
+                    val message = client.post<JsonSampleClass> {
+                        url(URL("http://127.0.0.1:8080/path/to/endpoint"))
+                        contentType(ContentType.Application.Json)
+                        body = JsonSampleClass(hello = "world")
                     }
 
                 }
