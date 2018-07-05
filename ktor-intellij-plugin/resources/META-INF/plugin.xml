@@ -39,7 +39,7 @@
             </ul>
         ]]>
     </description>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.4</version>
     <vendor url="http://www.jetbrains.com">JetBrains</vendor>
 
     <depends>org.jetbrains.plugins.gradle</depends>
