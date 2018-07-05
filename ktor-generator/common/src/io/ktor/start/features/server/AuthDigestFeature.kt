@@ -19,6 +19,7 @@ package io.ktor.start.features.server
 
 import io.ktor.start.*
 import io.ktor.start.project.*
+import io.ktor.start.util.*
 
 object AuthDigestFeature : ServerFeature(ApplicationKt, AuthFeature) {
     override val group: String = "Authentication"
@@ -28,4 +29,28 @@ object AuthDigestFeature : ServerFeature(ApplicationKt, AuthFeature) {
     override val title = "Authentication Digest"
     override val description = "Handle Digest authentication"
     override val documentation = "https://ktor.io/features/authentication/digest.html"
+
+    override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addAuthProvider {
+            +"val myRealm = \"MyRealm\""
+            +"val usersInMyRealmToHA1: Map<String, ByteArray> = mapOf("
+                +"// pass=\"test\", HA1=MD5(\"test:MyRealm:pass\")=\"fb12475e62dedc5c2744d98eb73b8877\""
+                +"\"test\" to hex(\"fb12475e62dedc5c2744d98eb73b8877\")"
+            +")"
+            +"digest(\"myDigestAuth\")" {
+                +"userNameRealmPasswordDigestProvider = " {
+                    +"userName, realm ->"
+                    +"usersInMyRealmToHA1[userName]"
+                }
+            }
+        }
+        addRoute {
+            "authenticate(\"myDigestAuth\")" {
+                "get(\"/protected/route/digest\")" {
+                    +"val principal = call.principal<UserIdPrincipal>()!!"
+                    +"call.respondText(\"Hello \${principal.name}\")"
+                }
+            }
+        }
+    }
 }

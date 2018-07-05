@@ -14,11 +14,9 @@ object AuthBasicClientFeature : ClientFeature(CoreClientEngine) {
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.features.json.*")
         append(CoreClientEngine.CLIENT_FEATURES) {
-            "install(JsonFeature)" {
-                +"install(BasicAuth)" {
-                    +"username = \"test\""
-                    +"password = \"pass\""
-                }
+            +"install(BasicAuth)" {
+                +"username = \"test\""
+                +"password = \"pass\""
             }
         }
     }
@@ -32,9 +30,19 @@ object JsonClientFeature : ClientFeature(CoreClientEngine) {
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.features.json.*")
+        addApplicationClasses {
+            +"data class JsonSampleClass(val hello: String)"
+        }
         append(CoreClientEngine.CLIENT_FEATURES) {
             "install(JsonFeature)" {
                 +"serializer = GsonSerializer()"
+            }
+        }
+        append(CoreClientEngine.CLIENT_USAGE) {
+            "val message = client.post<JsonSampleClass>" {
+                +"url(URL(\"http://127.0.0.1:8080/path/to/endpoint\"))"
+                +"contentType(ContentType.Application.Json)"
+                +"body = JsonSampleClass(hello = \"world\")"
             }
         }
     }
