@@ -26,6 +26,6 @@ object AuthLdapFeature : ServerFeature(ApplicationKt, AuthFeature) {
     override val artifacts = listOf("io.ktor:ktor-auth-ldap:\$ktor_version")
     override val id = "auth-ldap"
     override val title = "Authentication LDAP"
-    override val description = "Handle JDAP authentication"
+    override val description = "Handle LDAP authentication"
     override val documentation = "https://ktor.io/features/authentication/ldap.html"
 }
