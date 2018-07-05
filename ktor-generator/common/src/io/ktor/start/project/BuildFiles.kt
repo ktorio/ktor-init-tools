@@ -25,12 +25,17 @@ object BuildFiles : BuildInfoBlock() {
         when (info.projectType) {
             ProjectType.Gradle -> BuildFilesGradle.apply { render(info) }
             ProjectType.Maven -> BuildFilesMaven.apply { render(info) }
-            else -> error("Unsupported build type ${info.projectType}")
         }
 
         addMavenRepository(Repos.jcenter)
         addMavenRepository(Repos.ktor)
         addCompileDependency(MvnArtifact("org.jetbrains.kotlin:kotlin-stdlib-jdk8:\$kotlin_version"))
+
+        // Temporal for Ktor 0.9.3 because of the metadata problem
+        addCompileDependency(MvnArtifact("org.jetbrains.kotlinx:kotlinx-coroutines-core:\$kotlinx_coroutines_version"))
+        addCompileDependency(MvnArtifact("org.jetbrains.kotlinx:kotlinx-coroutines-io:\$kotlinx_coroutines_version"))
+        addCompileDependency(MvnArtifact("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:\$kotlinx_coroutines_version"))
+
         addCompileDependency(MvnArtifact("io.ktor:ktor-server-${info.ktorEngine.id}:\$ktor_version"))
         addCompileDependency(MvnArtifact("ch.qos.logback:logback-classic:\$logback_version"))
         addTestDependency(MvnArtifact("io.ktor:ktor-server-tests:\$ktor_version"))

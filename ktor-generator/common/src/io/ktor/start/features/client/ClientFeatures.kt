@@ -30,6 +30,8 @@ object JsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.features.json.*")
+        addImport("io.ktor.client.request.*")
+        addImport("java.net.URL")
         addApplicationClasses {
             +"data class JsonSampleClass(val hello: String)"
         }
@@ -39,10 +41,12 @@ object JsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
             }
         }
         append(CoreClientEngine.CLIENT_USAGE) {
-            "val message = client.post<JsonSampleClass>" {
-                +"url(URL(\"http://127.0.0.1:8080/path/to/endpoint\"))"
-                +"contentType(ContentType.Application.Json)"
-                +"body = JsonSampleClass(hello = \"world\")"
+            "runBlocking" {
+                "val message = client.post<JsonSampleClass>" {
+                    +"url(URL(\"http://127.0.0.1:8080/path/to/endpoint\"))"
+                    +"contentType(ContentType.Application.Json)"
+                    +"body = JsonSampleClass(hello = \"world\")"
+                }
             }
         }
     }

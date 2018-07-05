@@ -31,11 +31,14 @@ object AuthDigestFeature : ServerFeature(ApplicationKt, AuthFeature, RoutingFeat
     override val documentation = "https://ktor.io/features/authentication/digest.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addImport("io.ktor.util.*")
         addAuthProvider {
             +"val myRealm = \"MyRealm\""
             +"val usersInMyRealmToHA1: Map<String, ByteArray> = mapOf("
+            indent {
                 +"// pass=\"test\", HA1=MD5(\"test:MyRealm:pass\")=\"fb12475e62dedc5c2744d98eb73b8877\""
                 +"\"test\" to hex(\"fb12475e62dedc5c2744d98eb73b8877\")"
+            }
             +")"
             +"digest(\"myDigestAuth\")" {
                 +"userNameRealmPasswordDigestProvider = " {

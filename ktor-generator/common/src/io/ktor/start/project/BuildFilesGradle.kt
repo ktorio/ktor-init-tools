@@ -27,6 +27,7 @@ internal object BuildFilesGradle : BuildInfoBlock() {
                 +"ext.kotlin_version = '$KOTLIN_VERSION'"
                 +"ext.ktor_version = '${info.ktorVersion}'"
                 +"ext.logback_version = '1.2.1'"
+                +"ext.kotlinx_coroutines_version = '0.23.4'" // Temporal for Ktor 0.9.3 because of the metadata problem
                 +""
                 "repositories" {
                     +"jcenter()"
