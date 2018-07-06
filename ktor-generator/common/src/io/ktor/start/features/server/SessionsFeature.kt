@@ -38,7 +38,9 @@ object SessionsFeature : ServerFeature(ApplicationKt, RoutingFeature) {
         }
         addFeatureInstall {
             +"install(Sessions)" {
-                +"cookie<MySession>(\"MY_SESSION\")"
+                +"cookie<MySession>(\"MY_SESSION\")" {
+                    +"cookie.extensions[\"SameSite\"] = \"lax\""
+                }
             }
         }
         addRoute {
