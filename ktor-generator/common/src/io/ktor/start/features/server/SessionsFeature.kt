@@ -19,12 +19,34 @@ package io.ktor.start.features.server
 
 import io.ktor.start.*
 import io.ktor.start.project.*
+import io.ktor.start.util.*
 
-object SessionsFeature : ServerFeature(ApplicationKt) {
+object SessionsFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val repos = Repos.ktor
-    override val artifacts = listOf("io.ktor:ktor-server-sessions:\$ktor_version") // Only required for Cache and Directory storages
+    override val artifacts = listOf(
+        "io.ktor:ktor-server-sessions:\$ktor_version" // Only required for Cache and Directory storages
+    )
     override val id = "ktor-sessions"
     override val title = "Sessions"
     override val description = "Adds supports for sessions: with the payload in the client or the server"
     override val documentation = "https://ktor.io/features/sessions.html"
+
+    override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addImport("io.ktor.sessions.*")
+        addApplicationClasses {
+            +"data class MySession(val count: Int = 0)"
+        }
+        addFeatureInstall {
+            +"install(Sessions)" {
+                +"cookie<MySession>(\"MY_SESSION\")"
+            }
+        }
+        addRoute {
+            +"get(\"/session/increment\")" {
+                +"val session = call.sessions.get<MySession>() ?: MySession()"
+                +"call.sessions.set(session.copy(count = session.count + 1))"
+                +"call.respondText(\"Counter is \${session.count}. Refresh to increment.\")"
+            }
+        }
+    }
 }
