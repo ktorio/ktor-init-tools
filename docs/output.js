@@ -412,7 +412,15 @@
     return Unit;
   }
   function main$lambda_6(it) {
-    onHashUpdated();
+    onHashUpdated(window.location.hash);
+    return Unit;
+  }
+  function main$lambda_7(event) {
+    var tmp$;
+    var edata = (Kotlin.isType(tmp$ = event, MessageEvent) ? tmp$ : throwCCE()).data;
+    if (edata && edata.type === 'updateHash') {
+      onHashUpdated(edata.value);
+    }
     return Unit;
   }
   function main(args) {
@@ -443,7 +451,7 @@
     jQuery(str_8).keyup(main$lambda_4);
     var id = artifactVersionId;
     jQuery('#' + id).keyup(main$lambda_5);
-    onHashUpdated();
+    onHashUpdated(window.location.hash);
     addDependencies();
     registerBuildButton();
     handleFiltering();
@@ -451,6 +459,7 @@
     updateHash();
     registerKeyboardUsability();
     window.onpopstate = main$lambda_6;
+    window.addEventListener('message', main$lambda_7);
   }
   var defaultArtifactGroup;
   var defaultArtifactName;
@@ -476,9 +485,9 @@
   }
   var Map = Kotlin.kotlin.collections.Map;
   var emptySet = Kotlin.kotlin.collections.emptySet_287e2$;
-  function onHashUpdated() {
+  function onHashUpdated(hash) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12, tmp$_13, tmp$_14, tmp$_15, tmp$_16;
-    var params = get_hashParams();
+    var params = parseHash(hash);
     var str = '#include_wrapper';
     var tmp$_17 = jQuery(str);
     var key = 'no_wrapper';
@@ -596,9 +605,9 @@
     }
   }
   var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
-  function get_hashParams() {
+  function parseHash(hash) {
     try {
-      return formUrlDecode(trim(window.location.hash, Kotlin.charArrayOf(35)));
+      return formUrlDecode(trim(hash, Kotlin.charArrayOf(35)));
     }
      catch (e) {
       if (Kotlin.isType(e, Throwable)) {
@@ -607,6 +616,9 @@
        else
         throw e;
     }
+  }
+  function get_hashParams() {
+    return parseHash(window.location.hash);
   }
   var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
   function formUrlDecode($receiver) {
@@ -9425,9 +9437,10 @@
     get: get_includeWrapper,
     set: set_includeWrapper
   });
-  package$start.onHashUpdated = onHashUpdated;
+  package$start.onHashUpdated_61zpoe$ = onHashUpdated;
   package$start.updateHash = updateHash;
   package$start.updateIndeterminate = updateIndeterminate;
+  package$start.parseHash_61zpoe$ = parseHash;
   Object.defineProperty(package$start, 'hashParams', {
     get: get_hashParams
   });
