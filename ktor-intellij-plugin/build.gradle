@@ -1,9 +1,5 @@
-buildscript {
-	ext.intellijBaseVersion = "2018.1.5"
-}
-
 plugins {
-  id "org.jetbrains.intellij" version "0.3.2"
+  id "org.jetbrains.intellij" version "0.3.4"
 
 }
 
@@ -20,10 +16,13 @@ dependencies {
 	compile project(":ktor-generator-jvm")
 }
 
+def intellijBaseVersion = "2018.1.5"
 def intellijVersion = "IC-$intellijBaseVersion"
 
 intellij {
-	version intellijVersion
+	//version intellijVersion
+	version 'LATEST-EAP-SNAPSHOT'
+	updateSinceUntilBuild false
 	plugins = [
 			'maven', 'gradle'
 	]

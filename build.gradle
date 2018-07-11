@@ -1,9 +1,14 @@
 buildscript {
-    ext.kotlin_version = '1.2.41'
+    ext.kotlin_version = '1.2.60-eap-44'
     ext.web_dir = 'docs'
 
     repositories {
+        mavenLocal()
         jcenter()
+        maven { url "https://dl.bintray.com/soywiz/soywiz/" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://dl.bintray.com/jetbrains/kotlin-native-dependencies" }
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -14,6 +19,17 @@ group 'io.ktor.start'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'idea'
+
+allprojects {
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven { url "https://dl.bintray.com/soywiz/soywiz/" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://dl.bintray.com/jetbrains/kotlin-native-dependencies" }
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+    }
+}
 
 idea {
     module {
