@@ -41,14 +41,7 @@ fun main(args: Array<String>) {
     jq("#artifact-name").keyup { updateHash() }
     jqId(artifactVersionId).keyup { updateHash() }
 
-    jq("#include_wrapper").prop("checked", if ("no_wrapper" in hashParams) "" else "checked")
-    jq("#artifact-group").`val`(hashParams["artifact-group"]?.firstOrNull() ?: "com.example")
-    jq("#artifact-name").`val`(hashParams["artifact-name"]?.firstOrNull() ?: "ktor-demo")
-    jq("#$artifactVersionId").`val`(hashParams[artifactVersionId]?.firstOrNull() ?: "0.0.1-SNAPSHOT")
-    jq("#ktor-version").`val`(hashParams["ktor-version"]?.firstOrNull() ?: defaultKtorVersion)
-    jq("#ktor-version").`val`(hashParams["ktor-version"]?.firstOrNull() ?: defaultKtorVersion)
-    jq("#ktor-engine").`val`(hashParams["ktor-engine"]?.firstOrNull() ?: defaultKtorEngine)
-    jq("#project-type").`val`(hashParams["project-type"]?.firstOrNull() ?: ProjectType.Gradle.id)
+    onHashUpdated()
 
     addDependencies()
     registerBuildButton()
@@ -56,6 +49,9 @@ fun main(args: Array<String>) {
     removeLoading()
     updateHash()
     registerKeyboardUsability()
+    window.onpopstate = {
+        onHashUpdated()
+    }
 }
 
 val defaultArtifactGroup = "com.example"
@@ -77,6 +73,27 @@ var includeWrapper
     set(value) {
         jq("#include_wrapper").checked = value
     }
+
+fun onHashUpdated() {
+    val params = hashParams
+    //println("Hash updated: ${document.location?.href}")
+    jq("#include_wrapper").prop("checked", if ("no_wrapper" in params) "" else "checked")
+    jq("#artifact-group").`val`(params["artifact-group"]?.firstOrNull() ?: "com.example")
+    jq("#artifact-name").`val`(params["artifact-name"]?.firstOrNull() ?: "ktor-demo")
+    jq("#$artifactVersionId").`val`(params[artifactVersionId]?.firstOrNull() ?: "0.0.1-SNAPSHOT")
+    jq("#ktor-version").`val`(params["ktor-version"]?.firstOrNull() ?: defaultKtorVersion)
+    jq("#ktor-version").`val`(params["ktor-version"]?.firstOrNull() ?: defaultKtorVersion)
+    jq("#ktor-engine").`val`(params["ktor-engine"]?.firstOrNull() ?: defaultKtorEngine)
+    jq("#project-type").`val`(params["project-type"]?.firstOrNull() ?: ProjectType.Gradle.id)
+    val dependencies = (params["dependency"] as? ArrayList<String>?)?.toSet() ?: setOf()
+    for (dep in ALL_FEATURES) {
+        val depId = dep.id
+        val res = depId in dependencies
+        val item = jq("#artifact-$depId")
+        item.checked = res
+        //console.log("[$res, ${item.checked}] :: $depId in $dependencies")
+    }
+}
 
 fun updateHash() {
     val items = LinkedHashMap<String, ArrayList<String>>()
@@ -104,7 +121,8 @@ fun updateHash() {
         if (str != default) items[key] = arrayListOf(str)
     }
 
-    document.location?.hash = items.formUrlEncode()
+    //document.location?.hash = items.formUrlEncode()
+    window.history.pushState(jsObject(), document.title, document.location?.pathname + "#" + items.formUrlEncode())
 
     try {
         window.top.postMessage(jsObject("type" to "updateHash", "value" to document.location?.hash), "*")
@@ -130,12 +148,10 @@ fun updateIndeterminate() {
     }
 }
 
-val hashParams: Map<String, List<String>> by lazy {
-    try {
-        window.location.hash.trim('#').formUrlDecode()
-    } catch (e: Throwable) {
-        mapOf<String, List<String>>()
-    }
+val hashParams: Map<String, List<String>> get() = try {
+    window.location.hash.trim('#').formUrlDecode()
+} catch (e: Throwable) {
+    mapOf<String, List<String>>()
 }
 
 // @TODO: Encode
