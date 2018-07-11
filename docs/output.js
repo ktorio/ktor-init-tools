@@ -517,6 +517,7 @@
       var item = jQuery(str_7);
       set_checked(item, res);
     }
+    updateIndeterminate();
   }
   var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   function updateHash() {

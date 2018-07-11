@@ -102,6 +102,7 @@ fun onHashUpdated(hash: String) {
         item.checked = res
         //console.log("[$res, ${item.checked}] :: $depId in $dependencies")
     }
+    updateIndeterminate()
 }
 
 fun updateHash() {
