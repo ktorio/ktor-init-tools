@@ -77,6 +77,8 @@ class GenerationTest {
                 import io.ktor.client.*
                 import io.ktor.client.engine.apache.*
                 import io.ktor.client.features.json.*
+                import io.ktor.client.request.*
+                import java.net.URL
 
                 fun main(args: Array<String>): Unit = io.ktor.server.netty.DevelopmentEngine.main(args)
 
@@ -88,10 +90,12 @@ class GenerationTest {
                             serializer = GsonSerializer()
                         }
                     }
-                    val message = client.post<JsonSampleClass> {
-                        url(URL("http://127.0.0.1:8080/path/to/endpoint"))
-                        contentType(ContentType.Application.Json)
-                        body = JsonSampleClass(hello = "world")
+                    runBlocking {
+                        val message = client.post<JsonSampleClass> {
+                            url(URL("http://127.0.0.1:8080/path/to/endpoint"))
+                            contentType(ContentType.Application.Json)
+                            body = JsonSampleClass(hello = "world")
+                        }
                     }
 
                 }
