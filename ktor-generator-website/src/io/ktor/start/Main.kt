@@ -21,6 +21,8 @@ import io.ktor.start.features.*
 import io.ktor.start.project.*
 import io.ktor.start.util.*
 import js.externals.jquery.*
+import org.w3c.dom.*
+import org.w3c.dom.events.*
 import kotlin.browser.*
 
 @Suppress("unused")
@@ -41,7 +43,7 @@ fun main(args: Array<String>) {
     jq("#artifact-name").keyup { updateHash() }
     jqId(artifactVersionId).keyup { updateHash() }
 
-    onHashUpdated()
+    onHashUpdated(window.location.hash)
 
     addDependencies()
     registerBuildButton()
@@ -50,8 +52,15 @@ fun main(args: Array<String>) {
     updateHash()
     registerKeyboardUsability()
     window.onpopstate = {
-        onHashUpdated()
+        onHashUpdated(window.location.hash)
     }
+    window.addEventListener("message", { event: Event ->
+        val edata = (event as MessageEvent).data.asDynamic()
+        if (edata && edata.type === "updateHash") {
+            onHashUpdated(edata.value)
+        }
+        Unit
+    })
 }
 
 val defaultArtifactGroup = "com.example"
@@ -74,8 +83,8 @@ var includeWrapper
         jq("#include_wrapper").checked = value
     }
 
-fun onHashUpdated() {
-    val params = hashParams
+fun onHashUpdated(hash: String) {
+    val params = parseHash(hash)
     //println("Hash updated: ${document.location?.href}")
     jq("#include_wrapper").prop("checked", if ("no_wrapper" in params) "" else "checked")
     jq("#artifact-group").`val`(params["artifact-group"]?.firstOrNull() ?: "com.example")
@@ -148,11 +157,13 @@ fun updateIndeterminate() {
     }
 }
 
-val hashParams: Map<String, List<String>> get() = try {
-    window.location.hash.trim('#').formUrlDecode()
+fun parseHash(hash: String) = try {
+    hash.trim('#').formUrlDecode()
 } catch (e: Throwable) {
     mapOf<String, List<String>>()
 }
+
+val hashParams: Map<String, List<String>> get() = parseHash(window.location.hash)
 
 // @TODO: Encode
 fun String.formUrlDecode(): Map<String, List<String>> = this.split('&')
