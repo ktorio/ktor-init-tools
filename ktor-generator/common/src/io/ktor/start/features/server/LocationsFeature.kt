@@ -19,12 +19,31 @@ package io.ktor.start.features.server
 
 import io.ktor.start.*
 import io.ktor.start.project.*
+import io.ktor.start.util.*
 
-object LocationsFeature : ServerFeature(ApplicationKt, StatusPagesFeature) {
+object LocationsFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-locations:\$ktor_version")
     override val id = "ktor-locations"
     override val title = "Locations"
     override val description = "Allows to define route locations in a typed way"
     override val documentation = "https://ktor.io/features/locations.html"
+
+    override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addImport("io.ktor.locations.*")
+
+        addApplicationClasses {
+            +"@Location(\"/location/{name}\")"
+            +"class MyLocation(val name: String, val arg1: Int = 42, val arg2: String = \"default\")"
+        }
+        addFeatureInstall {
+            +"install(Locations)" {
+            }
+        }
+        addRoute {
+            +"get<MyLocation>" {
+                +"call.respondText(\"Location: name=\${it.name}, arg1=\${it.arg1}, arg2=\${it.arg2}\")"
+            }
+        }
+    }
 }
