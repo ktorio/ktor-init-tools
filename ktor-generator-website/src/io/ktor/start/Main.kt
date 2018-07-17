@@ -25,31 +25,12 @@ import js.externals.jquery.*
 import org.w3c.dom.*
 import org.w3c.dom.events.*
 import kotlin.browser.*
-import kotlin.collections.ArrayList
-import kotlin.collections.LinkedHashMap
-import kotlin.collections.List
-import kotlin.collections.Map
-import kotlin.collections.arrayListOf
 import kotlin.collections.component1
 import kotlin.collections.component2
-import kotlin.collections.contains
-import kotlin.collections.filter
-import kotlin.collections.firstOrNull
-import kotlin.collections.flatMap
-import kotlin.collections.groupBy
-import kotlin.collections.iterator
-import kotlin.collections.joinToString
-import kotlin.collections.listOf
-import kotlin.collections.map
-import kotlin.collections.mapOf
-import kotlin.collections.plus
-import kotlin.collections.plusAssign
 import kotlin.collections.set
-import kotlin.collections.setOf
-import kotlin.collections.toMap
-import kotlin.collections.toSet
 
 val swaggerModels = arrayListOf<SwaggerModel>()
+var swaggerGenerators = listOf<SwaggerGenerator>()
 
 @Suppress("unused")
 fun main(args: Array<String>) {
@@ -84,6 +65,8 @@ fun main(args: Array<String>) {
                         error("Not a JSON file")
                     }
                 }
+            } catch (e: CancelException) {
+                // This is OK, the user cancelled, we shouldn't report
             } catch (e: Throwable) {
                 console.error(e)
                 window.alert(e.toString())
@@ -112,7 +95,20 @@ fun main(args: Array<String>) {
 }
 
 fun updateSwaggerModels() {
-    jq("#swagger-models-placeholder").text(swaggerModels.map { it.filename }.joinToString(", "))
+    val placeholder = jq("#swagger-models-placeholder")
+    placeholder.text("")
+
+    for (model in swaggerModels) {
+        val span = jq("<button type='button' class='btn btn-info' style='margin:4px;'>").text(model.filename)
+        span.append(jq("<span class='badge badge-light' style='margin-left:4px;'>❌</span>"))
+        span.on("click") {
+            swaggerModels -= model
+            updateSwaggerModels()
+        }
+        placeholder.append(span)
+    }
+    swaggerGenerators = swaggerModels.map { SwaggerGenerator(it) }
+    onHashUpdated(document.location!!.hash)
 }
 
 val defaultArtifactGroup = "com.example"
@@ -135,6 +131,19 @@ var includeWrapper
         jq("#include_wrapper").checked = value
     }
 
+class DependencyChecker(val hash: String) {
+    val params = parseHash(hash)
+    val dependencies = (params["dependency"] as? ArrayList<String>?)?.toSet() ?: setOf()
+
+    fun includeDependency(depId: String): Boolean {
+        if (depId in dependencies) return true
+        val dep = ALL_FEATURES_BY_ID[depId]
+        if (dep != null) return swaggerGenerators.any { dep!! in it.blockDeps }
+        return false
+    }
+}
+
+
 fun onHashUpdated(hash: String) {
     val params = parseHash(hash)
     //println("Hash updated: ${document.location?.href}")
@@ -146,15 +155,15 @@ fun onHashUpdated(hash: String) {
     jq("#ktor-version").`val`(params["ktor-version"]?.firstOrNull() ?: defaultKtorVersion)
     jq("#ktor-engine").`val`(params["ktor-engine"]?.firstOrNull() ?: defaultKtorEngine)
     jq("#project-type").`val`(params["project-type"]?.firstOrNull() ?: ProjectType.Gradle.id)
-    val dependencies = (params["dependency"] as? ArrayList<String>?)?.toSet() ?: setOf()
+    val dependencies = DependencyChecker(hash)
     for (dep in ALL_FEATURES) {
         val depId = dep.id
-        val res = depId in dependencies
+        val res = dependencies.includeDependency(depId)
         val item = jq("#artifact-$depId")
         item.checked = res
         //console.log("[$res, ${item.checked}] :: $depId in $dependencies")
     }
-    updateIndeterminate()
+    updateIndeterminate(dependencies)
 }
 
 fun updateHash() {
@@ -191,17 +200,18 @@ fun updateHash() {
     } catch (e: dynamic) {
         console.error(e)
     }
-    updateIndeterminate()
+    val dependencies = DependencyChecker(document.location!!.hash)
+    updateIndeterminate(dependencies)
 }
 
-fun updateIndeterminate() {
+fun updateIndeterminate(dependencies: DependencyChecker) {
     val features = FeatureSet(ALL_FEATURES.filter { jq("#artifact-${it.id}").checked })
     //println("directFeatures:$directFeatures")
     //println("allFeatures:$allFeatures")
     //println("transitiveFeatures:$transitiveFeatures")
     for (feature in ALL_FEATURES) {
         val selector = jq("#artifact-${feature.id}")
-        val selected = feature in features.all
+        val selected = (feature in features.all) || (swaggerGenerators.any { feature in it.blockDeps })
         val indeterminate = feature in features.transitive
         selector.prop("indeterminate", indeterminate)
         selector.closest("label")
@@ -328,7 +338,7 @@ suspend fun build(dev: Boolean) {
     )
     try {
         val zipBytes = buildZip {
-            val files = generate(info, (listOf(ApplicationKt) + dependenciesToInclude))
+            val files = generate(info, (listOf(ApplicationKt) + dependenciesToInclude + swaggerGenerators))
             for ((file, result) in files) {
                 val rname = "${info.artifactName}/$file"
                 if (dev) {

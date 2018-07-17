@@ -109,7 +109,7 @@ suspend fun dialogOpenFile(filter: String = "*"): List<File> = suspendCoroutine 
                 for (n in 0 until selectedFiles.asDynamic().length) ff += selectedFiles[n].unsafeCast<File>()
                 continuation.resume(ff)
             } else {
-                continuation.resumeWithException(RuntimeException("cancel"))
+                continuation.resumeWithException(CancelException())
             }
         }
     }
@@ -135,6 +135,8 @@ suspend fun dialogOpenFile(filter: String = "*"): List<File> = suspendCoroutine 
 
     inputFile?.click()
 }
+
+class CancelException : RuntimeException()
 
 suspend fun File.read(): ByteArray = suspendCoroutine { c ->
     val reader = FileReader()

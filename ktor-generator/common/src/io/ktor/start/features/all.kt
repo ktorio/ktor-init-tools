@@ -73,3 +73,5 @@ val ALL_FEATURES: List<Feature> = listOf(
     PartialContentFeature,
     RawSocketsTlsFeature
 )
+
+val ALL_FEATURES_BY_ID = ALL_FEATURES.associateBy { it.id }

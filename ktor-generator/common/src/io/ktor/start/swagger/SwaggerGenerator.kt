@@ -5,7 +5,17 @@ import io.ktor.start.features.server.*
 import io.ktor.start.project.*
 import io.ktor.start.util.*
 
-class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(RoutingFeature, ApplicationKt) {
+class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildDepsFromModel().toTypedArray()) {
+    companion object {
+        fun SwaggerModel.buildDepsFromModel(): Set<Block<BuildInfo>> {
+            val out = LinkedHashSet<Block<BuildInfo>>()
+            out += ApplicationKt
+            out += RoutingFeature
+            out += AuthJwtFeature // @TODO: Do this conditionally based on Security blocks
+            return out
+        }
+    }
+
     override fun BlockBuilder.render(info: BuildInfo) {
         addApplicationClasses {
             for (def in model.definitions.values) {
