@@ -61,6 +61,8 @@ class FileResult(
     val string: String by lazy {
         charset?.let { data.toString(it) } ?: data.hex
     }
+
+    override fun toString(): String = "FileResult($name, ${if (charset != null) string else "binary(${data.size})"})"
 }
 
 open class BlockBuilder(val subject: Any) : Extra by Extra.Mixin() {

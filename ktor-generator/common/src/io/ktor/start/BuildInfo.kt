@@ -20,14 +20,14 @@ package io.ktor.start
 import io.ktor.start.util.*
 
 data class BuildInfo(
-    val includeWrapper: Boolean,
-    val projectType: ProjectType,
-    val ktorVersion: SemVer,
-    val artifactName: String,
-    val artifactGroup: String,
-    val artifactVersion: String,
-    val ktorEngine: KtorEngine,
-    val fetch: suspend (path: String) -> ByteArray
+    val includeWrapper: Boolean = false,
+    val projectType: ProjectType = ProjectType.Gradle,
+    val ktorVersion: SemVer = Versions.LAST,
+    val artifactName: String = "example",
+    val artifactGroup: String = "com.example",
+    val artifactVersion: String = "0.0.1-SNAPSHOT",
+    val ktorEngine: KtorEngine = KtorEngine.Netty,
+    val fetch: suspend (path: String) -> ByteArray = { TODO("Must set fetch") }
 ) {
     val ktorVer = ktorVersion
     val developmentPackage = "io.ktor.server.${ktorEngine.id}"
