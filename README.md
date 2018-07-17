@@ -13,6 +13,7 @@ The code generation features:
 * Ktor version selection.
 * GroupId/ArtifactId/Version definition.
 * Feature selection with sample code generation.
+* Code generation from swagger models.
 * Easy to modify and add new things.
 
 ## Project Generation Website

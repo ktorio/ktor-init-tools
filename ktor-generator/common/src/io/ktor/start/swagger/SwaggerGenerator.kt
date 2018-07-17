@@ -64,7 +64,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(RoutingFeatur
             "integer" -> "Int"
             "long" -> "Long"
             "boolean" -> "Boolean"
-            // @TODO: Unsupported unnamed type
+            // @TODO: Unsupported anonymous type
             "object" -> "Any"
             else -> error("Unsupported prim of type $type ($this)")
         }
@@ -72,7 +72,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(RoutingFeatur
             type.substringAfterLast('/')
         }
         is SwaggerModel.ArrayType -> {
-            "Lis<${this.items.toKotlin()}>"
+            "List<${this.items.toKotlin()}>"
         }
         else -> error("Unsupported $this")
     }

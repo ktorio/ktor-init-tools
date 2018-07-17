@@ -3,6 +3,7 @@ package io.ktor.start.swagger
 import io.ktor.start.util.*
 
 data class SwaggerModel(
+    val filename: String,
     val info: SwaggerInfo,
     val basePath: String,
     val schemes: List<String>,
@@ -169,7 +170,7 @@ data class SwaggerModel(
             }
         }
 
-        fun parseUntypedModel(model: Any?): SwaggerModel {
+        fun parse(model: Any?, filename: String = "unknown.json"): SwaggerModel {
             return Dynamic {
                 if (model["swagger"] != "2.0") error("Not a swagger: '2.0' model")
                 val info = model["info"].let {
@@ -207,6 +208,7 @@ data class SwaggerModel(
                     }.toMap()
                 }
                 SwaggerModel(
+                    filename = filename,
                     info = info,
                     basePath = basePath,
                     schemes = schemes,

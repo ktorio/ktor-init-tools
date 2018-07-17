@@ -27,6 +27,7 @@ data class BuildInfo(
     val artifactGroup: String = "com.example",
     val artifactVersion: String = "0.0.1-SNAPSHOT",
     val ktorEngine: KtorEngine = KtorEngine.Netty,
+    val generateFeatureSample: Boolean = true,
     val fetch: suspend (path: String) -> ByteArray = { TODO("Must set fetch") }
 ) {
     val ktorVer = ktorVersion

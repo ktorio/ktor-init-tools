@@ -12,7 +12,7 @@ class SwaggerGenerationTest {
     @Test
     fun name() = runBlocking {
         val untypedModel = Json.parse(getResourceString("/swagger.json")!!)
-        val model = SwaggerModel.parseUntypedModel(untypedModel)
+        val model = SwaggerModel.parse(untypedModel)
         val swaggerGenerator = SwaggerGenerator(model)
         val results = generate(BuildInfo(), swaggerGenerator)
         for ((file, res) in results) {

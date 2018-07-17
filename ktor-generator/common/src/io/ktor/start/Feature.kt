@@ -58,7 +58,9 @@ abstract class Feature(vararg deps: Block<BuildInfo>) : Block<BuildInfo>(*deps) 
         for (artifact in artifacts) {
             addTestDependency(MvnArtifact(artifact))
         }
-        renderFeature(info)
+        if (info.generateFeatureSample) {
+            renderFeature(info)
+        }
     }
 
     open fun BlockBuilder.renderFeature(info: BuildInfo) {

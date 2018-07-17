@@ -47,7 +47,7 @@ suspend fun fetchFile(file: String): ByteArray {
 val EmptyContinuation = object : Continuation<Unit> {
     override val context: CoroutineContext = EmptyCoroutineContext
     override fun resume(value: Unit) = Unit
-    override fun resumeWithException(exception: Throwable) = Unit
+    override fun resumeWithException(exception: Throwable) = console.error(exception)
 }
 
 fun launch(callback: suspend () -> Unit) {
@@ -59,7 +59,8 @@ fun launch(callback: suspend () -> Unit) {
 external val jQuery: JQueryStatic<HTMLElement> = definedExternally
 
 inline fun jq(str: String) = jQuery(str)
-inline fun jq(str: HTMLElement) = jQuery(str)
+inline fun jq(str: Element) = jQuery(str)
+inline fun jq(str: Node) = jQuery(str.unsafeCast<Element>())
 inline fun jqId(id: String) = jQuery("#$id")
 
 //external fun JQuery.io.ktor.start.on(name: String, event: dynamic)
@@ -85,3 +86,66 @@ fun generateBrowserFile(filename: String, data: ByteArray, type: String = "appli
         document.body?.removeChild(elem)
     }
 }
+
+suspend fun dialogOpenFile(filter: String = "*"): List<File> = suspendCoroutine { continuation ->
+    if (windowInputFile == null) {
+        val wif = jq("<input type='file' style='display:none;'>")[0]
+        windowInputFile = wif.unsafeCast<HTMLInputElement>()
+        document.body?.append(wif)
+    }
+    val inputFile = windowInputFile
+    var completedOnce = false
+    var files = arrayOf<File>()
+
+    val completed = {
+        if (!completedOnce) {
+            completedOnce = true
+
+            selectedFiles = files
+
+            //console.log('completed', files);
+            if (files.size > 0.0) {
+                val ff = arrayListOf<File>()
+                for (n in 0 until selectedFiles.asDynamic().length) ff += selectedFiles[n].unsafeCast<File>()
+                continuation.resume(ff)
+            } else {
+                continuation.resumeWithException(RuntimeException("cancel"))
+            }
+        }
+    }
+
+    windowInputFile?.value = ""
+
+    windowInputFile?.onclick = {
+        document.body?.onfocus = {
+            document.body?.onfocus = null
+            window.setTimeout({
+                completed()
+            }, 2000)
+        }
+        Unit
+    }
+
+    windowInputFile?.onchange = { e ->
+        files = e.target.asDynamic()["files"]
+        //var v = this.value;
+        //console.log(v);
+        completed()
+    }
+
+    inputFile?.click()
+}
+
+suspend fun File.read(): ByteArray = suspendCoroutine { c ->
+    val reader = FileReader()
+    reader.onload = {
+        c.resume(Int8Array((reader.result as ArrayBuffer)) as ByteArray)
+    }
+    reader.onerror = {
+        c.resumeWithException(RuntimeException("onerror"))
+    }
+    reader.readAsArrayBuffer(this)
+}
+
+var windowInputFile: HTMLInputElement? = null
+var selectedFiles = arrayOf<File>()

@@ -49,7 +49,7 @@ object Json {
                 unread()
                 return readStringLit()
             }
-            else -> invalidJson("Not expected '$ic'")
+            else -> invalidJson("JSON: Not expected '$ic'")
         }
     }
 
@@ -82,7 +82,7 @@ object Json {
             is Number -> b.append("$obj")
             is CustomJsonSerializer -> obj.encodeToJson(b)
             else -> {
-                error("Don't know how to serialize $obj")
+                error("JSON: Don't know how to serialize $obj")
                 //encode(ClassFactory(obj::class).toMap(obj), b)
             }
         }
@@ -129,7 +129,7 @@ object Json {
                 b.inline(StringBuilder().apply { obj.encodeToJson(this) }.toString())
             }
             else -> {
-                error("Don't know how to serialize $obj")
+                error("JSON: Don't know how to serialize $obj")
                 //encode(ClassFactory(obj::class).toMap(obj), b)
             }
         }

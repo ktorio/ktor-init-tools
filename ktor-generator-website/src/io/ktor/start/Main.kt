@@ -19,11 +19,37 @@ package io.ktor.start
 
 import io.ktor.start.features.*
 import io.ktor.start.project.*
+import io.ktor.start.swagger.*
 import io.ktor.start.util.*
 import js.externals.jquery.*
 import org.w3c.dom.*
 import org.w3c.dom.events.*
 import kotlin.browser.*
+import kotlin.collections.ArrayList
+import kotlin.collections.LinkedHashMap
+import kotlin.collections.List
+import kotlin.collections.Map
+import kotlin.collections.arrayListOf
+import kotlin.collections.component1
+import kotlin.collections.component2
+import kotlin.collections.contains
+import kotlin.collections.filter
+import kotlin.collections.firstOrNull
+import kotlin.collections.flatMap
+import kotlin.collections.groupBy
+import kotlin.collections.iterator
+import kotlin.collections.joinToString
+import kotlin.collections.listOf
+import kotlin.collections.map
+import kotlin.collections.mapOf
+import kotlin.collections.plus
+import kotlin.collections.plusAssign
+import kotlin.collections.set
+import kotlin.collections.setOf
+import kotlin.collections.toMap
+import kotlin.collections.toSet
+
+val swaggerModels = arrayListOf<SwaggerModel>()
 
 @Suppress("unused")
 fun main(args: Array<String>) {
@@ -43,6 +69,28 @@ fun main(args: Array<String>) {
     jq("#artifact-name").keyup { updateHash() }
     jqId(artifactVersionId).keyup { updateHash() }
 
+    jq("#add-swager-model").asDynamic().click {
+        launch {
+            try {
+                val files = dialogOpenFile("*")
+                for (file in files) {
+                    if (file.name.endsWith(".json")) {
+                        val jsonStr = file.read().toString(UTF8)
+                        val untypedModel = Json.parse(jsonStr)
+                        val model = SwaggerModel.parse(untypedModel, file.name)
+                        swaggerModels += model
+                        updateSwaggerModels()
+                    } else {
+                        error("Not a JSON file")
+                    }
+                }
+            } catch (e: Throwable) {
+                console.error(e)
+                window.alert(e.toString())
+            }
+        }
+    }
+
     onHashUpdated(window.location.hash)
 
     addDependencies()
@@ -61,6 +109,10 @@ fun main(args: Array<String>) {
         }
         Unit
     })
+}
+
+fun updateSwaggerModels() {
+    jq("#swagger-models-placeholder").text(swaggerModels.map { it.filename }.joinToString(", "))
 }
 
 val defaultArtifactGroup = "com.example"
@@ -200,8 +252,10 @@ fun addDependenciesKind(kind: String, features: List<Feature>) {
             val checked = if (checkedBool) "checked" else ""
 
             val simplifiedArtifacts = (feature.artifacts + feature.testArtifacts)
-                .map { it.removePrefix("io.ktor:")
-                .removeSuffix(":\$ktor_version") }
+                .map {
+                    it.removePrefix("io.ktor:")
+                        .removeSuffix(":\$ktor_version")
+                }
 
             deps.append(
                 jq("<label for='artifact-${feature.id}' class='artifact' />")
