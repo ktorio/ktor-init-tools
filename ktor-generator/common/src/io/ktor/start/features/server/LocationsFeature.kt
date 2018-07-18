@@ -37,12 +37,12 @@ object LocationsFeature : ServerFeature(ApplicationKt, RoutingFeature) {
                 +"@Location(\"/location/{name}\")"
                 +"class MyLocation(val name: String, val arg1: Int = 42, val arg2: String = \"default\")"
             }
-            //SEPARATOR {
-            //    +"@Location(\"/type/{name}\") data class Type(val name: String)"
-            //    +"// In these classes we have to include the `name` property matching the parent."
-            //    +"@Location(\"/edit\") data class TypeEdit(val name: String)"
-            //    +"@Location(\"/list/{page}\") data class TypeList(val name: String, val page: Int)"
-            //}
+            SEPARATOR {
+                +"@Location(\"/type/{name}\") data class Type(val name: String)" {
+                    +"@Location(\"/edit\") data class Edit(val type: Type)"
+                    +"@Location(\"/list/{page}\") data class List(val type: Type, val page: Int)"
+                }
+            }
         }
         addFeatureInstall {
             +"install(Locations)" {
@@ -53,23 +53,13 @@ object LocationsFeature : ServerFeature(ApplicationKt, RoutingFeature) {
                 +"call.respondText(\"Location: name=\${it.name}, arg1=\${it.arg1}, arg2=\${it.arg2}\")"
             }
 
-            // This doesn't work on Ktor 0.9.3
-
-            //+"// /type/{name}"
-            //+"location<Type>" {
-            //    +"get<TypeEdit> { typeEdit -> // /edit "
-            //    indent {
-            //        // ...
-            //        +"call.respondText(\"Inside \$typeEdit\")"
-            //    }
-            //    +"}"
-            //    +"get<TypeList> { typeList -> // /list/{page}"
-            //    indent {
-            //        // ...
-            //        +"call.respondText(\"Inside \$typeList\")"
-            //    }
-            //    +"}"
-            //}
+            +"// Register nested routes"
+            +"get<Type.Edit>" {
+                +"call.respondText(\"Inside \$it\")"
+            }
+            +"get<Type.List>" {
+                +"call.respondText(\"Inside \$it\")"
+            }
         }
     }
 }
