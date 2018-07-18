@@ -84,10 +84,20 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                     when (param.schema) {
                         SwaggerModel.StringType -> +"val ${param.name} = $base.get(\"${param.name}\")"
                         SwaggerModel.IntType -> +"val ${param.name} = $base.getInt(\"${param.name}\") { ${(param.default as? Number?)?.toInt() ?: 0} }"
-                        else -> error(param.schema)
+                        is SwaggerModel.ArrayType -> +"val ${param.name} = $base.getArray(\"${param.name}\")"
+                        else -> {
+                            // @TODO:
+                            println("Unknown schema: ${param.schema}")
+                        }
                     }
                 }
+                "formData" -> {
+                    // @TODO:
+                }
                 "body" -> {
+                    // @TODO
+                }
+                "header" -> {
                     // @TODO
                 }
                 else -> error("Unsupported param.in=${param.inside}")

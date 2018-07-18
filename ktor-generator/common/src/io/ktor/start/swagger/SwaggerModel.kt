@@ -19,27 +19,35 @@ data class SwaggerModel(
     object StringType : BasePrimType {
         override fun toString(): String = "String"
     }
+
     object IntType : BasePrimType {
         override fun toString(): String = "Int"
     }
+
     object LongType : BasePrimType {
         override fun toString(): String = "Long"
     }
+
     object BoolType : BasePrimType {
         override fun toString(): String = "Bool"
     }
+
     object DoubleType : BasePrimType {
         override fun toString(): String = "Double"
     }
+
     data class RefType(val type: String) : GenType {
         override fun toString(): String = type.substringAfterLast('/')
     }
+
     data class ArrayType(val items: GenType) : GenType {
         override fun toString(): String = "List<$items>"
     }
+
     data class OptionalType(val type: GenType) : GenType {
         override fun toString(): String = "$type?"
     }
+
     data class ObjType(val fields: Map<String, GenType>) : GenType {
         override fun toString(): String = "Any/*Unsupported {$fields}*/"
     }
@@ -112,7 +120,10 @@ data class SwaggerModel(
         val description: String,
         val schema: GenType?
     ) {
-        val intCode = code.toIntOrNull() ?: -1
+        val intCode = when (code) {
+            "default" -> 200
+            else -> code.toIntOrNull() ?: -1
+        }
     }
 
     companion object {
@@ -130,14 +141,18 @@ data class SwaggerModel(
                         val format = def["format"]
                         when (type.str) {
                             "string" -> StringType
-                            "integer", "int" -> IntType
-                            "double", "number" -> DoubleType
+                            "integer" -> IntType
+                            "int" -> IntType
+                            "double" -> DoubleType
+                            "number" -> DoubleType
                             "long" -> LongType
-                            "bool", "boolean" -> BoolType
+                            "bool" -> BoolType
+                            "boolean" -> BoolType
                             "null" -> error("null? : $def")
                             "object" -> {
                                 val props = def["properties"]
-                                val entries = props.strEntries.map { it.first to parseDefinitionElement(it.second) }.toMap()
+                                val entries =
+                                    props.strEntries.map { it.first to parseDefinitionElement(it.second) }.toMap()
                                 ObjType(entries)
                             }
                             else -> {
