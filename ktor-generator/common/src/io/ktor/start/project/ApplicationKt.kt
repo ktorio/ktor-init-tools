@@ -20,7 +20,7 @@ package io.ktor.start.project
 import io.ktor.start.*
 import io.ktor.start.util.*
 
-object ApplicationKt : BuildInfoBlock(BuildFiles, ApplicationConf, GitIgnoreFile) {
+object ApplicationKt : BuildInfoBlock(BuildFiles, ApplicationConf, LogBackXml, GitIgnoreFile) {
     val MODULE_INSTALL = newSlot("MODULE_INSTALL")
     val MODULE_POST = newSlot("MODULE_POST")
     val APPLICATION_CLASSES = newSlot("APPLICATION_CLASSES")

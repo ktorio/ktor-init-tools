@@ -15,7 +15,8 @@
 
             <h3>0.1.0</h2>
             <ul>
-                <li>Added experimental Swagger Code generation.</li>
+                <li>Added experimental Swagger Server Code generation.</li>
+                <li>Generate <code>logback.xml</code> file.</li>
                 <li>Fixed zip folder permissions.</li>
                 <li>Fix maven missing property.</li>
             </ul>
