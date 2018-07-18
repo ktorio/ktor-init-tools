@@ -26,13 +26,14 @@ class ZipBuilder {
         val S_IFREG = "0100000".toInt(8) // regular
         val S_IFDIR = "0040000".toInt(8) // directory
         val DEFAULT_FILE = "644".toInt(8)
+        val DEFAULT_DIR = "755".toInt(8)
     }
 
     class FileInfo(val name: String, val data: ByteArray, val date: DateTime, val mode: Int = DEFAULT_FILE)
 
     val files = LinkedHashMap<String, FileInfo>()
 
-    fun addParentDir(name: String, date: DateTime = NewDateTime(), mode: Int = DEFAULT_FILE or S_IFDIR) {
+    fun addParentDir(name: String, date: DateTime = NewDateTime(), mode: Int = DEFAULT_DIR or S_IFDIR) {
         if (name == "") return
         addParentDir(name.substringBeforeLast('/', ""), date)
         val dname = "$name/"
