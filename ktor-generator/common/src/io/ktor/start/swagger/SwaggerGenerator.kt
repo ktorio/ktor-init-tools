@@ -20,16 +20,18 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
 
     override fun BlockBuilder.render(info: BuildInfo) {
         addApplicationClasses {
-            +"class HttpException(val code: HttpStatusCode, val message: String = code.description) : RuntimeException()"
+            +"class HttpException(val code: HttpStatusCode, val description: String = code.description) : RuntimeException(description)"
         }
         addExtensionMethods {
             +"inline fun Parameters.getInt(name: String, default: () -> Int = {0}): Int = get(name)?.toInt() ?: default()"
+            +"inline fun <reified T : Any> Parameters.getTyped(name: String): T = getTyped(T::class, name)"
+            +"fun <T : Any> Parameters.getTyped(type: KClass<T>, name: String): T = TODO()"
             +"fun httpException(code: HttpStatusCode, message: String = code.description): Nothing = throw HttpException(code, message)"
-            +"fun httpException(code: Int, message: String = code.description): Nothing = throw HttpException(HttpStatusCode(code, message))"
+            +"fun httpException(code: Int, message: String = \"Error \$code\"): Nothing = throw HttpException(HttpStatusCode(code, message))"
         }
         addCustomStatusPage {
-            "exception<AuthorizationException>"(suffix = " cause ->") {
-                +"call.respond(cause.code, cause.message)"
+            "exception<HttpException>"(suffix = " cause ->") {
+                +"call.respond(cause.code, cause.description)"
             }
         }
         addApplicationClasses {
@@ -72,6 +74,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
 
     fun Indenter.renderRouteMethodBody(method: SwaggerModel.PathMethodModel) {
         for (param in method.parameters) {
+            +"// ${param.description.replace("\n", " ")}"
             when (param.inside) {
                 // Parameter based
                 "query", "path" -> {
@@ -84,7 +87,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                     when (param.schema) {
                         SwaggerModel.StringType -> +"val ${param.name} = $base.get(\"${param.name}\")"
                         SwaggerModel.IntType -> +"val ${param.name} = $base.getInt(\"${param.name}\") { ${(param.default as? Number?)?.toInt() ?: 0} }"
-                        is SwaggerModel.ArrayType -> +"val ${param.name} = $base.getArray(\"${param.name}\")"
+                        is SwaggerModel.ArrayType -> +"val ${param.name} = $base.getTyped<${param.schema.toKotlin()}>(\"${param.name}\")"
                         else -> {
                             // @TODO:
                             println("Unknown schema: ${param.schema}")
