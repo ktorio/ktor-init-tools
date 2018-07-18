@@ -99,14 +99,19 @@ fun updateSwaggerModels() {
     placeholder.text("")
 
     for (model in swaggerModels) {
-        val span = jq("<button type='button' class='btn btn-info' style='margin:4px;'>").text(model.filename)
+        val span = jq("<button type='button' class='btn btn-info' style='margin:0 4px 4px 0;'>").text(model.filename)
         span.append(jq("<span class='badge badge-light' style='margin-left:4px;'>❌</span>"))
         span.on("click") {
             swaggerModels -= model
             updateSwaggerModels()
         }
         placeholder.append(span)
+        placeholder.append(jq("<span>").text("Routes: ${model.paths.size}, Defs: ${model.definitions.size}, Auths: ${model.securityDefinitions.size}"))
     }
+
+    // Allow only one swagger model
+    jq("#add-swager-model").css("display", if (swaggerModels.isEmpty()) "inline-block" else "none")
+
     swaggerGenerators = swaggerModels.map { SwaggerGenerator(it) }
     onHashUpdated(document.location!!.hash)
 }

@@ -44,14 +44,14 @@ object ApplicationKt : BuildInfoBlock(BuildFiles, ApplicationConf, GitIgnoreFile
                 +"fun main(args: Array<String>): Unit = ${info.developmentEngineFQ}.main(args)"
             }
             SEPARATOR {
-                block(APPLICATION_CLASSES)
-            }
-            SEPARATOR {
                 "fun Application.module()" {
                     block(MODULE_INSTALL)
                     EMPTY_LINE_ONCE()
                     block(MODULE_POST)
                 }
+            }
+            SEPARATOR {
+                block(APPLICATION_CLASSES)
             }
             SEPARATOR {
                 block(EXTENSIONS)

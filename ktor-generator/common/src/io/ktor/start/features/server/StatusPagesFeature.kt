@@ -29,6 +29,8 @@ object StatusPagesFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val description = "Allow to respond to thrown exceptions."
     override val documentation = "https://ktor.io/features/status-pages.html"
 
+    val CUSTOM_STATUS_PAGES = newSlot("CUSTOM_STATUS_PAGES")
+
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")
         addApplicationClasses {
@@ -43,7 +45,17 @@ object StatusPagesFeature : ServerFeature(ApplicationKt, RoutingFeature) {
                 "exception<AuthorizationException>"(suffix = " cause ->") {
                     +"call.respond(HttpStatusCode.Forbidden)"
                 }
+                SEPARATOR {
+                    block(CUSTOM_STATUS_PAGES)
+                }
             }
         }
     }
 }
+
+fun BlockBuilder.addCustomStatusPage(callback: Indenter.() -> Unit) {
+    appendSeparated(StatusPagesFeature.CUSTOM_STATUS_PAGES) {
+        callback()
+    }
+}
+

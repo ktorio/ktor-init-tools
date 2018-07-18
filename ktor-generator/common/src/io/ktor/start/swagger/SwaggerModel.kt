@@ -14,10 +14,35 @@ data class SwaggerModel(
     val definitions: Map<String, TypeDef>
 ) {
     interface GenType
-    data class PrimType(val type: String, val format: String?, val untyped: Any?) : GenType
-    data class RefType(val type: String) : GenType
-    data class ArrayType(val items: GenType) : GenType
-    data class OptionalType(val type: GenType) : GenType
+    interface BasePrimType : GenType
+    data class PrimType(val type: String, val format: String?, val untyped: Any?) : BasePrimType
+    object StringType : BasePrimType {
+        override fun toString(): String = "String"
+    }
+    object IntType : BasePrimType {
+        override fun toString(): String = "Int"
+    }
+    object LongType : BasePrimType {
+        override fun toString(): String = "Long"
+    }
+    object BoolType : BasePrimType {
+        override fun toString(): String = "Bool"
+    }
+    object DoubleType : BasePrimType {
+        override fun toString(): String = "Double"
+    }
+    data class RefType(val type: String) : GenType {
+        override fun toString(): String = type.substringAfterLast('/')
+    }
+    data class ArrayType(val items: GenType) : GenType {
+        override fun toString(): String = "List<$items>"
+    }
+    data class OptionalType(val type: GenType) : GenType {
+        override fun toString(): String = "$type?"
+    }
+    data class ObjType(val fields: Map<String, GenType>) : GenType {
+        override fun toString(): String = "Any/*Unsupported {$fields}*/"
+    }
 
     data class Prop(val name: String, val type: GenType, val required: Boolean) {
         val rtype = if (required) type else OptionalType(type)
@@ -86,7 +111,9 @@ data class SwaggerModel(
         val code: String,
         val description: String,
         val schema: GenType?
-    )
+    ) {
+        val intCode = code.toIntOrNull() ?: -1
+    }
 
     companion object {
         fun parseDefinitionElement(def: Any?): GenType {
@@ -101,7 +128,23 @@ data class SwaggerModel(
                         ArrayType(parseDefinitionElement(items))
                     } else {
                         val format = def["format"]
-                        PrimType(type.str, format?.str, def)
+                        when (type.str) {
+                            "string" -> StringType
+                            "integer", "int" -> IntType
+                            "double", "number" -> DoubleType
+                            "long" -> LongType
+                            "bool", "boolean" -> BoolType
+                            "null" -> error("null? : $def")
+                            "object" -> {
+                                val props = def["properties"]
+                                val entries = props.strEntries.map { it.first to parseDefinitionElement(it.second) }.toMap()
+                                ObjType(entries)
+                            }
+                            else -> {
+                                //error("Other prim $type, $def")
+                                PrimType(type.str, format?.str, def)
+                            }
+                        }
                     }
                 }
             }
@@ -133,7 +176,7 @@ data class SwaggerModel(
                     required = def["required"].bool,
                     description = def["description"].str,
                     default = def["default"],
-                    schema = parseDefinitionElement(def["schema"])
+                    schema = parseDefinitionElement(def["schema"] ?: def)
                 )
             }
         }

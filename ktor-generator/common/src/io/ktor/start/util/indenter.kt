@@ -120,12 +120,29 @@ class Indenter(internal val actions: ArrayList<Action> = arrayListOf<Indenter.Ac
         return this
     }
 
-    fun _indent() {
-        actions.add(Action.Indent)
+    inline fun indent(count: Int, callback: () -> Unit): Indenter {
+        _indent(count)
+        try {
+            callback()
+        } finally {
+            _unindent(count)
+        }
+        return this
     }
 
-    fun _unindent() {
-        actions.add(Action.Unindent)
+    var indentLevel: Int = 0; private set
+
+    fun _indent() = _indent(1)
+    fun _unindent() = _unindent(1)
+
+    fun _indent(count: Int) {
+        for (v in 0 until count) actions.add(Action.Indent)
+        indentLevel += count
+    }
+
+    fun _unindent(count: Int) {
+        for (v in 0 until count) actions.add(Action.Unindent)
+        indentLevel -= count
     }
 
     class IndenterEvaluator(val markHandler: ((sb: StringBuilder, line: Int, data: Any) -> Unit)?, val indentEmptyLines: Boolean, val doIndent: Boolean) {
