@@ -18,8 +18,13 @@
 package io.ktor.start.intellij
 
 import com.intellij.ide.util.projectWizard.*
+import com.intellij.openapi.fileChooser.*
+import com.intellij.openapi.ui.*
 import com.intellij.uiDesigner.core.*
 import io.ktor.start.intellij.util.*
+import io.ktor.start.swagger.*
+import io.ktor.start.util.*
+import java.awt.event.*
 import javax.swing.*
 
 class KtorArtifactWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
@@ -28,7 +33,7 @@ class KtorArtifactWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() 
     lateinit var version: JTextField
 
     val panel = JPanel().apply {
-        layout = GridLayoutManager(5, 2)
+        layout = GridLayoutManager(6, 2)
         fun addLabelText(name: String, value: String, row: Int): JTextField {
             val tfield = JTextField(value)
             addAtGrid(
@@ -61,10 +66,64 @@ class KtorArtifactWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() 
         groupId = addLabelText("GroupId", config.artifactGroup, row = 1)
         artifactId = addLabelText("ArtifactId", config.artifactId, row = 2)
         version = addLabelText("Version", config.artifactVersion, row = 3)
+        val addModelButton = JButton("Add Swagger JSON Model...")
+        val modelLabel = JLabel("")
+
+        fun updateModelLabel() {
+            val model = config.swaggerModules.firstOrNull()
+            if (model != null) {
+                modelLabel.text =
+                        "${model?.filename}, Routes: ${model.paths.size}, Defs: ${model.definitions.size}, SecDefs: ${model.securityDefinitions.size} (click to remove ❌)"
+                addModelButton.isVisible = false
+            } else {
+                modelLabel.text = ""
+                addModelButton.isVisible = true
+            }
+        }
+
+        modelLabel.addMouseListener(object : MouseAdapter() {
+            override fun mouseClicked(e: MouseEvent?) {
+                config.swaggerModules = listOf()
+                updateModelLabel()
+            }
+        })
+
+        addAtGrid(
+            modelLabel, row = 4, column = 1,
+            HSizePolicy = GridConstraints.SIZEPOLICY_FIXED,
+            VSizePolicy = GridConstraints.SIZEPOLICY_FIXED
+        )
+        addAtGrid(
+            addModelButton.apply {
+                addActionListener {
+                    try {
+                        val file = FileChooser.chooseFile(
+                            FileChooserDescriptor(true, false, false, false, false, false),
+                            null, null
+                        )
+                        if (file != null) {
+                            val fileStr = file.inputStream.readBytes().toString(UTF8)
+                            val model = SwaggerModel.parse(Json.parse(fileStr), file.name)
+                            config.swaggerModules = listOf(model)
+                        } else {
+                            config.swaggerModules = listOf()
+                        }
+                    } catch (e: Throwable) {
+                        Messages.showErrorDialog(e.message, "Error")
+                    }
+                    updateModelLabel()
+                }
+            },
+            row = 4, column = 0,
+            HSizePolicy = GridConstraints.SIZEPOLICY_FIXED,
+            VSizePolicy = GridConstraints.SIZEPOLICY_FIXED
+
+        )
         add(Spacer().apply {}, GridConstraints().apply {
-            row = 4; column = 0; fill =
+            row = 5; column = 0; fill =
                 GridConstraints.FILL_VERTICAL
         })
+
     }
 
     override fun updateDataModel() {

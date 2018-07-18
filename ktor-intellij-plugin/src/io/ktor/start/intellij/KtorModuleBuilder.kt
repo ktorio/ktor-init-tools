@@ -32,6 +32,7 @@ import com.intellij.openapi.vfs.*
 import io.ktor.start.*
 import io.ktor.start.intellij.util.*
 import io.ktor.start.project.*
+import io.ktor.start.swagger.*
 import io.ktor.start.util.*
 import kotlinx.coroutines.experimental.*
 import org.jetbrains.idea.maven.execution.*
@@ -77,7 +78,7 @@ class KtorModuleBuilder : JavaModuleBuilder() {
             )
 
             runBlocking {
-                val blocks = listOf(ApplicationKt) + config.featuresToInstall
+                val blocks = listOf(ApplicationKt) + config.featuresToInstall + config.swaggerModules.map { SwaggerGenerator(it) }
                 for ((_, content) in generate(info, blocks)) {
                     root.createFile(content.name, content.data)
                 }

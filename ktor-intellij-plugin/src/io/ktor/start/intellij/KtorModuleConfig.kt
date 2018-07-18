@@ -18,6 +18,7 @@
 package io.ktor.start.intellij
 
 import io.ktor.start.*
+import io.ktor.start.swagger.*
 
 class KtorModuleConfig {
     var artifactGroup = "com.example"
@@ -28,4 +29,5 @@ class KtorModuleConfig {
     var ktorVersion = Versions.LAST
     var wrapper = true
     var engine = KtorEngine.Netty
+    var swaggerModules = listOf<SwaggerModel>()
 }

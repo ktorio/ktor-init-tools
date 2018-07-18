@@ -13,6 +13,12 @@
 
             <h2>Changelog</h2>
 
+            <h3>0.1.0</h2>
+            <ul>
+                <li>Added experimental Swagger Code generation.</li>
+                <li>Fixed zip folder permissions.</li>
+                <li>Fix maven missing property.</li>
+            </ul>
             <h3>0.0.5</h2>
             <ul>
                 <li>Make compatible with EAP builds.</li>

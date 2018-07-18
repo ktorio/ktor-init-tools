@@ -175,9 +175,14 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                 if (def != null) {
                     +"${def.name}("
                     indent {
-                       for ((key, prop) in def.props) {
+                        val props = def.props.entries.toList()
+                       for (index in props.indices) {
+                           val key = props[index].key
+                           val prop = props[index].value
+                           val last = index >= props.size - 1
+                           val comma = if (last) "" else ","
                            val rindentLevel = this.indentLevel
-                           +"$key = ${Indenter { indent(rindentLevel) { toKotlinDefault(prop.rtype) } }.toString().trim()}"
+                           +"$key = ${Indenter { indent(rindentLevel) { toKotlinDefault(prop.rtype) } }.toString().trim()}$comma"
                        }
                     }
                     +")"
