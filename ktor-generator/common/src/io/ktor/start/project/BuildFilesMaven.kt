@@ -35,6 +35,7 @@ internal object BuildFilesMaven : BuildInfoBlock() {
                     "<properties>" {
                         +"<kotlin_version>$KOTLIN_VERSION</kotlin_version>"
                         +"<ktor_version>${info.ktorVersion}</ktor_version>"
+                        +"<kotlinx_coroutines_version>$KOTLINX_COROUTINES_VERSION</kotlinx_coroutines_version>" // Temporal for Ktor 0.9.3 because of the metadata problem
                         +"<logback_version>1.2.1</logback_version>"
                         +"<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>"
                         +"<kotlin.compiler.incremental>true</kotlin.compiler.incremental>"
