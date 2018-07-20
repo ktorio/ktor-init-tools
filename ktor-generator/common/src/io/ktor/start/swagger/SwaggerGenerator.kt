@@ -86,7 +86,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
 
                     when (param.schema) {
                         SwaggerModel.StringType -> +"val ${param.name} = $base.get(\"${param.name}\")"
-                        SwaggerModel.IntType -> +"val ${param.name} = $base.getInt(\"${param.name}\") { ${(param.default as? Number?)?.toInt() ?: 0} }"
+                        SwaggerModel.Int32Type -> +"val ${param.name} = $base.getInt(\"${param.name}\") { ${(param.default as? Number?)?.toInt() ?: 0} }"
                         is SwaggerModel.ArrayType -> +"val ${param.name} = $base.getTyped<${param.schema.toKotlin()}>(\"${param.name}\")"
                         else -> {
                             // @TODO:
@@ -148,9 +148,9 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
     fun SwaggerModel.GenType.toKotlin(): String = when (this) {
         is SwaggerModel.OptionalType -> "${this.type.toKotlin()}?"
         is SwaggerModel.StringType -> "String"
-        is SwaggerModel.IntType -> "Int"
+        is SwaggerModel.Int32Type -> "Int"
         is SwaggerModel.DoubleType -> "Double"
-        is SwaggerModel.LongType -> "Long"
+        is SwaggerModel.Int64Type -> "Long"
         is SwaggerModel.BoolType -> "Boolean"
         is SwaggerModel.RefType -> {
             type.substringAfterLast('/')
@@ -169,9 +169,9 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             null -> +"null"
             is SwaggerModel.OptionalType -> +"null"
             is SwaggerModel.StringType -> +"\"\""
-            is SwaggerModel.IntType -> +"0"
+            is SwaggerModel.Int32Type -> +"0"
             is SwaggerModel.DoubleType -> +"0.0"
-            is SwaggerModel.LongType -> +"0L"
+            is SwaggerModel.Int64Type -> +"0L"
             is SwaggerModel.BoolType -> +"false"
             is SwaggerModel.RefType -> {
                 val def = model.definitions[type.type.substringAfterLast('/')]

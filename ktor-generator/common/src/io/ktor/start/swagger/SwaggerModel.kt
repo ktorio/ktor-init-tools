@@ -2,6 +2,9 @@ package io.ktor.start.swagger
 
 import io.ktor.start.util.*
 
+/**
+ * https://swagger.io/specification/
+ */
 data class SwaggerModel(
     val filename: String,
     val info: SwaggerInfo,
@@ -16,15 +19,32 @@ data class SwaggerModel(
     interface GenType
     interface BasePrimType : GenType
     data class PrimType(val type: String, val format: String?, val untyped: Any?) : BasePrimType
-    object StringType : BasePrimType {
+
+    interface BaseStringType : BasePrimType
+
+    object PasswordType : BaseStringType {
         override fun toString(): String = "String"
     }
 
-    object IntType : BasePrimType {
+    object Base64Type : BaseStringType {
+        override fun toString(): String = "Base64Type"
+    }
+
+    object BinaryStringType : BaseStringType {
+        override fun toString(): String = "String"
+    }
+
+    object StringType : BaseStringType {
+        override fun toString(): String = "String"
+    }
+
+    interface IntegerType : BasePrimType
+
+    object Int32Type : IntegerType {
         override fun toString(): String = "Int"
     }
 
-    object LongType : BasePrimType {
+    object Int64Type : IntegerType {
         override fun toString(): String = "Long"
     }
 
@@ -32,8 +52,20 @@ data class SwaggerModel(
         override fun toString(): String = "Bool"
     }
 
+    object FloatType : BasePrimType {
+        override fun toString(): String = "Float"
+    }
+
     object DoubleType : BasePrimType {
         override fun toString(): String = "Double"
+    }
+
+    object DateType : BasePrimType {
+        override fun toString(): String = "Date"
+    }
+
+    object DateTimeType : BasePrimType {
+        override fun toString(): String = "DateTime"
     }
 
     data class RefType(val type: String) : GenType {
@@ -127,6 +159,7 @@ data class SwaggerModel(
     }
 
     companion object {
+        // https://swagger.io/specification/#data-types
         fun parseDefinitionElement(def: Any?): GenType {
             return Dynamic {
                 val ref = def["\$ref"]
@@ -134,31 +167,44 @@ data class SwaggerModel(
                     RefType(ref.str)
                 } else {
                     val type = def["type"]
-                    if (type == "array") {
-                        val items = def["items"]
-                        ArrayType(parseDefinitionElement(items))
-                    } else {
-                        val format = def["format"]
-                        when (type.str) {
-                            "string" -> StringType
-                            "integer" -> IntType
-                            "int" -> IntType
-                            "double" -> DoubleType
-                            "number" -> DoubleType
-                            "long" -> LongType
-                            "bool" -> BoolType
-                            "boolean" -> BoolType
-                            "null" -> error("null? : $def")
-                            "object" -> {
-                                val props = def["properties"]
-                                val entries =
-                                    props.strEntries.map { it.first to parseDefinitionElement(it.second) }.toMap()
-                                ObjType(entries)
-                            }
-                            else -> {
-                                //error("Other prim $type, $def")
-                                PrimType(type.str, format?.str, def)
-                            }
+                    val format = def["format"]
+                    when (type) {
+                        // Primitive
+                        "integer" -> when (format.str) {
+                            "int32", "null", "" -> Int32Type
+                            "int64" -> Int64Type
+                            else -> error("Invalid integer type $format")
+                        }
+                        "number" -> when (format.str) {
+                            "float" -> FloatType
+                            "double", "null", "" -> DoubleType
+                            else -> error("Invalid number type $format")
+                        }
+                        "string" -> when (format.str) {
+                            "string", "null", "" -> StringType
+                            "byte" -> Base64Type // Base64
+                            "binary" -> BinaryStringType // ISO-8859-1
+                            "date" -> DateType
+                            "date-time" -> DateTimeType
+                            "password" -> PasswordType
+                            else -> error("Invalid string type $format")
+                        }
+                        "boolean" -> BoolType
+                        // Composed Types
+                        "array" -> {
+                            val items = def["items"]
+                            ArrayType(parseDefinitionElement(items))
+                        }
+                        "object" -> {
+                            val props = def["properties"]
+                            val entries =
+                                props.strEntries.map { it.first to parseDefinitionElement(it.second) }.toMap()
+                            ObjType(entries)
+                        }
+                        "null" -> error("null? : $def")
+                        else -> {
+                            //error("Other prim $type, $def")
+                            PrimType(type.str, format?.str, def)
                         }
                     }
                 }
