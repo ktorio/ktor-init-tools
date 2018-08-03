@@ -44,13 +44,19 @@ fun VirtualFile.createFile(path: String, data: String, charset: Charset = UTF8):
     createFile(path, data.toByteArray(charset))
 
 fun VirtualFile.createFile(path: String, data: ByteArray): VirtualFile {
-    val file = File(path)
-    val dir = this.createDirectories(file.parent)
+    val file = PathInfo(path)
+    val fileParent = file.parent
+    val dir = this.createDirectories(fileParent)
     return runWriteAction {
         dir.createChildData(null, file.name).apply {
             setBinaryContent(data)
         }
     }
+}
+
+class PathInfo(val path: String) {
+    val name: String get() = path.substringAfterLast('/', path)
+    val parent: String? get() = if (path.contains('/')) path.substringBeforeLast('/', "") else null
 }
 
 fun VirtualFile.createDirectories(path: String?): VirtualFile {
@@ -75,8 +81,13 @@ fun Project.backgroundTask(
         override fun shouldStartInBackground() = background
 
         override fun run(indicator: ProgressIndicator) {
-            if (indeterminate) indicator.isIndeterminate = true
-            callback(indicator)
+            try {
+                if (indeterminate) indicator.isIndeterminate = true
+                callback(indicator)
+            } catch (e: Throwable) {
+                e.printStackTrace()
+                throw e
+            }
         }
     })
 }
