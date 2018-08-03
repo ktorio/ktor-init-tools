@@ -30,7 +30,7 @@ class GenerationTest {
     fun testSmoke() = suspendTest {
         val files = generate(info, RoutingFeature)
         assertEquals(
-            setOf("build.gradle", "settings.gradle", ".gitignore", "resources/application.conf", "src/application.kt"),
+            setOf("build.gradle", "settings.gradle", "resources/logback.xml", ".gitignore", "resources/application.conf", "src/application.kt"),
             files.keys
         )
         assertEquals(
@@ -55,7 +55,7 @@ class GenerationTest {
 
 
             """.trimIndent(),
-            files["src/application.kt"]!!.string.replace("\t", " ".repeat(4))
+            files["src/application.kt"]!!.string
         )
     }
 
@@ -82,8 +82,6 @@ class GenerationTest {
 
                 fun main(args: Array<String>): Unit = io.ktor.server.netty.DevelopmentEngine.main(args)
 
-                data class JsonSampleClass(val hello: String)
-
                 fun Application.module() {
                     val client = HttpClient(Apache) {
                         install(JsonFeature) {
@@ -99,6 +97,8 @@ class GenerationTest {
                     }
 
                 }
+
+                data class JsonSampleClass(val hello: String)
 
 
             """.trimIndent(),

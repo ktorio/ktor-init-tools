@@ -106,9 +106,11 @@ open class BlockBuilder(val subject: Any) : Extra by Extra.Mixin() {
         fileBinary(name, charset = charset, mode = mode) {
             val indenter = Indenter()
             indenter.apply { callback() }
-            indenter.toString().toByteArray(charset)
+            indenter.toString().expandTabs().toByteArray(charset)
         }
     }
+
+    private fun String.expandTabs() = this.replace("\t", "    ")
 
     fun fileBinary(name: String, charset: Charset? = null, mode: Int = "644".toInt(8), callback: suspend () -> ByteArray) {
         files[name] = {
