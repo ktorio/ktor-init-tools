@@ -18,5 +18,24 @@ class SwaggerGenerationTest {
         for ((file, res) in results) {
             println("$file: $res")
         }
+        Unit
+    }
+
+    @Test
+    fun name2() = runBlocking {
+        val untypedModel = Json.parse(getResourceString("/uspto.json")!!)
+        val model = SwaggerModel.parse(untypedModel)
+        val swaggerGenerator = SwaggerGenerator(model)
+        val results = generate(BuildInfo(), swaggerGenerator)
+        for ((file, res) in results) {
+            println("$file: $res")
+        }
+        Unit
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun name3() = runBlocking {
+        SwaggerModel.parse(Json.parse(getResourceString("/empty.json")!!))
+        Unit
     }
 }

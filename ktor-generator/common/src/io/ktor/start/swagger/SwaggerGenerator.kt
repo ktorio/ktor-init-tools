@@ -148,6 +148,9 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
     fun SwaggerModel.GenType.toKotlin(): String = when (this) {
         is SwaggerModel.OptionalType -> "${this.type.toKotlin()}?"
         is SwaggerModel.StringType -> "String"
+        is SwaggerModel.PasswordType -> "String" // @TODO: SecureString instead?
+        is SwaggerModel.DateType -> "Date"
+        is SwaggerModel.DateTimeType -> "Date"
         is SwaggerModel.Int32Type -> "Int"
         is SwaggerModel.DoubleType -> "Double"
         is SwaggerModel.Int64Type -> "Long"
@@ -161,7 +164,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         is SwaggerModel.ObjType -> {
             "Any/*Unsupported ${this.fields}*/"
         }
-        else -> error("Unsupported $this")
+        else -> error("Unsupported '$this' class=${this::class}")
     }
 
     fun Indenter.toKotlinDefault(type: SwaggerModel.GenType?) {
@@ -169,6 +172,8 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             null -> +"null"
             is SwaggerModel.OptionalType -> +"null"
             is SwaggerModel.StringType -> +"\"\""
+            is SwaggerModel.DateType -> +"Date()"
+            is SwaggerModel.DateTimeType -> +"Date()"
             is SwaggerModel.Int32Type -> +"0"
             is SwaggerModel.DoubleType -> +"0.0"
             is SwaggerModel.Int64Type -> +"0L"
@@ -199,7 +204,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             is SwaggerModel.ObjType -> {
                 +"Any()/*Unsupported ${type.fields}*/"
             }
-            else -> error("Unsupported $this")
+            else -> error("Unsupported '$type'")
         }
     }
 }
