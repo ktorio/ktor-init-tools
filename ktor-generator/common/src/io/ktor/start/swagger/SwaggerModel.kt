@@ -276,7 +276,11 @@ data class SwaggerModel(
 
         fun parse(model: Any?, filename: String = "unknown.json"): SwaggerModel {
             return Dynamic {
-                if (model["swagger"] != "2.0") error("Not a swagger: '2.0' model")
+                val version = model["swagger"] ?: model["openapi"]
+                val semVer = SemVer(version.toString())
+
+                if (semVer !in (SemVer("2.0") .. SemVer("3.0"))) throw IllegalArgumentException("Not a swagger/openapi: '2.0' or '3.0.0' model")
+
                 val info = model["info"].let {
                     SwaggerInfo(
                         description = it["description"].str,
