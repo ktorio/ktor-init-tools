@@ -4,18 +4,43 @@ import io.ktor.start.util.*
 
 /**
  * https://swagger.io/specification/
+ * https://blog.readme.io/an-example-filled-guide-to-swagger-3-2/
  */
 data class SwaggerModel(
     val filename: String,
     val info: SwaggerInfo,
-    val basePath: String,
-    val schemes: List<String>,
+    val servers: List<Server>,
     val produces: List<String>,
     val consumes: List<String>,
     val securityDefinitions: Map<String, SecurityDefinition>,
     val paths: Map<String, PathModel>,
     val definitions: Map<String, TypeDef>
 ) {
+    data class Server(
+        val url: String,
+        val description: String
+    ) {
+        //V2:
+        //info:
+        //  title: Swagger Sample App
+        //host: example.com
+        //basePath: /v1
+        //schemes: ['http', 'https']
+        //
+        //V3:
+        //servers:
+        //- url: https://{subdomain}.site.com/{version}
+        //  description: The main prod server
+        //  variables:
+        //    subdomain:
+        //      default: production
+        //    version:
+        //      enum:
+        //        - v1
+        //        - v2
+        //      default: v2
+    }
+
     interface GenType
     interface BasePrimType : GenType
     data class PrimType(val type: String, val format: String?, val untyped: Any?) : BasePrimType
@@ -159,6 +184,9 @@ data class SwaggerModel(
     }
 
     companion object {
+        val V2 = SemVer("2.0")
+        val V3 = SemVer("3.0.0")
+
         // https://swagger.io/specification/#data-types
         fun parseDefinitionElement(def: Any?): GenType {
             return Dynamic {
@@ -279,7 +307,7 @@ data class SwaggerModel(
                 val version = model["swagger"] ?: model["openapi"]
                 val semVer = SemVer(version.toString())
 
-                if (semVer !in (SemVer("2.0") .. SemVer("3.0"))) throw IllegalArgumentException("Not a swagger/openapi: '2.0' or '3.0.0' model")
+                if (semVer !in (V2..V3)) throw IllegalArgumentException("Not a swagger/openapi: '2.0' or '3.0.0' model")
 
                 val info = model["info"].let {
                     SwaggerInfo(
@@ -290,8 +318,17 @@ data class SwaggerModel(
                         license = it["license"].let { NamedUrl(it["name"].str, it["url"].str) }
                     )
                 }
-                val basePath = model["basePath"].str
-                val schemes = model["schemes"].list.map { it.str }
+                val servers = arrayListOf<Server>()
+                if (semVer < V3) {
+                    val host = model["host"]?.str ?: "127.0.0.1"
+                    val basePath = model["basePath"]?.str ?: "/"
+                    val schemes = model["schemes"].list.map { it.str }
+                    servers += Server(url = "{scheme}://$host$basePath", description = info.description)
+                } else {
+                    for (userver in model["servers"].list) {
+                        servers += Server(url = userver["url"].str, description = userver["description"]?.str ?: "API")
+                    }
+                }
                 val produces = model["produces"].list.map { it.str }
                 val consumes = model["consumes"].list.map { it.str }
                 val securityDefinitions = model["securityDefinitions"].let {
@@ -318,8 +355,7 @@ data class SwaggerModel(
                 SwaggerModel(
                     filename = filename,
                     info = info,
-                    basePath = basePath,
-                    schemes = schemes,
+                    servers = servers,
                     produces = produces,
                     consumes = consumes,
                     securityDefinitions = securityDefinitions,
