@@ -3,11 +3,13 @@
     <id>io.ktor.intellij.plugin</id>
 
     <name>Ktor</name>
+    <version>0.2.0</version>
+    <vendor url="http://www.jetbrains.com">JetBrains</vendor>
     <description>
         <![CDATA[
             This plugin supports the <a href="https://ktor.io/">Ktor</a> framework.
 
-            Note: It doesn't work on Android Studio.
+            <strong>Note: It doesn't work on Android Studio.</strong>
 
             The following features are available:
             <ul>
@@ -20,8 +22,10 @@
             <ul>
                 <li>Fixed plugin on windows (no src folder was generated).</li>
                 <li>Generate files with spaces instead of tabs.</li>
-                <li>Support Swagger/OpenAPI models from 2.0.0 to 3.0.0.</li>
-                <li>Additional templatesº.</li>
+                <li>Additional templates.</li>
+                <li>Swagger: Support Swagger/OpenAPI models from 2.0.0 (beta) to 3.0.0 (pre-alpha, not fully working yet).</li>
+                <li>Swagger: Support JWT authentication with Swagger.</li>
+                <li>Swagger: Generate Swagger client using JVM HttpClient.</li>
             </ul>
             <h3>0.1.0</h2>
             <ul>
@@ -63,8 +67,6 @@
             </ul>
         ]]>
     </description>
-    <version>0.0.6-SNAPSHOT</version>
-    <vendor url="http://www.jetbrains.com">JetBrains</vendor>
 
     <depends>org.jetbrains.plugins.gradle</depends>
     <depends>org.jetbrains.idea.maven</depends>
