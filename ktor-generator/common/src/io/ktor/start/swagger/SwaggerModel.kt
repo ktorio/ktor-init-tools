@@ -4,6 +4,10 @@ import io.ktor.start.util.*
 
 /**
  * https://swagger.io/specification/
+ * https://github.com/OAI/OpenAPI-Specification/blob/master/versions/1.2.md
+ * https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
+ * https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md
+ * https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md
  * https://blog.readme.io/an-example-filled-guide-to-swagger-3-2/
  */
 data class SwaggerModel(
@@ -18,7 +22,8 @@ data class SwaggerModel(
 ) {
     data class Server(
         val url: String,
-        val description: String
+        val description: String,
+        val variables: Map<String, ServerVariable>
     ) {
         //V2:
         //info:
@@ -40,6 +45,13 @@ data class SwaggerModel(
         //        - v2
         //      default: v2
     }
+
+    data class ServerVariable(
+        val name: String,
+        val default: String,
+        val description: String,
+        val enum: List<String>?
+    )
 
     interface GenType
     interface BasePrimType : GenType
@@ -128,8 +140,8 @@ data class SwaggerModel(
         val inside: String
     )
 
-
-    data class NamedUrl(val name: String, val url: String)
+    data class Contact(val name: String, val url: String, val email: String)
+    data class License(val name: String, val url: String)
 
     data class Parameter(
         val name: String,
@@ -165,11 +177,12 @@ data class SwaggerModel(
     }
 
     data class SwaggerInfo(
-        val description: String,
-        val version: String,
         val title: String,
-        val contact: NamedUrl,
-        val license: NamedUrl
+        val description: String,
+        val termsOfService: String,
+        val version: String,
+        val contact: Contact,
+        val license: License
     )
 
     data class Response(
@@ -184,8 +197,14 @@ data class SwaggerModel(
     }
 
     companion object {
-        val V2 = SemVer("2.0")
-        val V3 = SemVer("3.0.0")
+        object Versions {
+            val V2 = SemVer("2.0")
+            val V3 = SemVer("3.0.0")
+            val V3_0_1 = SemVer("3.0.1")
+
+            val MIN = V2
+            val MAX = V3_0_1
+        }
 
         // https://swagger.io/specification/#data-types
         fun parseDefinitionElement(def: Any?): GenType {
@@ -262,7 +281,7 @@ data class SwaggerModel(
                 Parameter(
                     name = def["name"].str,
                     inside = def["in"].str,
-                    required = def["required"].bool,
+                    required = def["required"]?.bool ?: false,
                     description = def["description"].str,
                     default = def["default"],
                     schema = parseDefinitionElement(def["schema"] ?: def)
@@ -307,26 +326,37 @@ data class SwaggerModel(
                 val version = model["swagger"] ?: model["openapi"]
                 val semVer = SemVer(version.toString())
 
-                if (semVer !in (V2..V3)) throw IllegalArgumentException("Not a swagger/openapi: '2.0' or '3.0.0' model")
+                if (semVer !in (Versions.MIN..Versions.MAX)) throw IllegalArgumentException("Not a swagger/openapi: '2.0' or '3.0.0' model")
 
                 val info = model["info"].let {
                     SwaggerInfo(
-                        description = it["description"].str,
-                        version = it["version"].str,
                         title = it["title"].str,
-                        contact = it["contact"].let { NamedUrl(it["name"].str, it["url"].str) },
-                        license = it["license"].let { NamedUrl(it["name"].str, it["url"].str) }
+                        description = it["description"].str,
+                        termsOfService = it["termsOfService"].str,
+                        contact = it["contact"].let { Contact(it["name"].str, it["url"].str, it["email"].str) },
+                        license = it["license"].let { License(it["name"].str, it["url"].str) },
+                        version = it["version"].str
                     )
                 }
                 val servers = arrayListOf<Server>()
-                if (semVer < V3) {
+                if (semVer < Versions.V3) {
                     val host = model["host"]?.str ?: "127.0.0.1"
                     val basePath = model["basePath"]?.str ?: "/"
-                    val schemes = model["schemes"].list.map { it.str }
-                    servers += Server(url = "{scheme}://$host$basePath", description = info.description)
+                    val schemes = model["schemes"].strList
+                    servers += Server(url = "{scheme}://$host$basePath", description = info.description, variables = mapOf(
+                        "scheme" to ServerVariable("scheme", schemes.firstOrNull() ?: "https", "", schemes)
+                    ))
                 } else {
                     for (userver in model["servers"].list) {
-                        servers += Server(url = userver["url"].str, description = userver["description"]?.str ?: "API")
+                        servers += Server(url = userver["url"].str, description = userver["description"]?.str ?: "API", variables = userver["variables"].map.map { (uname, uvar) ->
+                            val name = uname.str
+                            name to ServerVariable(
+                                name,
+                                uvar["default"].str,
+                                uvar["description"].str,
+                                uvar["enum"]?.strList
+                            )
+                        }.toMap())
                     }
                 }
                 val produces = model["produces"].list.map { it.str }
