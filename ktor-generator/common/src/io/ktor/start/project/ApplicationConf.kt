@@ -23,6 +23,7 @@ import io.ktor.start.util.*
 object ApplicationConf : BuildInfoBlock() {
     val KTOR = newSlot("KTOR")
     val DEPLOYMENT = newSlot("DEPLOYMENT")
+    val TOP = newSlot("CONF")
 
     override fun BlockBuilder.render(info: BuildInfo) {
         fileText("resources/application.conf") {
@@ -39,6 +40,7 @@ object ApplicationConf : BuildInfoBlock() {
 
                 block(KTOR)
             }
+            block(TOP)
         }
     }
 }
@@ -51,6 +53,12 @@ fun BlockBuilder.addHoconDeployment(block: Indenter.() -> Unit) {
 
 fun BlockBuilder.addHoconKtor(block: Indenter.() -> Unit) {
     appendSeparated(ApplicationConf.KTOR) {
+        block()
+    }
+}
+
+fun BlockBuilder.addHoconTop(block: Indenter.() -> Unit) {
+    appendSeparated(ApplicationConf.TOP) {
         block()
     }
 }

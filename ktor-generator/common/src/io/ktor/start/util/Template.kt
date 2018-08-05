@@ -94,8 +94,21 @@ open class BlockBuilder(val subject: Any) : Extra by Extra.Mixin() {
         instance.blocks += SlotInstance.RenderBlock(false, callback)
     }
 
+    fun prepend(slot: BlockSlot<*>, once: Boolean = false, callback: Indenter.() -> Unit) {
+        val instance = _gen(slot)
+        instance.blocks.add(0, SlotInstance.RenderBlock(false, callback))
+    }
+
     fun appendSeparated(slot: BlockSlot<*>, once: Boolean = false, callback: Indenter.() -> Unit) {
         append(slot, once) {
+            SEPARATOR {
+                callback()
+            }
+        }
+    }
+
+    fun prependSeparated(slot: BlockSlot<*>, once: Boolean = false, callback: Indenter.() -> Unit) {
+        prepend(slot, once) {
             SEPARATOR {
                 callback()
             }

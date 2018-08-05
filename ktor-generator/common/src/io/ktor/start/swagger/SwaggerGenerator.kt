@@ -13,6 +13,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             val model = this
             val out = LinkedHashSet<Block<BuildInfo>>()
             out += ApplicationKt
+            out += ApplicationConf
             out += StatusPagesFeature
             out += RoutingFeature
             out += ApacheClientEngine
@@ -78,6 +79,52 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                 }
             }
         }
+        val registerInstances = arrayListOf<String>()
+        val registerInstancesDecl = arrayListOf<String>()
+        if (model.securityDefinitions.isNotEmpty()) {
+            addImport("io.ktor.auth.*")
+            addImport("io.ktor.auth.jwt.*")
+            addImport("com.auth0.jwt.*")
+            addImport("com.auth0.jwt.algorithms.*")
+
+            addHoconTop {
+                +"jwt" {
+                    +"secret = \"TODO-change-this-supersecret-or-use-SECRET-env\""
+                    +"secret = \${?SECRET}"
+                }
+            }
+
+            addApplicationClasses {
+                +"open class MyJWT(val secret: String)" {
+                    +"private val algorithm = Algorithm.HMAC256(secret)"
+                    +"val verifier = JWT.require(algorithm).build()"
+                    +"fun sign(name: String): String = JWT.create().withClaim(\"name\", name).sign(algorithm)"
+                }
+            }
+
+            addAuthProvider {
+                registerInstances += "myjwt"
+                registerInstancesDecl += "val myjwt: MyJWT"
+                for (sec in model.securityDefinitions.values) {
+                    +"// ${sec.description.split("\n").joinToString("\\n")}"
+                    +"// @TODO: Please, edit the application.conf # jwt.secret property and provide a secure random value for it"
+                    +"jwt(${sec.id.quote()})" {
+                        +"authSchemes(\"Bearer\", \"Token\")"
+                        +"verifier(myjwt.verifier)"
+                        +"validate" {
+                            +"UserIdPrincipal(it.payload.getClaim(\"name\").asString())"
+                        }
+                    }
+                }
+            }
+
+            prependSeparated(ApplicationKt.MODULE_INSTALL) {
+                +"val myjwt = MyJWT(secret = environment.config.property(\"jwt.secret\").getString())"
+            }
+        }
+        addRoute {
+            +"registerRoutes(${model.info.classNameServer}(${registerInstances.joinToString(", ")}))"
+        }
         fileText("src/swagger-backend.kt") {
             SEPARATOR {
                 +"package ${info.artifactGroup}"
@@ -88,7 +135,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                 +"import io.ktor.swagger.experimental.*"
             }
             SEPARATOR {
-                renderBackend(model)
+                renderBackend(model, registerInstancesDecl)
             }
         }
         fileText("src/swagger-frontend.kt") {
@@ -104,22 +151,6 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             SEPARATOR {
                 renderFrontend(model)
             }
-        }
-        if (model.securityDefinitions.isNotEmpty()) {
-            addImport("io.ktor.auth.*")
-            addImport("io.ktor.auth.jwt.*")
-
-            addAuthProvider {
-                for (sec in model.securityDefinitions.values) {
-                    +"// ${sec.description.split("\n").joinToString("\\n")}"
-                    +"jwt(${sec.id.quote()})" {
-                        +"authSchemes(\"Bearer\", \"Token\")"
-                    }
-                }
-            }
-        }
-        addRoute {
-            +"registerRoutes(${model.info.classNameServer}())"
         }
     }
 
@@ -191,8 +222,8 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         }
     }
 
-    fun Indenter.renderBackend(model: SwaggerModel) {
-        +"class ${model.info.classNameServer} : SwaggerBaseServer, ${model.info.className}" {
+    fun Indenter.renderBackend(model: SwaggerModel, registerInstancesDecl: List<String>) {
+        +"class ${model.info.classNameServer}(${registerInstancesDecl.joinToString(", ")}) : SwaggerBaseServer, ${model.info.className}" {
             for (paths in model.paths.values) {
                 for (method in paths.methodsList) {
                     SEPARATOR {
