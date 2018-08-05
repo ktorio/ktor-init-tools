@@ -19,6 +19,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
     }
 
     override fun BlockBuilder.render(info: BuildInfo) {
+        addImport("kotlin.reflect.*") // For KClass
         addApplicationClasses {
             +"class HttpException(val code: HttpStatusCode, val description: String = code.description) : RuntimeException(description)"
         }
