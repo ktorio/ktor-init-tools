@@ -62,21 +62,34 @@
   var plus_1 = Kotlin.kotlin.collections.plus_khz7k3$;
   var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
   var toString = Kotlin.toString;
-  var first = Kotlin.kotlin.collections.first_7wnvza$;
-  var replace = Kotlin.kotlin.text.replace_680rmw$;
-  var substringAfterLast = Kotlin.kotlin.text.substringAfterLast_8cymmc$;
-  var toList = Kotlin.kotlin.collections.toList_7wnvza$;
-  var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
-  var first_0 = Kotlin.kotlin.collections.first_2p1efm$;
-  var List = Kotlin.kotlin.collections.List;
-  var Iterable = Kotlin.kotlin.collections.Iterable;
-  var Map = Kotlin.kotlin.collections.Map;
-  var toIntOrNull_0 = Kotlin.kotlin.text.toIntOrNull_6ic1pp$;
-  var numberToLong = Kotlin.numberToLong;
-  var toLongOrNull = Kotlin.kotlin.text.toLongOrNull_6ic1pp$;
+  var PrimitiveClasses$intClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.intClass;
+  var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
+  var removeAll = Kotlin.kotlin.collections.removeAll_qafx1e$;
+  var first = Kotlin.kotlin.collections.first_2p1efm$;
+  var split_0 = Kotlin.kotlin.text.split_ip8yn$;
   var numberToDouble = Kotlin.numberToDouble;
-  var toDouble = Kotlin.kotlin.text.toDouble_pdl1vz$;
+  var numberToLong = Kotlin.numberToLong;
   var L0 = Kotlin.Long.ZERO;
+  var toList = Kotlin.kotlin.collections.toList_7wnvza$;
+  var PrimitiveClasses$stringClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.stringClass;
+  var getKClass = Kotlin.getKClass;
+  var kotlin = Kotlin.kotlin;
+  var Long = Kotlin.Long;
+  var PrimitiveClasses$booleanClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.booleanClass;
+  var PrimitiveClasses$floatClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.floatClass;
+  var PrimitiveClasses$doubleClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.doubleClass;
+  var PrimitiveClasses$anyClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.anyClass;
+  var substringAfterLast = Kotlin.kotlin.text.substringAfterLast_8cymmc$;
+  var List = Kotlin.kotlin.collections.List;
+  var Map = Kotlin.kotlin.collections.Map;
+  var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
+  var rangeTo = Kotlin.kotlin.ranges.rangeTo_8xshf9$;
+  var IllegalArgumentException_init = Kotlin.kotlin.IllegalArgumentException_init_pdl1vj$;
+  var mapOf = Kotlin.kotlin.collections.mapOf_x2b85n$;
+  var Iterable = Kotlin.kotlin.collections.Iterable;
+  var toIntOrNull_0 = Kotlin.kotlin.text.toIntOrNull_6ic1pp$;
+  var toLongOrNull = Kotlin.kotlin.text.toLongOrNull_6ic1pp$;
+  var toDouble = Kotlin.kotlin.text.toDouble_pdl1vz$;
   var toIntArray = Kotlin.kotlin.collections.toIntArray_fx3nzu$;
   var toFloatArray = Kotlin.kotlin.collections.toFloatArray_zwy31$;
   var toDoubleArray = Kotlin.kotlin.collections.toDoubleArray_tcduak$;
@@ -85,24 +98,29 @@
   var CharRange = Kotlin.kotlin.ranges.CharRange;
   var StringBuilder_init = Kotlin.kotlin.text.StringBuilder_init;
   var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
+  var withIndex = Kotlin.kotlin.collections.withIndex_7wnvza$;
   var toBoxedChar = Kotlin.toBoxedChar;
-  var IllegalArgumentException_init = Kotlin.kotlin.IllegalArgumentException_init_pdl1vj$;
   var isWhitespace = Kotlin.kotlin.text.isWhitespace_myv2d0$;
   var toChar = Kotlin.toChar;
+  var replace = Kotlin.kotlin.text.replace_680rmw$;
   var Any = Object;
   var toSet_0 = Kotlin.kotlin.collections.toSet_us0mfu$;
   var copyOf = Kotlin.kotlin.collections.copyOf_mrm5p$;
   var numberToByte = Kotlin.numberToByte;
   var toByte = Kotlin.toByte;
   var StringBuilder_init_0 = Kotlin.kotlin.text.StringBuilder_init_za3lpa$;
-  var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
+  var decapitalize = Kotlin.kotlin.text.decapitalize_pdl1vz$;
+  var capitalize = Kotlin.kotlin.text.capitalize_pdl1vz$;
+  var joinToString_0 = Kotlin.kotlin.sequences.joinToString_853xkz$;
   var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
-  var split_0 = Kotlin.kotlin.text.split_ip8yn$;
   var until = Kotlin.kotlin.ranges.until_ui3wc7$;
   var toString_0 = Kotlin.kotlin.text.toString_dqglrj$;
   var padStart = Kotlin.kotlin.text.padStart_vrc1nu$;
   var startsWith_0 = Kotlin.kotlin.text.startsWith_sgbm27$;
   var endsWith_0 = Kotlin.kotlin.text.endsWith_sgbm27$;
+  var Pair = Kotlin.kotlin.Pair;
+  var Set = Kotlin.kotlin.collections.Set;
+  var Regex = Kotlin.kotlin.text.Regex;
   var Comparable = Kotlin.kotlin.Comparable;
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_8cymmc$;
   CancelException.prototype = Object.create(RuntimeException.prototype);
@@ -221,8 +239,72 @@
   BuildFilesMaven.prototype.constructor = BuildFilesMaven;
   GitIgnoreFile.prototype = Object.create(Block.prototype);
   GitIgnoreFile.prototype.constructor = GitIgnoreFile;
+  LogBackXml.prototype = Object.create(Block.prototype);
+  LogBackXml.prototype.constructor = LogBackXml;
+  JsonRule$RuleList.prototype = Object.create(JsonRule.prototype);
+  JsonRule$RuleList.prototype.constructor = JsonRule$RuleList;
+  JsonRule$MinMaxDouble.prototype = Object.create(JsonRule.prototype);
+  JsonRule$MinMaxDouble.prototype.constructor = JsonRule$MinMaxDouble;
+  JsonRule$MinMaxInt.prototype = Object.create(JsonRule.prototype);
+  JsonRule$MinMaxInt.prototype.constructor = JsonRule$MinMaxInt;
+  JsonRule$MinInt.prototype = Object.create(JsonRule$MinMaxInt.prototype);
+  JsonRule$MinInt.prototype.constructor = JsonRule$MinInt;
+  JsonRule$MaxInt.prototype = Object.create(JsonRule$MinMaxInt.prototype);
+  JsonRule$MaxInt.prototype.constructor = JsonRule$MaxInt;
+  JsonRule$MinLength.prototype = Object.create(JsonRule$MinInt.prototype);
+  JsonRule$MinLength.prototype.constructor = JsonRule$MinLength;
+  JsonRule$MinItems.prototype = Object.create(JsonRule$MinInt.prototype);
+  JsonRule$MinItems.prototype.constructor = JsonRule$MinItems;
+  JsonRule$MinProperties.prototype = Object.create(JsonRule$MinInt.prototype);
+  JsonRule$MinProperties.prototype.constructor = JsonRule$MinProperties;
+  JsonRule$MaxLength.prototype = Object.create(JsonRule$MaxInt.prototype);
+  JsonRule$MaxLength.prototype.constructor = JsonRule$MaxLength;
+  JsonRule$MaxItems.prototype = Object.create(JsonRule$MaxInt.prototype);
+  JsonRule$MaxItems.prototype.constructor = JsonRule$MaxItems;
+  JsonRule$MaxProperties.prototype = Object.create(JsonRule$MaxInt.prototype);
+  JsonRule$MaxProperties.prototype.constructor = JsonRule$MaxProperties;
+  JsonRule$Not.prototype = Object.create(JsonRule.prototype);
+  JsonRule$Not.prototype.constructor = JsonRule$Not;
+  JsonRule$AllOf.prototype = Object.create(JsonRule$RuleList.prototype);
+  JsonRule$AllOf.prototype.constructor = JsonRule$AllOf;
+  JsonRule$AnyOf.prototype = Object.create(JsonRule$RuleList.prototype);
+  JsonRule$AnyOf.prototype.constructor = JsonRule$AnyOf;
+  JsonRule$OneOf.prototype = Object.create(JsonRule$RuleList.prototype);
+  JsonRule$OneOf.prototype.constructor = JsonRule$OneOf;
+  JsonRule$MultipleOf.prototype = Object.create(JsonRule.prototype);
+  JsonRule$MultipleOf.prototype.constructor = JsonRule$MultipleOf;
+  JsonRule$Minimum.prototype = Object.create(JsonRule$MinMaxDouble.prototype);
+  JsonRule$Minimum.prototype.constructor = JsonRule$Minimum;
+  JsonRule$Maximum.prototype = Object.create(JsonRule$MinMaxDouble.prototype);
+  JsonRule$Maximum.prototype.constructor = JsonRule$Maximum;
+  JsonRule$Range.prototype = Object.create(JsonRule.prototype);
+  JsonRule$Range.prototype.constructor = JsonRule$Range;
+  JsonRule$UniqueItems.prototype = Object.create(JsonRule.prototype);
+  JsonRule$UniqueItems.prototype.constructor = JsonRule$UniqueItems;
+  JsonRule$Required.prototype = Object.create(JsonRule.prototype);
+  JsonRule$Required.prototype.constructor = JsonRule$Required;
+  JsonRule$Pattern.prototype = Object.create(JsonRule.prototype);
+  JsonRule$Pattern.prototype.constructor = JsonRule$Pattern;
+  JsonRule$Enumerable.prototype = Object.create(JsonRule.prototype);
+  JsonRule$Enumerable.prototype.constructor = JsonRule$Enumerable;
   SwaggerGenerator.prototype = Object.create(Block.prototype);
   SwaggerGenerator.prototype.constructor = SwaggerGenerator;
+  SwaggerModel$PasswordType.prototype = Object.create(SwaggerModel$BaseStringType.prototype);
+  SwaggerModel$PasswordType.prototype.constructor = SwaggerModel$PasswordType;
+  SwaggerModel$Base64Type.prototype = Object.create(SwaggerModel$BaseStringType.prototype);
+  SwaggerModel$Base64Type.prototype.constructor = SwaggerModel$Base64Type;
+  SwaggerModel$BinaryStringType.prototype = Object.create(SwaggerModel$BaseStringType.prototype);
+  SwaggerModel$BinaryStringType.prototype.constructor = SwaggerModel$BinaryStringType;
+  SwaggerModel$StringType.prototype = Object.create(SwaggerModel$BaseStringType.prototype);
+  SwaggerModel$StringType.prototype.constructor = SwaggerModel$StringType;
+  SwaggerModel$Int32Type.prototype = Object.create(SwaggerModel$IntegerType.prototype);
+  SwaggerModel$Int32Type.prototype.constructor = SwaggerModel$Int32Type;
+  SwaggerModel$Int64Type.prototype = Object.create(SwaggerModel$IntegerType.prototype);
+  SwaggerModel$Int64Type.prototype.constructor = SwaggerModel$Int64Type;
+  SwaggerModel$Inside.prototype = Object.create(Enum.prototype);
+  SwaggerModel$Inside.prototype.constructor = SwaggerModel$Inside;
+  SwaggerModel$SecurityType.prototype = Object.create(Enum.prototype);
+  SwaggerModel$SecurityType.prototype.constructor = SwaggerModel$SecurityType;
   function jsObject(pairs) {
     var tmp$;
     var obj = {};
@@ -5412,9 +5494,30 @@
       return this.documentation_o1t10q$_0;
     }
   });
-  function LocationsFeature$renderFeature$lambda($receiver) {
+  function LocationsFeature$renderFeature$lambda$lambda($receiver) {
     $receiver.line_61zpoe$('@Location("/location/{name}")');
     $receiver.line_61zpoe$('class MyLocation(val name: String, val arg1: Int = 42, val arg2: String = "default")');
+    return Unit;
+  }
+  function LocationsFeature$renderFeature$lambda$lambda_0($receiver) {
+    var $receiver_0 = '@Location("/type/{name}") data class Type(val name: String)';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('@Location("/edit") data class Edit(val type: Type)');
+      $receiver.line_61zpoe$('@Location("/list/{page}") data class List(val type: Type, val page: Int)');
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+    return Unit;
+  }
+  function LocationsFeature$renderFeature$lambda($receiver) {
+    SEPARATOR($receiver, LocationsFeature$renderFeature$lambda$lambda);
+    SEPARATOR($receiver, LocationsFeature$renderFeature$lambda$lambda_0);
     return Unit;
   }
   function LocationsFeature$renderFeature$lambda_0($receiver) {
@@ -5434,6 +5537,31 @@
     $receiver._indent();
     try {
       $receiver.line_61zpoe$('call.respondText("Location: name=${it.name}, arg1=${it.arg1}, arg2=${it.arg2}")');
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+    $receiver.line_61zpoe$('// Register nested routes');
+    var $receiver_1 = 'get<Type.Edit>';
+    var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('call.respondText("Inside $it")');
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+    var $receiver_2 = 'get<Type.List>';
+    var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_1 : $receiver_2 + ' {' + rafter_1);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('call.respondText("Inside $it")');
     }
     finally {
       $receiver._unindent();
@@ -6741,6 +6869,7 @@
     Block.call(this, []);
     this.KTOR = this.newSlot_pdl1vj$('KTOR');
     this.DEPLOYMENT = this.newSlot_pdl1vj$('DEPLOYMENT');
+    this.TOP = this.newSlot_pdl1vj$('CONF');
   }
   function ApplicationConf$render$lambda(this$ApplicationConf_0, this$render_0, closure$info_0) {
     return function ($receiver_0, continuation_0, suspended) {
@@ -6810,7 +6939,7 @@
             }
 
             this.local$$receiver.line_61zpoe$('}' + '');
-            return this.local$$receiver;
+            return this.local$this$render.block_1s7wi0$(this.local$$receiver, this.local$this$ApplicationConf.TOP), Unit;
           case 1:
             throw this.exception_0;
         }
@@ -6860,9 +6989,18 @@
   function addHoconKtor($receiver, block) {
     $receiver.appendSeparated_qu2wte$(ApplicationConf_getInstance().KTOR, void 0, addHoconKtor$lambda(block));
   }
+  function addHoconTop$lambda(closure$block) {
+    return function ($receiver) {
+      closure$block($receiver);
+      return Unit;
+    };
+  }
+  function addHoconTop($receiver, block) {
+    $receiver.appendSeparated_qu2wte$(ApplicationConf_getInstance().TOP, void 0, addHoconTop$lambda(block));
+  }
   function ApplicationKt() {
     ApplicationKt_instance = this;
-    Block.call(this, [BuildFiles_getInstance(), ApplicationConf_getInstance(), GitIgnoreFile_getInstance()]);
+    Block.call(this, [BuildFiles_getInstance(), ApplicationConf_getInstance(), LogBackXml_getInstance(), GitIgnoreFile_getInstance()]);
     this.MODULE_INSTALL = this.newSlot_pdl1vj$('MODULE_INSTALL');
     this.MODULE_POST = this.newSlot_pdl1vj$('MODULE_POST');
     this.APPLICATION_CLASSES = this.newSlot_pdl1vj$('APPLICATION_CLASSES');
@@ -8697,6 +8835,638 @@
     }
     return GitIgnoreFile_instance;
   }
+  function LogBackXml() {
+    LogBackXml_instance = this;
+    Block.call(this, []);
+  }
+  function LogBackXml$render$lambda$lambda(this$) {
+    return function ($receiver) {
+      var $receiver_0 = '<configuration>';
+      var tmp$, tmp$_0, tmp$_1;
+      var tmp$_2;
+      if ((tmp$_1 = (tmp$_0 = (tmp$ = Regex_init('<(\\w+)').find_905azu$($receiver_0)) != null ? tmp$.groupValues : null) != null ? getOrNull(tmp$_0, 1) : null) != null)
+        tmp$_2 = tmp$_1;
+      else {
+        throw IllegalStateException_init('Invalid XML tag'.toString());
+      }
+      var tagName = tmp$_2;
+      $receiver.indenter.line_61zpoe$($receiver_0);
+      var $this = $receiver.indenter;
+      $this._indent();
+      try {
+        var this$_0 = this$;
+        var $receiver_1 = '<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">';
+        var tmp$_3, tmp$_4, tmp$_5;
+        var tmp$_6;
+        if ((tmp$_5 = (tmp$_4 = (tmp$_3 = Regex_init('<(\\w+)').find_905azu$($receiver_1)) != null ? tmp$_3.groupValues : null) != null ? getOrNull(tmp$_4, 1) : null) != null)
+          tmp$_6 = tmp$_5;
+        else {
+          throw IllegalStateException_init('Invalid XML tag'.toString());
+        }
+        var tagName_0 = tmp$_6;
+        $receiver.indenter.line_61zpoe$($receiver_1);
+        var $this_0 = $receiver.indenter;
+        $this_0._indent();
+        try {
+          var $receiver_2 = '<encoder>';
+          var tmp$_7, tmp$_8, tmp$_9;
+          var tmp$_10;
+          if ((tmp$_9 = (tmp$_8 = (tmp$_7 = Regex_init('<(\\w+)').find_905azu$($receiver_2)) != null ? tmp$_7.groupValues : null) != null ? getOrNull(tmp$_8, 1) : null) != null)
+            tmp$_10 = tmp$_9;
+          else {
+            throw IllegalStateException_init('Invalid XML tag'.toString());
+          }
+          var tagName_1 = tmp$_10;
+          $receiver.indenter.line_61zpoe$($receiver_2);
+          var $this_1 = $receiver.indenter;
+          $this_1._indent();
+          try {
+            this$_0.line_61zpoe$('<pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n<\/pattern>');
+          }
+          finally {
+            $this_1._unindent();
+          }
+          $receiver.indenter.line_61zpoe$('<\/' + tagName_1 + '>');
+        }
+        finally {
+          $this_0._unindent();
+        }
+        $receiver.indenter.line_61zpoe$('<\/' + tagName_0 + '>');
+        var $receiver_3 = '<root level="trace">';
+        var tmp$_11, tmp$_12, tmp$_13;
+        var tmp$_14;
+        if ((tmp$_13 = (tmp$_12 = (tmp$_11 = Regex_init('<(\\w+)').find_905azu$($receiver_3)) != null ? tmp$_11.groupValues : null) != null ? getOrNull(tmp$_12, 1) : null) != null)
+          tmp$_14 = tmp$_13;
+        else {
+          throw IllegalStateException_init('Invalid XML tag'.toString());
+        }
+        var tagName_2 = tmp$_14;
+        $receiver.indenter.line_61zpoe$($receiver_3);
+        var $this_2 = $receiver.indenter;
+        $this_2._indent();
+        try {
+          this$_0.line_61zpoe$('<appender-ref ref="STDOUT"/>');
+        }
+        finally {
+          $this_2._unindent();
+        }
+        $receiver.indenter.line_61zpoe$('<\/' + tagName_2 + '>');
+        this$_0.line_61zpoe$('<logger name="org.eclipse.jetty" level="INFO"/>');
+        this$_0.line_61zpoe$('<logger name="io.netty" level="INFO"/>');
+      }
+      finally {
+        $this._unindent();
+      }
+      $receiver.indenter.line_61zpoe$('<\/' + tagName + '>');
+      return Unit;
+    };
+  }
+  function LogBackXml$render$lambda($receiver_0, continuation_0, suspended) {
+    var instance = new Coroutine$LogBackXml$render$lambda($receiver_0, this, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
+  function Coroutine$LogBackXml$render$lambda($receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$LogBackXml$render$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$LogBackXml$render$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$LogBackXml$render$lambda.prototype.constructor = Coroutine$LogBackXml$render$lambda;
+  Coroutine$LogBackXml$render$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            return xml(this.local$$receiver, LogBackXml$render$lambda$lambda(this.local$$receiver)), Unit;
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  LogBackXml.prototype.render_miqy8c$ = function ($receiver, info) {
+    $receiver.fileText_7k8vha$('resources/logback.xml', void 0, void 0, LogBackXml$render$lambda);
+  };
+  LogBackXml.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'LogBackXml',
+    interfaces: [Block]
+  };
+  var LogBackXml_instance = null;
+  function LogBackXml_getInstance() {
+    if (LogBackXml_instance === null) {
+      new LogBackXml();
+    }
+    return LogBackXml_instance;
+  }
+  function JsonRule() {
+    JsonRule$Companion_getInstance();
+  }
+  function JsonRule$RuleList() {
+    JsonRule.call(this);
+  }
+  JsonRule$RuleList.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'RuleList',
+    interfaces: [JsonRule]
+  };
+  function JsonRule$MinMaxDouble() {
+    JsonRule.call(this);
+  }
+  Object.defineProperty(JsonRule$MinMaxDouble.prototype, 'valueAsInt', {
+    get: function () {
+      return numberToInt(this.value);
+    }
+  });
+  JsonRule$MinMaxDouble.prototype.toString_xo1ogr$ = function (clazz) {
+    if (equals(clazz, PrimitiveClasses$intClass))
+      return this.valueAsInt.toString();
+    else
+      return this.value.toString();
+  };
+  JsonRule$MinMaxDouble.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MinMaxDouble',
+    interfaces: [JsonRule]
+  };
+  function JsonRule$MinMaxInt() {
+    JsonRule.call(this);
+  }
+  JsonRule$MinMaxInt.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MinMaxInt',
+    interfaces: [JsonRule]
+  };
+  function JsonRule$MinInt() {
+    JsonRule$MinMaxInt.call(this);
+  }
+  JsonRule$MinInt.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MinInt',
+    interfaces: [JsonRule$MinMaxInt]
+  };
+  function JsonRule$MaxInt() {
+    JsonRule$MinMaxInt.call(this);
+  }
+  JsonRule$MaxInt.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MaxInt',
+    interfaces: [JsonRule$MinMaxInt]
+  };
+  function JsonRule$MinLength(value) {
+    JsonRule$MinInt.call(this);
+    this.value_sq9swx$_0 = value;
+  }
+  Object.defineProperty(JsonRule$MinLength.prototype, 'value', {
+    get: function () {
+      return this.value_sq9swx$_0;
+    }
+  });
+  JsonRule$MinLength.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MinLength',
+    interfaces: [JsonRule$MinInt]
+  };
+  function JsonRule$MinItems(value) {
+    JsonRule$MinInt.call(this);
+    this.value_xixsnr$_0 = value;
+  }
+  Object.defineProperty(JsonRule$MinItems.prototype, 'value', {
+    get: function () {
+      return this.value_xixsnr$_0;
+    }
+  });
+  JsonRule$MinItems.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MinItems',
+    interfaces: [JsonRule$MinInt]
+  };
+  function JsonRule$MinProperties(value) {
+    JsonRule$MinInt.call(this);
+    this.value_drteoe$_0 = value;
+  }
+  Object.defineProperty(JsonRule$MinProperties.prototype, 'value', {
+    get: function () {
+      return this.value_drteoe$_0;
+    }
+  });
+  JsonRule$MinProperties.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MinProperties',
+    interfaces: [JsonRule$MinInt]
+  };
+  function JsonRule$MaxLength(value) {
+    JsonRule$MaxInt.call(this);
+    this.value_ro8voz$_0 = value;
+  }
+  Object.defineProperty(JsonRule$MaxLength.prototype, 'value', {
+    get: function () {
+      return this.value_ro8voz$_0;
+    }
+  });
+  JsonRule$MaxLength.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MaxLength',
+    interfaces: [JsonRule$MaxInt]
+  };
+  function JsonRule$MaxItems(value) {
+    JsonRule$MaxInt.call(this);
+    this.value_f5t8hx$_0 = value;
+  }
+  Object.defineProperty(JsonRule$MaxItems.prototype, 'value', {
+    get: function () {
+      return this.value_f5t8hx$_0;
+    }
+  });
+  JsonRule$MaxItems.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MaxItems',
+    interfaces: [JsonRule$MaxInt]
+  };
+  function JsonRule$MaxProperties(value) {
+    JsonRule$MaxInt.call(this);
+    this.value_437540$_0 = value;
+  }
+  Object.defineProperty(JsonRule$MaxProperties.prototype, 'value', {
+    get: function () {
+      return this.value_437540$_0;
+    }
+  });
+  JsonRule$MaxProperties.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MaxProperties',
+    interfaces: [JsonRule$MaxInt]
+  };
+  function JsonRule$Not(rule) {
+    JsonRule.call(this);
+    this.rule = rule;
+  }
+  JsonRule$Not.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Not',
+    interfaces: [JsonRule]
+  };
+  function JsonRule$AllOf(rules) {
+    JsonRule$RuleList.call(this);
+    this.rules_b01crr$_0 = rules;
+  }
+  Object.defineProperty(JsonRule$AllOf.prototype, 'rules', {
+    get: function () {
+      return this.rules_b01crr$_0;
+    }
+  });
+  JsonRule$AllOf.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'AllOf',
+    interfaces: [JsonRule$RuleList]
+  };
+  function JsonRule$AnyOf(rules) {
+    JsonRule$RuleList.call(this);
+    this.rules_tdhdta$_0 = rules;
+  }
+  Object.defineProperty(JsonRule$AnyOf.prototype, 'rules', {
+    get: function () {
+      return this.rules_tdhdta$_0;
+    }
+  });
+  JsonRule$AnyOf.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'AnyOf',
+    interfaces: [JsonRule$RuleList]
+  };
+  function JsonRule$OneOf(rules) {
+    JsonRule$RuleList.call(this);
+    this.rules_hstq8c$_0 = rules;
+  }
+  Object.defineProperty(JsonRule$OneOf.prototype, 'rules', {
+    get: function () {
+      return this.rules_hstq8c$_0;
+    }
+  });
+  JsonRule$OneOf.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'OneOf',
+    interfaces: [JsonRule$RuleList]
+  };
+  function JsonRule$MultipleOf(value) {
+    JsonRule.call(this);
+    this.value = value;
+  }
+  JsonRule$MultipleOf.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MultipleOf',
+    interfaces: [JsonRule]
+  };
+  function JsonRule$Minimum(value, exclusive) {
+    JsonRule$MinMaxDouble.call(this);
+    this.value_llot49$_0 = value;
+    this.exclusive_ap5hwc$_0 = exclusive;
+  }
+  Object.defineProperty(JsonRule$Minimum.prototype, 'value', {
+    get: function () {
+      return this.value_llot49$_0;
+    }
+  });
+  Object.defineProperty(JsonRule$Minimum.prototype, 'exclusive', {
+    get: function () {
+      return this.exclusive_ap5hwc$_0;
+    }
+  });
+  JsonRule$Minimum.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Minimum',
+    interfaces: [JsonRule$MinMaxDouble]
+  };
+  function JsonRule$Maximum(value, exclusive) {
+    JsonRule$MinMaxDouble.call(this);
+    this.value_aqktg7$_0 = value;
+    this.exclusive_vc7jbe$_0 = exclusive;
+  }
+  Object.defineProperty(JsonRule$Maximum.prototype, 'value', {
+    get: function () {
+      return this.value_aqktg7$_0;
+    }
+  });
+  Object.defineProperty(JsonRule$Maximum.prototype, 'exclusive', {
+    get: function () {
+      return this.exclusive_vc7jbe$_0;
+    }
+  });
+  JsonRule$Maximum.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Maximum',
+    interfaces: [JsonRule$MinMaxDouble]
+  };
+  function JsonRule$Range(min, max, exclusive) {
+    JsonRule.call(this);
+    this.min = min;
+    this.max = max;
+    this.exclusive = exclusive;
+  }
+  JsonRule$Range.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Range',
+    interfaces: [JsonRule]
+  };
+  function JsonRule$UniqueItems() {
+    JsonRule$UniqueItems_instance = this;
+    JsonRule.call(this);
+  }
+  JsonRule$UniqueItems.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'UniqueItems',
+    interfaces: [JsonRule]
+  };
+  var JsonRule$UniqueItems_instance = null;
+  function JsonRule$UniqueItems_getInstance() {
+    if (JsonRule$UniqueItems_instance === null) {
+      new JsonRule$UniqueItems();
+    }
+    return JsonRule$UniqueItems_instance;
+  }
+  function JsonRule$Required() {
+    JsonRule$Required_instance = this;
+    JsonRule.call(this);
+  }
+  JsonRule$Required.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Required',
+    interfaces: [JsonRule]
+  };
+  var JsonRule$Required_instance = null;
+  function JsonRule$Required_getInstance() {
+    if (JsonRule$Required_instance === null) {
+      new JsonRule$Required();
+    }
+    return JsonRule$Required_instance;
+  }
+  function JsonRule$Pattern(pattern) {
+    JsonRule.call(this);
+    this.pattern = pattern;
+  }
+  JsonRule$Pattern.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Pattern',
+    interfaces: [JsonRule]
+  };
+  function JsonRule$Enumerable(items) {
+    JsonRule.call(this);
+    this.items = items;
+  }
+  JsonRule$Enumerable.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Enumerable',
+    interfaces: [JsonRule]
+  };
+  function JsonRule$Companion() {
+    JsonRule$Companion_instance = this;
+  }
+  JsonRule$Companion.prototype.parseOrNull_s8jyv4$ = function (def) {
+    var parsed = this.parse_s8jyv4$(def);
+    return Kotlin.isType(parsed, JsonRule$RuleList) && parsed.rules.isEmpty() ? null : parsed;
+  };
+  function JsonRule$Companion$parse$lambda$lambda(it) {
+    return Kotlin.isType(it, JsonRule$Minimum) || Kotlin.isType(it, JsonRule$Maximum);
+  }
+  JsonRule$Companion.prototype.parse_s8jyv4$ = function (def) {
+    var $receiver = package$util.DynamicAccess;
+    var tmp$;
+    var rules = ArrayList_init();
+    tmp$ = $receiver.get_strEntries_mzud1t$(def).iterator();
+    while (tmp$.hasNext()) {
+      var tmp$_0 = tmp$.next();
+      var key = tmp$_0.component1()
+      , value = tmp$_0.component2();
+      switch (key) {
+        case 'not':
+          var element = new JsonRule$Not(this.parse_s8jyv4$(value));
+          rules.add_11rb$(element);
+          break;
+        case 'allOf':
+          addAll(rules, this.get_ruleList_qmoht$(this.parse_s8jyv4$(value)));
+          break;
+        case 'anyOf':
+          var it = new JsonRule$AnyOf(this.get_ruleList_qmoht$(this.parse_s8jyv4$(value)));
+          if (!it.rules.isEmpty()) {
+            rules.add_11rb$(it);
+          }
+
+          break;
+        case 'oneOf':
+          var it_0 = new JsonRule$OneOf(this.get_ruleList_qmoht$(this.parse_s8jyv4$(value)));
+          if (!it_0.rules.isEmpty()) {
+            rules.add_11rb$(it_0);
+          }
+
+          break;
+        case 'multipleOf':
+          var element_0 = new JsonRule$MultipleOf($receiver.get_double_mzud1t$(value));
+          rules.add_11rb$(element_0);
+          break;
+        case 'minimum':
+          var element_1 = new JsonRule$Minimum($receiver.get_double_mzud1t$(value), $receiver.get_bool_mzud1t$($receiver.get_s2h60f$(def, 'exclusiveMinimum')));
+          rules.add_11rb$(element_1);
+          break;
+        case 'maximum':
+          var element_2 = new JsonRule$Maximum($receiver.get_double_mzud1t$(value), $receiver.get_bool_mzud1t$($receiver.get_s2h60f$(def, 'exclusiveMaximum')));
+          rules.add_11rb$(element_2);
+          break;
+        case 'minLength':
+          var element_3 = new JsonRule$MinLength($receiver.get_int_mzud1t$(value));
+          rules.add_11rb$(element_3);
+          break;
+        case 'maxLength':
+          var element_4 = new JsonRule$MaxLength($receiver.get_int_mzud1t$(value));
+          rules.add_11rb$(element_4);
+          break;
+        case 'minItems':
+          var element_5 = new JsonRule$MinItems($receiver.get_int_mzud1t$(value));
+          rules.add_11rb$(element_5);
+          break;
+        case 'maxItems':
+          var element_6 = new JsonRule$MaxItems($receiver.get_int_mzud1t$(value));
+          rules.add_11rb$(element_6);
+          break;
+        case 'minProperties':
+          var element_7 = new JsonRule$MinProperties($receiver.get_int_mzud1t$(value));
+          rules.add_11rb$(element_7);
+          break;
+        case 'maxProperties':
+          var element_8 = new JsonRule$MaxProperties($receiver.get_int_mzud1t$(value));
+          rules.add_11rb$(element_8);
+          break;
+        case 'required':
+          break;
+        case 'pattern':
+          var element_9 = new JsonRule$Pattern(Regex_init($receiver.get_str_mzud1t$(value)));
+          rules.add_11rb$(element_9);
+          break;
+        case 'uniqueItems':
+          if ($receiver.get_bool_mzud1t$(value)) {
+            var element_10 = JsonRule$UniqueItems_getInstance();
+            rules.add_11rb$(element_10);
+          }
+
+          break;
+        case 'enum':
+          var element_11 = new JsonRule$Enumerable(toSet($receiver.get_list_mzud1t$(value)));
+          rules.add_11rb$(element_11);
+          break;
+        default:break;
+      }
+    }
+    var destination = ArrayList_init();
+    var tmp$_1;
+    tmp$_1 = rules.iterator();
+    while (tmp$_1.hasNext()) {
+      var element_12 = tmp$_1.next();
+      if (Kotlin.isType(element_12, JsonRule$Minimum))
+        destination.add_11rb$(element_12);
+    }
+    var min = firstOrNull(destination);
+    var destination_0 = ArrayList_init();
+    var tmp$_2;
+    tmp$_2 = rules.iterator();
+    while (tmp$_2.hasNext()) {
+      var element_13 = tmp$_2.next();
+      if (Kotlin.isType(element_13, JsonRule$Maximum))
+        destination_0.add_11rb$(element_13);
+    }
+    var max = firstOrNull(destination_0);
+    if (min != null && max != null && !min.exclusive) {
+      removeAll(rules, JsonRule$Companion$parse$lambda$lambda);
+      var element_14 = new JsonRule$Range(min, max, max.exclusive);
+      rules.add_11rb$(element_14);
+    }
+    return rules.size === 1 ? first(rules) : new JsonRule$AllOf(rules);
+  };
+  JsonRule$Companion.prototype.get_ruleList_qmoht$ = function ($receiver) {
+    return Kotlin.isType($receiver, JsonRule$RuleList) ? $receiver.rules : listOf_0($receiver);
+  };
+  JsonRule$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var JsonRule$Companion_instance = null;
+  function JsonRule$Companion_getInstance() {
+    if (JsonRule$Companion_instance === null) {
+      new JsonRule$Companion();
+    }
+    return JsonRule$Companion_instance;
+  }
+  JsonRule.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'JsonRule',
+    interfaces: []
+  };
+  function toKotlin$lambda(closure$clazz) {
+    return function (it) {
+      return toKotlin(it, closure$clazz);
+    };
+  }
+  function toKotlin$lambda_0(closure$clazz) {
+    return function (it) {
+      return toKotlin(it, closure$clazz);
+    };
+  }
+  function toKotlin$lambda_1(closure$clazz) {
+    return function (it) {
+      return toKotlin(it, closure$clazz);
+    };
+  }
+  function toKotlin($receiver, clazz) {
+    var tmp$;
+    if (Kotlin.isType($receiver, JsonRule$Not))
+      tmp$ = '!(' + toKotlin($receiver.rule, clazz) + ')';
+    else if (Kotlin.isType($receiver, JsonRule$AllOf))
+      tmp$ = joinToString($receiver.rules, ' && ', void 0, void 0, void 0, void 0, toKotlin$lambda(clazz));
+    else if (Kotlin.isType($receiver, JsonRule$AnyOf))
+      tmp$ = joinToString($receiver.rules, ' || ', void 0, void 0, void 0, void 0, toKotlin$lambda_0(clazz));
+    else if (Kotlin.isType($receiver, JsonRule$OneOf))
+      tmp$ = joinToString($receiver.rules, ' xor ', void 0, void 0, void 0, void 0, toKotlin$lambda_1(clazz));
+    else if (Kotlin.isType($receiver, JsonRule$MultipleOf))
+      tmp$ = '(it % ' + $receiver.value + ')';
+    else if (Kotlin.isType($receiver, JsonRule$Minimum))
+      tmp$ = $receiver.exclusive ? 'it > ' + $receiver.toString_xo1ogr$(clazz) : 'it >= ' + $receiver.toString_xo1ogr$(clazz);
+    else if (Kotlin.isType($receiver, JsonRule$Maximum))
+      tmp$ = $receiver.exclusive ? 'it < ' + $receiver.toString_xo1ogr$(clazz) : 'it <= ' + $receiver.toString_xo1ogr$(clazz);
+    else if (Kotlin.isType($receiver, JsonRule$Range))
+      tmp$ = $receiver.exclusive ? 'it in ' + $receiver.min.toString_xo1ogr$(clazz) + ' until ' + $receiver.max.toString_xo1ogr$(clazz) : 'it in ' + $receiver.min.toString_xo1ogr$(clazz) + ' .. ' + $receiver.max.toString_xo1ogr$(clazz);
+    else if (Kotlin.isType($receiver, JsonRule$MinInt))
+      tmp$ = 'it.size >= ' + $receiver.value;
+    else if (Kotlin.isType($receiver, JsonRule$MaxInt))
+      tmp$ = 'it.size <= ' + $receiver.value;
+    else if (Kotlin.isType($receiver, JsonRule$Pattern))
+      tmp$ = 'Regex(' + quote($receiver.pattern.pattern) + ').matches(it)';
+    else if (Kotlin.isType($receiver, JsonRule$UniqueItems))
+      tmp$ = 'it.distinct().size == it.size';
+    else if (Kotlin.isType($receiver, JsonRule$Enumerable))
+      tmp$ = 'it in ' + get_kquoteLit($receiver.items);
+    else {
+      throw IllegalStateException_init(('Unsupported ' + $receiver).toString());
+    }
+    return tmp$;
+  }
   var copyToArray = Kotlin.kotlin.collections.copyToArray;
   function SwaggerGenerator(model) {
     SwaggerGenerator$Companion_getInstance();
@@ -8707,15 +9477,26 @@
     SwaggerGenerator$Companion_instance = this;
   }
   SwaggerGenerator$Companion.prototype.buildDepsFromModel_5tkht2$ = function ($receiver) {
+    var model = $receiver;
     var out = LinkedHashSet_init();
     var element = ApplicationKt_getInstance();
     out.add_11rb$(element);
-    var element_0 = StatusPagesFeature_getInstance();
+    var element_0 = ApplicationConf_getInstance();
     out.add_11rb$(element_0);
-    var element_1 = RoutingFeature_getInstance();
+    var element_1 = StatusPagesFeature_getInstance();
     out.add_11rb$(element_1);
-    var element_2 = AuthJwtFeature_getInstance();
+    var element_2 = RoutingFeature_getInstance();
     out.add_11rb$(element_2);
+    var element_3 = ApacheClientEngine_getInstance();
+    out.add_11rb$(element_3);
+    var element_4 = JsonJacksonFeature_getInstance();
+    out.add_11rb$(element_4);
+    if (!model.securityDefinitions.isEmpty()) {
+      var element_5 = AuthJwtFeature_getInstance();
+      out.add_11rb$(element_5);
+      var element_6 = AuthFeature_getInstance();
+      out.add_11rb$(element_6);
+    }
     return out;
   };
   SwaggerGenerator$Companion.$metadata$ = {
@@ -8730,19 +9511,62 @@
     }
     return SwaggerGenerator$Companion_instance;
   }
-  function SwaggerGenerator$render$lambda($receiver) {
-    $receiver.line_61zpoe$('class HttpException(val code: HttpStatusCode, val description: String = code.description) : RuntimeException(description)');
-    return Unit;
+  function SwaggerGenerator$render$lambda(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGenerator$render$lambda(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
   }
+  function Coroutine$SwaggerGenerator$render$lambda(closure$info_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+  }
+  Coroutine$SwaggerGenerator$render$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$SwaggerGenerator$render$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$SwaggerGenerator$render$lambda.prototype.constructor = Coroutine$SwaggerGenerator$render$lambda;
+  Coroutine$SwaggerGenerator$render$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = this.local$closure$info.fetch('swagger/swagger-util.kt.txt', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
   function SwaggerGenerator$render$lambda_0($receiver) {
-    $receiver.line_61zpoe$('inline fun Parameters.getInt(name: String, default: () -> Int = {0}): Int = get(name)?.toInt() ?: default()');
-    $receiver.line_61zpoe$('inline fun <reified T : Any> Parameters.getTyped(name: String): T = getTyped(T::class, name)');
-    $receiver.line_61zpoe$('fun <T : Any> Parameters.getTyped(type: KClass<T>, name: String): T = TODO()');
-    $receiver.line_61zpoe$('fun httpException(code: HttpStatusCode, message: String = code.description): Nothing = throw HttpException(code, message)');
-    $receiver.line_61zpoe$('fun httpException(code: Int, message: String = "Error $code"): Nothing = throw HttpException(HttpStatusCode(code, message))');
     return Unit;
   }
   function SwaggerGenerator$render$lambda_1($receiver) {
+    return Unit;
+  }
+  function SwaggerGenerator$render$lambda_2($receiver) {
     var $receiver_0 = 'exception<HttpException>';
     var suffix = ' cause ->';
     var rafter = suffix.length === 0 ? '' : ' ' + suffix;
@@ -8757,7 +9581,24 @@
     $receiver.line_61zpoe$('}' + '');
     return Unit;
   }
-  function SwaggerGenerator$render$lambda_2(this$SwaggerGenerator) {
+  function SwaggerGenerator$render$lambda$lambda(closure$info) {
+    return function ($receiver) {
+      $receiver.line_61zpoe$('package ' + closure$info.artifactGroup);
+      return Unit;
+    };
+  }
+  function SwaggerGenerator$render$lambda$lambda_0($receiver) {
+    $receiver.line_61zpoe$('import java.util.*');
+    $receiver.line_61zpoe$('import io.ktor.swagger.experimental.*');
+    return Unit;
+  }
+  function SwaggerGenerator$render$lambda$lambda_1(this$SwaggerGenerator) {
+    return function ($receiver) {
+      this$SwaggerGenerator.renderInterface_dy46pz$($receiver, this$SwaggerGenerator.model);
+      return Unit;
+    };
+  }
+  function SwaggerGenerator$render$lambda$lambda_2(this$SwaggerGenerator) {
     return function ($receiver) {
       var tmp$;
       tmp$ = this$SwaggerGenerator.model.definitions.values.iterator();
@@ -8772,70 +9613,161 @@
           for (var tmp$_0 = props.iterator(); tmp$_0.hasNext(); ++index) {
             var prop = tmp$_0.next();
             var comma = index >= (props.size - 1 | 0) ? '' : ',';
-            $receiver.line_61zpoe$('val ' + prop.name + ': ' + this$SwaggerGenerator_0.toKotlin_61zbhy$(prop.rtype) + comma);
+            $receiver.line_61zpoe$('val ' + prop.name + ': ' + this$SwaggerGenerator_0.toKotlin_slggk6$(prop.type) + comma);
           }
         }
         finally {
           $receiver._unindent();
         }
-        $receiver.line_61zpoe$(')');
-      }
-      return Unit;
-    };
-  }
-  function SwaggerGenerator$render$lambda$lambda(closure$method, closure$route, this$SwaggerGenerator) {
-    return function ($receiver) {
-      var $receiver_0 = closure$method.method + '(' + quote(closure$route.path) + ')';
-      var rafter = ''.length === 0 ? '' : ' ' + '';
-      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
-      $receiver._indent();
-      try {
-        var closure$method_0 = closure$method;
-        this$SwaggerGenerator.renderRouteMethodBody_i064du$($receiver, closure$method_0);
-      }
-      finally {
-        $receiver._unindent();
-      }
-      $receiver.line_61zpoe$('}' + '');
-      unaryPlus_0($receiver);
-      return Unit;
-    };
-  }
-  function SwaggerGenerator$render$lambda$lambda$lambda$lambda(closure$method, this$SwaggerGenerator, this$) {
-    return function () {
-      this$SwaggerGenerator.renderRouteMethodBody_i064du$(this$, closure$method);
-      return Unit;
-    };
-  }
-  function SwaggerGenerator$render$lambda$lambda$lambda(closure$method, this$SwaggerGenerator) {
-    return function ($receiver) {
-      unaryPlus_0($receiver.invoke_44doqu$(closure$method.method, void 0, SwaggerGenerator$render$lambda$lambda$lambda$lambda(closure$method, this$SwaggerGenerator, $receiver)));
-      return Unit;
-    };
-  }
-  function SwaggerGenerator$render$lambda_3(this$SwaggerGenerator) {
-    return function ($receiver) {
-      var tmp$;
-      tmp$ = this$SwaggerGenerator.model.paths.values.iterator();
-      while (tmp$.hasNext()) {
-        var route = tmp$.next();
-        if (route.methodsList.size === 1) {
-          var method = first(route.methodsList);
-          this$SwaggerGenerator.renderAuths_h2gi72$($receiver, method.security, SwaggerGenerator$render$lambda$lambda(method, route, this$SwaggerGenerator));
+        var $receiver_0 = def.propsList;
+        var destination = ArrayList_init();
+        var tmp$_1;
+        tmp$_1 = $receiver_0.iterator();
+        while (tmp$_1.hasNext()) {
+          var element = tmp$_1.next();
+          if (element.type.rule != null)
+            destination.add_11rb$(element);
         }
-         else {
-          var $receiver_0 = 'route(' + quote(route.path) + ')';
-          var rafter = ''.length === 0 ? '' : ' ' + '';
-          $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+        var propsWithRules = destination;
+        if (!propsWithRules.isEmpty()) {
+          $receiver.line_61zpoe$(') {');
           $receiver._indent();
           try {
-            var this$SwaggerGenerator_0 = this$SwaggerGenerator;
-            var tmp$_0;
-            tmp$_0 = route.methodsList.iterator();
-            while (tmp$_0.hasNext()) {
-              var method_0 = tmp$_0.next();
-              this$SwaggerGenerator_0.renderAuths_h2gi72$($receiver, method_0.security, SwaggerGenerator$render$lambda$lambda$lambda(method_0, this$SwaggerGenerator_0));
+            var rafter = ''.length === 0 ? '' : ' ' + '';
+            $receiver.line_61zpoe$('init'.length === 0 ? '{' + rafter : 'init' + ' {' + rafter);
+            $receiver._indent();
+            try {
+              var tmp$_2;
+              tmp$_2 = propsWithRules.iterator();
+              while (tmp$_2.hasNext()) {
+                var prop_0 = tmp$_2.next();
+                $receiver.line_61zpoe$(prop_0.name + '.verifyParam(' + quote(prop_0.name) + ') { ' + toString(prop_0.toRuleString()) + ' }');
+              }
             }
+            finally {
+              $receiver._unindent();
+            }
+            $receiver.line_61zpoe$('}' + '');
+            unaryPlus_0($receiver);
+          }
+          finally {
+            $receiver._unindent();
+          }
+          $receiver.line_61zpoe$('}');
+        }
+         else {
+          $receiver.line_61zpoe$(')');
+        }
+      }
+      return Unit;
+    };
+  }
+  function SwaggerGenerator$render$lambda_3(closure$info_0, this$SwaggerGenerator_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGenerator$render$lambda_0(closure$info_0, this$SwaggerGenerator_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$SwaggerGenerator$render$lambda_0(closure$info_0, this$SwaggerGenerator_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+    this.local$this$SwaggerGenerator = this$SwaggerGenerator_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$SwaggerGenerator$render$lambda_0.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$SwaggerGenerator$render$lambda_0.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$SwaggerGenerator$render$lambda_0.prototype.constructor = Coroutine$SwaggerGenerator$render$lambda_0;
+  Coroutine$SwaggerGenerator$render$lambda_0.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            SEPARATOR(this.local$$receiver, SwaggerGenerator$render$lambda$lambda(this.local$closure$info));
+            SEPARATOR(this.local$$receiver, SwaggerGenerator$render$lambda$lambda_0);
+            SEPARATOR(this.local$$receiver, SwaggerGenerator$render$lambda$lambda_1(this.local$this$SwaggerGenerator));
+            return SEPARATOR(this.local$$receiver, SwaggerGenerator$render$lambda$lambda_2(this.local$this$SwaggerGenerator)), Unit;
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function SwaggerGenerator$render$lambda_4($receiver) {
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$('jwt'.length === 0 ? '{' + rafter : 'jwt' + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('secret = "TODO-change-this-supersecret-or-use-SECRET-env"');
+      $receiver.line_61zpoe$('secret = ${?SECRET}');
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+    return Unit;
+  }
+  function SwaggerGenerator$render$lambda_5($receiver) {
+    var $receiver_0 = 'open class MyJWT(val secret: String)';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('private val algorithm = Algorithm.HMAC256(secret)');
+      $receiver.line_61zpoe$('val verifier = JWT.require(algorithm).build()');
+      $receiver.line_61zpoe$('fun sign(name: String): String = JWT.create().withClaim("name", name).sign(algorithm)');
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+    return Unit;
+  }
+  function SwaggerGenerator$render$lambda_6(closure$registerInstances, closure$registerInstancesDecl, this$SwaggerGenerator) {
+    return function ($receiver) {
+      var tmp$;
+      closure$registerInstances.add_11rb$('myjwt');
+      var $receiver_0 = closure$registerInstancesDecl;
+      var element = 'val myjwt: MyJWT';
+      $receiver_0.add_11rb$(element);
+      tmp$ = this$SwaggerGenerator.model.securityDefinitions.values.iterator();
+      while (tmp$.hasNext()) {
+        var sec = tmp$.next();
+        $receiver.line_61zpoe$('// ' + joinToString(split_0(sec.description, ['\n']), '\\n'));
+        $receiver.line_61zpoe$('// @TODO: Please, edit the application.conf # jwt.secret property and provide a secure random value for it');
+        var $receiver_1 = 'jwt(' + quote(sec.id) + ')';
+        var rafter = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter : $receiver_1 + ' {' + rafter);
+        $receiver._indent();
+        try {
+          $receiver.line_61zpoe$('authSchemes("Bearer", "Token")');
+          $receiver.line_61zpoe$('verifier(myjwt.verifier)');
+          var $receiver_2 = 'validate';
+          var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+          $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_0 : $receiver_2 + ' {' + rafter_0);
+          $receiver._indent();
+          try {
+            $receiver.line_61zpoe$('UserIdPrincipal(it.payload.getClaim("name").asString())');
           }
           finally {
             $receiver._unindent();
@@ -8843,131 +9775,197 @@
           $receiver.line_61zpoe$('}' + '');
           unaryPlus_0($receiver);
         }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$('}' + '');
+        unaryPlus_0($receiver);
       }
       return Unit;
     };
   }
-  SwaggerGenerator.prototype.render_miqy8c$ = function ($receiver, info) {
-    addApplicationClasses($receiver, SwaggerGenerator$render$lambda);
-    addExtensionMethods($receiver, SwaggerGenerator$render$lambda_0);
-    addCustomStatusPage($receiver, SwaggerGenerator$render$lambda_1);
-    addApplicationClasses($receiver, SwaggerGenerator$render$lambda_2(this));
-    addRoute($receiver, SwaggerGenerator$render$lambda_3(this));
+  function SwaggerGenerator$render$lambda_7($receiver) {
+    $receiver.line_61zpoe$('val myjwt = MyJWT(secret = environment.config.property("jwt.secret").getString())');
+    return Unit;
+  }
+  function SwaggerGenerator$render$lambda_8(this$SwaggerGenerator, closure$registerInstances) {
+    return function ($receiver) {
+      $receiver.line_61zpoe$('registerRoutes(' + this$SwaggerGenerator.model.info.classNameServer + '(' + joinToString(closure$registerInstances, ', ') + '))');
+      return Unit;
+    };
+  }
+  function SwaggerGenerator$render$lambda$lambda_3(closure$info) {
+    return function ($receiver) {
+      $receiver.line_61zpoe$('package ' + closure$info.artifactGroup);
+      return Unit;
+    };
+  }
+  function SwaggerGenerator$render$lambda$lambda_4($receiver) {
+    $receiver.line_61zpoe$('import java.util.*');
+    $receiver.line_61zpoe$('import io.ktor.http.*');
+    $receiver.line_61zpoe$('import io.ktor.swagger.experimental.*');
+    return Unit;
+  }
+  function SwaggerGenerator$render$lambda$lambda_5(this$SwaggerGenerator, closure$registerInstancesDecl) {
+    return function ($receiver) {
+      this$SwaggerGenerator.renderBackend_621tog$($receiver, this$SwaggerGenerator.model, closure$registerInstancesDecl);
+      return Unit;
+    };
+  }
+  function SwaggerGenerator$render$lambda_9(closure$info_0, this$SwaggerGenerator_0, closure$registerInstancesDecl_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGenerator$render$lambda_1(closure$info_0, this$SwaggerGenerator_0, closure$registerInstancesDecl_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$SwaggerGenerator$render$lambda_1(closure$info_0, this$SwaggerGenerator_0, closure$registerInstancesDecl_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+    this.local$this$SwaggerGenerator = this$SwaggerGenerator_0;
+    this.local$closure$registerInstancesDecl = closure$registerInstancesDecl_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$SwaggerGenerator$render$lambda_1.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
   };
-  SwaggerGenerator.prototype.renderRouteMethodBody_i064du$ = function ($receiver, method) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5;
-    tmp$ = method.parameters.iterator();
-    while (tmp$.hasNext()) {
-      var param = tmp$.next();
-      $receiver.line_61zpoe$('// ' + replace(param.description, '\n', ' '));
-      switch (param.inside) {
-        case 'query':
-        case 'path':
-          switch (param.inside) {
-            case 'query':
-              tmp$_0 = 'call.request.queryParameters';
-              break;
-            case 'path':
-              tmp$_0 = 'call.parameters';
-              break;
-            default:throw IllegalStateException_init('Unexpected'.toString());
-          }
-
-          var base = tmp$_0;
-          tmp$_1 = param.schema;
-          if (equals(tmp$_1, SwaggerModel$StringType_getInstance())) {
-            $receiver.line_61zpoe$('val ' + param.name + ' = ' + base + '.get(' + '"' + param.name + '"' + ')');
-          }
-           else if (equals(tmp$_1, SwaggerModel$IntType_getInstance())) {
-            $receiver.line_61zpoe$('val ' + param.name + ' = ' + base + '.getInt(' + '"' + param.name + '"' + ') { ' + ((tmp$_4 = (tmp$_3 = (tmp$_2 = param.default) == null || Kotlin.isNumber(tmp$_2) ? tmp$_2 : null) != null ? numberToInt(tmp$_3) : null) != null ? tmp$_4 : 0) + ' }');
-          }
-           else if (Kotlin.isType(tmp$_1, SwaggerModel$ArrayType)) {
-            $receiver.line_61zpoe$('val ' + param.name + ' = ' + base + '.getTyped<' + this.toKotlin_61zbhy$(param.schema) + '>(' + '"' + param.name + '"' + ')');
-          }
-           else {
-            println('Unknown schema: ' + param.schema);
-          }
-
-          break;
-        case 'formData':
-          break;
-        case 'body':
-          break;
-        case 'header':
-          break;
-        default:throw IllegalStateException_init(('Unsupported param.in=' + param.inside).toString());
-      }
-    }
-    var $receiver_0 = method.responses;
-    var destination = ArrayList_init();
-    var tmp$_6;
-    tmp$_6 = $receiver_0.iterator();
-    while (tmp$_6.hasNext()) {
-      var element = tmp$_6.next();
-      if (element.intCode !== 200)
-        destination.add_11rb$(element);
-    }
-    tmp$_5 = destination.iterator();
-    while (tmp$_5.hasNext()) {
-      var response = tmp$_5.next();
-      var $receiver_1 = 'if (false)';
-      var rafter = ''.length === 0 ? '' : ' ' + '';
-      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter : $receiver_1 + ' {' + rafter);
-      $receiver._indent();
+  Coroutine$SwaggerGenerator$render$lambda_1.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$SwaggerGenerator$render$lambda_1.prototype.constructor = Coroutine$SwaggerGenerator$render$lambda_1;
+  Coroutine$SwaggerGenerator$render$lambda_1.prototype.doResume = function () {
+    do
       try {
-        this.renderResponse_181pkm$($receiver, response);
-      }
-      finally {
-        $receiver._unindent();
-      }
-      $receiver.line_61zpoe$('}' + '');
-      unaryPlus_0($receiver);
-    }
-    var $receiver_2 = method.responses;
-    var firstOrNull$result;
-    firstOrNull$break: do {
-      var tmp$_7;
-      tmp$_7 = $receiver_2.iterator();
-      while (tmp$_7.hasNext()) {
-        var element_0 = tmp$_7.next();
-        if (element_0.intCode === 200) {
-          firstOrNull$result = element_0;
-          break firstOrNull$break;
+        switch (this.state_0) {
+          case 0:
+            SEPARATOR(this.local$$receiver, SwaggerGenerator$render$lambda$lambda_3(this.local$closure$info));
+            SEPARATOR(this.local$$receiver, SwaggerGenerator$render$lambda$lambda_4);
+            return SEPARATOR(this.local$$receiver, SwaggerGenerator$render$lambda$lambda_5(this.local$this$SwaggerGenerator, this.local$closure$registerInstancesDecl)), Unit;
+          case 1:
+            throw this.exception_0;
         }
       }
-      firstOrNull$result = null;
-    }
-     while (false);
-    var okResponse = firstOrNull$result;
-    if (okResponse != null) {
-      this.renderResponse_181pkm$($receiver, okResponse);
-    }
-     else {
-      $receiver.line_61zpoe$('call.respondText("ok", contentType = ContentType.Text.Plain)');
-    }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
   };
-  function SwaggerGenerator$renderResponse$lambda(closure$rindentLevel, closure$response, this$SwaggerGenerator) {
+  function SwaggerGenerator$render$lambda$lambda_6(closure$info) {
     return function ($receiver) {
-      var count = closure$rindentLevel + 2 | 0;
-      $receiver._indent_za3lpa$(count);
-      try {
-        var closure$response_0 = closure$response;
-        this$SwaggerGenerator.toKotlinDefault_yht7sm$($receiver, closure$response_0.schema);
-      }
-      finally {
-        $receiver._unindent_za3lpa$(count);
-      }
+      $receiver.line_61zpoe$('package ' + closure$info.artifactGroup);
       return Unit;
     };
   }
-  var trim_0 = Kotlin.kotlin.text.trim_gw00vp$;
+  function SwaggerGenerator$render$lambda$lambda_7($receiver) {
+    $receiver.line_61zpoe$('import java.util.*');
+    $receiver.line_61zpoe$('import io.ktor.http.*');
+    $receiver.line_61zpoe$('import io.ktor.client.*');
+    $receiver.line_61zpoe$('import io.ktor.swagger.experimental.*');
+    return Unit;
+  }
+  function SwaggerGenerator$render$lambda$lambda_8(this$SwaggerGenerator) {
+    return function ($receiver) {
+      this$SwaggerGenerator.renderFrontend_dy46pz$($receiver, this$SwaggerGenerator.model);
+      return Unit;
+    };
+  }
+  function SwaggerGenerator$render$lambda_10(closure$info_0, this$SwaggerGenerator_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGenerator$render$lambda_2(closure$info_0, this$SwaggerGenerator_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$SwaggerGenerator$render$lambda_2(closure$info_0, this$SwaggerGenerator_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+    this.local$this$SwaggerGenerator = this$SwaggerGenerator_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$SwaggerGenerator$render$lambda_2.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$SwaggerGenerator$render$lambda_2.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$SwaggerGenerator$render$lambda_2.prototype.constructor = Coroutine$SwaggerGenerator$render$lambda_2;
+  Coroutine$SwaggerGenerator$render$lambda_2.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            SEPARATOR(this.local$$receiver, SwaggerGenerator$render$lambda$lambda_6(this.local$closure$info));
+            SEPARATOR(this.local$$receiver, SwaggerGenerator$render$lambda$lambda_7);
+            return SEPARATOR(this.local$$receiver, SwaggerGenerator$render$lambda$lambda_8(this.local$this$SwaggerGenerator)), Unit;
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  SwaggerGenerator.prototype.render_miqy8c$ = function ($receiver, info) {
+    $receiver.fileBinary_qk5z91$('src/io/ktor/swagger/experimental/swagger-util.kt', void 0, void 0, SwaggerGenerator$render$lambda(info));
+    addImport($receiver, 'kotlin.reflect.*');
+    addImport($receiver, 'java.util.*');
+    addImport($receiver, 'io.ktor.swagger.experimental.*');
+    addApplicationClasses($receiver, SwaggerGenerator$render$lambda_0);
+    addExtensionMethods($receiver, SwaggerGenerator$render$lambda_1);
+    addCustomStatusPage($receiver, SwaggerGenerator$render$lambda_2);
+    $receiver.fileText_7k8vha$('src/swagger-api.kt', void 0, void 0, SwaggerGenerator$render$lambda_3(info, this));
+    var registerInstances = ArrayList_init();
+    var registerInstancesDecl = ArrayList_init();
+    if (!this.model.securityDefinitions.isEmpty()) {
+      addImport($receiver, 'io.ktor.auth.*');
+      addImport($receiver, 'io.ktor.auth.jwt.*');
+      addImport($receiver, 'com.auth0.jwt.*');
+      addImport($receiver, 'com.auth0.jwt.algorithms.*');
+      addHoconTop($receiver, SwaggerGenerator$render$lambda_4);
+      addApplicationClasses($receiver, SwaggerGenerator$render$lambda_5);
+      addAuthProvider($receiver, SwaggerGenerator$render$lambda_6(registerInstances, registerInstancesDecl, this));
+      $receiver.prependSeparated_qu2wte$(ApplicationKt_getInstance().MODULE_INSTALL, void 0, SwaggerGenerator$render$lambda_7);
+    }
+    addRoute($receiver, SwaggerGenerator$render$lambda_8(this, registerInstances));
+    $receiver.fileText_7k8vha$('src/swagger-backend.kt', void 0, void 0, SwaggerGenerator$render$lambda_9(info, this, registerInstancesDecl));
+    $receiver.fileText_7k8vha$('src/swagger-frontend.kt', void 0, void 0, SwaggerGenerator$render$lambda_10(info, this));
+  };
+  function SwaggerGenerator$renderResponse$lambda(closure$response, this$SwaggerGenerator) {
+    return function ($receiver) {
+      var tmp$, tmp$_0;
+      tmp$_0 = (tmp$ = closure$response.schema) != null ? tmp$.type : null;
+      this$SwaggerGenerator.toKotlinDefault_xq0hum$($receiver, tmp$_0, null);
+      return Unit;
+    };
+  }
   SwaggerGenerator.prototype.renderResponse_181pkm$ = function ($receiver, response) {
     var code = response.intCode;
     if (code === 200) {
       var rindentLevel = $receiver.indentLevel;
-      var $receiver_0 = Indenter$Companion_getInstance().invoke_yot30u$(SwaggerGenerator$renderResponse$lambda(rindentLevel, response, this)).toString();
-      var tmp$;
-      $receiver.line_61zpoe$('call.respond(' + trim_0(Kotlin.isCharSequence(tmp$ = $receiver_0) ? tmp$ : throwCCE()).toString() + ')');
+      $receiver.line_61zpoe$('call.respond(' + indentString(rindentLevel + 2 | 0, SwaggerGenerator$renderResponse$lambda(response, this)) + ')');
     }
      else {
       var httpStatus = HttpStatusCode$Companion_getInstance().byCode.get_11rb$(code);
@@ -8979,127 +9977,366 @@
       }
     }
   };
-  SwaggerGenerator.prototype.renderAuths_h2gi72$ = function ($receiver, security, callback) {
-    if (!security.isEmpty()) {
-      var destination = ArrayList_init_0(collectionSizeOrDefault(security, 10));
+  function SwaggerGenerator$renderInterface$lambda$lambda$lambda(it) {
+    return quote(it.name);
+  }
+  function SwaggerGenerator$renderInterface$lambda$lambda$lambda$lambda(closure$param, this$SwaggerGenerator) {
+    return function ($receiver) {
+      this$SwaggerGenerator.toKotlinDefault_8na47e$($receiver, closure$param.schema, closure$param.default);
+      return Unit;
+    };
+  }
+  function SwaggerGenerator$renderInterface$lambda$lambda(closure$path, closure$paths, this$SwaggerGenerator) {
+    return function ($receiver) {
       var tmp$;
-      tmp$ = security.iterator();
+      $receiver.line_61zpoe$('/**');
+      $receiver.line_61zpoe$(' * ' + closure$path.description);
+      $receiver.line_61zpoe$(' * ');
+      tmp$ = closure$path.parameters.iterator();
       while (tmp$.hasNext()) {
-        var item = tmp$.next();
-        destination.add_11rb$(quote(item.name));
+        var param = tmp$.next();
+        $receiver.line_61zpoe$(' * @param ' + param.name + ' ' + param.description);
       }
-      var $receiver_0 = 'authenticate(' + joinToString(destination, ', ') + ')';
+      if (!closure$path.parameters.isEmpty()) {
+        $receiver.line_61zpoe$(' * ');
+      }
+      $receiver.line_61zpoe$(' * @return ' + closure$path.defaultResponse.description);
+      $receiver.line_61zpoe$(' */');
+      $receiver.line_61zpoe$('@Path(' + quote(closure$paths.path) + ')');
+      $receiver.line_61zpoe$('@Method(' + quote(closure$path.method.toUpperCase()) + ')');
+      if (!closure$path.security.isEmpty()) {
+        $receiver.line_61zpoe$('@Auth(' + joinToString(closure$path.security, ', ', void 0, void 0, void 0, void 0, SwaggerGenerator$renderInterface$lambda$lambda$lambda) + ')');
+      }
+      $receiver.line_61zpoe$('suspend fun ' + closure$path.methodName + '(');
+      $receiver._indent();
+      try {
+        var closure$path_0 = closure$path;
+        var this$SwaggerGenerator_0 = this$SwaggerGenerator;
+        var tmp$_0, tmp$_1;
+        tmp$_0 = get_metaIter(closure$path_0.parameters).iterator();
+        while (tmp$_0.hasNext()) {
+          var tmp$_2 = tmp$_0.next();
+          var info = tmp$_2.component1()
+          , param_0 = tmp$_2.component2();
+          var qpname = quote(param_0.name);
+          switch (param_0.inside.name) {
+            case 'BODY':
+              tmp$_1 = '@Body(' + qpname + ')';
+              break;
+            case 'HEADER':
+              tmp$_1 = '@Header(' + qpname + ')';
+              break;
+            case 'QUERY':
+              tmp$_1 = '@Query(' + qpname + ')';
+              break;
+            case 'PATH':
+              tmp$_1 = '@Path(' + qpname + ')';
+              break;
+            case 'FORM_DATA':
+              tmp$_1 = '@FormData(' + qpname + ')';
+              break;
+            default:tmp$_1 = Kotlin.noWhenBranchMatched();
+              break;
+          }
+          var inAnnotation = tmp$_1;
+          var default_0 = param_0.required ? '' : ' = ' + indentStringHere($receiver, SwaggerGenerator$renderInterface$lambda$lambda$lambda$lambda(param_0, this$SwaggerGenerator_0));
+          $receiver.line_61zpoe$(inAnnotation + ' ' + param_0.name + ': ' + this$SwaggerGenerator_0.toKotlin_slggk6$(param_0.schema) + default_0 + get_optComma(info));
+        }
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('): ' + this$SwaggerGenerator.toKotlin_61zbhy$(closure$path.responseType));
+      return Unit;
+    };
+  }
+  SwaggerGenerator.prototype.renderInterface_dy46pz$ = function ($receiver, model) {
+    $receiver.line_61zpoe$('/**');
+    $receiver.line_61zpoe$(' * ' + model.info.title);
+    $receiver.line_61zpoe$(' * ');
+    $receiver.line_61zpoe$(' * ' + model.info.description);
+    $receiver.line_61zpoe$(' */');
+    var $receiver_0 = 'interface ' + model.info.className + ' : SwaggerBaseApi';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      var tmp$, tmp$_0;
+      tmp$ = model.paths.values.iterator();
+      while (tmp$.hasNext()) {
+        var paths = tmp$.next();
+        tmp$_0 = paths.methodsList.iterator();
+        while (tmp$_0.hasNext()) {
+          var path = tmp$_0.next();
+          SEPARATOR($receiver, SwaggerGenerator$renderInterface$lambda$lambda(path, paths, this));
+        }
+      }
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+  };
+  function SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda(closure$method) {
+    return function ($receiver) {
+      var tmp$;
+      tmp$ = closure$method.parameters.iterator();
+      while (tmp$.hasNext()) {
+        var param = tmp$.next();
+        var pschema = param.schema;
+        var rule = pschema.rule;
+        if (rule != null) {
+          $receiver.line_61zpoe$('check(' + toKotlin_1(rule, pschema) + ') { ' + quote('Invalid ' + param.name) + ' }');
+        }
+      }
+      return Unit;
+    };
+  }
+  function SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda$lambda(closure$response, this$SwaggerGenerator) {
+    return function ($receiver) {
+      this$SwaggerGenerator.renderResponse_181pkm$($receiver, closure$response);
+      return Unit;
+    };
+  }
+  function SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda_0(closure$method, this$SwaggerGenerator) {
+    return function ($receiver) {
+      var tmp$;
+      tmp$ = closure$method.errorResponses.iterator();
+      while (tmp$.hasNext()) {
+        var response = tmp$.next();
+        $receiver.line_61zpoe$('if (false) ' + indentString($receiver.indentLevel, SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda$lambda(response, this$SwaggerGenerator)));
+      }
+      return Unit;
+    };
+  }
+  function SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda$lambda_0(closure$method, this$SwaggerGenerator) {
+    return function ($receiver) {
+      this$SwaggerGenerator.toKotlinDefault_xq0hum$($receiver, closure$method.responseType, null);
+      return Unit;
+    };
+  }
+  function SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda_1(closure$method, this$SwaggerGenerator) {
+    return function ($receiver) {
+      if (!equals(closure$method.responseType, SwaggerModel$VoidType_getInstance())) {
+        $receiver.line_61zpoe$('return ' + indentString($receiver.indentLevel, SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda$lambda_0(closure$method, this$SwaggerGenerator)));
+      }
+      return Unit;
+    };
+  }
+  function SwaggerGenerator$renderBackend$lambda$lambda(closure$method, this$SwaggerGenerator) {
+    return function ($receiver) {
+      $receiver.line_61zpoe$('override suspend fun ' + closure$method.methodName + '(');
+      $receiver._indent();
+      try {
+        var closure$method_0 = closure$method;
+        var this$SwaggerGenerator_0 = this$SwaggerGenerator;
+        var tmp$;
+        tmp$ = get_metaIter(closure$method_0.parameters).iterator();
+        while (tmp$.hasNext()) {
+          var tmp$_0 = tmp$.next();
+          var info = tmp$_0.component1()
+          , param = tmp$_0.component2();
+          $receiver.line_61zpoe$(param.name + ': ' + this$SwaggerGenerator_0.toKotlin_slggk6$(param.schema) + get_optComma(info));
+        }
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('): ' + this$SwaggerGenerator.toKotlin_61zbhy$(closure$method.responseType) + ' {');
+      $receiver._indent();
+      try {
+        var closure$method_1 = closure$method;
+        var this$SwaggerGenerator_1 = this$SwaggerGenerator;
+        SEPARATOR($receiver, SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda(closure$method_1));
+        SEPARATOR($receiver, SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda_0(closure$method_1, this$SwaggerGenerator_1));
+        SEPARATOR($receiver, SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda_1(closure$method_1, this$SwaggerGenerator_1));
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}');
+      return Unit;
+    };
+  }
+  SwaggerGenerator.prototype.renderBackend_621tog$ = function ($receiver, model, registerInstancesDecl) {
+    var $receiver_0 = 'class ' + model.info.classNameServer + '(' + joinToString(registerInstancesDecl, ', ') + ') : SwaggerBaseServer, ' + model.info.className;
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      var tmp$, tmp$_0;
+      tmp$ = model.paths.values.iterator();
+      while (tmp$.hasNext()) {
+        var paths = tmp$.next();
+        tmp$_0 = paths.methodsList.iterator();
+        while (tmp$_0.hasNext()) {
+          var method = tmp$_0.next();
+          SEPARATOR($receiver, SwaggerGenerator$renderBackend$lambda$lambda(method, this));
+        }
+      }
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+  };
+  function SwaggerGenerator$renderFrontend$lambda(closure$model) {
+    return function ($receiver) {
+      var $receiver_0 = 'interface ' + closure$model.info.classNameClient + ' : ' + closure$model.info.className;
       var rafter = ''.length === 0 ? '' : ' ' + '';
       $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
       $receiver._indent();
       try {
-        callback($receiver);
+        $receiver.line_61zpoe$('fun setToken(token: String)');
       }
       finally {
         $receiver._unindent();
       }
       $receiver.line_61zpoe$('}' + '');
       unaryPlus_0($receiver);
-    }
-     else {
-      callback($receiver);
-    }
-  };
-  SwaggerGenerator.prototype.toKotlin_61zbhy$ = function ($receiver) {
-    if (Kotlin.isType($receiver, SwaggerModel$OptionalType))
-      return this.toKotlin_61zbhy$($receiver.type) + '?';
-    else if (Kotlin.isType($receiver, SwaggerModel$StringType))
-      return 'String';
-    else if (Kotlin.isType($receiver, SwaggerModel$IntType))
-      return 'Int';
-    else if (Kotlin.isType($receiver, SwaggerModel$DoubleType))
-      return 'Double';
-    else if (Kotlin.isType($receiver, SwaggerModel$LongType))
-      return 'Long';
-    else if (Kotlin.isType($receiver, SwaggerModel$BoolType))
-      return 'Boolean';
-    else if (Kotlin.isType($receiver, SwaggerModel$RefType))
-      return substringAfterLast($receiver.type, 47);
-    else if (Kotlin.isType($receiver, SwaggerModel$ArrayType))
-      return 'List<' + this.toKotlin_61zbhy$($receiver.items) + '>';
-    else if (Kotlin.isType($receiver, SwaggerModel$ObjType))
-      return 'Any/*Unsupported ' + $receiver.fields + '*/';
-    else {
-      throw IllegalStateException_init(('Unsupported ' + $receiver).toString());
-    }
-  };
-  function SwaggerGenerator$toKotlinDefault$lambda$lambda(closure$rindentLevel, closure$prop, this$SwaggerGenerator) {
-    return function ($receiver) {
-      var count = closure$rindentLevel;
-      $receiver._indent_za3lpa$(count);
-      try {
-        var closure$prop_0 = closure$prop;
-        this$SwaggerGenerator.toKotlinDefault_yht7sm$($receiver, closure$prop_0.rtype);
-      }
-      finally {
-        $receiver._unindent_za3lpa$(count);
-      }
       return Unit;
     };
   }
-  SwaggerGenerator.prototype.toKotlinDefault_yht7sm$ = function ($receiver, type) {
+  function SwaggerGenerator$renderFrontend$lambda_0(closure$model) {
+    return function ($receiver) {
+      $receiver.line_61zpoe$('fun ' + closure$model.info.classNameClient + '(endpoint: String, client: HttpClient = HttpClient()): ' + closure$model.info.classNameClient + ' = createClient(client, endpoint)');
+      return Unit;
+    };
+  }
+  SwaggerGenerator.prototype.renderFrontend_dy46pz$ = function ($receiver, model) {
+    SEPARATOR($receiver, SwaggerGenerator$renderFrontend$lambda(model));
+    SEPARATOR($receiver, SwaggerGenerator$renderFrontend$lambda_0(model));
+  };
+  SwaggerGenerator.prototype.toKotlin_slggk6$ = function ($receiver) {
+    return this.toKotlin_61zbhy$($receiver.type);
+  };
+  SwaggerGenerator.prototype.toKotlin_61zbhy$ = function ($receiver) {
+    if (Kotlin.isType($receiver, SwaggerModel$OptionalType))
+      return this.toKotlin_slggk6$($receiver.type) + '?';
+    else if (Kotlin.isType($receiver, SwaggerModel$StringType))
+      return 'String';
+    else if (Kotlin.isType($receiver, SwaggerModel$PasswordType))
+      return 'String';
+    else if (Kotlin.isType($receiver, SwaggerModel$DateType))
+      return 'Date';
+    else if (Kotlin.isType($receiver, SwaggerModel$DateTimeType))
+      return 'Date';
+    else if (Kotlin.isType($receiver, SwaggerModel$Int32Type))
+      return 'Int';
+    else if (Kotlin.isType($receiver, SwaggerModel$DoubleType))
+      return 'Double';
+    else if (Kotlin.isType($receiver, SwaggerModel$Int64Type))
+      return 'Long';
+    else if (Kotlin.isType($receiver, SwaggerModel$BoolType))
+      return 'Boolean';
+    else if (Kotlin.isType($receiver, SwaggerModel$NamedObject))
+      return $receiver.name;
+    else if (Kotlin.isType($receiver, SwaggerModel$ArrayType))
+      return 'List<' + this.toKotlin_slggk6$($receiver.items) + '>';
+    else if (Kotlin.isType($receiver, SwaggerModel$ObjType))
+      return 'Any/*Unsupported ' + $receiver.fields + '*/';
+    else if (Kotlin.isType($receiver, SwaggerModel$VoidType))
+      return 'Unit';
+    else {
+      throw IllegalStateException_init(("Unsupported '" + $receiver + "' class=" + Kotlin.getKClassFromExpression($receiver)).toString());
+    }
+  };
+  SwaggerGenerator.prototype.toKotlinDefault_8na47e$ = function ($receiver, type, default_0) {
+    this.toKotlinDefault_xq0hum$($receiver, type != null ? type.type : null, default_0);
+  };
+  function SwaggerGenerator$toKotlinDefault$lambda$lambda(closure$prop, this$SwaggerGenerator) {
+    return function ($receiver) {
+      this$SwaggerGenerator.toKotlinDefault_8na47e$($receiver, closure$prop, null);
+      return Unit;
+    };
+  }
+  function SwaggerGenerator$toKotlinDefault$lambda$lambda_0(closure$prop, this$SwaggerGenerator) {
+    return function ($receiver) {
+      this$SwaggerGenerator.toKotlinDefault_8na47e$($receiver, closure$prop, null);
+      return Unit;
+    };
+  }
+  SwaggerGenerator.prototype.toKotlinDefault_xq0hum$ = function ($receiver, type, default_0) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10;
     if (type == null) {
       $receiver.line_61zpoe$('null');
     }
      else if (Kotlin.isType(type, SwaggerModel$OptionalType)) {
       $receiver.line_61zpoe$('null');
     }
-     else if (Kotlin.isType(type, SwaggerModel$StringType)) {
-      $receiver.line_61zpoe$('""');
+     else if (Kotlin.isType(type, SwaggerModel$BaseStringType)) {
+      $receiver.line_61zpoe$(quote((tmp$ = default_0 != null ? default_0.toString() : null) != null ? tmp$ : ''));
     }
-     else if (Kotlin.isType(type, SwaggerModel$IntType)) {
-      $receiver.line_61zpoe$('0');
+     else if (Kotlin.isType(type, SwaggerModel$DateType)) {
+      $receiver.line_61zpoe$('Date()');
+    }
+     else if (Kotlin.isType(type, SwaggerModel$DateTimeType)) {
+      $receiver.line_61zpoe$('Date()');
+    }
+     else if (Kotlin.isType(type, SwaggerModel$Int32Type)) {
+      $receiver.line_61zpoe$(((tmp$_2 = (tmp$_1 = (tmp$_0 = default_0) == null || Kotlin.isNumber(tmp$_0) ? tmp$_0 : null) != null ? numberToInt(tmp$_1) : null) != null ? tmp$_2 : 0).toString());
     }
      else if (Kotlin.isType(type, SwaggerModel$DoubleType)) {
-      $receiver.line_61zpoe$('0.0');
+      $receiver.line_61zpoe$(((tmp$_5 = (tmp$_4 = (tmp$_3 = default_0) == null || Kotlin.isNumber(tmp$_3) ? tmp$_3 : null) != null ? numberToDouble(tmp$_4) : null) != null ? tmp$_5 : 0.0).toString());
     }
-     else if (Kotlin.isType(type, SwaggerModel$LongType)) {
-      $receiver.line_61zpoe$('0L');
+     else if (Kotlin.isType(type, SwaggerModel$Int64Type)) {
+      $receiver.line_61zpoe$(((tmp$_8 = (tmp$_7 = (tmp$_6 = default_0) == null || Kotlin.isNumber(tmp$_6) ? tmp$_6 : null) != null ? numberToLong(tmp$_7) : null) != null ? tmp$_8 : L0).toString());
     }
      else if (Kotlin.isType(type, SwaggerModel$BoolType)) {
-      $receiver.line_61zpoe$('false');
+      $receiver.line_61zpoe$(((tmp$_10 = (tmp$_9 = default_0) == null || typeof tmp$_9 === 'boolean' ? tmp$_9 : null) != null ? tmp$_10 : false).toString());
     }
-     else if (Kotlin.isType(type, SwaggerModel$RefType)) {
-      var def = this.model.definitions.get_11rb$(substringAfterLast(type.type, 47));
-      if (def != null) {
-        $receiver.line_61zpoe$(def.name + '(');
-        $receiver._indent();
-        try {
-          var props = toList(def.props.entries);
-          for (var index = 0; index !== props.size; ++index) {
-            var key = props.get_za3lpa$(index).key;
-            var prop = props.get_za3lpa$(index).value;
-            var last = index >= (props.size - 1 | 0);
-            var comma = last ? '' : ',';
-            var rindentLevel = $receiver.indentLevel;
-            var tmp$ = key + ' = ';
-            var $receiver_0 = Indenter$Companion_getInstance().invoke_yot30u$(SwaggerGenerator$toKotlinDefault$lambda$lambda(rindentLevel, prop, this)).toString();
-            var tmp$_0;
-            $receiver.line_61zpoe$(tmp$ + trim_0(Kotlin.isCharSequence(tmp$_0 = $receiver_0) ? tmp$_0 : throwCCE()).toString() + comma);
-          }
+     else if (Kotlin.isType(type, SwaggerModel$NamedObject)) {
+      var def = type.kind;
+      $receiver.line_61zpoe$(type.name + '(');
+      $receiver._indent();
+      try {
+        var tmp$_11;
+        var props = toList(def.type.fields.entries);
+        tmp$_11 = get_metaIter(props).iterator();
+        while (tmp$_11.hasNext()) {
+          var tmp$_12 = tmp$_11.next();
+          var info = tmp$_12.component1()
+          , entry = tmp$_12.component2();
+          var key = entry.key;
+          var prop = entry.value;
+          $receiver.line_61zpoe$(key + ' = ' + indentStringHere($receiver, SwaggerGenerator$toKotlinDefault$lambda$lambda(prop, this)) + get_optComma(info));
         }
-        finally {
-          $receiver._unindent();
-        }
-        $receiver.line_61zpoe$(')');
       }
-       else {
-        $receiver.line_61zpoe$('error');
+      finally {
+        $receiver._unindent();
       }
+      $receiver.line_61zpoe$(')');
     }
      else if (Kotlin.isType(type, SwaggerModel$ArrayType)) {
       $receiver.line_61zpoe$('listOf()');
     }
      else if (Kotlin.isType(type, SwaggerModel$ObjType)) {
-      $receiver.line_61zpoe$('Any()/*Unsupported ' + type.fields + '*/');
+      $receiver.line_61zpoe$('mapOf(');
+      $receiver._indent();
+      try {
+        var tmp$_13;
+        tmp$_13 = get_metaIter(type.fields.entries).iterator();
+        while (tmp$_13.hasNext()) {
+          var tmp$_14 = tmp$_13.next();
+          var info_0 = tmp$_14.component1()
+          , entry_0 = tmp$_14.component2();
+          var key_0 = entry_0.key;
+          var prop_0 = entry_0.value;
+          $receiver.line_61zpoe$(quote(key_0) + ' to ' + indentStringHere($receiver, SwaggerGenerator$toKotlinDefault$lambda$lambda_0(prop_0, this)) + get_optComma(info_0));
+        }
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$(')');
+    }
+     else if (Kotlin.isType(type, SwaggerModel$VoidType)) {
+      $receiver.line_61zpoe$('Unit');
     }
      else {
-      throw IllegalStateException_init(('Unsupported ' + $receiver).toString());
+      throw IllegalStateException_init(("Unsupported '" + toString(type) + "'").toString());
     }
   };
   SwaggerGenerator.$metadata$ = {
@@ -9107,18 +10344,107 @@
     simpleName: 'SwaggerGenerator',
     interfaces: [Block]
   };
-  function SwaggerModel(filename, info, basePath, schemes, produces, consumes, securityDefinitions, paths, definitions) {
+  function get_optComma($receiver) {
+    return $receiver.isLast ? '' : ',';
+  }
+  function SwaggerModel(filename, info, servers, produces, consumes, securityDefinitions, paths, definitions) {
     SwaggerModel$Companion_getInstance();
     this.filename = filename;
     this.info = info;
-    this.basePath = basePath;
-    this.schemes = schemes;
+    this.servers = servers;
     this.produces = produces;
     this.consumes = consumes;
     this.securityDefinitions = securityDefinitions;
     this.paths = paths;
     this.definitions = definitions;
   }
+  function SwaggerModel$Server(url, description, variables) {
+    this.url = url;
+    this.description = description;
+    this.variables = variables;
+  }
+  SwaggerModel$Server.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Server',
+    interfaces: []
+  };
+  SwaggerModel$Server.prototype.component1 = function () {
+    return this.url;
+  };
+  SwaggerModel$Server.prototype.component2 = function () {
+    return this.description;
+  };
+  SwaggerModel$Server.prototype.component3 = function () {
+    return this.variables;
+  };
+  SwaggerModel$Server.prototype.copy_j3bsb7$ = function (url, description, variables) {
+    return new SwaggerModel$Server(url === void 0 ? this.url : url, description === void 0 ? this.description : description, variables === void 0 ? this.variables : variables);
+  };
+  SwaggerModel$Server.prototype.toString = function () {
+    return 'Server(url=' + Kotlin.toString(this.url) + (', description=' + Kotlin.toString(this.description)) + (', variables=' + Kotlin.toString(this.variables)) + ')';
+  };
+  SwaggerModel$Server.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.url) | 0;
+    result = result * 31 + Kotlin.hashCode(this.description) | 0;
+    result = result * 31 + Kotlin.hashCode(this.variables) | 0;
+    return result;
+  };
+  SwaggerModel$Server.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.url, other.url) && Kotlin.equals(this.description, other.description) && Kotlin.equals(this.variables, other.variables)))));
+  };
+  function SwaggerModel$ServerVariable(name, default_0, description, enum_0) {
+    this.name = name;
+    this.default = default_0;
+    this.description = description;
+    this.enum = enum_0;
+  }
+  SwaggerModel$ServerVariable.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ServerVariable',
+    interfaces: []
+  };
+  SwaggerModel$ServerVariable.prototype.component1 = function () {
+    return this.name;
+  };
+  SwaggerModel$ServerVariable.prototype.component2 = function () {
+    return this.default;
+  };
+  SwaggerModel$ServerVariable.prototype.component3 = function () {
+    return this.description;
+  };
+  SwaggerModel$ServerVariable.prototype.component4 = function () {
+    return this.enum;
+  };
+  SwaggerModel$ServerVariable.prototype.copy_l56lqi$ = function (name, default_0, description, enum_0) {
+    return new SwaggerModel$ServerVariable(name === void 0 ? this.name : name, default_0 === void 0 ? this.default : default_0, description === void 0 ? this.description : description, enum_0 === void 0 ? this.enum : enum_0);
+  };
+  SwaggerModel$ServerVariable.prototype.toString = function () {
+    return 'ServerVariable(name=' + Kotlin.toString(this.name) + (', default=' + Kotlin.toString(this.default)) + (', description=' + Kotlin.toString(this.description)) + (', enum=' + Kotlin.toString(this.enum)) + ')';
+  };
+  SwaggerModel$ServerVariable.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.name) | 0;
+    result = result * 31 + Kotlin.hashCode(this.default) | 0;
+    result = result * 31 + Kotlin.hashCode(this.description) | 0;
+    result = result * 31 + Kotlin.hashCode(this.enum) | 0;
+    return result;
+  };
+  SwaggerModel$ServerVariable.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.default, other.default) && Kotlin.equals(this.description, other.description) && Kotlin.equals(this.enum, other.enum)))));
+  };
+  function SwaggerModel$InfoGenType(type, rule) {
+    this.type = type;
+    this.rule = rule;
+  }
+  SwaggerModel$InfoGenType.prototype.toString = function () {
+    return this.rule != null ? this.type.toString() + '(' + toString(this.rule) + ')' : this.type.toString();
+  };
+  SwaggerModel$InfoGenType.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'InfoGenType',
+    interfaces: []
+  };
   function SwaggerModel$GenType() {
   }
   SwaggerModel$GenType.$metadata$ = {
@@ -9133,43 +10459,79 @@
     simpleName: 'BasePrimType',
     interfaces: [SwaggerModel$GenType]
   };
-  function SwaggerModel$PrimType(type, format, untyped) {
-    this.type = type;
-    this.format = format;
-    this.untyped = untyped;
+  function SwaggerModel$BaseStringType() {
+    this.ktype_nqxge$_0 = PrimitiveClasses$stringClass;
   }
-  SwaggerModel$PrimType.$metadata$ = {
+  Object.defineProperty(SwaggerModel$BaseStringType.prototype, 'ktype', {
+    get: function () {
+      return this.ktype_nqxge$_0;
+    }
+  });
+  SwaggerModel$BaseStringType.$metadata$ = {
     kind: Kind_CLASS,
-    simpleName: 'PrimType',
+    simpleName: 'BaseStringType',
     interfaces: [SwaggerModel$BasePrimType]
   };
-  SwaggerModel$PrimType.prototype.component1 = function () {
-    return this.type;
+  function SwaggerModel$PasswordType() {
+    SwaggerModel$PasswordType_instance = this;
+    SwaggerModel$BaseStringType.call(this);
+  }
+  SwaggerModel$PasswordType.prototype.toString = function () {
+    return 'String';
   };
-  SwaggerModel$PrimType.prototype.component2 = function () {
-    return this.format;
+  SwaggerModel$PasswordType.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'PasswordType',
+    interfaces: [SwaggerModel$BaseStringType]
   };
-  SwaggerModel$PrimType.prototype.component3 = function () {
-    return this.untyped;
+  var SwaggerModel$PasswordType_instance = null;
+  function SwaggerModel$PasswordType_getInstance() {
+    if (SwaggerModel$PasswordType_instance === null) {
+      new SwaggerModel$PasswordType();
+    }
+    return SwaggerModel$PasswordType_instance;
+  }
+  function SwaggerModel$Base64Type() {
+    SwaggerModel$Base64Type_instance = this;
+    SwaggerModel$BaseStringType.call(this);
+  }
+  SwaggerModel$Base64Type.prototype.toString = function () {
+    return 'Base64Type';
   };
-  SwaggerModel$PrimType.prototype.copy_yyjhqb$ = function (type, format, untyped) {
-    return new SwaggerModel$PrimType(type === void 0 ? this.type : type, format === void 0 ? this.format : format, untyped === void 0 ? this.untyped : untyped);
+  SwaggerModel$Base64Type.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Base64Type',
+    interfaces: [SwaggerModel$BaseStringType]
   };
-  SwaggerModel$PrimType.prototype.toString = function () {
-    return 'PrimType(type=' + Kotlin.toString(this.type) + (', format=' + Kotlin.toString(this.format)) + (', untyped=' + Kotlin.toString(this.untyped)) + ')';
+  var SwaggerModel$Base64Type_instance = null;
+  function SwaggerModel$Base64Type_getInstance() {
+    if (SwaggerModel$Base64Type_instance === null) {
+      new SwaggerModel$Base64Type();
+    }
+    return SwaggerModel$Base64Type_instance;
+  }
+  function SwaggerModel$BinaryStringType() {
+    SwaggerModel$BinaryStringType_instance = this;
+    SwaggerModel$BaseStringType.call(this);
+  }
+  SwaggerModel$BinaryStringType.prototype.toString = function () {
+    return 'String';
   };
-  SwaggerModel$PrimType.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.type) | 0;
-    result = result * 31 + Kotlin.hashCode(this.format) | 0;
-    result = result * 31 + Kotlin.hashCode(this.untyped) | 0;
-    return result;
+  SwaggerModel$BinaryStringType.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'BinaryStringType',
+    interfaces: [SwaggerModel$BaseStringType]
   };
-  SwaggerModel$PrimType.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.type, other.type) && Kotlin.equals(this.format, other.format) && Kotlin.equals(this.untyped, other.untyped)))));
-  };
+  var SwaggerModel$BinaryStringType_instance = null;
+  function SwaggerModel$BinaryStringType_getInstance() {
+    if (SwaggerModel$BinaryStringType_instance === null) {
+      new SwaggerModel$BinaryStringType();
+    }
+    return SwaggerModel$BinaryStringType_instance;
+  }
   function SwaggerModel$StringType() {
     SwaggerModel$StringType_instance = this;
+    SwaggerModel$BaseStringType.call(this);
   }
   SwaggerModel$StringType.prototype.toString = function () {
     return 'String';
@@ -9177,7 +10539,7 @@
   SwaggerModel$StringType.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'StringType',
-    interfaces: [SwaggerModel$BasePrimType]
+    interfaces: [SwaggerModel$BaseStringType]
   };
   var SwaggerModel$StringType_instance = null;
   function SwaggerModel$StringType_getInstance() {
@@ -9186,45 +10548,104 @@
     }
     return SwaggerModel$StringType_instance;
   }
-  function SwaggerModel$IntType() {
-    SwaggerModel$IntType_instance = this;
+  function SwaggerModel$VoidType() {
+    SwaggerModel$VoidType_instance = this;
+    this.ktype_ym9fww$_0 = getKClass(Object.getPrototypeOf(kotlin.Unit).constructor);
   }
-  SwaggerModel$IntType.prototype.toString = function () {
+  Object.defineProperty(SwaggerModel$VoidType.prototype, 'ktype', {
+    get: function () {
+      return this.ktype_ym9fww$_0;
+    }
+  });
+  SwaggerModel$VoidType.prototype.toString = function () {
+    return 'Unit';
+  };
+  SwaggerModel$VoidType.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'VoidType',
+    interfaces: [SwaggerModel$GenType]
+  };
+  var SwaggerModel$VoidType_instance = null;
+  function SwaggerModel$VoidType_getInstance() {
+    if (SwaggerModel$VoidType_instance === null) {
+      new SwaggerModel$VoidType();
+    }
+    return SwaggerModel$VoidType_instance;
+  }
+  function SwaggerModel$IntegerType() {
+  }
+  SwaggerModel$IntegerType.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'IntegerType',
+    interfaces: [SwaggerModel$BasePrimType]
+  };
+  SwaggerModel.prototype.validate_ujn5f2$ = defineInlineFunction('output.io.ktor.start.swagger.SwaggerModel.validate_ujn5f2$', wrapFunction(function () {
+    var IllegalArgumentException_init = Kotlin.kotlin.IllegalArgumentException_init;
+    return function ($receiver, validator) {
+      if (!validator($receiver))
+        throw IllegalArgumentException_init();
+      return $receiver;
+    };
+  }));
+  function SwaggerModel$Int32Type() {
+    SwaggerModel$Int32Type_instance = this;
+    SwaggerModel$IntegerType.call(this);
+    this.ktype_u65igw$_0 = PrimitiveClasses$intClass;
+  }
+  Object.defineProperty(SwaggerModel$Int32Type.prototype, 'ktype', {
+    get: function () {
+      return this.ktype_u65igw$_0;
+    }
+  });
+  SwaggerModel$Int32Type.prototype.toString = function () {
     return 'Int';
   };
-  SwaggerModel$IntType.$metadata$ = {
+  SwaggerModel$Int32Type.$metadata$ = {
     kind: Kind_OBJECT,
-    simpleName: 'IntType',
-    interfaces: [SwaggerModel$BasePrimType]
+    simpleName: 'Int32Type',
+    interfaces: [SwaggerModel$IntegerType]
   };
-  var SwaggerModel$IntType_instance = null;
-  function SwaggerModel$IntType_getInstance() {
-    if (SwaggerModel$IntType_instance === null) {
-      new SwaggerModel$IntType();
+  var SwaggerModel$Int32Type_instance = null;
+  function SwaggerModel$Int32Type_getInstance() {
+    if (SwaggerModel$Int32Type_instance === null) {
+      new SwaggerModel$Int32Type();
     }
-    return SwaggerModel$IntType_instance;
+    return SwaggerModel$Int32Type_instance;
   }
-  function SwaggerModel$LongType() {
-    SwaggerModel$LongType_instance = this;
+  function SwaggerModel$Int64Type() {
+    SwaggerModel$Int64Type_instance = this;
+    SwaggerModel$IntegerType.call(this);
+    this.ktype_jvsykh$_0 = getKClass(Long);
   }
-  SwaggerModel$LongType.prototype.toString = function () {
+  Object.defineProperty(SwaggerModel$Int64Type.prototype, 'ktype', {
+    get: function () {
+      return this.ktype_jvsykh$_0;
+    }
+  });
+  SwaggerModel$Int64Type.prototype.toString = function () {
     return 'Long';
   };
-  SwaggerModel$LongType.$metadata$ = {
+  SwaggerModel$Int64Type.$metadata$ = {
     kind: Kind_OBJECT,
-    simpleName: 'LongType',
-    interfaces: [SwaggerModel$BasePrimType]
+    simpleName: 'Int64Type',
+    interfaces: [SwaggerModel$IntegerType]
   };
-  var SwaggerModel$LongType_instance = null;
-  function SwaggerModel$LongType_getInstance() {
-    if (SwaggerModel$LongType_instance === null) {
-      new SwaggerModel$LongType();
+  var SwaggerModel$Int64Type_instance = null;
+  function SwaggerModel$Int64Type_getInstance() {
+    if (SwaggerModel$Int64Type_instance === null) {
+      new SwaggerModel$Int64Type();
     }
-    return SwaggerModel$LongType_instance;
+    return SwaggerModel$Int64Type_instance;
   }
   function SwaggerModel$BoolType() {
     SwaggerModel$BoolType_instance = this;
+    this.ktype_l5m4ze$_0 = PrimitiveClasses$booleanClass;
   }
+  Object.defineProperty(SwaggerModel$BoolType.prototype, 'ktype', {
+    get: function () {
+      return this.ktype_l5m4ze$_0;
+    }
+  });
   SwaggerModel$BoolType.prototype.toString = function () {
     return 'Bool';
   };
@@ -9240,9 +10661,39 @@
     }
     return SwaggerModel$BoolType_instance;
   }
+  function SwaggerModel$FloatType() {
+    SwaggerModel$FloatType_instance = this;
+    this.ktype_yvbr9q$_0 = PrimitiveClasses$floatClass;
+  }
+  Object.defineProperty(SwaggerModel$FloatType.prototype, 'ktype', {
+    get: function () {
+      return this.ktype_yvbr9q$_0;
+    }
+  });
+  SwaggerModel$FloatType.prototype.toString = function () {
+    return 'Float';
+  };
+  SwaggerModel$FloatType.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'FloatType',
+    interfaces: [SwaggerModel$BasePrimType]
+  };
+  var SwaggerModel$FloatType_instance = null;
+  function SwaggerModel$FloatType_getInstance() {
+    if (SwaggerModel$FloatType_instance === null) {
+      new SwaggerModel$FloatType();
+    }
+    return SwaggerModel$FloatType_instance;
+  }
   function SwaggerModel$DoubleType() {
     SwaggerModel$DoubleType_instance = this;
+    this.ktype_4u8k7h$_0 = PrimitiveClasses$doubleClass;
   }
+  Object.defineProperty(SwaggerModel$DoubleType.prototype, 'ktype', {
+    get: function () {
+      return this.ktype_4u8k7h$_0;
+    }
+  });
   SwaggerModel$DoubleType.prototype.toString = function () {
     return 'Double';
   };
@@ -9258,34 +10709,100 @@
     }
     return SwaggerModel$DoubleType_instance;
   }
-  function SwaggerModel$RefType(type) {
-    this.type = type;
+  function SwaggerModel$DateType() {
+    SwaggerModel$DateType_instance = this;
+    this.ktype_6t2d86$_0 = getKClass(Date);
   }
-  SwaggerModel$RefType.prototype.toString = function () {
-    return substringAfterLast(this.type, 47);
+  Object.defineProperty(SwaggerModel$DateType.prototype, 'ktype', {
+    get: function () {
+      return this.ktype_6t2d86$_0;
+    }
+  });
+  SwaggerModel$DateType.prototype.toString = function () {
+    return 'Date';
   };
-  SwaggerModel$RefType.$metadata$ = {
+  SwaggerModel$DateType.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'DateType',
+    interfaces: [SwaggerModel$BasePrimType]
+  };
+  var SwaggerModel$DateType_instance = null;
+  function SwaggerModel$DateType_getInstance() {
+    if (SwaggerModel$DateType_instance === null) {
+      new SwaggerModel$DateType();
+    }
+    return SwaggerModel$DateType_instance;
+  }
+  function SwaggerModel$DateTimeType() {
+    SwaggerModel$DateTimeType_instance = this;
+    this.ktype_57jwnr$_0 = getKClass(Date);
+  }
+  Object.defineProperty(SwaggerModel$DateTimeType.prototype, 'ktype', {
+    get: function () {
+      return this.ktype_57jwnr$_0;
+    }
+  });
+  SwaggerModel$DateTimeType.prototype.toString = function () {
+    return 'DateTime';
+  };
+  SwaggerModel$DateTimeType.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'DateTimeType',
+    interfaces: [SwaggerModel$BasePrimType]
+  };
+  var SwaggerModel$DateTimeType_instance = null;
+  function SwaggerModel$DateTimeType_getInstance() {
+    if (SwaggerModel$DateTimeType_instance === null) {
+      new SwaggerModel$DateTimeType();
+    }
+    return SwaggerModel$DateTimeType_instance;
+  }
+  function SwaggerModel$NamedObject(path, kind) {
+    this.path = path;
+    this.kind = kind;
+    this.ktype_r8xcpc$_0 = PrimitiveClasses$anyClass;
+    this.name = substringAfterLast(this.path, 47);
+  }
+  Object.defineProperty(SwaggerModel$NamedObject.prototype, 'ktype', {
+    get: function () {
+      return this.ktype_r8xcpc$_0;
+    }
+  });
+  SwaggerModel$NamedObject.prototype.toString = function () {
+    return this.name;
+  };
+  SwaggerModel$NamedObject.$metadata$ = {
     kind: Kind_CLASS,
-    simpleName: 'RefType',
+    simpleName: 'NamedObject',
     interfaces: [SwaggerModel$GenType]
   };
-  SwaggerModel$RefType.prototype.component1 = function () {
-    return this.type;
+  SwaggerModel$NamedObject.prototype.component1 = function () {
+    return this.path;
   };
-  SwaggerModel$RefType.prototype.copy_61zpoe$ = function (type) {
-    return new SwaggerModel$RefType(type === void 0 ? this.type : type);
+  SwaggerModel$NamedObject.prototype.component2 = function () {
+    return this.kind;
   };
-  SwaggerModel$RefType.prototype.hashCode = function () {
+  SwaggerModel$NamedObject.prototype.copy_ikpv5x$ = function (path, kind) {
+    return new SwaggerModel$NamedObject(path === void 0 ? this.path : path, kind === void 0 ? this.kind : kind);
+  };
+  SwaggerModel$NamedObject.prototype.hashCode = function () {
     var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.type) | 0;
+    result = result * 31 + Kotlin.hashCode(this.path) | 0;
+    result = result * 31 + Kotlin.hashCode(this.kind) | 0;
     return result;
   };
-  SwaggerModel$RefType.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.type, other.type))));
+  SwaggerModel$NamedObject.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.path, other.path) && Kotlin.equals(this.kind, other.kind)))));
   };
   function SwaggerModel$ArrayType(items) {
     this.items = items;
+    this.ktype_guyhh$_0 = getKClass(List);
   }
+  Object.defineProperty(SwaggerModel$ArrayType.prototype, 'ktype', {
+    get: function () {
+      return this.ktype_guyhh$_0;
+    }
+  });
   SwaggerModel$ArrayType.prototype.toString = function () {
     return 'List<' + this.items + '>';
   };
@@ -9297,7 +10814,7 @@
   SwaggerModel$ArrayType.prototype.component1 = function () {
     return this.items;
   };
-  SwaggerModel$ArrayType.prototype.copy_bngw1n$ = function (items) {
+  SwaggerModel$ArrayType.prototype.copy_d75mr0$ = function (items) {
     return new SwaggerModel$ArrayType(items === void 0 ? this.items : items);
   };
   SwaggerModel$ArrayType.prototype.hashCode = function () {
@@ -9310,7 +10827,13 @@
   };
   function SwaggerModel$OptionalType(type) {
     this.type = type;
+    this.ktype_jjlloc$_0 = PrimitiveClasses$anyClass;
   }
+  Object.defineProperty(SwaggerModel$OptionalType.prototype, 'ktype', {
+    get: function () {
+      return this.ktype_jjlloc$_0;
+    }
+  });
   SwaggerModel$OptionalType.prototype.toString = function () {
     return this.type.toString() + '?';
   };
@@ -9322,7 +10845,7 @@
   SwaggerModel$OptionalType.prototype.component1 = function () {
     return this.type;
   };
-  SwaggerModel$OptionalType.prototype.copy_bngw1n$ = function (type) {
+  SwaggerModel$OptionalType.prototype.copy_d75mr0$ = function (type) {
     return new SwaggerModel$OptionalType(type === void 0 ? this.type : type);
   };
   SwaggerModel$OptionalType.prototype.hashCode = function () {
@@ -9333,11 +10856,18 @@
   SwaggerModel$OptionalType.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.type, other.type))));
   };
-  function SwaggerModel$ObjType(fields) {
+  function SwaggerModel$ObjType(namePath, fields) {
+    this.namePath = namePath;
     this.fields = fields;
+    this.ktype_ksz8jt$_0 = getKClass(Map);
   }
+  Object.defineProperty(SwaggerModel$ObjType.prototype, 'ktype', {
+    get: function () {
+      return this.ktype_ksz8jt$_0;
+    }
+  });
   SwaggerModel$ObjType.prototype.toString = function () {
-    return 'Any/*Unsupported {' + this.fields + '}*/';
+    return 'Any/*Unsupported {' + this.fields + '} namePath=' + toString(this.namePath) + '*/';
   };
   SwaggerModel$ObjType.$metadata$ = {
     kind: Kind_CLASS,
@@ -9345,18 +10875,22 @@
     interfaces: [SwaggerModel$GenType]
   };
   SwaggerModel$ObjType.prototype.component1 = function () {
+    return this.namePath;
+  };
+  SwaggerModel$ObjType.prototype.component2 = function () {
     return this.fields;
   };
-  SwaggerModel$ObjType.prototype.copy_e9nkji$ = function (fields) {
-    return new SwaggerModel$ObjType(fields === void 0 ? this.fields : fields);
+  SwaggerModel$ObjType.prototype.copy_h4st60$ = function (namePath, fields) {
+    return new SwaggerModel$ObjType(namePath === void 0 ? this.namePath : namePath, fields === void 0 ? this.fields : fields);
   };
   SwaggerModel$ObjType.prototype.hashCode = function () {
     var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.namePath) | 0;
     result = result * 31 + Kotlin.hashCode(this.fields) | 0;
     return result;
   };
   SwaggerModel$ObjType.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.fields, other.fields))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.namePath, other.namePath) && Kotlin.equals(this.fields, other.fields)))));
   };
   function SwaggerModel$Prop(name, type, required) {
     this.name = name;
@@ -9364,6 +10898,15 @@
     this.required = required;
     this.rtype = this.required ? this.type : new SwaggerModel$OptionalType(this.type);
   }
+  Object.defineProperty(SwaggerModel$Prop.prototype, 'rule', {
+    get: function () {
+      return this.type.rule;
+    }
+  });
+  SwaggerModel$Prop.prototype.toRuleString = function () {
+    var tmp$;
+    return (tmp$ = this.rule) != null ? toKotlin_1(tmp$, this.type) : null;
+  };
   SwaggerModel$Prop.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'Prop',
@@ -9378,7 +10921,7 @@
   SwaggerModel$Prop.prototype.component3 = function () {
     return this.required;
   };
-  SwaggerModel$Prop.prototype.copy_mix5l8$ = function (name, type, required) {
+  SwaggerModel$Prop.prototype.copy_iuimd$ = function (name, type, required) {
     return new SwaggerModel$Prop(name === void 0 ? this.name : name, type === void 0 ? this.type : type, required === void 0 ? this.required : required);
   };
   SwaggerModel$Prop.prototype.toString = function () {
@@ -9425,8 +10968,8 @@
   SwaggerModel$TypeDef.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.props, other.props)))));
   };
-  function SwaggerModel$SecurityDefinition(kname, description, type, name, inside) {
-    this.kname = kname;
+  function SwaggerModel$SecurityDefinition(id, description, type, name, inside) {
+    this.id = id;
     this.description = description;
     this.type = type;
     this.name = name;
@@ -9437,36 +10980,265 @@
     simpleName: 'SecurityDefinition',
     interfaces: []
   };
-  function SwaggerModel$NamedUrl(name, url) {
+  function SwaggerModel$Contact(name, url, email) {
+    this.name = name;
+    this.url = url;
+    this.email = email;
+  }
+  SwaggerModel$Contact.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Contact',
+    interfaces: []
+  };
+  SwaggerModel$Contact.prototype.component1 = function () {
+    return this.name;
+  };
+  SwaggerModel$Contact.prototype.component2 = function () {
+    return this.url;
+  };
+  SwaggerModel$Contact.prototype.component3 = function () {
+    return this.email;
+  };
+  SwaggerModel$Contact.prototype.copy_6hosri$ = function (name, url, email) {
+    return new SwaggerModel$Contact(name === void 0 ? this.name : name, url === void 0 ? this.url : url, email === void 0 ? this.email : email);
+  };
+  SwaggerModel$Contact.prototype.toString = function () {
+    return 'Contact(name=' + Kotlin.toString(this.name) + (', url=' + Kotlin.toString(this.url)) + (', email=' + Kotlin.toString(this.email)) + ')';
+  };
+  SwaggerModel$Contact.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.name) | 0;
+    result = result * 31 + Kotlin.hashCode(this.url) | 0;
+    result = result * 31 + Kotlin.hashCode(this.email) | 0;
+    return result;
+  };
+  SwaggerModel$Contact.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.url, other.url) && Kotlin.equals(this.email, other.email)))));
+  };
+  function SwaggerModel$License(name, url) {
     this.name = name;
     this.url = url;
   }
-  SwaggerModel$NamedUrl.$metadata$ = {
+  SwaggerModel$License.$metadata$ = {
     kind: Kind_CLASS,
-    simpleName: 'NamedUrl',
+    simpleName: 'License',
     interfaces: []
   };
-  SwaggerModel$NamedUrl.prototype.component1 = function () {
+  SwaggerModel$License.prototype.component1 = function () {
     return this.name;
   };
-  SwaggerModel$NamedUrl.prototype.component2 = function () {
+  SwaggerModel$License.prototype.component2 = function () {
     return this.url;
   };
-  SwaggerModel$NamedUrl.prototype.copy_puj7f4$ = function (name, url) {
-    return new SwaggerModel$NamedUrl(name === void 0 ? this.name : name, url === void 0 ? this.url : url);
+  SwaggerModel$License.prototype.copy_puj7f4$ = function (name, url) {
+    return new SwaggerModel$License(name === void 0 ? this.name : name, url === void 0 ? this.url : url);
   };
-  SwaggerModel$NamedUrl.prototype.toString = function () {
-    return 'NamedUrl(name=' + Kotlin.toString(this.name) + (', url=' + Kotlin.toString(this.url)) + ')';
+  SwaggerModel$License.prototype.toString = function () {
+    return 'License(name=' + Kotlin.toString(this.name) + (', url=' + Kotlin.toString(this.url)) + ')';
   };
-  SwaggerModel$NamedUrl.prototype.hashCode = function () {
+  SwaggerModel$License.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.name) | 0;
     result = result * 31 + Kotlin.hashCode(this.url) | 0;
     return result;
   };
-  SwaggerModel$NamedUrl.prototype.equals = function (other) {
+  SwaggerModel$License.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.url, other.url)))));
   };
+  function SwaggerModel$Inside(name, ordinal, id) {
+    Enum.call(this);
+    this.id = id;
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function SwaggerModel$Inside_initFields() {
+    SwaggerModel$Inside_initFields = function () {
+    };
+    SwaggerModel$Inside$QUERY_instance = new SwaggerModel$Inside('QUERY', 0, 'query');
+    SwaggerModel$Inside$HEADER_instance = new SwaggerModel$Inside('HEADER', 1, 'header');
+    SwaggerModel$Inside$PATH_instance = new SwaggerModel$Inside('PATH', 2, 'path');
+    SwaggerModel$Inside$FORM_DATA_instance = new SwaggerModel$Inside('FORM_DATA', 3, 'formData');
+    SwaggerModel$Inside$BODY_instance = new SwaggerModel$Inside('BODY', 4, 'body');
+    SwaggerModel$Inside$Companion_getInstance();
+  }
+  var SwaggerModel$Inside$QUERY_instance;
+  function SwaggerModel$Inside$QUERY_getInstance() {
+    SwaggerModel$Inside_initFields();
+    return SwaggerModel$Inside$QUERY_instance;
+  }
+  var SwaggerModel$Inside$HEADER_instance;
+  function SwaggerModel$Inside$HEADER_getInstance() {
+    SwaggerModel$Inside_initFields();
+    return SwaggerModel$Inside$HEADER_instance;
+  }
+  var SwaggerModel$Inside$PATH_instance;
+  function SwaggerModel$Inside$PATH_getInstance() {
+    SwaggerModel$Inside_initFields();
+    return SwaggerModel$Inside$PATH_instance;
+  }
+  var SwaggerModel$Inside$FORM_DATA_instance;
+  function SwaggerModel$Inside$FORM_DATA_getInstance() {
+    SwaggerModel$Inside_initFields();
+    return SwaggerModel$Inside$FORM_DATA_instance;
+  }
+  var SwaggerModel$Inside$BODY_instance;
+  function SwaggerModel$Inside$BODY_getInstance() {
+    SwaggerModel$Inside_initFields();
+    return SwaggerModel$Inside$BODY_instance;
+  }
+  function SwaggerModel$Inside$Companion() {
+    SwaggerModel$Inside$Companion_instance = this;
+    var $receiver = SwaggerModel$Inside$values();
+    var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
+    var destination = LinkedHashMap_init_0(capacity);
+    var tmp$;
+    for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
+      var element = $receiver[tmp$];
+      destination.put_xwzc9p$(element.id, element);
+    }
+    this.BY_ID = destination;
+  }
+  SwaggerModel$Inside$Companion.prototype.get_61zpoe$ = function (id) {
+    var tmp$;
+    var tmp$_0;
+    if ((tmp$ = this.BY_ID.get_11rb$(id)) != null)
+      tmp$_0 = tmp$;
+    else {
+      throw IllegalStateException_init(("Unsupported Parameter.'in'='" + id + "'").toString());
+    }
+    return tmp$_0;
+  };
+  SwaggerModel$Inside$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var SwaggerModel$Inside$Companion_instance = null;
+  function SwaggerModel$Inside$Companion_getInstance() {
+    SwaggerModel$Inside_initFields();
+    if (SwaggerModel$Inside$Companion_instance === null) {
+      new SwaggerModel$Inside$Companion();
+    }
+    return SwaggerModel$Inside$Companion_instance;
+  }
+  SwaggerModel$Inside.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Inside',
+    interfaces: [Enum]
+  };
+  function SwaggerModel$Inside$values() {
+    return [SwaggerModel$Inside$QUERY_getInstance(), SwaggerModel$Inside$HEADER_getInstance(), SwaggerModel$Inside$PATH_getInstance(), SwaggerModel$Inside$FORM_DATA_getInstance(), SwaggerModel$Inside$BODY_getInstance()];
+  }
+  SwaggerModel$Inside.values = SwaggerModel$Inside$values;
+  function SwaggerModel$Inside$valueOf(name) {
+    switch (name) {
+      case 'QUERY':
+        return SwaggerModel$Inside$QUERY_getInstance();
+      case 'HEADER':
+        return SwaggerModel$Inside$HEADER_getInstance();
+      case 'PATH':
+        return SwaggerModel$Inside$PATH_getInstance();
+      case 'FORM_DATA':
+        return SwaggerModel$Inside$FORM_DATA_getInstance();
+      case 'BODY':
+        return SwaggerModel$Inside$BODY_getInstance();
+      default:throwISE('No enum constant io.ktor.start.swagger.SwaggerModel.Inside.' + name);
+    }
+  }
+  SwaggerModel$Inside.valueOf_61zpoe$ = SwaggerModel$Inside$valueOf;
+  function SwaggerModel$SecurityType(name, ordinal, id) {
+    Enum.call(this);
+    this.id = id;
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function SwaggerModel$SecurityType_initFields() {
+    SwaggerModel$SecurityType_initFields = function () {
+    };
+    SwaggerModel$SecurityType$API_KEY_instance = new SwaggerModel$SecurityType('API_KEY', 0, 'apiKey');
+    SwaggerModel$SecurityType$HTTP_instance = new SwaggerModel$SecurityType('HTTP', 1, 'http');
+    SwaggerModel$SecurityType$OAUTH2_instance = new SwaggerModel$SecurityType('OAUTH2', 2, 'oauth2');
+    SwaggerModel$SecurityType$OPEN_ID_CONNECT_instance = new SwaggerModel$SecurityType('OPEN_ID_CONNECT', 3, 'openIdConnect');
+    SwaggerModel$SecurityType$Companion_getInstance();
+  }
+  var SwaggerModel$SecurityType$API_KEY_instance;
+  function SwaggerModel$SecurityType$API_KEY_getInstance() {
+    SwaggerModel$SecurityType_initFields();
+    return SwaggerModel$SecurityType$API_KEY_instance;
+  }
+  var SwaggerModel$SecurityType$HTTP_instance;
+  function SwaggerModel$SecurityType$HTTP_getInstance() {
+    SwaggerModel$SecurityType_initFields();
+    return SwaggerModel$SecurityType$HTTP_instance;
+  }
+  var SwaggerModel$SecurityType$OAUTH2_instance;
+  function SwaggerModel$SecurityType$OAUTH2_getInstance() {
+    SwaggerModel$SecurityType_initFields();
+    return SwaggerModel$SecurityType$OAUTH2_instance;
+  }
+  var SwaggerModel$SecurityType$OPEN_ID_CONNECT_instance;
+  function SwaggerModel$SecurityType$OPEN_ID_CONNECT_getInstance() {
+    SwaggerModel$SecurityType_initFields();
+    return SwaggerModel$SecurityType$OPEN_ID_CONNECT_instance;
+  }
+  function SwaggerModel$SecurityType$Companion() {
+    SwaggerModel$SecurityType$Companion_instance = this;
+    var $receiver = SwaggerModel$SecurityType$values();
+    var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
+    var destination = LinkedHashMap_init_0(capacity);
+    var tmp$;
+    for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
+      var element = $receiver[tmp$];
+      destination.put_xwzc9p$(element.id, element);
+    }
+    this.BY_ID = destination;
+  }
+  SwaggerModel$SecurityType$Companion.prototype.get_61zpoe$ = function (id) {
+    var tmp$;
+    var tmp$_0;
+    if ((tmp$ = this.BY_ID.get_11rb$(id)) != null)
+      tmp$_0 = tmp$;
+    else {
+      throw IllegalStateException_init(("Unsupported Security.'type'='" + id + "'").toString());
+    }
+    return tmp$_0;
+  };
+  SwaggerModel$SecurityType$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var SwaggerModel$SecurityType$Companion_instance = null;
+  function SwaggerModel$SecurityType$Companion_getInstance() {
+    SwaggerModel$SecurityType_initFields();
+    if (SwaggerModel$SecurityType$Companion_instance === null) {
+      new SwaggerModel$SecurityType$Companion();
+    }
+    return SwaggerModel$SecurityType$Companion_instance;
+  }
+  SwaggerModel$SecurityType.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SecurityType',
+    interfaces: [Enum]
+  };
+  function SwaggerModel$SecurityType$values() {
+    return [SwaggerModel$SecurityType$API_KEY_getInstance(), SwaggerModel$SecurityType$HTTP_getInstance(), SwaggerModel$SecurityType$OAUTH2_getInstance(), SwaggerModel$SecurityType$OPEN_ID_CONNECT_getInstance()];
+  }
+  SwaggerModel$SecurityType.values = SwaggerModel$SecurityType$values;
+  function SwaggerModel$SecurityType$valueOf(name) {
+    switch (name) {
+      case 'API_KEY':
+        return SwaggerModel$SecurityType$API_KEY_getInstance();
+      case 'HTTP':
+        return SwaggerModel$SecurityType$HTTP_getInstance();
+      case 'OAUTH2':
+        return SwaggerModel$SecurityType$OAUTH2_getInstance();
+      case 'OPEN_ID_CONNECT':
+        return SwaggerModel$SecurityType$OPEN_ID_CONNECT_getInstance();
+      default:throwISE('No enum constant io.ktor.start.swagger.SwaggerModel.SecurityType.' + name);
+    }
+  }
+  SwaggerModel$SecurityType.valueOf_61zpoe$ = SwaggerModel$SecurityType$valueOf;
   function SwaggerModel$Parameter(name, inside, required, description, default_0, schema) {
     this.name = name;
     this.inside = inside;
@@ -9498,7 +11270,7 @@
   SwaggerModel$Parameter.prototype.component6 = function () {
     return this.schema;
   };
-  SwaggerModel$Parameter.prototype.copy_5trlv8$ = function (name, inside, required, description, default_0, schema) {
+  SwaggerModel$Parameter.prototype.copy_lw7fqy$ = function (name, inside, required, description, default_0, schema) {
     return new SwaggerModel$Parameter(name === void 0 ? this.name : name, inside === void 0 ? this.inside : inside, required === void 0 ? this.required : required, description === void 0 ? this.description : description, default_0 === void 0 ? this.default : default_0, schema === void 0 ? this.schema : schema);
   };
   SwaggerModel$Parameter.prototype.toString = function () {
@@ -9557,6 +11329,36 @@
     this.operationId = operationId;
     this.parameters = parameters;
     this.responses = responses;
+    var $receiver = this.responses;
+    var destination = ArrayList_init();
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      if (element.intCode !== 200)
+        destination.add_11rb$(element);
+    }
+    this.errorResponses = destination;
+    var $receiver_0 = this.responses;
+    var firstOrNull$result;
+    firstOrNull$break: do {
+      var tmp$_0;
+      tmp$_0 = $receiver_0.iterator();
+      while (tmp$_0.hasNext()) {
+        var element_0 = tmp$_0.next();
+        if (element_0.intCode === 200) {
+          firstOrNull$result = element_0;
+          break firstOrNull$break;
+        }
+      }
+      firstOrNull$result = null;
+    }
+     while (false);
+    this.okResponse = firstOrNull$result;
+    var tmp$_1, tmp$_2, tmp$_3, tmp$_4;
+    this.defaultResponse = (tmp$_1 = this.okResponse) != null ? tmp$_1 : new SwaggerModel$Response('200', 'OK', new SwaggerModel$InfoGenType(SwaggerModel$StringType_getInstance(), null));
+    this.responseType = (tmp$_3 = (tmp$_2 = this.defaultResponse.schema) != null ? tmp$_2.type : null) != null ? tmp$_3 : SwaggerModel$VoidType_getInstance();
+    this.methodName = ID_getInstance().normalizeMethodName_61zpoe$((tmp$_4 = this.operationId) != null ? tmp$_4 : this.method + '/' + this.path);
   }
   SwaggerModel$PathMethodModel.$metadata$ = {
     kind: Kind_CLASS,
@@ -9590,7 +11392,7 @@
   SwaggerModel$PathMethodModel.prototype.component9 = function () {
     return this.responses;
   };
-  SwaggerModel$PathMethodModel.prototype.copy_fq9g1x$ = function (path, method, summary, description, tags, security, operationId, parameters, responses) {
+  SwaggerModel$PathMethodModel.prototype.copy_z5i89s$ = function (path, method, summary, description, tags, security, operationId, parameters, responses) {
     return new SwaggerModel$PathMethodModel(path === void 0 ? this.path : path, method === void 0 ? this.method : method, summary === void 0 ? this.summary : summary, description === void 0 ? this.description : description, tags === void 0 ? this.tags : tags, security === void 0 ? this.security : security, operationId === void 0 ? this.operationId : operationId, parameters === void 0 ? this.parameters : parameters, responses === void 0 ? this.responses : responses);
   };
   SwaggerModel$PathMethodModel.prototype.toString = function () {
@@ -9643,12 +11445,18 @@
   SwaggerModel$PathModel.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.path, other.path) && Kotlin.equals(this.methods, other.methods)))));
   };
-  function SwaggerModel$SwaggerInfo(description, version, title, contact, license) {
-    this.description = description;
-    this.version = version;
+  function SwaggerModel$SwaggerInfo(title, description, termsOfService, version, contact, license) {
     this.title = title;
+    this.description = description;
+    this.termsOfService = termsOfService;
+    this.version = version;
     this.contact = contact;
     this.license = license;
+    var tmp$, tmp$_0;
+    var $receiver = this.title;
+    this.className = (tmp$_0 = (tmp$ = $receiver.length > 0 ? $receiver : null) != null ? ID_getInstance().normalizeClassName_61zpoe$(tmp$) : null) != null ? tmp$_0 : 'SwaggerApi';
+    this.classNameServer = this.className + 'Server';
+    this.classNameClient = this.className + 'Client';
   }
   SwaggerModel$SwaggerInfo.$metadata$ = {
     kind: Kind_CLASS,
@@ -9656,37 +11464,41 @@
     interfaces: []
   };
   SwaggerModel$SwaggerInfo.prototype.component1 = function () {
-    return this.description;
-  };
-  SwaggerModel$SwaggerInfo.prototype.component2 = function () {
-    return this.version;
-  };
-  SwaggerModel$SwaggerInfo.prototype.component3 = function () {
     return this.title;
   };
+  SwaggerModel$SwaggerInfo.prototype.component2 = function () {
+    return this.description;
+  };
+  SwaggerModel$SwaggerInfo.prototype.component3 = function () {
+    return this.termsOfService;
+  };
   SwaggerModel$SwaggerInfo.prototype.component4 = function () {
-    return this.contact;
+    return this.version;
   };
   SwaggerModel$SwaggerInfo.prototype.component5 = function () {
+    return this.contact;
+  };
+  SwaggerModel$SwaggerInfo.prototype.component6 = function () {
     return this.license;
   };
-  SwaggerModel$SwaggerInfo.prototype.copy_jv6gow$ = function (description, version, title, contact, license) {
-    return new SwaggerModel$SwaggerInfo(description === void 0 ? this.description : description, version === void 0 ? this.version : version, title === void 0 ? this.title : title, contact === void 0 ? this.contact : contact, license === void 0 ? this.license : license);
+  SwaggerModel$SwaggerInfo.prototype.copy_ij07d7$ = function (title, description, termsOfService, version, contact, license) {
+    return new SwaggerModel$SwaggerInfo(title === void 0 ? this.title : title, description === void 0 ? this.description : description, termsOfService === void 0 ? this.termsOfService : termsOfService, version === void 0 ? this.version : version, contact === void 0 ? this.contact : contact, license === void 0 ? this.license : license);
   };
   SwaggerModel$SwaggerInfo.prototype.toString = function () {
-    return 'SwaggerInfo(description=' + Kotlin.toString(this.description) + (', version=' + Kotlin.toString(this.version)) + (', title=' + Kotlin.toString(this.title)) + (', contact=' + Kotlin.toString(this.contact)) + (', license=' + Kotlin.toString(this.license)) + ')';
+    return 'SwaggerInfo(title=' + Kotlin.toString(this.title) + (', description=' + Kotlin.toString(this.description)) + (', termsOfService=' + Kotlin.toString(this.termsOfService)) + (', version=' + Kotlin.toString(this.version)) + (', contact=' + Kotlin.toString(this.contact)) + (', license=' + Kotlin.toString(this.license)) + ')';
   };
   SwaggerModel$SwaggerInfo.prototype.hashCode = function () {
     var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.description) | 0;
-    result = result * 31 + Kotlin.hashCode(this.version) | 0;
     result = result * 31 + Kotlin.hashCode(this.title) | 0;
+    result = result * 31 + Kotlin.hashCode(this.description) | 0;
+    result = result * 31 + Kotlin.hashCode(this.termsOfService) | 0;
+    result = result * 31 + Kotlin.hashCode(this.version) | 0;
     result = result * 31 + Kotlin.hashCode(this.contact) | 0;
     result = result * 31 + Kotlin.hashCode(this.license) | 0;
     return result;
   };
   SwaggerModel$SwaggerInfo.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.description, other.description) && Kotlin.equals(this.version, other.version) && Kotlin.equals(this.title, other.title) && Kotlin.equals(this.contact, other.contact) && Kotlin.equals(this.license, other.license)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.title, other.title) && Kotlin.equals(this.description, other.description) && Kotlin.equals(this.termsOfService, other.termsOfService) && Kotlin.equals(this.version, other.version) && Kotlin.equals(this.contact, other.contact) && Kotlin.equals(this.license, other.license)))));
   };
   function SwaggerModel$Response(code, description, schema) {
     this.code = code;
@@ -9713,7 +11525,7 @@
   SwaggerModel$Response.prototype.component3 = function () {
     return this.schema;
   };
-  SwaggerModel$Response.prototype.copy_bogf5q$ = function (code, description, schema) {
+  SwaggerModel$Response.prototype.copy_gnagun$ = function (code, description, schema) {
     return new SwaggerModel$Response(code === void 0 ? this.code : code, description === void 0 ? this.description : description, schema === void 0 ? this.schema : schema);
   };
   SwaggerModel$Response.prototype.toString = function () {
@@ -9732,73 +11544,131 @@
   function SwaggerModel$Companion() {
     SwaggerModel$Companion_instance = this;
   }
-  SwaggerModel$Companion.prototype.parseDefinitionElement_s8jyv4$ = function (def) {
+  function SwaggerModel$Companion$Versions() {
+    SwaggerModel$Companion$Versions_instance = this;
+    this.V2 = new SemVer('2.0');
+    this.V3 = new SemVer('3.0.0');
+    this.V3_0_1 = new SemVer('3.0.1');
+    this.MIN = this.V2;
+    this.MAX = this.V3_0_1;
+  }
+  SwaggerModel$Companion$Versions.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Versions',
+    interfaces: []
+  };
+  var SwaggerModel$Companion$Versions_instance = null;
+  function SwaggerModel$Companion$Versions_getInstance() {
+    if (SwaggerModel$Companion$Versions_instance === null) {
+      new SwaggerModel$Companion$Versions();
+    }
+    return SwaggerModel$Companion$Versions_instance;
+  }
+  SwaggerModel$Companion.prototype.parseDefinitionElement_mdpa8p$ = function (def, root, namePath) {
     var $receiver = package$util.DynamicAccess;
     var callback$result;
-    callback$break: do {
-      var ref = $receiver.get_s2h60f$(def, '$ref');
-      if (ref != null) {
-        callback$result = new SwaggerModel$RefType($receiver.get_str_mzud1t$(ref));
+    var tmp$, tmp$_0, tmp$_1;
+    var ref = $receiver.get_s2h60f$(def, '$ref');
+    if (ref != null) {
+      var path = $receiver.get_str_mzud1t$(ref);
+      var referee = this.parseDefinitionElement_mdpa8p$(Json_getInstance().followReference_d0xna2$(def, root, path), root, path);
+      if (Kotlin.isType(referee.type, SwaggerModel$ObjType)) {
+        tmp$_0 = new SwaggerModel$InfoGenType(new SwaggerModel$NamedObject(path, Kotlin.isType(tmp$ = referee, SwaggerModel$InfoGenType) ? tmp$ : throwCCE()), null);
       }
-       else {
-        var type = $receiver.get_s2h60f$(def, 'type');
-        if (equals(type, 'array')) {
-          var items = $receiver.get_s2h60f$(def, 'items');
-          callback$result = new SwaggerModel$ArrayType(this.parseDefinitionElement_s8jyv4$(items));
-        }
-         else {
-          var format = $receiver.get_s2h60f$(def, 'format');
-          switch ($receiver.get_str_mzud1t$(type)) {
-            case 'string':
-              callback$result = SwaggerModel$StringType_getInstance();
-              break callback$break;
-            case 'integer':
-              callback$result = SwaggerModel$IntType_getInstance();
-              break callback$break;
-            case 'int':
-              callback$result = SwaggerModel$IntType_getInstance();
-              break callback$break;
-            case 'double':
-              callback$result = SwaggerModel$DoubleType_getInstance();
-              break callback$break;
-            case 'number':
-              callback$result = SwaggerModel$DoubleType_getInstance();
-              break callback$break;
-            case 'long':
-              callback$result = SwaggerModel$LongType_getInstance();
-              break callback$break;
-            case 'bool':
-              callback$result = SwaggerModel$BoolType_getInstance();
-              break callback$break;
-            case 'boolean':
-              callback$result = SwaggerModel$BoolType_getInstance();
-              break callback$break;
-            case 'null':
-              throw IllegalStateException_init(('null? : ' + toString(def)).toString());
-            case 'object':
-              var props = $receiver.get_s2h60f$(def, 'properties');
-              var $receiver_0 = $receiver.get_strEntries_mzud1t$(props);
-              var destination = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
-              var tmp$;
-              tmp$ = $receiver_0.iterator();
-              while (tmp$.hasNext()) {
-                var item = tmp$.next();
-                destination.add_11rb$(to(item.first, this.parseDefinitionElement_s8jyv4$(item.second)));
-              }
-
-              var entries = toMap(destination);
-              callback$result = new SwaggerModel$ObjType(entries);
-              break callback$break;
-            default:callback$result = new SwaggerModel$PrimType($receiver.get_str_mzud1t$(type), format != null ? $receiver.get_str_mzud1t$(format) : null, def);
-              break callback$break;
-          }
-        }
-      }
+       else
+        tmp$_0 = referee;
+      return tmp$_0;
     }
-     while (false);
+     else {
+      var type = $receiver.get_s2h60f$(def, 'type');
+      var format = $receiver.get_s2h60f$(def, 'format');
+      var rule = JsonRule$Companion_getInstance().parseOrNull_s8jyv4$(def);
+      switch (type) {
+        case 'integer':
+          switch ($receiver.get_str_mzud1t$(format)) {
+            case 'int32':
+            case 'null':
+            case '':
+              tmp$_1 = SwaggerModel$Int32Type_getInstance();
+              break;
+            case 'int64':
+              tmp$_1 = SwaggerModel$Int64Type_getInstance();
+              break;
+            default:throw IllegalStateException_init(('Invalid integer type ' + toString(format)).toString());
+          }
+
+          break;
+        case 'number':
+          switch ($receiver.get_str_mzud1t$(format)) {
+            case 'float':
+              tmp$_1 = SwaggerModel$FloatType_getInstance();
+              break;
+            case 'double':
+            case 'null':
+            case '':
+              tmp$_1 = SwaggerModel$DoubleType_getInstance();
+              break;
+            default:throw IllegalStateException_init(('Invalid number type ' + toString(format)).toString());
+          }
+
+          break;
+        case 'string':
+          switch ($receiver.get_str_mzud1t$(format)) {
+            case 'string':
+            case 'null':
+            case '':
+              tmp$_1 = SwaggerModel$StringType_getInstance();
+              break;
+            case 'byte':
+              tmp$_1 = SwaggerModel$Base64Type_getInstance();
+              break;
+            case 'binary':
+              tmp$_1 = SwaggerModel$BinaryStringType_getInstance();
+              break;
+            case 'date':
+              tmp$_1 = SwaggerModel$DateType_getInstance();
+              break;
+            case 'date-time':
+              tmp$_1 = SwaggerModel$DateTimeType_getInstance();
+              break;
+            case 'password':
+              tmp$_1 = SwaggerModel$PasswordType_getInstance();
+              break;
+            default:throw IllegalStateException_init(('Invalid string type ' + toString(format)).toString());
+          }
+
+          break;
+        case 'boolean':
+          tmp$_1 = SwaggerModel$BoolType_getInstance();
+          break;
+        case 'array':
+          var items = $receiver.get_s2h60f$(def, 'items');
+          tmp$_1 = new SwaggerModel$ArrayType(this.parseDefinitionElement_mdpa8p$(items, root, null));
+          break;
+        case 'object':
+          var props = $receiver.get_s2h60f$(def, 'properties');
+          var $receiver_0 = $receiver.get_strEntries_mzud1t$(props);
+          var destination = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
+          var tmp$_2;
+          tmp$_2 = $receiver_0.iterator();
+          while (tmp$_2.hasNext()) {
+            var item = tmp$_2.next();
+            destination.add_11rb$(to(item.first, this.parseDefinitionElement_mdpa8p$(item.second, root, null)));
+          }
+
+          var entries = toMap(destination);
+          tmp$_1 = new SwaggerModel$ObjType(namePath, entries);
+          break;
+        case 'null':
+          throw IllegalStateException_init(('null? : ' + toString(def)).toString());
+        default:throw IllegalStateException_init(('Other prim ' + toString(type) + ', ' + toString(def)).toString());
+      }
+      var ptype = tmp$_1;
+      callback$result = new SwaggerModel$InfoGenType(ptype, rule);
+    }
     return callback$result;
   };
-  SwaggerModel$Companion.prototype.parseDefinition_4w9ihe$ = function (name, def) {
+  SwaggerModel$Companion.prototype.parseDefinition_fmz8iu$ = function (name, def, root) {
     var $receiver = package$util.DynamicAccess;
     var type = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'type'));
     if (!equals(type, 'object')) {
@@ -9814,57 +11684,58 @@
       var tmp$_0 = destination.add_11rb$;
       var key = item.component1()
       , element = item.component2();
-      var pdef = this.parseDefinitionElement_s8jyv4$(element);
+      var pdef = this.parseDefinitionElement_mdpa8p$(element, root, null);
       tmp$_0.call(destination, to(key, new SwaggerModel$Prop($receiver.get_str_mzud1t$(key), pdef, required.contains_11rb$(key))));
     }
     var props = toMap(destination);
     return new SwaggerModel$TypeDef(name, props);
   };
-  SwaggerModel$Companion.prototype.parseParameter_s8jyv4$ = function (def) {
+  SwaggerModel$Companion.prototype.parseParameter_oaftn8$ = function (def, root) {
     var $receiver = package$util.DynamicAccess;
-    var tmp$;
-    return new SwaggerModel$Parameter($receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'name')), $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'in')), $receiver.get_bool_mzud1t$($receiver.get_s2h60f$(def, 'required')), $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'description')), $receiver.get_s2h60f$(def, 'default'), this.parseDefinitionElement_s8jyv4$((tmp$ = $receiver.get_s2h60f$(def, 'schema')) != null ? tmp$ : def));
+    var tmp$, tmp$_0, tmp$_1;
+    return new SwaggerModel$Parameter($receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'name')), SwaggerModel$Inside$Companion_getInstance().get_61zpoe$($receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'in'))), (tmp$_0 = (tmp$ = $receiver.get_s2h60f$(def, 'required')) != null ? $receiver.get_bool_mzud1t$(tmp$) : null) != null ? tmp$_0 : false, $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'description')), $receiver.get_s2h60f$(def, 'default'), this.parseDefinitionElement_mdpa8p$((tmp$_1 = $receiver.get_s2h60f$(def, 'schema')) != null ? tmp$_1 : def, root, null));
   };
-  SwaggerModel$Companion.prototype.parseMethodPath_18o3fo$ = function (path, method, def) {
+  SwaggerModel$Companion.prototype.parseMethodPath_arau7s$ = function (path, method, def, root) {
     var $receiver = package$util.DynamicAccess;
-    var tmp$ = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'summary'));
-    var tmp$_0 = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'description'));
-    var tmp$_1 = $receiver.get_strList_mzud1t$($receiver.get_s2h60f$(def, 'tags'));
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+    tmp$ = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'summary'));
+    tmp$_0 = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'description'));
+    tmp$_1 = $receiver.get_strList_mzud1t$($receiver.get_s2h60f$(def, 'tags'));
     var $receiver_0 = $receiver.get_list_mzud1t$($receiver.get_s2h60f$(def, 'security'));
     var destination = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
-    var tmp$_2;
-    tmp$_2 = $receiver_0.iterator();
-    while (tmp$_2.hasNext()) {
-      var item = tmp$_2.next();
-      var tmp$_3 = destination.add_11rb$;
-      var name = first_0($receiver.get_strKeys_mzud1t$(item));
+    var tmp$_4;
+    tmp$_4 = $receiver_0.iterator();
+    while (tmp$_4.hasNext()) {
+      var item = tmp$_4.next();
+      var tmp$_5 = destination.add_11rb$;
+      var name = first($receiver.get_strKeys_mzud1t$(item));
       var info = $receiver.get_s2h60f$(item, name);
-      tmp$_3.call(destination, new SwaggerModel$Security(name, $receiver.get_strList_mzud1t$(info)));
+      tmp$_5.call(destination, new SwaggerModel$Security(name, $receiver.get_strList_mzud1t$(info)));
     }
-    var tmp$_4 = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'tags'));
+    tmp$_3 = (tmp$_2 = $receiver.get_s2h60f$(def, 'operationId')) != null ? $receiver.get_str_mzud1t$(tmp$_2) : null;
     var $receiver_1 = $receiver.get_list_mzud1t$($receiver.get_s2h60f$(def, 'parameters'));
     var destination_0 = ArrayList_init_0(collectionSizeOrDefault($receiver_1, 10));
-    var tmp$_5;
-    tmp$_5 = $receiver_1.iterator();
-    while (tmp$_5.hasNext()) {
-      var item_0 = tmp$_5.next();
-      destination_0.add_11rb$(this.parseParameter_s8jyv4$(item_0));
+    var tmp$_6;
+    tmp$_6 = $receiver_1.iterator();
+    while (tmp$_6.hasNext()) {
+      var item_0 = tmp$_6.next();
+      destination_0.add_11rb$(this.parseParameter_oaftn8$(item_0, root));
     }
     var $receiver_2 = $receiver.get_strEntries_mzud1t$($receiver.get_s2h60f$(def, 'responses'));
     var destination_1 = ArrayList_init_0(collectionSizeOrDefault($receiver_2, 10));
-    var tmp$_6;
-    tmp$_6 = $receiver_2.iterator();
-    while (tmp$_6.hasNext()) {
-      var item_1 = tmp$_6.next();
-      var tmp$_7 = destination_1.add_11rb$;
+    var tmp$_7;
+    tmp$_7 = $receiver_2.iterator();
+    while (tmp$_7.hasNext()) {
+      var item_1 = tmp$_7.next();
+      var tmp$_8 = destination_1.add_11rb$;
       var code = item_1.component1()
       , rdef = item_1.component2();
-      var tmp$_8;
-      tmp$_7.call(destination_1, new SwaggerModel$Response(code, $receiver.get_str_mzud1t$($receiver.get_s2h60f$(rdef, 'description')), (tmp$_8 = $receiver.get_s2h60f$(rdef, 'schema')) != null ? this.parseDefinitionElement_s8jyv4$(tmp$_8) : null));
+      var tmp$_9;
+      tmp$_8.call(destination_1, new SwaggerModel$Response(code, $receiver.get_str_mzud1t$($receiver.get_s2h60f$(rdef, 'description')), (tmp$_9 = $receiver.get_s2h60f$(rdef, 'schema')) != null ? this.parseDefinitionElement_mdpa8p$(tmp$_9, root, null) : null));
     }
-    return new SwaggerModel$PathMethodModel(path, method, tmp$, tmp$_0, tmp$_1, destination, tmp$_4, destination_0, destination_1);
+    return new SwaggerModel$PathMethodModel(path, method, tmp$, tmp$_0, tmp$_1, destination, tmp$_3, destination_0, destination_1);
   };
-  SwaggerModel$Companion.prototype.parsePath_4w9ihe$ = function (path, def) {
+  SwaggerModel$Companion.prototype.parsePath_fmz8iu$ = function (path, def, root) {
     var $receiver = package$util.DynamicAccess.get_strEntries_mzud1t$(def);
     var destination = ArrayList_init_0(collectionSizeOrDefault($receiver, 10));
     var tmp$;
@@ -9874,7 +11745,7 @@
       var tmp$_0 = destination.add_11rb$;
       var method = item.component1()
       , methodDef = item.component2();
-      tmp$_0.call(destination, to(method, this.parseMethodPath_18o3fo$(path, method, methodDef)));
+      tmp$_0.call(destination, to(method, this.parseMethodPath_arau7s$(path, method, methodDef, root)));
     }
     return new SwaggerModel$PathModel(path, toMap(destination));
   };
@@ -9882,82 +11753,110 @@
     if (filename === void 0)
       filename = 'unknown.json';
     var $receiver = package$util.DynamicAccess;
-    if (!equals($receiver.get_s2h60f$(model, 'swagger'), '2.0')) {
-      throw IllegalStateException_init("Not a swagger: '2.0' model".toString());
-    }
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4;
+    var root = model;
+    var version = (tmp$ = $receiver.get_s2h60f$(model, 'swagger')) != null ? tmp$ : $receiver.get_s2h60f$(model, 'openapi');
+    var semVer = new SemVer(toString(version));
+    if (!rangeTo(SwaggerModel$Companion$Versions_getInstance().MIN, SwaggerModel$Companion$Versions_getInstance().MAX).contains_mef7kx$(semVer))
+      throw IllegalArgumentException_init("Not a swagger/openapi: '2.0' or '3.0.0' model");
     var it = $receiver.get_s2h60f$(model, 'info');
-    var tmp$ = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(it, 'description'));
-    var tmp$_0 = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(it, 'version'));
-    var tmp$_1 = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(it, 'title'));
+    var tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9;
+    tmp$_5 = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(it, 'title'));
+    tmp$_6 = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(it, 'description'));
+    tmp$_7 = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(it, 'termsOfService'));
     var $receiver_0 = $receiver.get_s2h60f$(it, 'contact');
-    var tmp$_2 = new SwaggerModel$NamedUrl($receiver.get_str_mzud1t$($receiver.get_s2h60f$($receiver_0, 'name')), $receiver.get_str_mzud1t$($receiver.get_s2h60f$($receiver_0, 'url')));
+    tmp$_8 = new SwaggerModel$Contact($receiver.get_str_mzud1t$($receiver.get_s2h60f$($receiver_0, 'name')), $receiver.get_str_mzud1t$($receiver.get_s2h60f$($receiver_0, 'url')), $receiver.get_str_mzud1t$($receiver.get_s2h60f$($receiver_0, 'email')));
     var $receiver_1 = $receiver.get_s2h60f$(it, 'license');
-    var info = new SwaggerModel$SwaggerInfo(tmp$, tmp$_0, tmp$_1, tmp$_2, new SwaggerModel$NamedUrl($receiver.get_str_mzud1t$($receiver.get_s2h60f$($receiver_1, 'name')), $receiver.get_str_mzud1t$($receiver.get_s2h60f$($receiver_1, 'url'))));
-    var basePath = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(model, 'basePath'));
-    var $receiver_2 = $receiver.get_list_mzud1t$($receiver.get_s2h60f$(model, 'schemes'));
-    var destination = ArrayList_init_0(collectionSizeOrDefault($receiver_2, 10));
-    var tmp$_3;
-    tmp$_3 = $receiver_2.iterator();
-    while (tmp$_3.hasNext()) {
-      var item = tmp$_3.next();
-      destination.add_11rb$($receiver.get_str_mzud1t$(item));
+    tmp$_9 = new SwaggerModel$License($receiver.get_str_mzud1t$($receiver.get_s2h60f$($receiver_1, 'name')), $receiver.get_str_mzud1t$($receiver.get_s2h60f$($receiver_1, 'url')));
+    var info = new SwaggerModel$SwaggerInfo(tmp$_5, tmp$_6, tmp$_7, $receiver.get_str_mzud1t$($receiver.get_s2h60f$(it, 'version')), tmp$_8, tmp$_9);
+    var servers = ArrayList_init();
+    if (semVer.compareTo_11rb$(SwaggerModel$Companion$Versions_getInstance().V3) < 0) {
+      var host = (tmp$_1 = (tmp$_0 = $receiver.get_s2h60f$(model, 'host')) != null ? $receiver.get_str_mzud1t$(tmp$_0) : null) != null ? tmp$_1 : '127.0.0.1';
+      var basePath = (tmp$_3 = (tmp$_2 = $receiver.get_s2h60f$(model, 'basePath')) != null ? $receiver.get_str_mzud1t$(tmp$_2) : null) != null ? tmp$_3 : '/';
+      var schemes = $receiver.get_strList_mzud1t$($receiver.get_s2h60f$(model, 'schemes'));
+      var tmp$_10;
+      var element = new SwaggerModel$Server('{scheme}://' + host + basePath, info.description, mapOf(to('scheme', new SwaggerModel$ServerVariable('scheme', (tmp$_10 = firstOrNull(schemes)) != null ? tmp$_10 : 'https', '', schemes))));
+      servers.add_11rb$(element);
     }
-    var schemes = destination;
+     else {
+      tmp$_4 = $receiver.get_list_mzud1t$($receiver.get_s2h60f$(model, 'servers')).iterator();
+      while (tmp$_4.hasNext()) {
+        var userver = tmp$_4.next();
+        var tmp$_11, tmp$_12, tmp$_13, tmp$_14;
+        tmp$_11 = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(userver, 'url'));
+        tmp$_14 = (tmp$_13 = (tmp$_12 = $receiver.get_s2h60f$(userver, 'description')) != null ? $receiver.get_str_mzud1t$(tmp$_12) : null) != null ? tmp$_13 : 'API';
+        var $receiver_2 = $receiver.get_map_mzud1t$($receiver.get_s2h60f$(userver, 'variables'));
+        var destination = ArrayList_init_0($receiver_2.size);
+        var tmp$_15;
+        tmp$_15 = $receiver_2.entries.iterator();
+        while (tmp$_15.hasNext()) {
+          var item = tmp$_15.next();
+          var tmp$_16 = destination.add_11rb$;
+          var uname = item.key;
+          var uvar = item.value;
+          var tmp$_17;
+          var name = $receiver.get_str_mzud1t$(uname);
+          tmp$_16.call(destination, to(name, new SwaggerModel$ServerVariable(name, $receiver.get_str_mzud1t$($receiver.get_s2h60f$(uvar, 'default')), $receiver.get_str_mzud1t$($receiver.get_s2h60f$(uvar, 'description')), (tmp$_17 = $receiver.get_s2h60f$(uvar, 'enum')) != null ? $receiver.get_strList_mzud1t$(tmp$_17) : null)));
+        }
+        var element_0 = new SwaggerModel$Server(tmp$_11, tmp$_14, toMap(destination));
+        servers.add_11rb$(element_0);
+      }
+    }
     var $receiver_3 = $receiver.get_list_mzud1t$($receiver.get_s2h60f$(model, 'produces'));
     var destination_0 = ArrayList_init_0(collectionSizeOrDefault($receiver_3, 10));
-    var tmp$_4;
-    tmp$_4 = $receiver_3.iterator();
-    while (tmp$_4.hasNext()) {
-      var item_0 = tmp$_4.next();
+    var tmp$_18;
+    tmp$_18 = $receiver_3.iterator();
+    while (tmp$_18.hasNext()) {
+      var item_0 = tmp$_18.next();
       destination_0.add_11rb$($receiver.get_str_mzud1t$(item_0));
     }
     var produces = destination_0;
     var $receiver_4 = $receiver.get_list_mzud1t$($receiver.get_s2h60f$(model, 'consumes'));
     var destination_1 = ArrayList_init_0(collectionSizeOrDefault($receiver_4, 10));
-    var tmp$_5;
-    tmp$_5 = $receiver_4.iterator();
-    while (tmp$_5.hasNext()) {
-      var item_1 = tmp$_5.next();
+    var tmp$_19;
+    tmp$_19 = $receiver_4.iterator();
+    while (tmp$_19.hasNext()) {
+      var item_1 = tmp$_19.next();
       destination_1.add_11rb$($receiver.get_str_mzud1t$(item_1));
     }
     var consumes = destination_1;
     var $receiver_5 = $receiver.get_strEntries_mzud1t$($receiver.get_s2h60f$(model, 'securityDefinitions'));
     var destination_2 = ArrayList_init_0(collectionSizeOrDefault($receiver_5, 10));
-    var tmp$_6;
-    tmp$_6 = $receiver_5.iterator();
-    while (tmp$_6.hasNext()) {
-      var item_2 = tmp$_6.next();
-      var tmp$_7 = destination_2.add_11rb$;
+    var tmp$_20;
+    tmp$_20 = $receiver_5.iterator();
+    while (tmp$_20.hasNext()) {
+      var item_2 = tmp$_20.next();
+      var tmp$_21 = destination_2.add_11rb$;
       var kname = item_2.component1()
       , obj = item_2.component2();
-      tmp$_7.call(destination_2, to(kname, new SwaggerModel$SecurityDefinition($receiver.get_str_mzud1t$(kname), $receiver.get_str_mzud1t$($receiver.get_s2h60f$(obj, 'description')), $receiver.get_str_mzud1t$($receiver.get_s2h60f$(obj, 'type')), $receiver.get_str_mzud1t$($receiver.get_s2h60f$(obj, 'name')), $receiver.get_str_mzud1t$($receiver.get_s2h60f$(obj, 'in')))));
+      tmp$_21.call(destination_2, to(kname, new SwaggerModel$SecurityDefinition($receiver.get_str_mzud1t$(kname), $receiver.get_str_mzud1t$($receiver.get_s2h60f$(obj, 'description')), SwaggerModel$SecurityType$Companion_getInstance().get_61zpoe$($receiver.get_str_mzud1t$($receiver.get_s2h60f$(obj, 'type'))), $receiver.get_str_mzud1t$($receiver.get_s2h60f$(obj, 'name')), $receiver.get_str_mzud1t$($receiver.get_s2h60f$(obj, 'in')))));
     }
     var securityDefinitions = toMap(destination_2);
     var $receiver_6 = $receiver.get_strEntries_mzud1t$($receiver.get_s2h60f$(model, 'paths'));
     var destination_3 = ArrayList_init_0(collectionSizeOrDefault($receiver_6, 10));
-    var tmp$_8;
-    tmp$_8 = $receiver_6.iterator();
-    while (tmp$_8.hasNext()) {
-      var item_3 = tmp$_8.next();
-      var tmp$_9 = destination_3.add_11rb$;
+    var tmp$_22;
+    tmp$_22 = $receiver_6.iterator();
+    while (tmp$_22.hasNext()) {
+      var item_3 = tmp$_22.next();
+      var tmp$_23 = destination_3.add_11rb$;
       var key = item_3.component1()
       , obj_0 = item_3.component2();
-      tmp$_9.call(destination_3, to(key, this.parsePath_4w9ihe$(key, obj_0)));
+      tmp$_23.call(destination_3, to(key, this.parsePath_fmz8iu$(key, obj_0, root)));
     }
     var paths = toMap(destination_3);
     var $receiver_7 = $receiver.get_strEntries_mzud1t$($receiver.get_s2h60f$(model, 'definitions'));
     var destination_4 = ArrayList_init_0(collectionSizeOrDefault($receiver_7, 10));
-    var tmp$_10;
-    tmp$_10 = $receiver_7.iterator();
-    while (tmp$_10.hasNext()) {
-      var item_4 = tmp$_10.next();
-      var tmp$_11 = destination_4.add_11rb$;
+    var tmp$_24;
+    tmp$_24 = $receiver_7.iterator();
+    while (tmp$_24.hasNext()) {
+      var item_4 = tmp$_24.next();
+      var tmp$_25 = destination_4.add_11rb$;
       var key_0 = item_4.component1()
       , obj_1 = item_4.component2();
-      tmp$_11.call(destination_4, to(key_0, this.parseDefinition_4w9ihe$(key_0, obj_1)));
+      tmp$_25.call(destination_4, to(key_0, this.parseDefinition_fmz8iu$(key_0, obj_1, root)));
     }
     var definitions = toMap(destination_4);
-    return new SwaggerModel(filename, info, basePath, schemes, produces, consumes, securityDefinitions, paths, definitions);
+    return new SwaggerModel(filename, info, servers, produces, consumes, securityDefinitions, paths, definitions);
   };
   SwaggerModel$Companion.$metadata$ = {
     kind: Kind_OBJECT,
@@ -9983,38 +11882,34 @@
     return this.info;
   };
   SwaggerModel.prototype.component3 = function () {
-    return this.basePath;
+    return this.servers;
   };
   SwaggerModel.prototype.component4 = function () {
-    return this.schemes;
-  };
-  SwaggerModel.prototype.component5 = function () {
     return this.produces;
   };
-  SwaggerModel.prototype.component6 = function () {
+  SwaggerModel.prototype.component5 = function () {
     return this.consumes;
   };
-  SwaggerModel.prototype.component7 = function () {
+  SwaggerModel.prototype.component6 = function () {
     return this.securityDefinitions;
   };
-  SwaggerModel.prototype.component8 = function () {
+  SwaggerModel.prototype.component7 = function () {
     return this.paths;
   };
-  SwaggerModel.prototype.component9 = function () {
+  SwaggerModel.prototype.component8 = function () {
     return this.definitions;
   };
-  SwaggerModel.prototype.copy_gvm9hu$ = function (filename, info, basePath, schemes, produces, consumes, securityDefinitions, paths, definitions) {
-    return new SwaggerModel(filename === void 0 ? this.filename : filename, info === void 0 ? this.info : info, basePath === void 0 ? this.basePath : basePath, schemes === void 0 ? this.schemes : schemes, produces === void 0 ? this.produces : produces, consumes === void 0 ? this.consumes : consumes, securityDefinitions === void 0 ? this.securityDefinitions : securityDefinitions, paths === void 0 ? this.paths : paths, definitions === void 0 ? this.definitions : definitions);
+  SwaggerModel.prototype.copy_rbgpg2$ = function (filename, info, servers, produces, consumes, securityDefinitions, paths, definitions) {
+    return new SwaggerModel(filename === void 0 ? this.filename : filename, info === void 0 ? this.info : info, servers === void 0 ? this.servers : servers, produces === void 0 ? this.produces : produces, consumes === void 0 ? this.consumes : consumes, securityDefinitions === void 0 ? this.securityDefinitions : securityDefinitions, paths === void 0 ? this.paths : paths, definitions === void 0 ? this.definitions : definitions);
   };
   SwaggerModel.prototype.toString = function () {
-    return 'SwaggerModel(filename=' + Kotlin.toString(this.filename) + (', info=' + Kotlin.toString(this.info)) + (', basePath=' + Kotlin.toString(this.basePath)) + (', schemes=' + Kotlin.toString(this.schemes)) + (', produces=' + Kotlin.toString(this.produces)) + (', consumes=' + Kotlin.toString(this.consumes)) + (', securityDefinitions=' + Kotlin.toString(this.securityDefinitions)) + (', paths=' + Kotlin.toString(this.paths)) + (', definitions=' + Kotlin.toString(this.definitions)) + ')';
+    return 'SwaggerModel(filename=' + Kotlin.toString(this.filename) + (', info=' + Kotlin.toString(this.info)) + (', servers=' + Kotlin.toString(this.servers)) + (', produces=' + Kotlin.toString(this.produces)) + (', consumes=' + Kotlin.toString(this.consumes)) + (', securityDefinitions=' + Kotlin.toString(this.securityDefinitions)) + (', paths=' + Kotlin.toString(this.paths)) + (', definitions=' + Kotlin.toString(this.definitions)) + ')';
   };
   SwaggerModel.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.filename) | 0;
     result = result * 31 + Kotlin.hashCode(this.info) | 0;
-    result = result * 31 + Kotlin.hashCode(this.basePath) | 0;
-    result = result * 31 + Kotlin.hashCode(this.schemes) | 0;
+    result = result * 31 + Kotlin.hashCode(this.servers) | 0;
     result = result * 31 + Kotlin.hashCode(this.produces) | 0;
     result = result * 31 + Kotlin.hashCode(this.consumes) | 0;
     result = result * 31 + Kotlin.hashCode(this.securityDefinitions) | 0;
@@ -10023,8 +11918,14 @@
     return result;
   };
   SwaggerModel.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.filename, other.filename) && Kotlin.equals(this.info, other.info) && Kotlin.equals(this.basePath, other.basePath) && Kotlin.equals(this.schemes, other.schemes) && Kotlin.equals(this.produces, other.produces) && Kotlin.equals(this.consumes, other.consumes) && Kotlin.equals(this.securityDefinitions, other.securityDefinitions) && Kotlin.equals(this.paths, other.paths) && Kotlin.equals(this.definitions, other.definitions)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.filename, other.filename) && Kotlin.equals(this.info, other.info) && Kotlin.equals(this.servers, other.servers) && Kotlin.equals(this.produces, other.produces) && Kotlin.equals(this.consumes, other.consumes) && Kotlin.equals(this.securityDefinitions, other.securityDefinitions) && Kotlin.equals(this.paths, other.paths) && Kotlin.equals(this.definitions, other.definitions)))));
   };
+  function toKotlin_0($receiver, type) {
+    return toKotlin($receiver, type.ktype);
+  }
+  function toKotlin_1($receiver, type) {
+    return toKotlin_0($receiver, type.type);
+  }
   function Dynamic() {
     Dynamic_instance = this;
   }
@@ -10156,7 +12057,9 @@
       return null;
   };
   DynamicAccess.prototype.toBoolOrNull_mzud1t$ = function ($receiver) {
-    if (typeof $receiver === 'string')
+    if (typeof $receiver === 'boolean')
+      return $receiver;
+    else if (typeof $receiver === 'string')
       return equals($receiver, '1') || equals($receiver, 'true') || equals($receiver, 'on');
     else if (Kotlin.isNumber($receiver))
       return numberToInt($receiver) !== 0;
@@ -10344,6 +12247,21 @@
   Json.prototype.parse_61zpoe$ = function (s) {
     return this.decode_zdjs8x$(new StrReader(s));
   };
+  Json.prototype.followReference_d0xna2$ = function (current, root, path) {
+    var $receiver = package$util.DynamicAccess;
+    var tmp$;
+    if (!startsWith(path, '#/')) {
+      throw IllegalStateException_init('Only supported absolute JSON paths!'.toString());
+    }
+    var rpath = path.substring(2);
+    var node = root;
+    tmp$ = split_0(rpath, ['/']).iterator();
+    while (tmp$.hasNext()) {
+      var part = tmp$.next();
+      node = $receiver.get_s2h60f$(node, part);
+    }
+    return node;
+  };
   var StrReader$readWhile$lambda = wrapFunction(function () {
     return function (closure$filter, this$StrReader) {
       return function () {
@@ -10434,6 +12352,9 @@
 
         break;
     }
+  };
+  Json.prototype.stringify_s8jyv4$ = function (obj) {
+    return this.encodeUntyped_s8jyv4$(obj);
   };
   Json.prototype.encodeUntyped_s8jyv4$ = function (obj) {
     var $receiver = StringBuilder_init();
@@ -10615,6 +12536,73 @@
   function toJsonUntyped($receiver) {
     return Json_getInstance().encodeUntyped_s8jyv4$($receiver);
   }
+  function MetaListIterable(items) {
+    this.items = items;
+  }
+  MetaListIterable.prototype.iterator = function () {
+    var $receiver = withIndex(this.items);
+    var destination = ArrayList_init_0(collectionSizeOrDefault($receiver, 10));
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      destination.add_11rb$(to(new IteratorStepInfo(item.index, this.items.size, item.value), item.value));
+    }
+    return destination.iterator();
+  };
+  MetaListIterable.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MetaListIterable',
+    interfaces: [Iterable]
+  };
+  function get_metaIter($receiver) {
+    return new MetaListIterable(toList($receiver));
+  }
+  function IteratorStepInfo(index0, length, item) {
+    this.index0 = index0;
+    this.length = length;
+    this.item = item;
+  }
+  Object.defineProperty(IteratorStepInfo.prototype, 'isFirst', {
+    get: function () {
+      return this.index0 === 0;
+    }
+  });
+  Object.defineProperty(IteratorStepInfo.prototype, 'isLast', {
+    get: function () {
+      return this.index0 >= (this.length - 1 | 0);
+    }
+  });
+  IteratorStepInfo.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'IteratorStepInfo',
+    interfaces: []
+  };
+  IteratorStepInfo.prototype.component1 = function () {
+    return this.index0;
+  };
+  IteratorStepInfo.prototype.component2 = function () {
+    return this.length;
+  };
+  IteratorStepInfo.prototype.component3 = function () {
+    return this.item;
+  };
+  IteratorStepInfo.prototype.copy_vq7693$ = function (index0, length, item) {
+    return new IteratorStepInfo(index0 === void 0 ? this.index0 : index0, length === void 0 ? this.length : length, item === void 0 ? this.item : item);
+  };
+  IteratorStepInfo.prototype.toString = function () {
+    return 'IteratorStepInfo(index0=' + Kotlin.toString(this.index0) + (', length=' + Kotlin.toString(this.length)) + (', item=' + Kotlin.toString(this.item)) + ')';
+  };
+  IteratorStepInfo.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.index0) | 0;
+    result = result * 31 + Kotlin.hashCode(this.length) | 0;
+    result = result * 31 + Kotlin.hashCode(this.item) | 0;
+    return result;
+  };
+  IteratorStepInfo.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.index0, other.index0) && Kotlin.equals(this.length, other.length) && Kotlin.equals(this.item, other.item)))));
+  };
   function StrReader(str, file, pos) {
     if (file === void 0)
       file = 'file';
@@ -11040,6 +13028,12 @@
     var element = new SlotInstance$RenderBlock(false, callback);
     $receiver.add_11rb$(element);
   };
+  BlockBuilder.prototype.prepend_qu2wte$ = function (slot, once, callback) {
+    if (once === void 0)
+      once = false;
+    var instance = this._gen_2hbfcb$(slot);
+    instance.blocks.add_wxm5ur$(0, new SlotInstance$RenderBlock(false, callback));
+  };
   function BlockBuilder$appendSeparated$lambda$lambda(closure$callback) {
     return function ($receiver) {
       closure$callback($receiver);
@@ -11057,19 +13051,37 @@
       once = false;
     this.append_qu2wte$(slot, once, BlockBuilder$appendSeparated$lambda(callback));
   };
-  function BlockBuilder$fileText$lambda(closure$callback_0, closure$charset_0) {
+  function BlockBuilder$prependSeparated$lambda$lambda(closure$callback) {
+    return function ($receiver) {
+      closure$callback($receiver);
+      return Unit;
+    };
+  }
+  function BlockBuilder$prependSeparated$lambda(closure$callback) {
+    return function ($receiver) {
+      SEPARATOR($receiver, BlockBuilder$prependSeparated$lambda$lambda(closure$callback));
+      return Unit;
+    };
+  }
+  BlockBuilder.prototype.prependSeparated_qu2wte$ = function (slot, once, callback) {
+    if (once === void 0)
+      once = false;
+    this.prepend_qu2wte$(slot, once, BlockBuilder$prependSeparated$lambda(callback));
+  };
+  function BlockBuilder$fileText$lambda(closure$callback_0, this$BlockBuilder_0, closure$charset_0) {
     return function (continuation_0, suspended) {
-      var instance = new Coroutine$BlockBuilder$fileText$lambda(closure$callback_0, closure$charset_0, continuation_0);
+      var instance = new Coroutine$BlockBuilder$fileText$lambda(closure$callback_0, this$BlockBuilder_0, closure$charset_0, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
-  function Coroutine$BlockBuilder$fileText$lambda(closure$callback_0, closure$charset_0, continuation_0) {
+  function Coroutine$BlockBuilder$fileText$lambda(closure$callback_0, this$BlockBuilder_0, closure$charset_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
     this.local$closure$callback = closure$callback_0;
+    this.local$this$BlockBuilder = this$BlockBuilder_0;
     this.local$closure$charset = closure$charset_0;
     this.local$indenter = void 0;
   }
@@ -11094,7 +13106,7 @@
           case 1:
             throw this.exception_0;
           case 2:
-            return toByteArray(this.local$indenter.toString(), this.local$closure$charset);
+            return toByteArray(this.local$this$BlockBuilder.expandTabs_44n53b$_0(this.local$indenter.toString()), this.local$closure$charset);
         }
       }
        catch (e) {
@@ -11114,7 +13126,10 @@
       charset = UTF8_getInstance();
     if (mode === void 0)
       mode = toInt('644', 8);
-    this.fileBinary_qk5z91$(name, charset, mode, BlockBuilder$fileText$lambda(callback, charset));
+    this.fileBinary_qk5z91$(name, charset, mode, BlockBuilder$fileText$lambda(callback, this, charset));
+  };
+  BlockBuilder.prototype.expandTabs_44n53b$_0 = function ($receiver) {
+    return replace($receiver, '\t', '    ');
   };
   function BlockBuilder$fileBinary$lambda(closure$name_0, closure$callback_0, closure$mode_0, closure$charset_0) {
     return function (continuation_0, suspended) {
@@ -11741,6 +13756,33 @@
     }
     return out;
   }
+  function ID() {
+    ID_instance = this;
+  }
+  ID.prototype.normalizeMethodName_61zpoe$ = function (str) {
+    return decapitalize(this.normalize_61zpoe$(str));
+  };
+  ID.prototype.normalizeClassName_61zpoe$ = function (str) {
+    return capitalize(this.normalize_61zpoe$(str));
+  };
+  function ID$normalize$lambda(it) {
+    return capitalize(it.value);
+  }
+  ID.prototype.normalize_61zpoe$ = function (str) {
+    return joinToString_0(Regex_init('\\w+').findAll_905azu$(str), '', void 0, void 0, void 0, void 0, ID$normalize$lambda);
+  };
+  ID.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'ID',
+    interfaces: []
+  };
+  var ID_instance = null;
+  function ID_getInstance() {
+    if (ID_instance === null) {
+      new ID();
+    }
+    return ID_instance;
+  }
   function Indenter(actions) {
     Indenter$Companion_getInstance();
     if (actions === void 0) {
@@ -12326,6 +14368,28 @@
   function xml($receiver, callback) {
     callback(new XmlIndenter($receiver));
   }
+  function indentStringHere($receiver, callback) {
+    return indentString($receiver.indentLevel, callback);
+  }
+  function indentString$lambda(closure$level, closure$callback) {
+    return function ($receiver) {
+      var count = closure$level;
+      $receiver._indent_za3lpa$(count);
+      try {
+        closure$callback($receiver);
+      }
+      finally {
+        $receiver._unindent_za3lpa$(count);
+      }
+      return Unit;
+    };
+  }
+  var trim_0 = Kotlin.kotlin.text.trim_gw00vp$;
+  function indentString(level, callback) {
+    var $receiver = Indenter$Companion_getInstance().invoke_yot30u$(indentString$lambda(level, callback)).toString();
+    var tmp$;
+    return trim_0(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE()).toString();
+  }
   function MvnArtifact(dependency) {
     this.dependency = dependency;
     this.parts = split_0(this.dependency, [':']);
@@ -12456,10 +14520,41 @@
       return $receiver;
     }
   }
+  function get_kquoteLit$lambda(it) {
+    return get_kquoteLit(it);
+  }
+  function get_kquoteLit$lambda_0(it) {
+    return get_kquoteLit(it);
+  }
+  function get_kquoteLit$lambda_1(it) {
+    return get_kquoteLit(it.key) + ' to ' + get_kquoteLit(it.value);
+  }
+  function get_kquoteLit($receiver) {
+    var tmp$;
+    if ($receiver == null)
+      tmp$ = 'null';
+    else if (Kotlin.isNumber($receiver))
+      tmp$ = toString($receiver);
+    else if (typeof $receiver === 'string')
+      tmp$ = quote($receiver);
+    else if (Kotlin.isType($receiver, Pair))
+      tmp$ = get_kquoteLit($receiver.first) + ' to ' + get_kquoteLit($receiver.second);
+    else if (Kotlin.isType($receiver, List))
+      tmp$ = 'listOf(' + joinToString($receiver, ', ', void 0, void 0, void 0, void 0, get_kquoteLit$lambda) + ')';
+    else if (Kotlin.isType($receiver, Set))
+      tmp$ = 'setOf(' + joinToString($receiver, ', ', void 0, void 0, void 0, void 0, get_kquoteLit$lambda_0) + ')';
+    else if (Kotlin.isType($receiver, Map))
+      tmp$ = 'mapOf(' + joinToString($receiver.entries, ', ', void 0, void 0, void 0, void 0, get_kquoteLit$lambda_1) + ')';
+    else if (Kotlin.isType($receiver, Regex))
+      tmp$ = 'Regex(' + quote($receiver.pattern) + ')';
+    else
+      tmp$ = '<error>';
+    return tmp$;
+  }
   function SemVer(version) {
     this.version = version;
     this.parts1_0 = split(this.version, Kotlin.charArrayOf(45), void 0, 2);
-    this.parts2_0 = split(first_0(this.parts1_0), Kotlin.charArrayOf(46));
+    this.parts2_0 = split(first(this.parts1_0), Kotlin.charArrayOf(46));
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5;
     this.major = (tmp$_0 = (tmp$ = getOrNull(this.parts2_0, 0)) != null ? toIntOrNull(tmp$) : null) != null ? tmp$_0 : 0;
     this.minor = (tmp$_2 = (tmp$_1 = getOrNull(this.parts2_0, 1)) != null ? toIntOrNull(tmp$_1) : null) != null ? tmp$_2 : 0;
@@ -13153,6 +15248,7 @@
   });
   package$project.addHoconDeployment_xi0fd9$ = addHoconDeployment;
   package$project.addHoconKtor_xi0fd9$ = addHoconKtor;
+  package$project.addHoconTop_xi0fd9$ = addHoconTop;
   Object.defineProperty(package$project, 'ApplicationKt', {
     get: ApplicationKt_getInstance
   });
@@ -13187,47 +15283,149 @@
   Object.defineProperty(package$project, 'GitIgnoreFile', {
     get: GitIgnoreFile_getInstance
   });
+  Object.defineProperty(package$project, 'LogBackXml', {
+    get: LogBackXml_getInstance
+  });
+  JsonRule.RuleList = JsonRule$RuleList;
+  JsonRule.MinMaxDouble = JsonRule$MinMaxDouble;
+  JsonRule.MinMaxInt = JsonRule$MinMaxInt;
+  JsonRule.MinInt = JsonRule$MinInt;
+  JsonRule.MaxInt = JsonRule$MaxInt;
+  JsonRule.MinLength = JsonRule$MinLength;
+  JsonRule.MinItems = JsonRule$MinItems;
+  JsonRule.MinProperties = JsonRule$MinProperties;
+  JsonRule.MaxLength = JsonRule$MaxLength;
+  JsonRule.MaxItems = JsonRule$MaxItems;
+  JsonRule.MaxProperties = JsonRule$MaxProperties;
+  JsonRule.Not = JsonRule$Not;
+  JsonRule.AllOf = JsonRule$AllOf;
+  JsonRule.AnyOf = JsonRule$AnyOf;
+  JsonRule.OneOf = JsonRule$OneOf;
+  JsonRule.MultipleOf = JsonRule$MultipleOf;
+  JsonRule.Minimum = JsonRule$Minimum;
+  JsonRule.Maximum = JsonRule$Maximum;
+  JsonRule.Range = JsonRule$Range;
+  Object.defineProperty(JsonRule, 'UniqueItems', {
+    get: JsonRule$UniqueItems_getInstance
+  });
+  Object.defineProperty(JsonRule, 'Required', {
+    get: JsonRule$Required_getInstance
+  });
+  JsonRule.Pattern = JsonRule$Pattern;
+  JsonRule.Enumerable = JsonRule$Enumerable;
+  Object.defineProperty(JsonRule, 'Companion', {
+    get: JsonRule$Companion_getInstance
+  });
+  var package$swagger = package$start.swagger || (package$start.swagger = {});
+  package$swagger.JsonRule = JsonRule;
+  package$swagger.toKotlin_h5xh7q$ = toKotlin;
   Object.defineProperty(SwaggerGenerator, 'Companion', {
     get: SwaggerGenerator$Companion_getInstance
   });
-  var package$swagger = package$start.swagger || (package$start.swagger = {});
   package$swagger.SwaggerGenerator = SwaggerGenerator;
+  package$swagger.get_optComma_cbok15$ = get_optComma;
+  SwaggerModel.Server = SwaggerModel$Server;
+  SwaggerModel.ServerVariable = SwaggerModel$ServerVariable;
+  SwaggerModel.InfoGenType = SwaggerModel$InfoGenType;
   SwaggerModel.GenType = SwaggerModel$GenType;
   SwaggerModel.BasePrimType = SwaggerModel$BasePrimType;
-  SwaggerModel.PrimType = SwaggerModel$PrimType;
+  SwaggerModel.BaseStringType = SwaggerModel$BaseStringType;
+  Object.defineProperty(SwaggerModel, 'PasswordType', {
+    get: SwaggerModel$PasswordType_getInstance
+  });
+  Object.defineProperty(SwaggerModel, 'Base64Type', {
+    get: SwaggerModel$Base64Type_getInstance
+  });
+  Object.defineProperty(SwaggerModel, 'BinaryStringType', {
+    get: SwaggerModel$BinaryStringType_getInstance
+  });
   Object.defineProperty(SwaggerModel, 'StringType', {
     get: SwaggerModel$StringType_getInstance
   });
-  Object.defineProperty(SwaggerModel, 'IntType', {
-    get: SwaggerModel$IntType_getInstance
+  Object.defineProperty(SwaggerModel, 'VoidType', {
+    get: SwaggerModel$VoidType_getInstance
   });
-  Object.defineProperty(SwaggerModel, 'LongType', {
-    get: SwaggerModel$LongType_getInstance
+  SwaggerModel.IntegerType = SwaggerModel$IntegerType;
+  Object.defineProperty(SwaggerModel, 'Int32Type', {
+    get: SwaggerModel$Int32Type_getInstance
+  });
+  Object.defineProperty(SwaggerModel, 'Int64Type', {
+    get: SwaggerModel$Int64Type_getInstance
   });
   Object.defineProperty(SwaggerModel, 'BoolType', {
     get: SwaggerModel$BoolType_getInstance
   });
+  Object.defineProperty(SwaggerModel, 'FloatType', {
+    get: SwaggerModel$FloatType_getInstance
+  });
   Object.defineProperty(SwaggerModel, 'DoubleType', {
     get: SwaggerModel$DoubleType_getInstance
   });
-  SwaggerModel.RefType = SwaggerModel$RefType;
+  Object.defineProperty(SwaggerModel, 'DateType', {
+    get: SwaggerModel$DateType_getInstance
+  });
+  Object.defineProperty(SwaggerModel, 'DateTimeType', {
+    get: SwaggerModel$DateTimeType_getInstance
+  });
+  SwaggerModel.NamedObject = SwaggerModel$NamedObject;
   SwaggerModel.ArrayType = SwaggerModel$ArrayType;
   SwaggerModel.OptionalType = SwaggerModel$OptionalType;
   SwaggerModel.ObjType = SwaggerModel$ObjType;
   SwaggerModel.Prop = SwaggerModel$Prop;
   SwaggerModel.TypeDef = SwaggerModel$TypeDef;
   SwaggerModel.SecurityDefinition = SwaggerModel$SecurityDefinition;
-  SwaggerModel.NamedUrl = SwaggerModel$NamedUrl;
+  SwaggerModel.Contact = SwaggerModel$Contact;
+  SwaggerModel.License = SwaggerModel$License;
+  Object.defineProperty(SwaggerModel$Inside, 'QUERY', {
+    get: SwaggerModel$Inside$QUERY_getInstance
+  });
+  Object.defineProperty(SwaggerModel$Inside, 'HEADER', {
+    get: SwaggerModel$Inside$HEADER_getInstance
+  });
+  Object.defineProperty(SwaggerModel$Inside, 'PATH', {
+    get: SwaggerModel$Inside$PATH_getInstance
+  });
+  Object.defineProperty(SwaggerModel$Inside, 'FORM_DATA', {
+    get: SwaggerModel$Inside$FORM_DATA_getInstance
+  });
+  Object.defineProperty(SwaggerModel$Inside, 'BODY', {
+    get: SwaggerModel$Inside$BODY_getInstance
+  });
+  Object.defineProperty(SwaggerModel$Inside, 'Companion', {
+    get: SwaggerModel$Inside$Companion_getInstance
+  });
+  SwaggerModel.Inside = SwaggerModel$Inside;
+  Object.defineProperty(SwaggerModel$SecurityType, 'API_KEY', {
+    get: SwaggerModel$SecurityType$API_KEY_getInstance
+  });
+  Object.defineProperty(SwaggerModel$SecurityType, 'HTTP', {
+    get: SwaggerModel$SecurityType$HTTP_getInstance
+  });
+  Object.defineProperty(SwaggerModel$SecurityType, 'OAUTH2', {
+    get: SwaggerModel$SecurityType$OAUTH2_getInstance
+  });
+  Object.defineProperty(SwaggerModel$SecurityType, 'OPEN_ID_CONNECT', {
+    get: SwaggerModel$SecurityType$OPEN_ID_CONNECT_getInstance
+  });
+  Object.defineProperty(SwaggerModel$SecurityType, 'Companion', {
+    get: SwaggerModel$SecurityType$Companion_getInstance
+  });
+  SwaggerModel.SecurityType = SwaggerModel$SecurityType;
   SwaggerModel.Parameter = SwaggerModel$Parameter;
   SwaggerModel.Security = SwaggerModel$Security;
   SwaggerModel.PathMethodModel = SwaggerModel$PathMethodModel;
   SwaggerModel.PathModel = SwaggerModel$PathModel;
   SwaggerModel.SwaggerInfo = SwaggerModel$SwaggerInfo;
   SwaggerModel.Response = SwaggerModel$Response;
+  Object.defineProperty(SwaggerModel$Companion.prototype, 'Versions', {
+    get: SwaggerModel$Companion$Versions_getInstance
+  });
   Object.defineProperty(SwaggerModel, 'Companion', {
     get: SwaggerModel$Companion_getInstance
   });
   package$swagger.SwaggerModel = SwaggerModel;
+  package$swagger.toKotlin_8us2re$ = toKotlin_0;
+  package$swagger.toKotlin_d3r508$ = toKotlin_1;
   Object.defineProperty(package$util, 'Dynamic', {
     get: Dynamic_getInstance
   });
@@ -13239,6 +15437,9 @@
   });
   package$util.CustomJsonSerializer = CustomJsonSerializer;
   package$util.toJsonUntyped_3huzfx$ = toJsonUntyped;
+  package$util.MetaListIterable = MetaListIterable;
+  package$util.get_metaIter_4mqhgw$ = get_metaIter;
+  package$util.IteratorStepInfo = IteratorStepInfo;
   package$util.StrReader = StrReader;
   package$util.readStringLit_4ve410$ = readStringLit;
   package$util.generate_maf521$ = generate;
@@ -13281,6 +15482,9 @@
   package$util.get_hex_964n91$ = get_hex;
   package$util.get_hex_s8ev3n$ = get_hex_0;
   package$util.get_shex_s8ev3n$ = get_shex;
+  Object.defineProperty(package$util, 'ID', {
+    get: ID_getInstance
+  });
   Object.defineProperty(Indenter, 'INDENTS', {
     get: Indenter$INDENTS_getInstance
   });
@@ -13311,12 +15515,15 @@
   package$util.SEPARATOR_s3zzuq$ = SEPARATOR;
   package$util.XmlIndenter = XmlIndenter;
   package$util.xml_ldohgd$ = xml;
+  package$util.indentStringHere_s3zzuq$ = indentStringHere;
+  package$util.indentString_c25ews$ = indentString;
   package$util.MvnArtifact = MvnArtifact;
   package$util.escape_pdl1vz$ = escape;
   package$util.unescape_pdl1vz$ = unescape;
   package$util.quote_5cw0du$ = quote;
   package$util.isQuoted_pdl1vz$ = isQuoted;
   package$util.unquote_pdl1vz$ = unquote;
+  package$util.get_kquoteLit_mzud1t$ = get_kquoteLit;
   package$util.SemVer = SemVer;
   Object.defineProperty(ZipBuilder, 'Companion', {
     get: ZipBuilder$Companion_getInstance
