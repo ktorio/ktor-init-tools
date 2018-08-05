@@ -53,10 +53,12 @@ data class SwaggerModel(
         val enum: List<String>?
     )
 
-    interface GenType
-    interface BasePrimType : GenType
-    data class PrimType(val type: String, val format: String?, val untyped: Any?) : BasePrimType
+    class InfoGenType<T : GenType>(val type: T, val rule: JsonRule?)
 
+    interface GenType {
+    }
+    interface BasePrimType : GenType {
+    }
     interface BaseStringType : BasePrimType
 
     object PasswordType : BaseStringType {
@@ -75,13 +77,20 @@ data class SwaggerModel(
         override fun toString(): String = "String"
     }
 
-    interface IntegerType : BasePrimType
+    abstract class IntegerType : BasePrimType {
 
-    object Int32Type : IntegerType {
+    }
+
+    inline fun <T> T.validate(validator: (T) -> Boolean): T {
+        if (!validator(this)) throw IllegalArgumentException()
+        return this
+    }
+
+    object Int32Type : IntegerType() {
         override fun toString(): String = "Int"
     }
 
-    object Int64Type : IntegerType {
+    object Int64Type : IntegerType() {
         override fun toString(): String = "Long"
     }
 
@@ -105,23 +114,24 @@ data class SwaggerModel(
         override fun toString(): String = "DateTime"
     }
 
-    data class RefType(val type: String) : GenType {
-        override fun toString(): String = type.substringAfterLast('/')
+    data class NamedObject(val path: String, val kind: InfoGenType<ObjType>) : GenType {
+        val name = path.substringAfterLast('/')
+        override fun toString(): String = name
     }
 
-    data class ArrayType(val items: GenType) : GenType {
+    data class ArrayType(val items: InfoGenType<GenType>) : GenType {
         override fun toString(): String = "List<$items>"
     }
 
-    data class OptionalType(val type: GenType) : GenType {
+    data class OptionalType(val type: InfoGenType<GenType>) : GenType {
         override fun toString(): String = "$type?"
     }
 
-    data class ObjType(val fields: Map<String, GenType>) : GenType {
-        override fun toString(): String = "Any/*Unsupported {$fields}*/"
+    data class ObjType(val namePath: String?, val fields: Map<String, InfoGenType<GenType>>) : GenType {
+        override fun toString(): String = "Any/*Unsupported {$fields} namePath=$namePath*/"
     }
 
-    data class Prop(val name: String, val type: GenType, val required: Boolean) {
+    data class Prop(val name: String, val type: InfoGenType<GenType>, val required: Boolean) {
         val rtype = if (required) type else OptionalType(type)
     }
 
@@ -149,7 +159,7 @@ data class SwaggerModel(
         val required: Boolean,
         val description: String,
         val default: Any?,
-        val schema: GenType
+        val schema: InfoGenType<GenType>
     )
 
     data class Security(
@@ -188,7 +198,7 @@ data class SwaggerModel(
     data class Response(
         val code: String,
         val description: String,
-        val schema: GenType?
+        val schema: InfoGenType<GenType>?
     ) {
         val intCode = when (code) {
             "default" -> 200
@@ -207,15 +217,19 @@ data class SwaggerModel(
         }
 
         // https://swagger.io/specification/#data-types
-        fun parseDefinitionElement(def: Any?): GenType {
+        fun parseDefinitionElement(def: Any?, root: Any?, namePath: String?): InfoGenType<GenType> {
             return Dynamic {
                 val ref = def["\$ref"]
                 if (ref != null) {
-                    RefType(ref.str)
+                    val path = ref.str
+                    val referee = parseDefinitionElement(Json.followReference(def, root, path), root, path)
+                    return if (referee.type is ObjType) InfoGenType(NamedObject(path, referee as InfoGenType<ObjType>), null) else referee
+                    //RefType(ref.str)
                 } else {
                     val type = def["type"]
                     val format = def["format"]
-                    when (type) {
+                    val rule = JsonRule.parseOrNull(def)
+                    val ptype = when (type) {
                         // Primitive
                         "integer" -> when (format.str) {
                             "int32", "null", "" -> Int32Type
@@ -240,25 +254,27 @@ data class SwaggerModel(
                         // Composed Types
                         "array" -> {
                             val items = def["items"]
-                            ArrayType(parseDefinitionElement(items))
+                            ArrayType(parseDefinitionElement(items, root, null))
                         }
                         "object" -> {
                             val props = def["properties"]
                             val entries =
-                                props.strEntries.map { it.first to parseDefinitionElement(it.second) }.toMap()
-                            ObjType(entries)
+                                props.strEntries.map { it.first to parseDefinitionElement(it.second, root, null) }
+                                    .toMap()
+                            ObjType(namePath, entries)
                         }
                         "null" -> error("null? : $def")
                         else -> {
-                            //error("Other prim $type, $def")
-                            PrimType(type.str, format?.str, def)
+                            error("Other prim $type, $def")
+                            //PrimType(type.str, format?.str, def)
                         }
                     }
+                    InfoGenType(ptype, rule)
                 }
             }
         }
 
-        fun parseDefinition(name: String, def: Any?): TypeDef {
+        fun parseDefinition(name: String, def: Any?, root: Any?): TypeDef {
             //println("Definition $name:")
             return Dynamic {
                 //println(" - " + def["required"].list)
@@ -267,7 +283,7 @@ data class SwaggerModel(
                 val required = def["required"].strList.toSet()
                 val props = def["properties"].let {
                     it.strEntries.map { (key, element) ->
-                        val pdef = parseDefinitionElement(element)
+                        val pdef = parseDefinitionElement(element, root, null)
                         key to Prop(key.str, pdef, key in required)
                     }.toMap()
                 }
@@ -276,7 +292,7 @@ data class SwaggerModel(
             }
         }
 
-        fun parseParameter(def: Any?): Parameter {
+        fun parseParameter(def: Any?, root: Any?): Parameter {
             return Dynamic {
                 Parameter(
                     name = def["name"].str,
@@ -284,12 +300,12 @@ data class SwaggerModel(
                     required = def["required"]?.bool ?: false,
                     description = def["description"].str,
                     default = def["default"],
-                    schema = parseDefinitionElement(def["schema"] ?: def)
+                    schema = parseDefinitionElement(def["schema"] ?: def, root, null)
                 )
             }
         }
 
-        fun parseMethodPath(path: String, method: String, def: Any?): PathMethodModel {
+        fun parseMethodPath(path: String, method: String, def: Any?, root: Any?): PathMethodModel {
             return Dynamic {
                 PathMethodModel(
                     path = path,
@@ -303,26 +319,30 @@ data class SwaggerModel(
                         Security(name, info.strList)
                     },
                     operationId = def["tags"].str,
-                    parameters = def["parameters"].list.map { parseParameter(it) },
+                    parameters = def["parameters"].list.map { parseParameter(it, root) },
                     responses = def["responses"].let {
                         it.strEntries.map { (code, rdef) ->
-                            Response(code, rdef["description"].str, rdef["schema"]?.let { parseDefinitionElement(it) })
+                            Response(
+                                code,
+                                rdef["description"].str,
+                                rdef["schema"]?.let { parseDefinitionElement(it, root, null) })
                         }
                     }
                 )
             }
         }
 
-        fun parsePath(path: String, def: Any?): PathModel {
+        fun parsePath(path: String, def: Any?, root: Any?): PathModel {
             return Dynamic {
                 PathModel(path, def.strEntries.map { (method, methodDef) ->
-                    method to parseMethodPath(path, method, methodDef)
+                    method to parseMethodPath(path, method, methodDef, root)
                 }.toMap())
             }
         }
 
         fun parse(model: Any?, filename: String = "unknown.json"): SwaggerModel {
             return Dynamic {
+                val root = model
                 val version = model["swagger"] ?: model["openapi"]
                 val semVer = SemVer(version.toString())
 
@@ -343,20 +363,26 @@ data class SwaggerModel(
                     val host = model["host"]?.str ?: "127.0.0.1"
                     val basePath = model["basePath"]?.str ?: "/"
                     val schemes = model["schemes"].strList
-                    servers += Server(url = "{scheme}://$host$basePath", description = info.description, variables = mapOf(
-                        "scheme" to ServerVariable("scheme", schemes.firstOrNull() ?: "https", "", schemes)
-                    ))
+                    servers += Server(
+                        url = "{scheme}://$host$basePath", description = info.description, variables = mapOf(
+                            "scheme" to ServerVariable("scheme", schemes.firstOrNull() ?: "https", "", schemes)
+                        )
+                    )
                 } else {
                     for (userver in model["servers"].list) {
-                        servers += Server(url = userver["url"].str, description = userver["description"]?.str ?: "API", variables = userver["variables"].map.map { (uname, uvar) ->
-                            val name = uname.str
-                            name to ServerVariable(
-                                name,
-                                uvar["default"].str,
-                                uvar["description"].str,
-                                uvar["enum"]?.strList
-                            )
-                        }.toMap())
+                        servers += Server(
+                            url = userver["url"].str,
+                            description = userver["description"]?.str ?: "API",
+                            variables = userver["variables"].map.map { (uname, uvar) ->
+                                val name = uname.str
+                                name to ServerVariable(
+                                    name,
+                                    uvar["default"].str,
+                                    uvar["description"].str,
+                                    uvar["enum"]?.strList
+                                )
+                            }.toMap()
+                        )
                     }
                 }
                 val produces = model["produces"].list.map { it.str }
@@ -374,12 +400,12 @@ data class SwaggerModel(
                 }
                 val paths = model["paths"].let {
                     it.strEntries.map { (key, obj) ->
-                        key to parsePath(key, obj)
+                        key to parsePath(key, obj, root)
                     }.toMap()
                 }
                 val definitions = model["definitions"].let {
                     it.strEntries.map { (key, obj) ->
-                        key to parseDefinition(key, obj)
+                        key to parseDefinition(key, obj, root)
                     }.toMap()
                 }
                 SwaggerModel(

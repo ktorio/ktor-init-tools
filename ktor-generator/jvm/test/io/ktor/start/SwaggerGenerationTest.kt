@@ -35,6 +35,17 @@ class SwaggerGenerationTest {
         Unit
     }
 
+    @Test
+    fun modelWithJsonSchemaRules() = runBlocking {
+        val model = petstore3
+        val swaggerGenerator = SwaggerGenerator(model)
+        val results = generate(BuildInfo(), swaggerGenerator)
+        for ((file, res) in results) {
+            println("$file: $res")
+        }
+        Unit
+    }
+
     @Test(expected = IllegalArgumentException::class)
     fun invalidJson() = runBlocking {
         SwaggerModel.parse(Json.parse(getResourceString("/empty.json")!!))

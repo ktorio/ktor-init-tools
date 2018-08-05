@@ -59,3 +59,18 @@ fun String.unquote(): String = if (isQuoted()) {
 } else {
     this
 }
+
+val Any?.kquoteLit: String get() {
+    return when (this) {
+        null -> "null"
+        is Number -> "$this"
+        is String -> this.quote()
+        is Pair<*, *> -> this.first.kquoteLit + " to " + this.second.kquoteLit
+        is List<*> -> "listOf(" + this.joinToString(", ") { it.kquoteLit } + ")"
+        is Set<*> -> "setOf(" + this.joinToString(", ") { it.kquoteLit } + ")"
+        is Map<*, *> ->
+            "mapOf(" + this.entries.joinToString(", ") { it.key.kquoteLit + " to " + it.value.kquoteLit } + ")"
+        is Regex -> "Regex(" + this.pattern.quote() + ")"
+        else -> "<error>"
+    }
+}

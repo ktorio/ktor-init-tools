@@ -5,6 +5,18 @@ object Json {
 
     fun parse(s: String): Any? = StrReader(s).decode()
 
+    fun followReference(current: Any?, root: Any?, path: String): Any? {
+        return Dynamic {
+            if (!path.startsWith("#/")) error("Only supported absolute JSON paths!")
+            val rpath = path.substring(2)
+            var node = root
+            for (part in rpath.split("/")) {
+                node = node[part]
+            }
+            node
+        }
+    }
+
     fun StrReader.decode(): Any? {
         val ic = skipSpaces().read()
         when (ic) {
@@ -53,6 +65,7 @@ object Json {
         }
     }
 
+    fun stringify(obj: Any?) = encodeUntyped(obj)
     fun encodeUntyped(obj: Any?) = StringBuilder().apply { encodeUntyped(obj, this) }.toString()
 
     fun encodeUntyped(obj: Any?, b: StringBuilder) {

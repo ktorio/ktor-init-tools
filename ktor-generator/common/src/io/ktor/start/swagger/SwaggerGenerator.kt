@@ -24,11 +24,13 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             +"class HttpException(val code: HttpStatusCode, val description: String = code.description) : RuntimeException(description)"
         }
         addExtensionMethods {
-            +"inline fun Parameters.getInt(name: String, default: () -> Int = {0}): Int = get(name)?.toInt() ?: default()"
-            +"inline fun <reified T : Any> Parameters.getTyped(name: String): T = getTyped(T::class, name)"
+            +"inline fun Parameters.getInt(name: String, verify: (Int) -> Boolean = { true }, default: () -> Int = {0}): Int = (get(name)?.toInt() ?: default()).verifyParam(name, verify)"
+            +"inline fun <reified T : Any> Parameters.getTyped(name: String, verify: (T) -> Boolean = { true }): T = getTyped(T::class, name).verifyParam(name, verify)"
             +"fun <T : Any> Parameters.getTyped(type: KClass<T>, name: String): T = TODO()"
             +"fun httpException(code: HttpStatusCode, message: String = code.description): Nothing = throw HttpException(code, message)"
             +"fun httpException(code: Int, message: String = \"Error \$code\"): Nothing = throw HttpException(HttpStatusCode(code, message))"
+            +"inline fun <T> T.verifyParam(name: String, callback: (T) -> Boolean): T { if (!callback(this)) throw IllegalArgumentException(\"\$name\"); return this }"
+
         }
         addCustomStatusPage {
             "exception<HttpException>"(suffix = " cause ->") {
@@ -36,14 +38,14 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             }
         }
         addApplicationClasses {
-        //addExtensionMethods {
+            //addExtensionMethods {
             for (def in model.definitions.values) {
                 +"data class ${def.name}("
                 indent {
                     val props = def.props.values
                     for ((index, prop) in props.withIndex()) {
                         val comma = if (index >= props.size - 1) "" else ","
-                        +"val ${prop.name}: ${prop.rtype.toKotlin()}$comma"
+                        +"val ${prop.name}: ${prop.type.toKotlin()}$comma"
                     }
                 }
                 +")"
@@ -85,10 +87,21 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                         else -> error("Unexpected")
                     }
 
-                    when (param.schema) {
-                        SwaggerModel.StringType -> +"val ${param.name} = $base.get(\"${param.name}\")"
-                        SwaggerModel.Int32Type -> +"val ${param.name} = $base.getInt(\"${param.name}\") { ${(param.default as? Number?)?.toInt() ?: 0} }"
-                        is SwaggerModel.ArrayType -> +"val ${param.name} = $base.getTyped<${param.schema.toKotlin()}>(\"${param.name}\")"
+                    val pschema = param.schema
+                    val prule = pschema.rule
+                    val ptype = pschema.type
+                    val verify = if (prule != null) {
+                        ", verify = { ${prule.toKotlin()} }"
+                    } else ""
+                    when (ptype) {
+                        is SwaggerModel.StringType -> +"val ${param.name} = $base.get(\"${param.name}\")"
+                        is SwaggerModel.Int32Type -> {
+                            +("val ${param.name} = $base.getInt(\"${param.name}\"$verify)" +
+                                    " { ${(param.default as? Number?)?.toInt() ?: 0} }")
+                        }
+                        is SwaggerModel.ArrayType -> {
+                            +"val ${param.name} = $base.getTyped<${ptype.toKotlin()}>(\"${param.name}\"$verify)"
+                        }
                         else -> {
                             // @TODO:
                             println("Unknown schema: ${param.schema}")
@@ -125,7 +138,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         val code = response.intCode
         if (code == 200) {
             val rindentLevel = indentLevel
-            +"call.respond(${Indenter { indent(rindentLevel + 2) { toKotlinDefault(response.schema) } }.toString().trim()})"
+            +"call.respond(${Indenter { indent(rindentLevel + 2) { toKotlinDefault(response.schema?.type) } }.toString().trim()})"
         } else {
             val httpStatus = HttpStatusCode.byCode[code]
             if (httpStatus != null) {
@@ -146,6 +159,8 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         }
     }
 
+    fun SwaggerModel.InfoGenType<*>.toKotlin(): String = type.toKotlin()
+
     fun SwaggerModel.GenType.toKotlin(): String = when (this) {
         is SwaggerModel.OptionalType -> "${this.type.toKotlin()}?"
         is SwaggerModel.StringType -> "String"
@@ -156,17 +171,13 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         is SwaggerModel.DoubleType -> "Double"
         is SwaggerModel.Int64Type -> "Long"
         is SwaggerModel.BoolType -> "Boolean"
-        is SwaggerModel.RefType -> {
-            type.substringAfterLast('/')
-        }
-        is SwaggerModel.ArrayType -> {
-            "List<${this.items.toKotlin()}>"
-        }
-        is SwaggerModel.ObjType -> {
-            "Any/*Unsupported ${this.fields}*/"
-        }
+        is SwaggerModel.NamedObject -> name
+        is SwaggerModel.ArrayType -> "List<${this.items.toKotlin()}>"
+        is SwaggerModel.ObjType -> "Any/*Unsupported ${this.fields}*/"
         else -> error("Unsupported '$this' class=${this::class}")
     }
+
+    fun Indenter.toKotlinDefault(type: SwaggerModel.InfoGenType<*>?) = toKotlinDefault(type?.type)
 
     fun Indenter.toKotlinDefault(type: SwaggerModel.GenType?) {
         when (type) {
@@ -179,33 +190,37 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             is SwaggerModel.DoubleType -> +"0.0"
             is SwaggerModel.Int64Type -> +"0L"
             is SwaggerModel.BoolType -> +"false"
-            is SwaggerModel.RefType -> {
-                val def = model.definitions[type.type.substringAfterLast('/')]
-                if (def != null) {
-                    +"${def.name}("
-                    indent {
-                        val props = def.props.entries.toList()
-                       for (index in props.indices) {
-                           val key = props[index].key
-                           val prop = props[index].value
-                           val last = index >= props.size - 1
-                           val comma = if (last) "" else ","
-                           val rindentLevel = this.indentLevel
-                           +"$key = ${Indenter { indent(rindentLevel) { toKotlinDefault(prop.rtype) } }.toString().trim()}$comma"
-                       }
+            is SwaggerModel.NamedObject -> {
+                val def = type.kind
+                +"${type.name}("
+                indent {
+                    val props = def.type.fields.entries.toList()
+                    for ((info, entry) in props.metaIter) {
+                        val (key, prop) = entry
+                        val rindentLevel = this.indentLevel
+                        +"$key = ${Indenter { indent(rindentLevel) { toKotlinDefault(prop) } }.toString().trim()}${info.optComma}"
                     }
-                    +")"
-                } else {
-                    +"error"
                 }
+                +")"
             }
             is SwaggerModel.ArrayType -> {
                 +"listOf()"
             }
             is SwaggerModel.ObjType -> {
-                +"Any()/*Unsupported ${type.fields}*/"
+                //+"Any()/*Unsupported ${type.fields}*/"
+                +"mapOf("
+                indent {
+                    for ((info, entry) in type.fields.entries.metaIter) {
+                        val (key, prop) = entry
+                        val rindentLevel = this.indentLevel
+                        +"${key.quote()} to ${Indenter { indent(rindentLevel) { toKotlinDefault(prop) } }.toString().trim()}${info.optComma}"
+                    }
+                }
+                +")"
             }
             else -> error("Unsupported '$type'")
         }
     }
 }
+
+val <T> IteratorStepInfo<T>.optComma get() = if (this.isLast) "" else ","
