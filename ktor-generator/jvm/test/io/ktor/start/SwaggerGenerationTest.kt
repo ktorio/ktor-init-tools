@@ -9,15 +9,23 @@ class SwaggerGenerationTest {
     val swagger by lazy { SwaggerModel.parse(Json.parse(getResourceString("/swagger.json")!!)) }
     val uspto by lazy { SwaggerModel.parse(Json.parse(getResourceString("/uspto.json")!!)) }
     val petstore3 by lazy { SwaggerModel.parse(Json.parse(getResourceString("/small-petstore3.json")!!)) }
+    val buildInfo by lazy { BuildInfo(fetch = { getResourceBytes(it) ?: error("Couldn't find $it") }) }
+
+    private fun getResourceBytes(name: String) =
+        null
+                ?: SwaggerGenerationTest::class.java.getResourceAsStream(name)?.readBytes()
+                ?: SwaggerGenerationTest::class.java.getResourceAsStream("/$name")?.readBytes()
+                ?: ClassLoader.getSystemClassLoader().getResourceAsStream(name)?.readBytes()
+                ?: ClassLoader.getSystemClassLoader().getResourceAsStream("/$name")?.readBytes()
 
     private fun getResourceString(name: String) =
-        SwaggerGenerationTest::class.java.getResourceAsStream(name)?.readBytes()?.toString(Charsets.UTF_8)
+        getResourceBytes(name)?.toString(Charsets.UTF_8)
 
     @Test
     fun model2() = runBlocking {
         val model = swagger
         val swaggerGenerator = SwaggerGenerator(model)
-        val results = generate(BuildInfo(), swaggerGenerator)
+        val results = generate(buildInfo, swaggerGenerator)
         for ((file, res) in results) {
             println("$file: $res")
         }
@@ -28,7 +36,7 @@ class SwaggerGenerationTest {
     fun model3() = runBlocking {
         val model = uspto
         val swaggerGenerator = SwaggerGenerator(model)
-        val results = generate(BuildInfo(), swaggerGenerator)
+        val results = generate(buildInfo, swaggerGenerator)
         for ((file, res) in results) {
             println("$file: $res")
         }
@@ -39,7 +47,7 @@ class SwaggerGenerationTest {
     fun modelWithJsonSchemaRules() = runBlocking {
         val model = petstore3
         val swaggerGenerator = SwaggerGenerator(model)
-        val results = generate(BuildInfo(), swaggerGenerator)
+        val results = generate(buildInfo, swaggerGenerator)
         for ((file, res) in results) {
             println("$file: $res")
         }

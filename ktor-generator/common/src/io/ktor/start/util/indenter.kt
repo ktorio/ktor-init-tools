@@ -262,3 +262,9 @@ class XmlIndenter(val indenter: Indenter) {
 fun Indenter.xml(callback: XmlIndenter.() -> Unit) {
     callback(XmlIndenter(this))
 }
+
+fun Indenter.indentStringHere(callback: Indenter.() -> Unit): String = indentString(indentLevel, callback)
+
+fun indentString(level: Int, callback: Indenter.() -> Unit): String {
+    return Indenter { indent(level) { callback()} }.toString().trim()
+}

@@ -72,7 +72,9 @@ sealed class JsonRule {
                     "maxItems" -> rules += JsonRule.MaxItems(value.int)
                     "minProperties" -> rules += JsonRule.MinProperties(value.int)
                     "maxProperties" -> rules += JsonRule.MaxProperties(value.int)
-                    "required" -> if (value.bool) rules += JsonRule.Required
+                    "required" -> {
+                        // if (value.bool) rules += JsonRule.Required
+                    }
                     "pattern" -> rules += JsonRule.Pattern(Regex(value.str))
                     "uniqueItems" -> if (value.bool) rules += JsonRule.UniqueItems
                     "enum" -> rules += JsonRule.Enumerable(value.list.toSet())

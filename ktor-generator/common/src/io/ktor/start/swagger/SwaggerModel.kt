@@ -83,6 +83,11 @@ data class SwaggerModel(
         override fun toString(): String = "String"
     }
 
+    object VoidType : GenType {
+        override val ktype: KClass<*> = Unit::class
+        override fun toString(): String = "Unit"
+    }
+
     abstract class IntegerType : BasePrimType {
 
     }
@@ -173,9 +178,17 @@ data class SwaggerModel(
     data class Contact(val name: String, val url: String, val email: String)
     data class License(val name: String, val url: String)
 
+    enum class Inside(val id: String) {
+        QUERY("query"), HEADER("header"), PATH("path"), FORM_DATA("formData"), BODY("body");
+        companion object {
+            val BY_ID = values().associateBy { it.id }
+            operator fun get(id: String) = BY_ID[id] ?: error("Unsupporteed Parameter.'in'='$id'")
+        }
+    }
+
     data class Parameter(
         val name: String,
-        val inside: String,
+        val inside: Inside,
         val required: Boolean,
         val description: String,
         val default: Any?,
@@ -194,10 +207,16 @@ data class SwaggerModel(
         val description: String,
         val tags: List<String>,
         val security: List<Security>,
-        val operationId: String,
+        val operationId: String?,
         val parameters: List<Parameter>,
         val responses: List<Response>
-    )
+    ) {
+        val errorResponses = responses.filter { it.intCode != 200 }
+        val okResponse = responses.firstOrNull { it.intCode == 200 }
+        val defaultResponse = okResponse ?: Response("200", "OK", InfoGenType(StringType, rule = null))
+        val responseType = defaultResponse.schema?.type ?: SwaggerModel.VoidType
+        val methodName = ID.normalizeMethodName(operationId ?: "$method/$path")
+    }
 
     data class PathModel(
         val path: String,
@@ -213,7 +232,11 @@ data class SwaggerModel(
         val version: String,
         val contact: Contact,
         val license: License
-    )
+    ) {
+        val className = title.takeIf { it.isNotEmpty() }?.let { ID.normalizeClassName(it) } ?: "SwaggerApi"
+        val classNameServer = "${className}Server"
+        val classNameClient = "${className}Client"
+    }
 
     data class Response(
         val code: String,
@@ -316,7 +339,7 @@ data class SwaggerModel(
             return Dynamic {
                 Parameter(
                     name = def["name"].str,
-                    inside = def["in"].str,
+                    inside = Inside[def["in"].str],
                     required = def["required"]?.bool ?: false,
                     description = def["description"].str,
                     default = def["default"],
@@ -338,7 +361,7 @@ data class SwaggerModel(
                         val info = it[name]
                         Security(name, info.strList)
                     },
-                    operationId = def["tags"].str,
+                    operationId = def["operationId"]?.str,
                     parameters = def["parameters"].list.map { parseParameter(it, root) },
                     responses = def["responses"].let {
                         it.strEntries.map { (code, rdef) ->
