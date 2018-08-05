@@ -1,6 +1,7 @@
 package io.ktor.start.swagger
 
 import io.ktor.start.util.*
+import kotlin.reflect.*
 
 /**
  * https://swagger.io/specification/
@@ -53,27 +54,32 @@ data class SwaggerModel(
         val enum: List<String>?
     )
 
-    class InfoGenType<T : GenType>(val type: T, val rule: JsonRule?)
+    class InfoGenType<T : GenType>(val type: T, val rule: JsonRule?) {
+        override fun toString(): String = if (rule != null) "$type($rule)" else "$type"
+    }
 
     interface GenType {
+        val ktype: KClass<*>
     }
     interface BasePrimType : GenType {
     }
-    interface BaseStringType : BasePrimType
+    open class BaseStringType : BasePrimType {
+        override val ktype: KClass<*> = String::class
+    }
 
-    object PasswordType : BaseStringType {
+    object PasswordType : BaseStringType() {
         override fun toString(): String = "String"
     }
 
-    object Base64Type : BaseStringType {
+    object Base64Type : BaseStringType() {
         override fun toString(): String = "Base64Type"
     }
 
-    object BinaryStringType : BaseStringType {
+    object BinaryStringType : BaseStringType() {
         override fun toString(): String = "String"
     }
 
-    object StringType : BaseStringType {
+    object StringType : BaseStringType() {
         override fun toString(): String = "String"
     }
 
@@ -87,52 +93,66 @@ data class SwaggerModel(
     }
 
     object Int32Type : IntegerType() {
+        override val ktype: KClass<*> = Int::class
         override fun toString(): String = "Int"
     }
 
     object Int64Type : IntegerType() {
+        override val ktype: KClass<*> = Long::class
         override fun toString(): String = "Long"
     }
 
     object BoolType : BasePrimType {
+        override val ktype: KClass<*> = Boolean::class
         override fun toString(): String = "Bool"
     }
 
     object FloatType : BasePrimType {
+        override val ktype: KClass<*> = Float::class
         override fun toString(): String = "Float"
     }
 
     object DoubleType : BasePrimType {
+        override val ktype: KClass<*> = Double::class
         override fun toString(): String = "Double"
     }
 
     object DateType : BasePrimType {
+        override val ktype: KClass<*> = DateTime::class
         override fun toString(): String = "Date"
     }
 
     object DateTimeType : BasePrimType {
+        override val ktype: KClass<*> = DateTime::class
         override fun toString(): String = "DateTime"
     }
 
     data class NamedObject(val path: String, val kind: InfoGenType<ObjType>) : GenType {
+        override val ktype: KClass<*> = Any::class
         val name = path.substringAfterLast('/')
         override fun toString(): String = name
     }
 
     data class ArrayType(val items: InfoGenType<GenType>) : GenType {
+        override val ktype: KClass<*> = List::class
         override fun toString(): String = "List<$items>"
     }
 
     data class OptionalType(val type: InfoGenType<GenType>) : GenType {
+        override val ktype: KClass<*> = Any::class
         override fun toString(): String = "$type?"
     }
 
     data class ObjType(val namePath: String?, val fields: Map<String, InfoGenType<GenType>>) : GenType {
+        override val ktype: KClass<*> = Map::class
         override fun toString(): String = "Any/*Unsupported {$fields} namePath=$namePath*/"
     }
 
     data class Prop(val name: String, val type: InfoGenType<GenType>, val required: Boolean) {
         val rtype = if (required) type else OptionalType(type)
+        val rule get() = type.rule
+
+        fun toRuleString(): String? = rule?.toKotlin(type)
     }
 
     data class TypeDef(
@@ -422,3 +442,6 @@ data class SwaggerModel(
         }
     }
 }
+
+fun JsonRule.toKotlin(type: SwaggerModel.GenType): String = toKotlin(type.ktype)
+fun JsonRule.toKotlin(type: SwaggerModel.InfoGenType<*>): String = toKotlin(type.type)

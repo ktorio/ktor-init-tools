@@ -48,7 +48,20 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                         +"val ${prop.name}: ${prop.type.toKotlin()}$comma"
                     }
                 }
-                +")"
+                val propsWithRules = def.propsList.filter { it.type.rule != null }
+                if (propsWithRules.isNotEmpty()) {
+                    +") {"
+                    indent {
+                        +"init" {
+                            for (prop in propsWithRules) {
+                                +"${prop.name}.verifyParam(${prop.name.quote()}) { ${prop.toRuleString()} }"
+                            }
+                        }
+                    }
+                    +"}"
+                } else {
+                    +")"
+                }
             }
         }
         addRoute {
@@ -90,9 +103,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                     val pschema = param.schema
                     val prule = pschema.rule
                     val ptype = pschema.type
-                    val verify = if (prule != null) {
-                        ", verify = { ${prule.toKotlin()} }"
-                    } else ""
+                    val verify = if (prule != null) ", verify = { ${prule.toKotlin(ptype)} }" else ""
                     when (ptype) {
                         is SwaggerModel.StringType -> +"val ${param.name} = $base.get(\"${param.name}\")"
                         is SwaggerModel.Int32Type -> {
