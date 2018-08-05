@@ -168,9 +168,9 @@ data class SwaggerModel(
     }
 
     class SecurityDefinition(
-        val kname: String,
+        val id: String,
         val description: String,
-        val type: String,
+        val type: SecurityType,
         val name: String,
         val inside: String
     )
@@ -182,7 +182,15 @@ data class SwaggerModel(
         QUERY("query"), HEADER("header"), PATH("path"), FORM_DATA("formData"), BODY("body");
         companion object {
             val BY_ID = values().associateBy { it.id }
-            operator fun get(id: String) = BY_ID[id] ?: error("Unsupporteed Parameter.'in'='$id'")
+            operator fun get(id: String) = BY_ID[id] ?: error("Unsupported Parameter.'in'='$id'")
+        }
+    }
+
+    enum class SecurityType(val id: String) {
+        API_KEY("apiKey"), HTTP("http"), OAUTH2("oauth2"), OPEN_ID_CONNECT("openIdConnect");
+        companion object {
+            val BY_ID = values().associateBy { it.id }
+            operator fun get(id: String) = BY_ID[id] ?: error("Unsupported Security.'type'='$id'")
         }
     }
 
@@ -433,9 +441,9 @@ data class SwaggerModel(
                 val securityDefinitions = model["securityDefinitions"].let {
                     it.strEntries.map { (kname, obj) ->
                         kname to SecurityDefinition(
-                            kname = kname.str,
+                            id = kname.str,
                             description = obj["description"].str,
-                            type = obj["type"].str,
+                            type = SecurityType[obj["type"].str],
                             name = obj["name"].str,
                             inside = obj["in"].str
                         )

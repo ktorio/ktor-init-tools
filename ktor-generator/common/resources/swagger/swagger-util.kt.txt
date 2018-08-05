@@ -6,6 +6,7 @@ import kotlin.coroutines.experimental.*
 import kotlin.coroutines.experimental.intrinsics.*
 import kotlinx.coroutines.experimental.*
 import io.ktor.application.*
+import io.ktor.auth.authenticate
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.response.*
@@ -185,7 +186,7 @@ enum class Source {
     BODY, QUERY, FORM_DATA, HEADER, PATH
 }
 
-fun Routing.registerMethod(instance: Any, method: java.lang.reflect.Method, path: String, httpMethod: String) {
+fun Route.registerMethod(instance: Any, method: java.lang.reflect.Method, path: String, httpMethod: String) {
     val params = arrayListOf<ParamInfo<*>>()
     for ((ptype, annotations) in method.parameterTypes.zip(method.parameterAnnotationsInAncestors)) {
         // Skip the continuation last argument!
@@ -215,6 +216,17 @@ fun Routing.registerMethod(instance: Any, method: java.lang.reflect.Method, path
     //println("METHOD: $instance, $method, $httpMethod, $path")
     //for (param in params) println("  - $param")
 
+    val auths = method.getAnnotationInAncestors(Auth::class.java)?.auths ?: arrayOf()
+    if (auths.isNotEmpty()) {
+        authenticate(*auths) {
+            registerMethodNoAuth(instance, method, path, httpMethod, params)
+        }
+    } else {
+        registerMethodNoAuth(instance, method, path, httpMethod, params)
+    }
+}
+
+fun Route.registerMethodNoAuth(instance: Any, method: java.lang.reflect.Method, path: String, httpMethod: String, params: List<ParamInfo<*>>) {
     route(path, HttpMethod(httpMethod)) {
         handle {
             val args = arrayListOf<Any?>()

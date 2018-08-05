@@ -9,11 +9,15 @@ import io.ktor.start.util.*
 class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildDepsFromModel().toTypedArray()) {
     companion object {
         fun SwaggerModel.buildDepsFromModel(): Set<Block<BuildInfo>> {
+            val model = this
             val out = LinkedHashSet<Block<BuildInfo>>()
             out += ApplicationKt
             out += StatusPagesFeature
             out += RoutingFeature
-            out += AuthJwtFeature // @TODO: Do this conditionally based on Security blocks
+            if (model.securityDefinitions.isNotEmpty()) {
+                out += AuthJwtFeature // @TODO: Do this conditionally based on Security blocks
+                out += AuthFeature
+            }
             return out
         }
     }
@@ -32,13 +36,17 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                 +"call.respond(cause.code, cause.description)"
             }
         }
-        fileText("src/swagger-model.kt") {
+
+        fileText("src/swagger-api.kt") {
             SEPARATOR {
                 +"package ${info.artifactGroup}"
             }
             SEPARATOR {
                 +"import java.util.*"
                 +"import io.ktor.swagger.experimental.*"
+            }
+            SEPARATOR {
+                renderInterface(model)
             }
             SEPARATOR {
                 //addExtensionMethods {
@@ -68,18 +76,6 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                 }
             }
         }
-        fileText("src/swagger-api.kt") {
-            SEPARATOR {
-                +"package ${info.artifactGroup}"
-            }
-            SEPARATOR {
-                +"import java.util.*"
-                +"import io.ktor.swagger.experimental.*"
-            }
-            SEPARATOR {
-                renderInterface(model)
-            }
-        }
         fileText("src/swagger-backend.kt") {
             SEPARATOR {
                 +"package ${info.artifactGroup}"
@@ -105,6 +101,19 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             }
             SEPARATOR {
                 renderFrontend(model)
+            }
+        }
+        if (model.securityDefinitions.isNotEmpty()) {
+            addImport("io.ktor.auth.*")
+            addImport("io.ktor.auth.jwt.*")
+
+            addAuthProvider {
+                for (sec in model.securityDefinitions.values) {
+                    +"// ${sec.description.split("\n").joinToString("\\n")}"
+                    +"jwt(${sec.id.quote()})" {
+                        +"authSchemes(\"Bearer\", \"Token\")"
+                    }
+                }
             }
         }
         addRoute {
@@ -194,7 +203,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         val code = response.intCode
         if (code == 200) {
             val rindentLevel = indentLevel
-            +"call.respond(${indentString(rindentLevel + 2) { toKotlinDefault(response.schema?.type, null) } })"
+            +"call.respond(${indentString(rindentLevel + 2) { toKotlinDefault(response.schema?.type, null) }})"
         } else {
             val httpStatus = HttpStatusCode.byCode[code]
             if (httpStatus != null) {
@@ -242,7 +251,12 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                                     SwaggerModel.Inside.PATH -> "@Path($qpname)"
                                     SwaggerModel.Inside.FORM_DATA -> "@FormData($qpname)"
                                 }
-                                val default = if (param.required) "" else " = " + indentStringHere { toKotlinDefault(param.schema, param.default) }
+                                val default = if (param.required) "" else " = " + indentStringHere {
+                                    toKotlinDefault(
+                                        param.schema,
+                                        param.default
+                                    )
+                                }
                                 +"$inAnnotation ${param.name}: ${param.schema.toKotlin()}$default${info.optComma}"
                             }
                         }
@@ -328,7 +342,8 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         else -> error("Unsupported '$this' class=${this::class}")
     }
 
-    fun Indenter.toKotlinDefault(type: SwaggerModel.InfoGenType<*>?, default: Any?) = toKotlinDefault(type?.type, default)
+    fun Indenter.toKotlinDefault(type: SwaggerModel.InfoGenType<*>?, default: Any?) =
+        toKotlinDefault(type?.type, default)
 
     fun Indenter.toKotlinDefault(type: SwaggerModel.GenType?, default: Any?) {
         when (type) {
