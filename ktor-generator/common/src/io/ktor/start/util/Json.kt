@@ -154,7 +154,8 @@ object Json {
         b.append('"')
         for (c in str) {
             when (c) {
-                '\\' -> b.append("\\\\"); '/' -> b.append("\\/"); '\'' -> b.append("\\'")
+                '\\' -> b.append("\\\\"); '\'' -> b.append("\\'")
+                //'/' -> b.append("\\/") // Stricter, but not as nice for strings with urls/paths because of the https://
                 '"' -> b.append("\\\""); '\b' -> b.append("\\b"); '\u000c' -> b.append("\\f")
                 '\n' -> b.append("\\n"); '\r' -> b.append("\\r"); '\t' -> b.append("\\t")
                 else -> b.append(c)

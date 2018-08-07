@@ -6,9 +6,9 @@ import kotlinx.coroutines.experimental.*
 import kotlin.test.*
 
 class SwaggerGenerationTest {
-    val swagger by lazy { SwaggerModel.parse(Json.parse(getResourceString("/swagger.json")!!)) }
-    val uspto by lazy { SwaggerModel.parse(Json.parse(getResourceString("/uspto.json")!!)) }
-    val petstore3 by lazy { SwaggerModel.parse(Json.parse(getResourceString("/small-petstore3.json")!!)) }
+    val swagger by lazy { SwaggerModel.parseJson(getResourceString("/swagger.json")!!) }
+    val uspto by lazy { SwaggerModel.parseJson(getResourceString("/uspto.json")!!) }
+    val petstore3 by lazy { SwaggerModel.parseJson(getResourceString("/small-petstore3.json")!!) }
     val buildInfo by lazy { BuildInfo(fetch = { getResourceBytes(it) ?: error("Couldn't find $it") }) }
 
     private fun getResourceBytes(name: String) =
@@ -56,7 +56,7 @@ class SwaggerGenerationTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun invalidJson() = runBlocking {
-        SwaggerModel.parse(Json.parse(getResourceString("/empty.json")!!))
+        SwaggerModel.parseJson(getResourceString("/empty.json")!!)
         Unit
     }
 

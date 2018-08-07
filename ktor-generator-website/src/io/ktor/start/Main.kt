@@ -57,8 +57,7 @@ fun main(args: Array<String>) {
                 for (file in files) {
                     if (file.name.endsWith(".json")) {
                         val jsonStr = file.read().toString(UTF8)
-                        val untypedModel = Json.parse(jsonStr)
-                        val model = SwaggerModel.parse(untypedModel, file.name)
+                        val model = SwaggerModel.parseJson(jsonStr, filename = file.name)
                         swaggerModels += model
                         updateSwaggerModels()
                     } else {

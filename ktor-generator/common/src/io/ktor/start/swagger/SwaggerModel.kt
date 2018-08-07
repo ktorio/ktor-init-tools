@@ -13,6 +13,7 @@ import kotlin.reflect.*
  */
 data class SwaggerModel(
     val filename: String,
+    val source: String,
     val info: SwaggerInfo,
     val servers: List<Server>,
     val produces: List<String>,
@@ -391,7 +392,11 @@ data class SwaggerModel(
             }
         }
 
-        fun parse(model: Any?, filename: String = "unknown.json"): SwaggerModel {
+        fun parseJson(source: String, filename: String = "unknown.json"): SwaggerModel {
+            return parse(Json.parse(source), source, filename)
+        }
+
+        fun parse(model: Any?, source: String, filename: String = "unknown.json"): SwaggerModel {
             return Dynamic {
                 val root = model
                 val version = model["swagger"] ?: model["openapi"]
@@ -461,6 +466,7 @@ data class SwaggerModel(
                 }
                 SwaggerModel(
                     filename = filename,
+                    source = source,
                     info = info,
                     servers = servers,
                     produces = produces,

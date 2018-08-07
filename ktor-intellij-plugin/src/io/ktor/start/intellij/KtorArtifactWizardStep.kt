@@ -103,7 +103,7 @@ class KtorArtifactWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() 
                         )
                         if (file != null) {
                             val fileStr = file.inputStream.readBytes().toString(UTF8)
-                            val model = SwaggerModel.parse(Json.parse(fileStr), file.name)
+                            val model = SwaggerModel.parseJson(fileStr, filename = file.name)
                             config.swaggerModules = listOf(model)
                         } else {
                             config.swaggerModules = listOf()

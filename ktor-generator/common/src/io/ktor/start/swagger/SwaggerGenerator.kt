@@ -152,6 +152,42 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                 renderFrontend(model)
             }
         }
+        fileText("api.json") {
+            +model.source
+        }
+        fileText("http-client.env.json") {
+            +Json.encodePrettyUntyped(
+                mapOf(
+                    "localhost" to mapOf(
+                        "host" to "http://127.0.0.1:8080"
+                    ),
+                    "prod" to mapOf(
+                        "host" to "https://my.domain.com"
+                    )
+                ), "    "
+            )
+        }
+
+        fileText("api.http") {
+            +"# ${model.info.title.escape()}"
+            +"# ${model.info.description.escape()}"
+            +""
+            for (path in model.paths.values) {
+                for (method in path.methodsList) {
+                    val httpMethod = method.method.toUpperCase()
+                    +"###"
+                    +""
+                    +"# ${method.description.escape()}"
+                    +"$httpMethod {{host}}${path.path}"
+                    if (httpMethod == "POST") {
+                        +"Content-Type: application/json"
+                        +""
+                        +"{}"
+                    }
+                    +""
+                }
+            }
+        }
     }
 
     fun Indenter.renderResponse(response: SwaggerModel.Response) {
