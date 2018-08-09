@@ -133,12 +133,6 @@ data class SwaggerModel(
         override fun toString(): String = "DateTime"
     }
 
-    data class NamedObject(val path: String, val kind: InfoGenType<ObjType>) : GenType {
-        override val ktype: KClass<*> = Any::class
-        val name = path.substringAfterLast('/')
-        override fun toString(): String = name
-    }
-
     data class ArrayType(val items: InfoGenType<GenType>) : GenType {
         override val ktype: KClass<*> = List::class
         override fun toString(): String = "List<$items>"
@@ -149,7 +143,18 @@ data class SwaggerModel(
         override fun toString(): String = "$type?"
     }
 
-    data class ObjType(val namePath: String?, val fields: Map<String, InfoGenType<GenType>>) : GenType {
+    interface MapLikeGenType : GenType {
+        val fields: Map<String, InfoGenType<GenType>>
+    }
+
+    data class NamedObject(val path: String, val kind: InfoGenType<ObjType>) : MapLikeGenType {
+        override val ktype: KClass<*> = Any::class
+        val name = path.substringAfterLast('/')
+        override fun toString(): String = name
+        override val fields get() = kind.type.fields
+    }
+
+    data class ObjType(val namePath: String?, override val fields: Map<String, InfoGenType<GenType>>) : MapLikeGenType {
         override val ktype: KClass<*> = Map::class
         override fun toString(): String = "Any/*Unsupported {$fields} namePath=$namePath*/"
     }
@@ -220,6 +225,10 @@ data class SwaggerModel(
         val parameters: List<Parameter>,
         val responses: List<Response>
     ) {
+        fun securityDefinitions(model: SwaggerModel): List<Pair<Security, SecurityDefinition?>> {
+            return security.map { it to model.securityDefinitions[it.name] }
+        }
+
         val errorResponses = responses.filter { it.intCode != 200 }
         val okResponse = responses.firstOrNull { it.intCode == 200 }
         val defaultResponse = okResponse ?: Response("200", "OK", InfoGenType(StringType, rule = null))

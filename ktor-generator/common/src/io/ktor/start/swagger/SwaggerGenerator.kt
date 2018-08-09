@@ -179,12 +179,31 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                     +""
                     +"# ${method.description.escape()}"
                     +"$httpMethod {{host}}${path.path}"
-                    if (httpMethod == "POST") {
+                    for ((sec, secdef) in method.securityDefinitions(model).filter {
+                        it.second?.inside == "header" && it.second?.type == SwaggerModel.SecurityType.API_KEY
+                    }) {
+                        +"${secdef!!.name}: Bearer {{ auth_token }}"
+                    }
+                    if (httpMethod == "POST" || httpMethod == "PUT") {
                         +"Content-Type: application/json"
                         +""
-                        +"{}"
+                        val postBody = method.parameters.filter { it.inside == SwaggerModel.Inside.BODY }
+                            .map { it.name to it.schema.type.toKotlinDefaultUntyped() }.toMap()
+                        +Json.encodePrettyUntyped(postBody)
                     }
                     +""
+                    // Heuristics trying to figure out an auth token to store from the response fields
+                    if (path.path.endsWith("/login")) {
+                        val tokenPath = method.responseType.findField("token")
+                        if (tokenPath != null) {
+                            val responsePath = "response.body.${tokenPath.joinToString(".")}"
+                            +"> {%"
+                            +"client.assert(typeof $responsePath !== \"undefined\", \"No token returned\");"
+                            +"client.global.set(\"auth_token\", $responsePath);"
+                            +"%}"
+                            +""
+                        }
+                    }
                 }
             }
         }
@@ -194,7 +213,9 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         val code = response.intCode
         if (code == 200) {
             val rindentLevel = indentLevel
-            +"call.respond(${indentString(rindentLevel + 2) { toKotlinDefault(response.schema?.type, null) }})"
+            +"call.respond(${indentString(rindentLevel + 2) {
+                toKotlinDefault(response.schema?.type, null, typed = true)
+            }})"
         } else {
             val httpStatus = HttpStatusCode.byCode[code]
             if (httpStatus != null) {
@@ -243,10 +264,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                                     SwaggerModel.Inside.FORM_DATA -> "@FormData($qpname)"
                                 }
                                 val default = if (param.required) "" else " = " + indentStringHere {
-                                    toKotlinDefault(
-                                        param.schema,
-                                        param.default
-                                    )
+                                    toKotlinDefault(param.schema, param.default, typed = true)
                                 }
                                 +"$inAnnotation ${param.name}: ${param.schema.toKotlin()}$default${info.optComma}"
                             }
@@ -288,7 +306,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                             SEPARATOR {
                                 if (method.responseType != SwaggerModel.VoidType) {
                                     +"return ${indentString(indentLevel) {
-                                        toKotlinDefault(method.responseType, null)
+                                        toKotlinDefault(method.responseType, null, typed = true)
                                     }}"
                                 }
                             }
@@ -330,10 +348,10 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         else -> error("Unsupported '$this' class=${this::class}")
     }
 
-    fun Indenter.toKotlinDefault(type: SwaggerModel.InfoGenType<*>?, default: Any?) =
-        toKotlinDefault(type?.type, default)
+    fun Indenter.toKotlinDefault(type: SwaggerModel.InfoGenType<*>?, default: Any?, typed: Boolean) =
+        toKotlinDefault(type?.type, default, typed)
 
-    fun Indenter.toKotlinDefault(type: SwaggerModel.GenType?, default: Any?) {
+    fun Indenter.toKotlinDefault(type: SwaggerModel.GenType?, default: Any?, typed: Boolean) {
         when (type) {
             null -> +"null"
             is SwaggerModel.OptionalType -> +"null"
@@ -344,35 +362,77 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             is SwaggerModel.DoubleType -> +"${((default as? Number?)?.toDouble() ?: 0.0)}"
             is SwaggerModel.Int64Type -> +"${((default as? Number?)?.toLong() ?: 0L)}"
             is SwaggerModel.BoolType -> +"${((default as? Boolean?) ?: false)}"
-            is SwaggerModel.NamedObject -> {
-                val def = type.kind
-                +"${type.name}("
-                indent {
-                    val props = def.type.fields.entries.toList()
-                    for ((info, entry) in props.metaIter) {
-                        val (key, prop) = entry
-                        +"$key = ${indentStringHere { toKotlinDefault(prop, null) }}${info.optComma}"
-                    }
-                }
-                +")"
-            }
             is SwaggerModel.ArrayType -> {
                 +"listOf()"
             }
-            is SwaggerModel.ObjType -> {
-                +"mapOf("
-                indent {
-                    for ((info, entry) in type.fields.entries.metaIter) {
-                        val (key, prop) = entry
-                        +"${key.quote()} to ${indentStringHere { toKotlinDefault(prop, null) }}${info.optComma}"
+            is SwaggerModel.MapLikeGenType -> {
+                if (typed && type is SwaggerModel.NamedObject) {
+                    val def = type.kind
+                    +"${type.name}("
+                    indent {
+                        val props = def.type.fields.entries.toList()
+                        for ((info, entry) in props.metaIter) {
+                            val (key, prop) = entry
+                            +"$key = ${indentStringHere { toKotlinDefault(prop, null, typed) }}${info.optComma}"
+                        }
                     }
+                    +")"
+                } else {
+                    +"mapOf("
+                    indent {
+                        for ((info, entry) in type.fields.entries.metaIter) {
+                            val (key, prop) = entry
+                            +"${key.quote()} to ${indentStringHere {
+                                toKotlinDefault(
+                                    prop,
+                                    null,
+                                    typed
+                                )
+                            }}${info.optComma}"
+                        }
+                    }
+                    +")"
                 }
-                +")"
             }
             is SwaggerModel.VoidType -> +"Unit"
             else -> error("Unsupported '$type'")
         }
     }
+
+    fun SwaggerModel.GenType?.toKotlinDefaultUntyped(): Any? {
+        return when (this) {
+            null -> null
+            is SwaggerModel.OptionalType -> null
+            is SwaggerModel.BaseStringType -> ""
+            is SwaggerModel.DateType -> ""
+            is SwaggerModel.DateTimeType -> ""
+            is SwaggerModel.Int32Type -> 0
+            is SwaggerModel.DoubleType -> "0.0"
+            is SwaggerModel.Int64Type -> "0L"
+            is SwaggerModel.BoolType -> "false"
+            is SwaggerModel.ArrayType -> listOf<Any?>()
+            is SwaggerModel.MapLikeGenType -> fields.map { it.key to it.value.type.toKotlinDefaultUntyped() }.toMap()
+            is SwaggerModel.VoidType -> Unit
+            else -> error("Unsupported '$this'")
+        }
+    }
+}
+
+fun SwaggerModel.GenType.findField(name: String, path: List<String> = listOf()): List<String>? {
+    when (this) {
+        is SwaggerModel.NamedObject -> {
+            return this.kind.type.findField(name, path)
+        }
+        is SwaggerModel.ObjType -> {
+            for ((fname, field) in this.fields) {
+                val fpath = path + fname
+                if (fname == name) return fpath
+                val res = field.type.findField(name, fpath)
+                if (res != null) return res
+            }
+        }
+    }
+    return null
 }
 
 val <T> IteratorStepInfo<T>.optComma get() = if (this.isLast) "" else ","

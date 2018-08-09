@@ -82,4 +82,13 @@ class SwaggerGenerationTest {
         )
         Unit
     }
+
+    @Test
+    fun detectLoginHeuristicsInApiHttp() = runBlocking {
+        val model = swagger
+        val swaggerGenerator = SwaggerGenerator(model)
+        val results = generate(buildInfo, swaggerGenerator)
+        val str = results["api.http"].toString()
+        assertTrue(str.contains("client.assert(typeof response.body.user.token !== \"undefined\", \"No token returned\");"), "but was $str")
+    }
 }
