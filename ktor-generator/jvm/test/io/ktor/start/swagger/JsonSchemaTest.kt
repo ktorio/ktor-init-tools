@@ -14,5 +14,12 @@ class JsonSchemaTest {
         assertEquals("it > 10 && it <= 100", test<Int>(mapOf("minimum" to 10, "exclusiveMinimum" to true, "maximum" to 100, "exclusiveMaximum" to false)))
     }
 
-    private inline fun <reified T> test(map: Map<Any?, Any?>) = JsonRule.parse(map).toKotlin(T::class)
+    @Test
+    fun length() {
+        assertEquals("it.length >= 4", test<Int>(mapOf("minLength" to 4)))
+        assertEquals("it.length <= 16", test<Int>(mapOf("maxLength" to 16)))
+        assertEquals("it.length in 4..16", test<Int>(mapOf("minLength" to 4, "maxLength" to 16)))
+    }
+
+    private inline fun <reified T> test(map: Map<Any?, Any?>) = JsonRule.parse(map).toKotlin("it", T::class)
 }

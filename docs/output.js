@@ -86,12 +86,14 @@
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var removeAll = Kotlin.kotlin.collections.removeAll_qafx1e$;
   var lines = Kotlin.kotlin.text.lines_gw00vp$;
+  var map = Kotlin.kotlin.sequences.map_z5avom$;
+  var toList = Kotlin.kotlin.sequences.toList_veqyi0$;
   var mapOf_0 = Kotlin.kotlin.collections.mapOf_x2b85n$;
   var getKClass = Kotlin.getKClass;
   var numberToDouble = Kotlin.numberToDouble;
   var numberToLong = Kotlin.numberToLong;
   var L0 = Kotlin.Long.ZERO;
-  var toList = Kotlin.kotlin.collections.toList_7wnvza$;
+  var toList_0 = Kotlin.kotlin.collections.toList_7wnvza$;
   var Map = Kotlin.kotlin.collections.Map;
   var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
   var toMutableMap = Kotlin.kotlin.collections.toMutableMap_abgq59$;
@@ -334,6 +336,8 @@
   JsonRule$Maximum.prototype.constructor = JsonRule$Maximum;
   JsonRule$Range.prototype = Object.create(JsonRule.prototype);
   JsonRule$Range.prototype.constructor = JsonRule$Range;
+  JsonRule$RangeLength.prototype = Object.create(JsonRule.prototype);
+  JsonRule$RangeLength.prototype.constructor = JsonRule$RangeLength;
   JsonRule$UniqueItems.prototype = Object.create(JsonRule.prototype);
   JsonRule$UniqueItems.prototype.constructor = JsonRule$UniqueItems;
   JsonRule$Required.prototype = Object.create(JsonRule.prototype);
@@ -12275,6 +12279,13 @@
     simpleName: 'MaxInt',
     interfaces: [JsonRule$MinMaxInt]
   };
+  function JsonRule$MinMaxLength() {
+  }
+  JsonRule$MinMaxLength.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'MinMaxLength',
+    interfaces: []
+  };
   function JsonRule$MinLength(value) {
     JsonRule$MinInt.call(this);
     this.value_sq9swx$_0 = value;
@@ -12287,7 +12298,7 @@
   JsonRule$MinLength.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'MinLength',
-    interfaces: [JsonRule$MinInt]
+    interfaces: [JsonRule$MinMaxLength, JsonRule$MinInt]
   };
   function JsonRule$MinItems(value) {
     JsonRule$MinInt.call(this);
@@ -12329,7 +12340,7 @@
   JsonRule$MaxLength.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'MaxLength',
-    interfaces: [JsonRule$MaxInt]
+    interfaces: [JsonRule$MinMaxLength, JsonRule$MaxInt]
   };
   function JsonRule$MaxItems(value) {
     JsonRule$MaxInt.call(this);
@@ -12470,6 +12481,16 @@
     simpleName: 'Range',
     interfaces: [JsonRule]
   };
+  function JsonRule$RangeLength(min, max) {
+    JsonRule.call(this);
+    this.min = min;
+    this.max = max;
+  }
+  JsonRule$RangeLength.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'RangeLength',
+    interfaces: [JsonRule]
+  };
   function JsonRule$UniqueItems() {
     JsonRule$UniqueItems_instance = this;
     JsonRule.call(this);
@@ -12527,8 +12548,11 @@
     var parsed = this.parse_s8jyv4$(def);
     return Kotlin.isType(parsed, JsonRule$RuleList) && parsed.rules.isEmpty() ? null : parsed;
   };
-  function JsonRule$Companion$parse$lambda$lambda(it) {
+  function JsonRule$Companion$parse$lambda$lambda$lambda(it) {
     return Kotlin.isType(it, JsonRule$Minimum) || Kotlin.isType(it, JsonRule$Maximum);
+  }
+  function JsonRule$Companion$parse$lambda$lambda$lambda_0(it) {
+    return Kotlin.isType(it, JsonRule$MinLength) || Kotlin.isType(it, JsonRule$MaxLength);
   }
   JsonRule$Companion.prototype.parse_s8jyv4$ = function (def) {
     var $receiver = package$util.DynamicAccess;
@@ -12636,9 +12660,32 @@
     }
     var max = firstOrNull(destination_0);
     if (min != null && max != null && !min.exclusive) {
-      removeAll(rules, JsonRule$Companion$parse$lambda$lambda);
+      removeAll(rules, JsonRule$Companion$parse$lambda$lambda$lambda);
       var element_14 = new JsonRule$Range(min, max, max.exclusive);
       rules.add_11rb$(element_14);
+    }
+    var destination_1 = ArrayList_init();
+    var tmp$_3;
+    tmp$_3 = rules.iterator();
+    while (tmp$_3.hasNext()) {
+      var element_15 = tmp$_3.next();
+      if (Kotlin.isType(element_15, JsonRule$MinLength))
+        destination_1.add_11rb$(element_15);
+    }
+    var min_0 = firstOrNull(destination_1);
+    var destination_2 = ArrayList_init();
+    var tmp$_4;
+    tmp$_4 = rules.iterator();
+    while (tmp$_4.hasNext()) {
+      var element_16 = tmp$_4.next();
+      if (Kotlin.isType(element_16, JsonRule$MaxLength))
+        destination_2.add_11rb$(element_16);
+    }
+    var max_0 = firstOrNull(destination_2);
+    if (min_0 != null && max_0 != null) {
+      removeAll(rules, JsonRule$Companion$parse$lambda$lambda$lambda_0);
+      var element_17 = new JsonRule$RangeLength(min_0, max_0);
+      rules.add_11rb$(element_17);
     }
     return rules.size === 1 ? first(rules) : new JsonRule$AllOf(rules);
   };
@@ -12662,49 +12709,54 @@
     simpleName: 'JsonRule',
     interfaces: []
   };
-  function toKotlin$lambda(closure$clazz) {
+  function get_propKt($receiver) {
+    return Kotlin.isType($receiver, JsonRule$MinMaxLength) ? 'length' : 'size';
+  }
+  function toKotlin$lambda(closure$param, closure$clazz) {
     return function (it) {
-      return toKotlin(it, closure$clazz);
+      return toKotlin(it, closure$param, closure$clazz);
     };
   }
-  function toKotlin$lambda_0(closure$clazz) {
+  function toKotlin$lambda_0(closure$param, closure$clazz) {
     return function (it) {
-      return toKotlin(it, closure$clazz);
+      return toKotlin(it, closure$param, closure$clazz);
     };
   }
-  function toKotlin$lambda_1(closure$clazz) {
+  function toKotlin$lambda_1(closure$param, closure$clazz) {
     return function (it) {
-      return toKotlin(it, closure$clazz);
+      return toKotlin(it, closure$param, closure$clazz);
     };
   }
-  function toKotlin($receiver, clazz) {
+  function toKotlin($receiver, param, clazz) {
     var tmp$;
     if (Kotlin.isType($receiver, JsonRule$Not))
-      tmp$ = '!(' + toKotlin($receiver.rule, clazz) + ')';
+      tmp$ = '!(' + toKotlin($receiver.rule, param, clazz) + ')';
     else if (Kotlin.isType($receiver, JsonRule$AllOf))
-      tmp$ = joinToString($receiver.rules, ' && ', void 0, void 0, void 0, void 0, toKotlin$lambda(clazz));
+      tmp$ = joinToString($receiver.rules, ' && ', void 0, void 0, void 0, void 0, toKotlin$lambda(param, clazz));
     else if (Kotlin.isType($receiver, JsonRule$AnyOf))
-      tmp$ = joinToString($receiver.rules, ' || ', void 0, void 0, void 0, void 0, toKotlin$lambda_0(clazz));
+      tmp$ = joinToString($receiver.rules, ' || ', void 0, void 0, void 0, void 0, toKotlin$lambda_0(param, clazz));
     else if (Kotlin.isType($receiver, JsonRule$OneOf))
-      tmp$ = joinToString($receiver.rules, ' xor ', void 0, void 0, void 0, void 0, toKotlin$lambda_1(clazz));
+      tmp$ = joinToString($receiver.rules, ' xor ', void 0, void 0, void 0, void 0, toKotlin$lambda_1(param, clazz));
     else if (Kotlin.isType($receiver, JsonRule$MultipleOf))
-      tmp$ = '(it % ' + $receiver.value + ')';
+      tmp$ = '(' + param + ' % ' + $receiver.value + ')';
     else if (Kotlin.isType($receiver, JsonRule$Minimum))
-      tmp$ = $receiver.exclusive ? 'it > ' + $receiver.toString_xo1ogr$(clazz) : 'it >= ' + $receiver.toString_xo1ogr$(clazz);
+      tmp$ = $receiver.exclusive ? param + ' > ' + $receiver.toString_xo1ogr$(clazz) : param + ' >= ' + $receiver.toString_xo1ogr$(clazz);
     else if (Kotlin.isType($receiver, JsonRule$Maximum))
-      tmp$ = $receiver.exclusive ? 'it < ' + $receiver.toString_xo1ogr$(clazz) : 'it <= ' + $receiver.toString_xo1ogr$(clazz);
+      tmp$ = $receiver.exclusive ? param + ' < ' + $receiver.toString_xo1ogr$(clazz) : param + ' <= ' + $receiver.toString_xo1ogr$(clazz);
     else if (Kotlin.isType($receiver, JsonRule$Range))
-      tmp$ = $receiver.exclusive ? 'it in ' + $receiver.min.toString_xo1ogr$(clazz) + ' until ' + $receiver.max.toString_xo1ogr$(clazz) : 'it in ' + $receiver.min.toString_xo1ogr$(clazz) + ' .. ' + $receiver.max.toString_xo1ogr$(clazz);
+      tmp$ = $receiver.exclusive ? param + ' in ' + $receiver.min.toString_xo1ogr$(clazz) + ' until ' + $receiver.max.toString_xo1ogr$(clazz) : param + ' in ' + $receiver.min.toString_xo1ogr$(clazz) + ' .. ' + $receiver.max.toString_xo1ogr$(clazz);
+    else if (Kotlin.isType($receiver, JsonRule$RangeLength))
+      tmp$ = param + '.length in ' + $receiver.min.value + '..' + $receiver.max.value;
     else if (Kotlin.isType($receiver, JsonRule$MinInt))
-      tmp$ = 'it.size >= ' + $receiver.value;
+      tmp$ = param + '.' + get_propKt($receiver) + ' >= ' + $receiver.value;
     else if (Kotlin.isType($receiver, JsonRule$MaxInt))
-      tmp$ = 'it.size <= ' + $receiver.value;
+      tmp$ = param + '.' + get_propKt($receiver) + ' <= ' + $receiver.value;
     else if (Kotlin.isType($receiver, JsonRule$Pattern))
-      tmp$ = 'Regex(' + quote($receiver.pattern.pattern) + ').matches(it)';
+      tmp$ = 'Regex(' + quote($receiver.pattern.pattern) + ').matches(' + param + ')';
     else if (Kotlin.isType($receiver, JsonRule$UniqueItems))
-      tmp$ = 'it.distinct().size == it.size';
+      tmp$ = param + '.distinct().size == ' + param + '.size';
     else if (Kotlin.isType($receiver, JsonRule$Enumerable))
-      tmp$ = 'it in ' + get_kquoteLit($receiver.items);
+      tmp$ = param + ' in ' + get_kquoteLit($receiver.items);
     else {
       throw IllegalStateException_init(('Unsupported ' + $receiver).toString());
     }
@@ -12884,7 +12936,7 @@
               tmp$_2 = propsWithRules.iterator();
               while (tmp$_2.hasNext()) {
                 var prop_0 = tmp$_2.next();
-                $receiver.line_61zpoe$(prop_0.name + '.verifyParam(' + quote(prop_0.name) + ') { ' + toString(prop_0.toRuleString()) + ' }');
+                $receiver.line_61zpoe$(prop_0.name + '.verifyParam(' + quote(prop_0.name) + ') { ' + toString(prop_0.toRuleString_61zpoe$('it')) + ' }');
               }
             }
             finally {
@@ -13222,17 +13274,23 @@
       }
      while (true);
   };
-  function SwaggerGenerator$render$lambda_12($receiver_0, continuation_0, suspended) {
-    var instance = new Coroutine$SwaggerGenerator$render$lambda_4($receiver_0, this, continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
+  function SwaggerGenerator$render$lambda$lambda_9(it) {
+    return it.groupValues.get_za3lpa$(1);
   }
-  function Coroutine$SwaggerGenerator$render$lambda_4($receiver_0, controller, continuation_0) {
+  function SwaggerGenerator$render$lambda_12(closure$paramsInUrls_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGenerator$render$lambda_4(closure$paramsInUrls_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$SwaggerGenerator$render$lambda_4(closure$paramsInUrls_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
     this.exceptionState_0 = 1;
+    this.local$closure$paramsInUrls = closure$paramsInUrls_0;
     this.local$$receiver = $receiver_0;
   }
   Coroutine$SwaggerGenerator$render$lambda_4.$metadata$ = {
@@ -13247,7 +13305,18 @@
       try {
         switch (this.state_0) {
           case 0:
-            return this.local$$receiver.line_61zpoe$(Json_getInstance().encodePrettyUntyped_hvn9da$(mapOf([to('localhost', mapOf_0(to('host', 'http://127.0.0.1:8080'))), to('prod', mapOf_0(to('host', 'https://my.domain.com')))]), '    '));
+            var tmp$ = Json_getInstance();
+            var tmp$_0 = mapOf_0(to('host', 'http://127.0.0.1:8080'));
+            var $receiver = this.local$closure$paramsInUrls;
+            var destination = ArrayList_init_0(collectionSizeOrDefault($receiver, 10));
+            var tmp$_1;
+            tmp$_1 = $receiver.iterator();
+            while (tmp$_1.hasNext()) {
+              var item = tmp$_1.next();
+              destination.add_11rb$(to('param_' + item, item));
+            }
+
+            return this.local$$receiver.line_61zpoe$(tmp$.encodePrettyUntyped_hvn9da$(mapOf_0(to('localhost', plus_1(tmp$_0, toMap(destination)))), '    '));
           case 1:
             throw this.exception_0;
         }
@@ -13264,6 +13333,11 @@
       }
      while (true);
   };
+  function SwaggerGenerator$render$lambda$lambda_10(this$SwaggerGenerator) {
+    return function (it) {
+      return it.name + '=' + this$SwaggerGenerator.toKotlinDefault_rsshv6$(it.schema.type, it.default, false);
+    };
+  }
   function SwaggerGenerator$render$lambda_13(this$SwaggerGenerator_0) {
     return function ($receiver_0, continuation_0, suspended) {
       var instance = new Coroutine$SwaggerGenerator$render$lambda_5(this$SwaggerGenerator_0, $receiver_0, this, continuation_0);
@@ -13315,44 +13389,82 @@
                   var descLine_0 = tmp$_2.next();
                   this.local$$receiver.line_61zpoe$('# ' + descLine_0);
                 }
-                this.local$$receiver.line_61zpoe$(httpMethod + ' {{host}}' + path.path);
-                var $receiver = method.securityDefinitions_mq44pj$(this.local$this$SwaggerGenerator.model);
+                var $receiver = path.path;
+                var regex = Regex_init('\\{(\\w+)\\}');
+                var replace_20wsma$result;
+                replace_20wsma$break: do {
+                  var match = regex.find_905azu$($receiver);
+                  if (match == null) {
+                    replace_20wsma$result = $receiver.toString();
+                    break replace_20wsma$break;
+                  }
+                  var lastStart = 0;
+                  var length = $receiver.length;
+                  var sb = StringBuilder_init_0(length);
+                  do {
+                    var foundMatch = ensureNotNull(match);
+                    sb.append_ezbsdh$($receiver, lastStart, foundMatch.range.start);
+                    sb.append_gw00v9$('{{param_' + foundMatch.groupValues.get_za3lpa$(1) + '}}');
+                    lastStart = foundMatch.range.endInclusive + 1 | 0;
+                    match = foundMatch.next();
+                  }
+                   while (lastStart < length && match != null);
+                  if (lastStart < length) {
+                    sb.append_ezbsdh$($receiver, lastStart, length);
+                  }
+                  replace_20wsma$result = sb.toString();
+                }
+                 while (false);
+                var escapedPath = replace_20wsma$result;
+                var $receiver_0 = method.parametersQuery;
                 var destination = ArrayList_init();
                 var tmp$_4;
-                tmp$_4 = $receiver.iterator();
+                tmp$_4 = $receiver_0.iterator();
                 while (tmp$_4.hasNext()) {
                   var element = tmp$_4.next();
-                  var tmp$_5, tmp$_6;
-                  if (equals((tmp$_5 = element.second) != null ? tmp$_5.inside : null, 'header') && equals((tmp$_6 = element.second) != null ? tmp$_6.type : null, SwaggerModel$SecurityType$API_KEY_getInstance()))
+                  if (element.default != null)
                     destination.add_11rb$(element);
                 }
-                tmp$_3 = destination.iterator();
+                var queryString = joinToString(destination, '&', void 0, void 0, void 0, void 0, SwaggerGenerator$render$lambda$lambda_10(this.local$this$SwaggerGenerator));
+                var rqueryString = queryString.length > 0 ? '?' + queryString : '';
+                this.local$$receiver.line_61zpoe$(httpMethod + ' {{host}}' + escapedPath + rqueryString);
+                var $receiver_1 = method.securityDefinitions_mq44pj$(this.local$this$SwaggerGenerator.model);
+                var destination_0 = ArrayList_init();
+                var tmp$_5;
+                tmp$_5 = $receiver_1.iterator();
+                while (tmp$_5.hasNext()) {
+                  var element_0 = tmp$_5.next();
+                  var tmp$_6, tmp$_7;
+                  if (equals((tmp$_6 = element_0.second) != null ? tmp$_6.inside : null, 'header') && equals((tmp$_7 = element_0.second) != null ? tmp$_7.type : null, SwaggerModel$SecurityType$API_KEY_getInstance()))
+                    destination_0.add_11rb$(element_0);
+                }
+                tmp$_3 = destination_0.iterator();
                 while (tmp$_3.hasNext()) {
-                  var tmp$_7 = tmp$_3.next();
-                  var sec = tmp$_7.component1()
-                  , secdef = tmp$_7.component2();
+                  var tmp$_8 = tmp$_3.next();
+                  var sec = tmp$_8.component1()
+                  , secdef = tmp$_8.component2();
                   this.local$$receiver.line_61zpoe$(ensureNotNull(secdef).name + ': Bearer {{ auth_token }}');
                 }
                 if (equals(httpMethod, 'POST') || equals(httpMethod, 'PUT')) {
                   this.local$$receiver.line_61zpoe$('Content-Type: application/json');
                   this.local$$receiver.line_61zpoe$('');
-                  var $receiver_0 = method.parameters;
-                  var destination_0 = ArrayList_init();
-                  var tmp$_8;
-                  tmp$_8 = $receiver_0.iterator();
-                  while (tmp$_8.hasNext()) {
-                    var element_0 = tmp$_8.next();
-                    if (element_0.inside === SwaggerModel$Inside$BODY_getInstance())
-                      destination_0.add_11rb$(element_0);
-                  }
-                  var destination_1 = ArrayList_init_0(collectionSizeOrDefault(destination_0, 10));
+                  var $receiver_2 = method.parameters;
+                  var destination_1 = ArrayList_init();
                   var tmp$_9;
-                  tmp$_9 = destination_0.iterator();
+                  tmp$_9 = $receiver_2.iterator();
                   while (tmp$_9.hasNext()) {
-                    var item = tmp$_9.next();
-                    destination_1.add_11rb$(to(item.name, this.local$this$SwaggerGenerator.toKotlinDefaultUntyped_r1jjni$(item.schema.type)));
+                    var element_1 = tmp$_9.next();
+                    if (element_1.inside === SwaggerModel$Inside$BODY_getInstance())
+                      destination_1.add_11rb$(element_1);
                   }
-                  var postBody = toMap(destination_1);
+                  var destination_2 = ArrayList_init_0(collectionSizeOrDefault(destination_1, 10));
+                  var tmp$_10;
+                  tmp$_10 = destination_1.iterator();
+                  while (tmp$_10.hasNext()) {
+                    var item = tmp$_10.next();
+                    destination_2.add_11rb$(to(item.name, this.local$this$SwaggerGenerator.toKotlinDefaultUntyped_r1jjni$(item.schema.type)));
+                  }
+                  var postBody = toMap(destination_2);
                   this.local$$receiver.line_61zpoe$(Json_getInstance().encodePrettyUntyped_hvn9da$(postBody));
                 }
                 this.local$$receiver.line_61zpoe$('');
@@ -13411,7 +13523,25 @@
     $receiver.fileText_7k8vha$('src/swagger-backend.kt', void 0, void 0, SwaggerGenerator$render$lambda_9(info, this, registerInstancesDecl));
     $receiver.fileText_7k8vha$('src/swagger-frontend.kt', void 0, void 0, SwaggerGenerator$render$lambda_10(info, this));
     $receiver.fileText_7k8vha$(endsWith(this.model.filename, '.json') ? 'api.json' : 'api.yaml', void 0, void 0, SwaggerGenerator$render$lambda_11(this));
-    $receiver.fileText_7k8vha$('http-client.env.json', void 0, void 0, SwaggerGenerator$render$lambda_12);
+    var $receiver_0 = this.model.paths.values;
+    var destination = ArrayList_init();
+    var tmp$;
+    tmp$ = $receiver_0.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      var list = element.methodsList;
+      addAll(destination, list);
+    }
+    var destination_0 = ArrayList_init();
+    var tmp$_0;
+    tmp$_0 = destination.iterator();
+    while (tmp$_0.hasNext()) {
+      var element_0 = tmp$_0.next();
+      var list_0 = toList(map(Regex_init('\\{(\\w+)\\}').findAll_905azu$(element_0.path), SwaggerGenerator$render$lambda$lambda_9));
+      addAll(destination_0, list_0);
+    }
+    var paramsInUrls = toSet(destination_0);
+    $receiver.fileText_7k8vha$('http-client.env.json', void 0, void 0, SwaggerGenerator$render$lambda_12(paramsInUrls));
     $receiver.fileText_7k8vha$('api.http', void 0, void 0, SwaggerGenerator$render$lambda_13(this));
   };
   function SwaggerGenerator$CompatibleLoginRoute(methodModel, tokenPath, username, password) {
@@ -13631,7 +13761,7 @@
         var pschema = param.schema;
         var rule = pschema.rule;
         if (rule != null) {
-          $receiver.line_61zpoe$('check(' + toKotlin_1(rule, pschema) + ') { ' + quote('Invalid ' + param.name) + ' }');
+          $receiver.line_61zpoe$('checkRequest(' + toKotlin_1(rule, param.name, pschema) + ') { ' + quote('Invalid ' + param.name) + ' }');
         }
       }
       return Unit;
@@ -13670,7 +13800,7 @@
           $receiver.line_61zpoe$('// @TODO: Your username/password validation here');
           if (loginRoute.password != null) {
             $receiver.line_61zpoe$('val password = ' + loginRoute.password.fullPath);
-            $receiver.line_61zpoe$('if (username != password) httpException(HttpStatusCode.Unauthorized)');
+            $receiver.line_61zpoe$('if (username != password) httpException(HttpStatusCode.Unauthorized, "username != password")');
           }
           $receiver.line_61zpoe$('val token = myjwt.sign(username)');
           package$util.DynamicAccess.set_7kor20$(untyped, loginRoute.tokenPath, new SwaggerModel$Identifier('token'));
@@ -13682,6 +13812,7 @@
   }
   function SwaggerGenerator$renderBackend$lambda$lambda(closure$method, this$SwaggerGenerator) {
     return function ($receiver) {
+      $receiver.line_61zpoe$('// ' + stripLineBreaks(closure$method.method).toUpperCase() + ' ' + stripLineBreaks(closure$method.path));
       $receiver.line_61zpoe$('override suspend fun ' + closure$method.methodName + '(');
       $receiver._indent();
       try {
@@ -13799,6 +13930,17 @@
       throw IllegalStateException_init(("Unsupported '" + $receiver + "' class=" + Kotlin.getKClassFromExpression($receiver)).toString());
     }
   };
+  function SwaggerGenerator$toKotlinDefault$lambda(this$toKotlinDefault, closure$default, closure$typed, this$SwaggerGenerator) {
+    return function ($receiver) {
+      this$SwaggerGenerator.toKotlinDefault_tv209j$($receiver, this$toKotlinDefault, closure$default, closure$typed);
+      return Unit;
+    };
+  }
+  SwaggerGenerator.prototype.toKotlinDefault_rsshv6$ = function ($receiver, default_0, typed, indentation) {
+    if (indentation === void 0)
+      indentation = 0;
+    return indentString(indentation, SwaggerGenerator$toKotlinDefault$lambda($receiver, default_0, typed, this));
+  };
   SwaggerGenerator.prototype.toKotlinDefault_bp1lbx$ = function ($receiver, type, default_0, typed) {
     this.toKotlinDefault_tv209j$($receiver, type != null ? type.type : null, default_0, typed);
   };
@@ -13857,7 +13999,7 @@
         $receiver._indent();
         try {
           var tmp$_11;
-          var props = toList(def.type.fields.entries);
+          var props = toList_0(def.type.fields.entries);
           tmp$_11 = get_metaIter(props).iterator();
           while (tmp$_11.hasNext()) {
             var tmp$_12 = tmp$_11.next();
@@ -14600,9 +14742,11 @@
       return this.type.rule;
     }
   });
-  SwaggerModel$Prop.prototype.toRuleString = function () {
+  SwaggerModel$Prop.prototype.toRuleString_61zpoe$ = function (param) {
+    if (param === void 0)
+      param = this.name;
     var tmp$;
-    return (tmp$ = this.rule) != null ? toKotlin_1(tmp$, this.type) : null;
+    return (tmp$ = this.rule) != null ? toKotlin_1(tmp$, param, this.type) : null;
   };
   SwaggerModel$Prop.$metadata$ = {
     kind: Kind_CLASS,
@@ -15026,25 +15170,75 @@
     this.operationId = operationId;
     this.parameters = parameters;
     this.responses = responses;
-    var $receiver = this.responses;
+    var $receiver = this.parameters;
     var destination = ArrayList_init();
     var tmp$;
     tmp$ = $receiver.iterator();
     while (tmp$.hasNext()) {
       var element = tmp$.next();
-      if (element.intCode !== 200)
+      if (element.inside === SwaggerModel$Inside$QUERY_getInstance())
         destination.add_11rb$(element);
     }
-    this.errorResponses = destination;
-    var $receiver_0 = this.responses;
+    this.parametersQuery = destination;
+    var $receiver_0 = this.parameters;
+    var destination_0 = ArrayList_init();
+    var tmp$_0;
+    tmp$_0 = $receiver_0.iterator();
+    while (tmp$_0.hasNext()) {
+      var element_0 = tmp$_0.next();
+      if (element_0.inside === SwaggerModel$Inside$BODY_getInstance())
+        destination_0.add_11rb$(element_0);
+    }
+    this.parametersBody = destination_0;
+    var $receiver_1 = this.parameters;
+    var destination_1 = ArrayList_init();
+    var tmp$_1;
+    tmp$_1 = $receiver_1.iterator();
+    while (tmp$_1.hasNext()) {
+      var element_1 = tmp$_1.next();
+      if (element_1.inside === SwaggerModel$Inside$FORM_DATA_getInstance())
+        destination_1.add_11rb$(element_1);
+    }
+    this.parametersFormData = destination_1;
+    var $receiver_2 = this.parameters;
+    var destination_2 = ArrayList_init();
+    var tmp$_2;
+    tmp$_2 = $receiver_2.iterator();
+    while (tmp$_2.hasNext()) {
+      var element_2 = tmp$_2.next();
+      if (element_2.inside === SwaggerModel$Inside$PATH_getInstance())
+        destination_2.add_11rb$(element_2);
+    }
+    this.parametersPath = destination_2;
+    var $receiver_3 = this.parameters;
+    var destination_3 = ArrayList_init();
+    var tmp$_3;
+    tmp$_3 = $receiver_3.iterator();
+    while (tmp$_3.hasNext()) {
+      var element_3 = tmp$_3.next();
+      if (element_3.inside === SwaggerModel$Inside$HEADER_getInstance())
+        destination_3.add_11rb$(element_3);
+    }
+    this.parametersHeader = destination_3;
+    var $receiver_4 = this.responses;
+    var destination_4 = ArrayList_init();
+    var tmp$_4;
+    tmp$_4 = $receiver_4.iterator();
+    while (tmp$_4.hasNext()) {
+      var element_4 = tmp$_4.next();
+      if (element_4.intCode !== 200)
+        destination_4.add_11rb$(element_4);
+    }
+    this.errorResponses = destination_4;
+    var $receiver_5 = this.responses;
     var firstOrNull$result;
     firstOrNull$break: do {
-      var tmp$_0;
-      tmp$_0 = $receiver_0.iterator();
-      while (tmp$_0.hasNext()) {
-        var element_0 = tmp$_0.next();
-        if (element_0.intCode === 200) {
-          firstOrNull$result = element_0;
+      var tmp$_5;
+      tmp$_5 = $receiver_5.iterator();
+      while (tmp$_5.hasNext()) {
+        var element_5 = tmp$_5.next();
+        if (element_5.intCode === 200) {
+          firstOrNull$result = element_5;
           break firstOrNull$break;
         }
       }
@@ -15052,10 +15246,10 @@
     }
      while (false);
     this.okResponse = firstOrNull$result;
-    var tmp$_1, tmp$_2, tmp$_3, tmp$_4;
-    this.defaultResponse = (tmp$_1 = this.okResponse) != null ? tmp$_1 : new SwaggerModel$Response('200', 'OK', new SwaggerModel$InfoGenType(SwaggerModel$StringType_getInstance(), null));
-    this.responseType = (tmp$_3 = (tmp$_2 = this.defaultResponse.schema) != null ? tmp$_2.type : null) != null ? tmp$_3 : SwaggerModel$VoidType_getInstance();
-    this.methodName = ID_getInstance().normalizeMethodName_61zpoe$((tmp$_4 = this.operationId) != null ? tmp$_4 : this.method + '/' + this.path);
+    var tmp$_6, tmp$_7, tmp$_8, tmp$_9;
+    this.defaultResponse = (tmp$_6 = this.okResponse) != null ? tmp$_6 : new SwaggerModel$Response('200', 'OK', new SwaggerModel$InfoGenType(SwaggerModel$StringType_getInstance(), null));
+    this.responseType = (tmp$_8 = (tmp$_7 = this.defaultResponse.schema) != null ? tmp$_7.type : null) != null ? tmp$_8 : SwaggerModel$VoidType_getInstance();
+    this.methodName = ID_getInstance().normalizeMethodName_61zpoe$((tmp$_9 = this.operationId) != null ? tmp$_9 : this.method + '/' + this.path);
   }
   SwaggerModel$PathMethodModel.prototype.securityDefinitions_mq44pj$ = function (model) {
     var $receiver = this.security;
@@ -15655,11 +15849,11 @@
   SwaggerModel.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.filename, other.filename) && Kotlin.equals(this.source, other.source) && Kotlin.equals(this.info, other.info) && Kotlin.equals(this.servers, other.servers) && Kotlin.equals(this.produces, other.produces) && Kotlin.equals(this.consumes, other.consumes) && Kotlin.equals(this.securityDefinitions, other.securityDefinitions) && Kotlin.equals(this.paths, other.paths) && Kotlin.equals(this.definitions, other.definitions)))));
   };
-  function toKotlin_0($receiver, type) {
-    return toKotlin($receiver, type.ktype);
+  function toKotlin_0($receiver, param, type) {
+    return toKotlin($receiver, param, type.ktype);
   }
-  function toKotlin_1($receiver, type) {
-    return toKotlin_0($receiver, type.type);
+  function toKotlin_1($receiver, param, type) {
+    return toKotlin_0($receiver, param, type.type);
   }
   function Dynamic() {
     Dynamic_instance = this;
@@ -15701,14 +15895,14 @@
     if (Kotlin.isType($receiver, List))
       return $receiver;
     else if (Kotlin.isType($receiver, Iterable))
-      return toList($receiver);
+      return toList_0($receiver);
     else {
       return emptyList();
     }
   };
   DynamicAccess.prototype.get_keys_mzud1t$ = function ($receiver) {
     if (Kotlin.isType($receiver, Map))
-      return toList($receiver.keys);
+      return toList_0($receiver.keys);
     else {
       return emptyList();
     }
@@ -16197,7 +16391,7 @@
       }
     }
      else if (Kotlin.isType(obj, Iterable)) {
-      var entries_0 = toList(obj);
+      var entries_0 = toList_0(obj);
       if (entries_0.isEmpty()) {
         b.inline_61zpoe$('[]');
       }
@@ -16318,7 +16512,7 @@
     interfaces: [Iterable]
   };
   function get_metaIter($receiver) {
-    return new MetaListIterable(toList($receiver));
+    return new MetaListIterable(toList_0($receiver));
   }
   function IteratorStepInfo(index0, length, item) {
     this.index0 = index0;
@@ -16588,7 +16782,7 @@
     return out.toString();
   }
   function generate(subject, blocks, continuation) {
-    return generate_0(subject, copyToArray(toList(blocks)).slice(), continuation);
+    return generate_0(subject, copyToArray(toList_0(blocks)).slice(), continuation);
   }
   function generate_0(subject_0, blocks_0, continuation_0, suspended) {
     var instance = new Coroutine$generate(subject_0, blocks_0, continuation_0);
@@ -19310,6 +19504,7 @@
   JsonRule.MinMaxInt = JsonRule$MinMaxInt;
   JsonRule.MinInt = JsonRule$MinInt;
   JsonRule.MaxInt = JsonRule$MaxInt;
+  JsonRule.MinMaxLength = JsonRule$MinMaxLength;
   JsonRule.MinLength = JsonRule$MinLength;
   JsonRule.MinItems = JsonRule$MinItems;
   JsonRule.MinProperties = JsonRule$MinProperties;
@@ -19324,6 +19519,7 @@
   JsonRule.Minimum = JsonRule$Minimum;
   JsonRule.Maximum = JsonRule$Maximum;
   JsonRule.Range = JsonRule$Range;
+  JsonRule.RangeLength = JsonRule$RangeLength;
   Object.defineProperty(JsonRule, 'UniqueItems', {
     get: JsonRule$UniqueItems_getInstance
   });
@@ -19337,7 +19533,8 @@
   });
   var package$swagger = package$start.swagger || (package$start.swagger = {});
   package$swagger.JsonRule = JsonRule;
-  package$swagger.toKotlin_h5xh7q$ = toKotlin;
+  package$swagger.get_propKt_qqpnji$ = get_propKt;
+  package$swagger.toKotlin_fcw6hg$ = toKotlin;
   Object.defineProperty(SwaggerGenerator, 'Companion', {
     get: SwaggerGenerator$Companion_getInstance
   });
@@ -19449,8 +19646,8 @@
     get: SwaggerModel$Companion_getInstance
   });
   package$swagger.SwaggerModel = SwaggerModel;
-  package$swagger.toKotlin_8us2re$ = toKotlin_0;
-  package$swagger.toKotlin_d3r508$ = toKotlin_1;
+  package$swagger.toKotlin_1hnt3g$ = toKotlin_0;
+  package$swagger.toKotlin_bnccq2$ = toKotlin_1;
   Object.defineProperty(package$util, 'Dynamic', {
     get: Dynamic_getInstance
   });

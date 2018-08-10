@@ -27,6 +27,10 @@ inline fun <T> T.verifyParam(name: String, callback: (T) -> Boolean): T {
     if (!callback(this)) throw IllegalArgumentException("$name"); return this
 }
 
+inline fun <T> T.checkRequest(cond: Boolean, callback: () -> String) {
+    if (!cond) httpException(HttpStatusCode.BadRequest, callback())
+}
+
 interface SwaggerBaseApi {
 }
 

@@ -69,7 +69,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                         indent {
                             +"init" {
                                 for (prop in propsWithRules) {
-                                    +"${prop.name}.verifyParam(${prop.name.quote()}) { ${prop.toRuleString()} }"
+                                    +"${prop.name}.verifyParam(${prop.name.quote()}) { ${prop.toRuleString("it")} }"
                                 }
                             }
                         }
@@ -193,9 +193,18 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                         +"# $descLine"
                     }
 
-                    +"$httpMethod {{host}}${path.path.replace(Regex("\\{(\\w+)\\}")) { matchResult ->
+                    val escapedPath = path.path.replace(Regex("\\{(\\w+)\\}")) { matchResult ->
                         "{{param_${matchResult.groupValues[1]}}}"
-                    }}"
+                    }
+
+                    // @TODO: Escaping when required?
+                    val queryString = method.parametersQuery
+                        .filter { it.default != null }
+                        .joinToString("&") { it.name + "=" + it.schema.type.toKotlinDefault(it.default, typed = false) }
+
+                    val rqueryString = if (queryString.isNotEmpty()) "?$queryString" else ""
+
+                    +"$httpMethod {{host}}$escapedPath$rqueryString"
                     for ((sec, secdef) in method.securityDefinitions(model).filter {
                         it.second?.inside == "header" && it.second?.type == SwaggerModel.SecurityType.API_KEY
                     }) {
@@ -341,6 +350,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             for (paths in model.paths.values) {
                 for (method in paths.methodsList) {
                     SEPARATOR {
+                        +"// ${method.method.stripLineBreaks().toUpperCase()} ${method.path.stripLineBreaks()}"
                         +"override suspend fun ${method.methodName}("
                         indent {
                             for ((info, param) in method.parameters.metaIter) {
@@ -354,7 +364,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                                     val pschema = param.schema
                                     val rule = pschema.rule
                                     if (rule != null) {
-                                        +"check(${rule.toKotlin(pschema)}) { ${"Invalid ${param.name}".quote()} }"
+                                        +"checkRequest(${rule.toKotlin(param.name, pschema)}) { ${"Invalid ${param.name}".quote()} }"
                                     }
                                 }
                             }
@@ -374,7 +384,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                                         +"// @TODO: Your username/password validation here"
                                         if (loginRoute.password != null) {
                                             +"val password = ${loginRoute.password.fullPath}"
-                                            +"if (username != password) httpException(HttpStatusCode.Unauthorized)"
+                                            +"if (username != password) httpException(HttpStatusCode.Unauthorized, \"username != password\")"
                                         }
                                         +"val token = myjwt.sign(username)"
                                         Dynamic {
@@ -423,6 +433,10 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         is SwaggerModel.ObjType -> "Any/*Unsupported ${this.fields}*/"
         is SwaggerModel.VoidType -> "Unit"
         else -> error("Unsupported '$this' class=${this::class}")
+    }
+
+    fun SwaggerModel.GenType?.toKotlinDefault(default: Any?, typed: Boolean, indentation: Int = 0): String {
+        return indentString(indentation) { toKotlinDefault(this@toKotlinDefault, default, typed)}
     }
 
     fun Indenter.toKotlinDefault(type: SwaggerModel.InfoGenType<*>?, default: Any?, typed: Boolean) =

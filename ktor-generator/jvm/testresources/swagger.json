@@ -313,12 +313,15 @@
             "description": "Limit number of articles returned (default is 20)",
             "required": false,
             "default": 20,
+            "minimum": 1,
+            "maximum": 100,
             "type": "integer"
           },
           {
             "name": "offset",
             "in": "query",
             "description": "Offset/skip number of articles (default is 0)",
+            "minimum": 0,
             "required": false,
             "default": 0,
             "type": "integer"
@@ -802,11 +805,15 @@
       "type": "object",
       "properties": {
         "email": {
-          "type": "string"
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 32
         },
         "password": {
           "type": "string",
-          "format": "password"
+          "format": "password",
+          "minLength": 5,
+          "maxLength": 128
         }
       },
       "required": [

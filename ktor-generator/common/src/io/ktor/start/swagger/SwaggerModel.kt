@@ -165,7 +165,7 @@ data class SwaggerModel(
         val rtype = if (required) type else OptionalType(type)
         val rule get() = type.rule
 
-        fun toRuleString(): String? = rule?.toKotlin(type)
+        fun toRuleString(param: String = name): String? = rule?.toKotlin(param, type)
     }
 
     data class TypeDef(
@@ -227,6 +227,12 @@ data class SwaggerModel(
         val parameters: List<Parameter>,
         val responses: List<Response>
     ) {
+        val parametersQuery = parameters.filter { it.inside == Inside.QUERY }
+        val parametersBody = parameters.filter { it.inside == Inside.BODY }
+        val parametersFormData = parameters.filter { it.inside == Inside.FORM_DATA }
+        val parametersPath = parameters.filter { it.inside == Inside.PATH }
+        val parametersHeader = parameters.filter { it.inside == Inside.HEADER }
+
         fun securityDefinitions(model: SwaggerModel): List<Pair<Security, SecurityDefinition?>> {
             return security.map { it to model.securityDefinitions[it.name] }
         }
@@ -504,5 +510,5 @@ data class SwaggerModel(
     }
 }
 
-fun JsonRule.toKotlin(type: SwaggerModel.GenType): String = toKotlin(type.ktype)
-fun JsonRule.toKotlin(type: SwaggerModel.InfoGenType<*>): String = toKotlin(type.type)
+fun JsonRule.toKotlin(param: String, type: SwaggerModel.GenType): String = toKotlin(param, type.ktype)
+fun JsonRule.toKotlin(param: String, type: SwaggerModel.InfoGenType<*>): String = toKotlin(param, type.type)

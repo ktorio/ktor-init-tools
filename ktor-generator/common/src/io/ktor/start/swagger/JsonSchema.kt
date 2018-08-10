@@ -28,11 +28,13 @@ sealed class JsonRule {
     abstract class MinInt : MinMaxInt()
     abstract class MaxInt : MinMaxInt()
 
-    class MinLength(override val value: Int) : MinInt()
+    interface MinMaxLength
+
+    class MinLength(override val value: Int) : MinInt(), MinMaxLength
     class MinItems(override val value: Int) : MinInt()
     class MinProperties(override val value: Int) : MinInt()
 
-    class MaxLength(override val value: Int) : MaxInt()
+    class MaxLength(override val value: Int) : MaxInt(), MinMaxLength
     class MaxItems(override val value: Int) : MaxInt()
     class MaxProperties(override val value: Int) : MaxInt()
 
@@ -44,6 +46,7 @@ sealed class JsonRule {
     class Minimum(override val value: Double, override val exclusive: Boolean) : MinMaxDouble()
     class Maximum(override val value: Double, override val exclusive: Boolean) : MinMaxDouble()
     class Range(val min: Minimum, val max: Maximum, val exclusive: Boolean) : JsonRule()
+    class RangeLength(val min: MinLength, val max: MaxLength) : JsonRule()
     object UniqueItems : JsonRule()
     object Required : JsonRule()
     class Pattern(val pattern: Regex) : JsonRule()
@@ -82,12 +85,24 @@ sealed class JsonRule {
                 }
             }
 
-            val min = rules.filterIsInstance<JsonRule.Minimum>().firstOrNull()
-            val max = rules.filterIsInstance<JsonRule.Maximum>().firstOrNull()
+            run {
+                val min = rules.filterIsInstance<JsonRule.Minimum>().firstOrNull()
+                val max = rules.filterIsInstance<JsonRule.Maximum>().firstOrNull()
 
-            if (min != null && max != null && !min.exclusive) {
-                rules.removeAll { it is JsonRule.Minimum || it is JsonRule.Maximum }
-                rules += JsonRule.Range(min, max, max.exclusive)
+                if (min != null && max != null && !min.exclusive) {
+                    rules.removeAll { it is JsonRule.Minimum || it is JsonRule.Maximum }
+                    rules += JsonRule.Range(min, max, max.exclusive)
+                }
+            }
+
+            run {
+                val min = rules.filterIsInstance<JsonRule.MinLength>().firstOrNull()
+                val max = rules.filterIsInstance<JsonRule.MaxLength>().firstOrNull()
+
+                if (min != null && max != null) {
+                    rules.removeAll { it is JsonRule.MinLength || it is JsonRule.MaxLength }
+                    rules += JsonRule.RangeLength(min, max)
+                }
             }
 
             return if (rules.size == 1) rules.first() else JsonRule.AllOf(rules)
@@ -99,21 +114,24 @@ sealed class JsonRule {
     }
 }
 
-fun JsonRule.toKotlin(clazz: KClass<*>): String {
+val JsonRule.MinMaxInt.propKt get() = if (this is JsonRule.MinMaxLength) "length" else "size"
+
+fun JsonRule.toKotlin(param: String, clazz: KClass<*>): String {
     return when (this) {
-        is JsonRule.Not -> "!(${rule.toKotlin(clazz)})"
-        is JsonRule.AllOf -> rules.joinToString(" && ") { it.toKotlin(clazz) }
-        is JsonRule.AnyOf -> rules.joinToString(" || ") { it.toKotlin(clazz) }
-        is JsonRule.OneOf -> rules.joinToString(" xor ") { it.toKotlin(clazz) }
-        is JsonRule.MultipleOf -> "(it % $value)"
-        is JsonRule.Minimum -> if (exclusive) "it > ${toString(clazz)}" else "it >= ${toString(clazz)}"
-        is JsonRule.Maximum -> if (exclusive) "it < ${toString(clazz)}" else "it <= ${toString(clazz)}"
-        is JsonRule.Range -> if (exclusive) "it in ${min.toString(clazz)} until ${max.toString(clazz)}" else "it in ${min.toString(clazz)} .. ${max.toString(clazz)}"
-        is JsonRule.MinInt -> "it.size >= $value"
-        is JsonRule.MaxInt -> "it.size <= $value"
-        is JsonRule.Pattern -> "Regex(${pattern.pattern.quote()}).matches(it)"
-        is JsonRule.UniqueItems -> "it.distinct().size == it.size" // @TODO: Optimize!
-        is JsonRule.Enumerable -> "it in ${items.kquoteLit}"
+        is JsonRule.Not -> "!(${rule.toKotlin(param, clazz)})"
+        is JsonRule.AllOf -> rules.joinToString(" && ") { it.toKotlin(param, clazz) }
+        is JsonRule.AnyOf -> rules.joinToString(" || ") { it.toKotlin(param, clazz) }
+        is JsonRule.OneOf -> rules.joinToString(" xor ") { it.toKotlin(param, clazz) }
+        is JsonRule.MultipleOf -> "($param % $value)"
+        is JsonRule.Minimum -> if (exclusive) "$param > ${toString(clazz)}" else "$param >= ${toString(clazz)}"
+        is JsonRule.Maximum -> if (exclusive) "$param < ${toString(clazz)}" else "$param <= ${toString(clazz)}"
+        is JsonRule.Range -> if (exclusive) "$param in ${min.toString(clazz)} until ${max.toString(clazz)}" else "$param in ${min.toString(clazz)} .. ${max.toString(clazz)}"
+        is JsonRule.RangeLength -> "$param.length in ${min.value}..${max.value}"
+        is JsonRule.MinInt -> "$param.${this.propKt} >= $value"
+        is JsonRule.MaxInt -> "$param.${this.propKt} <= $value"
+        is JsonRule.Pattern -> "Regex(${pattern.pattern.quote()}).matches($param)"
+        is JsonRule.UniqueItems -> "$param.distinct().size == $param.size" // @TODO: Optimize!
+        is JsonRule.Enumerable -> "$param in ${items.kquoteLit}"
         else -> error("Unsupported $this")
     }
 }
