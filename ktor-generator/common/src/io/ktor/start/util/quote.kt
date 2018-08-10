@@ -1,5 +1,7 @@
 package io.ktor.start.util
 
+fun String.stripLineBreaks() = this.split('\n').joinToString(" ")
+
 fun String.escape(): String {
     val out = StringBuilder()
     for (n in 0 until this.length) {

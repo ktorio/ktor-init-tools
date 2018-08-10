@@ -169,15 +169,21 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         }
 
         fileText("api.http") {
-            +"# ${model.info.title.escape()}"
-            +"# ${model.info.description.escape()}"
+            +"# ${model.info.title.stripLineBreaks()}"
+            for (descLine in model.info.description) {
+                +"# $descLine"
+            }
             +""
             for (path in model.paths.values) {
                 for (method in path.methodsList) {
                     val httpMethod = method.method.toUpperCase()
                     +"###"
                     +""
-                    +"# ${method.description.escape()}"
+
+                    for (descLine in method.description.lines()) {
+                        +"# $descLine"
+                    }
+
                     +"$httpMethod {{host}}${path.path}"
                     for ((sec, secdef) in method.securityDefinitions(model).filter {
                         it.second?.inside == "header" && it.second?.type == SwaggerModel.SecurityType.API_KEY
@@ -228,24 +234,29 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
 
     fun Indenter.renderInterface(model: SwaggerModel) {
         +"/**"
-        +" * ${model.info.title}"
+        +" * ${model.info.title.stripLineBreaks()}"
         +" * "
-        +" * ${model.info.description}"
+        for (descLine in model.info.description.lines()) {
+            +" * $descLine"
+        }
         +" */"
         +"interface ${model.info.className} : SwaggerBaseApi" {
             for (paths in model.paths.values) {
                 for (path in paths.methodsList) {
                     SEPARATOR {
                         +"/**"
-                        +" * ${path.description}"
+                        for (descLine in path.description.lines()) {
+                            +" * $descLine"
+                        }
                         +" * "
                         for (param in path.parameters) {
-                            +" * @param ${param.name} ${param.description}"
+                            param.description.escape()
+                            +" * @param ${param.name} ${param.description.stripLineBreaks()}"
                         }
                         if (path.parameters.isNotEmpty()) {
                             +" * "
                         }
-                        +" * @return ${path.defaultResponse.description}"
+                        +" * @return ${path.defaultResponse.description.stripLineBreaks()}"
                         +" */"
                         +"@Path(${paths.path.quote()})"
                         +"@Method(${path.method.toUpperCase().quote()})"
@@ -399,11 +410,11 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         }
     }
 
-    fun SwaggerModel.GenType?.toKotlinDefaultUntyped(): Any? {
+    fun SwaggerModel.GenType?.toKotlinDefaultUntyped(path: List<String> = listOf()): Any? {
         return when (this) {
             null -> null
             is SwaggerModel.OptionalType -> null
-            is SwaggerModel.BaseStringType -> ""
+            is SwaggerModel.BaseStringType -> path.joinToString(".")
             is SwaggerModel.DateType -> ""
             is SwaggerModel.DateTimeType -> ""
             is SwaggerModel.Int32Type -> 0
@@ -411,7 +422,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             is SwaggerModel.Int64Type -> "0L"
             is SwaggerModel.BoolType -> "false"
             is SwaggerModel.ArrayType -> listOf<Any?>()
-            is SwaggerModel.MapLikeGenType -> fields.map { it.key to it.value.type.toKotlinDefaultUntyped() }.toMap()
+            is SwaggerModel.MapLikeGenType -> fields.map { it.key to it.value.type.toKotlinDefaultUntyped(path + it.key) }.toMap()
             is SwaggerModel.VoidType -> Unit
             else -> error("Unsupported '$this'")
         }
