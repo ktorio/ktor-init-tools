@@ -442,26 +442,35 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
     fun Indenter.toKotlinDefault(type: SwaggerModel.InfoGenType<*>?, default: Any?, typed: Boolean) =
         toKotlinDefault(type?.type, default, typed)
 
+    private val Any?.tryNumber get() = when (this) {
+        null -> null
+        is Number -> this
+        else -> "$this".toDoubleOrNull()
+    }
+
+    private val Any?.tryInt get() = tryNumber?.toInt()
+    private val Any?.tryDouble get() = tryNumber?.toDouble()
+    private val Any?.tryLong get() = tryNumber?.toLong()
+    private val Any?.tryBool get() = when {
+        this is Boolean -> this
+        this is String -> !(this == "" || this == "false" || this == "0")
+        else -> tryInt
+    }
+
     fun Indenter.toKotlinDefault(type: SwaggerModel.GenType?, default: Any?, typed: Boolean) {
         when (type) {
             null -> +"null"
             is SwaggerModel.OptionalType -> +"null"
             is SwaggerModel.BaseStringType -> {
-                if (default is SwaggerModel.Identifier) {
-                    +default.id
-                } else {
-                    +(default?.toString() ?: "").quote()
-                }
+                if (default is SwaggerModel.Identifier) +default.id else +(default?.toString() ?: "").quote()
             }
             is SwaggerModel.DateType -> +"Date()"
             is SwaggerModel.DateTimeType -> +"Date()"
-            is SwaggerModel.Int32Type -> +"${((default as? Number?)?.toInt() ?: 0)}"
-            is SwaggerModel.DoubleType -> +"${((default as? Number?)?.toDouble() ?: 0.0)}"
-            is SwaggerModel.Int64Type -> +"${((default as? Number?)?.toLong() ?: 0L)}"
-            is SwaggerModel.BoolType -> +"${((default as? Boolean?) ?: false)}"
-            is SwaggerModel.ArrayType -> {
-                +"listOf()"
-            }
+            is SwaggerModel.Int32Type -> +"${default.tryInt ?: 0}"
+            is SwaggerModel.DoubleType -> +"${default.tryDouble ?: 0.0}"
+            is SwaggerModel.Int64Type -> +"${default.tryLong ?: 0L}"
+            is SwaggerModel.BoolType -> +"${default.tryBool ?: false}"
+            is SwaggerModel.ArrayType -> +"listOf()"
             is SwaggerModel.MapLikeGenType -> {
                 if (typed && type is SwaggerModel.NamedObject) {
                     val def = type.kind

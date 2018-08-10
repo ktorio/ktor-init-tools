@@ -6,21 +6,24 @@ import kotlinx.coroutines.experimental.*
 import kotlin.test.*
 
 class SwaggerGenerationTest {
-    val swagger by lazy { SwaggerModel.parseJson(getResourceString("/swagger.json")!!) }
-    val swaggerYaml by lazy { SwaggerModel.parseYaml(getResourceString("/swagger.yaml")!!) }
-    val uspto by lazy { SwaggerModel.parseJson(getResourceString("/uspto.json")!!) }
-    val petstore3 by lazy { SwaggerModel.parseJson(getResourceString("/small-petstore3.json")!!) }
-    val buildInfo by lazy { BuildInfo(fetch = { getResourceBytes(it) ?: error("Couldn't find $it") }) }
+    companion object {
+        val swagger by lazy { SwaggerModel.parseJson(getResourceString("/swagger.json")!!) }
+        val swaggerYaml by lazy { SwaggerModel.parseYaml(getResourceString("/swagger.yaml")!!) }
+        val uspto by lazy { SwaggerModel.parseJson(getResourceString("/uspto.json")!!) }
+        val petstore3 by lazy { SwaggerModel.parseJson(getResourceString("/small-petstore3.json")!!) }
+        val buildInfo by lazy { BuildInfo(fetch = { getResourceBytes(it) ?: error("Couldn't find $it") }) }
 
-    private fun getResourceBytes(name: String) =
-        null
-                ?: SwaggerGenerationTest::class.java.getResourceAsStream(name)?.readBytes()
-                ?: SwaggerGenerationTest::class.java.getResourceAsStream("/$name")?.readBytes()
-                ?: ClassLoader.getSystemClassLoader().getResourceAsStream(name)?.readBytes()
-                ?: ClassLoader.getSystemClassLoader().getResourceAsStream("/$name")?.readBytes()
+        private fun getResourceBytes(name: String) =
+            null
+                    ?: SwaggerGenerationTest::class.java.getResourceAsStream(name)?.readBytes()
+                    ?: SwaggerGenerationTest::class.java.getResourceAsStream("/$name")?.readBytes()
+                    ?: ClassLoader.getSystemClassLoader().getResourceAsStream(name)?.readBytes()
+                    ?: ClassLoader.getSystemClassLoader().getResourceAsStream("/$name")?.readBytes()
 
-    private fun getResourceString(name: String) =
-        getResourceBytes(name)?.toString(Charsets.UTF_8)
+        private fun getResourceString(name: String) =
+            getResourceBytes(name)?.toString(Charsets.UTF_8)
+
+    }
 
     @Test
     fun model2() = runBlocking {
@@ -102,5 +105,15 @@ class SwaggerGenerationTest {
         val results = generate(buildInfo, swaggerGenerator)
         val str = results["api.http"].toString()
         assertTrue(str.contains("client.assert(typeof response.body.user.token !== \"undefined\", \"No token returned\");"), "but was $str")
+    }
+
+    @Test
+    fun detectLimits() = runBlocking {
+        for (model in listOf(swagger, swaggerYaml)) {
+            val str = generate(buildInfo, SwaggerGenerator(model)).toString()
+            assertTrue(str.contains("?limit=20&offset=0"))
+            assertTrue(str.contains("checkRequest(limit in 1 .. 100) { \"Invalid limit\" }"))
+            assertTrue(str.contains("checkRequest(offset >= 0) { \"Invalid offset\" }"))
+        }
     }
 }
