@@ -161,15 +161,18 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         fileText(if (model.filename.endsWith(".json")) "api.json" else "api.yaml") {
             +model.source
         }
+
+        val paramsInUrls = model.paths.values.flatMap { it.methodsList }.flatMap { Regex("\\{(\\w+)\\}").findAll(it.path).map { it.groupValues[1] }.toList() }.toSet()
+
         fileText("http-client.env.json") {
             +Json.encodePrettyUntyped(
                 mapOf(
                     "localhost" to mapOf(
                         "host" to "http://127.0.0.1:8080"
-                    ),
-                    "prod" to mapOf(
-                        "host" to "https://my.domain.com"
-                    )
+                    ) + paramsInUrls.map { "param_$it" to it }.toMap()
+                    //"prod" to mapOf(
+                    //    "host" to "https://my.domain.com"
+                    //)
                 ), "    "
             )
         }
@@ -190,7 +193,9 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                         +"# $descLine"
                     }
 
-                    +"$httpMethod {{host}}${path.path}"
+                    +"$httpMethod {{host}}${path.path.replace(Regex("\\{(\\w+)\\}")) { matchResult ->
+                        "{{param_${matchResult.groupValues[1]}}}"
+                    }}"
                     for ((sec, secdef) in method.securityDefinitions(model).filter {
                         it.second?.inside == "header" && it.second?.type == SwaggerModel.SecurityType.API_KEY
                     }) {
