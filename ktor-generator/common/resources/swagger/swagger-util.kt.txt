@@ -1,8 +1,6 @@
 package io.ktor.swagger.experimental
 
-import com.fasterxml.jackson.databind.*
 import com.fasterxml.jackson.module.kotlin.*
-import kotlin.reflect.*
 import kotlin.coroutines.experimental.*
 import kotlin.coroutines.experimental.intrinsics.*
 import kotlinx.coroutines.experimental.*
@@ -10,14 +8,14 @@ import io.ktor.application.*
 import io.ktor.auth.authenticate
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.request.header
-import io.ktor.client.request.parameter
+import io.ktor.client.request.*
 import io.ktor.client.response.*
-import io.ktor.content.ByteArrayContent
+import io.ktor.content.*
 import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import io.ktor.util.*
 import java.lang.reflect.*
 
 class HttpException(val code: HttpStatusCode, val description: String = code.description) : RuntimeException(description)
@@ -212,7 +210,7 @@ class ApiClass(val clazz: Class<*>, val methods: List<ApiMethodInfo>) {
     }
 
     data class ApiParamInfo<T>(val source: Source, val name: String, val type: Class<T>) {
-        fun get(call: ApplicationCall): T {
+        suspend fun get(call: ApplicationCall): T {
             return call.getTyped(source, name, type)
         }
     }
@@ -256,19 +254,33 @@ object Json {
 
 //inline fun <reified T> ApplicationCall.getTyped(source: String, name: String): T =
 //        objectMapper.convertValue(getRaw(source, name), T::class.java)
-
-fun <T> ApplicationCall.getTyped(source: Source, name: String, clazz: Class<T>): T {
+suspend fun <T> ApplicationCall.getTyped(source: Source, name: String, clazz: Class<T>): T {
     return Json.convert(getRaw(source, name), clazz)
 }
 
-fun ApplicationCall.getRaw(source: Source, name: String): Any? {
+suspend fun ApplicationCall.getRaw(source: Source, name: String): Any? {
     return when (source) {
         Source.PATH -> this.parameters.get(name)
         Source.QUERY -> this.request.queryParameters.get(name)
-        Source.BODY -> TODO()
+        Source.BODY -> this.getCachedUntypedBody()[name]
         Source.FORM_DATA -> TODO()
         Source.HEADER -> this.request.header(name)
     }
+}
+
+val CACHED_BODY_KEY = AttributeKey<Any>("CACHED_BODY_KEY")
+
+inline fun <T : Any> Attributes.computeIfAbsentInline(key: AttributeKey<T>, block: () -> T): T {
+    if (!this.contains(key)) {
+        this.put(key, block())
+    }
+    return this[key]
+}
+
+private suspend fun ApplicationCall.getCachedUntypedBody(): Map<String, Any?> {
+    return attributes.computeIfAbsentInline(CACHED_BODY_KEY) {
+        Json.parse(this@getCachedUntypedBody.receive(), HashMap::class.java)
+    } as Map<String, Any?>
 }
 
 ///////////////////////////////////////////////////

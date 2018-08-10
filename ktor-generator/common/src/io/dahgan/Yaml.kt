@@ -1493,13 +1493,12 @@ internal object YamlSpec : YamlParser() {
      *                           l-literal-content(n+m,t)
      */
     fun c_l_literal(n: Int) = emptyToken(Code.BeginScalar) and (c_literal cmt "node") and
-            prefixErrorWith(c_b_block_header(n), emptyToken(Code.EndScalar)) and
-            text({ state ->
+            prefixErrorWith(c_b_block_header(n), emptyToken(Code.EndScalar)) and text { state ->
                 val m = state.yields["m"] as Int
                 val t = state.yields["t"] as Chomp
 
                 l_literal_content(n + m, t)(state)
-            })
+            }
 
     /**
      * [171] l-nb-literal-text(n) ::= l-empty(n,block-in)*
