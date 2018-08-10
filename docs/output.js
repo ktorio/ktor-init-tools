@@ -49,30 +49,53 @@
   var contains = Kotlin.kotlin.text.contains_li3zpu$;
   var equals = Kotlin.equals;
   var numberToInt = Kotlin.numberToInt;
-  var toInt = Kotlin.kotlin.text.toInt_6ic1pp$;
+  var HashMap_init = Kotlin.kotlin.collections.HashMap_init_q3lmfv$;
+  var List = Kotlin.kotlin.collections.List;
+  var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
+  var first = Kotlin.kotlin.collections.first_2p1efm$;
+  var Pair = Kotlin.kotlin.Pair;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
-  var PropertyMetadata = Kotlin.PropertyMetadata;
-  var lazy = Kotlin.kotlin.lazy_klfg04$;
-  var minus = Kotlin.kotlin.collections.minus_khz7k3$;
-  var plus_0 = Kotlin.kotlin.collections.plus_iwxh38$;
+  var UnsupportedOperationException_init = Kotlin.kotlin.UnsupportedOperationException_init;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
+  var IllegalArgumentException_init = Kotlin.kotlin.IllegalArgumentException_init_pdl1vj$;
+  var IntRange = Kotlin.kotlin.ranges.IntRange;
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
-  var LinkedHashSet_init = Kotlin.kotlin.collections.LinkedHashSet_init_287e2$;
-  var plus_1 = Kotlin.kotlin.collections.plus_khz7k3$;
-  var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
+  var toByte = Kotlin.toByte;
+  var mapOf = Kotlin.kotlin.collections.mapOf_qfcya0$;
+  var PropertyMetadata = Kotlin.PropertyMetadata;
+  var toIntArray = Kotlin.kotlin.collections.toIntArray_fx3nzu$;
+  var lazy = Kotlin.kotlin.lazy_klfg04$;
   var toString = Kotlin.toString;
+  var HashMap_init_0 = Kotlin.kotlin.collections.HashMap_init_73mtqc$;
+  var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
+  var reversed = Kotlin.kotlin.collections.reversed_tmsbgo$;
+  var getPropertyCallableRef = Kotlin.getPropertyCallableRef;
+  var Any = Object;
+  var plus_0 = Kotlin.kotlin.collections.plus_qloxvw$;
+  var toChar = Kotlin.toChar;
+  var unboxChar = Kotlin.unboxChar;
+  var toInt = Kotlin.kotlin.text.toInt_6ic1pp$;
+  var minus = Kotlin.kotlin.collections.minus_khz7k3$;
+  var plus_1 = Kotlin.kotlin.collections.plus_iwxh38$;
+  var LinkedHashSet_init = Kotlin.kotlin.collections.LinkedHashSet_init_287e2$;
+  var plus_2 = Kotlin.kotlin.collections.plus_khz7k3$;
+  var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
   var PrimitiveClasses$intClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.intClass;
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var removeAll = Kotlin.kotlin.collections.removeAll_qafx1e$;
-  var first = Kotlin.kotlin.collections.first_2p1efm$;
-  var split_0 = Kotlin.kotlin.text.split_ip8yn$;
+  var lines = Kotlin.kotlin.text.lines_gw00vp$;
+  var mapOf_0 = Kotlin.kotlin.collections.mapOf_x2b85n$;
+  var getKClass = Kotlin.getKClass;
   var numberToDouble = Kotlin.numberToDouble;
   var numberToLong = Kotlin.numberToLong;
   var L0 = Kotlin.Long.ZERO;
   var toList = Kotlin.kotlin.collections.toList_7wnvza$;
+  var Map = Kotlin.kotlin.collections.Map;
+  var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
+  var toMutableMap = Kotlin.kotlin.collections.toMutableMap_abgq59$;
   var PrimitiveClasses$stringClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.stringClass;
-  var getKClass = Kotlin.getKClass;
   var kotlin = Kotlin.kotlin;
   var Long = Kotlin.Long;
   var PrimitiveClasses$booleanClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.booleanClass;
@@ -80,34 +103,29 @@
   var PrimitiveClasses$doubleClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.doubleClass;
   var PrimitiveClasses$anyClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.anyClass;
   var substringAfterLast = Kotlin.kotlin.text.substringAfterLast_8cymmc$;
-  var List = Kotlin.kotlin.collections.List;
-  var Map = Kotlin.kotlin.collections.Map;
   var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
   var rangeTo = Kotlin.kotlin.ranges.rangeTo_8xshf9$;
-  var IllegalArgumentException_init = Kotlin.kotlin.IllegalArgumentException_init_pdl1vj$;
-  var mapOf = Kotlin.kotlin.collections.mapOf_x2b85n$;
   var Iterable = Kotlin.kotlin.collections.Iterable;
+  var dropLast = Kotlin.kotlin.collections.dropLast_yzln2o$;
+  var last = Kotlin.kotlin.collections.last_2p1efm$;
+  var MutableMap = Kotlin.kotlin.collections.MutableMap;
   var toIntOrNull_0 = Kotlin.kotlin.text.toIntOrNull_6ic1pp$;
   var toLongOrNull = Kotlin.kotlin.text.toLongOrNull_6ic1pp$;
   var toDouble = Kotlin.kotlin.text.toDouble_pdl1vz$;
-  var toIntArray = Kotlin.kotlin.collections.toIntArray_fx3nzu$;
   var toFloatArray = Kotlin.kotlin.collections.toFloatArray_zwy31$;
   var toDoubleArray = Kotlin.kotlin.collections.toDoubleArray_tcduak$;
   var toLongArray = Kotlin.kotlin.collections.toLongArray_558emf$;
-  var unboxChar = Kotlin.unboxChar;
+  var split_0 = Kotlin.kotlin.text.split_ip8yn$;
   var CharRange = Kotlin.kotlin.ranges.CharRange;
   var StringBuilder_init = Kotlin.kotlin.text.StringBuilder_init;
   var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
   var withIndex = Kotlin.kotlin.collections.withIndex_7wnvza$;
   var toBoxedChar = Kotlin.toBoxedChar;
   var isWhitespace = Kotlin.kotlin.text.isWhitespace_myv2d0$;
-  var toChar = Kotlin.toChar;
   var replace = Kotlin.kotlin.text.replace_680rmw$;
-  var Any = Object;
   var toSet_0 = Kotlin.kotlin.collections.toSet_us0mfu$;
   var copyOf = Kotlin.kotlin.collections.copyOf_mrm5p$;
   var numberToByte = Kotlin.numberToByte;
-  var toByte = Kotlin.toByte;
   var StringBuilder_init_0 = Kotlin.kotlin.text.StringBuilder_init_za3lpa$;
   var decapitalize = Kotlin.kotlin.text.decapitalize_pdl1vz$;
   var capitalize = Kotlin.kotlin.text.capitalize_pdl1vz$;
@@ -118,13 +136,50 @@
   var padStart = Kotlin.kotlin.text.padStart_vrc1nu$;
   var startsWith_0 = Kotlin.kotlin.text.startsWith_sgbm27$;
   var endsWith_0 = Kotlin.kotlin.text.endsWith_sgbm27$;
-  var Pair = Kotlin.kotlin.Pair;
   var Set = Kotlin.kotlin.collections.Set;
   var Regex = Kotlin.kotlin.text.Regex;
   var Comparable = Kotlin.kotlin.Comparable;
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_8cymmc$;
   CancelException.prototype = Object.create(RuntimeException.prototype);
   CancelException.prototype.constructor = CancelException;
+  Yaml$SingleContext.prototype = Object.create(Yaml$Context.prototype);
+  Yaml$SingleContext.prototype.constructor = Yaml$SingleContext;
+  Yaml$ScalarContext.prototype = Object.create(Yaml$Context.prototype);
+  Yaml$ScalarContext.prototype.constructor = Yaml$ScalarContext;
+  Yaml$NodeContext.prototype = Object.create(Yaml$Context.prototype);
+  Yaml$NodeContext.prototype.constructor = Yaml$NodeContext;
+  Yaml$ListContext.prototype = Object.create(Yaml$Context.prototype);
+  Yaml$ListContext.prototype.constructor = Yaml$ListContext;
+  Yaml$MapContext.prototype = Object.create(Yaml$Context.prototype);
+  Yaml$MapContext.prototype.constructor = Yaml$MapContext;
+  Yaml$PairContext.prototype = Object.create(Yaml$Context.prototype);
+  Yaml$PairContext.prototype.constructor = Yaml$PairContext;
+  Yaml$BeginIgnoreVisitor$visit$ObjectLiteral.prototype = Object.create(Yaml$Context.prototype);
+  Yaml$BeginIgnoreVisitor$visit$ObjectLiteral.prototype.constructor = Yaml$BeginIgnoreVisitor$visit$ObjectLiteral;
+  YamlSpec.prototype = Object.create(YamlParser.prototype);
+  YamlSpec.prototype.constructor = YamlSpec;
+  YamlDecoder$Encoding.prototype = Object.create(Enum.prototype);
+  YamlDecoder$Encoding.prototype.constructor = YamlDecoder$Encoding;
+  YamlDecoder.prototype = Object.create(YamlParser.prototype);
+  YamlDecoder.prototype.constructor = YamlDecoder;
+  YamlParser$Chomp.prototype = Object.create(Enum.prototype);
+  YamlParser$Chomp.prototype.constructor = YamlParser$Chomp;
+  YamlParser$Code.prototype = Object.create(Enum.prototype);
+  YamlParser$Code.prototype.constructor = YamlParser$Code;
+  YamlParser$Context.prototype = Object.create(Enum.prototype);
+  YamlParser$Context.prototype.constructor = YamlParser$Context;
+  YamlParser$Result$Failed.prototype = Object.create(YamlParser$Result.prototype);
+  YamlParser$Result$Failed.prototype.constructor = YamlParser$Result$Failed;
+  YamlParser$Result$Completed.prototype = Object.create(YamlParser$Result.prototype);
+  YamlParser$Result$Completed.prototype.constructor = YamlParser$Result$Completed;
+  YamlParser$Result$More.prototype = Object.create(YamlParser$Result.prototype);
+  YamlParser$Result$More.prototype.constructor = YamlParser$Result$More;
+  YamlParser$Escapable$Code.prototype = Object.create(YamlParser$Escapable.prototype);
+  YamlParser$Escapable$Code.prototype.constructor = YamlParser$Escapable$Code;
+  YamlParser$Escapable$Text.prototype = Object.create(YamlParser$Escapable.prototype);
+  YamlParser$Escapable$Text.prototype.constructor = YamlParser$Escapable$Text;
+  YamlParser$Companion.prototype = Object.create(YamlParser.prototype);
+  YamlParser$Companion.prototype.constructor = YamlParser$Companion;
   Feature.prototype = Object.create(Block.prototype);
   Feature.prototype.constructor = Feature;
   ServerFeature.prototype = Object.create(Feature.prototype);
@@ -501,7 +556,6 @@
       (tmp$_1 = document.body) != null ? tmp$_1.removeChild(elem) : null;
     }
   }
-  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
   function dialogOpenFile$lambda$lambda(closure$completedOnce, closure$files, closure$continuation) {
     return function () {
       var tmp$;
@@ -745,7 +799,6 @@
     updateHash();
     return Unit;
   }
-  var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
   function main$lambda$lambda(continuation_0, suspended) {
     var instance = new Coroutine$main$lambda$lambda(continuation_0);
     if (suspended)
@@ -789,7 +842,7 @@
             }
 
             this.local$file = this.local$tmp$.next();
-            if (endsWith(this.local$file.name, '.json')) {
+            if (endsWith(this.local$file.name, '.json') || endsWith(this.local$file.name, '.yaml')) {
               this.state_0 = 3;
               this.result_0 = read(this.local$file, this);
               if (this.result_0 === COROUTINE_SUSPENDED)
@@ -797,13 +850,12 @@
               continue;
             }
              else {
-              throw IllegalStateException_init('Not a JSON file'.toString());
+              throw IllegalStateException_init('Not a JSON or YAML file'.toString());
             }
 
           case 3:
             var jsonStr = toString_1(this.result_0, UTF8_getInstance());
-            var untypedModel = Json_getInstance().parse_61zpoe$(jsonStr);
-            var model = SwaggerModel$Companion_getInstance().parse_hvn9da$(untypedModel, this.local$file.name);
+            var model = SwaggerModel$Companion_getInstance().parseJsonOrYaml_puj7f4$(jsonStr, this.local$file.name);
             swaggerModels.add_11rb$(model);
             updateSwaggerModels();
             this.state_0 = 4;
@@ -1259,7 +1311,6 @@
     updateHash();
     return Unit;
   }
-  var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
   function addDependenciesKind(kind, features) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2;
     var dependencyIds = toSet((tmp$ = get_hashParams().get_11rb$('dependency')) != null ? tmp$ : emptyList());
@@ -1772,6 +1823,3198 @@
     var tmp$;
     return (Kotlin.isType(tmp$ = $receiver, Date) ? tmp$ : throwCCE()).getSeconds();
   }
+  function Yaml() {
+    Yaml_instance = this;
+  }
+  Yaml.prototype.load_61zpoe$ = function (text) {
+    return this.load_fqrh44$(toByteArray(text, UTF8_getInstance()));
+  };
+  Yaml.prototype.load_fqrh44$ = function (bytes) {
+    return this.load_0(YamlSpec_getInstance().yaml().tokenize_7x97xx$('load', bytes, false)).get_za3lpa$(0);
+  };
+  Yaml.prototype.loadAll_61zpoe$ = function (text) {
+    return this.loadAll_fqrh44$(toByteArray(text, UTF8_getInstance()));
+  };
+  Yaml.prototype.loadAll_fqrh44$ = function (bytes) {
+    return this.load_0(YamlSpec_getInstance().yaml().tokenize_7x97xx$('load-all', bytes, false));
+  };
+  Yaml.prototype.load_0 = function (tokens) {
+    var tmp$;
+    var anchors = HashMap_init();
+    var context = new Stack();
+    context.push_11rb$(new Yaml$ListContext());
+    var tmp$_0;
+    tmp$_0 = tokens.iterator();
+    while (tmp$_0.hasNext()) {
+      var element = tmp$_0.next();
+      this.visitor_0(element.code).visit_2xkidc$(anchors, context, element);
+    }
+    var result = context.pop().peek();
+    if (Kotlin.isType(result, List)) {
+      return Kotlin.isType(tmp$ = result, List) ? tmp$ : throwCCE();
+    }
+    throw IllegalStateException_init('unexpected result: ' + result);
+  };
+  Yaml.prototype.visitor_0 = function (code) {
+    switch (code.name) {
+      case 'Text':
+        return new Yaml$TextVisitor();
+      case 'Meta':
+        return new Yaml$TextVisitor();
+      case 'LineFeed':
+        return new Yaml$EndOfLineVisitor('\n');
+      case 'LineFold':
+        return new Yaml$EndOfLineVisitor(' ');
+      case 'BeginComment':
+        return new Yaml$BeginIgnoreVisitor();
+      case 'EndComment':
+        return new Yaml$EndIgnoreVisitor();
+      case 'BeginAnchor':
+        return new Yaml$BeginVisitor(new Yaml$SingleContext());
+      case 'EndAnchor':
+        return new Yaml$EndVisitor();
+      case 'BeginAlias':
+        return new Yaml$BeginVisitor(new Yaml$SingleContext());
+      case 'EndAlias':
+        return new Yaml$EndAliasVisitor();
+      case 'BeginScalar':
+        return new Yaml$BeginVisitor(new Yaml$ScalarContext());
+      case 'EndScalar':
+        return new Yaml$EndVisitor();
+      case 'BeginSequence':
+        return new Yaml$BeginVisitor(new Yaml$ListContext());
+      case 'EndSequence':
+        return new Yaml$EndVisitor();
+      case 'BeginMapping':
+        return new Yaml$BeginVisitor(new Yaml$MapContext());
+      case 'EndMapping':
+        return new Yaml$EndVisitor();
+      case 'BeginPair':
+        return new Yaml$BeginVisitor(new Yaml$PairContext());
+      case 'EndPair':
+        return new Yaml$EndVisitor();
+      case 'BeginNode':
+        return new Yaml$BeginVisitor(new Yaml$NodeContext());
+      case 'EndNode':
+        return new Yaml$EndNodeVisitor();
+      case 'BeginDocument':
+        return new Yaml$BeginVisitor(new Yaml$SingleContext());
+      case 'EndDocument':
+        return new Yaml$EndVisitor();
+      case 'Error':
+        return new Yaml$ErrorVisitor();
+      default:return Yaml$SKIP_getInstance();
+    }
+  };
+  function Yaml$Context() {
+    this.data_0 = ArrayList_init();
+  }
+  Yaml$Context.prototype.add_za3rmp$ = function (any) {
+    return this.data_0.add_11rb$(any);
+  };
+  Yaml$Context.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Context',
+    interfaces: []
+  };
+  function Yaml$SingleContext() {
+    Yaml$Context.call(this);
+  }
+  Yaml$SingleContext.prototype.peek = function () {
+    return first(this.data_0);
+  };
+  Yaml$SingleContext.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SingleContext',
+    interfaces: [Yaml$Context]
+  };
+  function Yaml$ScalarContext() {
+    Yaml$Context.call(this);
+  }
+  Yaml$ScalarContext.prototype.peek = function () {
+    return joinToString(this.data_0, '');
+  };
+  Yaml$ScalarContext.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ScalarContext',
+    interfaces: [Yaml$Context]
+  };
+  function Yaml$NodeContext() {
+    Yaml$Context.call(this);
+  }
+  Yaml$NodeContext.prototype.peek = function () {
+    return this.data_0.size > 1 ? new Pair(first(this.data_0), this.data_0.get_za3lpa$(1)) : new Pair('', first(this.data_0));
+  };
+  Yaml$NodeContext.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'NodeContext',
+    interfaces: [Yaml$Context]
+  };
+  function Yaml$ListContext() {
+    Yaml$Context.call(this);
+  }
+  Yaml$ListContext.prototype.peek = function () {
+    return this.data_0;
+  };
+  Yaml$ListContext.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ListContext',
+    interfaces: [Yaml$Context]
+  };
+  function Yaml$MapContext() {
+    Yaml$Context.call(this);
+  }
+  Yaml$MapContext.prototype.peek = function () {
+    var $receiver = this.data_0;
+    var destination = ArrayList_init();
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      if (Kotlin.isType(element, Pair))
+        destination.add_11rb$(element);
+    }
+    return toMap(destination);
+  };
+  Yaml$MapContext.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MapContext',
+    interfaces: [Yaml$Context]
+  };
+  function Yaml$PairContext() {
+    Yaml$Context.call(this);
+  }
+  Yaml$PairContext.prototype.peek = function () {
+    return new Pair(this.data_0.get_za3lpa$(0), this.data_0.get_za3lpa$(1));
+  };
+  Yaml$PairContext.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'PairContext',
+    interfaces: [Yaml$Context]
+  };
+  function Yaml$Visitor() {
+  }
+  Yaml$Visitor.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'Visitor',
+    interfaces: []
+  };
+  function Yaml$BeginVisitor(context) {
+    this.context = context;
+  }
+  Yaml$BeginVisitor.prototype.visit_2xkidc$ = function (anchors, contexts, token) {
+    contexts.push_11rb$(this.context);
+  };
+  Yaml$BeginVisitor.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'BeginVisitor',
+    interfaces: [Yaml$Visitor]
+  };
+  function Yaml$BeginIgnoreVisitor() {
+  }
+  function Yaml$BeginIgnoreVisitor$visit$ObjectLiteral() {
+    Yaml$Context.call(this);
+  }
+  Yaml$BeginIgnoreVisitor$visit$ObjectLiteral.prototype.peek = function () {
+    throw UnsupportedOperationException_init();
+  };
+  Yaml$BeginIgnoreVisitor$visit$ObjectLiteral.$metadata$ = {
+    kind: Kind_CLASS,
+    interfaces: [Yaml$Context]
+  };
+  Yaml$BeginIgnoreVisitor.prototype.visit_2xkidc$ = function (anchors, contexts, token) {
+    contexts.push_11rb$(new Yaml$BeginIgnoreVisitor$visit$ObjectLiteral());
+  };
+  Yaml$BeginIgnoreVisitor.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'BeginIgnoreVisitor',
+    interfaces: [Yaml$Visitor]
+  };
+  function Yaml$EndIgnoreVisitor() {
+  }
+  Yaml$EndIgnoreVisitor.prototype.visit_2xkidc$ = function (anchors, contexts, token) {
+    contexts.pop();
+  };
+  Yaml$EndIgnoreVisitor.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'EndIgnoreVisitor',
+    interfaces: [Yaml$Visitor]
+  };
+  function Yaml$EndVisitor() {
+  }
+  Yaml$EndVisitor.prototype.visit_2xkidc$ = function (anchors, contexts, token) {
+    var top = contexts.pop();
+    contexts.peek().add_za3rmp$(top.peek());
+  };
+  Yaml$EndVisitor.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'EndVisitor',
+    interfaces: [Yaml$Visitor]
+  };
+  function Yaml$EndNodeVisitor() {
+  }
+  Yaml$EndNodeVisitor.prototype.visit_2xkidc$ = function (anchors, contexts, token) {
+    var tmp$;
+    var top = Kotlin.isType(tmp$ = contexts.pop().peek(), Pair) ? tmp$ : throwCCE();
+    if (top.first.toString().length > 0) {
+      anchors.put_xwzc9p$(top.first.toString(), top.second);
+    }
+    contexts.peek().add_za3rmp$(top.second);
+  };
+  Yaml$EndNodeVisitor.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'EndNodeVisitor',
+    interfaces: [Yaml$Visitor]
+  };
+  function Yaml$EndAliasVisitor() {
+  }
+  Yaml$EndAliasVisitor.prototype.visit_2xkidc$ = function (anchors, contexts, token) {
+    var top = contexts.pop();
+    contexts.peek().add_za3rmp$(ensureNotNull(anchors.get_11rb$(top.peek().toString())));
+  };
+  Yaml$EndAliasVisitor.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'EndAliasVisitor',
+    interfaces: [Yaml$Visitor]
+  };
+  function Yaml$TextVisitor() {
+  }
+  Yaml$TextVisitor.prototype.visit_2xkidc$ = function (anchors, contexts, token) {
+    contexts.peek().add_za3rmp$(token.text.toString());
+  };
+  Yaml$TextVisitor.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'TextVisitor',
+    interfaces: [Yaml$Visitor]
+  };
+  function Yaml$EndOfLineVisitor(join) {
+    this.join = join;
+  }
+  Yaml$EndOfLineVisitor.prototype.visit_2xkidc$ = function (anchors, contexts, token) {
+    contexts.peek().add_za3rmp$(this.join);
+  };
+  Yaml$EndOfLineVisitor.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'EndOfLineVisitor',
+    interfaces: [Yaml$Visitor]
+  };
+  function Yaml$ErrorVisitor() {
+  }
+  Yaml$ErrorVisitor.prototype.visit_2xkidc$ = function (anchors, contexts, token) {
+    throw IllegalStateException_init(token.text.toString() + ' - Line #' + token.line + ' , Character #' + (token.lineChar + 1 | 0));
+  };
+  Yaml$ErrorVisitor.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ErrorVisitor',
+    interfaces: [Yaml$Visitor]
+  };
+  function Yaml$SKIP() {
+    Yaml$SKIP_instance = this;
+  }
+  Yaml$SKIP.prototype.visit_2xkidc$ = function (anchors, contexts, token) {
+  };
+  Yaml$SKIP.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'SKIP',
+    interfaces: [Yaml$Visitor]
+  };
+  var Yaml$SKIP_instance = null;
+  function Yaml$SKIP_getInstance() {
+    if (Yaml$SKIP_instance === null) {
+      new Yaml$SKIP();
+    }
+    return Yaml$SKIP_instance;
+  }
+  Yaml.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Yaml',
+    interfaces: []
+  };
+  var Yaml_instance = null;
+  function Yaml_getInstance() {
+    if (Yaml_instance === null) {
+      new Yaml();
+    }
+    return Yaml_instance;
+  }
+  function YamlSpec() {
+    YamlSpec_instance = this;
+    YamlParser.call(this);
+    this.c_printable = this.or_h1fl79$(this.or_h1fl79$(this.or_h1fl79$(this.or_thfhbo$(this.or_h1fl79$(this.or_thfhbo$(this.or_thfhbo$(this.of_za3lpa$(9), 10), 13), new IntRange(32, 126)), 133), new IntRange(160, 55295)), new IntRange(57344, 65533)), new IntRange(65536, 1114111));
+    this.nb_json = this.or_h1fl79$(this.of_za3lpa$(9), new IntRange(32, 1114111));
+    this.c_byte_order_mark = this.bom_za3lpa$(65279);
+    this.c_sequence_entry = this.indicator_s8itvh$(45);
+    this.c_mapping_key = this.indicator_s8itvh$(63);
+    this.c_mapping_value = this.indicator_s8itvh$(58);
+    this.c_collect_entry = this.indicator_s8itvh$(44);
+    this.c_sequence_start = this.indicator_s8itvh$(91);
+    this.c_sequence_end = this.indicator_s8itvh$(93);
+    this.c_mapping_start = this.indicator_s8itvh$(123);
+    this.c_mapping_end = this.indicator_s8itvh$(125);
+    this.c_comment = this.indicator_s8itvh$(35);
+    this.c_anchor = this.indicator_s8itvh$(38);
+    this.c_alias = this.indicator_s8itvh$(42);
+    this.c_tag = this.indicator_s8itvh$(33);
+    this.c_literal = this.indicator_s8itvh$(124);
+    this.c_folded = this.indicator_s8itvh$(62);
+    this.c_single_quote = this.indicator_s8itvh$(39);
+    this.c_double_quote = this.indicator_s8itvh$(34);
+    this.c_directive = this.indicator_s8itvh$(37);
+    this.c_reserved = this.indicator_5msym5$(this.or_ui3wc7$(64, 96));
+    this.c_indicator = this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.c_sequence_entry, this.c_mapping_key), this.c_mapping_value), this.c_collect_entry), this.c_sequence_start), this.c_sequence_end), this.c_mapping_start), this.c_mapping_end), this.c_comment), this.c_anchor), this.c_alias), this.c_tag), this.c_literal), this.c_folded), this.c_single_quote), this.c_double_quote), this.c_directive), this.c_reserved);
+    this.c_flow_indicator = this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.c_collect_entry, this.c_sequence_start), this.c_sequence_end), this.c_mapping_start), this.c_mapping_end);
+    this.b_line_feed = this.of_za3lpa$(10);
+    this.b_carriage_return = this.of_za3lpa$(13);
+    this.b_char = this.or_yb4yy3$(this.b_line_feed, this.b_carriage_return);
+    this.nb_char = this.not_yb4yy3$(this.not_yb4yy3$(this.c_printable, this.b_char), this.c_byte_order_mark);
+    this.b_break = this.and_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.and_yb4yy3$(this.b_carriage_return, this.b_line_feed), this.b_carriage_return), this.b_line_feed), this.nextLine());
+    this.b_as_line_feed = this.token_qhjjef$(YamlParser$Code$LineFeed_getInstance(), this.b_break);
+    this.b_non_content = this.token_qhjjef$(YamlParser$Code$Break_getInstance(), this.b_break);
+    this.s_space = this.of_za3lpa$(32);
+    this.s_tab = this.of_za3lpa$(9);
+    this.s_white = this.or_yb4yy3$(this.s_space, this.s_tab);
+    this.ns_char = this.not_yb4yy3$(this.nb_char, this.s_white);
+    this.ns_dec_digit = this.of_n8acyv$(new IntRange(48, 57));
+    this.ns_hex_digit = this.or_h1fl79$(this.or_h1fl79$(this.ns_dec_digit, new IntRange(65, 70)), new IntRange(97, 102));
+    this.ns_ascii_letter = this.or_9omhn3$(new IntRange(65, 90), new IntRange(97, 122));
+    this.ns_word_char = this.or_9e8rdb$(this.or_yb4yy3$(this.ns_dec_digit, this.ns_ascii_letter), 45);
+    this.ns_uri_char = this.cho_l8gk4$('escape', this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_9e8rdb$(this.or_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.cmt_elu61a$(37, 'escape'), this.ns_hex_digit), this.ns_hex_digit), this.ns_word_char), 35), 59), 47), 63), 58), 64), 38), 61), 43), 36), 44), 95), 46), 33), 126), 42), 39), 40), 41), 91), 93));
+    this.ns_tag_char = this.not_yb4yy3$(this.not_yb4yy3$(this.ns_uri_char, this.c_tag), this.c_flow_indicator);
+    this.c_escape = this.indicator_s8itvh$(92);
+    this.ns_esc_null = this.meta_s8itvh$(48);
+    this.ns_esc_bell = this.meta_s8itvh$(97);
+    this.ns_esc_backspace = this.meta_s8itvh$(98);
+    this.ns_esc_horizontal_tab = this.meta_5msym5$(this.or_a5dju6$(116, 9));
+    this.ns_esc_line_feed = this.meta_s8itvh$(110);
+    this.ns_esc_vertical_tab = this.meta_s8itvh$(118);
+    this.ns_esc_form_feed = this.meta_s8itvh$(102);
+    this.ns_esc_carriage_return = this.meta_s8itvh$(114);
+    this.ns_esc_escape = this.meta_s8itvh$(101);
+    this.ns_esc_space = this.meta_za3lpa$(32);
+    this.ns_esc_double_quote = this.meta_s8itvh$(34);
+    this.ns_esc_slash = this.meta_s8itvh$(47);
+    this.ns_esc_backslash = this.meta_s8itvh$(92);
+    this.ns_esc_next_line = this.meta_s8itvh$(78);
+    this.ns_esc_non_breaking_space = this.meta_s8itvh$(95);
+    this.ns_esc_line_separator = this.meta_s8itvh$(76);
+    this.ns_esc_paragraph_separator = this.meta_s8itvh$(80);
+    this.ns_esc_8_bit = this.and_yb4yy3$(this.cmt_ixf2s$(this.indicator_s8itvh$(120), 'escaped'), this.meta_5msym5$(this.tms_thfhbo$(this.ns_hex_digit, 2)));
+    this.ns_esc_16_bit = this.and_yb4yy3$(this.cmt_ixf2s$(this.indicator_s8itvh$(117), 'escaped'), this.meta_5msym5$(this.tms_thfhbo$(this.ns_hex_digit, 4)));
+    this.ns_esc_32_bit = this.and_yb4yy3$(this.cmt_ixf2s$(this.indicator_s8itvh$(85), 'escaped'), this.meta_5msym5$(this.tms_thfhbo$(this.ns_hex_digit, 8)));
+    this.c_ns_esc_char = this.wrapTokens_u68c0l$(YamlParser$Code$BeginEscape_getInstance(), YamlParser$Code$EndEscape_getInstance(), this.and_yb4yy3$(this.cmt_ixf2s$(this.c_escape, 'escape'), this.cho_l8gk4$('escaped', this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.ns_esc_null, this.ns_esc_bell), this.ns_esc_backspace), this.ns_esc_horizontal_tab), this.ns_esc_line_feed), this.ns_esc_vertical_tab), this.ns_esc_form_feed), this.ns_esc_carriage_return), this.ns_esc_escape), this.ns_esc_space), this.ns_esc_double_quote), this.ns_esc_slash), this.ns_esc_backslash), this.ns_esc_next_line), this.ns_esc_non_breaking_space), this.ns_esc_line_separator), this.ns_esc_paragraph_separator), this.ns_esc_8_bit), this.ns_esc_16_bit), this.ns_esc_32_bit))));
+    this.s_separate_in_line = this.or_yb4yy3$(this.token_qhjjef$(YamlParser$Code$White_getInstance(), this.oom_5msym5$(this.s_white)), this.sol());
+    this.b_as_space = this.token_qhjjef$(YamlParser$Code$LineFold_getInstance(), this.b_break);
+    this.c_nb_comment_text = this.wrapTokens_u68c0l$(YamlParser$Code$BeginComment_getInstance(), YamlParser$Code$EndComment_getInstance(), this.and_yb4yy3$(this.c_comment, this.meta_5msym5$(this.zom_5msym5$(this.nb_char))));
+    this.b_comment = this.or_yb4yy3$(this.b_non_content, this.eof());
+    this.s_b_comment = this.and_yb4yy3$(this.opt_5msym5$(this.and_yb4yy3$(this.s_separate_in_line, this.opt_5msym5$(this.c_nb_comment_text))), this.b_comment);
+    this.l_comment = this.and_yb4yy3$(this.and_yb4yy3$(this.s_separate_in_line, this.opt_5msym5$(this.c_nb_comment_text)), this.b_comment);
+    this.s_l_comments = this.and_yb4yy3$(this.or_yb4yy3$(this.s_b_comment, this.sol()), this.zom_5msym5$(this.nonEmpty_5msym5$(this.l_comment)));
+    this.l_directive = this.and_yb4yy3$(this.wrapTokens_u68c0l$(YamlParser$Code$BeginDirective_getInstance(), YamlParser$Code$EndDirective_getInstance(), this.and_yb4yy3$(this.cmt_ixf2s$(this.c_directive, 'doc'), this.cho_l8gk4$('directive', this.or_yb4yy3$(this.or_yb4yy3$(this.ns_yaml_directive(), this.ns_tag_directive()), this.ns_reserved_directive())))), this.s_l_comments);
+    this.c_ns_anchor_property = this.wrapTokens_u68c0l$(YamlParser$Code$BeginAnchor_getInstance(), YamlParser$Code$EndAnchor_getInstance(), this.and_yb4yy3$(this.c_anchor, this.ns_anchor_name()));
+    this.c_ns_alias_node = this.wrapTokens_u68c0l$(YamlParser$Code$BeginAlias_getInstance(), YamlParser$Code$EndAlias_getInstance(), this.and_yb4yy3$(this.cmt_ixf2s$(this.c_alias, 'node'), this.ns_anchor_name()));
+    this.e_scalar = this.wrapTokens_u68c0l$(YamlParser$Code$BeginScalar_getInstance(), YamlParser$Code$EndScalar_getInstance(), this.empty());
+    this.e_node = this.wrapTokens_u68c0l$(YamlParser$Code$BeginNode_getInstance(), YamlParser$Code$EndNode_getInstance(), this.e_scalar);
+    this.nb_double_char = this.cho_l8gk4$('escape', this.or_yb4yy3$(this.c_ns_esc_char, this.not_yb4yy3$(this.not_yb4yy3$(this.nb_json, this.c_escape), this.c_double_quote)));
+    this.ns_double_char = this.not_yb4yy3$(this.nb_double_char, this.s_white);
+    this.nb_double_one_line = this.zom_5msym5$(this.nb_double_char);
+    this.nb_ns_double_in_line = this.zom_5msym5$(this.and_yb4yy3$(this.zom_5msym5$(this.s_white), this.ns_double_char));
+    this.c_quoted_quote = this.wrapTokens_u68c0l$(YamlParser$Code$BeginEscape_getInstance(), YamlParser$Code$EndEscape_getInstance(), this.and_yb4yy3$(this.cmt_ixf2s$(this.c_single_quote, 'escape'), this.meta_s8itvh$(39)));
+    this.nb_single_char = this.cho_l8gk4$('escape', this.or_yb4yy3$(this.c_quoted_quote, this.not_yb4yy3$(this.nb_json, this.c_single_quote)));
+    this.ns_single_char = this.not_yb4yy3$(this.nb_single_char, this.s_white);
+    this.nb_single_one_line = this.zom_5msym5$(this.nb_single_char);
+    this.nb_ns_single_in_line = this.zom_5msym5$(this.and_yb4yy3$(this.zom_5msym5$(this.s_white), this.ns_single_char));
+    this.ns_plain_safe_out = this.not_yb4yy3$(this.not_yb4yy3$(this.ns_char, this.c_mapping_value), this.c_comment);
+    this.ns_plain_safe_in = this.not_yb4yy3$(this.ns_plain_safe_out, this.c_flow_indicator);
+    this.detect_inline_indentation = this.peek_5msym5$(this.count_spaces_za3lpa$(0));
+    this.l_document_prefix = this.and_yb4yy3$(this.opt_5msym5$(this.c_byte_order_mark), this.zom_5msym5$(this.nonEmpty_5msym5$(this.l_comment)));
+    this.c_directives_end = this.token_qhjjef$(YamlParser$Code$DirectivesEnd_getInstance(), this.and_9e8rdb$(this.and_ui3wc7$(45, 45), 45));
+    this.c_document_end = this.token_qhjjef$(YamlParser$Code$DocumentEnd_getInstance(), this.and_9e8rdb$(this.and_ui3wc7$(46, 46), 46));
+    this.l_document_suffix = this.and_yb4yy3$(this.c_document_end, this.s_l_comments);
+    this.l_bare_document = this.forbidding_caskni$(this.cho_l8gk4$('node', this.s_l_block_node_akvb8y$(-1, YamlParser$Context$BlockIn_getInstance())), this.c_forbidden());
+    this.l_explicit_document = this.and_yb4yy3$(this.cmt_ixf2s$(this.c_directives_end, 'doc'), this.recovery_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.or_yb4yy3$(this.l_bare_document, this.e_node), this.opt_5msym5$(this.s_l_comments)), this.unparsed_za3lpa$(0)), this.unparsed_za3lpa$(0)));
+    this.l_directives_document = this.and_yb4yy3$(this.oom_5msym5$(this.l_directive), this.l_explicit_document);
+    this.l_any_document = this.wrapTokens_u68c0l$(YamlParser$Code$BeginDocument_getInstance(), YamlParser$Code$EndDocument_getInstance(), this.cho_l8gk4$('doc', this.recovery_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.l_directives_document, this.l_explicit_document), this.l_bare_document), this.unparsed_za3lpa$(0))));
+    this.l_yaml_stream = this.and_yb4yy3$(this.and_yb4yy3$(this.zom_5msym5$(this.nonEmpty_5msym5$(this.l_document_prefix)), this.or_yb4yy3$(this.or_yb4yy3$(this.eof(), this.pla_5msym5$(this.and_yb4yy3$(this.c_document_end, this.or_yb4yy3$(this.or_yb4yy3$(this.b_char, this.s_white), this.eof())))), this.l_any_document)), this.zom_5msym5$(this.nonEmpty_5msym5$(this.cho_l8gk4$('more', this.and_yb4yy3$(this.or_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.oom_5msym5$(this.cmt_ixf2s$(this.l_document_suffix, 'more')), this.zom_5msym5$(this.nonEmpty_5msym5$(this.l_document_prefix))), this.or_yb4yy3$(this.eof(), this.l_any_document)), this.zom_5msym5$(this.nonEmpty_5msym5$(this.l_document_prefix))), this.cho_l8gk4$('doc', this.opt_5msym5$(this.wrapTokens_u68c0l$(YamlParser$Code$BeginDocument_getInstance(), YamlParser$Code$EndDocument_getInstance(), this.l_explicit_document))))))));
+  }
+  YamlSpec.prototype.yaml = function () {
+    return new YamlParser$PatternTokenizer(this.l_yaml_stream);
+  };
+  YamlSpec.prototype.s_indent_za3lpa$ = function (n) {
+    return this.token_qhjjef$(YamlParser$Code$Indent_getInstance(), this.tms_thfhbo$(this.s_space, n));
+  };
+  YamlSpec.prototype.s_indent_lt_za3lpa$ = function (n) {
+    return this.token_qhjjef$(YamlParser$Code$Indent_getInstance(), this.lms_thfhbo$(this.s_space, n));
+  };
+  YamlSpec.prototype.s_indent_le_za3lpa$ = function (n) {
+    return this.token_qhjjef$(YamlParser$Code$Indent_getInstance(), this.lms_thfhbo$(this.s_space, n + 1 | 0));
+  };
+  YamlSpec.prototype.s_line_prefix_akvb8y$ = function (n, c) {
+    switch (c.name) {
+      case 'BlockOut':
+        return this.s_block_line_prefix_za3lpa$(n);
+      case 'BlockIn':
+        return this.s_block_line_prefix_za3lpa$(n);
+      case 'FlowOut':
+        return this.s_flow_line_prefix_za3lpa$(n);
+      case 'FlowIn':
+        return this.s_flow_line_prefix_za3lpa$(n);
+      default:throw IllegalArgumentException_init('invalid context: ' + c);
+    }
+  };
+  YamlSpec.prototype.s_block_line_prefix_za3lpa$ = function (n) {
+    return this.s_indent_za3lpa$(n);
+  };
+  YamlSpec.prototype.s_flow_line_prefix_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.s_indent_za3lpa$(n), this.opt_5msym5$(this.s_separate_in_line));
+  };
+  YamlSpec.prototype.l_empty_akvb8y$ = function (n, c) {
+    return this.and_yb4yy3$(this.or_yb4yy3$(this.s_line_prefix_akvb8y$(n, c), this.s_indent_lt_za3lpa$(n)), this.b_as_line_feed);
+  };
+  YamlSpec.prototype.b_l_trimmed_akvb8y$ = function (n, c) {
+    return this.and_yb4yy3$(this.b_non_content, this.oom_5msym5$(this.l_empty_akvb8y$(n, c)));
+  };
+  YamlSpec.prototype.b_l_folded_akvb8y$ = function (n, c) {
+    return this.or_yb4yy3$(this.b_l_trimmed_akvb8y$(n, c), this.b_as_space);
+  };
+  YamlSpec.prototype.s_flow_folded_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.opt_5msym5$(this.s_separate_in_line), this.b_l_folded_akvb8y$(n, YamlParser$Context$FlowIn_getInstance())), this.s_flow_line_prefix_za3lpa$(n));
+  };
+  YamlSpec.prototype.s_separate_akvb8y$ = function (n, c) {
+    switch (c.name) {
+      case 'BlockOut':
+        return this.s_separate_lines_za3lpa$(n);
+      case 'BlockIn':
+        return this.s_separate_lines_za3lpa$(n);
+      case 'FlowOut':
+        return this.s_separate_lines_za3lpa$(n);
+      case 'FlowIn':
+        return this.s_separate_lines_za3lpa$(n);
+      case 'BlockKey':
+        return this.s_separate_in_line;
+      case 'FlowKey':
+        return this.s_separate_in_line;
+      default:return Kotlin.noWhenBranchMatched();
+    }
+  };
+  YamlSpec.prototype.s_separate_lines_za3lpa$ = function (n) {
+    return this.or_yb4yy3$(this.and_yb4yy3$(this.s_l_comments, this.s_flow_line_prefix_za3lpa$(n)), this.s_separate_in_line);
+  };
+  YamlSpec.prototype.ns_reserved_directive = function () {
+    return this.and_yb4yy3$(this.ns_directive_name(), this.zom_5msym5$(this.and_yb4yy3$(this.s_separate_in_line, this.ns_directive_parameter())));
+  };
+  YamlSpec.prototype.ns_directive_name = function () {
+    return this.meta_5msym5$(this.oom_5msym5$(this.ns_char));
+  };
+  YamlSpec.prototype.ns_directive_parameter = function () {
+    return this.meta_5msym5$(this.oom_5msym5$(this.ns_char));
+  };
+  YamlSpec.prototype.ns_yaml_directive = function () {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.cmt_ixf2s$(this.meta_5msym5$(this.and_9e8rdb$(this.and_9e8rdb$(this.and_ui3wc7$(89, 65), 77), 76)), 'directive'), this.s_separate_in_line), this.ns_yaml_version());
+  };
+  YamlSpec.prototype.ns_yaml_version = function () {
+    return this.meta_5msym5$(this.and_yb4yy3$(this.and_9e8rdb$(this.oom_5msym5$(this.ns_dec_digit), 46), this.oom_5msym5$(this.ns_dec_digit)));
+  };
+  YamlSpec.prototype.ns_tag_directive = function () {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.cmt_ixf2s$(this.meta_5msym5$(this.and_9e8rdb$(this.and_ui3wc7$(84, 65), 71)), 'directive'), this.s_separate_in_line), this.c_tag_handle()), this.s_separate_in_line), this.ns_tag_prefix());
+  };
+  YamlSpec.prototype.c_tag_handle = function () {
+    return this.or_yb4yy3$(this.or_yb4yy3$(this.c_named_tag_handle(), this.c_secondary_tag_handle()), this.c_primary_tag_handle());
+  };
+  YamlSpec.prototype.c_primary_tag_handle = function () {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginHandle_getInstance(), YamlParser$Code$EndHandle_getInstance(), this.c_tag);
+  };
+  YamlSpec.prototype.c_secondary_tag_handle = function () {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginHandle_getInstance(), YamlParser$Code$EndHandle_getInstance(), this.and_yb4yy3$(this.c_tag, this.c_tag));
+  };
+  YamlSpec.prototype.c_named_tag_handle = function () {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginHandle_getInstance(), YamlParser$Code$EndHandle_getInstance(), this.and_yb4yy3$(this.c_tag, this.meta_5msym5$(this.and_yb4yy3$(this.oom_5msym5$(this.ns_word_char), this.c_tag))));
+  };
+  YamlSpec.prototype.ns_tag_prefix = function () {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginTag_getInstance(), YamlParser$Code$EndTag_getInstance(), this.or_yb4yy3$(this.c_ns_local_tag_prefix(), this.ns_global_tag_prefix()));
+  };
+  YamlSpec.prototype.c_ns_local_tag_prefix = function () {
+    return this.and_yb4yy3$(this.c_tag, this.meta_5msym5$(this.zom_5msym5$(this.ns_uri_char)));
+  };
+  YamlSpec.prototype.ns_global_tag_prefix = function () {
+    return this.meta_5msym5$(this.and_yb4yy3$(this.ns_tag_char, this.zom_5msym5$(this.ns_uri_char)));
+  };
+  YamlSpec.prototype.c_ns_properties_akvb8y$ = function (n, c) {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginProperties_getInstance(), YamlParser$Code$EndProperties_getInstance(), this.or_yb4yy3$(this.and_yb4yy3$(this.c_ns_tag_property(), this.opt_5msym5$(this.and_yb4yy3$(this.s_separate_akvb8y$(n, c), this.c_ns_anchor_property))), this.and_yb4yy3$(this.c_ns_anchor_property, this.opt_5msym5$(this.and_yb4yy3$(this.s_separate_akvb8y$(n, c), this.c_ns_tag_property())))));
+  };
+  YamlSpec.prototype.c_ns_tag_property = function () {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginTag_getInstance(), YamlParser$Code$EndTag_getInstance(), this.or_yb4yy3$(this.or_yb4yy3$(this.c_verbatim_tag(), this.c_ns_shorthand_tag()), this.c_non_specific_tag()));
+  };
+  YamlSpec.prototype.c_verbatim_tag = function () {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.c_tag, this.indicator_s8itvh$(60)), this.meta_5msym5$(this.oom_5msym5$(this.ns_uri_char))), this.indicator_s8itvh$(62));
+  };
+  YamlSpec.prototype.c_ns_shorthand_tag = function () {
+    return this.and_yb4yy3$(this.c_tag_handle(), this.meta_5msym5$(this.oom_5msym5$(this.ns_tag_char)));
+  };
+  YamlSpec.prototype.c_non_specific_tag = function () {
+    return this.c_tag;
+  };
+  YamlSpec.prototype.ns_anchor_char = function () {
+    return this.not_yb4yy3$(this.ns_char, this.c_flow_indicator);
+  };
+  YamlSpec.prototype.ns_anchor_name = function () {
+    return this.meta_5msym5$(this.oom_5msym5$(this.ns_anchor_char()));
+  };
+  YamlSpec.prototype.c_double_quoted_akvb8y$ = function (n, c) {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginScalar_getInstance(), YamlParser$Code$EndScalar_getInstance(), this.and_yb4yy3$(this.and_yb4yy3$(this.cmt_ixf2s$(this.c_double_quote, 'node'), this.text_5msym5$(this.nb_double_text_akvb8y$(n, c))), this.c_double_quote));
+  };
+  YamlSpec.prototype.nb_double_text_akvb8y$ = function (n, c) {
+    switch (c.name) {
+      case 'FlowOut':
+        return this.nb_double_multi_line_za3lpa$(n);
+      case 'FlowIn':
+        return this.nb_double_multi_line_za3lpa$(n);
+      case 'BlockKey':
+        return this.nb_double_one_line;
+      case 'FlowKey':
+        return this.nb_double_one_line;
+      default:throw IllegalArgumentException_init('unexpected');
+    }
+  };
+  YamlSpec.prototype.s_double_escaped_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.zom_5msym5$(this.s_white), this.wrapTokens_u68c0l$(YamlParser$Code$BeginEscape_getInstance(), YamlParser$Code$EndEscape_getInstance(), this.and_yb4yy3$(this.cmt_ixf2s$(this.c_escape, 'escape'), this.b_non_content))), this.zom_5msym5$(this.l_empty_akvb8y$(n, YamlParser$Context$FlowIn_getInstance()))), this.s_flow_line_prefix_za3lpa$(n));
+  };
+  YamlSpec.prototype.s_double_break_za3lpa$ = function (n) {
+    return this.cho_l8gk4$('escape', this.or_yb4yy3$(this.s_double_escaped_za3lpa$(n), this.s_flow_folded_za3lpa$(n)));
+  };
+  function YamlSpec$s_double_next_line$lambda(closure$n, this$YamlSpec) {
+    return function (state) {
+      return this$YamlSpec.s_double_next_line_za3lpa$(closure$n)(state);
+    };
+  }
+  YamlSpec.prototype.s_double_next_line_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.s_double_break_za3lpa$(n), this.opt_5msym5$(this.and_yb4yy3$(this.and_yb4yy3$(this.ns_double_char, this.nb_ns_double_in_line), this.or_yb4yy3$(YamlSpec$s_double_next_line$lambda(n, this), this.zom_5msym5$(this.s_white)))));
+  };
+  YamlSpec.prototype.nb_double_multi_line_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.nb_ns_double_in_line, this.or_yb4yy3$(this.s_double_next_line_za3lpa$(n), this.zom_5msym5$(this.s_white)));
+  };
+  YamlSpec.prototype.c_single_quoted_akvb8y$ = function (n, c) {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginScalar_getInstance(), YamlParser$Code$EndScalar_getInstance(), this.and_yb4yy3$(this.and_yb4yy3$(this.cmt_ixf2s$(this.c_single_quote, 'node'), this.text_5msym5$(this.nb_single_text_akvb8y$(n, c))), this.c_single_quote));
+  };
+  YamlSpec.prototype.nb_single_text_akvb8y$ = function (n, c) {
+    switch (c.name) {
+      case 'FlowOut':
+        return this.nb_single_multi_line_za3lpa$(n);
+      case 'FlowIn':
+        return this.nb_single_multi_line_za3lpa$(n);
+      case 'BlockKey':
+        return this.nb_single_one_line;
+      case 'FlowKey':
+        return this.nb_single_one_line;
+      default:throw IllegalArgumentException_init('unexpected');
+    }
+  };
+  function YamlSpec$s_single_next_line$lambda(closure$n, this$YamlSpec) {
+    return function (state) {
+      return this$YamlSpec.s_single_next_line_za3lpa$(closure$n)(state);
+    };
+  }
+  YamlSpec.prototype.s_single_next_line_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.s_flow_folded_za3lpa$(n), this.opt_5msym5$(this.and_yb4yy3$(this.and_yb4yy3$(this.ns_single_char, this.nb_ns_single_in_line), this.or_yb4yy3$(YamlSpec$s_single_next_line$lambda(n, this), this.zom_5msym5$(this.s_white)))));
+  };
+  YamlSpec.prototype.nb_single_multi_line_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.nb_ns_single_in_line, this.or_yb4yy3$(this.s_single_next_line_za3lpa$(n), this.zom_5msym5$(this.s_white)));
+  };
+  YamlSpec.prototype.ns_plain_first_stezpg$ = function (c) {
+    return this.or_yb4yy3$(this.not_yb4yy3$(this.ns_char, this.c_indicator), this.and_yb4yy3$(this.or_9e8rdb$(this.or_ui3wc7$(63, 58), 45), this.pla_5msym5$(this.ns_char)));
+  };
+  YamlSpec.prototype.ns_plain_safe_stezpg$ = function (c) {
+    switch (c.name) {
+      case 'FlowOut':
+        return this.ns_plain_safe_out;
+      case 'FlowIn':
+        return this.ns_plain_safe_in;
+      case 'BlockKey':
+        return this.ns_plain_safe_out;
+      case 'FlowKey':
+        return this.ns_plain_safe_in;
+      default:throw IllegalArgumentException_init('unexpected');
+    }
+  };
+  YamlSpec.prototype.ns_plain_char_stezpg$ = function (c) {
+    return this.or_yb4yy3$(this.or_yb4yy3$(this.ns_plain_safe_stezpg$(c), this.and_9e8rdb$(this.plb_5msym5$(this.ns_char), 35)), this.and_j3igz5$(58, this.pla_5msym5$(this.ns_char)));
+  };
+  YamlSpec.prototype.ns_plain_akvb8y$ = function (n, c) {
+    var tmp$, tmp$_0, tmp$_1;
+    tmp$ = YamlParser$Code$BeginScalar_getInstance();
+    tmp$_0 = YamlParser$Code$EndScalar_getInstance();
+    switch (c.name) {
+      case 'FlowOut':
+        tmp$_1 = this.ns_plain_multi_line_akvb8y$(n, c);
+        break;
+      case 'FlowIn':
+        tmp$_1 = this.ns_plain_multi_line_akvb8y$(n, c);
+        break;
+      case 'BlockKey':
+        tmp$_1 = this.ns_plain_one_line_stezpg$(c);
+        break;
+      case 'FlowKey':
+        tmp$_1 = this.ns_plain_one_line_stezpg$(c);
+        break;
+      default:throw IllegalArgumentException_init('unexpected');
+    }
+    return this.wrapTokens_u68c0l$(tmp$, tmp$_0, this.text_5msym5$(tmp$_1));
+  };
+  YamlSpec.prototype.nb_ns_plain_in_line_stezpg$ = function (c) {
+    return this.zom_5msym5$(this.and_yb4yy3$(this.zom_5msym5$(this.s_white), this.ns_plain_char_stezpg$(c)));
+  };
+  YamlSpec.prototype.ns_plain_one_line_stezpg$ = function (c) {
+    return this.and_yb4yy3$(this.cmt_ixf2s$(this.ns_plain_first_stezpg$(c), 'node'), this.nb_ns_plain_in_line_stezpg$(c));
+  };
+  YamlSpec.prototype.s_ns_plain_next_line_akvb8y$ = function (n, c) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.s_flow_folded_za3lpa$(n), this.ns_plain_char_stezpg$(c)), this.nb_ns_plain_in_line_stezpg$(c));
+  };
+  YamlSpec.prototype.ns_plain_multi_line_akvb8y$ = function (n, c) {
+    return this.and_yb4yy3$(this.ns_plain_one_line_stezpg$(c), this.zom_5msym5$(this.s_ns_plain_next_line_akvb8y$(n, c)));
+  };
+  YamlSpec.prototype.in_flow_stezpg$ = function (c) {
+    switch (c.name) {
+      case 'FlowOut':
+        return YamlParser$Context$FlowIn_getInstance();
+      case 'FlowIn':
+        return YamlParser$Context$FlowIn_getInstance();
+      case 'BlockKey':
+        return YamlParser$Context$FlowKey_getInstance();
+      case 'FlowKey':
+        return YamlParser$Context$FlowKey_getInstance();
+      default:throw IllegalArgumentException_init('unexpected');
+    }
+  };
+  YamlSpec.prototype.c_flow_sequence_akvb8y$ = function (n, c) {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginSequence_getInstance(), YamlParser$Code$EndSequence_getInstance(), this.and_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.cmt_ixf2s$(this.c_sequence_start, 'node'), this.opt_5msym5$(this.s_separate_akvb8y$(n, c))), this.opt_5msym5$(this.ns_s_flow_seq_entries_akvb8y$(n, this.in_flow_stezpg$(c)))), this.c_sequence_end));
+  };
+  function YamlSpec$ns_s_flow_seq_entries$lambda(closure$n, closure$c, this$YamlSpec) {
+    return function (state) {
+      return this$YamlSpec.ns_s_flow_seq_entries_akvb8y$(closure$n, closure$c)(state);
+    };
+  }
+  YamlSpec.prototype.ns_s_flow_seq_entries_akvb8y$ = function (n, c) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.ns_flow_seq_entry_akvb8y$(n, c), this.opt_5msym5$(this.s_separate_akvb8y$(n, c))), this.opt_5msym5$(this.and_yb4yy3$(this.and_yb4yy3$(this.c_collect_entry, this.opt_5msym5$(this.s_separate_akvb8y$(n, c))), this.opt_5msym5$(YamlSpec$ns_s_flow_seq_entries$lambda(n, c, this)))));
+  };
+  YamlSpec.prototype.ns_flow_seq_entry_akvb8y$ = function (n, c) {
+    return this.cho_l8gk4$('pair', this.or_yb4yy3$(this.ns_flow_pair_akvb8y$(n, c), this.cho_l8gk4$('node', this.ns_flow_node_akvb8y$(n, c))));
+  };
+  YamlSpec.prototype.c_flow_mapping_akvb8y$ = function (n, c) {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginMapping_getInstance(), YamlParser$Code$EndMapping_getInstance(), this.and_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.cmt_ixf2s$(this.c_mapping_start, 'node'), this.opt_5msym5$(this.s_separate_akvb8y$(n, c))), this.opt_5msym5$(this.ns_s_flow_map_entries_akvb8y$(n, this.in_flow_stezpg$(c)))), this.c_mapping_end));
+  };
+  function YamlSpec$ns_s_flow_map_entries$lambda(closure$n, closure$c, this$YamlSpec) {
+    return function (state) {
+      return this$YamlSpec.ns_s_flow_map_entries_akvb8y$(closure$n, closure$c)(state);
+    };
+  }
+  YamlSpec.prototype.ns_s_flow_map_entries_akvb8y$ = function (n, c) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.ns_flow_map_entry_akvb8y$(n, c), this.opt_5msym5$(this.s_separate_akvb8y$(n, c))), this.opt_5msym5$(this.and_yb4yy3$(this.and_yb4yy3$(this.c_collect_entry, this.opt_5msym5$(this.s_separate_akvb8y$(n, c))), this.opt_5msym5$(YamlSpec$ns_s_flow_map_entries$lambda(n, c, this)))));
+  };
+  YamlSpec.prototype.ns_flow_map_entry_akvb8y$ = function (n, c) {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginPair_getInstance(), YamlParser$Code$EndPair_getInstance(), this.cho_l8gk4$('key', this.or_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.cmt_ixf2s$(this.c_mapping_key, 'key'), this.s_separate_akvb8y$(n, c)), this.ns_flow_map_explicit_entry_akvb8y$(n, c)), this.ns_flow_map_implicit_entry_akvb8y$(n, c))));
+  };
+  YamlSpec.prototype.ns_flow_map_explicit_entry_akvb8y$ = function (n, c) {
+    return this.or_yb4yy3$(this.ns_flow_map_implicit_entry_akvb8y$(n, c), this.and_yb4yy3$(this.e_node, this.e_node));
+  };
+  YamlSpec.prototype.ns_flow_map_implicit_entry_akvb8y$ = function (n, c) {
+    return this.cho_l8gk4$('pair', this.or_yb4yy3$(this.or_yb4yy3$(this.ns_flow_map_yaml_key_entry_akvb8y$(n, c), this.c_ns_flow_map_empty_key_entry_akvb8y$(n, c)), this.c_ns_flow_map_json_key_entry_akvb8y$(n, c)));
+  };
+  YamlSpec.prototype.ns_flow_map_yaml_key_entry_akvb8y$ = function (n, c) {
+    return this.and_yb4yy3$(this.cmt_ixf2s$(this.cho_l8gk4$('node', this.ns_flow_yaml_node_akvb8y$(n, c)), 'pair'), this.or_yb4yy3$(this.and_yb4yy3$(this.opt_5msym5$(this.s_separate_akvb8y$(n, c)), this.c_ns_flow_map_separate_value_akvb8y$(n, c)), this.e_node));
+  };
+  YamlSpec.prototype.c_ns_flow_map_empty_key_entry_akvb8y$ = function (n, c) {
+    return this.and_yb4yy3$(this.e_node, this.c_ns_flow_map_separate_value_akvb8y$(n, c));
+  };
+  YamlSpec.prototype.c_ns_flow_map_separate_value_akvb8y$ = function (n, c) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.c_mapping_value, this.cmt_ixf2s$(this.nla_5msym5$(this.ns_char), 'pair')), this.or_yb4yy3$(this.and_yb4yy3$(this.s_separate_akvb8y$(n, c), this.ns_flow_node_akvb8y$(n, c)), this.e_node));
+  };
+  YamlSpec.prototype.c_ns_flow_map_json_key_entry_akvb8y$ = function (n, c) {
+    return this.and_yb4yy3$(this.cmt_ixf2s$(this.cho_l8gk4$('node', this.c_flow_json_node_akvb8y$(n, c)), 'pair'), this.or_yb4yy3$(this.and_yb4yy3$(this.opt_5msym5$(this.s_separate_akvb8y$(n, c)), this.c_ns_flow_map_adjacent_value_akvb8y$(n, c)), this.e_node));
+  };
+  YamlSpec.prototype.c_ns_flow_map_adjacent_value_akvb8y$ = function (n, c) {
+    return this.and_yb4yy3$(this.cmt_ixf2s$(this.c_mapping_value, 'pair'), this.or_yb4yy3$(this.and_yb4yy3$(this.opt_5msym5$(this.s_separate_akvb8y$(n, c)), this.ns_flow_node_akvb8y$(n, c)), this.e_node));
+  };
+  YamlSpec.prototype.ns_flow_pair_akvb8y$ = function (n, c) {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginMapping_getInstance(), YamlParser$Code$EndMapping_getInstance(), this.wrapTokens_u68c0l$(YamlParser$Code$BeginPair_getInstance(), YamlParser$Code$EndPair_getInstance(), this.or_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.cmt_ixf2s$(this.c_mapping_key, 'pair'), this.s_separate_akvb8y$(n, c)), this.ns_flow_map_explicit_entry_akvb8y$(n, c)), this.ns_flow_pair_entry_akvb8y$(n, c))));
+  };
+  YamlSpec.prototype.ns_flow_pair_entry_akvb8y$ = function (n, c) {
+    return this.or_yb4yy3$(this.or_yb4yy3$(this.ns_flow_pair_yaml_key_entry_akvb8y$(n, c), this.c_ns_flow_map_empty_key_entry_akvb8y$(n, c)), this.c_ns_flow_pair_json_key_entry_akvb8y$(n, c));
+  };
+  YamlSpec.prototype.ns_flow_pair_yaml_key_entry_akvb8y$ = function (n, c) {
+    return this.and_yb4yy3$(this.ns_s_implicit_yaml_key_stezpg$(YamlParser$Context$FlowKey_getInstance()), this.c_ns_flow_map_separate_value_akvb8y$(n, c));
+  };
+  YamlSpec.prototype.c_ns_flow_pair_json_key_entry_akvb8y$ = function (n, c) {
+    return this.and_yb4yy3$(this.c_s_implicit_json_key_stezpg$(YamlParser$Context$FlowKey_getInstance()), this.c_ns_flow_map_adjacent_value_akvb8y$(n, c));
+  };
+  YamlSpec.prototype.ns_s_implicit_yaml_key_stezpg$ = function (c) {
+    return this.limitedTo_nf7wzz$(this.and_yb4yy3$(this.cho_l8gk4$('node', this.ns_flow_yaml_node_akvb8y$(-1, c)), this.opt_5msym5$(this.s_separate_in_line)), 1024);
+  };
+  YamlSpec.prototype.c_s_implicit_json_key_stezpg$ = function (c) {
+    return this.limitedTo_nf7wzz$(this.and_yb4yy3$(this.cho_l8gk4$('node', this.c_flow_json_node_akvb8y$(-1, c)), this.opt_5msym5$(this.s_separate_in_line)), 1024);
+  };
+  YamlSpec.prototype.ns_flow_yaml_content_akvb8y$ = function (n, c) {
+    return this.ns_plain_akvb8y$(n, c);
+  };
+  function YamlSpec$c_flow_json_content$lambda(closure$n, closure$c, this$YamlSpec) {
+    return function (state) {
+      return this$YamlSpec.c_flow_sequence_akvb8y$(closure$n, closure$c)(state);
+    };
+  }
+  YamlSpec.prototype.c_flow_json_content_akvb8y$ = function (n, c) {
+    return this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(YamlSpec$c_flow_json_content$lambda(n, c, this), this.c_flow_mapping_akvb8y$(n, c)), this.c_single_quoted_akvb8y$(n, c)), this.c_double_quoted_akvb8y$(n, c));
+  };
+  function YamlSpec$ns_flow_content$lambda(closure$n, closure$c, this$YamlSpec) {
+    return function (state) {
+      return this$YamlSpec.c_flow_json_content_akvb8y$(closure$n, closure$c)(state);
+    };
+  }
+  YamlSpec.prototype.ns_flow_content_akvb8y$ = function (n, c) {
+    return this.or_yb4yy3$(this.ns_flow_yaml_content_akvb8y$(n, c), YamlSpec$ns_flow_content$lambda(n, c, this));
+  };
+  YamlSpec.prototype.ns_flow_yaml_node_akvb8y$ = function (n, c) {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginNode_getInstance(), YamlParser$Code$EndNode_getInstance(), this.or_yb4yy3$(this.or_yb4yy3$(this.c_ns_alias_node, this.ns_flow_yaml_content_akvb8y$(n, c)), this.and_yb4yy3$(this.c_ns_properties_akvb8y$(n, c), this.or_yb4yy3$(this.and_yb4yy3$(this.s_separate_akvb8y$(n, c), this.ns_flow_yaml_content_akvb8y$(n, c)), this.e_scalar))));
+  };
+  function YamlSpec$c_flow_json_node$lambda(closure$n, closure$c, this$YamlSpec) {
+    return function (state) {
+      return this$YamlSpec.c_flow_json_content_akvb8y$(closure$n, closure$c)(state);
+    };
+  }
+  YamlSpec.prototype.c_flow_json_node_akvb8y$ = function (n, c) {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginNode_getInstance(), YamlParser$Code$EndNode_getInstance(), this.and_yb4yy3$(this.opt_5msym5$(this.and_yb4yy3$(this.c_ns_properties_akvb8y$(n, c), this.s_separate_akvb8y$(n, c))), YamlSpec$c_flow_json_node$lambda(n, c, this)));
+  };
+  YamlSpec.prototype.ns_flow_node_akvb8y$ = function (n, c) {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginNode_getInstance(), YamlParser$Code$EndNode_getInstance(), this.or_yb4yy3$(this.or_yb4yy3$(this.c_ns_alias_node, this.ns_flow_content_akvb8y$(n, c)), this.and_yb4yy3$(this.c_ns_properties_akvb8y$(n, c), this.or_yb4yy3$(this.and_yb4yy3$(this.s_separate_akvb8y$(n, c), this.ns_flow_content_akvb8y$(n, c)), this.e_scalar))));
+  };
+  YamlSpec.prototype.c_b_block_header_za3lpa$ = function (n) {
+    return this.cho_l8gk4$('header', this.and_yb4yy3$(this.or_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.snd_lg169v$(this.snd_lg169v$(this.c_indentation_indicator_za3lpa$(n), 'm', this.c_chomping_indicator()), 't', this.omt_ixf2s$(this.or_yb4yy3$(this.s_white, this.b_char), 'header')), this.s_b_comment), this.peekResult_puj7f4$('m', 't')), this.snd_lg169v$(this.snd_lg169v$(this.c_chomping_indicator(), 't', this.c_indentation_indicator_za3lpa$(n)), 'm', this.s_b_comment)), this.peekResult_puj7f4$('m', 't')));
+  };
+  YamlSpec.prototype.c_indentation_indicator_za3lpa$ = function (n) {
+    return this.or_yb4yy3$(this.and_yb4yy3$(this.indicator_5msym5$(this.not_9e8rdb$(this.ns_dec_digit, 48)), this.asInt()), this.detect_scalar_indentation_za3lpa$(n));
+  };
+  YamlSpec.prototype.detect_scalar_indentation_za3lpa$ = function (n) {
+    return this.peek_5msym5$(this.and_yb4yy3$(this.and_yb4yy3$(this.zom_5msym5$(this.nb_char), this.opt_5msym5$(this.and_yb4yy3$(this.b_non_content, this.zom_5msym5$(this.l_empty_akvb8y$(n, YamlParser$Context$BlockIn_getInstance()))))), this.count_spaces_za3lpa$(-n | 0)));
+  };
+  function YamlSpec$count_spaces$lambda(closure$n, this$YamlSpec) {
+    return function (state) {
+      return this$YamlSpec.count_spaces_za3lpa$(closure$n + 1 | 0)(state);
+    };
+  }
+  var Math_0 = Math;
+  YamlSpec.prototype.count_spaces_za3lpa$ = function (n) {
+    return this.or_yb4yy3$(this.and_yb4yy3$(this.s_space, YamlSpec$count_spaces$lambda(n, this)), this.result_za3lpa$(Math_0.max(1, n)));
+  };
+  YamlSpec.prototype.c_chomping_indicator = function () {
+    return this.or_yb4yy3$(this.or_yb4yy3$(this.and_yb4yy3$(this.indicator_s8itvh$(45), this.result_ba5ra6$(YamlParser$Chomp$Strip_getInstance())), this.and_yb4yy3$(this.indicator_s8itvh$(43), this.result_ba5ra6$(YamlParser$Chomp$Keep_getInstance()))), this.result_ba5ra6$(YamlParser$Chomp$Clip_getInstance()));
+  };
+  YamlSpec.prototype.end_block_scalar_ba5ra6$ = function (t) {
+    switch (t.name) {
+      case 'Strip':
+        return this.emptyToken_kzhhfs$(YamlParser$Code$EndScalar_getInstance());
+      case 'Clip':
+        return this.emptyToken_kzhhfs$(YamlParser$Code$EndScalar_getInstance());
+      case 'Keep':
+        return this.empty();
+      default:return Kotlin.noWhenBranchMatched();
+    }
+  };
+  YamlSpec.prototype.b_chomped_last_ba5ra6$ = function (t) {
+    switch (t.name) {
+      case 'Strip':
+        return this.and_yb4yy3$(this.emptyToken_kzhhfs$(YamlParser$Code$EndScalar_getInstance()), this.b_non_content);
+      case 'Clip':
+        return this.and_yb4yy3$(this.b_as_line_feed, this.emptyToken_kzhhfs$(YamlParser$Code$EndScalar_getInstance()));
+      case 'Keep':
+        return this.b_as_line_feed;
+      default:return Kotlin.noWhenBranchMatched();
+    }
+  };
+  YamlSpec.prototype.l_chomped_empty_oh9uqc$ = function (n, t) {
+    switch (t.name) {
+      case 'Strip':
+        return this.l_strip_empty_za3lpa$(n);
+      case 'Clip':
+        return this.l_strip_empty_za3lpa$(n);
+      case 'Keep':
+        return this.l_keep_empty_za3lpa$(n);
+      default:return Kotlin.noWhenBranchMatched();
+    }
+  };
+  YamlSpec.prototype.l_strip_empty_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.zom_5msym5$(this.and_yb4yy3$(this.s_indent_le_za3lpa$(n), this.b_non_content)), this.opt_5msym5$(this.l_trail_comments_za3lpa$(n)));
+  };
+  YamlSpec.prototype.l_keep_empty_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.zom_5msym5$(this.l_empty_akvb8y$(n, YamlParser$Context$BlockIn_getInstance())), this.emptyToken_kzhhfs$(YamlParser$Code$EndScalar_getInstance())), this.opt_5msym5$(this.l_trail_comments_za3lpa$(n)));
+  };
+  YamlSpec.prototype.l_trail_comments_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.s_indent_lt_za3lpa$(n), this.c_nb_comment_text), this.b_comment), this.zom_5msym5$(this.nonEmpty_5msym5$(this.l_comment)));
+  };
+  function YamlSpec$c_l_literal$lambda(closure$n, this$YamlSpec) {
+    return function (state) {
+      var tmp$, tmp$_0;
+      var m = typeof (tmp$ = state.yields.get_11rb$('m')) === 'number' ? tmp$ : throwCCE();
+      var t = Kotlin.isType(tmp$_0 = state.yields.get_11rb$('t'), YamlParser$Chomp) ? tmp$_0 : throwCCE();
+      return this$YamlSpec.l_literal_content_oh9uqc$(closure$n + m | 0, t)(state);
+    };
+  }
+  YamlSpec.prototype.c_l_literal_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.emptyToken_kzhhfs$(YamlParser$Code$BeginScalar_getInstance()), this.cmt_ixf2s$(this.c_literal, 'node')), this.prefixErrorWith_caskni$(this.c_b_block_header_za3lpa$(n), this.emptyToken_kzhhfs$(YamlParser$Code$EndScalar_getInstance()))), this.text_5msym5$(YamlSpec$c_l_literal$lambda(n, this)));
+  };
+  YamlSpec.prototype.l_nb_literal_text_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.zom_5msym5$(this.l_empty_akvb8y$(n, YamlParser$Context$BlockIn_getInstance())), this.s_indent_za3lpa$(n)), this.oom_5msym5$(this.nb_char));
+  };
+  YamlSpec.prototype.b_nb_literal_next_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.b_as_line_feed, this.l_nb_literal_text_za3lpa$(n));
+  };
+  YamlSpec.prototype.l_literal_content_oh9uqc$ = function (n, t) {
+    return this.and_yb4yy3$(this.or_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.l_nb_literal_text_za3lpa$(n), this.zom_5msym5$(this.b_nb_literal_next_za3lpa$(n))), this.b_chomped_last_ba5ra6$(t)), this.end_block_scalar_ba5ra6$(t)), this.l_chomped_empty_oh9uqc$(n, t));
+  };
+  function YamlSpec$c_l_folded$lambda(closure$n, this$YamlSpec) {
+    return function (state) {
+      var tmp$, tmp$_0;
+      var m = typeof (tmp$ = state.yields.get_11rb$('m')) === 'number' ? tmp$ : throwCCE();
+      var t = Kotlin.isType(tmp$_0 = state.yields.get_11rb$('t'), YamlParser$Chomp) ? tmp$_0 : throwCCE();
+      return this$YamlSpec.l_folded_content_oh9uqc$(closure$n + m | 0, t)(state);
+    };
+  }
+  YamlSpec.prototype.c_l_folded_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.emptyToken_kzhhfs$(YamlParser$Code$BeginScalar_getInstance()), this.cmt_ixf2s$(this.c_folded, 'node')), this.prefixErrorWith_caskni$(this.c_b_block_header_za3lpa$(n), this.emptyToken_kzhhfs$(YamlParser$Code$EndScalar_getInstance()))), this.text_5msym5$(YamlSpec$c_l_folded$lambda(n, this)));
+  };
+  YamlSpec.prototype.s_nb_folded_text_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.s_indent_za3lpa$(n), this.cmt_ixf2s$(this.ns_char, 'fold')), this.zom_5msym5$(this.nb_char));
+  };
+  YamlSpec.prototype.l_nb_folded_lines_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.s_nb_folded_text_za3lpa$(n), this.zom_5msym5$(this.and_yb4yy3$(this.b_l_folded_akvb8y$(n, YamlParser$Context$BlockIn_getInstance()), this.s_nb_folded_text_za3lpa$(n))));
+  };
+  YamlSpec.prototype.s_nb_spaced_text_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.s_indent_za3lpa$(n), this.cmt_ixf2s$(this.s_white, 'fold')), this.zom_5msym5$(this.nb_char));
+  };
+  YamlSpec.prototype.b_l_spaced_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.b_as_line_feed, this.zom_5msym5$(this.l_empty_akvb8y$(n, YamlParser$Context$BlockIn_getInstance())));
+  };
+  YamlSpec.prototype.l_nb_spaced_lines_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.s_nb_spaced_text_za3lpa$(n), this.zom_5msym5$(this.and_yb4yy3$(this.b_l_spaced_za3lpa$(n), this.s_nb_spaced_text_za3lpa$(n))));
+  };
+  YamlSpec.prototype.l_nb_same_lines_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.zom_5msym5$(this.l_empty_akvb8y$(n, YamlParser$Context$BlockIn_getInstance())), this.cho_l8gk4$('fold', this.or_yb4yy3$(this.l_nb_folded_lines_za3lpa$(n), this.l_nb_spaced_lines_za3lpa$(n))));
+  };
+  YamlSpec.prototype.l_nb_diff_lines_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.l_nb_same_lines_za3lpa$(n), this.zom_5msym5$(this.and_yb4yy3$(this.b_as_line_feed, this.l_nb_same_lines_za3lpa$(n))));
+  };
+  YamlSpec.prototype.l_folded_content_oh9uqc$ = function (n, t) {
+    return this.and_yb4yy3$(this.or_yb4yy3$(this.and_yb4yy3$(this.l_nb_diff_lines_za3lpa$(n), this.b_chomped_last_ba5ra6$(t)), this.end_block_scalar_ba5ra6$(t)), this.l_chomped_empty_oh9uqc$(n, t));
+  };
+  YamlSpec.prototype.detect_collection_indentation_za3lpa$ = function (n) {
+    return this.peek_5msym5$(this.and_yb4yy3$(this.zom_5msym5$(this.nonEmpty_5msym5$(this.l_comment)), this.count_spaces_za3lpa$(-n | 0)));
+  };
+  function YamlSpec$l_block_sequence$lambda(closure$n, this$YamlSpec) {
+    return function (state) {
+      var tmp$;
+      var m = typeof (tmp$ = state.yields.get_11rb$('m')) === 'number' ? tmp$ : throwCCE();
+      return this$YamlSpec.oom_5msym5$(this$YamlSpec.and_yb4yy3$(this$YamlSpec.s_indent_za3lpa$(closure$n + m | 0), this$YamlSpec.c_l_block_seq_entry_za3lpa$(closure$n + m | 0)))(state);
+    };
+  }
+  YamlSpec.prototype.l_block_sequence_za3lpa$ = function (n) {
+    return this.snd_lg169v$(this.detect_collection_indentation_za3lpa$(n), 'm', this.wrapTokens_u68c0l$(YamlParser$Code$BeginSequence_getInstance(), YamlParser$Code$EndSequence_getInstance(), YamlSpec$l_block_sequence$lambda(n, this)));
+  };
+  YamlSpec.prototype.c_l_block_seq_entry_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.c_sequence_entry, this.cmt_ixf2s$(this.nla_5msym5$(this.ns_char), 'node')), this.s_l_block_indented_akvb8y$(n, YamlParser$Context$BlockIn_getInstance()));
+  };
+  function YamlSpec$s_l_block_indented$lambda(this$YamlSpec, closure$n) {
+    return function (state) {
+      var tmp$;
+      var m = typeof (tmp$ = state.yields.get_11rb$('m')) === 'number' ? tmp$ : throwCCE();
+      return this$YamlSpec.and_yb4yy3$(this$YamlSpec.s_indent_za3lpa$(m), this$YamlSpec.or_yb4yy3$(this$YamlSpec.ns_l_in_line_sequence_za3lpa$(closure$n + 1 + m | 0), this$YamlSpec.ns_l_in_line_mapping_za3lpa$(closure$n + 1 + m | 0)))(state);
+    };
+  }
+  YamlSpec.prototype.s_l_block_indented_akvb8y$ = function (n, c) {
+    return this.snd_lg169v$(this.detect_inline_indentation, 'm', this.recovery_yb4yy3$(this.cho_l8gk4$('node', this.and_yb4yy3$(this.and_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(YamlSpec$s_l_block_indented$lambda(this, n), this.s_l_block_node_akvb8y$(n, c)), this.e_node), this.opt_5msym5$(this.s_l_comments)), this.unparsed_za3lpa$(n + 1 | 0))), this.unparsed_za3lpa$(n + 1 | 0)));
+  };
+  YamlSpec.prototype.ns_l_in_line_sequence_za3lpa$ = function (n) {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginNode_getInstance(), YamlParser$Code$EndNode_getInstance(), this.wrapTokens_u68c0l$(YamlParser$Code$BeginSequence_getInstance(), YamlParser$Code$EndSequence_getInstance(), this.and_yb4yy3$(this.c_l_block_seq_entry_za3lpa$(n), this.zom_5msym5$(this.and_yb4yy3$(this.s_indent_za3lpa$(n), this.c_l_block_seq_entry_za3lpa$(n))))));
+  };
+  function YamlSpec$l_block_mapping$lambda(closure$n, this$YamlSpec) {
+    return function (state) {
+      var tmp$;
+      var m = typeof (tmp$ = state.yields.get_11rb$('m')) === 'number' ? tmp$ : throwCCE();
+      return this$YamlSpec.oom_5msym5$(this$YamlSpec.and_yb4yy3$(this$YamlSpec.s_indent_za3lpa$(closure$n + m | 0), this$YamlSpec.ns_l_block_map_entry_za3lpa$(closure$n + m | 0)))(state);
+    };
+  }
+  YamlSpec.prototype.l_block_mapping_za3lpa$ = function (n) {
+    return this.snd_lg169v$(this.detect_collection_indentation_za3lpa$(n), 'm', this.wrapTokens_u68c0l$(YamlParser$Code$BeginMapping_getInstance(), YamlParser$Code$EndMapping_getInstance(), YamlSpec$l_block_mapping$lambda(n, this)));
+  };
+  YamlSpec.prototype.ns_l_block_map_entry_za3lpa$ = function (n) {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginPair_getInstance(), YamlParser$Code$EndPair_getInstance(), this.or_yb4yy3$(this.c_l_block_map_explicit_entry_za3lpa$(n), this.ns_l_block_map_implicit_entry_za3lpa$(n)));
+  };
+  YamlSpec.prototype.c_l_block_map_explicit_entry_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.c_l_block_map_explicit_key_za3lpa$(n), this.or_yb4yy3$(this.l_block_map_explicit_value_za3lpa$(n), this.e_node));
+  };
+  YamlSpec.prototype.c_l_block_map_explicit_key_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.cmt_ixf2s$(this.c_mapping_key, 'node'), this.s_l_block_indented_akvb8y$(n, YamlParser$Context$BlockOut_getInstance()));
+  };
+  YamlSpec.prototype.l_block_map_explicit_value_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.s_indent_za3lpa$(n), this.c_mapping_value), this.s_l_block_indented_akvb8y$(n, YamlParser$Context$BlockOut_getInstance()));
+  };
+  YamlSpec.prototype.ns_l_block_map_implicit_entry_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.or_yb4yy3$(this.ns_s_block_map_implicit_key(), this.e_node), this.c_l_block_map_implicit_value_za3lpa$(n));
+  };
+  YamlSpec.prototype.ns_s_block_map_implicit_key = function () {
+    return this.or_yb4yy3$(this.c_s_implicit_json_key_stezpg$(YamlParser$Context$BlockKey_getInstance()), this.ns_s_implicit_yaml_key_stezpg$(YamlParser$Context$BlockKey_getInstance()));
+  };
+  YamlSpec.prototype.c_l_block_map_implicit_value_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.cmt_ixf2s$(this.c_mapping_value, 'node'), this.recovery_yb4yy3$(this.and_yb4yy3$(this.and_yb4yy3$(this.or_yb4yy3$(this.s_l_block_node_akvb8y$(n, YamlParser$Context$BlockOut_getInstance()), this.e_node), this.opt_5msym5$(this.s_l_comments)), this.unparsed_za3lpa$(n + 1 | 0)), this.unparsed_za3lpa$(n + 1 | 0)));
+  };
+  YamlSpec.prototype.ns_l_in_line_mapping_za3lpa$ = function (n) {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginNode_getInstance(), YamlParser$Code$EndNode_getInstance(), this.wrapTokens_u68c0l$(YamlParser$Code$BeginMapping_getInstance(), YamlParser$Code$EndMapping_getInstance(), this.and_yb4yy3$(this.ns_l_block_map_entry_za3lpa$(n), this.zom_5msym5$(this.and_yb4yy3$(this.s_indent_za3lpa$(n), this.ns_l_block_map_entry_za3lpa$(n))))));
+  };
+  YamlSpec.prototype.unparsed_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.or_yb4yy3$(this.sol(), this.unparsed_text()), this.unparsed_break()), this.zom_5msym5$(this.nonEmpty_5msym5$(this.and_yb4yy3$(this.unparsed_indent_za3lpa$(n), this.and_yb4yy3$(this.unparsed_text(), this.unparsed_break())))));
+  };
+  YamlSpec.prototype.unparsed_indent_za3lpa$ = function (n) {
+    return this.token_qhjjef$(YamlParser$Code$Unparsed_getInstance(), this.tms_thfhbo$(this.s_space, n));
+  };
+  YamlSpec.prototype.unparsed_text = function () {
+    return this.token_qhjjef$(YamlParser$Code$Unparsed_getInstance(), this.upto_5msym5$(this.or_yb4yy3$(this.or_yb4yy3$(this.eof(), this.c_forbidden()), this.b_break)));
+  };
+  YamlSpec.prototype.unparsed_break = function () {
+    return this.or_yb4yy3$(this.or_yb4yy3$(this.or_yb4yy3$(this.eof(), this.peek_5msym5$(this.c_forbidden())), this.token_qhjjef$(YamlParser$Code$Unparsed_getInstance(), this.b_break)), this.empty());
+  };
+  YamlSpec.prototype.s_l_block_node_akvb8y$ = function (n, c) {
+    return this.or_yb4yy3$(this.s_l_block_in_block_akvb8y$(n, c), this.s_l_flow_in_block_za3lpa$(n));
+  };
+  YamlSpec.prototype.s_l_flow_in_block_za3lpa$ = function (n) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.s_separate_akvb8y$(n + 1 | 0, YamlParser$Context$FlowOut_getInstance()), this.ns_flow_node_akvb8y$(n + 1 | 0, YamlParser$Context$FlowOut_getInstance())), this.s_l_comments);
+  };
+  YamlSpec.prototype.s_l_block_in_block_akvb8y$ = function (n, c) {
+    return this.wrapTokens_u68c0l$(YamlParser$Code$BeginNode_getInstance(), YamlParser$Code$EndNode_getInstance(), this.or_yb4yy3$(this.s_l_block_scalar_akvb8y$(n, c), this.s_l_block_collection_akvb8y$(n, c)));
+  };
+  YamlSpec.prototype.s_l_block_scalar_akvb8y$ = function (n, c) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.s_separate_akvb8y$(n + 1 | 0, c), this.opt_5msym5$(this.and_yb4yy3$(this.c_ns_properties_akvb8y$(n + 1 | 0, c), this.s_separate_akvb8y$(n + 1 | 0, c)))), this.or_yb4yy3$(this.c_l_literal_za3lpa$(n), this.c_l_folded_za3lpa$(n)));
+  };
+  YamlSpec.prototype.s_l_block_collection_akvb8y$ = function (n, c) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.opt_5msym5$(this.and_yb4yy3$(this.s_separate_akvb8y$(n + 1 | 0, c), this.and_yb4yy3$(this.c_ns_properties_akvb8y$(n + 1 | 0, c), this.pla_5msym5$(this.s_l_comments)))), this.s_l_comments), this.or_yb4yy3$(this.l_block_sequence_za3lpa$(this.seq_spaces_akvb8y$(n, c)), this.l_block_mapping_za3lpa$(n)));
+  };
+  YamlSpec.prototype.seq_spaces_akvb8y$ = function (n, c) {
+    switch (c.name) {
+      case 'BlockOut':
+        return n - 1 | 0;
+      case 'BlockIn':
+        return n;
+      default:throw IllegalArgumentException_init('unexpected');
+    }
+  };
+  YamlSpec.prototype.c_forbidden = function () {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.sol(), this.or_yb4yy3$(this.c_directives_end, this.c_document_end)), this.or_yb4yy3$(this.or_yb4yy3$(this.b_char, this.s_white), this.eof()));
+  };
+  YamlSpec.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'YamlSpec',
+    interfaces: [YamlParser]
+  };
+  var YamlSpec_instance = null;
+  function YamlSpec_getInstance() {
+    if (YamlSpec_instance === null) {
+      new YamlSpec();
+    }
+    return YamlSpec_instance;
+  }
+  function YamlDecoder() {
+    YamlDecoder_instance = this;
+    YamlParser.call(this);
+  }
+  function YamlDecoder$Decoder() {
+  }
+  YamlDecoder$Decoder.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'Decoder',
+    interfaces: []
+  };
+  function YamlDecoder$UniChar(offset, code) {
+    this.offset = offset;
+    this.code = code;
+  }
+  YamlDecoder$UniChar.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'UniChar',
+    interfaces: []
+  };
+  YamlDecoder$UniChar.prototype.component1 = function () {
+    return this.offset;
+  };
+  YamlDecoder$UniChar.prototype.component2 = function () {
+    return this.code;
+  };
+  YamlDecoder$UniChar.prototype.copy_vux9f0$ = function (offset, code) {
+    return new YamlDecoder$UniChar(offset === void 0 ? this.offset : offset, code === void 0 ? this.code : code);
+  };
+  YamlDecoder$UniChar.prototype.toString = function () {
+    return 'UniChar(offset=' + Kotlin.toString(this.offset) + (', code=' + Kotlin.toString(this.code)) + ')';
+  };
+  YamlDecoder$UniChar.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.offset) | 0;
+    result = result * 31 + Kotlin.hashCode(this.code) | 0;
+    return result;
+  };
+  YamlDecoder$UniChar.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.offset, other.offset) && Kotlin.equals(this.code, other.code)))));
+  };
+  function YamlDecoder$UTF32Decoder(combine) {
+    YamlDecoder$UTF32Decoder$Companion_getInstance();
+    this.combine = combine;
+  }
+  function YamlDecoder$UTF32Decoder$Companion() {
+    YamlDecoder$UTF32Decoder$Companion_instance = this;
+  }
+  function YamlDecoder$UTF32Decoder$Companion$be$lambda(first, second, third, fourth) {
+    return fourth + (256 * (third + (256 * (second + (256 * first | 0) | 0) | 0) | 0) | 0) | 0;
+  }
+  YamlDecoder$UTF32Decoder$Companion.prototype.be = function () {
+    return new YamlDecoder$UTF32Decoder(YamlDecoder$UTF32Decoder$Companion$be$lambda);
+  };
+  function YamlDecoder$UTF32Decoder$Companion$le$lambda(first, second, third, fourth) {
+    return first + (256 * (second + (256 * (third + (256 * fourth | 0) | 0) | 0) | 0) | 0) | 0;
+  }
+  YamlDecoder$UTF32Decoder$Companion.prototype.le = function () {
+    return new YamlDecoder$UTF32Decoder(YamlDecoder$UTF32Decoder$Companion$le$lambda);
+  };
+  YamlDecoder$UTF32Decoder$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var YamlDecoder$UTF32Decoder$Companion_instance = null;
+  function YamlDecoder$UTF32Decoder$Companion_getInstance() {
+    if (YamlDecoder$UTF32Decoder$Companion_instance === null) {
+      new YamlDecoder$UTF32Decoder$Companion();
+    }
+    return YamlDecoder$UTF32Decoder$Companion_instance;
+  }
+  YamlDecoder$UTF32Decoder.prototype.decode_ir89t6$ = function (bytes, offset) {
+    if (YamlDecoder_getInstance().hasFewerThan_0(offset, 4, bytes)) {
+      throw IllegalArgumentException_init('UTF-32 input contains invalid number of bytes');
+    }
+    var first = YamlDecoder_getInstance().toUnsignedInt_0(bytes[offset]);
+    var second = YamlDecoder_getInstance().toUnsignedInt_0(bytes[offset + 1 | 0]);
+    var third = YamlDecoder_getInstance().toUnsignedInt_0(bytes[offset + 2 | 0]);
+    var fourth = YamlDecoder_getInstance().toUnsignedInt_0(bytes[offset + 3 | 0]);
+    return new YamlDecoder$UniChar(offset + 4 | 0, this.combine(first, second, third, fourth));
+  };
+  YamlDecoder$UTF32Decoder.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'UTF32Decoder',
+    interfaces: [YamlDecoder$Decoder]
+  };
+  function YamlDecoder$UTF16Decoder(combine) {
+    YamlDecoder$UTF16Decoder$Companion_getInstance();
+    this.combine = combine;
+    this.surrogateOffset_0 = -56613888;
+  }
+  function YamlDecoder$UTF16Decoder$Companion() {
+    YamlDecoder$UTF16Decoder$Companion_instance = this;
+  }
+  function YamlDecoder$UTF16Decoder$Companion$be$lambda(first, second) {
+    return second + (first * 256 | 0) | 0;
+  }
+  YamlDecoder$UTF16Decoder$Companion.prototype.be = function () {
+    return new YamlDecoder$UTF16Decoder(YamlDecoder$UTF16Decoder$Companion$be$lambda);
+  };
+  function YamlDecoder$UTF16Decoder$Companion$le$lambda(first, second) {
+    return first + (second * 256 | 0) | 0;
+  }
+  YamlDecoder$UTF16Decoder$Companion.prototype.le = function () {
+    return new YamlDecoder$UTF16Decoder(YamlDecoder$UTF16Decoder$Companion$le$lambda);
+  };
+  YamlDecoder$UTF16Decoder$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var YamlDecoder$UTF16Decoder$Companion_instance = null;
+  function YamlDecoder$UTF16Decoder$Companion_getInstance() {
+    if (YamlDecoder$UTF16Decoder$Companion_instance === null) {
+      new YamlDecoder$UTF16Decoder$Companion();
+    }
+    return YamlDecoder$UTF16Decoder$Companion_instance;
+  }
+  YamlDecoder$UTF16Decoder.prototype.decode_ir89t6$ = function (bytes, offset) {
+    var tmp$;
+    var head = this.undo_0(bytes, offset);
+    var tmp$_0;
+    tmp$_0 = head.code;
+    if (55296 <= tmp$_0 && tmp$_0 <= 56319)
+      tmp$ = this.combineLead_0(head, bytes, head.offset);
+    else {
+      var tmp$_1;
+      tmp$_1 = head.code;
+      if (56320 <= tmp$_1 && tmp$_1 <= 57343)
+        throw IllegalArgumentException_init('UTF-16 contains trail surrogate without lead surrogate');
+      else
+        tmp$ = head;
+    }
+    return tmp$;
+  };
+  YamlDecoder$UTF16Decoder.prototype.undo_0 = function (bytes, offset) {
+    if (YamlDecoder_getInstance().hasFewerThan_0(offset, 2, bytes)) {
+      throw IllegalArgumentException_init('UTF-16 input contains odd number of bytes');
+    }
+    var first = YamlDecoder_getInstance().toUnsignedInt_0(bytes[offset]);
+    var second = YamlDecoder_getInstance().toUnsignedInt_0(bytes[offset + 1 | 0]);
+    return new YamlDecoder$UniChar(offset + 2 | 0, this.combine(first, second));
+  };
+  YamlDecoder$UTF16Decoder.prototype.combineSurrogates_0 = function (lead, trail) {
+    return (lead * 1024 | 0) + trail + this.surrogateOffset_0 | 0;
+  };
+  YamlDecoder$UTF16Decoder.prototype.combineLead_0 = function (lead, bytes, offset) {
+    var tmp$;
+    if (YamlDecoder_getInstance().hasFewerThan_0(offset, 2, bytes)) {
+      throw IllegalArgumentException_init('UTF-16 contains lead surrogate as final character');
+    }
+    var tail = this.undo_0(bytes, offset);
+    var tailChar = tail.code;
+    tmp$ = tail.code;
+    if (56320 <= tmp$ && tmp$ <= 57343) {
+      return new YamlDecoder$UniChar(tail.offset, this.combineSurrogates_0(lead.code, tailChar));
+    }
+    throw IllegalArgumentException_init('UTF-16 contains lead surrogate without trail surrogate');
+  };
+  YamlDecoder$UTF16Decoder.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'UTF16Decoder',
+    interfaces: [YamlDecoder$Decoder]
+  };
+  function YamlDecoder$UTF8Decoder() {
+  }
+  YamlDecoder$UTF8Decoder.prototype.decode_ir89t6$ = function (bytes, offset) {
+    var tmp$;
+    if (YamlDecoder_getInstance().hasFewerThan_0(offset, 1, bytes)) {
+      throw IllegalArgumentException_init('UTF-8 input contains invalid number of bytes');
+    }
+    var first = YamlDecoder_getInstance().toUnsignedInt_0(bytes[offset]);
+    if (first < 128)
+      tmp$ = new YamlDecoder$UniChar(offset + 1 | 0, first);
+    else if (first < 192)
+      throw IllegalArgumentException_init('UTF-8 input contains invalid first byte');
+    else if (first < 224)
+      tmp$ = this.decodeTwoUTF8_0(first, offset + 1 | 0, bytes);
+    else if (first < 240)
+      tmp$ = this.decodeThreeUTF8_0(first, offset + 1 | 0, bytes);
+    else if (first < 248)
+      tmp$ = this.decodeFourUTF8_0(first, offset + 1 | 0, bytes);
+    else
+      throw IllegalArgumentException_init('UTF-8 input contains invalid first byte');
+    return tmp$;
+  };
+  YamlDecoder$UTF8Decoder.prototype.decodeTwoUTF8_0 = function (first, offset, bytes) {
+    var tmp$;
+    if (YamlDecoder_getInstance().hasFewerThan_0(offset, 1, bytes)) {
+      throw IllegalArgumentException_init('UTF-8 double byte char is missing second byte at eof');
+    }
+    var second = YamlDecoder_getInstance().toUnsignedInt_0(bytes[offset]);
+    if (second < 128 || 191 < second)
+      throw IllegalArgumentException_init('UTF-8 triple byte char has invalid second byte');
+    else
+      tmp$ = new YamlDecoder$UniChar(offset + 1 | 0, this.combineTwoUTF8_0(first, second));
+    return tmp$;
+  };
+  YamlDecoder$UTF8Decoder.prototype.combineTwoUTF8_0 = function (first, second) {
+    return ((first - 192 | 0) * 64 | 0) + (second - 128) | 0;
+  };
+  YamlDecoder$UTF8Decoder.prototype.decodeThreeUTF8_0 = function (first, offset, bytes) {
+    var tmp$;
+    if (YamlDecoder_getInstance().hasFewerThan_0(offset, 2, bytes)) {
+      throw IllegalArgumentException_init('UTF-8 triple byte char is missing bytes at eof');
+    }
+    var second = YamlDecoder_getInstance().toUnsignedInt_0(bytes[offset]);
+    var third = YamlDecoder_getInstance().toUnsignedInt_0(bytes[offset + 1 | 0]);
+    if (second < 128 || 191 < second)
+      throw IllegalArgumentException_init('UTF-8 triple byte char has invalid second byte');
+    else if (third < 128 || 191 < third)
+      throw IllegalArgumentException_init('UTF-8 triple byte char has invalid third byte');
+    else
+      tmp$ = new YamlDecoder$UniChar(offset + 2 | 0, this.combineThreeUTF8_0(first, second, third));
+    return tmp$;
+  };
+  YamlDecoder$UTF8Decoder.prototype.combineThreeUTF8_0 = function (first, second, third) {
+    return ((first - 224 | 0) * 4096 | 0) + ((second - 128 | 0) * 64 | 0) + (third - 128) | 0;
+  };
+  YamlDecoder$UTF8Decoder.prototype.decodeFourUTF8_0 = function (first, offset, bytes) {
+    var tmp$;
+    if (YamlDecoder_getInstance().hasFewerThan_0(offset, 3, bytes)) {
+      throw IllegalArgumentException_init('UTF-8 quad byte char is missing bytes at eof');
+    }
+    var second = YamlDecoder_getInstance().toUnsignedInt_0(bytes[offset]);
+    var third = YamlDecoder_getInstance().toUnsignedInt_0(bytes[offset + 1 | 0]);
+    var fourth = YamlDecoder_getInstance().toUnsignedInt_0(bytes[offset + 2 | 0]);
+    if (second < 128 || 191 < second)
+      throw IllegalArgumentException_init('UTF-8 quad byte char has invalid second byte');
+    else if (third < 128 || 191 < third)
+      throw IllegalArgumentException_init('UTF-8 quad byte char has invalid third byte');
+    else if (fourth < 128 || 191 < fourth)
+      throw IllegalArgumentException_init('UTF-8 quad byte char has invalid fourth byte');
+    else
+      tmp$ = new YamlDecoder$UniChar(offset + 3 | 0, this.combineFourUTF8_0(first, second, third, fourth));
+    return tmp$;
+  };
+  YamlDecoder$UTF8Decoder.prototype.combineFourUTF8_0 = function (first, second, third, fourth) {
+    return ((first - 240 | 0) * 262144 | 0) + ((second - 128 | 0) * 4096 | 0) + ((third - 128 | 0) * 64 | 0) + (fourth - 128) | 0;
+  };
+  YamlDecoder$UTF8Decoder.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'UTF8Decoder',
+    interfaces: [YamlDecoder$Decoder]
+  };
+  YamlDecoder.prototype.hasFewerThan_0 = function (offset, n, bytes) {
+    return (bytes.length - offset | 0) < n;
+  };
+  YamlDecoder.prototype.toUnsignedInt_0 = function ($receiver) {
+    return $receiver & 255;
+  };
+  function YamlDecoder$Encoding(name, ordinal, text) {
+    Enum.call(this);
+    this.text_td05r4$_0 = text;
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function YamlDecoder$Encoding_initFields() {
+    YamlDecoder$Encoding_initFields = function () {
+    };
+    YamlDecoder$Encoding$UTF8_instance = new YamlDecoder$Encoding('UTF8', 0, 'UTF-8');
+    YamlDecoder$Encoding$UTF16LE_instance = new YamlDecoder$Encoding('UTF16LE', 1, 'UTF-16LE');
+    YamlDecoder$Encoding$UTF16BE_instance = new YamlDecoder$Encoding('UTF16BE', 2, 'UTF-16BE');
+    YamlDecoder$Encoding$UTF32LE_instance = new YamlDecoder$Encoding('UTF32LE', 3, 'UTF-32LE');
+    YamlDecoder$Encoding$UTF32BE_instance = new YamlDecoder$Encoding('UTF32BE', 4, 'UTF-32BE');
+  }
+  var YamlDecoder$Encoding$UTF8_instance;
+  function YamlDecoder$Encoding$UTF8_getInstance() {
+    YamlDecoder$Encoding_initFields();
+    return YamlDecoder$Encoding$UTF8_instance;
+  }
+  var YamlDecoder$Encoding$UTF16LE_instance;
+  function YamlDecoder$Encoding$UTF16LE_getInstance() {
+    YamlDecoder$Encoding_initFields();
+    return YamlDecoder$Encoding$UTF16LE_instance;
+  }
+  var YamlDecoder$Encoding$UTF16BE_instance;
+  function YamlDecoder$Encoding$UTF16BE_getInstance() {
+    YamlDecoder$Encoding_initFields();
+    return YamlDecoder$Encoding$UTF16BE_instance;
+  }
+  var YamlDecoder$Encoding$UTF32LE_instance;
+  function YamlDecoder$Encoding$UTF32LE_getInstance() {
+    YamlDecoder$Encoding_initFields();
+    return YamlDecoder$Encoding$UTF32LE_instance;
+  }
+  var YamlDecoder$Encoding$UTF32BE_instance;
+  function YamlDecoder$Encoding$UTF32BE_getInstance() {
+    YamlDecoder$Encoding_initFields();
+    return YamlDecoder$Encoding$UTF32BE_instance;
+  }
+  YamlDecoder$Encoding.prototype.toString = function () {
+    return this.text_td05r4$_0;
+  };
+  YamlDecoder$Encoding.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Encoding',
+    interfaces: [Enum]
+  };
+  function YamlDecoder$Encoding$values() {
+    return [YamlDecoder$Encoding$UTF8_getInstance(), YamlDecoder$Encoding$UTF16LE_getInstance(), YamlDecoder$Encoding$UTF16BE_getInstance(), YamlDecoder$Encoding$UTF32LE_getInstance(), YamlDecoder$Encoding$UTF32BE_getInstance()];
+  }
+  YamlDecoder$Encoding.values = YamlDecoder$Encoding$values;
+  function YamlDecoder$Encoding$valueOf(name) {
+    switch (name) {
+      case 'UTF8':
+        return YamlDecoder$Encoding$UTF8_getInstance();
+      case 'UTF16LE':
+        return YamlDecoder$Encoding$UTF16LE_getInstance();
+      case 'UTF16BE':
+        return YamlDecoder$Encoding$UTF16BE_getInstance();
+      case 'UTF32LE':
+        return YamlDecoder$Encoding$UTF32LE_getInstance();
+      case 'UTF32BE':
+        return YamlDecoder$Encoding$UTF32BE_getInstance();
+      default:throwISE('No enum constant io.dahgan.YamlDecoder.Encoding.' + name);
+    }
+  }
+  YamlDecoder$Encoding.valueOf_61zpoe$ = YamlDecoder$Encoding$valueOf;
+  function YamlDecoder$Stream() {
+    YamlDecoder$Stream$Companion_getInstance();
+  }
+  function YamlDecoder$Stream$Companion() {
+    YamlDecoder$Stream$Companion_instance = this;
+  }
+  YamlDecoder$Stream$Companion.prototype.of_fqrh44$ = function (input) {
+    return new YamlDecoder$ByteStream(input);
+  };
+  YamlDecoder$Stream$Companion.prototype.empty = function () {
+    return new YamlDecoder$ByteStream(new Int8Array([]));
+  };
+  YamlDecoder$Stream$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var YamlDecoder$Stream$Companion_instance = null;
+  function YamlDecoder$Stream$Companion_getInstance() {
+    if (YamlDecoder$Stream$Companion_instance === null) {
+      new YamlDecoder$Stream$Companion();
+    }
+    return YamlDecoder$Stream$Companion_instance;
+  }
+  YamlDecoder$Stream.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'Stream',
+    interfaces: []
+  };
+  function YamlDecoder$ByteStream(input, offset) {
+    YamlDecoder$ByteStream$Companion_getInstance();
+    if (offset === void 0)
+      offset = 0;
+    this.input_0 = input;
+    this.offset_0 = offset;
+    this.encoding_361bwv$_0 = lazy(YamlDecoder$ByteStream$encoding$lambda(this));
+    this.head_63a6ci$_0 = lazy(YamlDecoder$ByteStream$head$lambda(this));
+  }
+  function YamlDecoder$ByteStream$Companion() {
+    YamlDecoder$ByteStream$Companion_instance = this;
+    this.X00_0 = toByte(0);
+    this.XFE_0 = toByte(254);
+    this.XFF_0 = toByte(255);
+    this.XEF_0 = toByte(239);
+    this.XBB_0 = toByte(187);
+    this.XBF_0 = toByte(191);
+    this.decoders_0 = mapOf([to(YamlDecoder$Encoding$UTF8_getInstance(), new YamlDecoder$UTF8Decoder()), to(YamlDecoder$Encoding$UTF16LE_getInstance(), YamlDecoder$UTF16Decoder$Companion_getInstance().le()), to(YamlDecoder$Encoding$UTF16BE_getInstance(), YamlDecoder$UTF16Decoder$Companion_getInstance().be()), to(YamlDecoder$Encoding$UTF32LE_getInstance(), YamlDecoder$UTF32Decoder$Companion_getInstance().le()), to(YamlDecoder$Encoding$UTF32BE_getInstance(), YamlDecoder$UTF32Decoder$Companion_getInstance().be())]);
+  }
+  YamlDecoder$ByteStream$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var YamlDecoder$ByteStream$Companion_instance = null;
+  function YamlDecoder$ByteStream$Companion_getInstance() {
+    if (YamlDecoder$ByteStream$Companion_instance === null) {
+      new YamlDecoder$ByteStream$Companion();
+    }
+    return YamlDecoder$ByteStream$Companion_instance;
+  }
+  Object.defineProperty(YamlDecoder$ByteStream.prototype, 'encoding_0', {
+    get: function () {
+      return this.encoding_361bwv$_0.value;
+    }
+  });
+  Object.defineProperty(YamlDecoder$ByteStream.prototype, 'head_0', {
+    get: function () {
+      return this.head_63a6ci$_0.value;
+    }
+  });
+  YamlDecoder$ByteStream.prototype.encoding = function () {
+    return this.encoding_0;
+  };
+  YamlDecoder$ByteStream.prototype.head = function () {
+    return this.head_0;
+  };
+  YamlDecoder$ByteStream.prototype.tail = function () {
+    return new YamlDecoder$ByteStream(this.input_0, this.head_0.offset);
+  };
+  YamlDecoder$ByteStream.prototype.isEmpty = function () {
+    return this.input_0.length <= this.offset_0;
+  };
+  YamlDecoder$ByteStream.prototype.isNotEmpty = function () {
+    return !this.isEmpty();
+  };
+  YamlDecoder$ByteStream.prototype.push_l6z0d4$ = function (head) {
+    return new YamlDecoder$PushedStream(head, this);
+  };
+  YamlDecoder$ByteStream.prototype.codes = function () {
+    var destination = ArrayList_init();
+    var current = this;
+    while (current.isNotEmpty()) {
+      destination.add_11rb$(current.head_0.code);
+      current = current.tail();
+    }
+    return toIntArray(destination);
+  };
+  function YamlDecoder$ByteStream$encoding$lambda(this$ByteStream) {
+    return function () {
+      if (this$ByteStream.input_0.length >= 4 && this$ByteStream.input_0[0] === YamlDecoder$ByteStream$Companion_getInstance().X00_0 && this$ByteStream.input_0[1] === YamlDecoder$ByteStream$Companion_getInstance().X00_0 && this$ByteStream.input_0[2] === YamlDecoder$ByteStream$Companion_getInstance().XFE_0 && this$ByteStream.input_0[3] === YamlDecoder$ByteStream$Companion_getInstance().XFF_0)
+        return YamlDecoder$Encoding$UTF32BE_getInstance();
+      else if (this$ByteStream.input_0.length >= 4 && this$ByteStream.input_0[0] === YamlDecoder$ByteStream$Companion_getInstance().X00_0 && this$ByteStream.input_0[1] === YamlDecoder$ByteStream$Companion_getInstance().X00_0 && this$ByteStream.input_0[2] === YamlDecoder$ByteStream$Companion_getInstance().X00_0)
+        return YamlDecoder$Encoding$UTF32BE_getInstance();
+      else if (this$ByteStream.input_0.length >= 4 && this$ByteStream.input_0[0] === YamlDecoder$ByteStream$Companion_getInstance().XFF_0 && this$ByteStream.input_0[1] === YamlDecoder$ByteStream$Companion_getInstance().XFE_0 && this$ByteStream.input_0[2] === YamlDecoder$ByteStream$Companion_getInstance().X00_0 && this$ByteStream.input_0[3] === YamlDecoder$ByteStream$Companion_getInstance().X00_0)
+        return YamlDecoder$Encoding$UTF32LE_getInstance();
+      else if (this$ByteStream.input_0.length >= 4 && this$ByteStream.input_0[1] === YamlDecoder$ByteStream$Companion_getInstance().X00_0 && this$ByteStream.input_0[2] === YamlDecoder$ByteStream$Companion_getInstance().X00_0 && this$ByteStream.input_0[3] === YamlDecoder$ByteStream$Companion_getInstance().X00_0)
+        return YamlDecoder$Encoding$UTF32LE_getInstance();
+      else if (this$ByteStream.input_0.length >= 2 && this$ByteStream.input_0[0] === YamlDecoder$ByteStream$Companion_getInstance().XFE_0 && this$ByteStream.input_0[1] === YamlDecoder$ByteStream$Companion_getInstance().XFF_0)
+        return YamlDecoder$Encoding$UTF16BE_getInstance();
+      else if (this$ByteStream.input_0.length >= 1 && this$ByteStream.input_0[0] === YamlDecoder$ByteStream$Companion_getInstance().X00_0)
+        return YamlDecoder$Encoding$UTF16BE_getInstance();
+      else if (this$ByteStream.input_0.length >= 2 && this$ByteStream.input_0[0] === YamlDecoder$ByteStream$Companion_getInstance().XFF_0 && this$ByteStream.input_0[1] === YamlDecoder$ByteStream$Companion_getInstance().XFE_0)
+        return YamlDecoder$Encoding$UTF16LE_getInstance();
+      else if (this$ByteStream.input_0.length >= 2 && this$ByteStream.input_0[1] === YamlDecoder$ByteStream$Companion_getInstance().X00_0)
+        return YamlDecoder$Encoding$UTF16LE_getInstance();
+      else if (this$ByteStream.input_0.length >= 4 && this$ByteStream.input_0[0] === YamlDecoder$ByteStream$Companion_getInstance().XEF_0 && this$ByteStream.input_0[1] === YamlDecoder$ByteStream$Companion_getInstance().XBB_0 && this$ByteStream.input_0[2] === YamlDecoder$ByteStream$Companion_getInstance().XBF_0)
+        return YamlDecoder$Encoding$UTF8_getInstance();
+      else
+        return YamlDecoder$Encoding$UTF8_getInstance();
+    };
+  }
+  function YamlDecoder$ByteStream$head$lambda(this$ByteStream) {
+    return function () {
+      return ensureNotNull(YamlDecoder$ByteStream$Companion_getInstance().decoders_0.get_11rb$(this$ByteStream.encoding_0)).decode_ir89t6$(this$ByteStream.input_0, this$ByteStream.offset_0);
+    };
+  }
+  YamlDecoder$ByteStream.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ByteStream',
+    interfaces: [YamlDecoder$Stream]
+  };
+  function YamlDecoder$PushedStream(head, tail) {
+    this.head_0 = head;
+    this.tail_0 = tail;
+  }
+  YamlDecoder$PushedStream.prototype.encoding = function () {
+    return this.tail_0.encoding();
+  };
+  YamlDecoder$PushedStream.prototype.head = function () {
+    return this.head_0;
+  };
+  YamlDecoder$PushedStream.prototype.tail = function () {
+    return this.tail_0;
+  };
+  YamlDecoder$PushedStream.prototype.isEmpty = function () {
+    return false;
+  };
+  YamlDecoder$PushedStream.prototype.isNotEmpty = function () {
+    return true;
+  };
+  YamlDecoder$PushedStream.prototype.push_l6z0d4$ = function (head) {
+    return new YamlDecoder$PushedStream(head, this);
+  };
+  YamlDecoder$PushedStream.prototype.codes = function () {
+    return Kotlin.primitiveArrayConcat(new Int32Array([this.head_0.code]), this.tail_0.codes());
+  };
+  YamlDecoder$PushedStream.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'PushedStream',
+    interfaces: [YamlDecoder$Stream]
+  };
+  YamlDecoder.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'YamlDecoder',
+    interfaces: [YamlParser]
+  };
+  var YamlDecoder_instance = null;
+  function YamlDecoder_getInstance() {
+    if (YamlDecoder_instance === null) {
+      new YamlDecoder();
+    }
+    return YamlDecoder_instance;
+  }
+  function YamlParser() {
+    YamlParser$Companion_getInstance();
+  }
+  function YamlParser$Chomp(name, ordinal, text) {
+    Enum.call(this);
+    this.text = text;
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function YamlParser$Chomp_initFields() {
+    YamlParser$Chomp_initFields = function () {
+    };
+    YamlParser$Chomp$Strip_instance = new YamlParser$Chomp('Strip', 0, 'strip');
+    YamlParser$Chomp$Clip_instance = new YamlParser$Chomp('Clip', 1, 'clip');
+    YamlParser$Chomp$Keep_instance = new YamlParser$Chomp('Keep', 2, 'keep');
+    YamlParser$Chomp$Companion_getInstance();
+  }
+  var YamlParser$Chomp$Strip_instance;
+  function YamlParser$Chomp$Strip_getInstance() {
+    YamlParser$Chomp_initFields();
+    return YamlParser$Chomp$Strip_instance;
+  }
+  var YamlParser$Chomp$Clip_instance;
+  function YamlParser$Chomp$Clip_getInstance() {
+    YamlParser$Chomp_initFields();
+    return YamlParser$Chomp$Clip_instance;
+  }
+  var YamlParser$Chomp$Keep_instance;
+  function YamlParser$Chomp$Keep_getInstance() {
+    YamlParser$Chomp_initFields();
+    return YamlParser$Chomp$Keep_instance;
+  }
+  YamlParser$Chomp.prototype.toString = function () {
+    return this.text;
+  };
+  function YamlParser$Chomp$Companion() {
+    YamlParser$Chomp$Companion_instance = this;
+  }
+  YamlParser$Chomp$Companion.prototype.from_61zpoe$ = function (word) {
+    switch (word) {
+      case 'strip':
+        return YamlParser$Chomp$Strip_getInstance();
+      case 'clip':
+        return YamlParser$Chomp$Clip_getInstance();
+      case 'keep':
+        return YamlParser$Chomp$Keep_getInstance();
+      default:throw IllegalArgumentException_init('unknown chomp: ' + word);
+    }
+  };
+  YamlParser$Chomp$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var YamlParser$Chomp$Companion_instance = null;
+  function YamlParser$Chomp$Companion_getInstance() {
+    YamlParser$Chomp_initFields();
+    if (YamlParser$Chomp$Companion_instance === null) {
+      new YamlParser$Chomp$Companion();
+    }
+    return YamlParser$Chomp$Companion_instance;
+  }
+  YamlParser$Chomp.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Chomp',
+    interfaces: [Enum]
+  };
+  function YamlParser$Chomp$values() {
+    return [YamlParser$Chomp$Strip_getInstance(), YamlParser$Chomp$Clip_getInstance(), YamlParser$Chomp$Keep_getInstance()];
+  }
+  YamlParser$Chomp.values = YamlParser$Chomp$values;
+  function YamlParser$Chomp$valueOf(name) {
+    switch (name) {
+      case 'Strip':
+        return YamlParser$Chomp$Strip_getInstance();
+      case 'Clip':
+        return YamlParser$Chomp$Clip_getInstance();
+      case 'Keep':
+        return YamlParser$Chomp$Keep_getInstance();
+      default:throwISE('No enum constant io.dahgan.YamlParser.Chomp.' + name);
+    }
+  }
+  YamlParser$Chomp.valueOf_61zpoe$ = YamlParser$Chomp$valueOf;
+  function YamlParser$Code(name, ordinal, code) {
+    Enum.call(this);
+    this.code = code;
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function YamlParser$Code_initFields() {
+    YamlParser$Code_initFields = function () {
+    };
+    YamlParser$Code$Bom_instance = new YamlParser$Code('Bom', 0, 'U');
+    YamlParser$Code$Text_instance = new YamlParser$Code('Text', 1, 'T');
+    YamlParser$Code$Meta_instance = new YamlParser$Code('Meta', 2, 't');
+    YamlParser$Code$Break_instance = new YamlParser$Code('Break', 3, 'b');
+    YamlParser$Code$LineFeed_instance = new YamlParser$Code('LineFeed', 4, 'L');
+    YamlParser$Code$LineFold_instance = new YamlParser$Code('LineFold', 5, 'l');
+    YamlParser$Code$Indicator_instance = new YamlParser$Code('Indicator', 6, 'I');
+    YamlParser$Code$White_instance = new YamlParser$Code('White', 7, 'w');
+    YamlParser$Code$Indent_instance = new YamlParser$Code('Indent', 8, 'i');
+    YamlParser$Code$DirectivesEnd_instance = new YamlParser$Code('DirectivesEnd', 9, 'K');
+    YamlParser$Code$DocumentEnd_instance = new YamlParser$Code('DocumentEnd', 10, 'k');
+    YamlParser$Code$BeginEscape_instance = new YamlParser$Code('BeginEscape', 11, 'E');
+    YamlParser$Code$EndEscape_instance = new YamlParser$Code('EndEscape', 12, 'e');
+    YamlParser$Code$BeginComment_instance = new YamlParser$Code('BeginComment', 13, 'C');
+    YamlParser$Code$EndComment_instance = new YamlParser$Code('EndComment', 14, 'c');
+    YamlParser$Code$BeginDirective_instance = new YamlParser$Code('BeginDirective', 15, 'D');
+    YamlParser$Code$EndDirective_instance = new YamlParser$Code('EndDirective', 16, 'd');
+    YamlParser$Code$BeginTag_instance = new YamlParser$Code('BeginTag', 17, 'G');
+    YamlParser$Code$EndTag_instance = new YamlParser$Code('EndTag', 18, 'g');
+    YamlParser$Code$BeginHandle_instance = new YamlParser$Code('BeginHandle', 19, 'H');
+    YamlParser$Code$EndHandle_instance = new YamlParser$Code('EndHandle', 20, 'h');
+    YamlParser$Code$BeginAnchor_instance = new YamlParser$Code('BeginAnchor', 21, 'A');
+    YamlParser$Code$EndAnchor_instance = new YamlParser$Code('EndAnchor', 22, 'a');
+    YamlParser$Code$BeginProperties_instance = new YamlParser$Code('BeginProperties', 23, 'P');
+    YamlParser$Code$EndProperties_instance = new YamlParser$Code('EndProperties', 24, 'p');
+    YamlParser$Code$BeginAlias_instance = new YamlParser$Code('BeginAlias', 25, 'R');
+    YamlParser$Code$EndAlias_instance = new YamlParser$Code('EndAlias', 26, 'r');
+    YamlParser$Code$BeginScalar_instance = new YamlParser$Code('BeginScalar', 27, 'S');
+    YamlParser$Code$EndScalar_instance = new YamlParser$Code('EndScalar', 28, 's');
+    YamlParser$Code$BeginSequence_instance = new YamlParser$Code('BeginSequence', 29, 'Q');
+    YamlParser$Code$EndSequence_instance = new YamlParser$Code('EndSequence', 30, 'q');
+    YamlParser$Code$BeginMapping_instance = new YamlParser$Code('BeginMapping', 31, 'M');
+    YamlParser$Code$EndMapping_instance = new YamlParser$Code('EndMapping', 32, 'm');
+    YamlParser$Code$BeginPair_instance = new YamlParser$Code('BeginPair', 33, 'X');
+    YamlParser$Code$EndPair_instance = new YamlParser$Code('EndPair', 34, 'x');
+    YamlParser$Code$BeginNode_instance = new YamlParser$Code('BeginNode', 35, 'N');
+    YamlParser$Code$EndNode_instance = new YamlParser$Code('EndNode', 36, 'n');
+    YamlParser$Code$BeginDocument_instance = new YamlParser$Code('BeginDocument', 37, 'O');
+    YamlParser$Code$EndDocument_instance = new YamlParser$Code('EndDocument', 38, 'o');
+    YamlParser$Code$BeginStream_instance = new YamlParser$Code('BeginStream', 39, '');
+    YamlParser$Code$EndStream_instance = new YamlParser$Code('EndStream', 40, '');
+    YamlParser$Code$Error_instance = new YamlParser$Code('Error', 41, '!');
+    YamlParser$Code$Unparsed_instance = new YamlParser$Code('Unparsed', 42, '-');
+    YamlParser$Code$Detected_instance = new YamlParser$Code('Detected', 43, '$');
+  }
+  var YamlParser$Code$Bom_instance;
+  function YamlParser$Code$Bom_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$Bom_instance;
+  }
+  var YamlParser$Code$Text_instance;
+  function YamlParser$Code$Text_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$Text_instance;
+  }
+  var YamlParser$Code$Meta_instance;
+  function YamlParser$Code$Meta_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$Meta_instance;
+  }
+  var YamlParser$Code$Break_instance;
+  function YamlParser$Code$Break_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$Break_instance;
+  }
+  var YamlParser$Code$LineFeed_instance;
+  function YamlParser$Code$LineFeed_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$LineFeed_instance;
+  }
+  var YamlParser$Code$LineFold_instance;
+  function YamlParser$Code$LineFold_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$LineFold_instance;
+  }
+  var YamlParser$Code$Indicator_instance;
+  function YamlParser$Code$Indicator_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$Indicator_instance;
+  }
+  var YamlParser$Code$White_instance;
+  function YamlParser$Code$White_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$White_instance;
+  }
+  var YamlParser$Code$Indent_instance;
+  function YamlParser$Code$Indent_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$Indent_instance;
+  }
+  var YamlParser$Code$DirectivesEnd_instance;
+  function YamlParser$Code$DirectivesEnd_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$DirectivesEnd_instance;
+  }
+  var YamlParser$Code$DocumentEnd_instance;
+  function YamlParser$Code$DocumentEnd_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$DocumentEnd_instance;
+  }
+  var YamlParser$Code$BeginEscape_instance;
+  function YamlParser$Code$BeginEscape_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$BeginEscape_instance;
+  }
+  var YamlParser$Code$EndEscape_instance;
+  function YamlParser$Code$EndEscape_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$EndEscape_instance;
+  }
+  var YamlParser$Code$BeginComment_instance;
+  function YamlParser$Code$BeginComment_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$BeginComment_instance;
+  }
+  var YamlParser$Code$EndComment_instance;
+  function YamlParser$Code$EndComment_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$EndComment_instance;
+  }
+  var YamlParser$Code$BeginDirective_instance;
+  function YamlParser$Code$BeginDirective_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$BeginDirective_instance;
+  }
+  var YamlParser$Code$EndDirective_instance;
+  function YamlParser$Code$EndDirective_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$EndDirective_instance;
+  }
+  var YamlParser$Code$BeginTag_instance;
+  function YamlParser$Code$BeginTag_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$BeginTag_instance;
+  }
+  var YamlParser$Code$EndTag_instance;
+  function YamlParser$Code$EndTag_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$EndTag_instance;
+  }
+  var YamlParser$Code$BeginHandle_instance;
+  function YamlParser$Code$BeginHandle_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$BeginHandle_instance;
+  }
+  var YamlParser$Code$EndHandle_instance;
+  function YamlParser$Code$EndHandle_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$EndHandle_instance;
+  }
+  var YamlParser$Code$BeginAnchor_instance;
+  function YamlParser$Code$BeginAnchor_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$BeginAnchor_instance;
+  }
+  var YamlParser$Code$EndAnchor_instance;
+  function YamlParser$Code$EndAnchor_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$EndAnchor_instance;
+  }
+  var YamlParser$Code$BeginProperties_instance;
+  function YamlParser$Code$BeginProperties_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$BeginProperties_instance;
+  }
+  var YamlParser$Code$EndProperties_instance;
+  function YamlParser$Code$EndProperties_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$EndProperties_instance;
+  }
+  var YamlParser$Code$BeginAlias_instance;
+  function YamlParser$Code$BeginAlias_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$BeginAlias_instance;
+  }
+  var YamlParser$Code$EndAlias_instance;
+  function YamlParser$Code$EndAlias_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$EndAlias_instance;
+  }
+  var YamlParser$Code$BeginScalar_instance;
+  function YamlParser$Code$BeginScalar_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$BeginScalar_instance;
+  }
+  var YamlParser$Code$EndScalar_instance;
+  function YamlParser$Code$EndScalar_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$EndScalar_instance;
+  }
+  var YamlParser$Code$BeginSequence_instance;
+  function YamlParser$Code$BeginSequence_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$BeginSequence_instance;
+  }
+  var YamlParser$Code$EndSequence_instance;
+  function YamlParser$Code$EndSequence_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$EndSequence_instance;
+  }
+  var YamlParser$Code$BeginMapping_instance;
+  function YamlParser$Code$BeginMapping_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$BeginMapping_instance;
+  }
+  var YamlParser$Code$EndMapping_instance;
+  function YamlParser$Code$EndMapping_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$EndMapping_instance;
+  }
+  var YamlParser$Code$BeginPair_instance;
+  function YamlParser$Code$BeginPair_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$BeginPair_instance;
+  }
+  var YamlParser$Code$EndPair_instance;
+  function YamlParser$Code$EndPair_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$EndPair_instance;
+  }
+  var YamlParser$Code$BeginNode_instance;
+  function YamlParser$Code$BeginNode_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$BeginNode_instance;
+  }
+  var YamlParser$Code$EndNode_instance;
+  function YamlParser$Code$EndNode_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$EndNode_instance;
+  }
+  var YamlParser$Code$BeginDocument_instance;
+  function YamlParser$Code$BeginDocument_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$BeginDocument_instance;
+  }
+  var YamlParser$Code$EndDocument_instance;
+  function YamlParser$Code$EndDocument_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$EndDocument_instance;
+  }
+  var YamlParser$Code$BeginStream_instance;
+  function YamlParser$Code$BeginStream_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$BeginStream_instance;
+  }
+  var YamlParser$Code$EndStream_instance;
+  function YamlParser$Code$EndStream_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$EndStream_instance;
+  }
+  var YamlParser$Code$Error_instance;
+  function YamlParser$Code$Error_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$Error_instance;
+  }
+  var YamlParser$Code$Unparsed_instance;
+  function YamlParser$Code$Unparsed_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$Unparsed_instance;
+  }
+  var YamlParser$Code$Detected_instance;
+  function YamlParser$Code$Detected_getInstance() {
+    YamlParser$Code_initFields();
+    return YamlParser$Code$Detected_instance;
+  }
+  YamlParser$Code.prototype.toString = function () {
+    return this.code;
+  };
+  YamlParser$Code.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Code',
+    interfaces: [Enum]
+  };
+  function YamlParser$Code$values() {
+    return [YamlParser$Code$Bom_getInstance(), YamlParser$Code$Text_getInstance(), YamlParser$Code$Meta_getInstance(), YamlParser$Code$Break_getInstance(), YamlParser$Code$LineFeed_getInstance(), YamlParser$Code$LineFold_getInstance(), YamlParser$Code$Indicator_getInstance(), YamlParser$Code$White_getInstance(), YamlParser$Code$Indent_getInstance(), YamlParser$Code$DirectivesEnd_getInstance(), YamlParser$Code$DocumentEnd_getInstance(), YamlParser$Code$BeginEscape_getInstance(), YamlParser$Code$EndEscape_getInstance(), YamlParser$Code$BeginComment_getInstance(), YamlParser$Code$EndComment_getInstance(), YamlParser$Code$BeginDirective_getInstance(), YamlParser$Code$EndDirective_getInstance(), YamlParser$Code$BeginTag_getInstance(), YamlParser$Code$EndTag_getInstance(), YamlParser$Code$BeginHandle_getInstance(), YamlParser$Code$EndHandle_getInstance(), YamlParser$Code$BeginAnchor_getInstance(), YamlParser$Code$EndAnchor_getInstance(), YamlParser$Code$BeginProperties_getInstance(), YamlParser$Code$EndProperties_getInstance(), YamlParser$Code$BeginAlias_getInstance(), YamlParser$Code$EndAlias_getInstance(), YamlParser$Code$BeginScalar_getInstance(), YamlParser$Code$EndScalar_getInstance(), YamlParser$Code$BeginSequence_getInstance(), YamlParser$Code$EndSequence_getInstance(), YamlParser$Code$BeginMapping_getInstance(), YamlParser$Code$EndMapping_getInstance(), YamlParser$Code$BeginPair_getInstance(), YamlParser$Code$EndPair_getInstance(), YamlParser$Code$BeginNode_getInstance(), YamlParser$Code$EndNode_getInstance(), YamlParser$Code$BeginDocument_getInstance(), YamlParser$Code$EndDocument_getInstance(), YamlParser$Code$BeginStream_getInstance(), YamlParser$Code$EndStream_getInstance(), YamlParser$Code$Error_getInstance(), YamlParser$Code$Unparsed_getInstance(), YamlParser$Code$Detected_getInstance()];
+  }
+  YamlParser$Code.values = YamlParser$Code$values;
+  function YamlParser$Code$valueOf(name) {
+    switch (name) {
+      case 'Bom':
+        return YamlParser$Code$Bom_getInstance();
+      case 'Text':
+        return YamlParser$Code$Text_getInstance();
+      case 'Meta':
+        return YamlParser$Code$Meta_getInstance();
+      case 'Break':
+        return YamlParser$Code$Break_getInstance();
+      case 'LineFeed':
+        return YamlParser$Code$LineFeed_getInstance();
+      case 'LineFold':
+        return YamlParser$Code$LineFold_getInstance();
+      case 'Indicator':
+        return YamlParser$Code$Indicator_getInstance();
+      case 'White':
+        return YamlParser$Code$White_getInstance();
+      case 'Indent':
+        return YamlParser$Code$Indent_getInstance();
+      case 'DirectivesEnd':
+        return YamlParser$Code$DirectivesEnd_getInstance();
+      case 'DocumentEnd':
+        return YamlParser$Code$DocumentEnd_getInstance();
+      case 'BeginEscape':
+        return YamlParser$Code$BeginEscape_getInstance();
+      case 'EndEscape':
+        return YamlParser$Code$EndEscape_getInstance();
+      case 'BeginComment':
+        return YamlParser$Code$BeginComment_getInstance();
+      case 'EndComment':
+        return YamlParser$Code$EndComment_getInstance();
+      case 'BeginDirective':
+        return YamlParser$Code$BeginDirective_getInstance();
+      case 'EndDirective':
+        return YamlParser$Code$EndDirective_getInstance();
+      case 'BeginTag':
+        return YamlParser$Code$BeginTag_getInstance();
+      case 'EndTag':
+        return YamlParser$Code$EndTag_getInstance();
+      case 'BeginHandle':
+        return YamlParser$Code$BeginHandle_getInstance();
+      case 'EndHandle':
+        return YamlParser$Code$EndHandle_getInstance();
+      case 'BeginAnchor':
+        return YamlParser$Code$BeginAnchor_getInstance();
+      case 'EndAnchor':
+        return YamlParser$Code$EndAnchor_getInstance();
+      case 'BeginProperties':
+        return YamlParser$Code$BeginProperties_getInstance();
+      case 'EndProperties':
+        return YamlParser$Code$EndProperties_getInstance();
+      case 'BeginAlias':
+        return YamlParser$Code$BeginAlias_getInstance();
+      case 'EndAlias':
+        return YamlParser$Code$EndAlias_getInstance();
+      case 'BeginScalar':
+        return YamlParser$Code$BeginScalar_getInstance();
+      case 'EndScalar':
+        return YamlParser$Code$EndScalar_getInstance();
+      case 'BeginSequence':
+        return YamlParser$Code$BeginSequence_getInstance();
+      case 'EndSequence':
+        return YamlParser$Code$EndSequence_getInstance();
+      case 'BeginMapping':
+        return YamlParser$Code$BeginMapping_getInstance();
+      case 'EndMapping':
+        return YamlParser$Code$EndMapping_getInstance();
+      case 'BeginPair':
+        return YamlParser$Code$BeginPair_getInstance();
+      case 'EndPair':
+        return YamlParser$Code$EndPair_getInstance();
+      case 'BeginNode':
+        return YamlParser$Code$BeginNode_getInstance();
+      case 'EndNode':
+        return YamlParser$Code$EndNode_getInstance();
+      case 'BeginDocument':
+        return YamlParser$Code$BeginDocument_getInstance();
+      case 'EndDocument':
+        return YamlParser$Code$EndDocument_getInstance();
+      case 'BeginStream':
+        return YamlParser$Code$BeginStream_getInstance();
+      case 'EndStream':
+        return YamlParser$Code$EndStream_getInstance();
+      case 'Error':
+        return YamlParser$Code$Error_getInstance();
+      case 'Unparsed':
+        return YamlParser$Code$Unparsed_getInstance();
+      case 'Detected':
+        return YamlParser$Code$Detected_getInstance();
+      default:throwISE('No enum constant io.dahgan.YamlParser.Code.' + name);
+    }
+  }
+  YamlParser$Code.valueOf_61zpoe$ = YamlParser$Code$valueOf;
+  function YamlParser$Context(name, ordinal, text) {
+    Enum.call(this);
+    this.text = text;
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function YamlParser$Context_initFields() {
+    YamlParser$Context_initFields = function () {
+    };
+    YamlParser$Context$BlockOut_instance = new YamlParser$Context('BlockOut', 0, 'block-out');
+    YamlParser$Context$BlockIn_instance = new YamlParser$Context('BlockIn', 1, 'block-in');
+    YamlParser$Context$FlowOut_instance = new YamlParser$Context('FlowOut', 2, 'flow-out');
+    YamlParser$Context$FlowIn_instance = new YamlParser$Context('FlowIn', 3, 'flow-in');
+    YamlParser$Context$BlockKey_instance = new YamlParser$Context('BlockKey', 4, 'block-key');
+    YamlParser$Context$FlowKey_instance = new YamlParser$Context('FlowKey', 5, 'flow-key');
+    YamlParser$Context$Companion_getInstance();
+  }
+  var YamlParser$Context$BlockOut_instance;
+  function YamlParser$Context$BlockOut_getInstance() {
+    YamlParser$Context_initFields();
+    return YamlParser$Context$BlockOut_instance;
+  }
+  var YamlParser$Context$BlockIn_instance;
+  function YamlParser$Context$BlockIn_getInstance() {
+    YamlParser$Context_initFields();
+    return YamlParser$Context$BlockIn_instance;
+  }
+  var YamlParser$Context$FlowOut_instance;
+  function YamlParser$Context$FlowOut_getInstance() {
+    YamlParser$Context_initFields();
+    return YamlParser$Context$FlowOut_instance;
+  }
+  var YamlParser$Context$FlowIn_instance;
+  function YamlParser$Context$FlowIn_getInstance() {
+    YamlParser$Context_initFields();
+    return YamlParser$Context$FlowIn_instance;
+  }
+  var YamlParser$Context$BlockKey_instance;
+  function YamlParser$Context$BlockKey_getInstance() {
+    YamlParser$Context_initFields();
+    return YamlParser$Context$BlockKey_instance;
+  }
+  var YamlParser$Context$FlowKey_instance;
+  function YamlParser$Context$FlowKey_getInstance() {
+    YamlParser$Context_initFields();
+    return YamlParser$Context$FlowKey_instance;
+  }
+  YamlParser$Context.prototype.toString = function () {
+    return this.text;
+  };
+  function YamlParser$Context$Companion() {
+    YamlParser$Context$Companion_instance = this;
+  }
+  YamlParser$Context$Companion.prototype.from_61zpoe$ = function (word) {
+    switch (word) {
+      case 'block_out':
+        return YamlParser$Context$BlockOut_getInstance();
+      case 'block_in':
+        return YamlParser$Context$BlockIn_getInstance();
+      case 'flow_out':
+        return YamlParser$Context$FlowOut_getInstance();
+      case 'flow_in':
+        return YamlParser$Context$FlowIn_getInstance();
+      case 'block_key':
+        return YamlParser$Context$BlockKey_getInstance();
+      case 'flow_key':
+        return YamlParser$Context$FlowKey_getInstance();
+      default:throw IllegalArgumentException_init('unknown context: ' + word);
+    }
+  };
+  YamlParser$Context$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var YamlParser$Context$Companion_instance = null;
+  function YamlParser$Context$Companion_getInstance() {
+    YamlParser$Context_initFields();
+    if (YamlParser$Context$Companion_instance === null) {
+      new YamlParser$Context$Companion();
+    }
+    return YamlParser$Context$Companion_instance;
+  }
+  YamlParser$Context.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Context',
+    interfaces: [Enum]
+  };
+  function YamlParser$Context$values() {
+    return [YamlParser$Context$BlockOut_getInstance(), YamlParser$Context$BlockIn_getInstance(), YamlParser$Context$FlowOut_getInstance(), YamlParser$Context$FlowIn_getInstance(), YamlParser$Context$BlockKey_getInstance(), YamlParser$Context$FlowKey_getInstance()];
+  }
+  YamlParser$Context.values = YamlParser$Context$values;
+  function YamlParser$Context$valueOf(name) {
+    switch (name) {
+      case 'BlockOut':
+        return YamlParser$Context$BlockOut_getInstance();
+      case 'BlockIn':
+        return YamlParser$Context$BlockIn_getInstance();
+      case 'FlowOut':
+        return YamlParser$Context$FlowOut_getInstance();
+      case 'FlowIn':
+        return YamlParser$Context$FlowIn_getInstance();
+      case 'BlockKey':
+        return YamlParser$Context$BlockKey_getInstance();
+      case 'FlowKey':
+        return YamlParser$Context$FlowKey_getInstance();
+      default:throwISE('No enum constant io.dahgan.YamlParser.Context.' + name);
+    }
+  }
+  YamlParser$Context.valueOf_61zpoe$ = YamlParser$Context$valueOf;
+  function YamlParser$Reply(result, tokens, commit, state) {
+    this.result = result;
+    this.tokens = tokens;
+    this.commit = commit;
+    this.state = state;
+  }
+  YamlParser$Reply.prototype.toString = function () {
+    return 'Result: ' + this.result + ' , Tokens: ' + YamlParser$Companion_getInstance().showTokens_y7gcgt$(this.tokens) + ', Commit: ' + toString(this.commit) + ', State: {' + this.state + '}';
+  };
+  YamlParser$Reply.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Reply',
+    interfaces: []
+  };
+  YamlParser$Reply.prototype.component1 = function () {
+    return this.result;
+  };
+  YamlParser$Reply.prototype.component2 = function () {
+    return this.tokens;
+  };
+  YamlParser$Reply.prototype.component3 = function () {
+    return this.commit;
+  };
+  YamlParser$Reply.prototype.component4 = function () {
+    return this.state;
+  };
+  YamlParser$Reply.prototype.copy_9frbqe$ = function (result, tokens, commit, state) {
+    return new YamlParser$Reply(result === void 0 ? this.result : result, tokens === void 0 ? this.tokens : tokens, commit === void 0 ? this.commit : commit, state === void 0 ? this.state : state);
+  };
+  YamlParser$Reply.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.result) | 0;
+    result = result * 31 + Kotlin.hashCode(this.tokens) | 0;
+    result = result * 31 + Kotlin.hashCode(this.commit) | 0;
+    result = result * 31 + Kotlin.hashCode(this.state) | 0;
+    return result;
+  };
+  YamlParser$Reply.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.result, other.result) && Kotlin.equals(this.tokens, other.tokens) && Kotlin.equals(this.commit, other.commit) && Kotlin.equals(this.state, other.state)))));
+  };
+  function YamlParser$Result(parser, completed, hasMore) {
+    this.parser = parser;
+    this.completed = completed;
+    this.hasMore = hasMore;
+  }
+  function YamlParser$Result$Failed(message) {
+    YamlParser$Result.call(this, null, false, false);
+    this.message = message;
+  }
+  YamlParser$Result$Failed.prototype.toString = function () {
+    return 'Failed ' + this.message;
+  };
+  YamlParser$Result$Failed.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Failed',
+    interfaces: [YamlParser$Result]
+  };
+  function YamlParser$Result$Completed(result) {
+    YamlParser$Result.call(this, null, true, false);
+    this.result = result;
+  }
+  YamlParser$Result$Completed.prototype.toString = function () {
+    return 'Result ' + this.result;
+  };
+  YamlParser$Result$Completed.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Completed',
+    interfaces: [YamlParser$Result]
+  };
+  function YamlParser$Result$More(result) {
+    YamlParser$Result.call(this, result, true, true);
+    this.result = result;
+  }
+  YamlParser$Result$More.prototype.toString = function () {
+    return 'More';
+  };
+  YamlParser$Result$More.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'More',
+    interfaces: [YamlParser$Result]
+  };
+  YamlParser$Result.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Result',
+    interfaces: []
+  };
+  function YamlParser$State(name, input, decision, limit, forbidden, isPeek, isSol, chars, charsByteOffset, charsCharOffset, charsLine, charsLineChar, byteOffset, charOffset, line, lineChar, code, last, yields) {
+    this.name = name;
+    this.input = input;
+    this.decision = decision;
+    this.limit = limit;
+    this.forbidden = forbidden;
+    this.isPeek = isPeek;
+    this.isSol = isSol;
+    this.chars = chars;
+    this.charsByteOffset = charsByteOffset;
+    this.charsCharOffset = charsCharOffset;
+    this.charsLine = charsLine;
+    this.charsLineChar = charsLineChar;
+    this.byteOffset = byteOffset;
+    this.charOffset = charOffset;
+    this.line = line;
+    this.lineChar = lineChar;
+    this.code = code;
+    this.last = last;
+    this.yields = yields;
+  }
+  YamlParser$State.prototype.toString = function () {
+    return this.name;
+  };
+  YamlParser$State.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'State',
+    interfaces: []
+  };
+  YamlParser$State.prototype.component1 = function () {
+    return this.name;
+  };
+  YamlParser$State.prototype.component2 = function () {
+    return this.input;
+  };
+  YamlParser$State.prototype.component3 = function () {
+    return this.decision;
+  };
+  YamlParser$State.prototype.component4 = function () {
+    return this.limit;
+  };
+  YamlParser$State.prototype.component5 = function () {
+    return this.forbidden;
+  };
+  YamlParser$State.prototype.component6 = function () {
+    return this.isPeek;
+  };
+  YamlParser$State.prototype.component7 = function () {
+    return this.isSol;
+  };
+  YamlParser$State.prototype.component8 = function () {
+    return this.chars;
+  };
+  YamlParser$State.prototype.component9 = function () {
+    return this.charsByteOffset;
+  };
+  YamlParser$State.prototype.component10 = function () {
+    return this.charsCharOffset;
+  };
+  YamlParser$State.prototype.component11 = function () {
+    return this.charsLine;
+  };
+  YamlParser$State.prototype.component12 = function () {
+    return this.charsLineChar;
+  };
+  YamlParser$State.prototype.component13 = function () {
+    return this.byteOffset;
+  };
+  YamlParser$State.prototype.component14 = function () {
+    return this.charOffset;
+  };
+  YamlParser$State.prototype.component15 = function () {
+    return this.line;
+  };
+  YamlParser$State.prototype.component16 = function () {
+    return this.lineChar;
+  };
+  YamlParser$State.prototype.component17 = function () {
+    return this.code;
+  };
+  YamlParser$State.prototype.component18 = function () {
+    return this.last;
+  };
+  YamlParser$State.prototype.component19 = function () {
+    return this.yields;
+  };
+  YamlParser$State.prototype.copy_18y9ea$ = function (name, input, decision, limit, forbidden, isPeek, isSol, chars, charsByteOffset, charsCharOffset, charsLine, charsLineChar, byteOffset, charOffset, line, lineChar, code, last, yields) {
+    return new YamlParser$State(name === void 0 ? this.name : name, input === void 0 ? this.input : input, decision === void 0 ? this.decision : decision, limit === void 0 ? this.limit : limit, forbidden === void 0 ? this.forbidden : forbidden, isPeek === void 0 ? this.isPeek : isPeek, isSol === void 0 ? this.isSol : isSol, chars === void 0 ? this.chars : chars, charsByteOffset === void 0 ? this.charsByteOffset : charsByteOffset, charsCharOffset === void 0 ? this.charsCharOffset : charsCharOffset, charsLine === void 0 ? this.charsLine : charsLine, charsLineChar === void 0 ? this.charsLineChar : charsLineChar, byteOffset === void 0 ? this.byteOffset : byteOffset, charOffset === void 0 ? this.charOffset : charOffset, line === void 0 ? this.line : line, lineChar === void 0 ? this.lineChar : lineChar, code === void 0 ? this.code : code, last === void 0 ? this.last : last, yields === void 0 ? this.yields : yields);
+  };
+  YamlParser$State.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.name) | 0;
+    result = result * 31 + Kotlin.hashCode(this.input) | 0;
+    result = result * 31 + Kotlin.hashCode(this.decision) | 0;
+    result = result * 31 + Kotlin.hashCode(this.limit) | 0;
+    result = result * 31 + Kotlin.hashCode(this.forbidden) | 0;
+    result = result * 31 + Kotlin.hashCode(this.isPeek) | 0;
+    result = result * 31 + Kotlin.hashCode(this.isSol) | 0;
+    result = result * 31 + Kotlin.hashCode(this.chars) | 0;
+    result = result * 31 + Kotlin.hashCode(this.charsByteOffset) | 0;
+    result = result * 31 + Kotlin.hashCode(this.charsCharOffset) | 0;
+    result = result * 31 + Kotlin.hashCode(this.charsLine) | 0;
+    result = result * 31 + Kotlin.hashCode(this.charsLineChar) | 0;
+    result = result * 31 + Kotlin.hashCode(this.byteOffset) | 0;
+    result = result * 31 + Kotlin.hashCode(this.charOffset) | 0;
+    result = result * 31 + Kotlin.hashCode(this.line) | 0;
+    result = result * 31 + Kotlin.hashCode(this.lineChar) | 0;
+    result = result * 31 + Kotlin.hashCode(this.code) | 0;
+    result = result * 31 + Kotlin.hashCode(this.last) | 0;
+    result = result * 31 + Kotlin.hashCode(this.yields) | 0;
+    return result;
+  };
+  YamlParser$State.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.input, other.input) && Kotlin.equals(this.decision, other.decision) && Kotlin.equals(this.limit, other.limit) && Kotlin.equals(this.forbidden, other.forbidden) && Kotlin.equals(this.isPeek, other.isPeek) && Kotlin.equals(this.isSol, other.isSol) && Kotlin.equals(this.chars, other.chars) && Kotlin.equals(this.charsByteOffset, other.charsByteOffset) && Kotlin.equals(this.charsCharOffset, other.charsCharOffset) && Kotlin.equals(this.charsLine, other.charsLine) && Kotlin.equals(this.charsLineChar, other.charsLineChar) && Kotlin.equals(this.byteOffset, other.byteOffset) && Kotlin.equals(this.charOffset, other.charOffset) && Kotlin.equals(this.line, other.line) && Kotlin.equals(this.lineChar, other.lineChar) && Kotlin.equals(this.code, other.code) && Kotlin.equals(this.last, other.last) && Kotlin.equals(this.yields, other.yields)))));
+  };
+  YamlParser.prototype.or_yb4yy3$ = function ($receiver, other) {
+    return this.decide_caskni$($receiver, other);
+  };
+  YamlParser.prototype.or_9e8rdb$ = function ($receiver, other) {
+    return this.decide_caskni$($receiver, this.of_s8itvh$(other));
+  };
+  YamlParser.prototype.or_thfhbo$ = function ($receiver, other) {
+    return this.decide_caskni$($receiver, this.of_za3lpa$(other));
+  };
+  YamlParser.prototype.or_h1fl79$ = function ($receiver, other) {
+    return this.decide_caskni$($receiver, this.of_n8acyv$(other));
+  };
+  function YamlParser$and$lambda(this$and, closure$other, this$YamlParser) {
+    return function (state) {
+      return this$YamlParser.and_bindParser_lrper$_0(this$and, closure$other)(state);
+    };
+  }
+  YamlParser.prototype.and_yb4yy3$ = function ($receiver, other) {
+    return YamlParser$and$lambda($receiver, other, this);
+  };
+  function YamlParser$and_bindParser$lambda(closure$left, closure$right, this$YamlParser) {
+    return function (state) {
+      var tmp$;
+      var reply = closure$left(state);
+      tmp$ = reply.result;
+      if (Kotlin.isType(tmp$, YamlParser$Result$Failed))
+        return reply.copy_9frbqe$(new YamlParser$Result$Failed(reply.result.message));
+      else if (Kotlin.isType(tmp$, YamlParser$Result$Completed))
+        return reply.copy_9frbqe$(new YamlParser$Result$More(closure$right));
+      else if (Kotlin.isType(tmp$, YamlParser$Result$More))
+        return reply.copy_9frbqe$(new YamlParser$Result$More(this$YamlParser.and_bindParser_lrper$_0(reply.result.result, closure$right)));
+      else
+        return Kotlin.noWhenBranchMatched();
+    };
+  }
+  YamlParser.prototype.and_bindParser_lrper$_0 = function (left, right) {
+    return YamlParser$and_bindParser$lambda(left, right, this);
+  };
+  YamlParser.prototype.and_9e8rdb$ = function ($receiver, other) {
+    return this.and_yb4yy3$($receiver, this.of_s8itvh$(other));
+  };
+  function YamlParser$snd$lambda$clone(closure$name) {
+    return function (current, result) {
+      var map = HashMap_init_0(current);
+      var key = closure$name;
+      map.put_xwzc9p$(key, result);
+      return map;
+    };
+  }
+  function YamlParser$snd$lambda$bindParser$lambda(closure$left, closure$right, closure$clone, closure$bindParser) {
+    return function (state) {
+      var tmp$;
+      var reply = closure$left(state);
+      tmp$ = reply.result;
+      if (Kotlin.isType(tmp$, YamlParser$Result$Failed))
+        return reply.copy_9frbqe$(new YamlParser$Result$Failed(reply.result.message));
+      else if (Kotlin.isType(tmp$, YamlParser$Result$Completed))
+        return reply.copy_9frbqe$(new YamlParser$Result$More(closure$right), void 0, void 0, reply.state.copy_18y9ea$(void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, closure$clone(state.yields, reply.result.result)));
+      else if (Kotlin.isType(tmp$, YamlParser$Result$More))
+        return reply.copy_9frbqe$(new YamlParser$Result$More(closure$bindParser(reply.result.result, closure$right)));
+      else
+        return Kotlin.noWhenBranchMatched();
+    };
+  }
+  function YamlParser$snd$lambda$bindParser(closure$clone) {
+    return function closure$bindParser(left, right) {
+      return YamlParser$snd$lambda$bindParser$lambda(left, right, closure$clone, closure$bindParser);
+    };
+  }
+  function YamlParser$snd$lambda(closure$name, this$snd, closure$other) {
+    return function (state) {
+      var clone = YamlParser$snd$lambda$clone(closure$name);
+      var bindParser = YamlParser$snd$lambda$bindParser(clone);
+      return bindParser(this$snd, closure$other)(state);
+    };
+  }
+  YamlParser.prototype.snd_lg169v$ = function ($receiver, name, other) {
+    return YamlParser$snd$lambda(name, $receiver, other);
+  };
+  YamlParser.prototype.not_yb4yy3$ = function ($receiver, rejected) {
+    return this.and_yb4yy3$(this.reject_k2c4mo$(rejected, null), $receiver);
+  };
+  YamlParser.prototype.not_9e8rdb$ = function ($receiver, rejected) {
+    return this.and_yb4yy3$(this.reject_k2c4mo$(this.of_s8itvh$(rejected), null), $receiver);
+  };
+  YamlParser.prototype.cmt_ixf2s$ = function ($receiver, decision) {
+    return this.and_yb4yy3$($receiver, this.commit_61zpoe$(decision));
+  };
+  YamlParser.prototype.omt_ixf2s$ = function ($receiver, decision) {
+    return this.and_yb4yy3$(this.peek_5msym5$($receiver), this.commit_61zpoe$(decision));
+  };
+  YamlParser.prototype.tms_thfhbo$ = function ($receiver, n) {
+    return n <= 0 ? this.empty() : this.and_yb4yy3$($receiver, this.tms_thfhbo$($receiver, n - 1 | 0));
+  };
+  YamlParser.prototype.lms_thfhbo$ = function ($receiver, n) {
+    if (n < 1)
+      return this.fail_za3rmp$('Fewer than 0 repetitions');
+    else if (n === 1)
+      return this.reject_k2c4mo$($receiver, null);
+    else
+      return this.cho_l8gk4$('<x', this.or_yb4yy3$(this.and_yb4yy3$(this.cmt_ixf2s$($receiver, '<x'), this.lms_thfhbo$($receiver, n - 1 | 0)), this.empty()));
+  };
+  function YamlParser$recovery$lambda$lambda(this$YamlParser) {
+    return function (state) {
+      return this$YamlParser.finishToken()(state.copy_18y9ea$(void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, YamlParser$Code$Unparsed_getInstance()));
+    };
+  }
+  function YamlParser$recovery$lambda(this$YamlParser, this$recovery, closure$recover) {
+    return function (state) {
+      var tmp$;
+      var unparsed = YamlParser$recovery$lambda$lambda(this$YamlParser);
+      var reply = this$recovery(state);
+      if (state.isPeek)
+        return reply;
+      else {
+        tmp$ = reply.result;
+        if (Kotlin.isType(tmp$, YamlParser$Result$Completed))
+          return reply;
+        else if (Kotlin.isType(tmp$, YamlParser$Result$More))
+          return reply.copy_9frbqe$(new YamlParser$Result$More(this$YamlParser.recovery_yb4yy3$(reply.result.result, closure$recover)));
+        else if (Kotlin.isType(tmp$, YamlParser$Result$Failed))
+          return reply.copy_9frbqe$(new YamlParser$Result$More(this$YamlParser.and_yb4yy3$(this$YamlParser.and_yb4yy3$(this$YamlParser.fake_p82x9p$(YamlParser$Code$Error_getInstance(), reply.result.message), unparsed), closure$recover)));
+        else
+          return Kotlin.noWhenBranchMatched();
+      }
+    };
+  }
+  YamlParser.prototype.recovery_yb4yy3$ = function ($receiver, recover) {
+    return YamlParser$recovery$lambda(this, $receiver, recover);
+  };
+  function YamlParser$of$lambda(closure$char) {
+    return function (it) {
+      return it === (closure$char | 0);
+    };
+  }
+  YamlParser.prototype.of_s8itvh$ = function (char) {
+    return this.nextIf_8xwv17$(YamlParser$of$lambda(char));
+  };
+  function YamlParser$of$lambda_0(closure$code) {
+    return function (it) {
+      return it === closure$code;
+    };
+  }
+  YamlParser.prototype.of_za3lpa$ = function (code) {
+    return this.nextIf_8xwv17$(YamlParser$of$lambda_0(code));
+  };
+  function YamlParser$of$lambda_1(closure$range) {
+    return function (it) {
+      return closure$range.start <= it && it <= closure$range.endInclusive;
+    };
+  }
+  YamlParser.prototype.of_n8acyv$ = function (range) {
+    return this.nextIf_8xwv17$(YamlParser$of$lambda_1(range));
+  };
+  YamlParser.prototype.or_9omhn3$ = function ($receiver, other) {
+    return this.or_yb4yy3$(this.of_n8acyv$($receiver), this.of_n8acyv$(other));
+  };
+  YamlParser.prototype.or_ui3wc7$ = function ($receiver, other) {
+    return this.or_yb4yy3$(this.of_s8itvh$($receiver), this.of_s8itvh$(other));
+  };
+  YamlParser.prototype.or_a5dju6$ = function ($receiver, other) {
+    return this.or_yb4yy3$(this.of_s8itvh$($receiver), this.of_za3lpa$(other));
+  };
+  YamlParser.prototype.and_ui3wc7$ = function ($receiver, other) {
+    return this.and_yb4yy3$(this.of_s8itvh$($receiver), this.of_s8itvh$(other));
+  };
+  YamlParser.prototype.and_j3igz5$ = function ($receiver, other) {
+    return this.and_yb4yy3$(this.of_s8itvh$($receiver), other);
+  };
+  YamlParser.prototype.returnReply_qu6q1x$ = function (state, result) {
+    return new YamlParser$Reply(new YamlParser$Result$Completed(result), emptyList(), null, state);
+  };
+  YamlParser.prototype.failReply_qu6q1x$ = function (state, message) {
+    return new YamlParser$Reply(new YamlParser$Result$Failed(message), emptyList(), null, state);
+  };
+  YamlParser.prototype.unexpectedReply_b15o62$ = function (state) {
+    return state.input.isEmpty() ? this.failReply_qu6q1x$(state, 'Unexpected end of input') : this.failReply_qu6q1x$(state, "Unexpected '" + YamlParser$Companion_getInstance().escape_za3lpa$(state.input.head().code) + "'");
+  };
+  function YamlParser$fail$lambda(closure$message, this$YamlParser) {
+    return function (state) {
+      return this$YamlParser.failReply_qu6q1x$(state, closure$message);
+    };
+  }
+  YamlParser.prototype.fail_za3rmp$ = function (message) {
+    return YamlParser$fail$lambda(message, this);
+  };
+  function YamlParser$nonEmpty$lambda$nonEmptyParser$lambda(closure$parser, closure$offset, this$YamlParser, closure$nonEmptyParser) {
+    return function (state) {
+      var tmp$;
+      var reply = closure$parser(state);
+      var newSate = reply.state;
+      tmp$ = reply.result;
+      if (Kotlin.isType(tmp$, YamlParser$Result$Failed))
+        return reply;
+      else if (Kotlin.isType(tmp$, YamlParser$Result$Completed))
+        return newSate.charOffset > closure$offset ? reply : this$YamlParser.failReply_qu6q1x$(newSate, 'Matched empty pattern');
+      else if (Kotlin.isType(tmp$, YamlParser$Result$More))
+        return reply.copy_9frbqe$(new YamlParser$Result$More(closure$nonEmptyParser(closure$offset, reply.result.result)));
+      else
+        return Kotlin.noWhenBranchMatched();
+    };
+  }
+  function YamlParser$nonEmpty$lambda$nonEmptyParser(this$YamlParser) {
+    return function closure$nonEmptyParser(offset, parser) {
+      return YamlParser$nonEmpty$lambda$nonEmptyParser$lambda(parser, offset, this$YamlParser, closure$nonEmptyParser);
+    };
+  }
+  function YamlParser$nonEmpty$lambda(this$YamlParser, closure$parser) {
+    return function (state) {
+      var nonEmptyParser = YamlParser$nonEmpty$lambda$nonEmptyParser(this$YamlParser);
+      return nonEmptyParser(state.charOffset, closure$parser)(state);
+    };
+  }
+  YamlParser.prototype.nonEmpty_5msym5$ = function (parser) {
+    return YamlParser$nonEmpty$lambda(this, parser);
+  };
+  function YamlParser$empty$lambda(this$YamlParser) {
+    return function (state) {
+      return this$YamlParser.returnReply_qu6q1x$(state, '');
+    };
+  }
+  YamlParser.prototype.empty = function () {
+    return YamlParser$empty$lambda(this);
+  };
+  function YamlParser$eof$lambda(this$YamlParser) {
+    return function (state) {
+      return state.input.isEmpty() ? this$YamlParser.returnReply_qu6q1x$(state, '') : this$YamlParser.unexpectedReply_b15o62$(state);
+    };
+  }
+  YamlParser.prototype.eof = function () {
+    return YamlParser$eof$lambda(this);
+  };
+  function YamlParser$sol$lambda(this$YamlParser) {
+    return function (state) {
+      return state.isSol ? this$YamlParser.returnReply_qu6q1x$(state, '') : this$YamlParser.failReply_qu6q1x$(state, 'Expected start of line');
+    };
+  }
+  YamlParser.prototype.sol = function () {
+    return YamlParser$sol$lambda(this);
+  };
+  YamlParser.prototype.tokenReply_bpy8yc$ = function (state, token) {
+    return new YamlParser$Reply(new YamlParser$Result$Completed(''), listOf_0(token), null, state.copy_18y9ea$(void 0, void 0, void 0, void 0, void 0, void 0, void 0, new Int32Array([]), -1, -1, -1, -1));
+  };
+  function YamlParser$finishToken$lambda(this$YamlParser) {
+    return function (state) {
+      var newState = state.copy_18y9ea$(void 0, void 0, void 0, void 0, void 0, void 0, void 0, new Int32Array(0), -1, -1, -1, -1);
+      if (state.isPeek)
+        return this$YamlParser.returnReply_qu6q1x$(newState, '');
+      else {
+        if (state.chars.length === 0)
+          return this$YamlParser.returnReply_qu6q1x$(newState, '');
+        else
+          return this$YamlParser.tokenReply_bpy8yc$(newState, new YamlParser$Token(state.charsByteOffset, state.charsCharOffset, state.charsLine, state.charsLineChar, state.code, YamlParser$Escapable$Companion_getInstance().of_q5rwfd$(toIntArray(reversed(state.chars)))));
+      }
+    };
+  }
+  YamlParser.prototype.finishToken = function () {
+    return YamlParser$finishToken$lambda(this);
+  };
+  function YamlParser$token$lambda(state, code) {
+    return state.copy_18y9ea$(void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, ensureNotNull(code));
+  }
+  YamlParser.prototype.token_qhjjef$ = function (code, parser) {
+    return this.and_yb4yy3$(this.finishToken(), this.with_7p1sv1$(YamlParser$token$lambda, getPropertyCallableRef('code', 1, function ($receiver) {
+      return $receiver.code;
+    }), code, this.and_yb4yy3$(parser, this.finishToken())));
+  };
+  function YamlParser$fake$lambda(this$YamlParser, closure$code, closure$text) {
+    return function (state) {
+      if (state.isPeek) {
+        return this$YamlParser.returnReply_qu6q1x$(state, '');
+      }
+       else {
+        return this$YamlParser.tokenReply_bpy8yc$(state, new YamlParser$Token(state.charsByteOffset === -1 ? state.byteOffset : state.charsByteOffset, state.charsCharOffset === -1 ? state.charOffset : state.charsCharOffset, state.charsLine === -1 ? state.line : state.charsLine, state.charsLineChar === -1 ? state.lineChar : state.charsLineChar, closure$code, YamlParser$Escapable$Companion_getInstance().of_61zpoe$(closure$text.toString())));
+      }
+    };
+  }
+  YamlParser.prototype.fake_p82x9p$ = function (code, text) {
+    return YamlParser$fake$lambda(this, code, text);
+  };
+  YamlParser.prototype.meta_5msym5$ = function (parser) {
+    return this.token_qhjjef$(YamlParser$Code$Meta_getInstance(), parser);
+  };
+  YamlParser.prototype.meta_s8itvh$ = function (char) {
+    return this.token_qhjjef$(YamlParser$Code$Meta_getInstance(), this.of_s8itvh$(char));
+  };
+  YamlParser.prototype.meta_za3lpa$ = function (code) {
+    return this.token_qhjjef$(YamlParser$Code$Meta_getInstance(), this.of_za3lpa$(code));
+  };
+  YamlParser.prototype.indicator_5msym5$ = function (parser) {
+    return this.token_qhjjef$(YamlParser$Code$Indicator_getInstance(), parser);
+  };
+  YamlParser.prototype.indicator_s8itvh$ = function (char) {
+    return this.token_qhjjef$(YamlParser$Code$Indicator_getInstance(), this.of_s8itvh$(char));
+  };
+  YamlParser.prototype.text_5msym5$ = function (parser) {
+    return this.token_qhjjef$(YamlParser$Code$Text_getInstance(), parser);
+  };
+  function YamlParser$emptyToken$lambda(this$YamlParser, closure$code) {
+    return function (state) {
+      return state.isPeek ? this$YamlParser.returnReply_qu6q1x$(state, '') : this$YamlParser.tokenReply_bpy8yc$(state, new YamlParser$Token(state.byteOffset, state.charOffset, state.line, state.lineChar, closure$code, YamlParser$Escapable$Companion_getInstance().of_61zpoe$('')));
+    };
+  }
+  YamlParser.prototype.emptyToken_kzhhfs$ = function (code) {
+    return this.and_yb4yy3$(this.finishToken(), YamlParser$emptyToken$lambda(this, code));
+  };
+  YamlParser.prototype.wrapTokens_u68c0l$ = function (beginCode, endCode, parser) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.emptyToken_kzhhfs$(beginCode), this.prefixErrorWith_caskni$(parser, this.emptyToken_kzhhfs$(endCode))), this.emptyToken_kzhhfs$(endCode));
+  };
+  function YamlParser$prefixErrorWith$lambda(closure$parser, closure$prefix, this$YamlParser) {
+    return function (state) {
+      var tmp$;
+      var reply = closure$parser(state);
+      tmp$ = reply.result;
+      if (Kotlin.isType(tmp$, YamlParser$Result$Completed))
+        return reply;
+      else if (Kotlin.isType(tmp$, YamlParser$Result$More))
+        return reply.copy_9frbqe$(new YamlParser$Result$More(this$YamlParser.prefixErrorWith_caskni$(reply.result.result, closure$prefix)));
+      else if (Kotlin.isType(tmp$, YamlParser$Result$Failed))
+        return reply.copy_9frbqe$(new YamlParser$Result$More(this$YamlParser.and_yb4yy3$(closure$prefix, this$YamlParser.fail_za3rmp$(reply.result.message))));
+      else
+        return Kotlin.noWhenBranchMatched();
+    };
+  }
+  YamlParser.prototype.prefixErrorWith_caskni$ = function (parser, prefix) {
+    return YamlParser$prefixErrorWith$lambda(parser, prefix, this);
+  };
+  YamlParser.prototype.opt_5msym5$ = function (parser) {
+    return this.or_yb4yy3$(this.and_yb4yy3$(parser, this.empty()), this.empty());
+  };
+  function YamlParser$zom$zomParser$lambda(closure$zomParser) {
+    return function (state) {
+      return closure$zomParser()(state);
+    };
+  }
+  function YamlParser$zom$zomParser(closure$parser, this$YamlParser) {
+    return function closure$zomParser() {
+      return this$YamlParser.or_yb4yy3$(this$YamlParser.and_yb4yy3$(this$YamlParser.cmt_ixf2s$(closure$parser, '*'), YamlParser$zom$zomParser$lambda(closure$zomParser)), this$YamlParser.empty());
+    };
+  }
+  YamlParser.prototype.zom_5msym5$ = function (parser) {
+    var zomParser = YamlParser$zom$zomParser(parser, this);
+    return this.cho_l8gk4$('*', zomParser());
+  };
+  YamlParser.prototype.oom_5msym5$ = function (parser) {
+    return this.and_yb4yy3$(parser, this.zom_5msym5$(parser));
+  };
+  function YamlParser$decide$lambda$decideParser$lambda(closure$left, closure$tokens, closure$right, closure$point, closure$decideParser) {
+    return function (state) {
+      var tmp$;
+      var reply = closure$left(state);
+      var newTokens = plus(closure$tokens, reply.tokens);
+      tmp$ = reply.result;
+      if (Kotlin.isType(tmp$, YamlParser$Result$Failed))
+        return new YamlParser$Reply(new YamlParser$Result$More(closure$right), emptyList(), null, closure$point);
+      else if (Kotlin.isType(tmp$, YamlParser$Result$Completed))
+        return reply.copy_9frbqe$(void 0, newTokens);
+      else if (Kotlin.isType(tmp$, YamlParser$Result$More))
+        if (reply.commit != null) {
+          return reply.copy_9frbqe$(new YamlParser$Result$More(reply.result.result), newTokens);
+        }
+         else
+          return closure$decideParser(closure$point, newTokens, reply.result.result, closure$right)(reply.state);
+      else
+        return Kotlin.noWhenBranchMatched();
+    };
+  }
+  function YamlParser$decide$lambda$decideParser(point, tokens, left, right) {
+    return YamlParser$decide$lambda$decideParser$lambda(left, tokens, right, point, YamlParser$decide$lambda$decideParser);
+  }
+  function YamlParser$decide$lambda(closure$left, closure$right) {
+    return function (state) {
+      var decideParser = YamlParser$decide$lambda$decideParser;
+      return decideParser(state, emptyList(), closure$left, closure$right)(state);
+    };
+  }
+  YamlParser.prototype.decide_caskni$ = function (left, right) {
+    return YamlParser$decide$lambda(left, right);
+  };
+  function YamlParser$choice$lambda$choiceParser$lambda(closure$parser, closure$makingDecision, closure$parentDecision, closure$choiceParser) {
+    return function (state) {
+      var tmp$, tmp$_0;
+      var reply = closure$parser(state);
+      tmp$ = reply.commit;
+      if (tmp$ == null)
+        tmp$_0 = null;
+      else if (equals(tmp$, closure$makingDecision))
+        tmp$_0 = null;
+      else
+        tmp$_0 = reply.commit;
+      var commit = tmp$_0;
+      if (Kotlin.isType(reply.result, YamlParser$Result$More)) {
+        return reply.copy_9frbqe$(new YamlParser$Result$More(closure$choiceParser(closure$parentDecision, closure$makingDecision, reply.result.result)), void 0, commit);
+      }
+       else
+        return reply.copy_9frbqe$(void 0, void 0, commit, reply.state.copy_18y9ea$(void 0, void 0, closure$parentDecision));
+    };
+  }
+  function YamlParser$choice$lambda$choiceParser(parentDecision, makingDecision, parser) {
+    return YamlParser$choice$lambda$choiceParser$lambda(parser, makingDecision, parentDecision, YamlParser$choice$lambda$choiceParser);
+  }
+  function YamlParser$choice$lambda(closure$decision, closure$parser) {
+    return function (state) {
+      var choiceParser = YamlParser$choice$lambda$choiceParser;
+      return choiceParser(state.decision, closure$decision, closure$parser)(state.copy_18y9ea$(void 0, void 0, closure$decision));
+    };
+  }
+  YamlParser.prototype.choice_mlkuup$ = function (decision, parser) {
+    return YamlParser$choice$lambda(decision, parser);
+  };
+  function YamlParser$prev$lambda$prevParser(this$YamlParser) {
+    return function closure$prevParser(point, parser, state) {
+      var tmp$, tmp$_0;
+      var reply = parser(state);
+      tmp$ = reply.result;
+      if (Kotlin.isType(tmp$, YamlParser$Result$Failed))
+        tmp$_0 = this$YamlParser.failReply_qu6q1x$(point, reply.result.message);
+      else if (Kotlin.isType(tmp$, YamlParser$Result$Completed))
+        tmp$_0 = this$YamlParser.returnReply_qu6q1x$(point, reply.result.result);
+      else if (Kotlin.isType(tmp$, YamlParser$Result$More))
+        tmp$_0 = closure$prevParser(point, reply.result.result, reply.state);
+      else
+        tmp$_0 = Kotlin.noWhenBranchMatched();
+      return tmp$_0;
+    };
+  }
+  function YamlParser$prev$lambda(this$YamlParser, closure$parser) {
+    return function (state) {
+      var tmp$;
+      var prevParser = YamlParser$prev$lambda$prevParser(this$YamlParser);
+      tmp$ = state.copy_18y9ea$(void 0, state.input.push_l6z0d4$(new YamlDecoder$UniChar(-1, state.last)), void 0, void 0, void 0, true);
+      return prevParser(state, closure$parser, tmp$);
+    };
+  }
+  YamlParser.prototype.prev_5msym5$ = function (parser) {
+    return YamlParser$prev$lambda(this, parser);
+  };
+  function YamlParser$peek$lambda$peekParser(this$YamlParser) {
+    return function closure$peekParser(point, parser, state) {
+      var tmp$, tmp$_0;
+      var reply = parser(state);
+      tmp$ = reply.result;
+      if (Kotlin.isType(tmp$, YamlParser$Result$Failed))
+        tmp$_0 = this$YamlParser.failReply_qu6q1x$(point, reply.result.message);
+      else if (Kotlin.isType(tmp$, YamlParser$Result$Completed))
+        tmp$_0 = this$YamlParser.returnReply_qu6q1x$(point, reply.result.result);
+      else if (Kotlin.isType(tmp$, YamlParser$Result$More))
+        tmp$_0 = closure$peekParser(point, reply.result.result, reply.state);
+      else
+        tmp$_0 = Kotlin.noWhenBranchMatched();
+      return tmp$_0;
+    };
+  }
+  function YamlParser$peek$lambda(this$YamlParser, closure$parser) {
+    return function (state) {
+      var peekParser = YamlParser$peek$lambda$peekParser(this$YamlParser);
+      return peekParser(state, closure$parser, state.copy_18y9ea$(void 0, void 0, void 0, void 0, void 0, true));
+    };
+  }
+  YamlParser.prototype.peek_5msym5$ = function (parser) {
+    return YamlParser$peek$lambda(this, parser);
+  };
+  function YamlParser$reject$rejectParser(this$YamlParser) {
+    return function closure$rejectParser(point, name, parser, state) {
+      var tmp$, tmp$_0;
+      var reply = parser(state);
+      tmp$ = reply.result;
+      if (Kotlin.isType(tmp$, YamlParser$Result$Failed))
+        tmp$_0 = this$YamlParser.returnReply_qu6q1x$(point, '');
+      else if (Kotlin.isType(tmp$, YamlParser$Result$Completed))
+        tmp$_0 = name == null ? this$YamlParser.unexpectedReply_b15o62$(point) : this$YamlParser.failReply_qu6q1x$(point, 'Unexpected ' + toString(name));
+      else if (Kotlin.isType(tmp$, YamlParser$Result$More))
+        tmp$_0 = closure$rejectParser(point, name, reply.result.result, reply.state);
+      else
+        tmp$_0 = Kotlin.noWhenBranchMatched();
+      return tmp$_0;
+    };
+  }
+  function YamlParser$reject$lambda(closure$name, closure$parser, closure$rejectParser) {
+    return function (state) {
+      return closure$rejectParser(state, closure$name, closure$parser, state.copy_18y9ea$(void 0, void 0, void 0, void 0, void 0, true));
+    };
+  }
+  YamlParser.prototype.reject_k2c4mo$ = function (parser, name) {
+    var rejectParser = YamlParser$reject$rejectParser(this);
+    return YamlParser$reject$lambda(name, parser, rejectParser);
+  };
+  function YamlParser$upto$lambda(it) {
+    return true;
+  }
+  YamlParser.prototype.upto_5msym5$ = function (parser) {
+    return this.zom_5msym5$(this.and_yb4yy3$(this.nla_5msym5$(parser), this.nextIf_8xwv17$(YamlParser$upto$lambda)));
+  };
+  function YamlParser$commit$lambda(closure$decision) {
+    return function (state) {
+      return new YamlParser$Reply(new YamlParser$Result$Completed(''), emptyList(), closure$decision, state);
+    };
+  }
+  YamlParser.prototype.commit_61zpoe$ = function (decision) {
+    return YamlParser$commit$lambda(decision);
+  };
+  function YamlParser$nextLine$lambda(this$YamlParser) {
+    return function (state) {
+      return this$YamlParser.returnReply_qu6q1x$(state.copy_18y9ea$(void 0, void 0, void 0, void 0, void 0, void 0, true, void 0, void 0, void 0, void 0, void 0, void 0, void 0, state.line + 1 | 0, 0), '');
+    };
+  }
+  YamlParser.prototype.nextLine = function () {
+    return YamlParser$nextLine$lambda(this);
+  };
+  function YamlParser$with$lambda$withParser$lambda(closure$parser, closure$parentValue, closure$withParser, closure$set) {
+    return function (state) {
+      var reply = closure$parser(state);
+      if (Kotlin.isType(reply.result, YamlParser$Result$More))
+        return reply.copy_9frbqe$(new YamlParser$Result$More(closure$withParser(closure$parentValue, reply.result.result)));
+      else
+        return reply.copy_9frbqe$(void 0, void 0, void 0, closure$set(reply.state, closure$parentValue));
+    };
+  }
+  function YamlParser$with$lambda$withParser(closure$set) {
+    return function closure$withParser(parentValue, parser) {
+      return YamlParser$with$lambda$withParser$lambda(parser, parentValue, closure$withParser, closure$set);
+    };
+  }
+  function YamlParser$with$lambda(closure$set, closure$get, closure$parser, closure$value) {
+    return function (state) {
+      var withParser = YamlParser$with$lambda$withParser(closure$set);
+      return withParser(closure$get(state), closure$parser)(closure$set(state, closure$value));
+    };
+  }
+  YamlParser.prototype.with_7p1sv1$ = function (set, get, value, parser) {
+    return YamlParser$with$lambda(set, get, parser, value);
+  };
+  function YamlParser$forbidding$lambda(state, forbidden) {
+    return state.copy_18y9ea$(void 0, void 0, void 0, void 0, forbidden);
+  }
+  YamlParser.prototype.forbidding_caskni$ = function (parser, forbidden) {
+    return this.with_7p1sv1$(YamlParser$forbidding$lambda, getPropertyCallableRef('forbidden', 1, function ($receiver) {
+      return $receiver.forbidden;
+    }), this.and_yb4yy3$(forbidden, this.empty()), parser);
+  };
+  function YamlParser$limitedTo$lambda(state, limit) {
+    return state.copy_18y9ea$(void 0, void 0, void 0, ensureNotNull(limit));
+  }
+  YamlParser.prototype.limitedTo_nf7wzz$ = function (parser, limit) {
+    return this.with_7p1sv1$(YamlParser$limitedTo$lambda, getPropertyCallableRef('limit', 1, function ($receiver) {
+      return $receiver.limit;
+    }), limit, parser);
+  };
+  var primitiveArrayConcat = Kotlin.primitiveArrayConcat;
+  function YamlParser$nextIf$consumeNextIf(closure$test, this$YamlParser) {
+    return function (state) {
+      var tmp$;
+      if (!state.input.isEmpty() && closure$test(state.input.head().code)) {
+        var char = state.input.head().code;
+        var chars = state.isPeek ? new Int32Array(0) : primitiveArrayConcat(new Int32Array([char]), state.chars);
+        var byteOffset = state.isPeek ? -1 : state.chars.length === 0 ? state.byteOffset : state.charsByteOffset;
+        var charOffset = state.isPeek ? -1 : state.chars.length === 0 ? state.charOffset : state.charsCharOffset;
+        var line = state.isPeek ? -1 : state.chars.length === 0 ? state.line : state.charsLine;
+        var lineChar = state.isPeek ? -1 : state.chars.length === 0 ? state.lineChar : state.charsLineChar;
+        var isSol = char === 65279 ? state.isSol : false;
+        var newState = state.copy_18y9ea$(void 0, state.input.tail(), void 0, void 0, void 0, void 0, isSol, chars, byteOffset, charOffset, line, lineChar, state.input.head().offset, state.charOffset + 1 | 0, void 0, state.lineChar + 1 | 0, void 0, char);
+        tmp$ = this$YamlParser.returnReply_qu6q1x$(newState, '');
+      }
+       else {
+        tmp$ = this$YamlParser.unexpectedReply_b15o62$(state);
+      }
+      return tmp$;
+    };
+  }
+  function YamlParser$nextIf$limitedNextIf(closure$consumeNextIf, this$YamlParser) {
+    return function (state) {
+      switch (state.limit) {
+        case -1:
+          return closure$consumeNextIf(state);
+        case 0:
+          return this$YamlParser.failReply_qu6q1x$(state, 'Lookahead limit reached');
+        default:return closure$consumeNextIf(state.copy_18y9ea$(void 0, void 0, void 0, state.limit - 1 | 0));
+      }
+    };
+  }
+  function YamlParser$nextIf$lambda(closure$limitedNextIf, this$YamlParser) {
+    return function (state) {
+      var tmp$;
+      if (state.forbidden == null)
+        return closure$limitedNextIf(state);
+      else {
+        var newParser = this$YamlParser.reject_k2c4mo$(state.forbidden, 'forbidden pattern');
+        var reply = newParser(state.copy_18y9ea$(void 0, void 0, void 0, void 0, null));
+        tmp$ = reply.result;
+        if (Kotlin.isType(tmp$, YamlParser$Result$Failed))
+          return reply;
+        else if (Kotlin.isType(tmp$, YamlParser$Result$Completed))
+          return closure$limitedNextIf(state);
+        else
+          throw IllegalStateException_init('ME: unexpected');
+      }
+    };
+  }
+  YamlParser.prototype.nextIf_8xwv17$ = function (test) {
+    var consumeNextIf = YamlParser$nextIf$consumeNextIf(test, this);
+    var limitedNextIf = YamlParser$nextIf$limitedNextIf(consumeNextIf, this);
+    return YamlParser$nextIf$lambda(limitedNextIf, this);
+  };
+  function YamlParser$bom$lambda(closure$code, this$YamlParser) {
+    return function (state) {
+      return this$YamlParser.and_yb4yy3$(this$YamlParser.of_za3lpa$(closure$code), this$YamlParser.fake_p82x9p$(YamlParser$Code$Bom_getInstance(), state.input.encoding().toString().substring(1)))(state);
+    };
+  }
+  YamlParser.prototype.bom_za3lpa$ = function (code) {
+    return YamlParser$bom$lambda(code, this);
+  };
+  function YamlParser$asInt$lambda(this$YamlParser) {
+    return function (state) {
+      return this$YamlParser.returnReply_qu6q1x$(state, state.last - 48 | 0);
+    };
+  }
+  YamlParser.prototype.asInt = function () {
+    return YamlParser$asInt$lambda(this);
+  };
+  function YamlParser$peekResult$lambda(closure$result, this$YamlParser) {
+    return function (state) {
+      var tmp$, tmp$_0;
+      tmp$_0 = Kotlin.isType(tmp$ = state.yields.get_11rb$(closure$result), Any) ? tmp$ : throwCCE();
+      return this$YamlParser.returnReply_qu6q1x$(state, tmp$_0);
+    };
+  }
+  YamlParser.prototype.peekResult_61zpoe$ = function (result) {
+    return YamlParser$peekResult$lambda(result, this);
+  };
+  function YamlParser$peekResult$lambda_0(closure$first, closure$second, this$YamlParser) {
+    return function (state) {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2;
+      tmp$ = state.copy_18y9ea$(void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, void 0, state.yields);
+      tmp$_2 = '(' + (Kotlin.isType(tmp$_0 = state.yields.get_11rb$(closure$first), Any) ? tmp$_0 : throwCCE()) + ',' + (Kotlin.isType(tmp$_1 = state.yields.get_11rb$(closure$second), Any) ? tmp$_1 : throwCCE()) + ')';
+      return this$YamlParser.returnReply_qu6q1x$(tmp$, tmp$_2);
+    };
+  }
+  YamlParser.prototype.peekResult_puj7f4$ = function (first, second) {
+    return YamlParser$peekResult$lambda_0(first, second, this);
+  };
+  function YamlParser$result$lambda(closure$result, this$YamlParser) {
+    return function (state) {
+      return this$YamlParser.returnReply_qu6q1x$(state, closure$result);
+    };
+  }
+  YamlParser.prototype.result_za3lpa$ = function (result) {
+    return YamlParser$result$lambda(result, this);
+  };
+  function YamlParser$result$lambda_0(closure$result, this$YamlParser) {
+    return function (state) {
+      return this$YamlParser.returnReply_qu6q1x$(state, closure$result);
+    };
+  }
+  YamlParser.prototype.result_ba5ra6$ = function (result) {
+    return YamlParser$result$lambda_0(result, this);
+  };
+  YamlParser.prototype.cho_l8gk4$ = function ($receiver, parser) {
+    return this.choice_mlkuup$($receiver, parser);
+  };
+  YamlParser.prototype.cmt_elu61a$ = function ($receiver, decision) {
+    return this.and_yb4yy3$(this.of_s8itvh$($receiver), this.commit_61zpoe$(decision));
+  };
+  YamlParser.prototype.plb_5msym5$ = function (lookbehind) {
+    return this.prev_5msym5$(lookbehind);
+  };
+  YamlParser.prototype.pla_5msym5$ = function (lookahead) {
+    return this.peek_5msym5$(lookahead);
+  };
+  YamlParser.prototype.nla_5msym5$ = function (lookahead) {
+    return this.reject_k2c4mo$(lookahead, null);
+  };
+  function YamlParser$Token(byteOffset, charOffset, line, lineChar, code, text) {
+    this.byteOffset = byteOffset;
+    this.charOffset = charOffset;
+    this.line = line;
+    this.lineChar = lineChar;
+    this.code = code;
+    this.text = text;
+  }
+  YamlParser$Token.prototype.toString = function () {
+    return '# B: ' + this.byteOffset + ', C: ' + this.charOffset + ', L: ' + this.line + ', c: ' + this.lineChar + '\n' + this.code + this.text + '\n';
+  };
+  YamlParser$Token.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Token',
+    interfaces: []
+  };
+  YamlParser$Token.prototype.component1 = function () {
+    return this.byteOffset;
+  };
+  YamlParser$Token.prototype.component2 = function () {
+    return this.charOffset;
+  };
+  YamlParser$Token.prototype.component3 = function () {
+    return this.line;
+  };
+  YamlParser$Token.prototype.component4 = function () {
+    return this.lineChar;
+  };
+  YamlParser$Token.prototype.component5 = function () {
+    return this.code;
+  };
+  YamlParser$Token.prototype.component6 = function () {
+    return this.text;
+  };
+  YamlParser$Token.prototype.copy_52pvax$ = function (byteOffset, charOffset, line, lineChar, code, text) {
+    return new YamlParser$Token(byteOffset === void 0 ? this.byteOffset : byteOffset, charOffset === void 0 ? this.charOffset : charOffset, line === void 0 ? this.line : line, lineChar === void 0 ? this.lineChar : lineChar, code === void 0 ? this.code : code, text === void 0 ? this.text : text);
+  };
+  YamlParser$Token.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.byteOffset) | 0;
+    result = result * 31 + Kotlin.hashCode(this.charOffset) | 0;
+    result = result * 31 + Kotlin.hashCode(this.line) | 0;
+    result = result * 31 + Kotlin.hashCode(this.lineChar) | 0;
+    result = result * 31 + Kotlin.hashCode(this.code) | 0;
+    result = result * 31 + Kotlin.hashCode(this.text) | 0;
+    return result;
+  };
+  YamlParser$Token.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.byteOffset, other.byteOffset) && Kotlin.equals(this.charOffset, other.charOffset) && Kotlin.equals(this.line, other.line) && Kotlin.equals(this.lineChar, other.lineChar) && Kotlin.equals(this.code, other.code) && Kotlin.equals(this.text, other.text)))));
+  };
+  function YamlParser$Escapable() {
+    YamlParser$Escapable$Companion_getInstance();
+  }
+  function YamlParser$Escapable$Companion() {
+    YamlParser$Escapable$Companion_instance = this;
+  }
+  YamlParser$Escapable$Companion.prototype.of_q5rwfd$ = function (text) {
+    return new YamlParser$Escapable$Code(text);
+  };
+  YamlParser$Escapable$Companion.prototype.of_61zpoe$ = function (text) {
+    return new YamlParser$Escapable$Text(text);
+  };
+  YamlParser$Escapable$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var YamlParser$Escapable$Companion_instance = null;
+  function YamlParser$Escapable$Companion_getInstance() {
+    if (YamlParser$Escapable$Companion_instance === null) {
+      new YamlParser$Escapable$Companion();
+    }
+    return YamlParser$Escapable$Companion_instance;
+  }
+  function YamlParser$Escapable$Code(codes) {
+    YamlParser$Escapable.call(this);
+    this.codes = codes;
+  }
+  YamlParser$Escapable$Code.prototype.toString = function () {
+    return YamlParser$Companion_getInstance().escape_xwgkrb$(this.codes, '');
+  };
+  YamlParser$Escapable$Code.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Code',
+    interfaces: [YamlParser$Escapable]
+  };
+  function YamlParser$Escapable$Text(text) {
+    YamlParser$Escapable.call(this);
+    this.text = text;
+  }
+  YamlParser$Escapable$Text.prototype.toString = function () {
+    return this.text;
+  };
+  YamlParser$Escapable$Text.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Text',
+    interfaces: [YamlParser$Escapable]
+  };
+  YamlParser$Escapable.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Escapable',
+    interfaces: []
+  };
+  function YamlParser$Tokenizer() {
+  }
+  YamlParser$Tokenizer.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'Tokenizer',
+    interfaces: []
+  };
+  function YamlParser$PatternTokenizer(pattern) {
+    this.pattern = pattern;
+  }
+  YamlParser$PatternTokenizer.prototype.tokenize_7x97xx$ = function (name, input, withFollowing) {
+    return this.patternParser_0(withFollowing, YamlParser$Companion_getInstance().wrap_0(this.pattern), YamlParser$Companion_getInstance().initialState_0(name, input));
+  };
+  YamlParser$PatternTokenizer.prototype.patternParser_0 = function (withFollowing, _parser, _state) {
+    var tmp$;
+    var out = ArrayList_init();
+    var parser = _parser;
+    var state = _state;
+    loop: while (true) {
+      var reply = parser(state);
+      var tokens = YamlParser$Companion_getInstance().commitBugs_0(reply);
+      var rState = reply.state;
+      tmp$ = reply.result;
+      if (Kotlin.isType(tmp$, YamlParser$Result$Failed)) {
+        var tmp$_0, tmp$_1;
+        tmp$_1 = typeof (tmp$_0 = reply.result.message) === 'string' ? tmp$_0 : throwCCE();
+        addAll(out, YamlParser$Companion_getInstance().errorTokens_0(tokens, rState, tmp$_1, withFollowing));
+        break loop;
+      }
+       else if (Kotlin.isType(tmp$, YamlParser$Result$Completed)) {
+        addAll(out, tokens);
+        break loop;
+      }
+       else if (Kotlin.isType(tmp$, YamlParser$Result$More)) {
+        addAll(out, tokens);
+        parser = reply.result.result;
+        state = rState;
+        continue loop;
+      }
+       else
+        Kotlin.noWhenBranchMatched();
+    }
+    return out;
+  };
+  YamlParser$PatternTokenizer.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'PatternTokenizer',
+    interfaces: [YamlParser$Tokenizer]
+  };
+  function YamlParser$ParserTokenizer(what, parser) {
+    this.what = what;
+    this.parser = parser;
+  }
+  function YamlParser$ParserTokenizer$tokenize$parserParser(closure$withFollowing, this$ParserTokenizer) {
+    return function closure$parserParser(parser, state) {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2;
+      var reply = parser(state);
+      var tokens = YamlParser$Companion_getInstance().commitBugs_0(reply);
+      var rState = reply.state;
+      tmp$ = reply.result;
+      if (Kotlin.isType(tmp$, YamlParser$Result$Failed)) {
+        tmp$_1 = typeof (tmp$_0 = reply.result.message) === 'string' ? tmp$_0 : throwCCE();
+        tmp$_2 = YamlParser$Companion_getInstance().errorTokens_0(tokens, rState, tmp$_1, closure$withFollowing);
+      }
+       else if (Kotlin.isType(tmp$, YamlParser$Result$Completed))
+        tmp$_2 = plus_0(tokens, new YamlParser$Token(rState.byteOffset, rState.charOffset, rState.line, rState.lineChar, YamlParser$Code$Detected_getInstance(), YamlParser$Escapable$Companion_getInstance().of_61zpoe$(this$ParserTokenizer.what + '=' + reply.result.result)));
+      else if (Kotlin.isType(tmp$, YamlParser$Result$More))
+        tmp$_2 = plus(tokens, closure$parserParser(reply.result.result, rState));
+      else
+        tmp$_2 = Kotlin.noWhenBranchMatched();
+      return tmp$_2;
+    };
+  }
+  YamlParser$ParserTokenizer.prototype.tokenize_7x97xx$ = function (name, input, withFollowing) {
+    var parserParser = YamlParser$ParserTokenizer$tokenize$parserParser(withFollowing, this);
+    return parserParser(YamlParser$Companion_getInstance().wrap_0(this.parser), YamlParser$Companion_getInstance().initialState_0(name, input));
+  };
+  YamlParser$ParserTokenizer.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ParserTokenizer',
+    interfaces: [YamlParser$Tokenizer]
+  };
+  function YamlParser$Companion() {
+    YamlParser$Companion_instance = this;
+    YamlParser.call(this);
+  }
+  YamlParser$Companion.prototype.escape_za3lpa$ = function (code) {
+    if (32 <= code && code !== 92 && code <= 126)
+      return String.fromCharCode(toChar(code));
+    else if (code <= 255)
+      return '\\' + 'x' + this.toHex_vux9f0$(2, code);
+    else if (256 <= code && code <= 65535)
+      return '\\' + 'u' + this.toHex_vux9f0$(4, code);
+    else
+      return '\\' + 'U' + this.toHex_vux9f0$(8, code);
+  };
+  YamlParser$Companion.prototype.escape_xwgkrb$ = function (text, separator) {
+    if (separator === void 0)
+      separator = ', ';
+    var transform = getCallableRef('escape', function ($receiver, code) {
+      return $receiver.escape_za3lpa$(code);
+    }.bind(null, YamlParser$Companion_getInstance()));
+    var destination = ArrayList_init_0(text.length);
+    var tmp$;
+    for (tmp$ = 0; tmp$ !== text.length; ++tmp$) {
+      var item = text[tmp$];
+      destination.add_11rb$(transform(item));
+    }
+    return joinToString(destination, separator);
+  };
+  YamlParser$Companion.prototype.toHex_vux9f0$ = function (digits, n) {
+    return digits === 1 ? String.fromCharCode(unboxChar(this.intToDigit_za3lpa$(n))) : this.toHex_vux9f0$(digits - 1 | 0, n / 16 | 0) + String.fromCharCode(unboxChar(this.intToDigit_za3lpa$(n % 16)));
+  };
+  YamlParser$Companion.prototype.intToDigit_za3lpa$ = function (n) {
+    return n < 10 ? toChar(48 + n | 0) : toChar(87 + n | 0);
+  };
+  YamlParser$Companion.prototype.showTokens_y7gcgt$ = function (tokens) {
+    var tmp$;
+    var accumulator = '';
+    tmp$ = tokens.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      accumulator = accumulator + element.toString();
+    }
+    return accumulator;
+  };
+  YamlParser$Companion.prototype.initialState_0 = function (name, input) {
+    return new YamlParser$State(name, YamlDecoder$Stream$Companion_getInstance().of_fqrh44$(input), '', -1, null, false, true, new Int32Array([]), -1, -1, -1, -1, 0, 0, 1, 0, YamlParser$Code$Unparsed_getInstance(), 32, HashMap_init());
+  };
+  YamlParser$Companion.prototype.commitBugs_0 = function (reply) {
+    var tokens = reply.tokens;
+    var state = reply.state;
+    return reply.commit == null ? tokens : plus_0(tokens, new YamlParser$Token(state.byteOffset, state.charOffset, state.line, state.lineChar, YamlParser$Code$Error_getInstance(), YamlParser$Escapable$Companion_getInstance().of_61zpoe$("Commit to '" + toString(reply.commit) + "' was made outside it")));
+  };
+  YamlParser$Companion.prototype.wrap_0 = function (parser) {
+    return this.and_yb4yy3$(this.and_yb4yy3$(this.snd_lg169v$(parser, 'result', this.finishToken()), this.eof()), this.peekResult_61zpoe$('result'));
+  };
+  YamlParser$Companion.prototype.errorTokens_0 = function (tokens, state, message, flag) {
+    var newTokens = plus_0(tokens, new YamlParser$Token(state.byteOffset, state.charOffset, state.line, state.lineChar, YamlParser$Code$Error_getInstance(), YamlParser$Escapable$Companion_getInstance().of_61zpoe$(message)));
+    return flag && state.input.isNotEmpty() ? plus_0(newTokens, new YamlParser$Token(state.byteOffset, state.charOffset, state.line, state.lineChar, YamlParser$Code$Unparsed_getInstance(), YamlParser$Escapable$Companion_getInstance().of_q5rwfd$(state.input.codes()))) : newTokens;
+  };
+  YamlParser$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: [YamlParser]
+  };
+  var YamlParser$Companion_instance = null;
+  function YamlParser$Companion_getInstance() {
+    if (YamlParser$Companion_instance === null) {
+      new YamlParser$Companion();
+    }
+    return YamlParser$Companion_instance;
+  }
+  YamlParser.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'YamlParser',
+    interfaces: []
+  };
   function BuildInfo(includeWrapper, projectType, ktorVersion, artifactName, artifactGroup, artifactVersion, ktorEngine, generateFeatureSample, fetch) {
     if (includeWrapper === void 0)
       includeWrapper = false;
@@ -2112,7 +5355,7 @@
       destination_0.put_xwzc9p$(element_0.name, element_0);
     }
     this.BY_NAME = destination_0;
-    this.BY = plus_0(this.BY_ID, this.BY_NAME);
+    this.BY = plus_1(this.BY_ID, this.BY_NAME);
   }
   KtorEngine$Companion.prototype.invoke_61zpoe$ = function (name) {
     var tmp$;
@@ -2203,7 +5446,7 @@
       destination_0.put_xwzc9p$(element_0.name, element_0);
     }
     this.BY_NAME = destination_0;
-    this.BY = plus_0(this.BY_ID, this.BY_NAME);
+    this.BY = plus_1(this.BY_ID, this.BY_NAME);
   }
   ProjectType$Companion.prototype.invoke_61zpoe$ = function (name) {
     var tmp$;
@@ -7220,7 +10463,7 @@
   function ApplicationTestKt$render$lambda$lambda$lambda(this$render) {
     return function ($receiver) {
       var tmp$;
-      tmp$ = plus_1(get_applicationKtImports(this$render), get_applicationTestKtImports(this$render)).iterator();
+      tmp$ = plus_2(get_applicationKtImports(this$render), get_applicationTestKtImports(this$render)).iterator();
       while (tmp$.hasNext()) {
         var import_0 = tmp$.next();
         $receiver.line_61zpoe$('import ' + import_0);
@@ -9745,7 +12988,7 @@
   }
   function SwaggerGenerator$render$lambda_6(closure$registerInstances, closure$registerInstancesDecl, this$SwaggerGenerator) {
     return function ($receiver) {
-      var tmp$;
+      var tmp$, tmp$_0;
       closure$registerInstances.add_11rb$('myjwt');
       var $receiver_0 = closure$registerInstancesDecl;
       var element = 'val myjwt: MyJWT';
@@ -9753,8 +12996,14 @@
       tmp$ = this$SwaggerGenerator.model.securityDefinitions.values.iterator();
       while (tmp$.hasNext()) {
         var sec = tmp$.next();
-        $receiver.line_61zpoe$('// ' + joinToString(split_0(sec.description, ['\n']), '\\n'));
+        $receiver.line_61zpoe$('// ---------------');
         $receiver.line_61zpoe$('// @TODO: Please, edit the application.conf # jwt.secret property and provide a secure random value for it');
+        $receiver.line_61zpoe$('// ---------------');
+        tmp$_0 = lines(sec.description).iterator();
+        while (tmp$_0.hasNext()) {
+          var descLine = tmp$_0.next();
+          $receiver.line_61zpoe$('// ' + descLine);
+        }
         var $receiver_1 = 'jwt(' + quote(sec.id) + ')';
         var rafter = ''.length === 0 ? '' : ' ' + '';
         $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter : $receiver_1 + ' {' + rafter);
@@ -9928,6 +13177,215 @@
       }
      while (true);
   };
+  function SwaggerGenerator$render$lambda_11(this$SwaggerGenerator_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGenerator$render$lambda_3(this$SwaggerGenerator_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$SwaggerGenerator$render$lambda_3(this$SwaggerGenerator_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$this$SwaggerGenerator = this$SwaggerGenerator_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$SwaggerGenerator$render$lambda_3.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$SwaggerGenerator$render$lambda_3.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$SwaggerGenerator$render$lambda_3.prototype.constructor = Coroutine$SwaggerGenerator$render$lambda_3;
+  Coroutine$SwaggerGenerator$render$lambda_3.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            return this.local$$receiver.line_61zpoe$(this.local$this$SwaggerGenerator.model.source);
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function SwaggerGenerator$render$lambda_12($receiver_0, continuation_0, suspended) {
+    var instance = new Coroutine$SwaggerGenerator$render$lambda_4($receiver_0, this, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
+  function Coroutine$SwaggerGenerator$render$lambda_4($receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$SwaggerGenerator$render$lambda_4.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$SwaggerGenerator$render$lambda_4.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$SwaggerGenerator$render$lambda_4.prototype.constructor = Coroutine$SwaggerGenerator$render$lambda_4;
+  Coroutine$SwaggerGenerator$render$lambda_4.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            return this.local$$receiver.line_61zpoe$(Json_getInstance().encodePrettyUntyped_hvn9da$(mapOf([to('localhost', mapOf_0(to('host', 'http://127.0.0.1:8080'))), to('prod', mapOf_0(to('host', 'https://my.domain.com')))]), '    '));
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function SwaggerGenerator$render$lambda_13(this$SwaggerGenerator_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGenerator$render$lambda_5(this$SwaggerGenerator_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$SwaggerGenerator$render$lambda_5(this$SwaggerGenerator_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$this$SwaggerGenerator = this$SwaggerGenerator_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$SwaggerGenerator$render$lambda_5.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$SwaggerGenerator$render$lambda_5.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$SwaggerGenerator$render$lambda_5.prototype.constructor = Coroutine$SwaggerGenerator$render$lambda_5;
+  Coroutine$SwaggerGenerator$render$lambda_5.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+            this.local$$receiver.line_61zpoe$('# ' + stripLineBreaks(this.local$this$SwaggerGenerator.model.info.title));
+            tmp$ = lines(this.local$this$SwaggerGenerator.model.info.description).iterator();
+            while (tmp$.hasNext()) {
+              var descLine = tmp$.next();
+              this.local$$receiver.line_61zpoe$('# ' + descLine);
+            }
+
+            this.local$$receiver.line_61zpoe$('');
+            tmp$_0 = this.local$this$SwaggerGenerator.model.paths.values.iterator();
+            while (tmp$_0.hasNext()) {
+              var path = tmp$_0.next();
+              tmp$_1 = path.methodsList.iterator();
+              while (tmp$_1.hasNext()) {
+                var method = tmp$_1.next();
+                var httpMethod = method.method.toUpperCase();
+                this.local$$receiver.line_61zpoe$('###');
+                this.local$$receiver.line_61zpoe$('');
+                tmp$_2 = lines(method.description).iterator();
+                while (tmp$_2.hasNext()) {
+                  var descLine_0 = tmp$_2.next();
+                  this.local$$receiver.line_61zpoe$('# ' + descLine_0);
+                }
+                this.local$$receiver.line_61zpoe$(httpMethod + ' {{host}}' + path.path);
+                var $receiver = method.securityDefinitions_mq44pj$(this.local$this$SwaggerGenerator.model);
+                var destination = ArrayList_init();
+                var tmp$_4;
+                tmp$_4 = $receiver.iterator();
+                while (tmp$_4.hasNext()) {
+                  var element = tmp$_4.next();
+                  var tmp$_5, tmp$_6;
+                  if (equals((tmp$_5 = element.second) != null ? tmp$_5.inside : null, 'header') && equals((tmp$_6 = element.second) != null ? tmp$_6.type : null, SwaggerModel$SecurityType$API_KEY_getInstance()))
+                    destination.add_11rb$(element);
+                }
+                tmp$_3 = destination.iterator();
+                while (tmp$_3.hasNext()) {
+                  var tmp$_7 = tmp$_3.next();
+                  var sec = tmp$_7.component1()
+                  , secdef = tmp$_7.component2();
+                  this.local$$receiver.line_61zpoe$(ensureNotNull(secdef).name + ': Bearer {{ auth_token }}');
+                }
+                if (equals(httpMethod, 'POST') || equals(httpMethod, 'PUT')) {
+                  this.local$$receiver.line_61zpoe$('Content-Type: application/json');
+                  this.local$$receiver.line_61zpoe$('');
+                  var $receiver_0 = method.parameters;
+                  var destination_0 = ArrayList_init();
+                  var tmp$_8;
+                  tmp$_8 = $receiver_0.iterator();
+                  while (tmp$_8.hasNext()) {
+                    var element_0 = tmp$_8.next();
+                    if (element_0.inside === SwaggerModel$Inside$BODY_getInstance())
+                      destination_0.add_11rb$(element_0);
+                  }
+                  var destination_1 = ArrayList_init_0(collectionSizeOrDefault(destination_0, 10));
+                  var tmp$_9;
+                  tmp$_9 = destination_0.iterator();
+                  while (tmp$_9.hasNext()) {
+                    var item = tmp$_9.next();
+                    destination_1.add_11rb$(to(item.name, this.local$this$SwaggerGenerator.toKotlinDefaultUntyped_r1jjni$(item.schema.type)));
+                  }
+                  var postBody = toMap(destination_1);
+                  this.local$$receiver.line_61zpoe$(Json_getInstance().encodePrettyUntyped_hvn9da$(postBody));
+                }
+                this.local$$receiver.line_61zpoe$('');
+                var loginRoute = this.local$this$SwaggerGenerator.tryGetCompatibleLoginRoute_k01abz$(method);
+                if (loginRoute != null) {
+                  var tokenPath = loginRoute.tokenPath;
+                  var responsePath = 'response.body.' + joinToString(tokenPath, '.');
+                  this.local$$receiver.line_61zpoe$('> {%');
+                  this.local$$receiver.line_61zpoe$('client.assert(typeof ' + responsePath + ' !== ' + '"' + 'undefined' + '"' + ', ' + '"' + 'No token returned' + '"' + ');');
+                  this.local$$receiver.line_61zpoe$('client.global.set(' + '"' + 'auth_token' + '"' + ', ' + responsePath + ');');
+                  this.local$$receiver.line_61zpoe$('%}');
+                  this.local$$receiver.line_61zpoe$('');
+                }
+              }
+            }
+
+            return Unit;
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
   SwaggerGenerator.prototype.render_miqy8c$ = function ($receiver, info) {
     $receiver.fileBinary_qk5z91$('src/io/ktor/swagger/experimental/swagger-util.kt', void 0, void 0, SwaggerGenerator$render$lambda(info));
     addImport($receiver, 'kotlin.reflect.*');
@@ -9952,12 +13410,88 @@
     addRoute($receiver, SwaggerGenerator$render$lambda_8(this, registerInstances));
     $receiver.fileText_7k8vha$('src/swagger-backend.kt', void 0, void 0, SwaggerGenerator$render$lambda_9(info, this, registerInstancesDecl));
     $receiver.fileText_7k8vha$('src/swagger-frontend.kt', void 0, void 0, SwaggerGenerator$render$lambda_10(info, this));
+    $receiver.fileText_7k8vha$(endsWith(this.model.filename, '.json') ? 'api.json' : 'api.yaml', void 0, void 0, SwaggerGenerator$render$lambda_11(this));
+    $receiver.fileText_7k8vha$('http-client.env.json', void 0, void 0, SwaggerGenerator$render$lambda_12);
+    $receiver.fileText_7k8vha$('api.http', void 0, void 0, SwaggerGenerator$render$lambda_13(this));
+  };
+  function SwaggerGenerator$CompatibleLoginRoute(methodModel, tokenPath, username, password) {
+    this.methodModel = methodModel;
+    this.tokenPath = tokenPath;
+    this.username = username;
+    this.password = password;
+  }
+  SwaggerGenerator$CompatibleLoginRoute.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CompatibleLoginRoute',
+    interfaces: []
+  };
+  function SwaggerGenerator$FieldInParamRef(param, path) {
+    this.param = param;
+    this.path = path;
+    this.fullPathParts = plus(listOf_0(this.param.name), this.path);
+    this.fullPath = joinToString(this.fullPathParts, '.');
+  }
+  SwaggerGenerator$FieldInParamRef.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'FieldInParamRef',
+    interfaces: []
+  };
+  SwaggerGenerator$FieldInParamRef.prototype.component1 = function () {
+    return this.param;
+  };
+  SwaggerGenerator$FieldInParamRef.prototype.component2 = function () {
+    return this.path;
+  };
+  SwaggerGenerator$FieldInParamRef.prototype.copy_mv6b9n$ = function (param, path) {
+    return new SwaggerGenerator$FieldInParamRef(param === void 0 ? this.param : param, path === void 0 ? this.path : path);
+  };
+  SwaggerGenerator$FieldInParamRef.prototype.toString = function () {
+    return 'FieldInParamRef(param=' + Kotlin.toString(this.param) + (', path=' + Kotlin.toString(this.path)) + ')';
+  };
+  SwaggerGenerator$FieldInParamRef.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.param) | 0;
+    result = result * 31 + Kotlin.hashCode(this.path) | 0;
+    return result;
+  };
+  SwaggerGenerator$FieldInParamRef.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.param, other.param) && Kotlin.equals(this.path, other.path)))));
+  };
+  SwaggerGenerator.prototype.findField_9maf73$ = function ($receiver, names, matchType) {
+    if (matchType === void 0)
+      matchType = null;
+    var tmp$, tmp$_0;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var param = tmp$.next();
+      for (tmp$_0 = 0; tmp$_0 !== names.length; ++tmp$_0) {
+        var name = names[tmp$_0];
+        var path = findField(param.schema, name, void 0, matchType);
+        if (path != null) {
+          return new SwaggerGenerator$FieldInParamRef(param, path);
+        }
+      }
+    }
+    return null;
+  };
+  SwaggerGenerator.prototype.tryGetCompatibleLoginRoute_k01abz$ = function ($receiver) {
+    var method = $receiver;
+    var path = $receiver.path;
+    if (endsWith(path, '/login')) {
+      var tokenPath = findField_0(method.responseType, 'token');
+      if (tokenPath != null) {
+        var username = this.findField_9maf73$($receiver.parameters, ['username', 'name', 'email', 'user'], getKClass(SwaggerModel$BaseStringType));
+        var password = this.findField_9maf73$($receiver.parameters, ['password', 'pass'], getKClass(SwaggerModel$BaseStringType));
+        return new SwaggerGenerator$CompatibleLoginRoute(method, tokenPath, username, password);
+      }
+    }
+    return null;
   };
   function SwaggerGenerator$renderResponse$lambda(closure$response, this$SwaggerGenerator) {
     return function ($receiver) {
       var tmp$, tmp$_0;
       tmp$_0 = (tmp$ = closure$response.schema) != null ? tmp$.type : null;
-      this$SwaggerGenerator.toKotlinDefault_xq0hum$($receiver, tmp$_0, null);
+      this$SwaggerGenerator.toKotlinDefault_tv209j$($receiver, tmp$_0, null, true);
       return Unit;
     };
   }
@@ -9982,25 +13516,30 @@
   }
   function SwaggerGenerator$renderInterface$lambda$lambda$lambda$lambda(closure$param, this$SwaggerGenerator) {
     return function ($receiver) {
-      this$SwaggerGenerator.toKotlinDefault_8na47e$($receiver, closure$param.schema, closure$param.default);
+      this$SwaggerGenerator.toKotlinDefault_bp1lbx$($receiver, closure$param.schema, closure$param.default, true);
       return Unit;
     };
   }
   function SwaggerGenerator$renderInterface$lambda$lambda(closure$path, closure$paths, this$SwaggerGenerator) {
     return function ($receiver) {
-      var tmp$;
+      var tmp$, tmp$_0;
       $receiver.line_61zpoe$('/**');
-      $receiver.line_61zpoe$(' * ' + closure$path.description);
-      $receiver.line_61zpoe$(' * ');
-      tmp$ = closure$path.parameters.iterator();
+      tmp$ = lines(closure$path.description).iterator();
       while (tmp$.hasNext()) {
-        var param = tmp$.next();
-        $receiver.line_61zpoe$(' * @param ' + param.name + ' ' + param.description);
+        var descLine = tmp$.next();
+        $receiver.line_61zpoe$(' * ' + descLine);
+      }
+      $receiver.line_61zpoe$(' * ');
+      tmp$_0 = closure$path.parameters.iterator();
+      while (tmp$_0.hasNext()) {
+        var param = tmp$_0.next();
+        escape(param.description);
+        $receiver.line_61zpoe$(' * @param ' + param.name + ' ' + stripLineBreaks(param.description));
       }
       if (!closure$path.parameters.isEmpty()) {
         $receiver.line_61zpoe$(' * ');
       }
-      $receiver.line_61zpoe$(' * @return ' + closure$path.defaultResponse.description);
+      $receiver.line_61zpoe$(' * @return ' + stripLineBreaks(closure$path.defaultResponse.description));
       $receiver.line_61zpoe$(' */');
       $receiver.line_61zpoe$('@Path(' + quote(closure$paths.path) + ')');
       $receiver.line_61zpoe$('@Method(' + quote(closure$path.method.toUpperCase()) + ')');
@@ -10012,33 +13551,33 @@
       try {
         var closure$path_0 = closure$path;
         var this$SwaggerGenerator_0 = this$SwaggerGenerator;
-        var tmp$_0, tmp$_1;
-        tmp$_0 = get_metaIter(closure$path_0.parameters).iterator();
-        while (tmp$_0.hasNext()) {
-          var tmp$_2 = tmp$_0.next();
-          var info = tmp$_2.component1()
-          , param_0 = tmp$_2.component2();
+        var tmp$_1, tmp$_2;
+        tmp$_1 = get_metaIter(closure$path_0.parameters).iterator();
+        while (tmp$_1.hasNext()) {
+          var tmp$_3 = tmp$_1.next();
+          var info = tmp$_3.component1()
+          , param_0 = tmp$_3.component2();
           var qpname = quote(param_0.name);
           switch (param_0.inside.name) {
             case 'BODY':
-              tmp$_1 = '@Body(' + qpname + ')';
+              tmp$_2 = '@Body(' + qpname + ')';
               break;
             case 'HEADER':
-              tmp$_1 = '@Header(' + qpname + ')';
+              tmp$_2 = '@Header(' + qpname + ')';
               break;
             case 'QUERY':
-              tmp$_1 = '@Query(' + qpname + ')';
+              tmp$_2 = '@Query(' + qpname + ')';
               break;
             case 'PATH':
-              tmp$_1 = '@Path(' + qpname + ')';
+              tmp$_2 = '@Path(' + qpname + ')';
               break;
             case 'FORM_DATA':
-              tmp$_1 = '@FormData(' + qpname + ')';
+              tmp$_2 = '@FormData(' + qpname + ')';
               break;
-            default:tmp$_1 = Kotlin.noWhenBranchMatched();
+            default:tmp$_2 = Kotlin.noWhenBranchMatched();
               break;
           }
-          var inAnnotation = tmp$_1;
+          var inAnnotation = tmp$_2;
           var default_0 = param_0.required ? '' : ' = ' + indentStringHere($receiver, SwaggerGenerator$renderInterface$lambda$lambda$lambda$lambda(param_0, this$SwaggerGenerator_0));
           $receiver.line_61zpoe$(inAnnotation + ' ' + param_0.name + ': ' + this$SwaggerGenerator_0.toKotlin_slggk6$(param_0.schema) + default_0 + get_optComma(info));
         }
@@ -10051,23 +13590,28 @@
     };
   }
   SwaggerGenerator.prototype.renderInterface_dy46pz$ = function ($receiver, model) {
+    var tmp$;
     $receiver.line_61zpoe$('/**');
-    $receiver.line_61zpoe$(' * ' + model.info.title);
+    $receiver.line_61zpoe$(' * ' + stripLineBreaks(model.info.title));
     $receiver.line_61zpoe$(' * ');
-    $receiver.line_61zpoe$(' * ' + model.info.description);
+    tmp$ = lines(model.info.description).iterator();
+    while (tmp$.hasNext()) {
+      var descLine = tmp$.next();
+      $receiver.line_61zpoe$(' * ' + descLine);
+    }
     $receiver.line_61zpoe$(' */');
     var $receiver_0 = 'interface ' + model.info.className + ' : SwaggerBaseApi';
     var rafter = ''.length === 0 ? '' : ' ' + '';
     $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
     try {
-      var tmp$, tmp$_0;
-      tmp$ = model.paths.values.iterator();
-      while (tmp$.hasNext()) {
-        var paths = tmp$.next();
-        tmp$_0 = paths.methodsList.iterator();
-        while (tmp$_0.hasNext()) {
-          var path = tmp$_0.next();
+      var tmp$_0, tmp$_1;
+      tmp$_0 = model.paths.values.iterator();
+      while (tmp$_0.hasNext()) {
+        var paths = tmp$_0.next();
+        tmp$_1 = paths.methodsList.iterator();
+        while (tmp$_1.hasNext()) {
+          var path = tmp$_1.next();
           SEPARATOR($receiver, SwaggerGenerator$renderInterface$lambda$lambda(path, paths, this));
         }
       }
@@ -10110,16 +13654,28 @@
       return Unit;
     };
   }
-  function SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda$lambda_0(closure$method, this$SwaggerGenerator) {
+  function SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda$lambda_0(closure$method, closure$untyped, this$SwaggerGenerator) {
     return function ($receiver) {
-      this$SwaggerGenerator.toKotlinDefault_xq0hum$($receiver, closure$method.responseType, null);
+      this$SwaggerGenerator.toKotlinDefault_tv209j$($receiver, closure$method.responseType, closure$untyped, true);
       return Unit;
     };
   }
   function SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda_1(closure$method, this$SwaggerGenerator) {
     return function ($receiver) {
       if (!equals(closure$method.responseType, SwaggerModel$VoidType_getInstance())) {
-        $receiver.line_61zpoe$('return ' + indentString($receiver.indentLevel, SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda$lambda_0(closure$method, this$SwaggerGenerator)));
+        var loginRoute = this$SwaggerGenerator.tryGetCompatibleLoginRoute_k01abz$(closure$method);
+        var untyped = this$SwaggerGenerator.toKotlinDefaultUntyped_r1jjni$(closure$method.responseType);
+        if ((loginRoute != null ? loginRoute.username : null) != null) {
+          $receiver.line_61zpoe$('val username = ' + loginRoute.username.fullPath);
+          $receiver.line_61zpoe$('// @TODO: Your username/password validation here');
+          if (loginRoute.password != null) {
+            $receiver.line_61zpoe$('val password = ' + loginRoute.password.fullPath);
+            $receiver.line_61zpoe$('if (username != password) httpException(HttpStatusCode.Unauthorized)');
+          }
+          $receiver.line_61zpoe$('val token = myjwt.sign(username)');
+          package$util.DynamicAccess.set_7kor20$(untyped, loginRoute.tokenPath, new SwaggerModel$Identifier('token'));
+        }
+        $receiver.line_61zpoe$('return ' + indentString($receiver.indentLevel, SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda$lambda_0(closure$method, untyped, this$SwaggerGenerator)));
       }
       return Unit;
     };
@@ -10243,22 +13799,22 @@
       throw IllegalStateException_init(("Unsupported '" + $receiver + "' class=" + Kotlin.getKClassFromExpression($receiver)).toString());
     }
   };
-  SwaggerGenerator.prototype.toKotlinDefault_8na47e$ = function ($receiver, type, default_0) {
-    this.toKotlinDefault_xq0hum$($receiver, type != null ? type.type : null, default_0);
+  SwaggerGenerator.prototype.toKotlinDefault_bp1lbx$ = function ($receiver, type, default_0, typed) {
+    this.toKotlinDefault_tv209j$($receiver, type != null ? type.type : null, default_0, typed);
   };
-  function SwaggerGenerator$toKotlinDefault$lambda$lambda(closure$prop, this$SwaggerGenerator) {
+  function SwaggerGenerator$toKotlinDefault$lambda$lambda(closure$prop, closure$rdefault, closure$typed, this$SwaggerGenerator) {
     return function ($receiver) {
-      this$SwaggerGenerator.toKotlinDefault_8na47e$($receiver, closure$prop, null);
+      this$SwaggerGenerator.toKotlinDefault_bp1lbx$($receiver, closure$prop, closure$rdefault, closure$typed);
       return Unit;
     };
   }
-  function SwaggerGenerator$toKotlinDefault$lambda$lambda_0(closure$prop, this$SwaggerGenerator) {
+  function SwaggerGenerator$toKotlinDefault$lambda$lambda_0(closure$prop, closure$rdefault, closure$typed, this$SwaggerGenerator) {
     return function ($receiver) {
-      this$SwaggerGenerator.toKotlinDefault_8na47e$($receiver, closure$prop, null);
+      this$SwaggerGenerator.toKotlinDefault_bp1lbx$($receiver, closure$prop, closure$rdefault, closure$typed);
       return Unit;
     };
   }
-  SwaggerGenerator.prototype.toKotlinDefault_xq0hum$ = function ($receiver, type, default_0) {
+  SwaggerGenerator.prototype.toKotlinDefault_tv209j$ = function ($receiver, type, default_0, typed) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10;
     if (type == null) {
       $receiver.line_61zpoe$('null');
@@ -10266,9 +13822,13 @@
      else if (Kotlin.isType(type, SwaggerModel$OptionalType)) {
       $receiver.line_61zpoe$('null');
     }
-     else if (Kotlin.isType(type, SwaggerModel$BaseStringType)) {
-      $receiver.line_61zpoe$(quote((tmp$ = default_0 != null ? default_0.toString() : null) != null ? tmp$ : ''));
-    }
+     else if (Kotlin.isType(type, SwaggerModel$BaseStringType))
+      if (Kotlin.isType(default_0, SwaggerModel$Identifier)) {
+        $receiver.line_61zpoe$(default_0.id);
+      }
+       else {
+        $receiver.line_61zpoe$(quote((tmp$ = default_0 != null ? default_0.toString() : null) != null ? tmp$ : ''));
+      }
      else if (Kotlin.isType(type, SwaggerModel$DateType)) {
       $receiver.line_61zpoe$('Date()');
     }
@@ -10287,51 +13847,68 @@
      else if (Kotlin.isType(type, SwaggerModel$BoolType)) {
       $receiver.line_61zpoe$(((tmp$_10 = (tmp$_9 = default_0) == null || typeof tmp$_9 === 'boolean' ? tmp$_9 : null) != null ? tmp$_10 : false).toString());
     }
-     else if (Kotlin.isType(type, SwaggerModel$NamedObject)) {
-      var def = type.kind;
-      $receiver.line_61zpoe$(type.name + '(');
-      $receiver._indent();
-      try {
-        var tmp$_11;
-        var props = toList(def.type.fields.entries);
-        tmp$_11 = get_metaIter(props).iterator();
-        while (tmp$_11.hasNext()) {
-          var tmp$_12 = tmp$_11.next();
-          var info = tmp$_12.component1()
-          , entry = tmp$_12.component2();
-          var key = entry.key;
-          var prop = entry.value;
-          $receiver.line_61zpoe$(key + ' = ' + indentStringHere($receiver, SwaggerGenerator$toKotlinDefault$lambda$lambda(prop, this)) + get_optComma(info));
-        }
-      }
-      finally {
-        $receiver._unindent();
-      }
-      $receiver.line_61zpoe$(')');
-    }
      else if (Kotlin.isType(type, SwaggerModel$ArrayType)) {
       $receiver.line_61zpoe$('listOf()');
     }
-     else if (Kotlin.isType(type, SwaggerModel$ObjType)) {
-      $receiver.line_61zpoe$('mapOf(');
-      $receiver._indent();
-      try {
-        var tmp$_13;
-        tmp$_13 = get_metaIter(type.fields.entries).iterator();
-        while (tmp$_13.hasNext()) {
-          var tmp$_14 = tmp$_13.next();
-          var info_0 = tmp$_14.component1()
-          , entry_0 = tmp$_14.component2();
-          var key_0 = entry_0.key;
-          var prop_0 = entry_0.value;
-          $receiver.line_61zpoe$(quote(key_0) + ' to ' + indentStringHere($receiver, SwaggerGenerator$toKotlinDefault$lambda$lambda_0(prop_0, this)) + get_optComma(info_0));
+     else if (Kotlin.isType(type, SwaggerModel$MapLikeGenType))
+      if (typed && Kotlin.isType(type, SwaggerModel$NamedObject)) {
+        var def = type.kind;
+        $receiver.line_61zpoe$(type.name + '(');
+        $receiver._indent();
+        try {
+          var tmp$_11;
+          var props = toList(def.type.fields.entries);
+          tmp$_11 = get_metaIter(props).iterator();
+          while (tmp$_11.hasNext()) {
+            var tmp$_12 = tmp$_11.next();
+            var info = tmp$_12.component1()
+            , entry = tmp$_12.component2();
+            var key = entry.key;
+            var prop = entry.value;
+            var tmp$_13;
+            if (Kotlin.isType(default_0, Map)) {
+              var tmp$_14;
+              tmp$_13 = (Kotlin.isType(tmp$_14 = default_0, Map) ? tmp$_14 : throwCCE()).get_11rb$(key);
+            }
+             else
+              tmp$_13 = null;
+            var rdefault = tmp$_13;
+            $receiver.line_61zpoe$(key + ' = ' + indentStringHere($receiver, SwaggerGenerator$toKotlinDefault$lambda$lambda(prop, rdefault, typed, this)) + get_optComma(info));
+          }
         }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$(')');
       }
-      finally {
-        $receiver._unindent();
+       else {
+        $receiver.line_61zpoe$('mapOf(');
+        $receiver._indent();
+        try {
+          var tmp$_15;
+          tmp$_15 = get_metaIter(type.fields.entries).iterator();
+          while (tmp$_15.hasNext()) {
+            var tmp$_16 = tmp$_15.next();
+            var info_0 = tmp$_16.component1()
+            , entry_0 = tmp$_16.component2();
+            var key_0 = entry_0.key;
+            var prop_0 = entry_0.value;
+            var tmp$_17;
+            if (Kotlin.isType(default_0, Map)) {
+              var tmp$_18;
+              tmp$_17 = (Kotlin.isType(tmp$_18 = default_0, Map) ? tmp$_18 : throwCCE()).get_11rb$(key_0);
+            }
+             else
+              tmp$_17 = null;
+            var rdefault_0 = tmp$_17;
+            $receiver.line_61zpoe$(quote(key_0) + ' to ' + indentStringHere($receiver, SwaggerGenerator$toKotlinDefault$lambda$lambda_0(prop_0, rdefault_0, typed, this)) + get_optComma(info_0));
+          }
+        }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$(')');
       }
-      $receiver.line_61zpoe$(')');
-    }
      else if (Kotlin.isType(type, SwaggerModel$VoidType)) {
       $receiver.line_61zpoe$('Unit');
     }
@@ -10339,17 +13916,95 @@
       throw IllegalStateException_init(("Unsupported '" + toString(type) + "'").toString());
     }
   };
+  SwaggerGenerator.prototype.toKotlinDefaultUntyped_r1jjni$ = function ($receiver, path) {
+    if (path === void 0) {
+      path = emptyList();
+    }
+    var tmp$;
+    if ($receiver == null)
+      tmp$ = null;
+    else if (Kotlin.isType($receiver, SwaggerModel$OptionalType))
+      tmp$ = null;
+    else if (Kotlin.isType($receiver, SwaggerModel$BaseStringType))
+      tmp$ = joinToString(path, '.');
+    else if (Kotlin.isType($receiver, SwaggerModel$DateType))
+      tmp$ = '';
+    else if (Kotlin.isType($receiver, SwaggerModel$DateTimeType))
+      tmp$ = '';
+    else if (Kotlin.isType($receiver, SwaggerModel$Int32Type))
+      tmp$ = 0;
+    else if (Kotlin.isType($receiver, SwaggerModel$DoubleType))
+      tmp$ = '0.0';
+    else if (Kotlin.isType($receiver, SwaggerModel$Int64Type))
+      tmp$ = '0L';
+    else if (Kotlin.isType($receiver, SwaggerModel$BoolType))
+      tmp$ = 'false';
+    else if (Kotlin.isType($receiver, SwaggerModel$ArrayType)) {
+      tmp$ = toMutableList(emptyList());
+    }
+     else if (Kotlin.isType($receiver, SwaggerModel$MapLikeGenType)) {
+      var $receiver_0 = $receiver.fields;
+      var destination = ArrayList_init_0($receiver_0.size);
+      var tmp$_0;
+      tmp$_0 = $receiver_0.entries.iterator();
+      while (tmp$_0.hasNext()) {
+        var item = tmp$_0.next();
+        destination.add_11rb$(to(item.key, this.toKotlinDefaultUntyped_r1jjni$(item.value.type, plus_0(path, item.key))));
+      }
+      tmp$ = toMutableMap(toMap(destination));
+    }
+     else if (Kotlin.isType($receiver, SwaggerModel$VoidType))
+      tmp$ = Unit;
+    else {
+      throw IllegalStateException_init(("Unsupported '" + toString($receiver) + "'").toString());
+    }
+    return tmp$;
+  };
   SwaggerGenerator.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'SwaggerGenerator',
     interfaces: [Block]
   };
+  function findField($receiver, name, path, matchType) {
+    if (path === void 0) {
+      path = emptyList();
+    }
+    if (matchType === void 0)
+      matchType = null;
+    return findField_0($receiver.type, name, path, matchType);
+  }
+  function findField_0($receiver, name, path, matchType) {
+    if (path === void 0) {
+      path = emptyList();
+    }
+    if (matchType === void 0)
+      matchType = null;
+    var tmp$;
+    if (Kotlin.isType($receiver, SwaggerModel$NamedObject))
+      return findField_0($receiver.kind.type, name, path);
+    else if (Kotlin.isType($receiver, SwaggerModel$ObjType)) {
+      tmp$ = $receiver.fields.entries.iterator();
+      while (tmp$.hasNext()) {
+        var tmp$_0 = tmp$.next();
+        var fname = tmp$_0.key;
+        var field = tmp$_0.value;
+        var fpath = plus_0(path, fname);
+        if (equals(fname, name) && (matchType == null || matchType.isInstance_s8jyv4$(field.type)))
+          return fpath;
+        var res = findField_0(field.type, name, fpath);
+        if (res != null)
+          return res;
+      }
+    }
+    return null;
+  }
   function get_optComma($receiver) {
     return $receiver.isLast ? '' : ',';
   }
-  function SwaggerModel(filename, info, servers, produces, consumes, securityDefinitions, paths, definitions) {
+  function SwaggerModel(filename, source, info, servers, produces, consumes, securityDefinitions, paths, definitions) {
     SwaggerModel$Companion_getInstance();
     this.filename = filename;
+    this.source = source;
     this.info = info;
     this.servers = servers;
     this.produces = produces;
@@ -10471,6 +14126,31 @@
     kind: Kind_CLASS,
     simpleName: 'BaseStringType',
     interfaces: [SwaggerModel$BasePrimType]
+  };
+  function SwaggerModel$Identifier(id) {
+    this.id = id;
+  }
+  SwaggerModel$Identifier.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Identifier',
+    interfaces: []
+  };
+  SwaggerModel$Identifier.prototype.component1 = function () {
+    return this.id;
+  };
+  SwaggerModel$Identifier.prototype.copy_61zpoe$ = function (id) {
+    return new SwaggerModel$Identifier(id === void 0 ? this.id : id);
+  };
+  SwaggerModel$Identifier.prototype.toString = function () {
+    return 'Identifier(id=' + Kotlin.toString(this.id) + ')';
+  };
+  SwaggerModel$Identifier.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.id) | 0;
+    return result;
+  };
+  SwaggerModel$Identifier.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.id, other.id))));
   };
   function SwaggerModel$PasswordType() {
     SwaggerModel$PasswordType_instance = this;
@@ -10757,43 +14437,6 @@
     }
     return SwaggerModel$DateTimeType_instance;
   }
-  function SwaggerModel$NamedObject(path, kind) {
-    this.path = path;
-    this.kind = kind;
-    this.ktype_r8xcpc$_0 = PrimitiveClasses$anyClass;
-    this.name = substringAfterLast(this.path, 47);
-  }
-  Object.defineProperty(SwaggerModel$NamedObject.prototype, 'ktype', {
-    get: function () {
-      return this.ktype_r8xcpc$_0;
-    }
-  });
-  SwaggerModel$NamedObject.prototype.toString = function () {
-    return this.name;
-  };
-  SwaggerModel$NamedObject.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'NamedObject',
-    interfaces: [SwaggerModel$GenType]
-  };
-  SwaggerModel$NamedObject.prototype.component1 = function () {
-    return this.path;
-  };
-  SwaggerModel$NamedObject.prototype.component2 = function () {
-    return this.kind;
-  };
-  SwaggerModel$NamedObject.prototype.copy_ikpv5x$ = function (path, kind) {
-    return new SwaggerModel$NamedObject(path === void 0 ? this.path : path, kind === void 0 ? this.kind : kind);
-  };
-  SwaggerModel$NamedObject.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.path) | 0;
-    result = result * 31 + Kotlin.hashCode(this.kind) | 0;
-    return result;
-  };
-  SwaggerModel$NamedObject.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.path, other.path) && Kotlin.equals(this.kind, other.kind)))));
-  };
   function SwaggerModel$ArrayType(items) {
     this.items = items;
     this.ktype_guyhh$_0 = getKClass(List);
@@ -10856,11 +14499,65 @@
   SwaggerModel$OptionalType.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.type, other.type))));
   };
+  function SwaggerModel$MapLikeGenType() {
+  }
+  SwaggerModel$MapLikeGenType.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'MapLikeGenType',
+    interfaces: [SwaggerModel$GenType]
+  };
+  function SwaggerModel$NamedObject(path, kind) {
+    this.path = path;
+    this.kind = kind;
+    this.ktype_r8xcpc$_0 = PrimitiveClasses$anyClass;
+    this.name = substringAfterLast(this.path, 47);
+  }
+  Object.defineProperty(SwaggerModel$NamedObject.prototype, 'ktype', {
+    get: function () {
+      return this.ktype_r8xcpc$_0;
+    }
+  });
+  SwaggerModel$NamedObject.prototype.toString = function () {
+    return this.name;
+  };
+  Object.defineProperty(SwaggerModel$NamedObject.prototype, 'fields', {
+    get: function () {
+      return this.kind.type.fields;
+    }
+  });
+  SwaggerModel$NamedObject.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'NamedObject',
+    interfaces: [SwaggerModel$MapLikeGenType]
+  };
+  SwaggerModel$NamedObject.prototype.component1 = function () {
+    return this.path;
+  };
+  SwaggerModel$NamedObject.prototype.component2 = function () {
+    return this.kind;
+  };
+  SwaggerModel$NamedObject.prototype.copy_ikpv5x$ = function (path, kind) {
+    return new SwaggerModel$NamedObject(path === void 0 ? this.path : path, kind === void 0 ? this.kind : kind);
+  };
+  SwaggerModel$NamedObject.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.path) | 0;
+    result = result * 31 + Kotlin.hashCode(this.kind) | 0;
+    return result;
+  };
+  SwaggerModel$NamedObject.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.path, other.path) && Kotlin.equals(this.kind, other.kind)))));
+  };
   function SwaggerModel$ObjType(namePath, fields) {
     this.namePath = namePath;
-    this.fields = fields;
+    this.fields_djrhwh$_0 = fields;
     this.ktype_ksz8jt$_0 = getKClass(Map);
   }
+  Object.defineProperty(SwaggerModel$ObjType.prototype, 'fields', {
+    get: function () {
+      return this.fields_djrhwh$_0;
+    }
+  });
   Object.defineProperty(SwaggerModel$ObjType.prototype, 'ktype', {
     get: function () {
       return this.ktype_ksz8jt$_0;
@@ -10872,7 +14569,7 @@
   SwaggerModel$ObjType.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'ObjType',
-    interfaces: [SwaggerModel$GenType]
+    interfaces: [SwaggerModel$MapLikeGenType]
   };
   SwaggerModel$ObjType.prototype.component1 = function () {
     return this.namePath;
@@ -11360,6 +15057,17 @@
     this.responseType = (tmp$_3 = (tmp$_2 = this.defaultResponse.schema) != null ? tmp$_2.type : null) != null ? tmp$_3 : SwaggerModel$VoidType_getInstance();
     this.methodName = ID_getInstance().normalizeMethodName_61zpoe$((tmp$_4 = this.operationId) != null ? tmp$_4 : this.method + '/' + this.path);
   }
+  SwaggerModel$PathMethodModel.prototype.securityDefinitions_mq44pj$ = function (model) {
+    var $receiver = this.security;
+    var destination = ArrayList_init_0(collectionSizeOrDefault($receiver, 10));
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      destination.add_11rb$(to(item, model.securityDefinitions.get_11rb$(item.name)));
+    }
+    return destination;
+  };
   SwaggerModel$PathMethodModel.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'PathMethodModel',
@@ -11749,7 +15457,30 @@
     }
     return new SwaggerModel$PathModel(path, toMap(destination));
   };
-  SwaggerModel$Companion.prototype.parse_hvn9da$ = function (model, filename) {
+  var trim_0 = Kotlin.kotlin.text.trim_gw00vp$;
+  SwaggerModel$Companion.prototype.parseJsonOrYaml_puj7f4$ = function (source, filename) {
+    var tmp$;
+    var tmp$_0;
+    var trimmedSource = trim_0(Kotlin.isCharSequence(tmp$_0 = source) ? tmp$_0 : throwCCE()).toString();
+    if (startsWith(trimmedSource, '{')) {
+      tmp$ = this.parseJson_puj7f4$(source, filename);
+    }
+     else {
+      tmp$ = this.parseYaml_puj7f4$(source, filename);
+    }
+    return tmp$;
+  };
+  SwaggerModel$Companion.prototype.parseJson_puj7f4$ = function (source, filename) {
+    if (filename === void 0)
+      filename = 'unknown.json';
+    return this.parse_1mu92c$(Json_getInstance().parse_61zpoe$(source), source, filename);
+  };
+  SwaggerModel$Companion.prototype.parseYaml_puj7f4$ = function (source, filename) {
+    if (filename === void 0)
+      filename = 'unknown.yaml';
+    return this.parse_1mu92c$(Yaml_getInstance().load_61zpoe$(source), source, filename);
+  };
+  SwaggerModel$Companion.prototype.parse_1mu92c$ = function (model, source, filename) {
     if (filename === void 0)
       filename = 'unknown.json';
     var $receiver = package$util.DynamicAccess;
@@ -11775,7 +15506,7 @@
       var basePath = (tmp$_3 = (tmp$_2 = $receiver.get_s2h60f$(model, 'basePath')) != null ? $receiver.get_str_mzud1t$(tmp$_2) : null) != null ? tmp$_3 : '/';
       var schemes = $receiver.get_strList_mzud1t$($receiver.get_s2h60f$(model, 'schemes'));
       var tmp$_10;
-      var element = new SwaggerModel$Server('{scheme}://' + host + basePath, info.description, mapOf(to('scheme', new SwaggerModel$ServerVariable('scheme', (tmp$_10 = firstOrNull(schemes)) != null ? tmp$_10 : 'https', '', schemes))));
+      var element = new SwaggerModel$Server('{scheme}://' + host + basePath, info.description, mapOf_0(to('scheme', new SwaggerModel$ServerVariable('scheme', (tmp$_10 = firstOrNull(schemes)) != null ? tmp$_10 : 'https', '', schemes))));
       servers.add_11rb$(element);
     }
      else {
@@ -11856,7 +15587,7 @@
       tmp$_25.call(destination_4, to(key_0, this.parseDefinition_fmz8iu$(key_0, obj_1, root)));
     }
     var definitions = toMap(destination_4);
-    return new SwaggerModel(filename, info, servers, produces, consumes, securityDefinitions, paths, definitions);
+    return new SwaggerModel(filename, source, info, servers, produces, consumes, securityDefinitions, paths, definitions);
   };
   SwaggerModel$Companion.$metadata$ = {
     kind: Kind_OBJECT,
@@ -11879,35 +15610,39 @@
     return this.filename;
   };
   SwaggerModel.prototype.component2 = function () {
-    return this.info;
+    return this.source;
   };
   SwaggerModel.prototype.component3 = function () {
-    return this.servers;
+    return this.info;
   };
   SwaggerModel.prototype.component4 = function () {
-    return this.produces;
+    return this.servers;
   };
   SwaggerModel.prototype.component5 = function () {
-    return this.consumes;
+    return this.produces;
   };
   SwaggerModel.prototype.component6 = function () {
-    return this.securityDefinitions;
+    return this.consumes;
   };
   SwaggerModel.prototype.component7 = function () {
-    return this.paths;
+    return this.securityDefinitions;
   };
   SwaggerModel.prototype.component8 = function () {
+    return this.paths;
+  };
+  SwaggerModel.prototype.component9 = function () {
     return this.definitions;
   };
-  SwaggerModel.prototype.copy_rbgpg2$ = function (filename, info, servers, produces, consumes, securityDefinitions, paths, definitions) {
-    return new SwaggerModel(filename === void 0 ? this.filename : filename, info === void 0 ? this.info : info, servers === void 0 ? this.servers : servers, produces === void 0 ? this.produces : produces, consumes === void 0 ? this.consumes : consumes, securityDefinitions === void 0 ? this.securityDefinitions : securityDefinitions, paths === void 0 ? this.paths : paths, definitions === void 0 ? this.definitions : definitions);
+  SwaggerModel.prototype.copy_h3cdz4$ = function (filename, source, info, servers, produces, consumes, securityDefinitions, paths, definitions) {
+    return new SwaggerModel(filename === void 0 ? this.filename : filename, source === void 0 ? this.source : source, info === void 0 ? this.info : info, servers === void 0 ? this.servers : servers, produces === void 0 ? this.produces : produces, consumes === void 0 ? this.consumes : consumes, securityDefinitions === void 0 ? this.securityDefinitions : securityDefinitions, paths === void 0 ? this.paths : paths, definitions === void 0 ? this.definitions : definitions);
   };
   SwaggerModel.prototype.toString = function () {
-    return 'SwaggerModel(filename=' + Kotlin.toString(this.filename) + (', info=' + Kotlin.toString(this.info)) + (', servers=' + Kotlin.toString(this.servers)) + (', produces=' + Kotlin.toString(this.produces)) + (', consumes=' + Kotlin.toString(this.consumes)) + (', securityDefinitions=' + Kotlin.toString(this.securityDefinitions)) + (', paths=' + Kotlin.toString(this.paths)) + (', definitions=' + Kotlin.toString(this.definitions)) + ')';
+    return 'SwaggerModel(filename=' + Kotlin.toString(this.filename) + (', source=' + Kotlin.toString(this.source)) + (', info=' + Kotlin.toString(this.info)) + (', servers=' + Kotlin.toString(this.servers)) + (', produces=' + Kotlin.toString(this.produces)) + (', consumes=' + Kotlin.toString(this.consumes)) + (', securityDefinitions=' + Kotlin.toString(this.securityDefinitions)) + (', paths=' + Kotlin.toString(this.paths)) + (', definitions=' + Kotlin.toString(this.definitions)) + ')';
   };
   SwaggerModel.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.filename) | 0;
+    result = result * 31 + Kotlin.hashCode(this.source) | 0;
     result = result * 31 + Kotlin.hashCode(this.info) | 0;
     result = result * 31 + Kotlin.hashCode(this.servers) | 0;
     result = result * 31 + Kotlin.hashCode(this.produces) | 0;
@@ -11918,7 +15653,7 @@
     return result;
   };
   SwaggerModel.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.filename, other.filename) && Kotlin.equals(this.info, other.info) && Kotlin.equals(this.servers, other.servers) && Kotlin.equals(this.produces, other.produces) && Kotlin.equals(this.consumes, other.consumes) && Kotlin.equals(this.securityDefinitions, other.securityDefinitions) && Kotlin.equals(this.paths, other.paths) && Kotlin.equals(this.definitions, other.definitions)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.filename, other.filename) && Kotlin.equals(this.source, other.source) && Kotlin.equals(this.info, other.info) && Kotlin.equals(this.servers, other.servers) && Kotlin.equals(this.produces, other.produces) && Kotlin.equals(this.consumes, other.consumes) && Kotlin.equals(this.securityDefinitions, other.securityDefinitions) && Kotlin.equals(this.paths, other.paths) && Kotlin.equals(this.definitions, other.definitions)))));
   };
   function toKotlin_0($receiver, type) {
     return toKotlin($receiver, type.ktype);
@@ -12038,7 +15773,27 @@
     return toMap(this.get_entries_mzud1t$($receiver));
   };
   DynamicAccess.prototype.get_uozw8h$ = function ($receiver, key) {
-    return typeof key === 'number' ? this.get_v36bcf$($receiver, key) : this.get_s2h60f$($receiver, this.get_str_mzud1t$(key));
+    return typeof key === 'number' ? this.get_v36bcf$($receiver, key) : Kotlin.isType(key, List) ? this.get_ijrmxw$($receiver, this.get_strList_mzud1t$(key)) : this.get_s2h60f$($receiver, this.get_str_mzud1t$(key));
+  };
+  DynamicAccess.prototype.get_ijrmxw$ = function ($receiver, keys) {
+    var tmp$;
+    var obj = $receiver;
+    tmp$ = keys.iterator();
+    while (tmp$.hasNext()) {
+      var key = tmp$.next();
+      obj = this.get_s2h60f$(obj, key);
+    }
+    return obj;
+  };
+  DynamicAccess.prototype.set_7kor20$ = function ($receiver, keys, value) {
+    var basePath = dropLast(keys, 1);
+    var container = this.get_ijrmxw$($receiver, basePath);
+    this.set_badpoj$(container, last(keys), value);
+  };
+  DynamicAccess.prototype.set_badpoj$ = function ($receiver, key, value) {
+    var tmp$;
+    if (Kotlin.isType($receiver, MutableMap))
+      (Kotlin.isType(tmp$ = $receiver, MutableMap) ? tmp$ : throwCCE()).put_xwzc9p$(key, value);
   };
   DynamicAccess.prototype.get_s2h60f$ = function ($receiver, key) {
     var tmp$;
@@ -12415,46 +16170,56 @@
     else if (typeof obj === 'boolean')
       b.inline_61zpoe$(obj ? 'true' : 'false');
     else if (Kotlin.isType(obj, Map)) {
-      b.line_61zpoe$('{');
-      b._indent();
-      try {
-        var entries = obj.entries;
-        var i = 0;
-        for (var tmp$ = entries.iterator(); tmp$.hasNext(); ++i) {
-          var v = tmp$.next();
-          if (i !== 0)
-            b.line_61zpoe$(',');
-          b.inline_61zpoe$(this.encodeString_1('' + toString(v.key)));
-          b.inline_61zpoe$(': ');
-          this.encodePrettyUntyped_m1go5v$(v.value, b);
-          if (i === (entries.size - 1 | 0))
-            b.line_61zpoe$('');
+      var entries = obj.entries;
+      if (entries.isEmpty()) {
+        b.inline_61zpoe$('{}');
+      }
+       else {
+        b.line_61zpoe$('{');
+        b._indent();
+        try {
+          var i = 0;
+          for (var tmp$ = entries.iterator(); tmp$.hasNext(); ++i) {
+            var v = tmp$.next();
+            if (i !== 0)
+              b.line_61zpoe$(',');
+            b.inline_61zpoe$(this.encodeString_1('' + toString(v.key)));
+            b.inline_61zpoe$(': ');
+            this.encodePrettyUntyped_m1go5v$(v.value, b);
+            if (i === (entries.size - 1 | 0))
+              b.line_61zpoe$('');
+          }
         }
+        finally {
+          b._unindent();
+        }
+        b.inline_61zpoe$('}');
       }
-      finally {
-        b._unindent();
-      }
-      b.inline_61zpoe$('}');
     }
      else if (Kotlin.isType(obj, Iterable)) {
-      b.line_61zpoe$('[');
-      b._indent();
-      try {
-        var entries_0 = toList(obj);
-        var i_0 = 0;
-        for (var tmp$_0 = entries_0.iterator(); tmp$_0.hasNext(); ++i_0) {
-          var v_0 = tmp$_0.next();
-          if (i_0 !== 0)
-            b.line_61zpoe$(',');
-          this.encodePrettyUntyped_m1go5v$(v_0, b);
-          if (i_0 === (entries_0.size - 1 | 0))
-            b.line_61zpoe$('');
+      var entries_0 = toList(obj);
+      if (entries_0.isEmpty()) {
+        b.inline_61zpoe$('[]');
+      }
+       else {
+        b.line_61zpoe$('[');
+        b._indent();
+        try {
+          var i_0 = 0;
+          for (var tmp$_0 = entries_0.iterator(); tmp$_0.hasNext(); ++i_0) {
+            var v_0 = tmp$_0.next();
+            if (i_0 !== 0)
+              b.line_61zpoe$(',');
+            this.encodePrettyUntyped_m1go5v$(v_0, b);
+            if (i_0 === (entries_0.size - 1 | 0))
+              b.line_61zpoe$('');
+          }
         }
+        finally {
+          b._unindent();
+        }
+        b.inline_61zpoe$(']');
       }
-      finally {
-        b._unindent();
-      }
-      b.inline_61zpoe$(']');
     }
      else if (typeof obj === 'string')
       b.inline_61zpoe$(this.encodeString_1(obj));
@@ -12483,9 +16248,6 @@
       switch (c) {
         case 92:
           b.append_gw00v9$('\\\\');
-          break;
-        case 47:
-          b.append_gw00v9$('\\/');
           break;
         case 39:
           b.append_gw00v9$("\\'");
@@ -12603,6 +16365,28 @@
   IteratorStepInfo.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.index0, other.index0) && Kotlin.equals(this.length, other.length) && Kotlin.equals(this.item, other.item)))));
   };
+  function Stack() {
+    this.items_0 = ArrayList_init();
+  }
+  Object.defineProperty(Stack.prototype, 'size', {
+    get: function () {
+      return this.items_0.size;
+    }
+  });
+  Stack.prototype.pop = function () {
+    return this.items_0.removeAt_za3lpa$(this.items_0.size - 1 | 0);
+  };
+  Stack.prototype.peek = function () {
+    return this.items_0.get_za3lpa$(this.items_0.size - 1 | 0);
+  };
+  Stack.prototype.push_11rb$ = function (value) {
+    return this.items_0.add_11rb$(value);
+  };
+  Stack.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Stack',
+    interfaces: []
+  };
   function StrReader(str, file, pos) {
     if (file === void 0)
       file = 'file';
@@ -12704,7 +16488,6 @@
     this.pos = this.pos + count | 0;
     return this;
   };
-  var Math_0 = Math;
   StrReader.prototype.substr_0 = function (pos, length) {
     var tmp$ = this.str;
     var b = this.length;
@@ -14384,7 +18167,6 @@
       return Unit;
     };
   }
-  var trim_0 = Kotlin.kotlin.text.trim_gw00vp$;
   function indentString(level, callback) {
     var $receiver = Indenter$Companion_getInstance().invoke_yot30u$(indentString$lambda(level, callback)).toString();
     var tmp$;
@@ -14431,6 +18213,9 @@
   MvnArtifact.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.dependency, other.dependency))));
   };
+  function stripLineBreaks($receiver) {
+    return joinToString(split($receiver, Kotlin.charArrayOf(10)), ' ');
+  }
   function escape($receiver) {
     var tmp$;
     var out = StringBuilder_init();
@@ -14891,6 +18676,240 @@
   package$util.get_hours_t5kl13$ = get_hours;
   package$util.get_minutes_t5kl13$ = get_minutes;
   package$util.get_seconds_t5kl13$ = get_seconds;
+  var package$dahgan = package$io.dahgan || (package$io.dahgan = {});
+  Object.defineProperty(package$dahgan, 'Yaml', {
+    get: Yaml_getInstance
+  });
+  Object.defineProperty(package$dahgan, 'YamlSpec', {
+    get: YamlSpec_getInstance
+  });
+  YamlDecoder.prototype.Decoder = YamlDecoder$Decoder;
+  YamlDecoder.prototype.UniChar = YamlDecoder$UniChar;
+  Object.defineProperty(YamlDecoder$UTF32Decoder, 'Companion', {
+    get: YamlDecoder$UTF32Decoder$Companion_getInstance
+  });
+  YamlDecoder.prototype.UTF32Decoder = YamlDecoder$UTF32Decoder;
+  Object.defineProperty(YamlDecoder$UTF16Decoder, 'Companion', {
+    get: YamlDecoder$UTF16Decoder$Companion_getInstance
+  });
+  YamlDecoder.prototype.UTF16Decoder = YamlDecoder$UTF16Decoder;
+  YamlDecoder.prototype.UTF8Decoder = YamlDecoder$UTF8Decoder;
+  Object.defineProperty(YamlDecoder$Encoding, 'UTF8', {
+    get: YamlDecoder$Encoding$UTF8_getInstance
+  });
+  Object.defineProperty(YamlDecoder$Encoding, 'UTF16LE', {
+    get: YamlDecoder$Encoding$UTF16LE_getInstance
+  });
+  Object.defineProperty(YamlDecoder$Encoding, 'UTF16BE', {
+    get: YamlDecoder$Encoding$UTF16BE_getInstance
+  });
+  Object.defineProperty(YamlDecoder$Encoding, 'UTF32LE', {
+    get: YamlDecoder$Encoding$UTF32LE_getInstance
+  });
+  Object.defineProperty(YamlDecoder$Encoding, 'UTF32BE', {
+    get: YamlDecoder$Encoding$UTF32BE_getInstance
+  });
+  YamlDecoder.prototype.Encoding = YamlDecoder$Encoding;
+  Object.defineProperty(YamlDecoder$Stream, 'Companion', {
+    get: YamlDecoder$Stream$Companion_getInstance
+  });
+  YamlDecoder.prototype.Stream = YamlDecoder$Stream;
+  Object.defineProperty(YamlDecoder$ByteStream, 'Companion', {
+    get: YamlDecoder$ByteStream$Companion_getInstance
+  });
+  YamlDecoder.prototype.ByteStream = YamlDecoder$ByteStream;
+  YamlDecoder.prototype.PushedStream = YamlDecoder$PushedStream;
+  Object.defineProperty(package$dahgan, 'YamlDecoder', {
+    get: YamlDecoder_getInstance
+  });
+  Object.defineProperty(YamlParser$Chomp, 'Strip', {
+    get: YamlParser$Chomp$Strip_getInstance
+  });
+  Object.defineProperty(YamlParser$Chomp, 'Clip', {
+    get: YamlParser$Chomp$Clip_getInstance
+  });
+  Object.defineProperty(YamlParser$Chomp, 'Keep', {
+    get: YamlParser$Chomp$Keep_getInstance
+  });
+  Object.defineProperty(YamlParser$Chomp, 'Companion', {
+    get: YamlParser$Chomp$Companion_getInstance
+  });
+  YamlParser.Chomp = YamlParser$Chomp;
+  Object.defineProperty(YamlParser$Code, 'Bom', {
+    get: YamlParser$Code$Bom_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'Text', {
+    get: YamlParser$Code$Text_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'Meta', {
+    get: YamlParser$Code$Meta_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'Break', {
+    get: YamlParser$Code$Break_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'LineFeed', {
+    get: YamlParser$Code$LineFeed_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'LineFold', {
+    get: YamlParser$Code$LineFold_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'Indicator', {
+    get: YamlParser$Code$Indicator_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'White', {
+    get: YamlParser$Code$White_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'Indent', {
+    get: YamlParser$Code$Indent_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'DirectivesEnd', {
+    get: YamlParser$Code$DirectivesEnd_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'DocumentEnd', {
+    get: YamlParser$Code$DocumentEnd_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'BeginEscape', {
+    get: YamlParser$Code$BeginEscape_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'EndEscape', {
+    get: YamlParser$Code$EndEscape_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'BeginComment', {
+    get: YamlParser$Code$BeginComment_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'EndComment', {
+    get: YamlParser$Code$EndComment_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'BeginDirective', {
+    get: YamlParser$Code$BeginDirective_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'EndDirective', {
+    get: YamlParser$Code$EndDirective_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'BeginTag', {
+    get: YamlParser$Code$BeginTag_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'EndTag', {
+    get: YamlParser$Code$EndTag_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'BeginHandle', {
+    get: YamlParser$Code$BeginHandle_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'EndHandle', {
+    get: YamlParser$Code$EndHandle_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'BeginAnchor', {
+    get: YamlParser$Code$BeginAnchor_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'EndAnchor', {
+    get: YamlParser$Code$EndAnchor_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'BeginProperties', {
+    get: YamlParser$Code$BeginProperties_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'EndProperties', {
+    get: YamlParser$Code$EndProperties_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'BeginAlias', {
+    get: YamlParser$Code$BeginAlias_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'EndAlias', {
+    get: YamlParser$Code$EndAlias_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'BeginScalar', {
+    get: YamlParser$Code$BeginScalar_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'EndScalar', {
+    get: YamlParser$Code$EndScalar_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'BeginSequence', {
+    get: YamlParser$Code$BeginSequence_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'EndSequence', {
+    get: YamlParser$Code$EndSequence_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'BeginMapping', {
+    get: YamlParser$Code$BeginMapping_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'EndMapping', {
+    get: YamlParser$Code$EndMapping_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'BeginPair', {
+    get: YamlParser$Code$BeginPair_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'EndPair', {
+    get: YamlParser$Code$EndPair_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'BeginNode', {
+    get: YamlParser$Code$BeginNode_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'EndNode', {
+    get: YamlParser$Code$EndNode_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'BeginDocument', {
+    get: YamlParser$Code$BeginDocument_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'EndDocument', {
+    get: YamlParser$Code$EndDocument_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'BeginStream', {
+    get: YamlParser$Code$BeginStream_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'EndStream', {
+    get: YamlParser$Code$EndStream_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'Error', {
+    get: YamlParser$Code$Error_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'Unparsed', {
+    get: YamlParser$Code$Unparsed_getInstance
+  });
+  Object.defineProperty(YamlParser$Code, 'Detected', {
+    get: YamlParser$Code$Detected_getInstance
+  });
+  YamlParser.Code = YamlParser$Code;
+  Object.defineProperty(YamlParser$Context, 'BlockOut', {
+    get: YamlParser$Context$BlockOut_getInstance
+  });
+  Object.defineProperty(YamlParser$Context, 'BlockIn', {
+    get: YamlParser$Context$BlockIn_getInstance
+  });
+  Object.defineProperty(YamlParser$Context, 'FlowOut', {
+    get: YamlParser$Context$FlowOut_getInstance
+  });
+  Object.defineProperty(YamlParser$Context, 'FlowIn', {
+    get: YamlParser$Context$FlowIn_getInstance
+  });
+  Object.defineProperty(YamlParser$Context, 'BlockKey', {
+    get: YamlParser$Context$BlockKey_getInstance
+  });
+  Object.defineProperty(YamlParser$Context, 'FlowKey', {
+    get: YamlParser$Context$FlowKey_getInstance
+  });
+  Object.defineProperty(YamlParser$Context, 'Companion', {
+    get: YamlParser$Context$Companion_getInstance
+  });
+  YamlParser.Context = YamlParser$Context;
+  YamlParser.Reply = YamlParser$Reply;
+  YamlParser$Result.Failed = YamlParser$Result$Failed;
+  YamlParser$Result.Completed = YamlParser$Result$Completed;
+  YamlParser$Result.More = YamlParser$Result$More;
+  YamlParser.Result = YamlParser$Result;
+  YamlParser.State = YamlParser$State;
+  YamlParser.Token = YamlParser$Token;
+  Object.defineProperty(YamlParser$Escapable, 'Companion', {
+    get: YamlParser$Escapable$Companion_getInstance
+  });
+  YamlParser$Escapable.Code = YamlParser$Escapable$Code;
+  YamlParser$Escapable.Text = YamlParser$Escapable$Text;
+  YamlParser.Escapable = YamlParser$Escapable;
+  YamlParser.Tokenizer = YamlParser$Tokenizer;
+  YamlParser.PatternTokenizer = YamlParser$PatternTokenizer;
+  YamlParser.ParserTokenizer = YamlParser$ParserTokenizer;
+  Object.defineProperty(YamlParser, 'Companion', {
+    get: YamlParser$Companion_getInstance
+  });
+  package$dahgan.YamlParser = YamlParser;
   package$start.BuildInfo = BuildInfo;
   package$start.FileContainer = FileContainer;
   package$start.add_ykoeqs$ = add;
@@ -15322,7 +19341,11 @@
   Object.defineProperty(SwaggerGenerator, 'Companion', {
     get: SwaggerGenerator$Companion_getInstance
   });
+  SwaggerGenerator.CompatibleLoginRoute = SwaggerGenerator$CompatibleLoginRoute;
+  SwaggerGenerator.FieldInParamRef = SwaggerGenerator$FieldInParamRef;
   package$swagger.SwaggerGenerator = SwaggerGenerator;
+  package$swagger.findField_uswiir$ = findField;
+  package$swagger.findField_maqzn5$ = findField_0;
   package$swagger.get_optComma_cbok15$ = get_optComma;
   SwaggerModel.Server = SwaggerModel$Server;
   SwaggerModel.ServerVariable = SwaggerModel$ServerVariable;
@@ -15330,6 +19353,7 @@
   SwaggerModel.GenType = SwaggerModel$GenType;
   SwaggerModel.BasePrimType = SwaggerModel$BasePrimType;
   SwaggerModel.BaseStringType = SwaggerModel$BaseStringType;
+  SwaggerModel.Identifier = SwaggerModel$Identifier;
   Object.defineProperty(SwaggerModel, 'PasswordType', {
     get: SwaggerModel$PasswordType_getInstance
   });
@@ -15367,9 +19391,10 @@
   Object.defineProperty(SwaggerModel, 'DateTimeType', {
     get: SwaggerModel$DateTimeType_getInstance
   });
-  SwaggerModel.NamedObject = SwaggerModel$NamedObject;
   SwaggerModel.ArrayType = SwaggerModel$ArrayType;
   SwaggerModel.OptionalType = SwaggerModel$OptionalType;
+  SwaggerModel.MapLikeGenType = SwaggerModel$MapLikeGenType;
+  SwaggerModel.NamedObject = SwaggerModel$NamedObject;
   SwaggerModel.ObjType = SwaggerModel$ObjType;
   SwaggerModel.Prop = SwaggerModel$Prop;
   SwaggerModel.TypeDef = SwaggerModel$TypeDef;
@@ -15440,6 +19465,7 @@
   package$util.MetaListIterable = MetaListIterable;
   package$util.get_metaIter_4mqhgw$ = get_metaIter;
   package$util.IteratorStepInfo = IteratorStepInfo;
+  package$util.Stack = Stack;
   package$util.StrReader = StrReader;
   package$util.readStringLit_4ve410$ = readStringLit;
   package$util.generate_maf521$ = generate;
@@ -15518,6 +19544,7 @@
   package$util.indentStringHere_s3zzuq$ = indentStringHere;
   package$util.indentString_c25ews$ = indentString;
   package$util.MvnArtifact = MvnArtifact;
+  package$util.stripLineBreaks_pdl1vz$ = stripLineBreaks;
   package$util.escape_pdl1vz$ = escape;
   package$util.unescape_pdl1vz$ = unescape;
   package$util.quote_5cw0du$ = quote;
