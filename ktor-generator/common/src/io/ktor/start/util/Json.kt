@@ -110,30 +110,38 @@ object Json {
             null -> b.inline("null")
             is Boolean -> b.inline(if (obj) "true" else "false")
             is Map<*, *> -> {
-                b.line("{")
-                b.indent {
-                    val entries = obj.entries
-                    for ((i, v) in entries.withIndex()) {
-                        if (i != 0) b.line(",")
-                        b.inline(encodeString("" + v.key))
-                        b.inline(": ")
-                        encodePrettyUntyped(v.value, b)
-                        if (i == entries.size - 1) b.line("")
+                val entries = obj.entries
+                if (entries.isEmpty()) {
+                    b.inline("{}")
+                } else {
+                    b.line("{")
+                    b.indent {
+                        for ((i, v) in entries.withIndex()) {
+                            if (i != 0) b.line(",")
+                            b.inline(encodeString("" + v.key))
+                            b.inline(": ")
+                            encodePrettyUntyped(v.value, b)
+                            if (i == entries.size - 1) b.line("")
+                        }
                     }
+                    b.inline("}")
                 }
-                b.inline("}")
             }
             is Iterable<*> -> {
-                b.line("[")
-                b.indent {
-                    val entries = obj.toList()
-                    for ((i, v) in entries.withIndex()) {
-                        if (i != 0) b.line(",")
-                        encodePrettyUntyped(v, b)
-                        if (i == entries.size - 1) b.line("")
+                val entries = obj.toList()
+                if (entries.isEmpty()) {
+                    b.inline("[]")
+                } else {
+                    b.line("[")
+                    b.indent {
+                        for ((i, v) in entries.withIndex()) {
+                            if (i != 0) b.line(",")
+                            encodePrettyUntyped(v, b)
+                            if (i == entries.size - 1) b.line("")
+                        }
                     }
+                    b.inline("]")
                 }
-                b.inline("]")
             }
             is String -> b.inline(encodeString(obj))
             is Number -> b.inline("$obj")
