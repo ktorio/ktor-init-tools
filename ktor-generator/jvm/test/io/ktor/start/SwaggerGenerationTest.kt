@@ -7,6 +7,7 @@ import kotlin.test.*
 
 class SwaggerGenerationTest {
     val swagger by lazy { SwaggerModel.parseJson(getResourceString("/swagger.json")!!) }
+    val swaggerYaml by lazy { SwaggerModel.parseYaml(getResourceString("/swagger.yaml")!!) }
     val uspto by lazy { SwaggerModel.parseJson(getResourceString("/uspto.json")!!) }
     val petstore3 by lazy { SwaggerModel.parseJson(getResourceString("/small-petstore3.json")!!) }
     val buildInfo by lazy { BuildInfo(fetch = { getResourceBytes(it) ?: error("Couldn't find $it") }) }
@@ -24,6 +25,17 @@ class SwaggerGenerationTest {
     @Test
     fun model2() = runBlocking {
         val model = swagger
+        val swaggerGenerator = SwaggerGenerator(model)
+        val results = generate(buildInfo, swaggerGenerator)
+        for ((file, res) in results) {
+            println("$file: $res")
+        }
+        Unit
+    }
+
+    @Test
+    fun model2Yaml() = runBlocking {
+        val model = swaggerYaml
         val swaggerGenerator = SwaggerGenerator(model)
         val results = generate(buildInfo, swaggerGenerator)
         for ((file, res) in results) {

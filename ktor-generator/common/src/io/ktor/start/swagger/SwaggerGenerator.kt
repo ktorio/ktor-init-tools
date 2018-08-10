@@ -157,7 +157,8 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                 renderFrontend(model)
             }
         }
-        fileText("api.json") {
+
+        fileText(if (model.filename.endsWith(".json")) "api.json" else "api.yaml") {
             +model.source
         }
         fileText("http-client.env.json") {

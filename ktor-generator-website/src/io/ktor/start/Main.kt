@@ -55,13 +55,13 @@ fun main(args: Array<String>) {
             try {
                 val files = dialogOpenFile("*")
                 for (file in files) {
-                    if (file.name.endsWith(".json")) {
+                    if (file.name.endsWith(".json") || file.name.endsWith(".yaml")) {
                         val jsonStr = file.read().toString(UTF8)
-                        val model = SwaggerModel.parseJson(jsonStr, filename = file.name)
+                        val model = SwaggerModel.parseJsonOrYaml(jsonStr, filename = file.name)
                         swaggerModels += model
                         updateSwaggerModels()
                     } else {
-                        error("Not a JSON file")
+                        error("Not a JSON or YAML file")
                     }
                 }
             } catch (e: CancelException) {

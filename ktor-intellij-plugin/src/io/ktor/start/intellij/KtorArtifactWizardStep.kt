@@ -66,7 +66,7 @@ class KtorArtifactWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() 
         groupId = addLabelText("GroupId", config.artifactGroup, row = 1)
         artifactId = addLabelText("ArtifactId", config.artifactId, row = 2)
         version = addLabelText("Version", config.artifactVersion, row = 3)
-        val addModelButton = JButton("Add Swagger JSON Model...")
+        val addModelButton = JButton("Add Swagger Model...")
         val modelLabel = JLabel("")
 
         fun updateModelLabel() {
@@ -103,7 +103,7 @@ class KtorArtifactWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() 
                         )
                         if (file != null) {
                             val fileStr = file.inputStream.readBytes().toString(UTF8)
-                            val model = SwaggerModel.parseJson(fileStr, filename = file.name)
+                            val model = SwaggerModel.parseJsonOrYaml(fileStr, filename = file.name)
                             config.swaggerModules = listOf(model)
                         } else {
                             config.swaggerModules = listOf()

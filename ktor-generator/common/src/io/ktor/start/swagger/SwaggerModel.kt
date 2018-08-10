@@ -1,5 +1,6 @@
 package io.ktor.start.swagger
 
+import io.dahgan.*
 import io.ktor.start.util.*
 import kotlin.reflect.*
 
@@ -62,8 +63,9 @@ data class SwaggerModel(
     interface GenType {
         val ktype: KClass<*>
     }
-    interface BasePrimType : GenType {
-    }
+
+    interface BasePrimType : GenType
+
     open class BaseStringType : BasePrimType {
         override val ktype: KClass<*> = String::class
     }
@@ -91,9 +93,7 @@ data class SwaggerModel(
         override fun toString(): String = "Unit"
     }
 
-    abstract class IntegerType : BasePrimType {
-
-    }
+    abstract class IntegerType : BasePrimType
 
     inline fun <T> T.validate(validator: (T) -> Boolean): T {
         if (!validator(this)) throw IllegalArgumentException()
@@ -403,8 +403,21 @@ data class SwaggerModel(
             }
         }
 
+        fun parseJsonOrYaml(source: String, filename: String): SwaggerModel {
+            val trimmedSource = source.trim()
+            return if (trimmedSource.startsWith("{")) {
+                parseJson(source, filename)
+            } else {
+                parseYaml(source, filename)
+            }
+        }
+
         fun parseJson(source: String, filename: String = "unknown.json"): SwaggerModel {
             return parse(Json.parse(source), source, filename)
+        }
+
+        fun parseYaml(source: String, filename: String = "unknown.yaml"): SwaggerModel {
+            return parse(Yaml.load(source), source, filename)
         }
 
         fun parse(model: Any?, source: String, filename: String = "unknown.json"): SwaggerModel {
