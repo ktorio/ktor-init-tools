@@ -32,7 +32,27 @@ object DynamicAccess {
 
     val Any?.map: Map<Any?, Any?> get() = entries.toMap()
 
-    operator fun Any?.get(key: Any?): Any? = if (key is Int) get(key) else get(key.str)
+    operator fun Any?.get(key: Any?): Any? = if (key is Int) get(key) else if (key is List<*>) get(key.strList) else get(key.str)
+
+    operator fun Any?.get(keys: List<String>): Any? {
+        var obj = this
+        for (key in keys) obj = obj[key]
+        return obj
+    }
+
+    operator fun Any?.set(keys: List<String>, value: Any?) {
+        val basePath = keys.dropLast(1)
+        val container = this[basePath]
+        container[keys.last()] = value
+    }
+
+    operator fun Any?.set(key: String, value: Any?) {
+        when {
+            this is MutableMap<*, *> -> {
+                (this as MutableMap<Any?, Any?>).put(key, value)
+            }
+        }
+    }
 
     operator fun Any?.get(key: String): Any? = when (this) {
         is Map<*, *> -> (this as Map<String, *>)[key]

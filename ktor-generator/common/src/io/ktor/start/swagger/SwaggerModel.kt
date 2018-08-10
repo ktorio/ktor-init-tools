@@ -68,6 +68,8 @@ data class SwaggerModel(
         override val ktype: KClass<*> = String::class
     }
 
+    data class Identifier(val id: String)
+
     object PasswordType : BaseStringType() {
         override fun toString(): String = "String"
     }

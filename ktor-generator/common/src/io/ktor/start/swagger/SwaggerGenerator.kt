@@ -6,6 +6,7 @@ import io.ktor.start.features.server.*
 import io.ktor.start.http.*
 import io.ktor.start.project.*
 import io.ktor.start.util.*
+import kotlin.reflect.*
 
 class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildDepsFromModel().toTypedArray()) {
     companion object {
@@ -106,8 +107,12 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                 registerInstances += "myjwt"
                 registerInstancesDecl += "val myjwt: MyJWT"
                 for (sec in model.securityDefinitions.values) {
-                    +"// ${sec.description.split("\n").joinToString("\\n")}"
+                    +"// ---------------"
                     +"// @TODO: Please, edit the application.conf # jwt.secret property and provide a secure random value for it"
+                    +"// ---------------"
+                    for (descLine in sec.description.lines()) {
+                        +"// $descLine"
+                    }
                     +"jwt(${sec.id.quote()})" {
                         +"authSchemes(\"Bearer\", \"Token\")"
                         +"verifier(myjwt.verifier)"
@@ -170,7 +175,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
 
         fileText("api.http") {
             +"# ${model.info.title.stripLineBreaks()}"
-            for (descLine in model.info.description) {
+            for (descLine in model.info.description.lines()) {
                 +"# $descLine"
             }
             +""
@@ -198,21 +203,59 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                         +Json.encodePrettyUntyped(postBody)
                     }
                     +""
-                    // Heuristics trying to figure out an auth token to store from the response fields
-                    if (path.path.endsWith("/login")) {
-                        val tokenPath = method.responseType.findField("token")
-                        if (tokenPath != null) {
-                            val responsePath = "response.body.${tokenPath.joinToString(".")}"
-                            +"> {%"
-                            +"client.assert(typeof $responsePath !== \"undefined\", \"No token returned\");"
-                            +"client.global.set(\"auth_token\", $responsePath);"
-                            +"%}"
-                            +""
-                        }
+                    val loginRoute = method.tryGetCompatibleLoginRoute()
+                    if (loginRoute != null) {
+                        val tokenPath = loginRoute.tokenPath
+                        val responsePath = "response.body.${tokenPath.joinToString(".")}"
+                        +"> {%"
+                        +"client.assert(typeof $responsePath !== \"undefined\", \"No token returned\");"
+                        +"client.global.set(\"auth_token\", $responsePath);"
+                        +"%}"
+                        +""
                     }
                 }
             }
         }
+    }
+
+    class CompatibleLoginRoute(
+        val methodModel: SwaggerModel.PathMethodModel,
+        val tokenPath: List<String>,
+        val username: FieldInParamRef?,
+        val password: FieldInParamRef?
+    )
+
+    data class FieldInParamRef(val param: SwaggerModel.Parameter, val path: List<String>) {
+        val fullPathParts = listOf(param.name) + path
+        val fullPath = fullPathParts.joinToString(".")
+    }
+
+    fun List<SwaggerModel.Parameter>.findField(vararg names: String, matchType: KClass<out SwaggerModel.GenType>? = null): FieldInParamRef? {
+        for (param in this) {
+            for (name in names) {
+                val path = param.schema.findField(name, matchType = matchType)
+                if (path != null) {
+                    return FieldInParamRef(param, path)
+                }
+            }
+        }
+        return null
+    }
+
+    // Heuristics trying to figure out an auth token to store from the response fields
+    fun SwaggerModel.PathMethodModel.tryGetCompatibleLoginRoute(): CompatibleLoginRoute? {
+        val method = this
+        val path = this.path
+        if (path.endsWith("/login")) {
+            val tokenPath = method.responseType.findField("token")
+            if (tokenPath != null) {
+                val username = parameters.findField("username", "name", "email", "user", matchType = SwaggerModel.BaseStringType::class)
+                val password = parameters.findField("password", "pass", matchType = SwaggerModel.BaseStringType::class)
+
+                return CompatibleLoginRoute(method, tokenPath, username, password)
+            }
+        }
+        return null
     }
 
     fun Indenter.renderResponse(response: SwaggerModel.Response) {
@@ -316,8 +359,25 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                             }
                             SEPARATOR {
                                 if (method.responseType != SwaggerModel.VoidType) {
+                                    val loginRoute = method.tryGetCompatibleLoginRoute()
+
+                                    val untyped = method.responseType.toKotlinDefaultUntyped()
+
+                                    if (loginRoute?.username != null) {
+                                        +"val username = ${loginRoute.username.fullPath}"
+                                        +"// @TODO: Your username/password validation here"
+                                        if (loginRoute.password != null) {
+                                            +"val password = ${loginRoute.password.fullPath}"
+                                            +"if (username != password) httpException(HttpStatusCode.Unauthorized)"
+                                        }
+                                        +"val token = myjwt.sign(username)"
+                                        Dynamic {
+                                            untyped[loginRoute.tokenPath] = SwaggerModel.Identifier("token")
+                                        }
+                                    }
+
                                     +"return ${indentString(indentLevel) {
-                                        toKotlinDefault(method.responseType, null, typed = true)
+                                        toKotlinDefault(method.responseType, untyped, typed = true)
                                     }}"
                                 }
                             }
@@ -366,7 +426,13 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         when (type) {
             null -> +"null"
             is SwaggerModel.OptionalType -> +"null"
-            is SwaggerModel.BaseStringType -> +(default?.toString() ?: "").quote()
+            is SwaggerModel.BaseStringType -> {
+                if (default is SwaggerModel.Identifier) {
+                    +default.id
+                } else {
+                    +(default?.toString() ?: "").quote()
+                }
+            }
             is SwaggerModel.DateType -> +"Date()"
             is SwaggerModel.DateTimeType -> +"Date()"
             is SwaggerModel.Int32Type -> +"${((default as? Number?)?.toInt() ?: 0)}"
@@ -384,7 +450,8 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                         val props = def.type.fields.entries.toList()
                         for ((info, entry) in props.metaIter) {
                             val (key, prop) = entry
-                            +"$key = ${indentStringHere { toKotlinDefault(prop, null, typed) }}${info.optComma}"
+                            val rdefault = if (default is Map<*, *>) default[key] else null
+                            +"$key = ${indentStringHere { toKotlinDefault(prop, rdefault, typed) }}${info.optComma}"
                         }
                     }
                     +")"
@@ -393,13 +460,9 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                     indent {
                         for ((info, entry) in type.fields.entries.metaIter) {
                             val (key, prop) = entry
+                            val rdefault = if (default is Map<*, *>) default[key] else null
                             +"${key.quote()} to ${indentStringHere {
-                                toKotlinDefault(
-                                    prop,
-                                    null,
-                                    typed
-                                )
-                            }}${info.optComma}"
+                                toKotlinDefault(prop, rdefault, typed) }}${info.optComma}"
                         }
                     }
                     +")"
@@ -421,15 +484,18 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             is SwaggerModel.DoubleType -> "0.0"
             is SwaggerModel.Int64Type -> "0L"
             is SwaggerModel.BoolType -> "false"
-            is SwaggerModel.ArrayType -> listOf<Any?>()
-            is SwaggerModel.MapLikeGenType -> fields.map { it.key to it.value.type.toKotlinDefaultUntyped(path + it.key) }.toMap()
+            is SwaggerModel.ArrayType -> listOf<Any?>().toMutableList()
+            is SwaggerModel.MapLikeGenType -> fields.map { it.key to it.value.type.toKotlinDefaultUntyped(path + it.key) }.toMap().toMutableMap()
             is SwaggerModel.VoidType -> Unit
             else -> error("Unsupported '$this'")
         }
     }
 }
 
-fun SwaggerModel.GenType.findField(name: String, path: List<String> = listOf()): List<String>? {
+fun SwaggerModel.InfoGenType<*>.findField(name: String, path: List<String> = listOf(), matchType: KClass<out SwaggerModel.GenType>? = null): List<String>? =
+    type.findField(name, path, matchType)
+
+fun SwaggerModel.GenType.findField(name: String, path: List<String> = listOf(), matchType: KClass<out SwaggerModel.GenType>? = null): List<String>? {
     when (this) {
         is SwaggerModel.NamedObject -> {
             return this.kind.type.findField(name, path)
@@ -437,7 +503,7 @@ fun SwaggerModel.GenType.findField(name: String, path: List<String> = listOf()):
         is SwaggerModel.ObjType -> {
             for ((fname, field) in this.fields) {
                 val fpath = path + fname
-                if (fname == name) return fpath
+                if (fname == name && ((matchType == null) || (matchType.isInstance(field.type)))) return fpath
                 val res = field.type.findField(name, fpath)
                 if (res != null) return res
             }
