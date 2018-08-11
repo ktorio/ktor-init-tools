@@ -211,11 +211,24 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                         +"${secdef!!.name}: Bearer {{ auth_token }}"
                     }
                     if (httpMethod == "POST" || httpMethod == "PUT") {
-                        +"Content-Type: application/json"
-                        +""
-                        val postBody = method.parameters.filter { it.inside == SwaggerModel.Inside.BODY }
-                            .map { it.name to it.schema.type.toKotlinDefaultUntyped() }.toMap()
-                        +Json.encodePrettyUntyped(postBody)
+                        val requestBody = method.requestBodyMerged.firstOrNull()
+                        if (requestBody != null) {
+                            val postBody = requestBody.schema.type.toDefaultUntyped()
+                            val contentType = requestBody.contentType
+                            +"Content-Type: $contentType"
+                            +""
+                            when (contentType) {
+                                ContentType.ApplicationJson -> {
+                                    +Json.encodePrettyUntyped(postBody)
+                                }
+                                ContentType.ApplicationXWwwFormUrlencoded -> {
+                                    +Dynamic { postBody.strEntries.map { it.first to it.second.str }.formUrlEncode() }
+                                }
+                                else -> {
+                                    +"# Unsupported contentType=$contentType"
+                                }
+                            }
+                        }
                     }
                     +""
                     val loginRoute = method.tryGetCompatibleLoginRoute()
@@ -377,7 +390,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                                 if (method.responseType != SwaggerModel.VoidType) {
                                     val loginRoute = method.tryGetCompatibleLoginRoute()
 
-                                    val untyped = method.responseType.toKotlinDefaultUntyped()
+                                    val untyped = method.responseType.toDefaultUntyped()
 
                                     if (loginRoute?.username != null) {
                                         +"val username = ${loginRoute.username.fullPath}"
@@ -442,81 +455,52 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
     fun Indenter.toKotlinDefault(type: SwaggerModel.InfoGenType<*>?, default: Any?, typed: Boolean) =
         toKotlinDefault(type?.type, default, typed)
 
-    private val Any?.tryNumber get() = when (this) {
-        null -> null
-        is Number -> this
-        else -> "$this".toDoubleOrNull()
-    }
-
-    private val Any?.tryInt get() = tryNumber?.toInt()
-    private val Any?.tryDouble get() = tryNumber?.toDouble()
-    private val Any?.tryLong get() = tryNumber?.toLong()
-    private val Any?.tryBool get() = when {
-        this is Boolean -> this
-        this is String -> !(this == "" || this == "false" || this == "0")
-        else -> tryInt
-    }
 
     fun Indenter.toKotlinDefault(type: SwaggerModel.GenType?, default: Any?, typed: Boolean) {
-        when (type) {
-            null -> +"null"
-            is SwaggerModel.OptionalType -> +"null"
-            is SwaggerModel.BaseStringType -> {
-                if (default is SwaggerModel.Identifier) +default.id else +(default?.toString() ?: "").quote()
-            }
-            is SwaggerModel.DateType -> +"Date()"
-            is SwaggerModel.DateTimeType -> +"Date()"
-            is SwaggerModel.Int32Type -> +"${default.tryInt ?: 0}"
-            is SwaggerModel.DoubleType -> +"${default.tryDouble ?: 0.0}"
-            is SwaggerModel.Int64Type -> +"${default.tryLong ?: 0L}"
-            is SwaggerModel.BoolType -> +"${default.tryBool ?: false}"
-            is SwaggerModel.ArrayType -> +"listOf()"
-            is SwaggerModel.MapLikeGenType -> {
-                if (typed && type is SwaggerModel.NamedObject) {
-                    val def = type.kind
-                    +"${type.name}("
-                    indent {
-                        val props = def.type.fields.entries.toList()
-                        for ((info, entry) in props.metaIter) {
-                            val (key, prop) = entry
-                            val rdefault = if (default is Map<*, *>) default[key] else null
-                            +"$key = ${indentStringHere { toKotlinDefault(prop, rdefault, typed) }}${info.optComma}"
-                        }
-                    }
-                    +")"
-                } else {
-                    +"mapOf("
-                    indent {
-                        for ((info, entry) in type.fields.entries.metaIter) {
-                            val (key, prop) = entry
-                            val rdefault = if (default is Map<*, *>) default[key] else null
-                            +"${key.quote()} to ${indentStringHere {
-                                toKotlinDefault(prop, rdefault, typed) }}${info.optComma}"
-                        }
-                    }
-                    +")"
+        Dynamic {
+            when (type) {
+                null -> +"null"
+                is SwaggerModel.OptionalType -> +"null"
+                is SwaggerModel.BaseStringType -> {
+                    if (default is SwaggerModel.Identifier) +default.id else +(default?.toString() ?: "").quote()
                 }
+                is SwaggerModel.DateType -> +"Date()"
+                is SwaggerModel.DateTimeType -> +"Date()"
+                is SwaggerModel.Int32Type -> +"${default.tryInt ?: 0}"
+                is SwaggerModel.DoubleType -> +"${default.tryDouble ?: 0.0}"
+                is SwaggerModel.Int64Type -> +"${default.tryLong ?: 0L}"
+                is SwaggerModel.BoolType -> +"${default.tryBool ?: false}"
+                is SwaggerModel.ArrayType -> +"listOf()"
+                is SwaggerModel.MapLikeGenType -> {
+                    if (typed && type is SwaggerModel.NamedObject) {
+                        val def = type.kind
+                        +"${type.name}("
+                        indent {
+                            val props = def.type.fields.entries.toList()
+                            for ((info, entry) in props.metaIter) {
+                                val (key, prop) = entry
+                                val rdefault = if (default is Map<*, *>) default[key] else null
+                                +"$key = ${indentStringHere { toKotlinDefault(prop, rdefault, typed) }}${info.optComma}"
+                            }
+                        }
+                        +")"
+                    } else {
+                        +"mapOf("
+                        indent {
+                            for ((info, entry) in type.fields.entries.metaIter) {
+                                val (key, prop) = entry
+                                val rdefault = if (default is Map<*, *>) default[key] else null
+                                +"${key.quote()} to ${indentStringHere {
+                                    toKotlinDefault(prop, rdefault, typed)
+                                }}${info.optComma}"
+                            }
+                        }
+                        +")"
+                    }
+                }
+                is SwaggerModel.VoidType -> +"Unit"
+                else -> error("Unsupported '$type'")
             }
-            is SwaggerModel.VoidType -> +"Unit"
-            else -> error("Unsupported '$type'")
-        }
-    }
-
-    fun SwaggerModel.GenType?.toKotlinDefaultUntyped(path: List<String> = listOf()): Any? {
-        return when (this) {
-            null -> null
-            is SwaggerModel.OptionalType -> null
-            is SwaggerModel.BaseStringType -> path.joinToString(".")
-            is SwaggerModel.DateType -> ""
-            is SwaggerModel.DateTimeType -> ""
-            is SwaggerModel.Int32Type -> 0
-            is SwaggerModel.DoubleType -> "0.0"
-            is SwaggerModel.Int64Type -> "0L"
-            is SwaggerModel.BoolType -> "false"
-            is SwaggerModel.ArrayType -> listOf<Any?>().toMutableList()
-            is SwaggerModel.MapLikeGenType -> fields.map { it.key to it.value.type.toKotlinDefaultUntyped(path + it.key) }.toMap().toMutableMap()
-            is SwaggerModel.VoidType -> Unit
-            else -> error("Unsupported '$this'")
         }
     }
 }

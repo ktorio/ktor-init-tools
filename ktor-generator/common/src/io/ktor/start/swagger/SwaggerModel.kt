@@ -1,7 +1,11 @@
 package io.ktor.start.swagger
 
 import io.dahgan.*
+import io.ktor.start.swagger.SwaggerModel.Companion.v
 import io.ktor.start.util.*
+import io.ktor.start.util.DynamicAccess.entries
+import io.ktor.start.util.DynamicAccess.get
+import io.ktor.start.util.DynamicAccess.str
 import kotlin.reflect.*
 
 /**
@@ -56,7 +60,7 @@ data class SwaggerModel(
         val enum: List<String>?
     )
 
-    class InfoGenType<T : GenType>(val type: T, val rule: JsonRule?) {
+    class InfoGenType<T : GenType>(val type: T, val rule: JsonRule?, val default: Any?) {
         override fun toString(): String = if (rule != null) "$type($rule)" else "$type"
     }
 
@@ -227,7 +231,8 @@ data class SwaggerModel(
         val security: List<Security>,
         val operationId: String?,
         val parameters: List<Parameter>,
-        val responses: List<Response>
+        val responses: List<Response>,
+        val requestBody: List<TypeWithContentType>
     ) {
         val summaryDescription = (summary + "\n\n" + (description ?: "")).trim()
 
@@ -237,13 +242,20 @@ data class SwaggerModel(
         val parametersPath = parameters.filter { it.inside == Inside.PATH }
         val parametersHeader = parameters.filter { it.inside == Inside.HEADER }
 
+        val requestBodyOld = if (parametersBody.isNotEmpty())
+            listOf(TypeWithContentType(ContentType.ApplicationJson, InfoGenType(ObjType(null, parametersBody.map { it.name to it.schema }.toMap()), null, null)))
+        else
+            listOf()
+
+        val requestBodyMerged = requestBodyOld + requestBody
+
         fun securityDefinitions(model: SwaggerModel): List<Pair<Security, SecurityDefinition?>> {
             return security.map { it to model.securityDefinitions[it.name] }
         }
 
         val errorResponses = responses.filter { it.intCode != 200 }
         val okResponse = responses.firstOrNull { it.intCode == 200 }
-        val defaultResponse = okResponse ?: Response("200", "OK", listOf(ResponseKind(ContentType.ApplicationJson, InfoGenType(StringType, rule = null))))
+        val defaultResponse = okResponse ?: Response("200", "OK", listOf(TypeWithContentType(ContentType.ApplicationJson, InfoGenType(StringType, rule = null, default = null))))
         val responseType = defaultResponse.schema?.type ?: SwaggerModel.VoidType
         val methodName = ID.normalizeMethodName(operationId ?: "$method/$path")
     }
@@ -271,7 +283,7 @@ data class SwaggerModel(
     data class Response(
         val code: String,
         val description: String,
-        val kinds: List<ResponseKind>
+        val kinds: List<TypeWithContentType>
     ) {
         val schema: InfoGenType<GenType>? = kinds.firstOrNull()?.schema
         val intCode = when (code) {
@@ -280,7 +292,7 @@ data class SwaggerModel(
         }
     }
 
-    class ResponseKind(val contentType: ContentType, val schema: InfoGenType<GenType>)
+    class TypeWithContentType(val contentType: ContentType, val schema: InfoGenType<GenType>)
 
     companion object {
         object Versions {
@@ -301,12 +313,14 @@ data class SwaggerModel(
                     val referee = parseDefinitionElement(Json.followReference(def, root, path), root, path)
                     return if (referee.type is ObjType) InfoGenType(
                         NamedObject(path, referee as InfoGenType<ObjType>),
+                        null,
                         null
                     ) else referee
                     //RefType(ref.str)
                 } else {
                     val type = def["type"]
                     val format = def["format"]
+                    val default = def["default"]
                     val rule = JsonRule.parseOrNull(def)
                     val ptype = when (type) {
                         // Primitive
@@ -350,7 +364,7 @@ data class SwaggerModel(
                             //PrimType(type.str, format?.str, def)
                         }
                     }
-                    InfoGenType(ptype, rule)
+                    InfoGenType(ptype, rule, default = default)
                 }
             }
         }
@@ -403,34 +417,39 @@ data class SwaggerModel(
                     parameters = def["parameters"].list.map { parseParameter(it, root) },
                     responses = def["responses"].let {
                         it.strEntries.map { (code, rdef) ->
-                            val kinds = arrayListOf<ResponseKind>()
-
-                            when (version.v) {
-                                SwVersion.V2 -> {
-                                    val schema = rdef["schema"]?.let { parseDefinitionElement(it, root, null) }
-                                    if (schema != null) {
-                                        kinds += ResponseKind(ContentType.ApplicationJson, schema)
-                                    }
-                                }
-                                SwVersion.V3 -> {
-                                    val content = rdef["content"]
-                                    for (fcontent in content.entries) {
-                                        val contentType = fcontent.first?.str
-                                        val contentInfo = fcontent.second
-                                        val schema = contentInfo["schema"]
-                                        val fschema = schema?.let { parseDefinitionElement(it, root, null) }
-                                        if (contentType != null && fschema != null) {
-                                            kinds += ResponseKind(ContentType(contentType), fschema)
-                                        }
-                                    }
-                                }
-                            }
-
-                            Response(code, rdef["description"].str, kinds)
+                            Response(code, rdef["description"].str, parseTypeWithContentTypes(rdef, root, version))
                         }
-                    }
+                    },
+                    requestBody = parseTypeWithContentTypes(def["requestBody"], root, version)
                 )
             }
+        }
+
+        private fun parseTypeWithContentTypes(rdef: Any?, root: Any?, version: SemVer): List<TypeWithContentType> {
+            val kinds = arrayListOf<TypeWithContentType>()
+
+            when (version.v) {
+                SwVersion.V2 -> {
+                    val schema = rdef["schema"]?.let { parseDefinitionElement(it, root, null) }
+                    if (schema != null) {
+                        kinds += TypeWithContentType(ContentType.ApplicationJson, schema)
+                    }
+                }
+                SwVersion.V3 -> {
+                    val content = rdef["content"]
+                    for (fcontent in content.entries) {
+                        val contentType = fcontent.first?.str
+                        val contentInfo = fcontent.second
+                        val schema = contentInfo["schema"]
+                        val fschema = schema?.let { parseDefinitionElement(it, root, null) }
+                        if (contentType != null && fschema != null) {
+                            kinds += TypeWithContentType(ContentType(contentType), fschema)
+                        }
+                    }
+                }
+            }
+
+            return kinds
         }
 
         enum class SwVersion {
@@ -553,3 +572,21 @@ data class SwaggerModel(
 
 fun JsonRule.toKotlin(param: String, type: SwaggerModel.GenType): String = toKotlin(param, type.ktype)
 fun JsonRule.toKotlin(param: String, type: SwaggerModel.InfoGenType<*>): String = toKotlin(param, type.type)
+
+fun SwaggerModel.GenType?.toDefaultUntyped(path: List<String> = listOf(), default: Any? = null): Any? {
+    return when (this) {
+        null -> null
+        is SwaggerModel.OptionalType -> null
+        is SwaggerModel.BaseStringType -> default?.str ?: path.joinToString(".")
+        is SwaggerModel.DateType -> ""
+        is SwaggerModel.DateTimeType -> ""
+        is SwaggerModel.Int32Type -> Dynamic { default.tryInt ?: 0 }
+        is SwaggerModel.DoubleType -> Dynamic { default.tryDouble ?: 0.0 }
+        is SwaggerModel.Int64Type -> Dynamic { default.tryLong ?: 0L }
+        is SwaggerModel.BoolType -> Dynamic { default.tryBool ?: false }
+        is SwaggerModel.ArrayType -> listOf<Any?>().toMutableList()
+        is SwaggerModel.MapLikeGenType -> fields.map { it.key to it.value.type.toDefaultUntyped(path + it.key, it.value.default) }.toMap().toMutableMap()
+        is SwaggerModel.VoidType -> Unit
+        else -> error("Unsupported '$this'")
+    }
+}

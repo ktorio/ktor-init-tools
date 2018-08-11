@@ -232,21 +232,6 @@ fun parseHash(hash: String) = try {
 
 val hashParams: Map<String, List<String>> get() = parseHash(window.location.hash)
 
-// @TODO: Encode
-fun String.formUrlDecode(): Map<String, List<String>> = this.split('&')
-    .map { val (key, value) = it.split('=', limit = 2) + listOf(""); key to value }
-    .groupBy { it.first }
-    .map { it.key to it.value.map { it.second } }
-    .toMap()
-
-fun List<Pair<String, String>>.formUrlEncode(): String {
-    return this.joinToString("&") { if (it.second.isNotEmpty()) "${it.first}=${it.second}" else it.first }
-}
-
-fun Map<String, List<String>>.formUrlEncode(): String {
-    return entries.flatMap { entry -> entry.value.map { entry.key to it } }.formUrlEncode()
-}
-
 fun addDependencies() {
     addDependenciesKind("server", ALL_SERVER_FEATURES)
     addDependenciesKind("client", ALL_CLIENT_FEATURES)

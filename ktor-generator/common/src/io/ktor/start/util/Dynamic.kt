@@ -125,4 +125,19 @@ object DynamicAccess {
     val Any?.floatArray: FloatArray get() = this as? FloatArray ?: list.map { it.float }.toFloatArray()
     val Any?.doubleArray: DoubleArray get() = this as? DoubleArray ?: list.map { it.double }.toDoubleArray()
     val Any?.longArray: LongArray get() = this as? LongArray ?: list.map { it.long }.toLongArray()
+
+    val Any?.tryNumber get() = when (this) {
+        null -> null
+        is Number -> this
+        else -> "$this".toDoubleOrNull()
+    }
+
+    val Any?.tryInt get() = tryNumber?.toInt()
+    val Any?.tryDouble get() = tryNumber?.toDouble()
+    val Any?.tryLong get() = tryNumber?.toLong()
+    val Any?.tryBool get() = when {
+        this is Boolean -> this
+        this is String -> !(this == "" || this == "false" || this == "0")
+        else -> tryInt
+    }
 }
