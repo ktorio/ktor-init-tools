@@ -220,13 +220,15 @@ data class SwaggerModel(
         val path: String,
         val method: String,
         val summary: String,
-        val description: String,
+        val description: String?,
         val tags: List<String>,
         val security: List<Security>,
         val operationId: String?,
         val parameters: List<Parameter>,
         val responses: List<Response>
     ) {
+        val summaryDescription = (summary + "\n\n" + (description ?: "")).trim()
+
         val parametersQuery = parameters.filter { it.inside == Inside.QUERY }
         val parametersBody = parameters.filter { it.inside == Inside.BODY }
         val parametersFormData = parameters.filter { it.inside == Inside.FORM_DATA }
@@ -380,7 +382,7 @@ data class SwaggerModel(
                     path = path,
                     method = method,
                     summary = def["summary"].str,
-                    description = def["description"].str,
+                    description = def["description"]?.str,
                     tags = def["tags"].strList,
                     security = def["security"].list.map {
                         val name = it.strKeys.first()

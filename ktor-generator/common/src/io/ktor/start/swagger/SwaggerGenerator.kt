@@ -189,7 +189,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                     +"###"
                     +""
 
-                    for (descLine in method.description.lines()) {
+                    for (descLine in method.summaryDescription.lines()) {
                         +"# $descLine"
                     }
 
@@ -303,7 +303,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                 for (path in paths.methodsList) {
                     SEPARATOR {
                         +"/**"
-                        for (descLine in path.description.lines()) {
+                        for (descLine in path.summaryDescription.lines()) {
                             +" * $descLine"
                         }
                         +" * "
