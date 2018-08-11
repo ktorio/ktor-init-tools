@@ -188,6 +188,7 @@ data class SwaggerModel(
 
     enum class Inside(val id: String) {
         QUERY("query"), HEADER("header"), PATH("path"), FORM_DATA("formData"), BODY("body");
+
         companion object {
             val BY_ID = values().associateBy { it.id }
             operator fun get(id: String) = BY_ID[id] ?: error("Unsupported Parameter.'in'='$id'")
@@ -196,6 +197,7 @@ data class SwaggerModel(
 
     enum class SecurityType(val id: String) {
         API_KEY("apiKey"), HTTP("http"), OAUTH2("oauth2"), OPEN_ID_CONNECT("openIdConnect");
+
         companion object {
             val BY_ID = values().associateBy { it.id }
             operator fun get(id: String) = BY_ID[id] ?: error("Unsupported Security.'type'='$id'")
@@ -241,7 +243,7 @@ data class SwaggerModel(
 
         val errorResponses = responses.filter { it.intCode != 200 }
         val okResponse = responses.firstOrNull { it.intCode == 200 }
-        val defaultResponse = okResponse ?: Response("200", "OK", InfoGenType(StringType, rule = null))
+        val defaultResponse = okResponse ?: Response("200", "OK", listOf(ResponseKind(ContentType.ApplicationJson, InfoGenType(StringType, rule = null))))
         val responseType = defaultResponse.schema?.type ?: SwaggerModel.VoidType
         val methodName = ID.normalizeMethodName(operationId ?: "$method/$path")
     }
@@ -269,13 +271,16 @@ data class SwaggerModel(
     data class Response(
         val code: String,
         val description: String,
-        val schema: InfoGenType<GenType>?
+        val kinds: List<ResponseKind>
     ) {
+        val schema: InfoGenType<GenType>? = kinds.firstOrNull()?.schema
         val intCode = when (code) {
             "default" -> 200
             else -> code.toIntOrNull() ?: -1
         }
     }
+
+    class ResponseKind(val contentType: ContentType, val schema: InfoGenType<GenType>)
 
     companion object {
         object Versions {
@@ -294,7 +299,10 @@ data class SwaggerModel(
                 if (ref != null) {
                     val path = ref.str
                     val referee = parseDefinitionElement(Json.followReference(def, root, path), root, path)
-                    return if (referee.type is ObjType) InfoGenType(NamedObject(path, referee as InfoGenType<ObjType>), null) else referee
+                    return if (referee.type is ObjType) InfoGenType(
+                        NamedObject(path, referee as InfoGenType<ObjType>),
+                        null
+                    ) else referee
                     //RefType(ref.str)
                 } else {
                     val type = def["type"]
@@ -319,7 +327,8 @@ data class SwaggerModel(
                             "date" -> DateType
                             "date-time" -> DateTimeType
                             "password" -> PasswordType
-                            else -> error("Invalid string type $format")
+                            "uriref" -> StringType
+                            else -> StringType
                         }
                         "boolean" -> BoolType
                         // Composed Types
@@ -327,10 +336,11 @@ data class SwaggerModel(
                             val items = def["items"]
                             ArrayType(parseDefinitionElement(items, root, null))
                         }
-                        "object" -> {
+                        null, "object" -> {
                             val props = def["properties"]
                             val entries =
-                                props.strEntries.map { it.first to parseDefinitionElement(it.second, root, null) }
+                                props.strEntries
+                                    .map { it.first to parseDefinitionElement(it.second, root, null) }
                                     .toMap()
                             ObjType(namePath, entries)
                         }
@@ -376,7 +386,7 @@ data class SwaggerModel(
             }
         }
 
-        fun parseMethodPath(path: String, method: String, def: Any?, root: Any?): PathMethodModel {
+        fun parseMethodPath(path: String, method: String, def: Any?, root: Any?, version: SemVer): PathMethodModel {
             return Dynamic {
                 PathMethodModel(
                     path = path,
@@ -393,31 +403,51 @@ data class SwaggerModel(
                     parameters = def["parameters"].list.map { parseParameter(it, root) },
                     responses = def["responses"].let {
                         it.strEntries.map { (code, rdef) ->
-                            Response(
-                                code,
-                                rdef["description"].str,
-                                rdef["schema"]?.let { parseDefinitionElement(it, root, null) })
+                            val kinds = arrayListOf<ResponseKind>()
+
+                            when (version.v) {
+                                SwVersion.V2 -> {
+                                    val schema = rdef["schema"]?.let { parseDefinitionElement(it, root, null) }
+                                    if (schema != null) {
+                                        kinds += ResponseKind(ContentType.ApplicationJson, schema)
+                                    }
+                                }
+                                SwVersion.V3 -> {
+                                    val content = rdef["content"]
+                                    for (fcontent in content.entries) {
+                                        val contentType = fcontent.first?.str
+                                        val contentInfo = fcontent.second
+                                        val schema = contentInfo["schema"]
+                                        val fschema = schema?.let { parseDefinitionElement(it, root, null) }
+                                        if (contentType != null && fschema != null) {
+                                            kinds += ResponseKind(ContentType(contentType), fschema)
+                                        }
+                                    }
+                                }
+                            }
+
+                            Response(code, rdef["description"].str, kinds)
                         }
                     }
                 )
             }
         }
 
-        fun parsePath(path: String, def: Any?, root: Any?): PathModel {
+        enum class SwVersion {
+            V2, V3
+        }
+
+        fun parsePath(path: String, def: Any?, root: Any?, version: SemVer): PathModel {
             return Dynamic {
                 PathModel(path, def.strEntries.map { (method, methodDef) ->
-                    method to parseMethodPath(path, method, methodDef, root)
+                    method to parseMethodPath(path, method, methodDef, root, version)
                 }.toMap())
             }
         }
 
         fun parseJsonOrYaml(source: String, filename: String): SwaggerModel {
             val trimmedSource = source.trim()
-            return if (trimmedSource.startsWith("{")) {
-                parseJson(source, filename)
-            } else {
-                parseYaml(source, filename)
-            }
+            return if (trimmedSource.startsWith("{")) parseJson(source, filename) else parseYaml(source, filename)
         }
 
         fun parseJson(source: String, filename: String = "unknown.json"): SwaggerModel {
@@ -427,6 +457,14 @@ data class SwaggerModel(
         fun parseYaml(source: String, filename: String = "unknown.yaml"): SwaggerModel {
             return parse(Yaml.load(source), source, filename)
         }
+
+        val SemVer.v get() = when {
+            this.is20() -> SwVersion.V2
+            this.is30() -> SwVersion.V3
+            else -> error("Unsupported version")
+        }
+        fun SemVer.is20() = (this < Versions.V3)
+        fun SemVer.is30() = (this >= Versions.V3)
 
         fun parse(model: Any?, source: String, filename: String = "unknown.json"): SwaggerModel {
             return Dynamic {
@@ -447,17 +485,18 @@ data class SwaggerModel(
                     )
                 }
                 val servers = arrayListOf<Server>()
-                if (semVer < Versions.V3) {
-                    val host = model["host"]?.str ?: "127.0.0.1"
-                    val basePath = model["basePath"]?.str ?: "/"
-                    val schemes = model["schemes"].strList
-                    servers += Server(
-                        url = "{scheme}://$host$basePath", description = info.description, variables = mapOf(
-                            "scheme" to ServerVariable("scheme", schemes.firstOrNull() ?: "https", "", schemes)
+                when (semVer.v) {
+                    SwVersion.V2 -> {
+                        val host = model["host"]?.str ?: "127.0.0.1"
+                        val basePath = model["basePath"]?.str ?: "/"
+                        val schemes = model["schemes"].strList
+                        servers += Server(
+                            url = "{scheme}://$host$basePath", description = info.description, variables = mapOf(
+                                "scheme" to ServerVariable("scheme", schemes.firstOrNull() ?: "https", "", schemes)
+                            )
                         )
-                    )
-                } else {
-                    for (userver in model["servers"].list) {
+                    }
+                    SwVersion.V3 -> for (userver in model["servers"].list) {
                         servers += Server(
                             url = userver["url"].str,
                             description = userver["description"]?.str ?: "API",
@@ -488,7 +527,7 @@ data class SwaggerModel(
                 }
                 val paths = model["paths"].let {
                     it.strEntries.map { (key, obj) ->
-                        key to parsePath(key, obj, root)
+                        key to parsePath(key, obj, root, semVer)
                     }.toMap()
                 }
                 val definitions = model["definitions"].let {
