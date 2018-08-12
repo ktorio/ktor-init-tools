@@ -18,15 +18,17 @@ import kotlin.reflect.*
  */
 data class SwaggerModel(
     val filename: String,
+    val untyped: Any?,
     val source: String,
     val info: SwaggerInfo,
     val servers: List<Server>,
     val produces: List<String>,
     val consumes: List<String>,
     val securityDefinitions: Map<String, SecurityDefinition>,
-    val paths: Map<String, PathModel>,
-    val definitions: Map<String, TypeDef>
+    val paths: Map<String, PathModel>
 ) {
+    val definitions: Map<String, TypeDef> = this.constructDefinitions()
+
     data class Server(
         val url: String,
         val description: String,
@@ -327,12 +329,12 @@ data class SwaggerModel(
                         "integer" -> when (format.str) {
                             "int32", "null", "" -> Int32Type
                             "int64" -> Int64Type
-                            else -> error("Invalid integer type $format")
+                            else -> Int32Type
                         }
                         "number" -> when (format.str) {
                             "float" -> FloatType
                             "double", "null", "" -> DoubleType
-                            else -> error("Invalid number type $format")
+                            else -> DoubleType
                         }
                         "string" -> when (format.str) {
                             "string", "null", "" -> StringType
@@ -341,7 +343,6 @@ data class SwaggerModel(
                             "date" -> DateType
                             "date-time" -> DateTimeType
                             "password" -> PasswordType
-                            "uriref" -> StringType
                             else -> StringType
                         }
                         "boolean" -> BoolType
@@ -373,8 +374,8 @@ data class SwaggerModel(
             //println("Definition $name:")
             return Dynamic {
                 //println(" - " + def["required"].list)
-                val type = def["type"].str
-                if (type != "object") error("Only supported 'object' definitions but found '$type'")
+                val type = def["type"]?.str
+                if (type != null && type != "object") error("Only supported 'object' definitions but found '$type'")
                 val required = def["required"].strList.toSet()
                 val props = def["properties"].let {
                     it.strEntries.map { (key, element) ->
@@ -533,6 +534,7 @@ data class SwaggerModel(
                 }
                 val produces = model["produces"].list.map { it.str }
                 val consumes = model["consumes"].list.map { it.str }
+
                 val securityDefinitions = model["securityDefinitions"].let {
                     it.strEntries.map { (kname, obj) ->
                         kname to SecurityDefinition(
@@ -549,26 +551,90 @@ data class SwaggerModel(
                         key to parsePath(key, obj, root, semVer)
                     }.toMap()
                 }
-                val definitions = model["definitions"].let {
-                    it.strEntries.map { (key, obj) ->
-                        key to parseDefinition(key, obj, root)
-                    }.toMap()
-                }
+
                 SwaggerModel(
                     filename = filename,
+                    untyped = model,
                     source = source,
                     info = info,
                     servers = servers,
                     produces = produces,
                     consumes = consumes,
                     securityDefinitions = securityDefinitions,
-                    paths = paths,
-                    definitions = definitions
+                    paths = paths
                 )
             }
         }
     }
+
+    class ReferenceFinder(val model: SwaggerModel) {
+        val out = LinkedHashSet<NamedObject>()
+        val explored = LinkedHashSet<GenType>()
+
+        fun find(): Set<NamedObject> {
+            for (path in this.model.paths.values) path.find()
+            return out
+        }
+
+        fun PathModel.find() {
+            for (method in methodsList) method.find()
+        }
+
+        fun PathMethodModel.find() {
+            for (response in responses) response.find()
+            for (param in parameters) param.find()
+            for (rb in requestBody) rb.find()
+        }
+
+        fun InfoGenType<out GenType>.find() {
+            this.type.find()
+        }
+
+        fun TypeWithContentType.find() = this.schema.find()
+
+        fun Prop.find() {
+            this.type.find()
+        }
+
+        fun Parameter.find() {
+            this.schema.find()
+        }
+
+        fun Response.find() {
+            this.schema?.find()
+        }
+
+        fun GenType.find() {
+            if (this in explored) return
+            explored += this
+
+            when (this) {
+                is NamedObject -> {
+                    out += this
+                    kind.find()
+                }
+                is MapLikeGenType -> {
+                    for (field in fields) field.value.find()
+                }
+                is ArrayType -> {
+                    items.find()
+                }
+            }
+        }
+    }
 }
+
+
+fun SwaggerModel.constructDefinitions(): Map<String, SwaggerModel.TypeDef> {
+    return SwaggerModel.ReferenceFinder(this).find().map {
+        val def = Json.followReference(untyped, untyped, it.path)
+        if (def == null) {
+            error("Found null, following path ${it.path}")
+        }
+        it.name to SwaggerModel.parseDefinition(it.name, def, untyped)
+    }.toMap()
+}
+
 
 fun JsonRule.toKotlin(param: String, type: SwaggerModel.GenType): String = toKotlin(param, type.ktype)
 fun JsonRule.toKotlin(param: String, type: SwaggerModel.InfoGenType<*>): String = toKotlin(param, type.type)
