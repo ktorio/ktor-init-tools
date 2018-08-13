@@ -37,14 +37,12 @@
   var to = Kotlin.kotlin.to_ujzrz7$;
   var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var trim = Kotlin.kotlin.text.trim_wqw3xr$;
-  var split = Kotlin.kotlin.text.split_o64adg$;
-  var listOf_0 = Kotlin.kotlin.collections.listOf_mh5how$;
   var plus = Kotlin.kotlin.collections.plus_mydzjv$;
-  var toMap = Kotlin.kotlin.collections.toMap_6hr0sd$;
-  var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var removePrefix = Kotlin.kotlin.text.removePrefix_gsj5wt$;
   var removeSuffix = Kotlin.kotlin.text.removeSuffix_gsj5wt$;
+  var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var println = Kotlin.kotlin.io.println_s8jyv4$;
+  var listOf_0 = Kotlin.kotlin.collections.listOf_mh5how$;
   var setOf = Kotlin.kotlin.collections.setOf_i5x0yv$;
   var contains = Kotlin.kotlin.text.contains_li3zpu$;
   var equals = Kotlin.equals;
@@ -55,6 +53,7 @@
   var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
   var first = Kotlin.kotlin.collections.first_2p1efm$;
   var Pair = Kotlin.kotlin.Pair;
+  var toMap = Kotlin.kotlin.collections.toMap_6hr0sd$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var UnsupportedOperationException_init = Kotlin.kotlin.UnsupportedOperationException_init;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
@@ -90,13 +89,9 @@
   var toList = Kotlin.kotlin.sequences.toList_veqyi0$;
   var mapOf_0 = Kotlin.kotlin.collections.mapOf_x2b85n$;
   var getKClass = Kotlin.getKClass;
-  var numberToDouble = Kotlin.numberToDouble;
-  var numberToLong = Kotlin.numberToLong;
   var L0 = Kotlin.Long.ZERO;
   var toList_0 = Kotlin.kotlin.collections.toList_7wnvza$;
   var Map = Kotlin.kotlin.collections.Map;
-  var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
-  var toMutableMap = Kotlin.kotlin.collections.toMutableMap_abgq59$;
   var PrimitiveClasses$stringClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.stringClass;
   var kotlin = Kotlin.kotlin;
   var Long = Kotlin.Long;
@@ -107,20 +102,28 @@
   var substringAfterLast = Kotlin.kotlin.text.substringAfterLast_8cymmc$;
   var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
   var rangeTo = Kotlin.kotlin.ranges.rangeTo_8xshf9$;
+  var filterNotNull = Kotlin.kotlin.collections.filterNotNull_m3lr2h$;
+  var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
+  var toMutableMap = Kotlin.kotlin.collections.toMutableMap_abgq59$;
   var Iterable = Kotlin.kotlin.collections.Iterable;
   var dropLast = Kotlin.kotlin.collections.dropLast_yzln2o$;
   var last = Kotlin.kotlin.collections.last_2p1efm$;
   var MutableMap = Kotlin.kotlin.collections.MutableMap;
   var toIntOrNull_0 = Kotlin.kotlin.text.toIntOrNull_6ic1pp$;
+  var numberToLong = Kotlin.numberToLong;
   var toLongOrNull = Kotlin.kotlin.text.toLongOrNull_6ic1pp$;
+  var numberToDouble = Kotlin.numberToDouble;
   var toDouble = Kotlin.kotlin.text.toDouble_pdl1vz$;
   var toFloatArray = Kotlin.kotlin.collections.toFloatArray_zwy31$;
   var toDoubleArray = Kotlin.kotlin.collections.toDoubleArray_tcduak$;
   var toLongArray = Kotlin.kotlin.collections.toLongArray_558emf$;
+  var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
+  var toString_0 = Kotlin.kotlin.text.toString_dqglrj$;
+  var padStart = Kotlin.kotlin.text.padStart_vrc1nu$;
+  var split = Kotlin.kotlin.text.split_o64adg$;
   var split_0 = Kotlin.kotlin.text.split_ip8yn$;
   var CharRange = Kotlin.kotlin.ranges.CharRange;
   var StringBuilder_init = Kotlin.kotlin.text.StringBuilder_init;
-  var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
   var withIndex = Kotlin.kotlin.collections.withIndex_7wnvza$;
   var toBoxedChar = Kotlin.toBoxedChar;
   var isWhitespace = Kotlin.kotlin.text.isWhitespace_myv2d0$;
@@ -134,8 +137,6 @@
   var joinToString_0 = Kotlin.kotlin.sequences.joinToString_853xkz$;
   var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
   var until = Kotlin.kotlin.ranges.until_ui3wc7$;
-  var toString_0 = Kotlin.kotlin.text.toString_dqglrj$;
-  var padStart = Kotlin.kotlin.text.padStart_vrc1nu$;
   var startsWith_0 = Kotlin.kotlin.text.startsWith_sgbm27$;
   var endsWith_0 = Kotlin.kotlin.text.endsWith_sgbm27$;
   var Set = Kotlin.kotlin.collections.Set;
@@ -364,6 +365,8 @@
   SwaggerModel$Inside.prototype.constructor = SwaggerModel$Inside;
   SwaggerModel$SecurityType.prototype = Object.create(Enum.prototype);
   SwaggerModel$SecurityType.prototype.constructor = SwaggerModel$SecurityType;
+  SwaggerModel$Companion$SwVersion.prototype = Object.create(Enum.prototype);
+  SwaggerModel$Companion$SwVersion.prototype.constructor = SwaggerModel$Companion$SwVersion;
   function jsObject(pairs) {
     var tmp$;
     var obj = {};
@@ -1228,84 +1231,6 @@
   }
   function get_hashParams() {
     return parseHash(window.location.hash);
-  }
-  function formUrlDecode($receiver) {
-    var $receiver_0 = split($receiver, Kotlin.charArrayOf(38));
-    var destination = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
-    var tmp$;
-    tmp$ = $receiver_0.iterator();
-    while (tmp$.hasNext()) {
-      var item = tmp$.next();
-      var tmp$_0 = destination.add_11rb$;
-      var tmp$_1 = plus(split(item, Kotlin.charArrayOf(61), void 0, 2), listOf_0(''));
-      var key = tmp$_1.get_za3lpa$(0);
-      var value = tmp$_1.get_za3lpa$(1);
-      tmp$_0.call(destination, to(key, value));
-    }
-    var destination_0 = LinkedHashMap_init();
-    var tmp$_2;
-    tmp$_2 = destination.iterator();
-    while (tmp$_2.hasNext()) {
-      var element = tmp$_2.next();
-      var key_0 = element.first;
-      var tmp$_0_0;
-      var value_0 = destination_0.get_11rb$(key_0);
-      if (value_0 == null) {
-        var answer = ArrayList_init();
-        destination_0.put_xwzc9p$(key_0, answer);
-        tmp$_0_0 = answer;
-      }
-       else {
-        tmp$_0_0 = value_0;
-      }
-      var list = tmp$_0_0;
-      list.add_11rb$(element);
-    }
-    var destination_1 = ArrayList_init_0(destination_0.size);
-    var tmp$_3;
-    tmp$_3 = destination_0.entries.iterator();
-    while (tmp$_3.hasNext()) {
-      var item_0 = tmp$_3.next();
-      var tmp$_4 = destination_1.add_11rb$;
-      var tmp$_5 = item_0.key;
-      var $receiver_1 = item_0.value;
-      var destination_2 = ArrayList_init_0(collectionSizeOrDefault($receiver_1, 10));
-      var tmp$_6;
-      tmp$_6 = $receiver_1.iterator();
-      while (tmp$_6.hasNext()) {
-        var item_1 = tmp$_6.next();
-        destination_2.add_11rb$(item_1.second);
-      }
-      tmp$_4.call(destination_1, to(tmp$_5, destination_2));
-    }
-    return toMap(destination_1);
-  }
-  function formUrlEncode$lambda(it) {
-    return it.second.length > 0 ? it.first + '=' + it.second : it.first;
-  }
-  function formUrlEncode($receiver) {
-    return joinToString($receiver, '&', void 0, void 0, void 0, void 0, formUrlEncode$lambda);
-  }
-  var addAll = Kotlin.kotlin.collections.addAll_ipc267$;
-  function formUrlEncode_0($receiver) {
-    var $receiver_0 = $receiver.entries;
-    var destination = ArrayList_init();
-    var tmp$;
-    tmp$ = $receiver_0.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      var $receiver_1 = element.value;
-      var destination_0 = ArrayList_init_0(collectionSizeOrDefault($receiver_1, 10));
-      var tmp$_0;
-      tmp$_0 = $receiver_1.iterator();
-      while (tmp$_0.hasNext()) {
-        var item = tmp$_0.next();
-        destination_0.add_11rb$(to(element.key, item));
-      }
-      var list = destination_0;
-      addAll(destination, list);
-    }
-    return formUrlEncode(destination);
   }
   function addDependencies() {
     addDependenciesKind('server', get_ALL_SERVER_FEATURES());
@@ -4874,6 +4799,7 @@
   YamlParser$PatternTokenizer.prototype.tokenize_7x97xx$ = function (name, input, withFollowing) {
     return this.patternParser_0(withFollowing, YamlParser$Companion_getInstance().wrap_0(this.pattern), YamlParser$Companion_getInstance().initialState_0(name, input));
   };
+  var addAll = Kotlin.kotlin.collections.addAll_ipc267$;
   YamlParser$PatternTokenizer.prototype.patternParser_0 = function (withFollowing, _parser, _state) {
     var tmp$;
     var out = ArrayList_init();
@@ -10278,6 +10204,7 @@
   }
   function ApplicationKt$render$lambda$lambda_1(this$ApplicationKt, this$render) {
     return function ($receiver) {
+      $receiver.line_61zpoe$('@Suppress("unused") // Referenced in application.conf');
       var $receiver_0 = 'fun Application.module()';
       var rafter = ''.length === 0 ? '' : ' ' + '';
       $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
@@ -10293,6 +10220,7 @@
         $receiver._unindent();
       }
       $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
       return Unit;
     };
   }
@@ -12225,6 +12153,49 @@
     }
     return LogBackXml_instance;
   }
+  function ContentType(str) {
+    ContentType$Companion_getInstance();
+    this.str = str;
+  }
+  function ContentType$Companion() {
+    ContentType$Companion_instance = this;
+    this.ApplicationJson = new ContentType('application/json');
+    this.ApplicationXWwwFormUrlencoded = new ContentType('application/x-www-form-urlencoded');
+  }
+  ContentType$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var ContentType$Companion_instance = null;
+  function ContentType$Companion_getInstance() {
+    if (ContentType$Companion_instance === null) {
+      new ContentType$Companion();
+    }
+    return ContentType$Companion_instance;
+  }
+  ContentType.prototype.toString = function () {
+    return this.str;
+  };
+  ContentType.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ContentType',
+    interfaces: []
+  };
+  ContentType.prototype.component1 = function () {
+    return this.str;
+  };
+  ContentType.prototype.copy_61zpoe$ = function (str) {
+    return new ContentType(str === void 0 ? this.str : str);
+  };
+  ContentType.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.str) | 0;
+    return result;
+  };
+  ContentType.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.str, other.str))));
+  };
   function JsonRule() {
     JsonRule$Companion_getInstance();
   }
@@ -12786,10 +12757,10 @@
     out.add_11rb$(element_3);
     var element_4 = JsonJacksonFeature_getInstance();
     out.add_11rb$(element_4);
+    var element_5 = AuthFeature_getInstance();
+    out.add_11rb$(element_5);
     if (!model.securityDefinitions.isEmpty()) {
-      var element_5 = AuthJwtFeature_getInstance();
-      out.add_11rb$(element_5);
-      var element_6 = AuthFeature_getInstance();
+      var element_6 = AuthJwtFeature_getInstance();
       out.add_11rb$(element_6);
     }
     return out;
@@ -12899,7 +12870,11 @@
       tmp$ = this$SwaggerGenerator.model.definitions.values.iterator();
       while (tmp$.hasNext()) {
         var def = tmp$.next();
-        $receiver.line_61zpoe$('data class ' + def.name + '(');
+        var classKeywords = !def.props.isEmpty() ? 'data class' : 'class';
+        if (def.synthetic) {
+          $receiver.line_61zpoe$('// Synthetic class name');
+        }
+        $receiver.line_61zpoe$(classKeywords + ' ' + def.name + '(');
         $receiver._indent();
         try {
           var this$SwaggerGenerator_0 = this$SwaggerGenerator;
@@ -12908,7 +12883,7 @@
           for (var tmp$_0 = props.iterator(); tmp$_0.hasNext(); ++index) {
             var prop = tmp$_0.next();
             var comma = index >= (props.size - 1 | 0) ? '' : ',';
-            $receiver.line_61zpoe$('val ' + prop.name + ': ' + this$SwaggerGenerator_0.toKotlin_slggk6$(prop.type) + comma);
+            $receiver.line_61zpoe$('val ' + prop.name + ': ' + this$SwaggerGenerator_0.toKotlinType_slggk6$(prop.type) + comma);
           }
         }
         finally {
@@ -13104,6 +13079,7 @@
   function SwaggerGenerator$render$lambda$lambda_4($receiver) {
     $receiver.line_61zpoe$('import java.util.*');
     $receiver.line_61zpoe$('import io.ktor.http.*');
+    $receiver.line_61zpoe$('import io.ktor.request.*');
     $receiver.line_61zpoe$('import io.ktor.swagger.experimental.*');
     return Unit;
   }
@@ -13384,7 +13360,7 @@
                 var httpMethod = method.method.toUpperCase();
                 this.local$$receiver.line_61zpoe$('###');
                 this.local$$receiver.line_61zpoe$('');
-                tmp$_2 = lines(method.description).iterator();
+                tmp$_2 = lines(method.summaryDescription).iterator();
                 while (tmp$_2.hasNext()) {
                   var descLine_0 = tmp$_2.next();
                   this.local$$receiver.line_61zpoe$('# ' + descLine_0);
@@ -13446,26 +13422,31 @@
                   this.local$$receiver.line_61zpoe$(ensureNotNull(secdef).name + ': Bearer {{ auth_token }}');
                 }
                 if (equals(httpMethod, 'POST') || equals(httpMethod, 'PUT')) {
-                  this.local$$receiver.line_61zpoe$('Content-Type: application/json');
-                  this.local$$receiver.line_61zpoe$('');
-                  var $receiver_2 = method.parameters;
-                  var destination_1 = ArrayList_init();
-                  var tmp$_9;
-                  tmp$_9 = $receiver_2.iterator();
-                  while (tmp$_9.hasNext()) {
-                    var element_1 = tmp$_9.next();
-                    if (element_1.inside === SwaggerModel$Inside$BODY_getInstance())
-                      destination_1.add_11rb$(element_1);
+                  var requestBody = firstOrNull(method.requestBodyMerged);
+                  if (requestBody != null) {
+                    var postBody = toDefaultUntyped(requestBody.schema.type);
+                    var contentType = requestBody.contentType;
+                    this.local$$receiver.line_61zpoe$('Content-Type: ' + contentType);
+                    this.local$$receiver.line_61zpoe$('');
+                    if (equals(contentType, ContentType$Companion_getInstance().ApplicationJson)) {
+                      this.local$$receiver.line_61zpoe$(Json_getInstance().encodePrettyUntyped_hvn9da$(postBody));
+                    }
+                     else if (equals(contentType, ContentType$Companion_getInstance().ApplicationXWwwFormUrlencoded)) {
+                      var $receiver_2 = package$util.DynamicAccess;
+                      var $receiver_3 = $receiver_2.get_strEntries_mzud1t$(postBody);
+                      var destination_1 = ArrayList_init_0(collectionSizeOrDefault($receiver_3, 10));
+                      var tmp$_9;
+                      tmp$_9 = $receiver_3.iterator();
+                      while (tmp$_9.hasNext()) {
+                        var item = tmp$_9.next();
+                        destination_1.add_11rb$(to(item.first, $receiver_2.get_str_mzud1t$(item.second)));
+                      }
+                      this.local$$receiver.line_61zpoe$(formUrlEncode(destination_1));
+                    }
+                     else {
+                      this.local$$receiver.line_61zpoe$('# Unsupported contentType=' + contentType);
+                    }
                   }
-                  var destination_2 = ArrayList_init_0(collectionSizeOrDefault(destination_1, 10));
-                  var tmp$_10;
-                  tmp$_10 = destination_1.iterator();
-                  while (tmp$_10.hasNext()) {
-                    var item = tmp$_10.next();
-                    destination_2.add_11rb$(to(item.name, this.local$this$SwaggerGenerator.toKotlinDefaultUntyped_r1jjni$(item.schema.type)));
-                  }
-                  var postBody = toMap(destination_2);
-                  this.local$$receiver.line_61zpoe$(Json_getInstance().encodePrettyUntyped_hvn9da$(postBody));
                 }
                 this.local$$receiver.line_61zpoe$('');
                 var loginRoute = this.local$this$SwaggerGenerator.tryGetCompatibleLoginRoute_k01abz$(method);
@@ -13654,7 +13635,7 @@
     return function ($receiver) {
       var tmp$, tmp$_0;
       $receiver.line_61zpoe$('/**');
-      tmp$ = lines(closure$path.description).iterator();
+      tmp$ = lines(closure$path.summaryDescription).iterator();
       while (tmp$.hasNext()) {
         var descLine = tmp$.next();
         $receiver.line_61zpoe$(' * ' + descLine);
@@ -13709,13 +13690,13 @@
           }
           var inAnnotation = tmp$_2;
           var default_0 = param_0.required ? '' : ' = ' + indentStringHere($receiver, SwaggerGenerator$renderInterface$lambda$lambda$lambda$lambda(param_0, this$SwaggerGenerator_0));
-          $receiver.line_61zpoe$(inAnnotation + ' ' + param_0.name + ': ' + this$SwaggerGenerator_0.toKotlin_slggk6$(param_0.schema) + default_0 + get_optComma(info));
+          $receiver.line_61zpoe$(inAnnotation + ' ' + param_0.name + ': ' + this$SwaggerGenerator_0.toKotlinType_slggk6$(param_0.schema) + default_0 + get_optComma(info));
         }
       }
       finally {
         $receiver._unindent();
       }
-      $receiver.line_61zpoe$('): ' + this$SwaggerGenerator.toKotlin_61zbhy$(closure$path.responseType));
+      $receiver.line_61zpoe$('): ' + this$SwaggerGenerator.toKotlinType_61zbhy$(closure$path.responseType));
       return Unit;
     };
   }
@@ -13752,9 +13733,13 @@
     $receiver.line_61zpoe$('}' + '');
     unaryPlus_0($receiver);
   };
-  function SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda(closure$method) {
+  function SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda(closure$method, this$SwaggerGenerator) {
     return function ($receiver) {
       var tmp$;
+      var reqBody = firstOrNull(closure$method.requestBody);
+      if (reqBody != null) {
+        $receiver.line_61zpoe$('val body = call().receive<' + this$SwaggerGenerator.toKotlinType_slggk6$(reqBody.schema) + '>()');
+      }
       tmp$ = closure$method.parameters.iterator();
       while (tmp$.hasNext()) {
         var param = tmp$.next();
@@ -13794,7 +13779,7 @@
     return function ($receiver) {
       if (!equals(closure$method.responseType, SwaggerModel$VoidType_getInstance())) {
         var loginRoute = this$SwaggerGenerator.tryGetCompatibleLoginRoute_k01abz$(closure$method);
-        var untyped = this$SwaggerGenerator.toKotlinDefaultUntyped_r1jjni$(closure$method.responseType);
+        var untyped = toDefaultUntyped(closure$method.responseType);
         if ((loginRoute != null ? loginRoute.username : null) != null) {
           $receiver.line_61zpoe$('val username = ' + loginRoute.username.fullPath);
           $receiver.line_61zpoe$('// @TODO: Your username/password validation here');
@@ -13824,18 +13809,18 @@
           var tmp$_0 = tmp$.next();
           var info = tmp$_0.component1()
           , param = tmp$_0.component2();
-          $receiver.line_61zpoe$(param.name + ': ' + this$SwaggerGenerator_0.toKotlin_slggk6$(param.schema) + get_optComma(info));
+          $receiver.line_61zpoe$(param.name + ': ' + this$SwaggerGenerator_0.toKotlinType_slggk6$(param.schema) + get_optComma(info));
         }
       }
       finally {
         $receiver._unindent();
       }
-      $receiver.line_61zpoe$('): ' + this$SwaggerGenerator.toKotlin_61zbhy$(closure$method.responseType) + ' {');
+      $receiver.line_61zpoe$('): ' + this$SwaggerGenerator.toKotlinType_61zbhy$(closure$method.responseType) + ' {');
       $receiver._indent();
       try {
         var closure$method_1 = closure$method;
         var this$SwaggerGenerator_1 = this$SwaggerGenerator;
-        SEPARATOR($receiver, SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda(closure$method_1));
+        SEPARATOR($receiver, SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda(closure$method_1, this$SwaggerGenerator_1));
         SEPARATOR($receiver, SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda_0(closure$method_1, this$SwaggerGenerator_1));
         SEPARATOR($receiver, SwaggerGenerator$renderBackend$lambda$lambda$lambda$lambda_1(closure$method_1, this$SwaggerGenerator_1));
       }
@@ -13896,12 +13881,12 @@
     SEPARATOR($receiver, SwaggerGenerator$renderFrontend$lambda(model));
     SEPARATOR($receiver, SwaggerGenerator$renderFrontend$lambda_0(model));
   };
-  SwaggerGenerator.prototype.toKotlin_slggk6$ = function ($receiver) {
-    return this.toKotlin_61zbhy$($receiver.type);
+  SwaggerGenerator.prototype.toKotlinType_slggk6$ = function ($receiver) {
+    return this.toKotlinType_61zbhy$($receiver.type);
   };
-  SwaggerGenerator.prototype.toKotlin_61zbhy$ = function ($receiver) {
+  SwaggerGenerator.prototype.toKotlinType_61zbhy$ = function ($receiver) {
     if (Kotlin.isType($receiver, SwaggerModel$OptionalType))
-      return this.toKotlin_slggk6$($receiver.type) + '?';
+      return this.toKotlinType_slggk6$($receiver.type) + '?';
     else if (Kotlin.isType($receiver, SwaggerModel$StringType))
       return 'String';
     else if (Kotlin.isType($receiver, SwaggerModel$PasswordType))
@@ -13921,9 +13906,9 @@
     else if (Kotlin.isType($receiver, SwaggerModel$NamedObject))
       return $receiver.name;
     else if (Kotlin.isType($receiver, SwaggerModel$ArrayType))
-      return 'List<' + this.toKotlin_slggk6$($receiver.items) + '>';
+      return 'List<' + this.toKotlinType_slggk6$($receiver.items) + '>';
     else if (Kotlin.isType($receiver, SwaggerModel$ObjType))
-      return 'Any/*Unsupported ' + $receiver.fields + '*/';
+      return $receiver.guessName;
     else if (Kotlin.isType($receiver, SwaggerModel$VoidType))
       return 'Unit';
     else {
@@ -13944,33 +13929,30 @@
   SwaggerGenerator.prototype.toKotlinDefault_bp1lbx$ = function ($receiver, type, default_0, typed) {
     this.toKotlinDefault_tv209j$($receiver, type != null ? type.type : null, default_0, typed);
   };
-  function SwaggerGenerator$toKotlinDefault$lambda$lambda(closure$prop, closure$rdefault, closure$typed, this$SwaggerGenerator) {
+  function SwaggerGenerator$toKotlinDefault$lambda$lambda$lambda(closure$prop, closure$rdefault, closure$typed, this$SwaggerGenerator) {
     return function ($receiver) {
       this$SwaggerGenerator.toKotlinDefault_bp1lbx$($receiver, closure$prop, closure$rdefault, closure$typed);
       return Unit;
     };
   }
-  function SwaggerGenerator$toKotlinDefault$lambda$lambda_0(closure$prop, closure$rdefault, closure$typed, this$SwaggerGenerator) {
+  function SwaggerGenerator$toKotlinDefault$lambda$lambda$lambda_0(closure$prop, closure$rdefault, closure$typed, this$SwaggerGenerator) {
     return function ($receiver) {
       this$SwaggerGenerator.toKotlinDefault_bp1lbx$($receiver, closure$prop, closure$rdefault, closure$typed);
       return Unit;
     };
   }
   SwaggerGenerator.prototype.toKotlinDefault_tv209j$ = function ($receiver, type, default_0, typed) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10;
+    var $receiver_0 = package$util.DynamicAccess;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
     if (type == null) {
       $receiver.line_61zpoe$('null');
     }
      else if (Kotlin.isType(type, SwaggerModel$OptionalType)) {
       $receiver.line_61zpoe$('null');
     }
-     else if (Kotlin.isType(type, SwaggerModel$BaseStringType))
-      if (Kotlin.isType(default_0, SwaggerModel$Identifier)) {
-        $receiver.line_61zpoe$(default_0.id);
-      }
-       else {
-        $receiver.line_61zpoe$(quote((tmp$ = default_0 != null ? default_0.toString() : null) != null ? tmp$ : ''));
-      }
+     else if (Kotlin.isType(type, SwaggerModel$BaseStringType)) {
+      Kotlin.isType(default_0, SwaggerModel$Identifier) ? $receiver.line_61zpoe$(default_0.id) : $receiver.line_61zpoe$(quote((tmp$ = default_0 != null ? default_0.toString() : null) != null ? tmp$ : ''));
+    }
      else if (Kotlin.isType(type, SwaggerModel$DateType)) {
       $receiver.line_61zpoe$('Date()');
     }
@@ -13978,44 +13960,37 @@
       $receiver.line_61zpoe$('Date()');
     }
      else if (Kotlin.isType(type, SwaggerModel$Int32Type)) {
-      $receiver.line_61zpoe$(((tmp$_2 = (tmp$_1 = (tmp$_0 = default_0) == null || Kotlin.isNumber(tmp$_0) ? tmp$_0 : null) != null ? numberToInt(tmp$_1) : null) != null ? tmp$_2 : 0).toString());
+      $receiver.line_61zpoe$(((tmp$_0 = $receiver_0.get_tryInt_mzud1t$(default_0)) != null ? tmp$_0 : 0).toString());
     }
      else if (Kotlin.isType(type, SwaggerModel$DoubleType)) {
-      $receiver.line_61zpoe$(((tmp$_5 = (tmp$_4 = (tmp$_3 = default_0) == null || Kotlin.isNumber(tmp$_3) ? tmp$_3 : null) != null ? numberToDouble(tmp$_4) : null) != null ? tmp$_5 : 0.0).toString());
+      $receiver.line_61zpoe$(((tmp$_1 = $receiver_0.get_tryDouble_mzud1t$(default_0)) != null ? tmp$_1 : 0.0).toString());
     }
      else if (Kotlin.isType(type, SwaggerModel$Int64Type)) {
-      $receiver.line_61zpoe$(((tmp$_8 = (tmp$_7 = (tmp$_6 = default_0) == null || Kotlin.isNumber(tmp$_6) ? tmp$_6 : null) != null ? numberToLong(tmp$_7) : null) != null ? tmp$_8 : L0).toString());
+      $receiver.line_61zpoe$(((tmp$_2 = $receiver_0.get_tryLong_mzud1t$(default_0)) != null ? tmp$_2 : L0).toString());
     }
      else if (Kotlin.isType(type, SwaggerModel$BoolType)) {
-      $receiver.line_61zpoe$(((tmp$_10 = (tmp$_9 = default_0) == null || typeof tmp$_9 === 'boolean' ? tmp$_9 : null) != null ? tmp$_10 : false).toString());
+      $receiver.line_61zpoe$(((tmp$_3 = $receiver_0.get_tryBool_mzud1t$(default_0)) != null ? tmp$_3 : false).toString());
     }
      else if (Kotlin.isType(type, SwaggerModel$ArrayType)) {
       $receiver.line_61zpoe$('listOf()');
     }
      else if (Kotlin.isType(type, SwaggerModel$MapLikeGenType))
       if (typed && Kotlin.isType(type, SwaggerModel$NamedObject)) {
-        var def = type.kind;
+        var def = type;
         $receiver.line_61zpoe$(type.name + '(');
         $receiver._indent();
         try {
-          var tmp$_11;
-          var props = toList_0(def.type.fields.entries);
-          tmp$_11 = get_metaIter(props).iterator();
-          while (tmp$_11.hasNext()) {
-            var tmp$_12 = tmp$_11.next();
-            var info = tmp$_12.component1()
-            , entry = tmp$_12.component2();
+          var tmp$_4;
+          var props = toList_0(def.fields.entries);
+          tmp$_4 = get_metaIter(props).iterator();
+          while (tmp$_4.hasNext()) {
+            var tmp$_5 = tmp$_4.next();
+            var info = tmp$_5.component1()
+            , entry = tmp$_5.component2();
             var key = entry.key;
             var prop = entry.value;
-            var tmp$_13;
-            if (Kotlin.isType(default_0, Map)) {
-              var tmp$_14;
-              tmp$_13 = (Kotlin.isType(tmp$_14 = default_0, Map) ? tmp$_14 : throwCCE()).get_11rb$(key);
-            }
-             else
-              tmp$_13 = null;
-            var rdefault = tmp$_13;
-            $receiver.line_61zpoe$(key + ' = ' + indentStringHere($receiver, SwaggerGenerator$toKotlinDefault$lambda$lambda(prop, rdefault, typed, this)) + get_optComma(info));
+            var rdefault = Kotlin.isType(default_0, Map) ? $receiver_0.get_s2h60f$(default_0, key) : null;
+            $receiver.line_61zpoe$(key + ' = ' + indentStringHere($receiver, SwaggerGenerator$toKotlinDefault$lambda$lambda$lambda(prop, rdefault, typed, this)) + get_optComma(info));
           }
         }
         finally {
@@ -14027,23 +14002,16 @@
         $receiver.line_61zpoe$('mapOf(');
         $receiver._indent();
         try {
-          var tmp$_15;
-          tmp$_15 = get_metaIter(type.fields.entries).iterator();
-          while (tmp$_15.hasNext()) {
-            var tmp$_16 = tmp$_15.next();
-            var info_0 = tmp$_16.component1()
-            , entry_0 = tmp$_16.component2();
+          var tmp$_6;
+          tmp$_6 = get_metaIter(type.fields.entries).iterator();
+          while (tmp$_6.hasNext()) {
+            var tmp$_7 = tmp$_6.next();
+            var info_0 = tmp$_7.component1()
+            , entry_0 = tmp$_7.component2();
             var key_0 = entry_0.key;
             var prop_0 = entry_0.value;
-            var tmp$_17;
-            if (Kotlin.isType(default_0, Map)) {
-              var tmp$_18;
-              tmp$_17 = (Kotlin.isType(tmp$_18 = default_0, Map) ? tmp$_18 : throwCCE()).get_11rb$(key_0);
-            }
-             else
-              tmp$_17 = null;
-            var rdefault_0 = tmp$_17;
-            $receiver.line_61zpoe$(quote(key_0) + ' to ' + indentStringHere($receiver, SwaggerGenerator$toKotlinDefault$lambda$lambda_0(prop_0, rdefault_0, typed, this)) + get_optComma(info_0));
+            var rdefault_0 = Kotlin.isType(default_0, Map) ? $receiver_0.get_s2h60f$(default_0, key_0) : null;
+            $receiver.line_61zpoe$(quote(key_0) + ' to ' + indentStringHere($receiver, SwaggerGenerator$toKotlinDefault$lambda$lambda$lambda_0(prop_0, rdefault_0, typed, this)) + get_optComma(info_0));
           }
         }
         finally {
@@ -14057,50 +14025,6 @@
      else {
       throw IllegalStateException_init(("Unsupported '" + toString(type) + "'").toString());
     }
-  };
-  SwaggerGenerator.prototype.toKotlinDefaultUntyped_r1jjni$ = function ($receiver, path) {
-    if (path === void 0) {
-      path = emptyList();
-    }
-    var tmp$;
-    if ($receiver == null)
-      tmp$ = null;
-    else if (Kotlin.isType($receiver, SwaggerModel$OptionalType))
-      tmp$ = null;
-    else if (Kotlin.isType($receiver, SwaggerModel$BaseStringType))
-      tmp$ = joinToString(path, '.');
-    else if (Kotlin.isType($receiver, SwaggerModel$DateType))
-      tmp$ = '';
-    else if (Kotlin.isType($receiver, SwaggerModel$DateTimeType))
-      tmp$ = '';
-    else if (Kotlin.isType($receiver, SwaggerModel$Int32Type))
-      tmp$ = 0;
-    else if (Kotlin.isType($receiver, SwaggerModel$DoubleType))
-      tmp$ = '0.0';
-    else if (Kotlin.isType($receiver, SwaggerModel$Int64Type))
-      tmp$ = '0L';
-    else if (Kotlin.isType($receiver, SwaggerModel$BoolType))
-      tmp$ = 'false';
-    else if (Kotlin.isType($receiver, SwaggerModel$ArrayType)) {
-      tmp$ = toMutableList(emptyList());
-    }
-     else if (Kotlin.isType($receiver, SwaggerModel$MapLikeGenType)) {
-      var $receiver_0 = $receiver.fields;
-      var destination = ArrayList_init_0($receiver_0.size);
-      var tmp$_0;
-      tmp$_0 = $receiver_0.entries.iterator();
-      while (tmp$_0.hasNext()) {
-        var item = tmp$_0.next();
-        destination.add_11rb$(to(item.key, this.toKotlinDefaultUntyped_r1jjni$(item.value.type, plus_0(path, item.key))));
-      }
-      tmp$ = toMutableMap(toMap(destination));
-    }
-     else if (Kotlin.isType($receiver, SwaggerModel$VoidType))
-      tmp$ = Unit;
-    else {
-      throw IllegalStateException_init(("Unsupported '" + toString($receiver) + "'").toString());
-    }
-    return tmp$;
   };
   SwaggerGenerator.$metadata$ = {
     kind: Kind_CLASS,
@@ -14122,9 +14046,7 @@
     if (matchType === void 0)
       matchType = null;
     var tmp$;
-    if (Kotlin.isType($receiver, SwaggerModel$NamedObject))
-      return findField_0($receiver.kind.type, name, path);
-    else if (Kotlin.isType($receiver, SwaggerModel$ObjType)) {
+    if (Kotlin.isType($receiver, SwaggerModel$MapLikeGenType)) {
       tmp$ = $receiver.fields.entries.iterator();
       while (tmp$.hasNext()) {
         var tmp$_0 = tmp$.next();
@@ -14143,9 +14065,10 @@
   function get_optComma($receiver) {
     return $receiver.isLast ? '' : ',';
   }
-  function SwaggerModel(filename, source, info, servers, produces, consumes, securityDefinitions, paths, definitions) {
+  function SwaggerModel(filename, untyped, source, info, servers, produces, consumes, securityDefinitions, paths) {
     SwaggerModel$Companion_getInstance();
     this.filename = filename;
+    this.untyped = untyped;
     this.source = source;
     this.info = info;
     this.servers = servers;
@@ -14153,7 +14076,7 @@
     this.consumes = consumes;
     this.securityDefinitions = securityDefinitions;
     this.paths = paths;
-    this.definitions = definitions;
+    this.definitions = constructDefinitions(this);
   }
   function SwaggerModel$Server(url, description, variables) {
     this.url = url;
@@ -14230,9 +14153,10 @@
   SwaggerModel$ServerVariable.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.default, other.default) && Kotlin.equals(this.description, other.description) && Kotlin.equals(this.enum, other.enum)))));
   };
-  function SwaggerModel$InfoGenType(type, rule) {
+  function SwaggerModel$InfoGenType(type, rule, default_0) {
     this.type = type;
     this.rule = rule;
+    this.default = default_0;
   }
   SwaggerModel$InfoGenType.prototype.toString = function () {
     return this.rule != null ? this.type.toString() + '(' + toString(this.rule) + ')' : this.type.toString();
@@ -14653,6 +14577,7 @@
     this.kind = kind;
     this.ktype_r8xcpc$_0 = PrimitiveClasses$anyClass;
     this.name = substringAfterLast(this.path, 47);
+    this.fields_fk2cii$_0 = this.kind.type.fields;
   }
   Object.defineProperty(SwaggerModel$NamedObject.prototype, 'ktype', {
     get: function () {
@@ -14664,7 +14589,7 @@
   };
   Object.defineProperty(SwaggerModel$NamedObject.prototype, 'fields', {
     get: function () {
-      return this.kind.type.fields;
+      return this.fields_fk2cii$_0;
     }
   });
   SwaggerModel$NamedObject.$metadata$ = {
@@ -14690,10 +14615,31 @@
   SwaggerModel$NamedObject.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.path, other.path) && Kotlin.equals(this.kind, other.kind)))));
   };
-  function SwaggerModel$ObjType(namePath, fields) {
+  function SwaggerModel$ObjType(namePath, guessPath, propList) {
     this.namePath = namePath;
-    this.fields_djrhwh$_0 = fields;
+    this.guessPath = guessPath;
+    this.propList = propList;
+    var $receiver = this.propList;
+    var capacity = coerceAtLeast(mapCapacity(collectionSizeOrDefault($receiver, 10)), 16);
+    var destination = LinkedHashMap_init_0(capacity);
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      destination.put_xwzc9p$(element.name, element);
+    }
+    this.props = destination;
+    var $receiver_0 = this.propList;
+    var destination_0 = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
+    var tmp$_0;
+    tmp$_0 = $receiver_0.iterator();
+    while (tmp$_0.hasNext()) {
+      var item = tmp$_0.next();
+      destination_0.add_11rb$(to(item.name, item.type));
+    }
+    this.fields_djrhwh$_0 = toMap(destination_0);
     this.ktype_ksz8jt$_0 = getKClass(Map);
+    this.guessName = ID_getInstance().normalizeClassName_mhpeer$(!this.guessPath.isEmpty() ? this.guessPath : listOf_0('Unknown'));
   }
   Object.defineProperty(SwaggerModel$ObjType.prototype, 'fields', {
     get: function () {
@@ -14706,7 +14652,7 @@
     }
   });
   SwaggerModel$ObjType.prototype.toString = function () {
-    return 'Any/*Unsupported {' + this.fields + '} namePath=' + toString(this.namePath) + '*/';
+    return 'Any/*Unsupported {' + this.fields + '} namePath=' + toString(this.namePath) + ', guessName=' + this.guessName + ', guessPath=' + this.guessPath + '*/';
   };
   SwaggerModel$ObjType.$metadata$ = {
     kind: Kind_CLASS,
@@ -14717,19 +14663,23 @@
     return this.namePath;
   };
   SwaggerModel$ObjType.prototype.component2 = function () {
-    return this.fields;
+    return this.guessPath;
   };
-  SwaggerModel$ObjType.prototype.copy_h4st60$ = function (namePath, fields) {
-    return new SwaggerModel$ObjType(namePath === void 0 ? this.namePath : namePath, fields === void 0 ? this.fields : fields);
+  SwaggerModel$ObjType.prototype.component3 = function () {
+    return this.propList;
+  };
+  SwaggerModel$ObjType.prototype.copy_ratv2z$ = function (namePath, guessPath, propList) {
+    return new SwaggerModel$ObjType(namePath === void 0 ? this.namePath : namePath, guessPath === void 0 ? this.guessPath : guessPath, propList === void 0 ? this.propList : propList);
   };
   SwaggerModel$ObjType.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.namePath) | 0;
-    result = result * 31 + Kotlin.hashCode(this.fields) | 0;
+    result = result * 31 + Kotlin.hashCode(this.guessPath) | 0;
+    result = result * 31 + Kotlin.hashCode(this.propList) | 0;
     return result;
   };
   SwaggerModel$ObjType.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.namePath, other.namePath) && Kotlin.equals(this.fields, other.fields)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.namePath, other.namePath) && Kotlin.equals(this.guessPath, other.guessPath) && Kotlin.equals(this.propList, other.propList)))));
   };
   function SwaggerModel$Prop(name, type, required) {
     this.name = name;
@@ -14777,37 +14727,6 @@
   };
   SwaggerModel$Prop.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.type, other.type) && Kotlin.equals(this.required, other.required)))));
-  };
-  function SwaggerModel$TypeDef(name, props) {
-    this.name = name;
-    this.props = props;
-    this.propsList = this.props.values;
-  }
-  SwaggerModel$TypeDef.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'TypeDef',
-    interfaces: []
-  };
-  SwaggerModel$TypeDef.prototype.component1 = function () {
-    return this.name;
-  };
-  SwaggerModel$TypeDef.prototype.component2 = function () {
-    return this.props;
-  };
-  SwaggerModel$TypeDef.prototype.copy_lp2q0r$ = function (name, props) {
-    return new SwaggerModel$TypeDef(name === void 0 ? this.name : name, props === void 0 ? this.props : props);
-  };
-  SwaggerModel$TypeDef.prototype.toString = function () {
-    return 'TypeDef(name=' + Kotlin.toString(this.name) + (', props=' + Kotlin.toString(this.props)) + ')';
-  };
-  SwaggerModel$TypeDef.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.name) | 0;
-    result = result * 31 + Kotlin.hashCode(this.props) | 0;
-    return result;
-  };
-  SwaggerModel$TypeDef.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.props, other.props)))));
   };
   function SwaggerModel$SecurityDefinition(id, description, type, name, inside) {
     this.id = id;
@@ -15160,7 +15079,8 @@
   SwaggerModel$Security.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.info, other.info)))));
   };
-  function SwaggerModel$PathMethodModel(path, method, summary, description, tags, security, operationId, parameters, responses) {
+  var trim_0 = Kotlin.kotlin.text.trim_gw00vp$;
+  function SwaggerModel$PathMethodModel(path, method, summary, description, tags, security, operationId, parameters, responses, requestBody) {
     this.path = path;
     this.method = method;
     this.summary = summary;
@@ -15170,73 +15090,97 @@
     this.operationId = operationId;
     this.parameters = parameters;
     this.responses = responses;
-    var $receiver = this.parameters;
+    this.requestBody = requestBody;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+    var $receiver = this.summary + '\n\n' + toString((tmp$ = this.description) != null ? tmp$ : '');
+    var tmp$_4;
+    this.summaryDescription = trim_0(Kotlin.isCharSequence(tmp$_4 = $receiver) ? tmp$_4 : throwCCE()).toString();
+    var $receiver_0 = this.parameters;
     var destination = ArrayList_init();
-    var tmp$;
-    tmp$ = $receiver.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
+    var tmp$_5;
+    tmp$_5 = $receiver_0.iterator();
+    while (tmp$_5.hasNext()) {
+      var element = tmp$_5.next();
       if (element.inside === SwaggerModel$Inside$QUERY_getInstance())
         destination.add_11rb$(element);
     }
     this.parametersQuery = destination;
-    var $receiver_0 = this.parameters;
+    var $receiver_1 = this.parameters;
     var destination_0 = ArrayList_init();
-    var tmp$_0;
-    tmp$_0 = $receiver_0.iterator();
-    while (tmp$_0.hasNext()) {
-      var element_0 = tmp$_0.next();
+    var tmp$_6;
+    tmp$_6 = $receiver_1.iterator();
+    while (tmp$_6.hasNext()) {
+      var element_0 = tmp$_6.next();
       if (element_0.inside === SwaggerModel$Inside$BODY_getInstance())
         destination_0.add_11rb$(element_0);
     }
     this.parametersBody = destination_0;
-    var $receiver_1 = this.parameters;
+    var $receiver_2 = this.parameters;
     var destination_1 = ArrayList_init();
-    var tmp$_1;
-    tmp$_1 = $receiver_1.iterator();
-    while (tmp$_1.hasNext()) {
-      var element_1 = tmp$_1.next();
+    var tmp$_7;
+    tmp$_7 = $receiver_2.iterator();
+    while (tmp$_7.hasNext()) {
+      var element_1 = tmp$_7.next();
       if (element_1.inside === SwaggerModel$Inside$FORM_DATA_getInstance())
         destination_1.add_11rb$(element_1);
     }
     this.parametersFormData = destination_1;
-    var $receiver_2 = this.parameters;
+    var $receiver_3 = this.parameters;
     var destination_2 = ArrayList_init();
-    var tmp$_2;
-    tmp$_2 = $receiver_2.iterator();
-    while (tmp$_2.hasNext()) {
-      var element_2 = tmp$_2.next();
+    var tmp$_8;
+    tmp$_8 = $receiver_3.iterator();
+    while (tmp$_8.hasNext()) {
+      var element_2 = tmp$_8.next();
       if (element_2.inside === SwaggerModel$Inside$PATH_getInstance())
         destination_2.add_11rb$(element_2);
     }
     this.parametersPath = destination_2;
-    var $receiver_3 = this.parameters;
+    var $receiver_4 = this.parameters;
     var destination_3 = ArrayList_init();
-    var tmp$_3;
-    tmp$_3 = $receiver_3.iterator();
-    while (tmp$_3.hasNext()) {
-      var element_3 = tmp$_3.next();
+    var tmp$_9;
+    tmp$_9 = $receiver_4.iterator();
+    while (tmp$_9.hasNext()) {
+      var element_3 = tmp$_9.next();
       if (element_3.inside === SwaggerModel$Inside$HEADER_getInstance())
         destination_3.add_11rb$(element_3);
     }
     this.parametersHeader = destination_3;
-    var $receiver_4 = this.responses;
-    var destination_4 = ArrayList_init();
-    var tmp$_4;
-    tmp$_4 = $receiver_4.iterator();
-    while (tmp$_4.hasNext()) {
-      var element_4 = tmp$_4.next();
-      if (element_4.intCode !== 200)
-        destination_4.add_11rb$(element_4);
+    var tmp$_10;
+    if (!this.parametersBody.isEmpty()) {
+      var tmp$_11 = ContentType$Companion_getInstance().ApplicationJson;
+      var tmp$_12 = emptyList();
+      var $receiver_5 = this.parametersBody;
+      var destination_4 = ArrayList_init_0(collectionSizeOrDefault($receiver_5, 10));
+      var tmp$_13;
+      tmp$_13 = $receiver_5.iterator();
+      while (tmp$_13.hasNext()) {
+        var item = tmp$_13.next();
+        destination_4.add_11rb$(new SwaggerModel$Prop(item.name, item.schema, true));
+      }
+      tmp$_10 = listOf_0(new SwaggerModel$TypeWithContentType(tmp$_11, new SwaggerModel$InfoGenType(new SwaggerModel$ObjType(null, tmp$_12, destination_4), null, null)));
     }
-    this.errorResponses = destination_4;
-    var $receiver_5 = this.responses;
+     else {
+      tmp$_10 = emptyList();
+    }
+    this.requestBodyOld = tmp$_10;
+    this.requestBodyMerged = plus(this.requestBodyOld, this.requestBody);
+    var $receiver_6 = this.responses;
+    var destination_5 = ArrayList_init();
+    var tmp$_14;
+    tmp$_14 = $receiver_6.iterator();
+    while (tmp$_14.hasNext()) {
+      var element_4 = tmp$_14.next();
+      if (element_4.intCode !== 200)
+        destination_5.add_11rb$(element_4);
+    }
+    this.errorResponses = destination_5;
+    var $receiver_7 = this.responses;
     var firstOrNull$result;
     firstOrNull$break: do {
-      var tmp$_5;
-      tmp$_5 = $receiver_5.iterator();
-      while (tmp$_5.hasNext()) {
-        var element_5 = tmp$_5.next();
+      var tmp$_15;
+      tmp$_15 = $receiver_7.iterator();
+      while (tmp$_15.hasNext()) {
+        var element_5 = tmp$_15.next();
         if (element_5.intCode === 200) {
           firstOrNull$result = element_5;
           break firstOrNull$break;
@@ -15246,10 +15190,9 @@
     }
      while (false);
     this.okResponse = firstOrNull$result;
-    var tmp$_6, tmp$_7, tmp$_8, tmp$_9;
-    this.defaultResponse = (tmp$_6 = this.okResponse) != null ? tmp$_6 : new SwaggerModel$Response('200', 'OK', new SwaggerModel$InfoGenType(SwaggerModel$StringType_getInstance(), null));
-    this.responseType = (tmp$_8 = (tmp$_7 = this.defaultResponse.schema) != null ? tmp$_7.type : null) != null ? tmp$_8 : SwaggerModel$VoidType_getInstance();
-    this.methodName = ID_getInstance().normalizeMethodName_61zpoe$((tmp$_9 = this.operationId) != null ? tmp$_9 : this.method + '/' + this.path);
+    this.defaultResponse = (tmp$_0 = this.okResponse) != null ? tmp$_0 : new SwaggerModel$Response('200', 'OK', listOf_0(new SwaggerModel$TypeWithContentType(ContentType$Companion_getInstance().ApplicationJson, new SwaggerModel$InfoGenType(SwaggerModel$StringType_getInstance(), null, null))));
+    this.responseType = (tmp$_2 = (tmp$_1 = this.defaultResponse.schema) != null ? tmp$_1.type : null) != null ? tmp$_2 : SwaggerModel$VoidType_getInstance();
+    this.methodName = ID_getInstance().normalizeMethodName_61zpoe$((tmp$_3 = this.operationId) != null ? tmp$_3 : this.method + '/' + this.path);
   }
   SwaggerModel$PathMethodModel.prototype.securityDefinitions_mq44pj$ = function (model) {
     var $receiver = this.security;
@@ -15294,11 +15237,14 @@
   SwaggerModel$PathMethodModel.prototype.component9 = function () {
     return this.responses;
   };
-  SwaggerModel$PathMethodModel.prototype.copy_z5i89s$ = function (path, method, summary, description, tags, security, operationId, parameters, responses) {
-    return new SwaggerModel$PathMethodModel(path === void 0 ? this.path : path, method === void 0 ? this.method : method, summary === void 0 ? this.summary : summary, description === void 0 ? this.description : description, tags === void 0 ? this.tags : tags, security === void 0 ? this.security : security, operationId === void 0 ? this.operationId : operationId, parameters === void 0 ? this.parameters : parameters, responses === void 0 ? this.responses : responses);
+  SwaggerModel$PathMethodModel.prototype.component10 = function () {
+    return this.requestBody;
+  };
+  SwaggerModel$PathMethodModel.prototype.copy_baqe4y$ = function (path, method, summary, description, tags, security, operationId, parameters, responses, requestBody) {
+    return new SwaggerModel$PathMethodModel(path === void 0 ? this.path : path, method === void 0 ? this.method : method, summary === void 0 ? this.summary : summary, description === void 0 ? this.description : description, tags === void 0 ? this.tags : tags, security === void 0 ? this.security : security, operationId === void 0 ? this.operationId : operationId, parameters === void 0 ? this.parameters : parameters, responses === void 0 ? this.responses : responses, requestBody === void 0 ? this.requestBody : requestBody);
   };
   SwaggerModel$PathMethodModel.prototype.toString = function () {
-    return 'PathMethodModel(path=' + Kotlin.toString(this.path) + (', method=' + Kotlin.toString(this.method)) + (', summary=' + Kotlin.toString(this.summary)) + (', description=' + Kotlin.toString(this.description)) + (', tags=' + Kotlin.toString(this.tags)) + (', security=' + Kotlin.toString(this.security)) + (', operationId=' + Kotlin.toString(this.operationId)) + (', parameters=' + Kotlin.toString(this.parameters)) + (', responses=' + Kotlin.toString(this.responses)) + ')';
+    return 'PathMethodModel(path=' + Kotlin.toString(this.path) + (', method=' + Kotlin.toString(this.method)) + (', summary=' + Kotlin.toString(this.summary)) + (', description=' + Kotlin.toString(this.description)) + (', tags=' + Kotlin.toString(this.tags)) + (', security=' + Kotlin.toString(this.security)) + (', operationId=' + Kotlin.toString(this.operationId)) + (', parameters=' + Kotlin.toString(this.parameters)) + (', responses=' + Kotlin.toString(this.responses)) + (', requestBody=' + Kotlin.toString(this.requestBody)) + ')';
   };
   SwaggerModel$PathMethodModel.prototype.hashCode = function () {
     var result = 0;
@@ -15311,10 +15257,11 @@
     result = result * 31 + Kotlin.hashCode(this.operationId) | 0;
     result = result * 31 + Kotlin.hashCode(this.parameters) | 0;
     result = result * 31 + Kotlin.hashCode(this.responses) | 0;
+    result = result * 31 + Kotlin.hashCode(this.requestBody) | 0;
     return result;
   };
   SwaggerModel$PathMethodModel.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.path, other.path) && Kotlin.equals(this.method, other.method) && Kotlin.equals(this.summary, other.summary) && Kotlin.equals(this.description, other.description) && Kotlin.equals(this.tags, other.tags) && Kotlin.equals(this.security, other.security) && Kotlin.equals(this.operationId, other.operationId) && Kotlin.equals(this.parameters, other.parameters) && Kotlin.equals(this.responses, other.responses)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.path, other.path) && Kotlin.equals(this.method, other.method) && Kotlin.equals(this.summary, other.summary) && Kotlin.equals(this.description, other.description) && Kotlin.equals(this.tags, other.tags) && Kotlin.equals(this.security, other.security) && Kotlin.equals(this.operationId, other.operationId) && Kotlin.equals(this.parameters, other.parameters) && Kotlin.equals(this.responses, other.responses) && Kotlin.equals(this.requestBody, other.requestBody)))));
   };
   function SwaggerModel$PathModel(path, methods) {
     this.path = path;
@@ -15402,16 +15349,17 @@
   SwaggerModel$SwaggerInfo.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.title, other.title) && Kotlin.equals(this.description, other.description) && Kotlin.equals(this.termsOfService, other.termsOfService) && Kotlin.equals(this.version, other.version) && Kotlin.equals(this.contact, other.contact) && Kotlin.equals(this.license, other.license)))));
   };
-  function SwaggerModel$Response(code, description, schema) {
+  function SwaggerModel$Response(code, description, kinds) {
     this.code = code;
     this.description = description;
-    this.schema = schema;
-    var tmp$, tmp$_0;
+    this.kinds = kinds;
+    var tmp$, tmp$_0, tmp$_1;
+    this.schema = (tmp$ = firstOrNull(this.kinds)) != null ? tmp$.schema : null;
     if (equals(this.code, 'default'))
-      tmp$_0 = 200;
+      tmp$_1 = 200;
     else
-      tmp$_0 = (tmp$ = toIntOrNull(this.code)) != null ? tmp$ : -1;
-    this.intCode = tmp$_0;
+      tmp$_1 = (tmp$_0 = toIntOrNull(this.code)) != null ? tmp$_0 : -1;
+    this.intCode = tmp$_1;
   }
   SwaggerModel$Response.$metadata$ = {
     kind: Kind_CLASS,
@@ -15425,23 +15373,32 @@
     return this.description;
   };
   SwaggerModel$Response.prototype.component3 = function () {
-    return this.schema;
+    return this.kinds;
   };
-  SwaggerModel$Response.prototype.copy_gnagun$ = function (code, description, schema) {
-    return new SwaggerModel$Response(code === void 0 ? this.code : code, description === void 0 ? this.description : description, schema === void 0 ? this.schema : schema);
+  SwaggerModel$Response.prototype.copy_bjmnon$ = function (code, description, kinds) {
+    return new SwaggerModel$Response(code === void 0 ? this.code : code, description === void 0 ? this.description : description, kinds === void 0 ? this.kinds : kinds);
   };
   SwaggerModel$Response.prototype.toString = function () {
-    return 'Response(code=' + Kotlin.toString(this.code) + (', description=' + Kotlin.toString(this.description)) + (', schema=' + Kotlin.toString(this.schema)) + ')';
+    return 'Response(code=' + Kotlin.toString(this.code) + (', description=' + Kotlin.toString(this.description)) + (', kinds=' + Kotlin.toString(this.kinds)) + ')';
   };
   SwaggerModel$Response.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.code) | 0;
     result = result * 31 + Kotlin.hashCode(this.description) | 0;
-    result = result * 31 + Kotlin.hashCode(this.schema) | 0;
+    result = result * 31 + Kotlin.hashCode(this.kinds) | 0;
     return result;
   };
   SwaggerModel$Response.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.code, other.code) && Kotlin.equals(this.description, other.description) && Kotlin.equals(this.schema, other.schema)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.code, other.code) && Kotlin.equals(this.description, other.description) && Kotlin.equals(this.kinds, other.kinds)))));
+  };
+  function SwaggerModel$TypeWithContentType(contentType, schema) {
+    this.contentType = contentType;
+    this.schema = schema;
+  }
+  SwaggerModel$TypeWithContentType.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'TypeWithContentType',
+    interfaces: []
   };
   function SwaggerModel$Companion() {
     SwaggerModel$Companion_instance = this;
@@ -15466,24 +15423,26 @@
     }
     return SwaggerModel$Companion$Versions_instance;
   }
-  SwaggerModel$Companion.prototype.parseDefinitionElement_mdpa8p$ = function (def, root, namePath) {
+  SwaggerModel$Companion.prototype.parseDefinitionElement_7govvk$ = function (def, root, namePath, guessPath) {
     var $receiver = package$util.DynamicAccess;
     var callback$result;
     var tmp$, tmp$_0, tmp$_1;
     var ref = $receiver.get_s2h60f$(def, '$ref');
     if (ref != null) {
       var path = $receiver.get_str_mzud1t$(ref);
-      var referee = this.parseDefinitionElement_mdpa8p$(Json_getInstance().followReference_d0xna2$(def, root, path), root, path);
+      var referee = this.parseDefinitionElement_7govvk$(Json_getInstance().followReference_d0xna2$(def, root, path), root, path, listOf_0(path));
       if (Kotlin.isType(referee.type, SwaggerModel$ObjType)) {
-        tmp$_0 = new SwaggerModel$InfoGenType(new SwaggerModel$NamedObject(path, Kotlin.isType(tmp$ = referee, SwaggerModel$InfoGenType) ? tmp$ : throwCCE()), null);
+        tmp$_0 = new SwaggerModel$InfoGenType(new SwaggerModel$NamedObject(path, Kotlin.isType(tmp$ = referee, SwaggerModel$InfoGenType) ? tmp$ : throwCCE()), null, null);
       }
-       else
+       else {
         tmp$_0 = referee;
+      }
       return tmp$_0;
     }
      else {
       var type = $receiver.get_s2h60f$(def, 'type');
       var format = $receiver.get_s2h60f$(def, 'format');
+      var default_0 = $receiver.get_s2h60f$(def, 'default');
       var rule = JsonRule$Companion_getInstance().parseOrNull_s8jyv4$(def);
       switch (type) {
         case 'integer':
@@ -15496,7 +15455,8 @@
             case 'int64':
               tmp$_1 = SwaggerModel$Int64Type_getInstance();
               break;
-            default:throw IllegalStateException_init(('Invalid integer type ' + toString(format)).toString());
+            default:tmp$_1 = SwaggerModel$Int32Type_getInstance();
+              break;
           }
 
           break;
@@ -15510,7 +15470,8 @@
             case '':
               tmp$_1 = SwaggerModel$DoubleType_getInstance();
               break;
-            default:throw IllegalStateException_init(('Invalid number type ' + toString(format)).toString());
+            default:tmp$_1 = SwaggerModel$DoubleType_getInstance();
+              break;
           }
 
           break;
@@ -15536,7 +15497,8 @@
             case 'password':
               tmp$_1 = SwaggerModel$PasswordType_getInstance();
               break;
-            default:throw IllegalStateException_init(('Invalid string type ' + toString(format)).toString());
+            default:tmp$_1 = SwaggerModel$StringType_getInstance();
+              break;
           }
 
           break;
@@ -15545,64 +15507,49 @@
           break;
         case 'array':
           var items = $receiver.get_s2h60f$(def, 'items');
-          tmp$_1 = new SwaggerModel$ArrayType(this.parseDefinitionElement_mdpa8p$(items, root, null));
+          tmp$_1 = new SwaggerModel$ArrayType(this.parseDefinitionElement_7govvk$(items, root, null, plus(guessPath, listOf_0('elements'))));
           break;
-        case 'object':
-          var props = $receiver.get_s2h60f$(def, 'properties');
-          var $receiver_0 = $receiver.get_strEntries_mzud1t$(props);
-          var destination = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
-          var tmp$_2;
-          tmp$_2 = $receiver_0.iterator();
-          while (tmp$_2.hasNext()) {
-            var item = tmp$_2.next();
-            destination.add_11rb$(to(item.first, this.parseDefinitionElement_mdpa8p$(item.second, root, null)));
+        default:if (type == null || equals(type, 'object')) {
+            var props = $receiver.get_s2h60f$(def, 'properties');
+            var required = toSet($receiver.get_strList_mzud1t$($receiver.get_s2h60f$(def, 'required')));
+            var $receiver_0 = $receiver.get_strEntries_mzud1t$(props);
+            var destination = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
+            var tmp$_2;
+            tmp$_2 = $receiver_0.iterator();
+            while (tmp$_2.hasNext()) {
+              var item = tmp$_2.next();
+              destination.add_11rb$(new SwaggerModel$Prop(item.first, this.parseDefinitionElement_7govvk$(item.second, root, null, plus_0(guessPath, item.first)), required.contains_11rb$(item.first)));
+            }
+            var entries = destination;
+            tmp$_1 = new SwaggerModel$ObjType(namePath, guessPath, entries);
+          }
+           else if (equals(type, 'null')) {
+            throw IllegalStateException_init(('null? : ' + toString(def)).toString());
+          }
+           else {
+            throw IllegalStateException_init(('Other prim ' + toString(type) + ', ' + toString(def)).toString());
           }
 
-          var entries = toMap(destination);
-          tmp$_1 = new SwaggerModel$ObjType(namePath, entries);
           break;
-        case 'null':
-          throw IllegalStateException_init(('null? : ' + toString(def)).toString());
-        default:throw IllegalStateException_init(('Other prim ' + toString(type) + ', ' + toString(def)).toString());
       }
       var ptype = tmp$_1;
-      callback$result = new SwaggerModel$InfoGenType(ptype, rule);
+      callback$result = new SwaggerModel$InfoGenType(ptype, rule, default_0);
     }
     return callback$result;
-  };
-  SwaggerModel$Companion.prototype.parseDefinition_fmz8iu$ = function (name, def, root) {
-    var $receiver = package$util.DynamicAccess;
-    var type = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'type'));
-    if (!equals(type, 'object')) {
-      throw IllegalStateException_init(("Only supported 'object' definitions but found '" + type + "'").toString());
-    }
-    var required = toSet($receiver.get_strList_mzud1t$($receiver.get_s2h60f$(def, 'required')));
-    var $receiver_0 = $receiver.get_strEntries_mzud1t$($receiver.get_s2h60f$(def, 'properties'));
-    var destination = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
-    var tmp$;
-    tmp$ = $receiver_0.iterator();
-    while (tmp$.hasNext()) {
-      var item = tmp$.next();
-      var tmp$_0 = destination.add_11rb$;
-      var key = item.component1()
-      , element = item.component2();
-      var pdef = this.parseDefinitionElement_mdpa8p$(element, root, null);
-      tmp$_0.call(destination, to(key, new SwaggerModel$Prop($receiver.get_str_mzud1t$(key), pdef, required.contains_11rb$(key))));
-    }
-    var props = toMap(destination);
-    return new SwaggerModel$TypeDef(name, props);
   };
   SwaggerModel$Companion.prototype.parseParameter_oaftn8$ = function (def, root) {
     var $receiver = package$util.DynamicAccess;
     var tmp$, tmp$_0, tmp$_1;
-    return new SwaggerModel$Parameter($receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'name')), SwaggerModel$Inside$Companion_getInstance().get_61zpoe$($receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'in'))), (tmp$_0 = (tmp$ = $receiver.get_s2h60f$(def, 'required')) != null ? $receiver.get_bool_mzud1t$(tmp$) : null) != null ? tmp$_0 : false, $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'description')), $receiver.get_s2h60f$(def, 'default'), this.parseDefinitionElement_mdpa8p$((tmp$_1 = $receiver.get_s2h60f$(def, 'schema')) != null ? tmp$_1 : def, root, null));
+    var paramName = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'name'));
+    return new SwaggerModel$Parameter(paramName, SwaggerModel$Inside$Companion_getInstance().get_61zpoe$($receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'in'))), (tmp$_0 = (tmp$ = $receiver.get_s2h60f$(def, 'required')) != null ? $receiver.get_bool_mzud1t$(tmp$) : null) != null ? tmp$_0 : false, $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'description')), $receiver.get_s2h60f$(def, 'default'), this.parseDefinitionElement_7govvk$((tmp$_1 = $receiver.get_s2h60f$(def, 'schema')) != null ? tmp$_1 : def, root, null, listOf(['param', paramName])));
   };
-  SwaggerModel$Companion.prototype.parseMethodPath_arau7s$ = function (path, method, def, root) {
+  SwaggerModel$Companion.prototype.parseMethodPath_7vswvu$ = function (path, method, def, root, version) {
     var $receiver = package$util.DynamicAccess;
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
-    tmp$ = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'summary'));
-    tmp$_0 = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'description'));
-    tmp$_1 = $receiver.get_strList_mzud1t$($receiver.get_s2h60f$(def, 'tags'));
+    var operationId = (tmp$ = $receiver.get_s2h60f$(def, 'operationId')) != null ? $receiver.get_str_mzud1t$(tmp$) : null;
+    tmp$_0 = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(def, 'summary'));
+    tmp$_2 = (tmp$_1 = $receiver.get_s2h60f$(def, 'description')) != null ? $receiver.get_str_mzud1t$(tmp$_1) : null;
+    tmp$_3 = $receiver.get_strList_mzud1t$($receiver.get_s2h60f$(def, 'tags'));
     var $receiver_0 = $receiver.get_list_mzud1t$($receiver.get_s2h60f$(def, 'security'));
     var destination = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
     var tmp$_4;
@@ -15614,7 +15561,6 @@
       var info = $receiver.get_s2h60f$(item, name);
       tmp$_5.call(destination, new SwaggerModel$Security(name, $receiver.get_strList_mzud1t$(info)));
     }
-    tmp$_3 = (tmp$_2 = $receiver.get_s2h60f$(def, 'operationId')) != null ? $receiver.get_str_mzud1t$(tmp$_2) : null;
     var $receiver_1 = $receiver.get_list_mzud1t$($receiver.get_s2h60f$(def, 'parameters'));
     var destination_0 = ArrayList_init_0(collectionSizeOrDefault($receiver_1, 10));
     var tmp$_6;
@@ -15632,12 +15578,82 @@
       var tmp$_8 = destination_1.add_11rb$;
       var code = item_1.component1()
       , rdef = item_1.component2();
-      var tmp$_9;
-      tmp$_8.call(destination_1, new SwaggerModel$Response(code, $receiver.get_str_mzud1t$($receiver.get_s2h60f$(rdef, 'description')), (tmp$_9 = $receiver.get_s2h60f$(rdef, 'schema')) != null ? this.parseDefinitionElement_mdpa8p$(tmp$_9, root, null) : null));
+      tmp$_8.call(destination_1, new SwaggerModel$Response(code, $receiver.get_str_mzud1t$($receiver.get_s2h60f$(rdef, 'description')), this.parseTypeWithContentTypes_0(rdef, root, version, listOf_0('responses'))));
     }
-    return new SwaggerModel$PathMethodModel(path, method, tmp$, tmp$_0, tmp$_1, destination, tmp$_3, destination_0, destination_1);
+    return new SwaggerModel$PathMethodModel(path, method, tmp$_0, tmp$_2, tmp$_3, destination, operationId, destination_0, destination_1, this.parseTypeWithContentTypes_0($receiver.get_s2h60f$(def, 'requestBody'), root, version, listOf([operationId != null ? operationId : method + '/' + path, 'ReqBody'])));
   };
-  SwaggerModel$Companion.prototype.parsePath_fmz8iu$ = function (path, def, root) {
+  SwaggerModel$Companion.prototype.parseTypeWithContentTypes_0 = function (rdef, root, version, guessPath) {
+    var tmp$, tmp$_0, tmp$_1;
+    var kinds = ArrayList_init();
+    switch (this.get_v_n4mt33$(version).name) {
+      case 'V2':
+        var schema = (tmp$ = DynamicAccess_getInstance().get_s2h60f$(rdef, 'schema')) != null ? this.parseDefinitionElement_7govvk$(tmp$, root, null, guessPath) : null;
+        if (schema != null) {
+          var element = new SwaggerModel$TypeWithContentType(ContentType$Companion_getInstance().ApplicationJson, schema);
+          kinds.add_11rb$(element);
+        }
+
+        break;
+      case 'V3':
+        var content = DynamicAccess_getInstance().get_s2h60f$(rdef, 'content');
+        tmp$_0 = DynamicAccess_getInstance().get_entries_mzud1t$(content).iterator();
+        while (tmp$_0.hasNext()) {
+          var fcontent = tmp$_0.next();
+          var contentType = (tmp$_1 = fcontent.first) != null ? DynamicAccess_getInstance().get_str_mzud1t$(tmp$_1) : null;
+          var contentInfo = fcontent.second;
+          var schema_0 = DynamicAccess_getInstance().get_s2h60f$(contentInfo, 'schema');
+          var fschema = schema_0 != null ? this.parseDefinitionElement_7govvk$(schema_0, root, null, guessPath) : null;
+          if (contentType != null && fschema != null) {
+            var element_0 = new SwaggerModel$TypeWithContentType(new ContentType(contentType), fschema);
+            kinds.add_11rb$(element_0);
+          }
+        }
+
+        break;
+    }
+    return kinds;
+  };
+  function SwaggerModel$Companion$SwVersion(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function SwaggerModel$Companion$SwVersion_initFields() {
+    SwaggerModel$Companion$SwVersion_initFields = function () {
+    };
+    SwaggerModel$Companion$SwVersion$V2_instance = new SwaggerModel$Companion$SwVersion('V2', 0);
+    SwaggerModel$Companion$SwVersion$V3_instance = new SwaggerModel$Companion$SwVersion('V3', 1);
+  }
+  var SwaggerModel$Companion$SwVersion$V2_instance;
+  function SwaggerModel$Companion$SwVersion$V2_getInstance() {
+    SwaggerModel$Companion$SwVersion_initFields();
+    return SwaggerModel$Companion$SwVersion$V2_instance;
+  }
+  var SwaggerModel$Companion$SwVersion$V3_instance;
+  function SwaggerModel$Companion$SwVersion$V3_getInstance() {
+    SwaggerModel$Companion$SwVersion_initFields();
+    return SwaggerModel$Companion$SwVersion$V3_instance;
+  }
+  SwaggerModel$Companion$SwVersion.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SwVersion',
+    interfaces: [Enum]
+  };
+  function SwaggerModel$Companion$SwVersion$values() {
+    return [SwaggerModel$Companion$SwVersion$V2_getInstance(), SwaggerModel$Companion$SwVersion$V3_getInstance()];
+  }
+  SwaggerModel$Companion$SwVersion.values = SwaggerModel$Companion$SwVersion$values;
+  function SwaggerModel$Companion$SwVersion$valueOf(name) {
+    switch (name) {
+      case 'V2':
+        return SwaggerModel$Companion$SwVersion$V2_getInstance();
+      case 'V3':
+        return SwaggerModel$Companion$SwVersion$V3_getInstance();
+      default:throwISE('No enum constant io.ktor.start.swagger.SwaggerModel.Companion.SwVersion.' + name);
+    }
+  }
+  SwaggerModel$Companion$SwVersion.valueOf_61zpoe$ = SwaggerModel$Companion$SwVersion$valueOf;
+  SwaggerModel$Companion.prototype.parsePath_7x15lk$ = function (path, def, root, version) {
     var $receiver = package$util.DynamicAccess.get_strEntries_mzud1t$(def);
     var destination = ArrayList_init_0(collectionSizeOrDefault($receiver, 10));
     var tmp$;
@@ -15647,22 +15663,14 @@
       var tmp$_0 = destination.add_11rb$;
       var method = item.component1()
       , methodDef = item.component2();
-      tmp$_0.call(destination, to(method, this.parseMethodPath_arau7s$(path, method, methodDef, root)));
+      tmp$_0.call(destination, to(method, this.parseMethodPath_7vswvu$(path, method, methodDef, root, version)));
     }
     return new SwaggerModel$PathModel(path, toMap(destination));
   };
-  var trim_0 = Kotlin.kotlin.text.trim_gw00vp$;
   SwaggerModel$Companion.prototype.parseJsonOrYaml_puj7f4$ = function (source, filename) {
     var tmp$;
-    var tmp$_0;
-    var trimmedSource = trim_0(Kotlin.isCharSequence(tmp$_0 = source) ? tmp$_0 : throwCCE()).toString();
-    if (startsWith(trimmedSource, '{')) {
-      tmp$ = this.parseJson_puj7f4$(source, filename);
-    }
-     else {
-      tmp$ = this.parseYaml_puj7f4$(source, filename);
-    }
-    return tmp$;
+    var trimmedSource = trim_0(Kotlin.isCharSequence(tmp$ = source) ? tmp$ : throwCCE()).toString();
+    return startsWith(trimmedSource, '{') ? this.parseJson_puj7f4$(source, filename) : this.parseYaml_puj7f4$(source, filename);
   };
   SwaggerModel$Companion.prototype.parseJson_puj7f4$ = function (source, filename) {
     if (filename === void 0)
@@ -15673,6 +15681,21 @@
     if (filename === void 0)
       filename = 'unknown.yaml';
     return this.parse_1mu92c$(Yaml_getInstance().load_61zpoe$(source), source, filename);
+  };
+  SwaggerModel$Companion.prototype.get_v_n4mt33$ = function ($receiver) {
+    if (this.is20_n4mt33$($receiver))
+      return SwaggerModel$Companion$SwVersion$V2_getInstance();
+    else if (this.is30_n4mt33$($receiver))
+      return SwaggerModel$Companion$SwVersion$V3_getInstance();
+    else {
+      throw IllegalStateException_init('Unsupported version'.toString());
+    }
+  };
+  SwaggerModel$Companion.prototype.is20_n4mt33$ = function ($receiver) {
+    return $receiver.compareTo_11rb$(SwaggerModel$Companion$Versions_getInstance().V3) < 0;
+  };
+  SwaggerModel$Companion.prototype.is30_n4mt33$ = function ($receiver) {
+    return $receiver.compareTo_11rb$(SwaggerModel$Companion$Versions_getInstance().V3) >= 0;
   };
   SwaggerModel$Companion.prototype.parse_1mu92c$ = function (model, source, filename) {
     if (filename === void 0)
@@ -15695,37 +15718,40 @@
     tmp$_9 = new SwaggerModel$License($receiver.get_str_mzud1t$($receiver.get_s2h60f$($receiver_1, 'name')), $receiver.get_str_mzud1t$($receiver.get_s2h60f$($receiver_1, 'url')));
     var info = new SwaggerModel$SwaggerInfo(tmp$_5, tmp$_6, tmp$_7, $receiver.get_str_mzud1t$($receiver.get_s2h60f$(it, 'version')), tmp$_8, tmp$_9);
     var servers = ArrayList_init();
-    if (semVer.compareTo_11rb$(SwaggerModel$Companion$Versions_getInstance().V3) < 0) {
-      var host = (tmp$_1 = (tmp$_0 = $receiver.get_s2h60f$(model, 'host')) != null ? $receiver.get_str_mzud1t$(tmp$_0) : null) != null ? tmp$_1 : '127.0.0.1';
-      var basePath = (tmp$_3 = (tmp$_2 = $receiver.get_s2h60f$(model, 'basePath')) != null ? $receiver.get_str_mzud1t$(tmp$_2) : null) != null ? tmp$_3 : '/';
-      var schemes = $receiver.get_strList_mzud1t$($receiver.get_s2h60f$(model, 'schemes'));
-      var tmp$_10;
-      var element = new SwaggerModel$Server('{scheme}://' + host + basePath, info.description, mapOf_0(to('scheme', new SwaggerModel$ServerVariable('scheme', (tmp$_10 = firstOrNull(schemes)) != null ? tmp$_10 : 'https', '', schemes))));
-      servers.add_11rb$(element);
-    }
-     else {
-      tmp$_4 = $receiver.get_list_mzud1t$($receiver.get_s2h60f$(model, 'servers')).iterator();
-      while (tmp$_4.hasNext()) {
-        var userver = tmp$_4.next();
-        var tmp$_11, tmp$_12, tmp$_13, tmp$_14;
-        tmp$_11 = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(userver, 'url'));
-        tmp$_14 = (tmp$_13 = (tmp$_12 = $receiver.get_s2h60f$(userver, 'description')) != null ? $receiver.get_str_mzud1t$(tmp$_12) : null) != null ? tmp$_13 : 'API';
-        var $receiver_2 = $receiver.get_map_mzud1t$($receiver.get_s2h60f$(userver, 'variables'));
-        var destination = ArrayList_init_0($receiver_2.size);
-        var tmp$_15;
-        tmp$_15 = $receiver_2.entries.iterator();
-        while (tmp$_15.hasNext()) {
-          var item = tmp$_15.next();
-          var tmp$_16 = destination.add_11rb$;
-          var uname = item.key;
-          var uvar = item.value;
-          var tmp$_17;
-          var name = $receiver.get_str_mzud1t$(uname);
-          tmp$_16.call(destination, to(name, new SwaggerModel$ServerVariable(name, $receiver.get_str_mzud1t$($receiver.get_s2h60f$(uvar, 'default')), $receiver.get_str_mzud1t$($receiver.get_s2h60f$(uvar, 'description')), (tmp$_17 = $receiver.get_s2h60f$(uvar, 'enum')) != null ? $receiver.get_strList_mzud1t$(tmp$_17) : null)));
+    switch (this.get_v_n4mt33$(semVer).name) {
+      case 'V2':
+        var host = (tmp$_1 = (tmp$_0 = $receiver.get_s2h60f$(model, 'host')) != null ? $receiver.get_str_mzud1t$(tmp$_0) : null) != null ? tmp$_1 : '127.0.0.1';
+        var basePath = (tmp$_3 = (tmp$_2 = $receiver.get_s2h60f$(model, 'basePath')) != null ? $receiver.get_str_mzud1t$(tmp$_2) : null) != null ? tmp$_3 : '/';
+        var schemes = $receiver.get_strList_mzud1t$($receiver.get_s2h60f$(model, 'schemes'));
+        var tmp$_10;
+        var element = new SwaggerModel$Server('{scheme}://' + host + basePath, info.description, mapOf_0(to('scheme', new SwaggerModel$ServerVariable('scheme', (tmp$_10 = firstOrNull(schemes)) != null ? tmp$_10 : 'https', '', schemes))));
+        servers.add_11rb$(element);
+        break;
+      case 'V3':
+        tmp$_4 = $receiver.get_list_mzud1t$($receiver.get_s2h60f$(model, 'servers')).iterator();
+        while (tmp$_4.hasNext()) {
+          var userver = tmp$_4.next();
+          var tmp$_11, tmp$_12, tmp$_13, tmp$_14;
+          tmp$_11 = $receiver.get_str_mzud1t$($receiver.get_s2h60f$(userver, 'url'));
+          tmp$_14 = (tmp$_13 = (tmp$_12 = $receiver.get_s2h60f$(userver, 'description')) != null ? $receiver.get_str_mzud1t$(tmp$_12) : null) != null ? tmp$_13 : 'API';
+          var $receiver_2 = $receiver.get_map_mzud1t$($receiver.get_s2h60f$(userver, 'variables'));
+          var destination = ArrayList_init_0($receiver_2.size);
+          var tmp$_15;
+          tmp$_15 = $receiver_2.entries.iterator();
+          while (tmp$_15.hasNext()) {
+            var item = tmp$_15.next();
+            var tmp$_16 = destination.add_11rb$;
+            var uname = item.key;
+            var uvar = item.value;
+            var tmp$_17;
+            var name = $receiver.get_str_mzud1t$(uname);
+            tmp$_16.call(destination, to(name, new SwaggerModel$ServerVariable(name, $receiver.get_str_mzud1t$($receiver.get_s2h60f$(uvar, 'default')), $receiver.get_str_mzud1t$($receiver.get_s2h60f$(uvar, 'description')), (tmp$_17 = $receiver.get_s2h60f$(uvar, 'enum')) != null ? $receiver.get_strList_mzud1t$(tmp$_17) : null)));
+          }
+          var element_0 = new SwaggerModel$Server(tmp$_11, tmp$_14, toMap(destination));
+          servers.add_11rb$(element_0);
         }
-        var element_0 = new SwaggerModel$Server(tmp$_11, tmp$_14, toMap(destination));
-        servers.add_11rb$(element_0);
-      }
+
+        break;
     }
     var $receiver_3 = $receiver.get_list_mzud1t$($receiver.get_s2h60f$(model, 'produces'));
     var destination_0 = ArrayList_init_0(collectionSizeOrDefault($receiver_3, 10));
@@ -15766,22 +15792,10 @@
       var tmp$_23 = destination_3.add_11rb$;
       var key = item_3.component1()
       , obj_0 = item_3.component2();
-      tmp$_23.call(destination_3, to(key, this.parsePath_fmz8iu$(key, obj_0, root)));
+      tmp$_23.call(destination_3, to(key, this.parsePath_7x15lk$(key, obj_0, root, semVer)));
     }
     var paths = toMap(destination_3);
-    var $receiver_7 = $receiver.get_strEntries_mzud1t$($receiver.get_s2h60f$(model, 'definitions'));
-    var destination_4 = ArrayList_init_0(collectionSizeOrDefault($receiver_7, 10));
-    var tmp$_24;
-    tmp$_24 = $receiver_7.iterator();
-    while (tmp$_24.hasNext()) {
-      var item_4 = tmp$_24.next();
-      var tmp$_25 = destination_4.add_11rb$;
-      var key_0 = item_4.component1()
-      , obj_1 = item_4.component2();
-      tmp$_25.call(destination_4, to(key_0, this.parseDefinition_fmz8iu$(key_0, obj_1, root)));
-    }
-    var definitions = toMap(destination_4);
-    return new SwaggerModel(filename, source, info, servers, produces, consumes, securityDefinitions, paths, definitions);
+    return new SwaggerModel(filename, model, source, info, servers, produces, consumes, securityDefinitions, paths);
   };
   SwaggerModel$Companion.$metadata$ = {
     kind: Kind_OBJECT,
@@ -15795,6 +15809,152 @@
     }
     return SwaggerModel$Companion_instance;
   }
+  function SwaggerModel$ReferenceFinder(model) {
+    this.model = model;
+    this.out = LinkedHashSet_init();
+    this.unnameds = LinkedHashSet_init();
+    this.explored = LinkedHashSet_init();
+  }
+  function SwaggerModel$ReferenceFinder$Result(out, unfilteredUnnameds) {
+    this.out = out;
+    var $receiver = this.out;
+    var destination = ArrayList_init_0(collectionSizeOrDefault($receiver, 10));
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      destination.add_11rb$(item.kind.type);
+    }
+    this.outObjs = toSet(destination);
+    var destination_0 = ArrayList_init();
+    var tmp$_0;
+    tmp$_0 = unfilteredUnnameds.iterator();
+    while (tmp$_0.hasNext()) {
+      var element = tmp$_0.next();
+      if (!this.outObjs.contains_11rb$(element))
+        destination_0.add_11rb$(element);
+    }
+    this.unnamed = destination_0;
+  }
+  SwaggerModel$ReferenceFinder$Result.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Result',
+    interfaces: []
+  };
+  SwaggerModel$ReferenceFinder.prototype.find = function () {
+    var tmp$;
+    tmp$ = this.model.paths.values.iterator();
+    while (tmp$.hasNext()) {
+      var path = tmp$.next();
+      this.find_qmvl8w$(path);
+    }
+    return new SwaggerModel$ReferenceFinder$Result(this.out, this.unnameds);
+  };
+  SwaggerModel$ReferenceFinder.prototype.find_qmvl8w$ = function ($receiver) {
+    var tmp$;
+    tmp$ = $receiver.methodsList.iterator();
+    while (tmp$.hasNext()) {
+      var method = tmp$.next();
+      this.find_k01abz$(method);
+    }
+  };
+  SwaggerModel$ReferenceFinder.prototype.find_k01abz$ = function ($receiver) {
+    var tmp$, tmp$_0, tmp$_1;
+    tmp$ = $receiver.responses.iterator();
+    while (tmp$.hasNext()) {
+      var response = tmp$.next();
+      this.find_3u8vbr$(response);
+    }
+    tmp$_0 = $receiver.parameters.iterator();
+    while (tmp$_0.hasNext()) {
+      var param = tmp$_0.next();
+      this.find_tyg8d1$(param);
+    }
+    tmp$_1 = $receiver.requestBody.iterator();
+    while (tmp$_1.hasNext()) {
+      var rb = tmp$_1.next();
+      this.find_t2wi81$(rb);
+    }
+  };
+  SwaggerModel$ReferenceFinder.prototype.find_mqoc4k$ = function ($receiver) {
+    this.find_61zbhy$($receiver.type);
+  };
+  SwaggerModel$ReferenceFinder.prototype.find_t2wi81$ = function ($receiver) {
+    this.find_mqoc4k$($receiver.schema);
+  };
+  SwaggerModel$ReferenceFinder.prototype.find_jb2i9l$ = function ($receiver) {
+    this.find_mqoc4k$($receiver.type);
+  };
+  SwaggerModel$ReferenceFinder.prototype.find_tyg8d1$ = function ($receiver) {
+    this.find_mqoc4k$($receiver.schema);
+  };
+  SwaggerModel$ReferenceFinder.prototype.find_3u8vbr$ = function ($receiver) {
+    var tmp$;
+    (tmp$ = $receiver.schema) != null ? (this.find_mqoc4k$(tmp$), Unit) : null;
+  };
+  SwaggerModel$ReferenceFinder.prototype.find_61zbhy$ = function ($receiver) {
+    var tmp$;
+    if (this.explored.contains_11rb$($receiver))
+      return;
+    this.explored.add_11rb$($receiver);
+    if (Kotlin.isType($receiver, SwaggerModel$NamedObject)) {
+      this.out.add_11rb$($receiver);
+      this.find_mqoc4k$($receiver.kind);
+    }
+     else if (Kotlin.isType($receiver, SwaggerModel$MapLikeGenType)) {
+      tmp$ = $receiver.fields.entries.iterator();
+      while (tmp$.hasNext()) {
+        var field = tmp$.next();
+        this.find_mqoc4k$(field.value);
+      }
+      if (Kotlin.isType($receiver, SwaggerModel$ObjType)) {
+        this.unnameds.add_11rb$($receiver);
+      }
+    }
+     else if (Kotlin.isType($receiver, SwaggerModel$ArrayType))
+      this.find_mqoc4k$($receiver.items);
+  };
+  SwaggerModel$ReferenceFinder.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ReferenceFinder',
+    interfaces: []
+  };
+  function SwaggerModel$TypeDef(name, props, synthetic) {
+    this.name = name;
+    this.props = props;
+    this.synthetic = synthetic;
+    this.propsList = this.props.values;
+  }
+  SwaggerModel$TypeDef.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'TypeDef',
+    interfaces: []
+  };
+  SwaggerModel$TypeDef.prototype.component1 = function () {
+    return this.name;
+  };
+  SwaggerModel$TypeDef.prototype.component2 = function () {
+    return this.props;
+  };
+  SwaggerModel$TypeDef.prototype.component3 = function () {
+    return this.synthetic;
+  };
+  SwaggerModel$TypeDef.prototype.copy_ngsr70$ = function (name, props, synthetic) {
+    return new SwaggerModel$TypeDef(name === void 0 ? this.name : name, props === void 0 ? this.props : props, synthetic === void 0 ? this.synthetic : synthetic);
+  };
+  SwaggerModel$TypeDef.prototype.toString = function () {
+    return 'TypeDef(name=' + Kotlin.toString(this.name) + (', props=' + Kotlin.toString(this.props)) + (', synthetic=' + Kotlin.toString(this.synthetic)) + ')';
+  };
+  SwaggerModel$TypeDef.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.name) | 0;
+    result = result * 31 + Kotlin.hashCode(this.props) | 0;
+    result = result * 31 + Kotlin.hashCode(this.synthetic) | 0;
+    return result;
+  };
+  SwaggerModel$TypeDef.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.props, other.props) && Kotlin.equals(this.synthetic, other.synthetic)))));
+  };
   SwaggerModel.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'SwaggerModel',
@@ -15804,38 +15964,39 @@
     return this.filename;
   };
   SwaggerModel.prototype.component2 = function () {
-    return this.source;
+    return this.untyped;
   };
   SwaggerModel.prototype.component3 = function () {
-    return this.info;
+    return this.source;
   };
   SwaggerModel.prototype.component4 = function () {
-    return this.servers;
+    return this.info;
   };
   SwaggerModel.prototype.component5 = function () {
-    return this.produces;
+    return this.servers;
   };
   SwaggerModel.prototype.component6 = function () {
-    return this.consumes;
+    return this.produces;
   };
   SwaggerModel.prototype.component7 = function () {
-    return this.securityDefinitions;
+    return this.consumes;
   };
   SwaggerModel.prototype.component8 = function () {
-    return this.paths;
+    return this.securityDefinitions;
   };
   SwaggerModel.prototype.component9 = function () {
-    return this.definitions;
+    return this.paths;
   };
-  SwaggerModel.prototype.copy_h3cdz4$ = function (filename, source, info, servers, produces, consumes, securityDefinitions, paths, definitions) {
-    return new SwaggerModel(filename === void 0 ? this.filename : filename, source === void 0 ? this.source : source, info === void 0 ? this.info : info, servers === void 0 ? this.servers : servers, produces === void 0 ? this.produces : produces, consumes === void 0 ? this.consumes : consumes, securityDefinitions === void 0 ? this.securityDefinitions : securityDefinitions, paths === void 0 ? this.paths : paths, definitions === void 0 ? this.definitions : definitions);
+  SwaggerModel.prototype.copy_n2zcwv$ = function (filename, untyped, source, info, servers, produces, consumes, securityDefinitions, paths) {
+    return new SwaggerModel(filename === void 0 ? this.filename : filename, untyped === void 0 ? this.untyped : untyped, source === void 0 ? this.source : source, info === void 0 ? this.info : info, servers === void 0 ? this.servers : servers, produces === void 0 ? this.produces : produces, consumes === void 0 ? this.consumes : consumes, securityDefinitions === void 0 ? this.securityDefinitions : securityDefinitions, paths === void 0 ? this.paths : paths);
   };
   SwaggerModel.prototype.toString = function () {
-    return 'SwaggerModel(filename=' + Kotlin.toString(this.filename) + (', source=' + Kotlin.toString(this.source)) + (', info=' + Kotlin.toString(this.info)) + (', servers=' + Kotlin.toString(this.servers)) + (', produces=' + Kotlin.toString(this.produces)) + (', consumes=' + Kotlin.toString(this.consumes)) + (', securityDefinitions=' + Kotlin.toString(this.securityDefinitions)) + (', paths=' + Kotlin.toString(this.paths)) + (', definitions=' + Kotlin.toString(this.definitions)) + ')';
+    return 'SwaggerModel(filename=' + Kotlin.toString(this.filename) + (', untyped=' + Kotlin.toString(this.untyped)) + (', source=' + Kotlin.toString(this.source)) + (', info=' + Kotlin.toString(this.info)) + (', servers=' + Kotlin.toString(this.servers)) + (', produces=' + Kotlin.toString(this.produces)) + (', consumes=' + Kotlin.toString(this.consumes)) + (', securityDefinitions=' + Kotlin.toString(this.securityDefinitions)) + (', paths=' + Kotlin.toString(this.paths)) + ')';
   };
   SwaggerModel.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.filename) | 0;
+    result = result * 31 + Kotlin.hashCode(this.untyped) | 0;
     result = result * 31 + Kotlin.hashCode(this.source) | 0;
     result = result * 31 + Kotlin.hashCode(this.info) | 0;
     result = result * 31 + Kotlin.hashCode(this.servers) | 0;
@@ -15843,17 +16004,122 @@
     result = result * 31 + Kotlin.hashCode(this.consumes) | 0;
     result = result * 31 + Kotlin.hashCode(this.securityDefinitions) | 0;
     result = result * 31 + Kotlin.hashCode(this.paths) | 0;
-    result = result * 31 + Kotlin.hashCode(this.definitions) | 0;
     return result;
   };
   SwaggerModel.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.filename, other.filename) && Kotlin.equals(this.source, other.source) && Kotlin.equals(this.info, other.info) && Kotlin.equals(this.servers, other.servers) && Kotlin.equals(this.produces, other.produces) && Kotlin.equals(this.consumes, other.consumes) && Kotlin.equals(this.securityDefinitions, other.securityDefinitions) && Kotlin.equals(this.paths, other.paths) && Kotlin.equals(this.definitions, other.definitions)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.filename, other.filename) && Kotlin.equals(this.untyped, other.untyped) && Kotlin.equals(this.source, other.source) && Kotlin.equals(this.info, other.info) && Kotlin.equals(this.servers, other.servers) && Kotlin.equals(this.produces, other.produces) && Kotlin.equals(this.consumes, other.consumes) && Kotlin.equals(this.securityDefinitions, other.securityDefinitions) && Kotlin.equals(this.paths, other.paths)))));
   };
+  function constructDefinitions($receiver) {
+    var res = (new SwaggerModel$ReferenceFinder($receiver)).find();
+    var $receiver_0 = res.out;
+    var destination = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
+    var tmp$;
+    tmp$ = $receiver_0.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      destination.add_11rb$(new SwaggerModel$TypeDef(item.name, item.kind.type.props, false));
+    }
+    var $receiver_1 = filterNotNull(destination);
+    var capacity = coerceAtLeast(mapCapacity(collectionSizeOrDefault($receiver_1, 10)), 16);
+    var destination_0 = LinkedHashMap_init_0(capacity);
+    var tmp$_0;
+    tmp$_0 = $receiver_1.iterator();
+    while (tmp$_0.hasNext()) {
+      var element = tmp$_0.next();
+      destination_0.put_xwzc9p$(element.name, element);
+    }
+    var namedDefs = destination_0;
+    var $receiver_2 = res.unnamed;
+    var destination_1 = ArrayList_init_0(collectionSizeOrDefault($receiver_2, 10));
+    var tmp$_1;
+    tmp$_1 = $receiver_2.iterator();
+    while (tmp$_1.hasNext()) {
+      var item_0 = tmp$_1.next();
+      var tmp$_2 = destination_1.add_11rb$;
+      var $receiver_3 = item_0.fields;
+      var destination_2 = ArrayList_init_0($receiver_3.size);
+      var tmp$_3;
+      tmp$_3 = $receiver_3.entries.iterator();
+      while (tmp$_3.hasNext()) {
+        var item_1 = tmp$_3.next();
+        var tmp$_4 = destination_2.add_11rb$;
+        var name = item_1.key;
+        var type = item_1.value;
+        tmp$_4.call(destination_2, to(name, new SwaggerModel$Prop(name, type, true)));
+      }
+      var props = toMap(destination_2);
+      tmp$_2.call(destination_1, new SwaggerModel$TypeDef(item_0.guessName, props, true));
+    }
+    var capacity_0 = coerceAtLeast(mapCapacity(collectionSizeOrDefault(destination_1, 10)), 16);
+    var destination_3 = LinkedHashMap_init_0(capacity_0);
+    var tmp$_5;
+    tmp$_5 = destination_1.iterator();
+    while (tmp$_5.hasNext()) {
+      var element_0 = tmp$_5.next();
+      destination_3.put_xwzc9p$(element_0.name, element_0);
+    }
+    var unnamedDefs = destination_3;
+    return plus_1(namedDefs, unnamedDefs);
+  }
   function toKotlin_0($receiver, param, type) {
     return toKotlin($receiver, param, type.ktype);
   }
   function toKotlin_1($receiver, param, type) {
     return toKotlin_0($receiver, param, type.type);
+  }
+  function toDefaultUntyped($receiver, path, default_0) {
+    if (path === void 0) {
+      path = emptyList();
+    }
+    if (default_0 === void 0)
+      default_0 = null;
+    var tmp$, tmp$_0;
+    if ($receiver == null)
+      tmp$_0 = null;
+    else if (Kotlin.isType($receiver, SwaggerModel$OptionalType))
+      tmp$_0 = null;
+    else if (Kotlin.isType($receiver, SwaggerModel$BaseStringType))
+      tmp$_0 = (tmp$ = default_0 != null ? DynamicAccess_getInstance().get_str_mzud1t$(default_0) : null) != null ? tmp$ : joinToString(path, '.');
+    else if (Kotlin.isType($receiver, SwaggerModel$DateType))
+      tmp$_0 = '';
+    else if (Kotlin.isType($receiver, SwaggerModel$DateTimeType))
+      tmp$_0 = '';
+    else if (Kotlin.isType($receiver, SwaggerModel$Int32Type)) {
+      var tmp$_1;
+      tmp$_0 = (tmp$_1 = package$util.DynamicAccess.get_tryInt_mzud1t$(default_0)) != null ? tmp$_1 : 0;
+    }
+     else if (Kotlin.isType($receiver, SwaggerModel$DoubleType)) {
+      var tmp$_2;
+      tmp$_0 = (tmp$_2 = package$util.DynamicAccess.get_tryDouble_mzud1t$(default_0)) != null ? tmp$_2 : 0.0;
+    }
+     else if (Kotlin.isType($receiver, SwaggerModel$Int64Type)) {
+      var tmp$_3;
+      tmp$_0 = (tmp$_3 = package$util.DynamicAccess.get_tryLong_mzud1t$(default_0)) != null ? tmp$_3 : L0;
+    }
+     else if (Kotlin.isType($receiver, SwaggerModel$BoolType)) {
+      var tmp$_4;
+      tmp$_0 = (tmp$_4 = package$util.DynamicAccess.get_tryBool_mzud1t$(default_0)) != null ? tmp$_4 : false;
+    }
+     else if (Kotlin.isType($receiver, SwaggerModel$ArrayType)) {
+      tmp$_0 = toMutableList(emptyList());
+    }
+     else if (Kotlin.isType($receiver, SwaggerModel$MapLikeGenType)) {
+      var $receiver_0 = $receiver.fields;
+      var destination = ArrayList_init_0($receiver_0.size);
+      var tmp$_5;
+      tmp$_5 = $receiver_0.entries.iterator();
+      while (tmp$_5.hasNext()) {
+        var item = tmp$_5.next();
+        destination.add_11rb$(to(item.key, toDefaultUntyped(item.value.type, plus_0(path, item.key), item.value.default)));
+      }
+      tmp$_0 = toMutableMap(toMap(destination));
+    }
+     else if (Kotlin.isType($receiver, SwaggerModel$VoidType))
+      tmp$_0 = Unit;
+    else {
+      throw IllegalStateException_init(("Unsupported '" + toString($receiver) + "'").toString());
+    }
+    return tmp$_0;
   }
   function Dynamic() {
     Dynamic_instance = this;
@@ -16173,6 +16439,34 @@
     }
     return tmp$_1;
   };
+  DynamicAccess.prototype.get_tryNumber_mzud1t$ = function ($receiver) {
+    if ($receiver == null)
+      return null;
+    else if (Kotlin.isNumber($receiver))
+      return $receiver;
+    else
+      return this.toDoubleOrNull_mzud1t$(toString($receiver));
+  };
+  DynamicAccess.prototype.get_tryInt_mzud1t$ = function ($receiver) {
+    var tmp$;
+    return (tmp$ = this.get_tryNumber_mzud1t$($receiver)) != null ? numberToInt(tmp$) : null;
+  };
+  DynamicAccess.prototype.get_tryDouble_mzud1t$ = function ($receiver) {
+    var tmp$;
+    return (tmp$ = this.get_tryNumber_mzud1t$($receiver)) != null ? numberToDouble(tmp$) : null;
+  };
+  DynamicAccess.prototype.get_tryLong_mzud1t$ = function ($receiver) {
+    var tmp$;
+    return (tmp$ = this.get_tryNumber_mzud1t$($receiver)) != null ? numberToLong(tmp$) : null;
+  };
+  DynamicAccess.prototype.get_tryBool_mzud1t$ = function ($receiver) {
+    if (typeof $receiver === 'boolean')
+      return $receiver;
+    else if (typeof $receiver === 'string')
+      return !(equals($receiver, '') || equals($receiver, 'false') || equals($receiver, '0'));
+    else
+      return this.get_tryInt_mzud1t$($receiver);
+  };
   DynamicAccess.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'DynamicAccess',
@@ -16184,6 +16478,106 @@
       new DynamicAccess();
     }
     return DynamicAccess_instance;
+  }
+  function encodeURIComponent($receiver) {
+    var $receiver_0 = StringBuilder_init();
+    var tmp$;
+    tmp$ = iterator($receiver);
+    while (tmp$.hasNext()) {
+      var v = unboxChar(tmp$.next());
+      switch (v) {
+        case 38:
+        case 32:
+        case 61:
+        case 47:
+          $receiver_0.append_s8itvh$(37);
+          $receiver_0.append_gw00v9$(padStart(toString_0(v | 0, 16), 2, 48));
+          break;
+        default:$receiver_0.append_s8itvh$(v);
+          break;
+      }
+    }
+    return $receiver_0.toString();
+  }
+  function formUrlDecode($receiver) {
+    var $receiver_0 = split($receiver, Kotlin.charArrayOf(38));
+    var destination = ArrayList_init_0(collectionSizeOrDefault($receiver_0, 10));
+    var tmp$;
+    tmp$ = $receiver_0.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      var tmp$_0 = destination.add_11rb$;
+      var tmp$_1 = plus(split(item, Kotlin.charArrayOf(61), void 0, 2), listOf_0(''));
+      var key = tmp$_1.get_za3lpa$(0);
+      var value = tmp$_1.get_za3lpa$(1);
+      tmp$_0.call(destination, to(key, value));
+    }
+    var destination_0 = LinkedHashMap_init();
+    var tmp$_2;
+    tmp$_2 = destination.iterator();
+    while (tmp$_2.hasNext()) {
+      var element = tmp$_2.next();
+      var key_0 = element.first;
+      var tmp$_0_0;
+      var value_0 = destination_0.get_11rb$(key_0);
+      if (value_0 == null) {
+        var answer = ArrayList_init();
+        destination_0.put_xwzc9p$(key_0, answer);
+        tmp$_0_0 = answer;
+      }
+       else {
+        tmp$_0_0 = value_0;
+      }
+      var list = tmp$_0_0;
+      list.add_11rb$(element);
+    }
+    var destination_1 = ArrayList_init_0(destination_0.size);
+    var tmp$_3;
+    tmp$_3 = destination_0.entries.iterator();
+    while (tmp$_3.hasNext()) {
+      var item_0 = tmp$_3.next();
+      var tmp$_4 = destination_1.add_11rb$;
+      var tmp$_5 = item_0.key;
+      var $receiver_1 = item_0.value;
+      var destination_2 = ArrayList_init_0(collectionSizeOrDefault($receiver_1, 10));
+      var tmp$_6;
+      tmp$_6 = $receiver_1.iterator();
+      while (tmp$_6.hasNext()) {
+        var item_1 = tmp$_6.next();
+        destination_2.add_11rb$(item_1.second);
+      }
+      tmp$_4.call(destination_1, to(tmp$_5, destination_2));
+    }
+    return toMap(destination_1);
+  }
+  function formUrlEncode$lambda(it) {
+    if (it.second.length > 0)
+      return encodeURIComponent(it.first) + '=' + encodeURIComponent(it.second);
+    else
+      return encodeURIComponent(it.first);
+  }
+  function formUrlEncode($receiver) {
+    return joinToString($receiver, '&', void 0, void 0, void 0, void 0, formUrlEncode$lambda);
+  }
+  function formUrlEncode_0($receiver) {
+    var $receiver_0 = $receiver.entries;
+    var destination = ArrayList_init();
+    var tmp$;
+    tmp$ = $receiver_0.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      var $receiver_1 = element.value;
+      var destination_0 = ArrayList_init_0(collectionSizeOrDefault($receiver_1, 10));
+      var tmp$_0;
+      tmp$_0 = $receiver_1.iterator();
+      while (tmp$_0.hasNext()) {
+        var item = tmp$_0.next();
+        destination_0.add_11rb$(to(element.key, item));
+      }
+      var list = destination_0;
+      addAll(destination, list);
+    }
+    return formUrlEncode(destination);
   }
   function Json() {
     Json_instance = this;
@@ -17736,6 +18130,12 @@
   function ID() {
     ID_instance = this;
   }
+  ID.prototype.normalizeMethodName_mhpeer$ = function (str) {
+    return this.normalizeMethodName_61zpoe$(joinToString(str, '/'));
+  };
+  ID.prototype.normalizeClassName_mhpeer$ = function (str) {
+    return this.normalizeClassName_61zpoe$(joinToString(str, '/'));
+  };
   ID.prototype.normalizeMethodName_61zpoe$ = function (str) {
     return decapitalize(this.normalize_61zpoe$(str));
   };
@@ -18846,9 +19246,6 @@
   Object.defineProperty(package$start, 'hashParams', {
     get: get_hashParams
   });
-  package$start.formUrlDecode_pdl1vz$ = formUrlDecode;
-  package$start.formUrlEncode_ye33rp$ = formUrlEncode;
-  package$start.formUrlEncode_jgmxsd$ = formUrlEncode_0;
   package$start.addDependencies = addDependencies;
   package$start.addDependenciesKind_vt7u6r$ = addDependenciesKind;
   package$start.build_6taknv$ = build;
@@ -19499,6 +19896,11 @@
   Object.defineProperty(package$project, 'LogBackXml', {
     get: LogBackXml_getInstance
   });
+  Object.defineProperty(ContentType, 'Companion', {
+    get: ContentType$Companion_getInstance
+  });
+  var package$swagger = package$start.swagger || (package$start.swagger = {});
+  package$swagger.ContentType = ContentType;
   JsonRule.RuleList = JsonRule$RuleList;
   JsonRule.MinMaxDouble = JsonRule$MinMaxDouble;
   JsonRule.MinMaxInt = JsonRule$MinMaxInt;
@@ -19531,7 +19933,6 @@
   Object.defineProperty(JsonRule, 'Companion', {
     get: JsonRule$Companion_getInstance
   });
-  var package$swagger = package$start.swagger || (package$start.swagger = {});
   package$swagger.JsonRule = JsonRule;
   package$swagger.get_propKt_qqpnji$ = get_propKt;
   package$swagger.toKotlin_fcw6hg$ = toKotlin;
@@ -19594,7 +19995,6 @@
   SwaggerModel.NamedObject = SwaggerModel$NamedObject;
   SwaggerModel.ObjType = SwaggerModel$ObjType;
   SwaggerModel.Prop = SwaggerModel$Prop;
-  SwaggerModel.TypeDef = SwaggerModel$TypeDef;
   SwaggerModel.SecurityDefinition = SwaggerModel$SecurityDefinition;
   SwaggerModel.Contact = SwaggerModel$Contact;
   SwaggerModel.License = SwaggerModel$License;
@@ -19639,21 +20039,38 @@
   SwaggerModel.PathModel = SwaggerModel$PathModel;
   SwaggerModel.SwaggerInfo = SwaggerModel$SwaggerInfo;
   SwaggerModel.Response = SwaggerModel$Response;
+  SwaggerModel.TypeWithContentType = SwaggerModel$TypeWithContentType;
   Object.defineProperty(SwaggerModel$Companion.prototype, 'Versions', {
     get: SwaggerModel$Companion$Versions_getInstance
   });
+  Object.defineProperty(SwaggerModel$Companion$SwVersion, 'V2', {
+    get: SwaggerModel$Companion$SwVersion$V2_getInstance
+  });
+  Object.defineProperty(SwaggerModel$Companion$SwVersion, 'V3', {
+    get: SwaggerModel$Companion$SwVersion$V3_getInstance
+  });
+  SwaggerModel$Companion.prototype.SwVersion = SwaggerModel$Companion$SwVersion;
   Object.defineProperty(SwaggerModel, 'Companion', {
     get: SwaggerModel$Companion_getInstance
   });
+  SwaggerModel$ReferenceFinder.Result = SwaggerModel$ReferenceFinder$Result;
+  SwaggerModel.ReferenceFinder = SwaggerModel$ReferenceFinder;
+  SwaggerModel.TypeDef = SwaggerModel$TypeDef;
   package$swagger.SwaggerModel = SwaggerModel;
+  package$swagger.constructDefinitions_5tkht2$ = constructDefinitions;
   package$swagger.toKotlin_1hnt3g$ = toKotlin_0;
   package$swagger.toKotlin_bnccq2$ = toKotlin_1;
+  package$swagger.toDefaultUntyped_rwoh4e$ = toDefaultUntyped;
   Object.defineProperty(package$util, 'Dynamic', {
     get: Dynamic_getInstance
   });
   Object.defineProperty(package$util, 'DynamicAccess', {
     get: DynamicAccess_getInstance
   });
+  package$util.encodeURIComponent_pdl1vz$ = encodeURIComponent;
+  package$util.formUrlDecode_pdl1vz$ = formUrlDecode;
+  package$util.formUrlEncode_ye33rp$ = formUrlEncode;
+  package$util.formUrlEncode_jgmxsd$ = formUrlEncode_0;
   Object.defineProperty(package$util, 'Json', {
     get: Json_getInstance
   });
