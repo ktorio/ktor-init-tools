@@ -19,9 +19,9 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             out += RoutingFeature
             out += ApacheClientEngine
             out += JsonJacksonFeature
+            out += AuthFeature // required for swagger-util.kt
             if (model.securityDefinitions.isNotEmpty()) {
                 out += AuthJwtFeature // @TODO: Do this conditionally based on Security blocks
-                out += AuthFeature
             }
             return out
         }
@@ -142,6 +142,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             SEPARATOR {
                 +"import java.util.*"
                 +"import io.ktor.http.*"
+                +"import io.ktor.request.*"
                 +"import io.ktor.swagger.experimental.*"
             }
             SEPARATOR {
@@ -380,7 +381,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                             SEPARATOR {
                                 val reqBody = method.requestBody.firstOrNull()
                                 if (reqBody != null) {
-                                    +"val body = call.receive<${reqBody.schema.toKotlinType()}>()"
+                                    +"val body = call().receive<${reqBody.schema.toKotlinType()}>()"
                                 }
 
                                 for (param in method.parameters) {
