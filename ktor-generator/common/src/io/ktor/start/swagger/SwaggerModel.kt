@@ -558,8 +558,7 @@ data class SwaggerModel(
         val explored = LinkedHashSet<GenType>()
 
         class Result(val out: Set<NamedObject>, unfilteredUnnameds: Set<ObjType>) {
-            //val outObjs = out.map { it.kind.type }.toSet()
-            val outObjs = setOf<ObjType>()
+            val outObjs = out.map { it.kind.type }.toSet()
             val unnamed = unfilteredUnnameds.filter { it !in outObjs }
         }
 
@@ -627,7 +626,7 @@ data class SwaggerModel(
 fun SwaggerModel.constructDefinitions(): Map<String, SwaggerModel.TypeDef> {
     val res = SwaggerModel.ReferenceFinder(this).find()
 
-    for (u in res.unnamed) println("unnamed: $u")
+    //for (u in res.unnamed) println("unnamed: $u")
 
     val namedDefs = res.out.map {
         SwaggerModel.TypeDef(it.name, it.kind.type.props, synthetic = false)
