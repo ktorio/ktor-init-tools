@@ -3,7 +3,7 @@
     <id>io.ktor.intellij.plugin</id>
 
     <name>Ktor</name>
-    <version>0.2.1-SNAPSHOT</version>
+    <version>0.2.1</version>
     <vendor url="http://www.jetbrains.com">JetBrains</vendor>
     <description>
         <![CDATA[
@@ -13,11 +13,20 @@
 
             The following features are available:
             <ul>
-                <li>Ability to create preconfigured Ktor projects.</li>
+                <li>Ability to create preconfigured Ktor projects with optional Swagger/OpenAPI support.</li>
             </ul>
 
             <h2>Changelog</h2>
 
+            <h3>0.2.1</h2>
+            <ul>
+                <li>Swagger: HTTP API generation (`api.http`) for documentation, and testing the API using IU.</li>
+                <li>Swagger: YAML support.</li>
+                <li>Swagger: JWT login code generation using heuristics.</li>
+                <li>Swagger: Fixed multiline comments in several places.</li>
+                <li>Swagger: Generated unnamed types.</li>
+                <li>Swagger: Improved OpenAPI 3.0 support (still requires some work).</li>
+            </ul>
             <h3>0.2.0</h2>
             <ul>
                 <li>Fixed plugin on windows (no src folder was generated).</li>
