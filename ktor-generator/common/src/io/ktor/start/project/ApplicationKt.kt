@@ -44,7 +44,8 @@ object ApplicationKt : BuildInfoBlock(BuildFiles, ApplicationConf, LogBackXml, G
                 +"fun main(args: Array<String>): Unit = ${info.developmentEngineFQ}.main(args)"
             }
             SEPARATOR {
-                "fun Application.module()" {
+                +"@Suppress(\"unused\") // Referenced in application.conf"
+                +"fun Application.module()" {
                     block(MODULE_INSTALL)
                     EMPTY_LINE_ONCE()
                     block(MODULE_POST)

@@ -1,7 +1,6 @@
 package io.ktor.start.swagger
 
 import io.dahgan.*
-import io.ktor.start.swagger.SwaggerModel.Companion.v
 import io.ktor.start.util.*
 import io.ktor.start.util.DynamicAccess.entries
 import io.ktor.start.util.DynamicAccess.get
@@ -155,16 +154,23 @@ data class SwaggerModel(
         val fields: Map<String, InfoGenType<GenType>>
     }
 
+    //data class UnnamedObject(val type: ObjType)
+
     data class NamedObject(val path: String, val kind: InfoGenType<ObjType>) : MapLikeGenType {
+    //data class NamedObject(val path: String, val def: TypeDef?) : MapLikeGenType {
         override val ktype: KClass<*> = Any::class
         val name = path.substringAfterLast('/')
+
         override fun toString(): String = name
-        override val fields get() = kind.type.fields
+        override val fields = kind.type.fields
     }
 
-    data class ObjType(val namePath: String?, override val fields: Map<String, InfoGenType<GenType>>) : MapLikeGenType {
+    data class ObjType(val namePath: String?, val guessPath: List<String>, val propList: List<Prop>) : MapLikeGenType {
+        val props = propList.associateBy { it.name }
+        override val fields: Map<String, InfoGenType<GenType>> = propList.map { it.name to it.type }.toMap()
         override val ktype: KClass<*> = Map::class
-        override fun toString(): String = "Any/*Unsupported {$fields} namePath=$namePath*/"
+        val guessName = ID.normalizeClassName(if (guessPath.isNotEmpty()) guessPath else listOf("Unknown"))
+        override fun toString(): String = "Any/*Unsupported {$fields} namePath=$namePath, guessName=$guessName, guessPath=$guessPath*/"
     }
 
     data class Prop(val name: String, val type: InfoGenType<GenType>, val required: Boolean) {
@@ -172,13 +178,6 @@ data class SwaggerModel(
         val rule get() = type.rule
 
         fun toRuleString(param: String = name): String? = rule?.toKotlin(param, type)
-    }
-
-    data class TypeDef(
-        val name: String,
-        val props: Map<String, Prop>
-    ) {
-        val propsList = props.values
     }
 
     class SecurityDefinition(
@@ -245,7 +244,7 @@ data class SwaggerModel(
         val parametersHeader = parameters.filter { it.inside == Inside.HEADER }
 
         val requestBodyOld = if (parametersBody.isNotEmpty())
-            listOf(TypeWithContentType(ContentType.ApplicationJson, InfoGenType(ObjType(null, parametersBody.map { it.name to it.schema }.toMap()), null, null)))
+            listOf(TypeWithContentType(ContentType.ApplicationJson, InfoGenType(ObjType(null, listOf(), parametersBody.map { Prop(it.name, it.schema, required = true) }), null, null)))
         else
             listOf()
 
@@ -307,18 +306,18 @@ data class SwaggerModel(
         }
 
         // https://swagger.io/specification/#data-types
-        fun parseDefinitionElement(def: Any?, root: Any?, namePath: String?): InfoGenType<GenType> {
+        fun parseDefinitionElement(def: Any?, root: Any?, namePath: String?, guessPath: List<String>): InfoGenType<GenType> {
             return Dynamic {
                 val ref = def["\$ref"]
                 if (ref != null) {
                     val path = ref.str
-                    val referee = parseDefinitionElement(Json.followReference(def, root, path), root, path)
-                    return if (referee.type is ObjType) InfoGenType(
-                        NamedObject(path, referee as InfoGenType<ObjType>),
-                        null,
-                        null
-                    ) else referee
-                    //RefType(ref.str)
+                    val referee = parseDefinitionElement(Json.followReference(def, root, path), root, path, listOf(path))
+                    return if (referee.type is ObjType) {
+                        @Suppress("UNCHECKED_CAST")
+                        InfoGenType(NamedObject(path, referee as InfoGenType<ObjType>), null, null)
+                    } else {
+                        referee
+                    }
                 } else {
                     val type = def["type"]
                     val format = def["format"]
@@ -349,15 +348,17 @@ data class SwaggerModel(
                         // Composed Types
                         "array" -> {
                             val items = def["items"]
-                            ArrayType(parseDefinitionElement(items, root, null))
+                            ArrayType(parseDefinitionElement(items, root, null, guessPath + listOf("elements")))
                         }
                         null, "object" -> {
                             val props = def["properties"]
+                            val required = def["required"].strList.toSet()
                             val entries =
                                 props.strEntries
-                                    .map { it.first to parseDefinitionElement(it.second, root, null) }
-                                    .toMap()
-                            ObjType(namePath, entries)
+                                    .map {
+                                        Prop(it.first, parseDefinitionElement(it.second, root, null, guessPath + it.first), it.first in required)
+                                    }
+                            ObjType(namePath, guessPath, entries)
                         }
                         "null" -> error("null? : $def")
                         else -> {
@@ -370,39 +371,23 @@ data class SwaggerModel(
             }
         }
 
-        fun parseDefinition(name: String, def: Any?, root: Any?): TypeDef {
-            //println("Definition $name:")
-            return Dynamic {
-                //println(" - " + def["required"].list)
-                val type = def["type"]?.str
-                if (type != null && type != "object") error("Only supported 'object' definitions but found '$type'")
-                val required = def["required"].strList.toSet()
-                val props = def["properties"].let {
-                    it.strEntries.map { (key, element) ->
-                        val pdef = parseDefinitionElement(element, root, null)
-                        key to Prop(key.str, pdef, key in required)
-                    }.toMap()
-                }
-
-                TypeDef(name, props)
-            }
-        }
-
         fun parseParameter(def: Any?, root: Any?): Parameter {
             return Dynamic {
+                val paramName = def["name"].str
                 Parameter(
-                    name = def["name"].str,
+                    name = paramName,
                     inside = Inside[def["in"].str],
                     required = def["required"]?.bool ?: false,
                     description = def["description"].str,
                     default = def["default"],
-                    schema = parseDefinitionElement(def["schema"] ?: def, root, null)
+                    schema = parseDefinitionElement(def["schema"] ?: def, root, null, listOf("param", paramName))
                 )
             }
         }
 
         fun parseMethodPath(path: String, method: String, def: Any?, root: Any?, version: SemVer): PathMethodModel {
             return Dynamic {
+                val operationId = def["operationId"]?.str
                 PathMethodModel(
                     path = path,
                     method = method,
@@ -414,24 +399,24 @@ data class SwaggerModel(
                         val info = it[name]
                         Security(name, info.strList)
                     },
-                    operationId = def["operationId"]?.str,
+                    operationId = operationId,
                     parameters = def["parameters"].list.map { parseParameter(it, root) },
                     responses = def["responses"].let {
                         it.strEntries.map { (code, rdef) ->
-                            Response(code, rdef["description"].str, parseTypeWithContentTypes(rdef, root, version))
+                            Response(code, rdef["description"].str, parseTypeWithContentTypes(rdef, root, version, listOf("responses")))
                         }
                     },
-                    requestBody = parseTypeWithContentTypes(def["requestBody"], root, version)
+                    requestBody = parseTypeWithContentTypes(def["requestBody"], root, version, listOf(operationId ?: "$method/$path", "ReqBody"))
                 )
             }
         }
 
-        private fun parseTypeWithContentTypes(rdef: Any?, root: Any?, version: SemVer): List<TypeWithContentType> {
+        private fun parseTypeWithContentTypes(rdef: Any?, root: Any?, version: SemVer, guessPath: List<String>): List<TypeWithContentType> {
             val kinds = arrayListOf<TypeWithContentType>()
 
             when (version.v) {
                 SwVersion.V2 -> {
-                    val schema = rdef["schema"]?.let { parseDefinitionElement(it, root, null) }
+                    val schema = rdef["schema"]?.let { parseDefinitionElement(it, root, null, guessPath) }
                     if (schema != null) {
                         kinds += TypeWithContentType(ContentType.ApplicationJson, schema)
                     }
@@ -442,7 +427,7 @@ data class SwaggerModel(
                         val contentType = fcontent.first?.str
                         val contentInfo = fcontent.second
                         val schema = contentInfo["schema"]
-                        val fschema = schema?.let { parseDefinitionElement(it, root, null) }
+                        val fschema = schema?.let { parseDefinitionElement(it, root, null, guessPath) }
                         if (contentType != null && fschema != null) {
                             kinds += TypeWithContentType(ContentType(contentType), fschema)
                         }
@@ -569,11 +554,18 @@ data class SwaggerModel(
 
     class ReferenceFinder(val model: SwaggerModel) {
         val out = LinkedHashSet<NamedObject>()
+        val unnameds = LinkedHashSet<ObjType>()
         val explored = LinkedHashSet<GenType>()
 
-        fun find(): Set<NamedObject> {
+        class Result(val out: Set<NamedObject>, unfilteredUnnameds: Set<ObjType>) {
+            //val outObjs = out.map { it.kind.type }.toSet()
+            val outObjs = setOf<ObjType>()
+            val unnamed = unfilteredUnnameds.filter { it !in outObjs }
+        }
+
+        fun find(): Result {
             for (path in this.model.paths.values) path.find()
-            return out
+            return Result(out, unnameds)
         }
 
         fun PathModel.find() {
@@ -615,6 +607,9 @@ data class SwaggerModel(
                 }
                 is MapLikeGenType -> {
                     for (field in fields) field.value.find()
+                    if (this is ObjType) {
+                        unnameds += this
+                    }
                 }
                 is ArrayType -> {
                     items.find()
@@ -622,17 +617,30 @@ data class SwaggerModel(
             }
         }
     }
+
+    data class TypeDef(val name: String, val props: Map<String, Prop>, val synthetic: Boolean) {
+        val propsList = props.values
+    }
 }
 
 
 fun SwaggerModel.constructDefinitions(): Map<String, SwaggerModel.TypeDef> {
-    return SwaggerModel.ReferenceFinder(this).find().map {
-        val def = Json.followReference(untyped, untyped, it.path)
-        if (def == null) {
-            error("Found null, following path ${it.path}")
-        }
-        it.name to SwaggerModel.parseDefinition(it.name, def, untyped)
-    }.toMap()
+    val res = SwaggerModel.ReferenceFinder(this).find()
+
+    for (u in res.unnamed) println("unnamed: $u")
+
+    val namedDefs = res.out.map {
+        SwaggerModel.TypeDef(it.name, it.kind.type.props, synthetic = false)
+    }.filterNotNull().associateBy { it.name }
+
+    val unnamedDefs = res.unnamed.map {
+        val props = it.fields.map { (name, type) ->
+            name to SwaggerModel.Prop(name, type, true)
+        }.toMap()
+        SwaggerModel.TypeDef(it.guessName, props, synthetic = true)
+    }.associateBy { it.name }
+
+    return namedDefs + unnamedDefs
 }
 
 

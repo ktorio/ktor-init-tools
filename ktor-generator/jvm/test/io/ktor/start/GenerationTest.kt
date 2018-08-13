@@ -45,6 +45,7 @@ class GenerationTest {
 
                 fun main(args: Array<String>): Unit = io.ktor.server.netty.DevelopmentEngine.main(args)
 
+                @Suppress("unused") // Referenced in application.conf
                 fun Application.module() {
                     routing {
                         get("/") {
@@ -82,6 +83,7 @@ class GenerationTest {
 
                 fun main(args: Array<String>): Unit = io.ktor.server.netty.DevelopmentEngine.main(args)
 
+                @Suppress("unused") // Referenced in application.conf
                 fun Application.module() {
                     val client = HttpClient(Apache) {
                         install(JsonFeature) {

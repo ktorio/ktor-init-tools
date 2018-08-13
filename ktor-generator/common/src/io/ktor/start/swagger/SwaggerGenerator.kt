@@ -55,12 +55,17 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             }
             SEPARATOR {
                 for (def in model.definitions.values) {
-                    +"data class ${def.name}("
+                    // @TODO: Consider using object instead?
+                    val classKeywords = if (def.props.isNotEmpty()) "data class" else "class"
+                    if (def.synthetic) {
+                        +"// Synthetic class name"
+                    }
+                    +"$classKeywords ${def.name}("
                     indent {
                         val props = def.props.values
                         for ((index, prop) in props.withIndex()) {
                             val comma = if (index >= props.size - 1) "" else ","
-                            +"val ${prop.name}: ${prop.type.toKotlin()}$comma"
+                            +"val ${prop.name}: ${prop.type.toKotlinType()}$comma"
                         }
                     }
                     val propsWithRules = def.propsList.filter { it.type.rule != null }
@@ -348,10 +353,10 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                                 val default = if (param.required) "" else " = " + indentStringHere {
                                     toKotlinDefault(param.schema, param.default, typed = true)
                                 }
-                                +"$inAnnotation ${param.name}: ${param.schema.toKotlin()}$default${info.optComma}"
+                                +"$inAnnotation ${param.name}: ${param.schema.toKotlinType()}$default${info.optComma}"
                             }
                         }
-                        +"): ${path.responseType.toKotlin()}"
+                        +"): ${path.responseType.toKotlinType()}"
                     }
                 }
             }
@@ -367,12 +372,17 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                         +"override suspend fun ${method.methodName}("
                         indent {
                             for ((info, param) in method.parameters.metaIter) {
-                                +"${param.name}: ${param.schema.toKotlin()}${info.optComma}"
+                                +"${param.name}: ${param.schema.toKotlinType()}${info.optComma}"
                             }
                         }
-                        +"): ${method.responseType.toKotlin()} {"
+                        +"): ${method.responseType.toKotlinType()} {"
                         indent {
                             SEPARATOR {
+                                val reqBody = method.requestBody.firstOrNull()
+                                if (reqBody != null) {
+                                    +"val body = call.receive<${reqBody.schema.toKotlinType()}>()"
+                                }
+
                                 for (param in method.parameters) {
                                     val pschema = param.schema
                                     val rule = pschema.rule
@@ -429,10 +439,10 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         }
     }
 
-    fun SwaggerModel.InfoGenType<*>.toKotlin(): String = type.toKotlin()
+    fun SwaggerModel.InfoGenType<*>.toKotlinType(): String = type.toKotlinType()
 
-    fun SwaggerModel.GenType.toKotlin(): String = when (this) {
-        is SwaggerModel.OptionalType -> "${this.type.toKotlin()}?"
+    fun SwaggerModel.GenType.toKotlinType(): String = when (this) {
+        is SwaggerModel.OptionalType -> "${this.type.toKotlinType()}?"
         is SwaggerModel.StringType -> "String"
         is SwaggerModel.PasswordType -> "String" // @TODO: SecureString instead?
         is SwaggerModel.DateType -> "Date"
@@ -442,8 +452,9 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         is SwaggerModel.Int64Type -> "Long"
         is SwaggerModel.BoolType -> "Boolean"
         is SwaggerModel.NamedObject -> name
-        is SwaggerModel.ArrayType -> "List<${this.items.toKotlin()}>"
-        is SwaggerModel.ObjType -> "Any/*Unsupported ${this.fields}*/"
+        is SwaggerModel.ArrayType -> "List<${this.items.toKotlinType()}>"
+        //is SwaggerModel.ObjType -> "Any/*Unsupported ${this.fields}, namePath=$namePath, guessName=$guessName, guessPath=$guessPath*/"
+        is SwaggerModel.ObjType -> guessName
         is SwaggerModel.VoidType -> "Unit"
         else -> error("Unsupported '$this' class=${this::class}")
     }
@@ -473,10 +484,10 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                 is SwaggerModel.ArrayType -> +"listOf()"
                 is SwaggerModel.MapLikeGenType -> {
                     if (typed && type is SwaggerModel.NamedObject) {
-                        val def = type.kind
+                        val def = type
                         +"${type.name}("
                         indent {
-                            val props = def.type.fields.entries.toList()
+                            val props = def.fields.entries.toList()
                             for ((info, entry) in props.metaIter) {
                                 val (key, prop) = entry
                                 val rdefault = if (default is Map<*, *>) default[key] else null
@@ -510,10 +521,8 @@ fun SwaggerModel.InfoGenType<*>.findField(name: String, path: List<String> = lis
 
 fun SwaggerModel.GenType.findField(name: String, path: List<String> = listOf(), matchType: KClass<out SwaggerModel.GenType>? = null): List<String>? {
     when (this) {
-        is SwaggerModel.NamedObject -> {
-            return this.kind.type.findField(name, path)
-        }
-        is SwaggerModel.ObjType -> {
+        //is SwaggerModel.NamedObject -> return this.kind.type.findField(name, path)
+        is SwaggerModel.MapLikeGenType -> {
             for ((fname, field) in this.fields) {
                 val fpath = path + fname
                 if (fname == name && ((matchType == null) || (matchType.isInstance(field.type)))) return fpath
