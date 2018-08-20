@@ -33,6 +33,7 @@ object RawSocketsTlsFeature : ServerFeature(ApplicationKt, RawSocketsFeature) {
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.network.tls.*")
+        addImport("kotlinx.coroutines.experimental.*")
 
         //replace(RawSocketsFeature.SERVER_SOCKET) {
         //    +"val serverSocket = aSocket(selectorManager).tcp().bind(port = DefaultPort).tls()"

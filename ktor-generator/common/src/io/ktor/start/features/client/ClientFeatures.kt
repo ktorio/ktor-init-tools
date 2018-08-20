@@ -32,6 +32,7 @@ object JsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
         addImport("io.ktor.client.features.json.*")
         addImport("io.ktor.client.request.*")
         addImport("java.net.URL")
+        addImport("kotlinx.coroutines.experimental.*")
         addApplicationClasses {
             +"data class JsonSampleClass(val hello: String)"
         }
