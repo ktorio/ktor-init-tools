@@ -13,6 +13,7 @@ object AuthBasicClientFeature : ClientFeature(CoreClientEngine) {
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.features.json.*")
+        addImport("io.ktor.client.features.auth.basic.*")
         append(CoreClientEngine.CLIENT_FEATURES) {
             +"install(BasicAuth)" {
                 +"username = \"test\""
