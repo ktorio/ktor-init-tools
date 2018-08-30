@@ -3,7 +3,7 @@
     <id>io.ktor.intellij.plugin</id>
 
     <name>Ktor</name>
-    <version>0.2.2-SNAPSHOT</version>
+    <version>0.2.2</version>
     <vendor url="http://www.jetbrains.com">JetBrains</vendor>
     <description>
         <![CDATA[
@@ -18,6 +18,12 @@
 
             <h2>Changelog</h2>
 
+            <h3>0.2.2</h2>
+            <ul>
+                <li>Ktor: 0.9.4.</li>
+                <li>Added support for Webjars feature.</li>
+                <li>Swagger: Initial experimental test generation.</li>
+            </ul>
             <h3>0.2.1</h2>
             <ul>
                 <li>Swagger: HTTP API generation (`api.http`) for documentation, and testing the API using IU.</li>

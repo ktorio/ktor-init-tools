@@ -39,6 +39,7 @@ abstract class Feature(vararg deps: Block<BuildInfo>) : Block<BuildInfo>(*deps) 
 
     open val group: String = "Features"
     open val tags = listOf<String>()
+    open val since: SemVer? = null
 
     open val repos: List<String> = Repos.ktor
     abstract val id: String

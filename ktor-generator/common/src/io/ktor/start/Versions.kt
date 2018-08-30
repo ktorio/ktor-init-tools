@@ -19,13 +19,14 @@ package io.ktor.start
 
 import io.ktor.start.util.*
 
-val KOTLIN_VERSION = "1.2.51"
-val KOTLINX_COROUTINES_VERSION = "0.23.4"
+val KOTLIN_VERSION = "1.2.61"
+val KOTLINX_COROUTINES_VERSION_FOR_KTOR_V093 = "0.23.4"
 
 object Versions {
-    val V092 = SemVer("0.9.2")
     val V093 = SemVer("0.9.3")
+    val V094 = SemVer("0.9.4")
     //val ALL = arrayOf(V092, V093)
-    val ALL = arrayOf(V093)
-    val LAST = V093
+    //val ALL = arrayOf(V094, V093) // @TODO: Not possible until `Feature.since` is taken into account in the feature selector
+    val ALL = arrayOf(V094)
+    val LAST = V094
 }

@@ -17,6 +17,7 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.util.*
 import java.lang.reflect.*
+import java.lang.reflect.Type
 
 class HttpException(val code: HttpStatusCode, val description: String = code.description) : RuntimeException(description)
 
