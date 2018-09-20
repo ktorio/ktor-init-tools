@@ -58,6 +58,7 @@ internal object BuildFilesGradle : BuildInfoBlock() {
             "repositories" {
                 for (repo in reposToInclude) {
                     when (repo) {
+                        "local" -> +"mavenLocal()"
                         "jcenter" -> +"jcenter()"
                         else -> +"maven { url '$repo' }"
                     }

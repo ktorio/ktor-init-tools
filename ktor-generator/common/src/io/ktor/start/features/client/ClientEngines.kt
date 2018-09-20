@@ -15,10 +15,19 @@ object CoreClientEngine : ClientEngine(ApplicationKt) {
     override val description = "Core of the HttpClient. Required for libraries."
     override val documentation = "https://ktor.io/clients/http-client.html"
 
+    override val artifacts: List<String> by lazy {
+        listOf(
+            "io.ktor:ktor-client-core:\$ktor_version",
+            "io.ktor:ktor-client-core-jvm:\$ktor_version"
+        )
+    }
+
     val CLIENT_USAGE = newSlot("CLIENT")
     val CLIENT_FEATURES = newSlot("CLIENT_FEATURES")
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addTestDependency(MvnArtifact("io.ktor:ktor-client-mock:\$ktor_version"))
+
         addImport("io.ktor.client.*")
 
         appendSeparated(ApplicationKt.MODULE_INSTALL) {
@@ -71,7 +80,7 @@ object JettyClientEngine : ClientEngine(CoreClientEngine) {
     }
 }
 
-object MockClientEngine : ClientEngine(CoreClientEngine) {
+object MockClientEngine : ClientEngine(CoreClientEngine, ApplicationTestKt) {
     override val id: String = "ktor-client-mock"
     override val title = "Mock HttpClient Engine"
     override val description = "Engine for using in tests to simulate HTTP responses programmatically."
@@ -81,5 +90,30 @@ object MockClientEngine : ClientEngine(CoreClientEngine) {
     override val testArtifacts = listOf("io.ktor:ktor-client-mock:\$ktor_version")
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addTestImport("io.ktor.client.engine.mock.*")
+        addTestImport("kotlinx.coroutines.experimental.*")
+        addTestImport("io.ktor.http.*")
+        addTestImport("kotlinx.coroutines.experimental.io.*")
+        addTestImport("io.ktor.client.request.*")
+        addTestImport("io.ktor.client.call.*")
+
+        addTestMethod("testClientMock") {
+            +"runBlocking" {
+                +"val client = HttpClient(MockEngine { call ->"
+                indent {
+                    +"if (url.encodedPath == \"/\")" {
+                        +"MockHttpResponse(call, HttpStatusCode.OK, ByteReadChannel(byteArrayOf(1, 2, 3)), headersOf(\"X-MyHeader\", \"MyValue\"))"
+                    }
+                    appending("else") {
+                        +"MockHttpResponse(call, HttpStatusCode.NotFound, ByteReadChannel(\"Not Found \${url.encodedPath}\"))"
+                    }
+                }
+                +"})"
+
+                +"assertEquals(byteArrayOf(1, 2, 3).toList(), client.get<ByteArray>(\"/\").toList())"
+                +"assertEquals(\"MyValue\", client.call(\"/\").response.headers[\"X-MyHeader\"])"
+                +"assertEquals(\"Not Found other/path\", client.get<String>(\"/other/path\"))"
+            }
+        }
     }
 }

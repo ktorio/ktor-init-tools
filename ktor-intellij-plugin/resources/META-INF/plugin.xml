@@ -18,6 +18,11 @@
 
             <h2>Changelog</h2>
 
+            <h3>0.2.3</h2>
+            <ul>
+                <li>Ktor: 0.9.5.</li>
+                <li>Initial test generation for some features.</li>
+            </ul>
             <h3>0.2.2</h2>
             <ul>
                 <li>Ktor: 0.9.4.</li>

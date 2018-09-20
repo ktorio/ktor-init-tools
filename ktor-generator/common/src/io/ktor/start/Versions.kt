@@ -25,8 +25,9 @@ val KOTLINX_COROUTINES_VERSION_FOR_KTOR_V093 = "0.23.4"
 object Versions {
     val V093 = SemVer("0.9.3")
     val V094 = SemVer("0.9.4")
+    val V095 = SemVer("0.9.5")
     //val ALL = arrayOf(V092, V093)
     //val ALL = arrayOf(V094, V093) // @TODO: Not possible until `Feature.since` is taken into account in the feature selector
-    val ALL = arrayOf(V094)
-    val LAST = V094
+    val ALL = arrayOf(V094, V095)
+    val LAST = V095
 }

@@ -17,7 +17,7 @@
 
 package io.ktor.start.util
 
-class Indenter(internal val actions: ArrayList<Action> = arrayListOf<Indenter.Action>()) {
+class Indenter(@PublishedApi internal val actions: ArrayList<Action> = arrayListOf<Indenter.Action>()) {
     object INDENTS {
         private val INDENTS = arrayListOf("")
 
@@ -101,6 +101,8 @@ class Indenter(internal val actions: ArrayList<Action> = arrayListOf<Indenter.Ac
         line("}")
         return this
     }
+
+    //class IndentedLine
 
     inline fun line(str: String, after: String = "", after2: String = "", callback: () -> Unit): Indenter {
         val rafter = if (after.isEmpty()) "" else " $after"
@@ -205,6 +207,15 @@ class Indenter(internal val actions: ArrayList<Action> = arrayListOf<Indenter.Ac
         return IndenterEvaluator(markHandler, indentEmptyLines, doIndent).apply { eval(actions) }.out.toString()
     }
 
+    //operator fun IndentedLine.plus(indentedLine: IndentedLine) = TODO()
+
+    inline fun appending(text: String, callback: () -> Unit) {
+        val lastAction = actions.lastOrNull() as? Action.Line ?: error("Expected a line")
+        if (lastAction.str != "}") error("Expected a '}'")
+        actions.removeAt(actions.size - 1)
+        line("} $text", callback = callback)
+    }
+
     inline operator fun String.invoke(suffix: String = "", callback: () -> Unit) = line(this, after = suffix, callback = callback)
     inline operator fun String.unaryPlus() = line(this)
 
@@ -230,6 +241,7 @@ class Indenter(internal val actions: ArrayList<Action> = arrayListOf<Indenter.Ac
 
 operator fun Unit.unaryPlus(): Unit = this
 operator fun Indenter.unaryPlus(): Indenter = this
+//operator fun Indenter.IndentedLine.unaryPlus(): Indenter.IndentedLine = this
 
 val Indenter.SEPARATOR get() = EMPTY_LINE_ONCE()
 

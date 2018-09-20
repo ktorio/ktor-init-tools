@@ -102,7 +102,10 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
                     td(JLabel("Using:"))
                     td(JComboBox(KtorEngine.values()).apply { engineCB = this })
                     td(JLabel("Ktor Version:"))
-                    td(JComboBox(Versions.ALL).apply { versionCB = this })
+                    td(JComboBox(Versions.ALL).apply {
+                        versionCB = this
+                        selectedItem = Versions.LAST
+                    })
                 }
             }, BorderLayout.NORTH)
 

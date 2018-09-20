@@ -8,6 +8,7 @@ object ApplicationTestKt : BuildInfoBlock(ApplicationKt) {
 
     override fun BlockBuilder.render(info: BuildInfo) {
         addTestImport("kotlin.test.*")
+        addTestImport("io.ktor.server.testing.*")
 
         fileText("test/ApplicationTest.kt") {
             +"package ${info.artifactGroup}"

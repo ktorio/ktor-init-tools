@@ -21,7 +21,7 @@ import io.ktor.start.*
 import io.ktor.start.project.*
 import io.ktor.start.util.*
 
-object RoutingFeature : ServerFeature(ApplicationKt) {
+object RoutingFeature : ServerFeature(ApplicationKt, ApplicationTestKt) {
     override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-server-core:\$ktor_version")
     override val id = "routing"
@@ -39,6 +39,15 @@ object RoutingFeature : ServerFeature(ApplicationKt) {
                     +"call.respondText(\"HELLO WORLD!\", contentType = ContentType.Text.Plain)"
                 }
                 block(BLOCK)
+            }
+        }
+
+        addTestMethod("testRoot") {
+            +"withTestApplication({ module() })" {
+                +"handleRequest(HttpMethod.Get, \"/\").apply" {
+                    +"assertEquals(HttpStatusCode.OK, response.status())"
+                    +"assertEquals(\"HELLO WORLD!\", response.content)"
+                }
             }
         }
     }

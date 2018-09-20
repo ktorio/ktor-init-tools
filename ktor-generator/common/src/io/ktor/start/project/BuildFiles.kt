@@ -27,6 +27,7 @@ object BuildFiles : BuildInfoBlock() {
             ProjectType.Maven -> BuildFilesMaven.apply { render(info) }
         }
 
+        addMavenRepository(Repos.local)
         addMavenRepository(Repos.jcenter)
         addMavenRepository(Repos.ktor)
         addCompileDependency(MvnArtifact("org.jetbrains.kotlin:kotlin-stdlib-jdk8:\$kotlin_version"))
