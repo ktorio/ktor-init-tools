@@ -19,7 +19,7 @@ package io.ktor.start
 
 import io.ktor.start.util.*
 
-val KOTLIN_VERSION = "1.2.61"
+val KOTLIN_VERSION = "1.2.70"
 val KOTLINX_COROUTINES_VERSION_FOR_KTOR_V093 = "0.23.4"
 
 object Versions {
