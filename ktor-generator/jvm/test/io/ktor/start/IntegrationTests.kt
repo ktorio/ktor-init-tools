@@ -18,7 +18,7 @@ class IntegrationTests {
     val info = BuildInfo(
         includeWrapper = false,
         projectType = ProjectType.Gradle,
-        ktorVersion = Versions.V093,
+        ktorVersion = Versions.LAST,
         artifactName = "example1",
         artifactGroup = "com.example",
         artifactVersion = "0.1.0-SNAPSHOT",
@@ -54,19 +54,20 @@ class IntegrationTests {
 
     @Test
     fun testSwaggerGeneration() {
+        //val testProjectRoot = testProjectDir.root
+        val testProjectRoot = File("/tmp/swagger-gen")
         runBlocking {
             generate(info, SwaggerGenerator(SwaggerModel.parseJson(getResourceString("/swagger.json")!!)))
-                .writeToFolder(testProjectDir.root)
+                .writeToFolder(testProjectRoot)
 
             val result = GradleRunner.create()
-                .withProjectDir(testProjectDir.root)
-                .withArguments("check")
+                .withProjectDir(testProjectRoot)
+                //.withArguments("check") // Test should fail, but the code should be valid
+                .withArguments("compileTestKotlin")
                 .forwardOutput()
                 .build()
 
-            println("RESULT: $result")
-            println("RESULT: ${result.output}")
-            println("RESULT: ${result.tasks.joinToString(", ") { it.path }}")
+            //println("RESULT: ${result.tasks.joinToString(", ") { it.path }}")
         }
     }
 }

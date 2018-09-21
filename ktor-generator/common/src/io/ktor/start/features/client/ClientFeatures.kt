@@ -28,6 +28,7 @@ object JsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
     override val title = "Json serialization for HttpClient"
     override val description = "Supports basic authentication for the Http Client"
     override val documentation = "https://ktor.io/clients/http-client.html#jsonfeature"
+    override val repos = super.repos + listOf("https://kotlin.bintray.com/kotlinx")
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.features.json.*")

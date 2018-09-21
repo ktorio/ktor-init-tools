@@ -13,7 +13,7 @@ class GenerationTest {
     val info = BuildInfo(
         includeWrapper = false,
         projectType = ProjectType.Gradle,
-        ktorVersion = Versions.V093,
+        ktorVersion = Versions.LAST,
         artifactName = "example1",
         artifactGroup = "com.example",
         artifactVersion = "0.1.0-SNAPSHOT",
