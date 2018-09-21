@@ -41,11 +41,11 @@ class IntegrationTests {
     @Test
     fun testNormalGradleGeneration() {
         val testProjectRoot = testProjectDir.root
-        //val testProjectRoot = File("/tmp/swagger-gen")
+        //val testProjectRoot = File("/tmp/normal-gradle")
 
         runBlocking {
             generate(info, ALL_FEATURES)
-                .writeToFolder(testProjectRoot)
+                .writeToFolder(testProjectRoot, print = true)
 
             GradleRunner.create()
                 .withProjectDir(testProjectRoot)

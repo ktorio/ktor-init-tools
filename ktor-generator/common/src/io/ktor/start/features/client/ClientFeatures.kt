@@ -49,11 +49,14 @@ object JsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
         }
         append(CoreClientEngine.CLIENT_USAGE) {
             "runBlocking" {
+                +"// Sample for making a HTTP Client request"
+                +"/*"
                 "val message = client.post<JsonSampleClass>" {
                     +"url(URL(\"http://127.0.0.1:8080/path/to/endpoint\"))"
                     +"contentType(ContentType.Application.Json)"
                     +"body = JsonSampleClass(hello = \"world\")"
                 }
+                +"*/"
             }
         }
     }
