@@ -32,11 +32,14 @@ object HttpsRedirectFeature : ServerFeature(ApplicationKt) {
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")
         addFeatureInstall {
-            "install(HttpsRedirect)" {
-                +"// The port to redirect to. By default 443, the default HTTPS port."
-                +"sslPort = 443"
-                +"// 301 Moved Permanently, or 302 Found redirect."
-                +"permanentRedirect = true"
+            +"// http://ktor.io/servers/features/https-redirect.html#testing"
+            +"if (!testing)" {
+                +"install(HttpsRedirect)" {
+                    +"// The port to redirect to. By default 443, the default HTTPS port."
+                    +"sslPort = 443"
+                    +"// 301 Moved Permanently, or 302 Found redirect."
+                    +"permanentRedirect = true"
+                }
             }
         }
     }

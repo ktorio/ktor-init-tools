@@ -11,6 +11,10 @@ import org.junit.rules.*
 import java.io.*
 
 class IntegrationTests {
+    companion object {
+        val GRADLE_VERSION = "4.7"
+    }
+
     @Rule
     @JvmField
     var testProjectDir = TemporaryFolder()
@@ -49,6 +53,7 @@ class IntegrationTests {
 
             GradleRunner.create()
                 .withProjectDir(testProjectRoot)
+                .withGradleVersion(GRADLE_VERSION)
                 .withArguments(
                     //"-i",
                     "check"
@@ -70,6 +75,7 @@ class IntegrationTests {
             val result = GradleRunner.create()
                 .withProjectDir(testProjectRoot)
                 //.withArguments("check") // Test should fail, but the code should be valid
+                .withGradleVersion(GRADLE_VERSION)
                 .withArguments(
                     //"-i",
                     "compileTestKotlin"

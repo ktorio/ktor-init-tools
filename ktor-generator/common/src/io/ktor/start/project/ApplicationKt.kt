@@ -45,7 +45,8 @@ object ApplicationKt : BuildInfoBlock(BuildFiles, ApplicationConf, LogBackXml, G
             }
             SEPARATOR {
                 +"@Suppress(\"unused\") // Referenced in application.conf"
-                +"fun Application.module()" {
+                +"@kotlin.jvm.JvmOverloads"
+                +"fun Application.module(testing: Boolean = false)" {
                     block(MODULE_INSTALL)
                     EMPTY_LINE_ONCE()
                     block(MODULE_POST)
