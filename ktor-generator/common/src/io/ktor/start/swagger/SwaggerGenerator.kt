@@ -225,6 +225,22 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             }
         }
 
+        fileText("test/swagger-backend-tests.kt") {
+            SEPARATOR {
+                +"package ${info.artifactGroup}"
+            }
+            SEPARATOR {
+                +"import io.ktor.http.*"
+                +"import io.ktor.server.testing.*"
+                +"import org.junit.*"
+            }
+            SEPARATOR {
+                SwaggerGeneratorTests.apply {
+                    renderTests(model)
+                }
+            }
+        }
+
         fileText(if (model.filename.endsWith(".json")) "api.json" else "api.yaml") {
             +model.source
         }
