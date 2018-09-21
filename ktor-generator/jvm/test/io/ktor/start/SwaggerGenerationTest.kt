@@ -12,17 +12,6 @@ class SwaggerGenerationTest {
         val uspto by lazy { SwaggerModel.parseJson(getResourceString("/uspto.json")!!) }
         val petstore3 by lazy { SwaggerModel.parseJson(getResourceString("/small-petstore3.json")!!) }
         val buildInfo by lazy { BuildInfo(fetch = { getResourceBytes(it) ?: error("Couldn't find $it") }) }
-
-        private fun getResourceBytes(name: String) =
-            null
-                    ?: SwaggerGenerationTest::class.java.getResourceAsStream(name)?.readBytes()
-                    ?: SwaggerGenerationTest::class.java.getResourceAsStream("/$name")?.readBytes()
-                    ?: ClassLoader.getSystemClassLoader().getResourceAsStream(name)?.readBytes()
-                    ?: ClassLoader.getSystemClassLoader().getResourceAsStream("/$name")?.readBytes()
-
-        private fun getResourceString(name: String) =
-            getResourceBytes(name)?.toString(Charsets.UTF_8)
-
     }
 
     @Test
