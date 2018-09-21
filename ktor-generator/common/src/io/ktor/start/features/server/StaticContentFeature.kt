@@ -31,6 +31,7 @@ object StaticContentFeature : ServerFeature(ApplicationKt, RoutingFeature) {
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.content.*")
+        addImport("io.ktor.http.content.*")
         addRoute {
             +"// Static feature. Try to access `/static/ktor_logo.svg`"
             "static(\"/static\")" {

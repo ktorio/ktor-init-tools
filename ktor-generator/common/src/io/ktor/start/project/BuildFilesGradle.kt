@@ -71,7 +71,7 @@ internal object BuildFilesGradle : BuildInfoBlock() {
                     for (dep in compileDependencies) {
                         +"compile \"${dep.dependency}\""
                     }
-                    for (dep in testDependencies) {
+                    for (dep in testDependencies - compileDependencies) {
                         +"testCompile \"${dep.dependency}\""
                     }
                 }

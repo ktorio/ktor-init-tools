@@ -31,12 +31,13 @@ object AutoHeadResponseFeature : ServerFeature(ApplicationKt) {
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")
+        addImport("io.ktor.util.date.*")
         addFeatureInstall {
             "install(CachingHeaders)" {
                 +"options { outgoingContent ->"
                 indent {
                     "when (outgoingContent.contentType?.withoutParameters())" {
-                        +"ContentType.Text.CSS -> CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 24 * 60 * 60))"
+                        +"ContentType.Text.CSS -> CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 24 * 60 * 60), expires = null as? GMTDate?)"
                         +"else -> null"
                     }
                 }

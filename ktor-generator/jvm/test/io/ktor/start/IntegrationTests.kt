@@ -40,13 +40,19 @@ class IntegrationTests {
      */
     @Test
     fun testNormalGradleGeneration() {
+        val testProjectRoot = testProjectDir.root
+        //val testProjectRoot = File("/tmp/swagger-gen")
+
         runBlocking {
             generate(info, ALL_FEATURES)
-                .writeToFolder(testProjectDir.root)
+                .writeToFolder(testProjectRoot)
 
             GradleRunner.create()
-                .withProjectDir(testProjectDir.root)
-                .withArguments("check")
+                .withProjectDir(testProjectRoot)
+                .withArguments(
+                    //"-i",
+                    "check"
+                )
                 .forwardOutput()
                 .build()
         }
@@ -54,8 +60,9 @@ class IntegrationTests {
 
     @Test
     fun testSwaggerGeneration() {
-        //val testProjectRoot = testProjectDir.root
-        val testProjectRoot = File("/tmp/swagger-gen")
+        val testProjectRoot = testProjectDir.root
+        //val testProjectRoot = File("/tmp/swagger-gen")
+
         runBlocking {
             generate(info, SwaggerGenerator(SwaggerModel.parseJson(getResourceString("/swagger.json")!!)))
                 .writeToFolder(testProjectRoot)
@@ -63,7 +70,10 @@ class IntegrationTests {
             val result = GradleRunner.create()
                 .withProjectDir(testProjectRoot)
                 //.withArguments("check") // Test should fail, but the code should be valid
-                .withArguments("compileTestKotlin")
+                .withArguments(
+                    //"-i",
+                    "compileTestKotlin"
+                )
                 .forwardOutput()
                 .build()
 

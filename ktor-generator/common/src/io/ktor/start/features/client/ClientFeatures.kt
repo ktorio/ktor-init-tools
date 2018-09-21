@@ -24,11 +24,15 @@ object AuthBasicClientFeature : ClientFeature(CoreClientEngine) {
 }
 
 object JsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
-    override val id = "ktor-client-json"
+    override val id = "ktor-client-json-jvm"
     override val title = "Json serialization for HttpClient"
     override val description = "Supports basic authentication for the Http Client"
     override val documentation = "https://ktor.io/clients/http-client.html#jsonfeature"
     override val repos = super.repos + listOf("https://kotlin.bintray.com/kotlinx")
+    override val artifacts = listOf(
+        "io.ktor:ktor-client-json-jvm:\$ktor_version",
+        "io.ktor:ktor-client-gson:\$ktor_version"
+    )
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.features.json.*")
