@@ -9,10 +9,19 @@ repositories {
     jcenter()
     mavenCentral()
 }
+
 kotlin {
     targets {
         fromPreset(presets.jvm, 'jvm')
         fromPreset(presets.js, 'js')
+
+        configure([js]) {
+            tasks.getByName(compilations.main.compileKotlinTaskName).kotlinOptions {
+                moduleKind = "umd"
+                sourceMap = false
+                metaInfo = false
+            }
+        }
     }
     sourceSets {
         commonMain {

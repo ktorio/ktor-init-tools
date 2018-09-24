@@ -17,12 +17,8 @@ pluginManagement {
 
 rootProject.name = 'ktor-init-tools'
 
+enableFeaturePreview('GRADLE_METADATA')
+
 include "ktor-intellij-plugin"
 include "ktor-generator-website"
 include "ktor-generator"
-
-/*
-findProject(":ktor-generator-common")?.projectDir = file("ktor-generator/common")
-findProject(":ktor-generator-jvm")?.projectDir = file("ktor-generator/jvm")
-findProject(":ktor-generator-js")?.projectDir = file("ktor-generator/js")
-*/
