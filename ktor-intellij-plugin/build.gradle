@@ -1,6 +1,5 @@
 plugins {
-  id "org.jetbrains.intellij" version "0.3.5"
-
+	id "org.jetbrains.intellij" version "0.3.5"
 }
 
 apply plugin: "kotlin"
@@ -13,7 +12,7 @@ sourceSets {
 }
 
 dependencies {
-	compile project(":ktor-generator-jvm")
+	compile project(":ktor-generator")
 }
 
 def intellijBaseVersion = "2018.2.1"
