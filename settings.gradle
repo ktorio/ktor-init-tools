@@ -1,12 +1,24 @@
+pluginManagement {
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "kotlin-multiplatform") {
+                useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:${requested.version}")
+            }
+        }
+    }
+
+    repositories {
+        mavenLocal()
+        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
+        mavenCentral()
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+}
+
 rootProject.name = 'ktor-init-tools'
+
+enableFeaturePreview('GRADLE_METADATA')
 
 include "ktor-intellij-plugin"
 include "ktor-generator-website"
-
-include "ktor-generator-common"
-include "ktor-generator-jvm"
-include "ktor-generator-js"
-
-findProject(":ktor-generator-common")?.projectDir = file("ktor-generator/common")
-findProject(":ktor-generator-jvm")?.projectDir = file("ktor-generator/jvm")
-findProject(":ktor-generator-js")?.projectDir = file("ktor-generator/js")
+include "ktor-generator"

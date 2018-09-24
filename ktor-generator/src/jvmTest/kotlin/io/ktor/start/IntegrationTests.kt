@@ -4,8 +4,7 @@ import io.ktor.start.features.*
 import io.ktor.start.features.server.*
 import io.ktor.start.swagger.*
 import io.ktor.start.util.*
-import kotlinx.coroutines.experimental.*
-import org.gradle.testkit.runner.*
+import kotlinx.coroutines.*
 import org.junit.*
 import org.junit.rules.*
 import java.io.*
@@ -51,7 +50,7 @@ class IntegrationTests {
             generate(info, ALL_FEATURES)
                 .writeToFolder(testProjectRoot, print = true)
 
-            GradleRunner.create()
+            org.gradle.testkit.runner.GradleRunner.create()
                 .withProjectDir(testProjectRoot)
                 .withGradleVersion(GRADLE_VERSION)
                 .withArguments(
@@ -72,7 +71,7 @@ class IntegrationTests {
             generate(info, SwaggerGenerator(SwaggerModel.parseJson(getResourceString("/swagger.json")!!)))
                 .writeToFolder(testProjectRoot)
 
-            val result = GradleRunner.create()
+            val result = org.gradle.testkit.runner.GradleRunner.create()
                 .withProjectDir(testProjectRoot)
                 //.withArguments("check") // Test should fail, but the code should be valid
                 .withGradleVersion(GRADLE_VERSION)

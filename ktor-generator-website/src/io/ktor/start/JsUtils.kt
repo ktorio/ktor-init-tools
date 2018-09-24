@@ -23,7 +23,7 @@ import org.w3c.dom.*
 import org.w3c.dom.url.*
 import org.w3c.files.*
 import kotlin.browser.*
-import kotlin.coroutines.experimental.*
+import kotlin.coroutines.*
 import kotlin.js.*
 
 external object Object {
@@ -46,8 +46,11 @@ suspend fun fetchFile(file: String): ByteArray {
 
 val EmptyContinuation = object : Continuation<Unit> {
     override val context: CoroutineContext = EmptyCoroutineContext
-    override fun resume(value: Unit) = Unit
-    override fun resumeWithException(exception: Throwable) = console.error(exception)
+    override fun resumeWith(result: Result<Unit>) {
+        if (result.isFailure) {
+            console.error(result.exceptionOrNull())
+        }
+    }
 }
 
 fun launch(callback: suspend () -> Unit) {

@@ -23,11 +23,10 @@ repositories {
     maven { url "https://kotlin.bintray.com/js-externals" }
 }
 
-kotlin.experimental.coroutines 'enable'
-
 dependencies {
-    expectedBy project(":ktor-generator-common")
-    //compile project(":ktor-generator-js") // Somehow this doesn't work
+    //compile project(":ktor-generator")
+    compile project(path: ':ktor-generator', configuration: 'jsRuntimeElements')
+
     compile "kotlin.js.externals:kotlin-js-jquery:3.2.0-0"
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
     testCompile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
@@ -35,6 +34,7 @@ dependencies {
 
 task buildAndCopy(type: Copy, dependsOn: ['build']) {
     // Copy kotlin.js and kotlin-meta.js from jar into web directory
+
     configurations.compile.each { File file ->
         //println(file.absolutePath)
         from(zipTree(file.absolutePath)) {
