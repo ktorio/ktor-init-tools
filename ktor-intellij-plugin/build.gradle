@@ -12,7 +12,8 @@ sourceSets {
 }
 
 dependencies {
-	compile project(":ktor-generator")
+	//compile project(":ktor-generator")
+	compile project(path: ':ktor-generator', configuration: 'jvmRuntimeElements')
 }
 
 def intellijBaseVersion = "2018.2.1"
