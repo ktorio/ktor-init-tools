@@ -31,8 +31,8 @@ class GenerationTest {
     fun testSmoke() = suspendTest {
         val files = generate(info, RoutingFeature)
         assertEquals(
-            setOf("build.gradle", "settings.gradle", "gradle.properties", "resources/logback.xml", ".gitignore", "resources/application.conf", ApplicationKt.ApplicationKtFile),
-            files.keys
+            listOf(".gitignore", "build.gradle", "gradle.properties", "resources/application.conf", "resources/logback.xml", "settings.gradle", "src/Application.kt", "test/ApplicationTest.kt"),
+            files.keys.toList().sorted()
         )
         assertEquals(
             """
@@ -47,7 +47,8 @@ class GenerationTest {
                 fun main(args: Array<String>): Unit = io.ktor.server.netty.DevelopmentEngine.main(args)
 
                 @Suppress("unused") // Referenced in application.conf
-                fun Application.module() {
+                @kotlin.jvm.JvmOverloads
+                fun Application.module(testing: Boolean = false) {
                     routing {
                         get("/") {
                             call.respondText("HELLO WORLD!", contentType = ContentType.Text.Plain)
@@ -81,22 +82,27 @@ class GenerationTest {
                 import io.ktor.client.features.json.*
                 import io.ktor.client.request.*
                 import java.net.URL
+                import kotlinx.coroutines.experimental.*
 
                 fun main(args: Array<String>): Unit = io.ktor.server.netty.DevelopmentEngine.main(args)
 
                 @Suppress("unused") // Referenced in application.conf
-                fun Application.module() {
+                @kotlin.jvm.JvmOverloads
+                fun Application.module(testing: Boolean = false) {
                     val client = HttpClient(Apache) {
                         install(JsonFeature) {
                             serializer = GsonSerializer()
                         }
                     }
                     runBlocking {
+                        // Sample for making a HTTP Client request
+                        /*
                         val message = client.post<JsonSampleClass> {
                             url(URL("http://127.0.0.1:8080/path/to/endpoint"))
                             contentType(ContentType.Application.Json)
                             body = JsonSampleClass(hello = "world")
                         }
+                        */
                     }
 
                 }
