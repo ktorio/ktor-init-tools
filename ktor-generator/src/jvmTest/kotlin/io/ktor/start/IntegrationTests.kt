@@ -38,53 +38,51 @@ class IntegrationTests {
         }
     )
 
-    // @TODO: 'implementation gradleTestKit()' in build.gradle doesn't work
+    /**
+     * Verifies that a generated project compiles, and passes all the tests.
+     */
+    @Test
+    fun testNormalGradleGeneration() {
+        val testProjectRoot = testProjectDir.root
+        //val testProjectRoot = File("/tmp/normal-gradle")
 
-    ///**
-    // * Verifies that a generated project compiles, and passes all the tests.
-    // */
-    //@Test
-    //fun testNormalGradleGeneration() {
-    //    val testProjectRoot = testProjectDir.root
-    //    //val testProjectRoot = File("/tmp/normal-gradle")
-    //
-    //    runBlocking {
-    //        generate(info, ALL_FEATURES)
-    //            .writeToFolder(testProjectRoot, print = true)
-    //
-    //        org.gradle.testkit.runner.GradleRunner.create()
-    //            .withProjectDir(testProjectRoot)
-    //            .withGradleVersion(GRADLE_VERSION)
-    //            .withArguments(
-    //                //"-i",
-    //                "check"
-    //            )
-    //            .forwardOutput()
-    //            .build()
-    //    }
-    //}
-    //
-    //@Test
-    //fun testSwaggerGeneration() {
-    //    val testProjectRoot = testProjectDir.root
-    //    //val testProjectRoot = File("/tmp/swagger-gen")
-    //
-    //    runBlocking {
-    //        generate(info, SwaggerGenerator(SwaggerModel.parseJson(getResourceString("/swagger.json")!!)))
-    //            .writeToFolder(testProjectRoot)
-    //
-    //        val result = org.gradle.testkit.runner.GradleRunner.create()
-    //            .withProjectDir(testProjectRoot)
-    //            //.withArguments("check") // Test should fail, but the code should be valid
-    //            .withGradleVersion(GRADLE_VERSION)
-    //            .withArguments(
-    //                //"-i",
-    //                "compileTestKotlin"
-    //            )
-    //            .forwardOutput()
-    //            .build()
-    //
-    //        //println("RESULT: ${result.tasks.joinToString(", ") { it.path }}")
-    //    }
-    //}
+        runBlocking {
+            generate(info, ALL_FEATURES)
+                .writeToFolder(testProjectRoot, print = true)
+
+            org.gradle.testkit.runner.GradleRunner.create()
+                .withProjectDir(testProjectRoot)
+                .withGradleVersion(GRADLE_VERSION)
+                .withArguments(
+                    //"-i",
+                    "check"
+                )
+                .forwardOutput()
+                .build()
+        }
+    }
+
+    @Test
+    fun testSwaggerGeneration() {
+        val testProjectRoot = testProjectDir.root
+        //val testProjectRoot = File("/tmp/swagger-gen")
+
+        runBlocking {
+            generate(info, SwaggerGenerator(SwaggerModel.parseJson(getResourceString("/swagger.json")!!)))
+                .writeToFolder(testProjectRoot)
+
+            val result = org.gradle.testkit.runner.GradleRunner.create()
+                .withProjectDir(testProjectRoot)
+                //.withArguments("check") // Test should fail, but the code should be valid
+                .withGradleVersion(GRADLE_VERSION)
+                .withArguments(
+                    //"-i",
+                    "compileTestKotlin"
+                )
+                .forwardOutput()
+                .build()
+
+            //println("RESULT: ${result.tasks.joinToString(", ") { it.path }}")
+        }
+    }
 }
