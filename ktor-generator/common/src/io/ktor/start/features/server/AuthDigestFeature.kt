@@ -42,7 +42,6 @@ object AuthDigestFeature : ServerFeature(ApplicationKt, AuthFeature, RoutingFeat
             +")"
             +"digest(\"myDigestAuth\")" {
                 lineNoOpen("userNameRealmPasswordDigestProvider = { userName, realm ->") {
-                    +"userName, realm ->"
                     +"usersInMyRealmToHA1[userName]"
                 }
             }
