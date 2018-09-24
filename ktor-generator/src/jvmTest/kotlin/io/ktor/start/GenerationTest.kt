@@ -1,14 +1,17 @@
 package io.ktor.start
 
-import io.ktor.start.features.*
-import io.ktor.start.features.both.*
-import io.ktor.start.features.client.*
-import io.ktor.start.features.server.*
-import io.ktor.start.project.*
-import io.ktor.start.util.*
-import kotlinx.coroutines.experimental.*
-import java.io.*
-import kotlin.test.*
+import io.ktor.start.features.ALL_FEATURES
+import io.ktor.start.features.both.RawSocketsTlsFeature
+import io.ktor.start.features.client.ApacheClientEngine
+import io.ktor.start.features.client.JsonClientFeature
+import io.ktor.start.features.server.RoutingFeature
+import io.ktor.start.project.ApplicationKt
+import io.ktor.start.util.generate
+import kotlinx.coroutines.runBlocking
+import java.io.File
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class GenerationTest {
     val info = BuildInfo(
@@ -20,7 +23,11 @@ class GenerationTest {
         artifactVersion = "0.1.0-SNAPSHOT",
         ktorEngine = KtorEngine.Netty,
         fetch = { name ->
-            val loaders = listOf(RoutingFeature::class.java.classLoader, GenerationTest::class.java.classLoader, ClassLoader.getSystemClassLoader())
+            val loaders = listOf(
+                RoutingFeature::class.java.classLoader,
+                GenerationTest::class.java.classLoader,
+                ClassLoader.getSystemClassLoader()
+            )
             val url = loaders.mapNotNull { it.getResource(name) ?: it.getResource("/$name") }.firstOrNull()
             val file = File(File("../common/resources"), name)
             url?.readBytes() ?: file.takeIf { it.exists() }?.readBytes() ?: error("Can't find resource '$name'")
@@ -31,7 +38,16 @@ class GenerationTest {
     fun testSmoke() = suspendTest {
         val files = generate(info, RoutingFeature)
         assertEquals(
-            listOf(".gitignore", "build.gradle", "gradle.properties", "resources/application.conf", "resources/logback.xml", "settings.gradle", "src/Application.kt", "test/ApplicationTest.kt"),
+            listOf(
+                ".gitignore",
+                "build.gradle",
+                "gradle.properties",
+                "resources/application.conf",
+                "resources/logback.xml",
+                "settings.gradle",
+                "src/Application.kt",
+                "test/ApplicationTest.kt"
+            ),
             files.keys.toList().sorted()
         )
         assertEquals(

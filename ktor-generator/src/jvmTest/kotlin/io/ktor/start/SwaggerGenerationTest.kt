@@ -1,9 +1,12 @@
 package io.ktor.start
 
-import io.ktor.start.swagger.*
-import io.ktor.start.util.*
-import kotlinx.coroutines.experimental.*
-import kotlin.test.*
+import io.ktor.start.swagger.SwaggerGenerator
+import io.ktor.start.swagger.SwaggerModel
+import io.ktor.start.util.generate
+import kotlinx.coroutines.runBlocking
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class SwaggerGenerationTest {
     companion object {
@@ -93,7 +96,10 @@ class SwaggerGenerationTest {
         val swaggerGenerator = SwaggerGenerator(model)
         val results = generate(buildInfo, swaggerGenerator)
         val str = results["api.http"].toString()
-        assertTrue(str.contains("client.assert(typeof response.body.user.token !== \"undefined\", \"No token returned\");"), "but was $str")
+        assertTrue(
+            str.contains("client.assert(typeof response.body.user.token !== \"undefined\", \"No token returned\");"),
+            "but was $str"
+        )
     }
 
     @Test
