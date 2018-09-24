@@ -40,10 +40,6 @@ kotlin {
                 implementation 'org.jetbrains.kotlin:kotlin-test'
                 implementation 'org.jetbrains.kotlin:kotlin-test-junit'
                 implementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-
-                //implementation gradleApi()
-                //implementation localGroovy()
-                //implementation gradleTestKit()
             }
         }
         jsMain {

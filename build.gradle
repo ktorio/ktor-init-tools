@@ -24,8 +24,6 @@ version '1.0-SNAPSHOT'
 apply plugin: 'idea'
 
 allprojects {
-    apply plugin: 'kotlin-multiplatform'
-
     repositories {
         mavenLocal()
         jcenter()
