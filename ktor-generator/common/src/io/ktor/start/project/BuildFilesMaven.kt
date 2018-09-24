@@ -33,12 +33,10 @@ internal object BuildFilesMaven : BuildInfoBlock() {
                     +"<name>${info.artifactName}</name>"
                     +"<description>${info.artifactName}</description>"
                     "<properties>" {
-                        +"<kotlin_version>$KOTLIN_VERSION</kotlin_version>"
-                        +"<ktor_version>${info.ktorVersion}</ktor_version>"
-                        if (info.ktorVer == Versions.V093) {
-                            +"<kotlinx_coroutines_version>$KOTLINX_COROUTINES_VERSION_FOR_KTOR_V093</kotlinx_coroutines_version>" // Temporal for Ktor 0.9.3 because of the metadata problem
+                        for ((key, value) in Properties.getProperties(info)) {
+                            +"<$key>$value</$key>"
                         }
-                        +"<logback_version>1.2.1</logback_version>"
+
                         +"<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>"
                         +"<kotlin.compiler.incremental>true</kotlin.compiler.incremental>"
                         +"<main.class>${info.developmentEngineFQ}</main.class>"

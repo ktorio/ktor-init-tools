@@ -23,14 +23,8 @@ import io.ktor.start.util.*
 internal object BuildFilesGradle : BuildInfoBlock() {
     override fun BlockBuilder.render(info: BuildInfo) {
         fileText("gradle.properties") {
-            +"kotlin.code.style=official"
-            +""
-            +"kotlin_version=$KOTLIN_VERSION"
-            +"ktor_version=${info.ktorVersion}"
-            +"logback_version=1.2.1"
-            if (info.ktorVer == Versions.V093) {
-                // Temporal for Ktor 0.9.3 because of the metadata problem
-                +"kotlinx_coroutines_version=$KOTLINX_COROUTINES_VERSION_FOR_KTOR_V093"
+            for ((key, value) in Properties.getProperties(info)) {
+                +"$key=$value"
             }
         }
         fileText("build.gradle") {
