@@ -26,7 +26,7 @@ object ApplicationKt : BuildInfoBlock(BuildFiles, ApplicationConf, LogBackXml, G
     val APPLICATION_CLASSES = newSlot("APPLICATION_CLASSES")
     val EXTENSIONS = newSlot("EXTENSIONS")
 
-    val ApplicationKtFile = "src/application.kt"
+    val ApplicationKtFile = "src/Application.kt"
 
     override fun BlockBuilder.render(info: BuildInfo) {
         addImport("io.ktor.application.*")
