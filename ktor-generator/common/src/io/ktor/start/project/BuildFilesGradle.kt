@@ -22,15 +22,19 @@ import io.ktor.start.util.*
 
 internal object BuildFilesGradle : BuildInfoBlock() {
     override fun BlockBuilder.render(info: BuildInfo) {
+        fileText("gradle.properties") {
+            +"kotlin.code.style=official"
+            +""
+            +"kotlin_version=$KOTLIN_VERSION"
+            +"ktor_version=${info.ktorVersion}"
+            +"logback_version=1.2.1"
+            if (info.ktorVer == Versions.V093) {
+                // Temporal for Ktor 0.9.3 because of the metadata problem
+                +"kotlinx_coroutines_version=$KOTLINX_COROUTINES_VERSION_FOR_KTOR_V093"
+            }
+        }
         fileText("build.gradle") {
             "buildscript" {
-                +"ext.kotlin_version = '$KOTLIN_VERSION'"
-                +"ext.ktor_version = '${info.ktorVersion}'"
-                +"ext.logback_version = '1.2.1'"
-                if (info.ktorVer == Versions.V093) {
-                    +"ext.kotlinx_coroutines_version = '$KOTLINX_COROUTINES_VERSION_FOR_KTOR_V093'" // Temporal for Ktor 0.9.3 because of the metadata problem
-                }
-                +""
                 "repositories" {
                     +"jcenter()"
                 }
