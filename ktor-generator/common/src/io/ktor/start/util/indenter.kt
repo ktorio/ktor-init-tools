@@ -104,11 +104,18 @@ class Indenter(@PublishedApi internal val actions: ArrayList<Action> = arrayList
 
     //class IndentedLine
 
-    inline fun line(str: String, after: String = "", after2: String = "", callback: () -> Unit): Indenter {
-        val rafter = if (after.isEmpty()) "" else " $after"
+    inline fun line(str: String, afterOpen: String = "", afterClose: String = "", callback: () -> Unit): Indenter {
+        val rafter = if (afterOpen.isEmpty()) "" else " $afterOpen"
         line(if (str.isEmpty()) "{$rafter" else "$str {$rafter")
         indent(callback)
-        line("}$after2")
+        line("}$afterClose")
+        return this
+    }
+
+    inline fun lineNoOpen(str: String, callback: () -> Unit): Indenter {
+        line(str)
+        indent(callback)
+        line("}")
         return this
     }
 
@@ -216,7 +223,7 @@ class Indenter(@PublishedApi internal val actions: ArrayList<Action> = arrayList
         line("} $text", callback = callback)
     }
 
-    inline operator fun String.invoke(suffix: String = "", callback: () -> Unit) = line(this, after = suffix, callback = callback)
+    inline operator fun String.invoke(suffix: String = "", callback: () -> Unit) = line(this, afterOpen = suffix, callback = callback)
     inline operator fun String.unaryPlus() = line(this)
 
     inline fun String.xml(callback: () -> Unit) {

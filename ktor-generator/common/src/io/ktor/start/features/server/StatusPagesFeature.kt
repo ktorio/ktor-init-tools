@@ -39,10 +39,10 @@ object StatusPagesFeature : ServerFeature(ApplicationKt, RoutingFeature) {
         }
         addRoute {
             "install(StatusPages)" {
-                "exception<AuthenticationException>"(suffix = " cause ->") {
+                lineNoOpen("exception<AuthenticationException> { cause ->") {
                     +"call.respond(HttpStatusCode.Unauthorized)"
                 }
-                "exception<AuthorizationException>"(suffix = " cause ->") {
+                lineNoOpen("exception<AuthorizationException> { cause ->") {
                     +"call.respond(HttpStatusCode.Forbidden)"
                 }
                 SEPARATOR {

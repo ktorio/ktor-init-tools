@@ -39,8 +39,14 @@ object LocationsFeature : ServerFeature(ApplicationKt, RoutingFeature) {
             }
             SEPARATOR {
                 +"@Location(\"/type/{name}\") data class Type(val name: String)" {
-                    +"@Location(\"/edit\") data class Edit(val type: Type)"
-                    +"@Location(\"/list/{page}\") data class List(val type: Type, val page: Int)"
+                    SEPARATOR {
+                        +"@Location(\"/edit\")"
+                        +"data class Edit(val type: Type)"
+                    }
+                    SEPARATOR {
+                        +"@Location(\"/list/{page}\")"
+                        +"data class List(val type: Type, val page: Int)"
+                    }
                 }
             }
         }

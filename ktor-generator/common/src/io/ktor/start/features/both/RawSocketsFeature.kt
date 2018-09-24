@@ -76,7 +76,7 @@ object RawSocketsFeature : ServerFeature(ApplicationKt) {
                                                     +"write.writeStringUtf8(\"\$line\\n\")"
                                                 }
                                             }
-                                            +"catch (e: Throwable)" {
+                                            appending("catch (e: Throwable)") {
                                                 +"socket.close()"
                                             }
                                         }

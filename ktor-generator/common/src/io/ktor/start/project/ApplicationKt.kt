@@ -26,12 +26,14 @@ object ApplicationKt : BuildInfoBlock(BuildFiles, ApplicationConf, LogBackXml, G
     val APPLICATION_CLASSES = newSlot("APPLICATION_CLASSES")
     val EXTENSIONS = newSlot("EXTENSIONS")
 
+    val ApplicationKtFile = "src/application.kt"
+
     override fun BlockBuilder.render(info: BuildInfo) {
         addImport("io.ktor.application.*")
         addImport("io.ktor.response.*")
         addImport("io.ktor.request.*")
 
-        fileText("src/application.kt") {
+        fileText(ApplicationKtFile) {
             +"package ${info.artifactGroup}"
             SEPARATOR {
                 linedeferred {

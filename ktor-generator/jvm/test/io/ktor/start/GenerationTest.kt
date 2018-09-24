@@ -4,6 +4,7 @@ import io.ktor.start.features.*
 import io.ktor.start.features.both.*
 import io.ktor.start.features.client.*
 import io.ktor.start.features.server.*
+import io.ktor.start.project.*
 import io.ktor.start.util.*
 import kotlinx.coroutines.experimental.*
 import java.io.*
@@ -30,7 +31,7 @@ class GenerationTest {
     fun testSmoke() = suspendTest {
         val files = generate(info, RoutingFeature)
         assertEquals(
-            setOf("build.gradle", "settings.gradle", "resources/logback.xml", ".gitignore", "resources/application.conf", "src/application.kt"),
+            setOf("build.gradle", "settings.gradle", "gradle.properties", "resources/logback.xml", ".gitignore", "resources/application.conf", ApplicationKt.ApplicationKtFile),
             files.keys
         )
         assertEquals(
@@ -56,7 +57,7 @@ class GenerationTest {
 
 
             """.trimIndent(),
-            files["src/application.kt"]!!.string
+            files[ApplicationKt.ApplicationKtFile]!!.string
         )
     }
 
@@ -104,7 +105,7 @@ class GenerationTest {
 
 
             """.trimIndent(),
-            files["src/application.kt"]!!.string.replace("\t", " ".repeat(4))
+            files[ApplicationKt.ApplicationKtFile]!!.string.replace("\t", " ".repeat(4))
         )
     }
 
