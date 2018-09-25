@@ -16,7 +16,7 @@ kotlin {
         fromPreset(presets.js, 'js')
 
         configure([js]) {
-            tasks.getByName(compilations.main.compileKotlinTaskName).kotlinOptions {
+            [tasks.getByName(compilations.main.compileKotlinTaskName), tasks.getByName(compilations.test.compileKotlinTaskName)]*.kotlinOptions {
                 moduleKind = "umd"
                 sourceMap = false
                 metaInfo = false
@@ -66,4 +66,35 @@ kotlin {
 
 dependencies {
     jvmTestImplementation gradleTestKit()
+}
+
+// JS TESTS
+
+apply plugin: 'com.moowork.node'
+
+afterEvaluate {
+    task populateNodeModules(type: Copy, dependsOn: jsTestClasses) {
+        from "${buildDir}/classes/kotlin/js/main"
+        from "${buildDir}/classes/kotlin/js/test"
+
+        configurations.jsTestCompileClasspath.each {
+            from zipTree(it.absolutePath).matching { include '*.js' }
+        }
+
+        into "${buildDir}/node_modules"
+    }
+
+    task mochaInstall(type: NpmTask) {
+        args = ['install', 'mocha']
+    }
+
+    task mochaTest(type: NodeTask, dependsOn: [mochaInstall, populateNodeModules]) {
+        script = rootProject.file("$buildDir/../node_modules/mocha/bin/mocha")
+        args = [new File("$buildDir/node_modules/${project.name}_test.js"), "--reporter", "dot"]
+        execOverrides {
+            it.workingDir = buildDir
+        }
+    }
+
+    jsTest.dependsOn(mochaTest)
 }
