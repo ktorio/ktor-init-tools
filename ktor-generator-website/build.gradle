@@ -14,8 +14,8 @@ compileKotlin2Js {
 
 [compileKotlin2Js, compileTestKotlin2Js]*.configure {
     kotlinOptions.moduleKind = "umd"
-    kotlinOptions.sourceMap = false
-    kotlinOptions.metaInfo = false
+    kotlinOptions.sourceMap = true
+    kotlinOptions.metaInfo = true
 }
 
 repositories {
@@ -26,6 +26,7 @@ repositories {
 dependencies {
     //compile project(":ktor-generator")
     compile project(path: ':ktor-generator', configuration: 'jsRuntimeElements')
+    //compile project(path: ':ktor-generator', configuration: 'jsRuntimeOnly')
 
     compile "kotlin.js.externals:kotlin-js-jquery:3.2.0-0"
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
@@ -85,4 +86,11 @@ task buildAndCopy(type: Copy, dependsOn: ['build']) {
 
 clean.doFirst() {
     delete("${rootProject.projectDir}/${web_dir}")
+}
+
+[compileKotlin2Js, compileTestKotlin2Js].each {
+    it.kotlinOptions {
+        freeCompilerArgs = ["-XXLanguage:+InlineClasses"]
+        languageVersion = "1.3"
+    }
 }

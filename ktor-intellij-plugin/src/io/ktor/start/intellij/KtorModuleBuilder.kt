@@ -34,7 +34,7 @@ import io.ktor.start.intellij.util.*
 import io.ktor.start.project.*
 import io.ktor.start.swagger.*
 import io.ktor.start.util.*
-import kotlinx.coroutines.experimental.*
+import kotlinx.coroutines.*
 import org.jetbrains.idea.maven.execution.*
 import org.jetbrains.idea.maven.project.*
 import org.jetbrains.plugins.gradle.service.project.wizard.*

@@ -46,3 +46,10 @@ repositories {
 	jcenter()
 	maven { url "https://plugins.gradle.org/m2/" }
 }
+
+[compileKotlin, compileTestKotlin].each {
+	it.kotlinOptions {
+		freeCompilerArgs = ["-XXLanguage:+InlineClasses"]
+		languageVersion = "1.3"
+	}
+}

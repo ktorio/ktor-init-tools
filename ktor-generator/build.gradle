@@ -14,12 +14,20 @@ kotlin {
     targets {
         fromPreset(presets.jvm, 'jvm')
         fromPreset(presets.js, 'js')
+        
+        configure([jvm]) {
+            [tasks.getByName(compilations.main.compileKotlinTaskName), tasks.getByName(compilations.test.compileKotlinTaskName)]*.kotlinOptions {
+                //freeCompilerArgs = ["-XXLanguage:+InlineClasses"]
+                languageVersion = "1.3"
+            }
+        }
 
         configure([js]) {
             [tasks.getByName(compilations.main.compileKotlinTaskName), tasks.getByName(compilations.test.compileKotlinTaskName)]*.kotlinOptions {
+                languageVersion = "1.3"
                 moduleKind = "umd"
-                sourceMap = false
-                metaInfo = false
+                sourceMap = true
+                metaInfo = true
             }
         }
     }
@@ -74,8 +82,10 @@ apply plugin: 'com.moowork.node'
 
 afterEvaluate {
     task populateNodeModules(type: Copy, dependsOn: jsTestClasses) {
-        from "${buildDir}/classes/kotlin/js/main"
-        from "${buildDir}/classes/kotlin/js/test"
+        //from "${buildDir}/classes/kotlin/js/main"
+        //from "${buildDir}/classes/kotlin/js/test"
+        from compileTestKotlinJs.kotlinOptions.outputFile
+        from compileKotlinJs.kotlinOptions.outputFile
 
         configurations.jsTestCompileClasspath.each {
             from zipTree(it.absolutePath).matching { include '*.js' }
@@ -106,7 +116,7 @@ afterEvaluate {
             }""")
         }
         script = rootProject.file("$buildDir/../node_modules/mocha/bin/mocha")
-        args = ["$buildDir/node_modules/${project.name}_test.js", "--reporter", "mocha-multi-reporters", "--reporter-options", "configFile=$mochaMultiReportersConfigJsonFile"]
+        args = [compileTestKotlinJs.kotlinOptions.outputFile, "--reporter", "mocha-multi-reporters", "--reporter-options", "configFile=$mochaMultiReportersConfigJsonFile"]
 
         //println("mocha " + args.join(" "))
         execOverrides {
@@ -117,3 +127,5 @@ afterEvaluate {
     jsTest.finalizedBy(mochaTest)
     //jsTest.dependsOn(mochaTest)
 }
+
+//configurations.each { println(it) }
