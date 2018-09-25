@@ -85,16 +85,35 @@ afterEvaluate {
     }
 
     task mochaInstall(type: NpmTask) {
-        args = ['install', 'mocha']
+        args = ['install', 'mocha', 'mocha-simple-html-reporter', 'mocha-multi-reporters', 'mocha-junit-reporter']
     }
 
+    //mocha testfile.js --reporter mocha-simple-html-reporter --reporter-options output=report.html
+
     task mochaTest(type: NodeTask, dependsOn: [mochaInstall, populateNodeModules]) {
+        def mochaMultiReportersConfigJsonFile = new File("$buildDir/mocha-multi-reporters-config.json")
+        doFirst {
+            // https://www.npmjs.com/package/mocha-multi-reporters
+            new File("$buildDir/test-results/jsTest").mkdirs()
+            mochaMultiReportersConfigJsonFile.write("""{
+                "reporterEnabled": "dot,mocha-junit-reporter",
+                "mochaJunitReporterReporterOptions": {
+                    "testsuitesTitle": true,
+                    "toConsole": false,
+                    "suiteTitleSeparatedBy": ".",
+                    "mochaFile": "$buildDir/test-results/jsTest/TEST-test.xml"
+                }
+            }""")
+        }
         script = rootProject.file("$buildDir/../node_modules/mocha/bin/mocha")
-        args = [new File("$buildDir/node_modules/${project.name}_test.js"), "--reporter", "dot"]
+        args = ["$buildDir/node_modules/${project.name}_test.js", "--reporter", "mocha-multi-reporters", "--reporter-options", "configFile=$mochaMultiReportersConfigJsonFile"]
+
+        //println("mocha " + args.join(" "))
         execOverrides {
             it.workingDir = buildDir
         }
     }
 
-    jsTest.dependsOn(mochaTest)
+    jsTest.finalizedBy(mochaTest)
+    //jsTest.dependsOn(mochaTest)
 }
