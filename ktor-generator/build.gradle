@@ -80,56 +80,8 @@ dependencies {
 
 apply plugin: 'com.moowork.node'
 
-tasks.remove(jsTest)
-
-/*
-class MyTask extends DefaultTask implements Reporting<MyReportContainer> {
-    MyReportContainer container = new MyReportContainer(this)
-
-    public MyTask() {
-        super();
-        println(container.getXml())
-    }
-
-    @Override
-    MyReportContainer getReports() { return container }
-
-    @Override
-    MyReportContainer reports(@DelegatesTo(type = "MyReportContainer", strategy = Closure.DELEGATE_FIRST) Closure closure) {
-        return reports((Action<? super MyReportContainer>){
-            closure.run()
-        });
-    }
-
-    @Override
-    MyReportContainer reports(Action<? super MyReportContainer> configureAction) {
-        configureAction.execute(reports);
-        return reports;
-    }
-
-    @TaskAction
-    public void generate() {
-        //def report = new org.gradle.api.internal.tasks.testing.DefaultJUnitXmlReport()
-        //report.
-    }
-}
-
-public class MyReportContainer extends TaskReportContainer<ConfigurableReport> {
-    public MyReportContainer(Task task) {
-        super(ConfigurableReport.class, task);
-        add(org.gradle.api.internal.tasks.testing.DefaultJUnitXmlReport.class, "xml", task)
-    }
-
-    public org.gradle.api.internal.tasks.testing.DefaultJUnitXmlReport getXml() {
-        return (org.gradle.api.internal.tasks.testing.DefaultJUnitXmlReport)getByName("xml");
-    }
-}
-*/
-
 afterEvaluate {
     task populateNodeModules(type: Copy, dependsOn: jsTestClasses) {
-        //from "${buildDir}/classes/kotlin/js/main"
-        //from "${buildDir}/classes/kotlin/js/test"
         from compileTestKotlinJs.kotlinOptions.outputFile
         from compileKotlinJs.kotlinOptions.outputFile
 
@@ -143,9 +95,7 @@ afterEvaluate {
     task mochaInstall(type: NpmTask) {
         args = ['install', 'mocha', 'mochawesome', 'mocha-simple-html-reporter', 'mocha-multi-reporters', 'mocha-junit-reporter']
     }
-
-    //mocha testfile.js --reporter mocha-simple-html-reporter --reporter-options output=report.html
-
+    
     task mochaTest(type: NodeTask, dependsOn: [mochaInstall, populateNodeModules]) {
         def mochaMultiReportersConfigJsonFile = new File("$buildDir/mocha-multi-reporters-config.json")
         doFirst {
@@ -182,17 +132,8 @@ afterEvaluate {
         }
     }
 
-    task jsTest(dependsOn: mochaTest) {
-
-    }
-
-    //task jsTest(type: MyTask, dependsOn: [mochaTest]) {
-    //    container.xml.enabled = true
-    //    container.xml.destination = new File("$buildDir/test-results/jsTest/TEST-test.xml")
-    //}
-
-    //jsTest.finalizedBy(mochaTest)
-    //jsTest.dependsOn(mochaTest)
+    tasks.remove(jsTest)
+    task jsTest(dependsOn: mochaTest)
 }
 
 //configurations.each { println(it) }
