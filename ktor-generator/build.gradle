@@ -97,6 +97,7 @@ afterEvaluate {
 
     task mochaInstall(type: NpmTask) {
         args = ['install', 'mocha', 'mochawesome', 'mocha-simple-html-reporter', 'mocha-multi-reporters', 'mocha-junit-reporter', 'source-map-support']
+        outputs.upToDateWhen { new File("$projectDir/node_modules").exists() }
     }
 
     task mochaTest(type: NodeTask, dependsOn: [mochaInstall, populateNodeModules]) {
@@ -139,8 +140,9 @@ afterEvaluate {
         }
     }
 
-    tasks.remove(jsTest)
-    task jsTest(dependsOn: mochaTest)
+    //tasks.remove(jsTest)
+    //task jsTest(dependsOn: mochaTest)
+    jsTest.finalizedBy(mochaTest)
 }
 
 //configurations.each { println(it) }
