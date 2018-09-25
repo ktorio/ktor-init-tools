@@ -86,16 +86,19 @@ afterEvaluate {
         from compileKotlinJs.kotlinOptions.outputFile
 
         configurations.jsTestCompileClasspath.each {
-            from zipTree(it.absolutePath).matching { include '*.js' }
+            from zipTree(it.absolutePath).matching {
+                include '*.js'
+                include '*.map'
+            }
         }
 
         into "${buildDir}/node_modules"
     }
 
     task mochaInstall(type: NpmTask) {
-        args = ['install', 'mocha', 'mochawesome', 'mocha-simple-html-reporter', 'mocha-multi-reporters', 'mocha-junit-reporter']
+        args = ['install', 'mocha', 'mochawesome', 'mocha-simple-html-reporter', 'mocha-multi-reporters', 'mocha-junit-reporter', 'source-map-support']
     }
-    
+
     task mochaTest(type: NodeTask, dependsOn: [mochaInstall, populateNodeModules]) {
         def mochaMultiReportersConfigJsonFile = new File("$buildDir/mocha-multi-reporters-config.json")
         doFirst {
@@ -116,7 +119,11 @@ afterEvaluate {
             }""")
         }
         script = rootProject.file("$buildDir/../node_modules/mocha/bin/mocha")
-        args = [compileTestKotlinJs.kotlinOptions.outputFile, "--reporter", "mocha-multi-reporters", "--reporter-options", "configFile=$mochaMultiReportersConfigJsonFile"]
+
+        //new File(compileTestKotlinJs.kotlinOptions.outputFile).write("require('source-map-support').install();\n" + new File(compileTestKotlinJs.kotlinOptions.outputFile).readLines().join("\n"))
+        //println(compileTestKotlinJs.kotlinOptions.outputFile)
+
+        args = [compileTestKotlinJs.kotlinOptions.outputFile, "-r", "source-map-support/register", "--reporter", "mocha-multi-reporters", "--reporter-options", "configFile=$mochaMultiReportersConfigJsonFile"]
 
         //println("mocha " + args.join(" "))
         execOverrides {
