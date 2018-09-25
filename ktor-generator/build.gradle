@@ -80,6 +80,52 @@ dependencies {
 
 apply plugin: 'com.moowork.node'
 
+tasks.remove(jsTest)
+
+/*
+class MyTask extends DefaultTask implements Reporting<MyReportContainer> {
+    MyReportContainer container = new MyReportContainer(this)
+
+    public MyTask() {
+        super();
+        println(container.getXml())
+    }
+
+    @Override
+    MyReportContainer getReports() { return container }
+
+    @Override
+    MyReportContainer reports(@DelegatesTo(type = "MyReportContainer", strategy = Closure.DELEGATE_FIRST) Closure closure) {
+        return reports((Action<? super MyReportContainer>){
+            closure.run()
+        });
+    }
+
+    @Override
+    MyReportContainer reports(Action<? super MyReportContainer> configureAction) {
+        configureAction.execute(reports);
+        return reports;
+    }
+
+    @TaskAction
+    public void generate() {
+        //def report = new org.gradle.api.internal.tasks.testing.DefaultJUnitXmlReport()
+        //report.
+    }
+}
+
+public class MyReportContainer extends TaskReportContainer<ConfigurableReport> {
+    public MyReportContainer(Task task) {
+        super(ConfigurableReport.class, task);
+        add(org.gradle.api.internal.tasks.testing.DefaultJUnitXmlReport.class, "xml", task)
+    }
+
+    public org.gradle.api.internal.tasks.testing.DefaultJUnitXmlReport getXml() {
+        return (org.gradle.api.internal.tasks.testing.DefaultJUnitXmlReport)getByName("xml");
+    }
+}
+*/
+
 afterEvaluate {
     task populateNodeModules(type: Copy, dependsOn: jsTestClasses) {
         //from "${buildDir}/classes/kotlin/js/main"
@@ -95,7 +141,7 @@ afterEvaluate {
     }
 
     task mochaInstall(type: NpmTask) {
-        args = ['install', 'mocha', 'mocha-simple-html-reporter', 'mocha-multi-reporters', 'mocha-junit-reporter']
+        args = ['install', 'mocha', 'mochawesome', 'mocha-simple-html-reporter', 'mocha-multi-reporters', 'mocha-junit-reporter']
     }
 
     //mocha testfile.js --reporter mocha-simple-html-reporter --reporter-options output=report.html
@@ -106,7 +152,11 @@ afterEvaluate {
             // https://www.npmjs.com/package/mocha-multi-reporters
             new File("$buildDir/test-results/jsTest").mkdirs()
             mochaMultiReportersConfigJsonFile.write("""{
-                "reporterEnabled": "dot,mocha-junit-reporter",
+                "reporterEnabled": "dot,mocha-junit-reporter,mochawesome",
+                "mochawesomeReporterOptions": {
+                    "reportFilename": "index",
+                    "quiet": true
+                },
                 "mochaJunitReporterReporterOptions": {
                     "testsuitesTitle": true,
                     "toConsole": false,
@@ -122,9 +172,26 @@ afterEvaluate {
         execOverrides {
             it.workingDir = buildDir
         }
+
+        doLast {
+            copy {
+                from "$buildDir/mochawesome-report"
+                into "$buildDir/reports/tests/jsTest"
+            }
+            println("Report saved to $buildDir/reports/tests/jsTest/index.html")
+        }
     }
 
-    jsTest.finalizedBy(mochaTest)
+    task jsTest(dependsOn: mochaTest) {
+
+    }
+
+    //task jsTest(type: MyTask, dependsOn: [mochaTest]) {
+    //    container.xml.enabled = true
+    //    container.xml.destination = new File("$buildDir/test-results/jsTest/TEST-test.xml")
+    //}
+
+    //jsTest.finalizedBy(mochaTest)
     //jsTest.dependsOn(mochaTest)
 }
 
