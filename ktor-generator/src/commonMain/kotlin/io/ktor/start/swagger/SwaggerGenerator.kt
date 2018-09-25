@@ -19,7 +19,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             out += RoutingFeature
             out += ApacheClientEngine
             out += JsonJacksonFeature
-            out += AuthFeature // required for swagger-util.kt
+            out += AuthFeature // required for SwaggerUtils.kt
             if (model.securityDefinitions.isNotEmpty()) {
                 out += AuthJwtFeature // @TODO: Do this conditionally based on Security blocks
             }
@@ -28,7 +28,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
     }
 
     override fun BlockBuilder.render(info: BuildInfo) {
-        fileBinary("src/io/ktor/swagger/experimental/swagger-util.kt") { info.fetch("swagger/swagger-util.kt.txt") }
+        fileBinary("src/io/ktor/swagger/experimental/SwaggerUtils.kt") { info.fetch("swagger/SwaggerUtils.kt.txt") }
         addImport("kotlin.reflect.*") // For KClass
         addImport("java.util.*") // For Date
         addImport("io.ktor.swagger.experimental.*")
@@ -42,7 +42,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             }
         }
 
-        fileText("src/swagger-api.kt") {
+        fileText("src/${model.info.className}.kt") {
             SEPARATOR {
                 +"package ${info.artifactGroup}"
             }
@@ -135,7 +135,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         addRoute {
             +"registerRoutes(${model.info.classNameServer}(${registerInstances.joinToString(", ")}))"
         }
-        fileText("src/swagger-backend.kt") {
+        fileText("src/${model.info.classNameServer}.kt") {
             SEPARATOR {
                 +"package ${info.artifactGroup}"
             }
@@ -163,7 +163,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                 +"import kotlin.test.*"
             }
             SEPARATOR {
-                +"class RoutesTest" {
+                +"class SwaggerRoutesTest" {
                     for (path in model.paths.values) {
                         for (method in path.methods.values) {
                             SEPARATOR {
@@ -210,7 +210,7 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                 }
             }
         }
-        fileText("src/swagger-frontend.kt") {
+        fileText("src/${model.info.classNameClient}.kt") {
             SEPARATOR {
                 +"package ${info.artifactGroup}"
             }
