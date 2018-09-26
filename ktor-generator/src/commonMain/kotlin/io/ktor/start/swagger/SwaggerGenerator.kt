@@ -42,49 +42,6 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
             }
         }
 
-        fileText("src/${model.info.className}.kt") {
-            SEPARATOR {
-                +"package ${info.artifactGroup}"
-            }
-            SEPARATOR {
-                +"import java.util.*"
-                +"import io.ktor.swagger.experimental.*"
-            }
-            SEPARATOR {
-                renderInterface(model)
-            }
-            SEPARATOR {
-                for (def in model.definitions.values) {
-                    // @TODO: Consider using object instead?
-                    val classKeywords = if (def.props.isNotEmpty()) "data class" else "class"
-                    if (def.synthetic) {
-                        +"// Synthetic class name"
-                    }
-                    +"$classKeywords ${def.name}("
-                    indent {
-                        val props = def.props.values
-                        for ((index, prop) in props.withIndex()) {
-                            val comma = if (index >= props.size - 1) "" else ","
-                            +"val ${prop.name}: ${prop.type.toKotlinType()}$comma"
-                        }
-                    }
-                    val propsWithRules = def.propsList.filter { it.type.rule != null }
-                    if (propsWithRules.isNotEmpty()) {
-                        +") {"
-                        indent {
-                            +"init" {
-                                for (prop in propsWithRules) {
-                                    +"${prop.name}.verifyParam(${prop.name.quote()}) { ${prop.toRuleString("it")} }"
-                                }
-                            }
-                        }
-                        +"}"
-                    } else {
-                        +")"
-                    }
-                }
-            }
-        }
         val registerInstances = arrayListOf<String>()
         val registerInstancesDecl = arrayListOf<String>()
         if (model.securityDefinitions.isNotEmpty()) {
@@ -135,95 +92,11 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         addRoute {
             +"registerRoutes(${model.info.classNameServer}(${registerInstances.joinToString(", ")}))"
         }
-        fileText("src/${model.info.classNameServer}.kt") {
-            SEPARATOR {
-                +"package ${info.artifactGroup}"
-            }
-            SEPARATOR {
-                +"import java.util.*"
-                +"import io.ktor.http.*"
-                +"import io.ktor.request.*"
-                +"import io.ktor.swagger.experimental.*"
-            }
-            SEPARATOR {
-                renderBackend(model, registerInstancesDecl)
-            }
-        }
-        fileText("test/SwaggerRoutesTest.kt") {
-            SEPARATOR {
-                +"package ${info.artifactGroup}"
-            }
-            SEPARATOR {
-                +"import java.util.*"
-                +"import io.ktor.config.*"
-                +"import io.ktor.http.*"
-                +"import io.ktor.request.*"
-                +"import io.ktor.server.testing.*"
-                +"import io.ktor.swagger.experimental.*"
-                +"import kotlin.test.*"
-            }
-            SEPARATOR {
-                +"class SwaggerRoutesTest" {
-                    for (path in model.paths.values) {
-                        for (method in path.methods.values) {
-                            SEPARATOR {
-                                +"/**"
-                                +" * @see ${model.info.classNameServer}.${method.methodName}"
-                                +" */"
-                                +"@Test"
-                                +"fun test${method.methodName.capitalize()}()" {
-                                    +"withTestApplication" {
-                                        +"// @TODO: Adjust path as required"
-                                        +"handleRequest(HttpMethod.${method.method.toLowerCase().capitalize()}, \"${method.path}\") {"
-                                        when (method.method.toUpperCase()) {
-                                            "POST", "PUT" -> indent {
-                                                +"// @TODO: Your body here"
-                                                +"setBodyJson(mapOf<String, Any?>())"
-                                            }
-                                        }
-                                        +"}.apply {"
-                                        indent {
-                                            +"// @TODO: Your test here"
-                                            +"assertEquals(HttpStatusCode.OK, response.status())"
-                                        }
-                                        +"}"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    SEPARATOR {
-                        +"fun <R> withTestApplication(test: TestApplicationEngine.() -> R): R" {
-                            +"return withApplication(createTestEnvironment())" {
-                                +"(environment.config as MapApplicationConfig).apply" {
-                                    +"put(\"jwt.secret\", \"TODO-change-this-supersecret-or-use-SECRET-env\")"
-                                }
-                                +"application.module()"
-                                +"test()"
-                            }
-                        }
-                    }
 
-                    SEPARATOR {
-                        +"fun TestApplicationRequest.setBodyJson(value: Any?) = setBody(Json.stringify(value))"
-                    }
-                }
-            }
-        }
-        fileText("src/${model.info.classNameClient}.kt") {
-            SEPARATOR {
-                +"package ${info.artifactGroup}"
-            }
-            SEPARATOR {
-                +"import java.util.*"
-                +"import io.ktor.http.*"
-                +"import io.ktor.client.*"
-                +"import io.ktor.swagger.experimental.*"
-            }
-            SEPARATOR {
-                renderFrontend(model)
-            }
-        }
+        fileSwaggerCommonInterface("src/${model.info.className}.kt", info, model)
+        fileSwaggerBackendHandler("src/${model.info.classNameServer}.kt", info, model, registerInstancesDecl)
+        fileSwaggerFrontendHandler("src/${model.info.classNameClient}.kt", info, model)
+        fileSwaggerBackendTests("test/${model.info.classNameServer}Test.kt", info, model)
 
         fileText(if (model.filename.endsWith(".json")) "api.json" else "api.yaml") {
             +model.source
@@ -380,137 +253,205 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
         }
     }
 
-    fun Indenter.renderInterface(model: SwaggerModel) {
-        +"/**"
-        +" * ${model.info.title.stripLineBreaks()}"
-        +" * "
-        for (descLine in model.info.description.lines()) {
-            +" * $descLine"
-        }
-        +" */"
-        +"interface ${model.info.className} : SwaggerBaseApi" {
-            for (paths in model.paths.values) {
-                for (path in paths.methodsList) {
-                    SEPARATOR {
-                        +"/**"
-                        for (descLine in path.summaryDescription.lines()) {
-                            +" * $descLine"
-                        }
-                        +" * "
-                        for (param in path.parameters) {
-                            param.description.escape()
-                            +" * @param ${param.name} ${param.description.stripLineBreaks()}"
-                        }
-                        if (path.parameters.isNotEmpty()) {
-                            +" * "
-                        }
-                        +" * @return ${path.defaultResponse.description.stripLineBreaks()}"
-                        +" */"
-                        +"@Path(${paths.path.quote()})"
-                        +"@Method(${path.method.toUpperCase().quote()})"
-                        if (path.security.isNotEmpty()) {
-                            +"@Auth(${path.security.joinToString(", ") { it.name.quote() }})"
-                        }
-                        +"suspend fun ${path.methodName}("
-                        indent {
-                            for ((info, param) in path.parameters.metaIter) {
-                                val qpname = param.name.quote()
-                                val inAnnotation = when (param.inside) {
-                                    SwaggerModel.Inside.BODY -> "@Body($qpname)"
-                                    SwaggerModel.Inside.HEADER -> "@Header($qpname)"
-                                    SwaggerModel.Inside.QUERY -> "@Query($qpname)"
-                                    SwaggerModel.Inside.PATH -> "@Path($qpname)"
-                                    SwaggerModel.Inside.FORM_DATA -> "@FormData($qpname)"
+    fun BlockBuilder.fileSwaggerCommonInterface(fileName: String, info: BuildInfo, model: SwaggerModel) {
+        fileText(fileName) {
+            SEPARATOR {
+                +"package ${info.artifactGroup}"
+            }
+            SEPARATOR {
+                +"import java.util.*"
+                +"import io.ktor.swagger.experimental.*"
+            }
+            SEPARATOR {
+
+                +"/**"
+                +" * ${model.info.title.stripLineBreaks()}"
+                +" * "
+                for (descLine in model.info.description.lines()) {
+                    +" * $descLine"
+                }
+                +" */"
+                +"interface ${model.info.className} : SwaggerBaseApi" {
+                    for (paths in model.paths.values) {
+                        for (path in paths.methodsList) {
+                            SEPARATOR {
+                                +"/**"
+                                for (descLine in path.summaryDescription.lines()) {
+                                    +" * $descLine"
                                 }
-                                val default = if (param.required) "" else " = " + indentStringHere {
-                                    toKotlinDefault(param.schema, param.default, typed = true)
+                                +" * "
+                                for (param in path.parameters) {
+                                    param.description.escape()
+                                    +" * @param ${param.name} ${param.description.stripLineBreaks()}"
                                 }
-                                +"$inAnnotation ${param.name}: ${param.schema.toKotlinType()}$default${info.optComma}"
+                                if (path.parameters.isNotEmpty()) {
+                                    +" * "
+                                }
+                                +" * @return ${path.defaultResponse.description.stripLineBreaks()}"
+                                +" */"
+                                +"@Path(${paths.path.quote()})"
+                                +"@Method(${path.method.toUpperCase().quote()})"
+                                if (path.security.isNotEmpty()) {
+                                    +"@Auth(${path.security.joinToString(", ") { it.name.quote() }})"
+                                }
+                                +"suspend fun ${path.methodName}("
+                                indent {
+                                    for ((info, param) in path.parameters.metaIter) {
+                                        val qpname = param.name.quote()
+                                        val inAnnotation = when (param.inside) {
+                                            SwaggerModel.Inside.BODY -> "@Body($qpname)"
+                                            SwaggerModel.Inside.HEADER -> "@Header($qpname)"
+                                            SwaggerModel.Inside.QUERY -> "@Query($qpname)"
+                                            SwaggerModel.Inside.PATH -> "@Path($qpname)"
+                                            SwaggerModel.Inside.FORM_DATA -> "@FormData($qpname)"
+                                        }
+                                        val default = if (param.required) "" else " = " + indentStringHere {
+                                            toKotlinDefault(param.schema, param.default, typed = true)
+                                        }
+                                        +"$inAnnotation ${param.name}: ${param.schema.toKotlinType()}$default${info.optComma}"
+                                    }
+                                }
+                                +"): ${path.responseType.toKotlinType()}"
                             }
                         }
-                        +"): ${path.responseType.toKotlinType()}"
+                    }
+                }
+
+                for (def in model.definitions.values) {
+                    SEPARATOR {
+                        // @TODO: Consider using object instead?
+                        val classKeywords = if (def.props.isNotEmpty()) "data class" else "class"
+                        if (def.synthetic) {
+                            +"// Synthetic class name"
+                        }
+                        +"$classKeywords ${def.name}("
+                        indent {
+                            val props = def.props.values
+                            for ((index, prop) in props.withIndex()) {
+                                val comma = if (index >= props.size - 1) "" else ","
+                                +"val ${prop.name}: ${prop.type.toKotlinType()}$comma"
+                            }
+                        }
+                        val propsWithRules = def.propsList.filter { it.type.rule != null }
+                        if (propsWithRules.isNotEmpty()) {
+                            +") {"
+                            indent {
+                                +"init" {
+                                    for (prop in propsWithRules) {
+                                        +"${prop.name}.verifyParam(${prop.name.quote()}) { ${prop.toRuleString("it")} }"
+                                    }
+                                }
+                            }
+                            +"}"
+                        } else {
+                            +")"
+                        }
                     }
                 }
             }
         }
     }
 
-    fun Indenter.renderBackend(model: SwaggerModel, registerInstancesDecl: List<String>) {
-        +"class ${model.info.classNameServer}(${registerInstancesDecl.joinToString(", ")}) : SwaggerBaseServer, ${model.info.className}" {
-            for (paths in model.paths.values) {
-                for (method in paths.methodsList) {
-                    SEPARATOR {
-                        +"// ${method.method.stripLineBreaks().toUpperCase()} ${method.path.stripLineBreaks()}"
-                        +"override suspend fun ${method.methodName}("
-                        indent {
-                            for ((info, param) in method.parameters.metaIter) {
-                                +"${param.name}: ${param.schema.toKotlinType()}${info.optComma}"
-                            }
-                        }
-                        +"): ${method.responseType.toKotlinType()} {"
-                        indent {
+    fun BlockBuilder.fileSwaggerBackendHandler(fileName: String, info: BuildInfo, model: SwaggerModel, registerInstancesDecl: List<String>) {
+        fileText(fileName) {
+            SEPARATOR {
+                +"package ${info.artifactGroup}"
+            }
+            SEPARATOR {
+                +"import java.util.*"
+                +"import io.ktor.http.*"
+                +"import io.ktor.request.*"
+                +"import io.ktor.swagger.experimental.*"
+            }
+            SEPARATOR {
+                +"class ${model.info.classNameServer}(${registerInstancesDecl.joinToString(", ")}) : SwaggerBaseServer, ${model.info.className}" {
+                    for (paths in model.paths.values) {
+                        for (method in paths.methodsList) {
                             SEPARATOR {
-                                val reqBody = method.requestBody.firstOrNull()
-                                if (reqBody != null) {
-                                    +"val body = call().receive<${reqBody.schema.toKotlinType()}>()"
-                                }
-
-                                for (param in method.parameters) {
-                                    val pschema = param.schema
-                                    val rule = pschema.rule
-                                    if (rule != null) {
-                                        +"checkRequest(${rule.toKotlin(
-                                            param.name,
-                                            pschema
-                                        )}) { ${"Invalid ${param.name}".quote()} }"
+                                +"// ${method.method.stripLineBreaks().toUpperCase()} ${method.path.stripLineBreaks()}"
+                                +"override suspend fun ${method.methodName}("
+                                indent {
+                                    for ((info, param) in method.parameters.metaIter) {
+                                        +"${param.name}: ${param.schema.toKotlinType()}${info.optComma}"
                                     }
                                 }
-                            }
-                            SEPARATOR {
-                                for (response in method.errorResponses) {
-                                    +"if (false) ${indentString(indentLevel) { renderResponse(response) }}"
-                                }
-                            }
-                            SEPARATOR {
-                                if (method.responseType != SwaggerModel.VoidType) {
-                                    val loginRoute = method.tryGetCompatibleLoginRoute()
-
-                                    val untyped = method.responseType.toDefaultUntyped()
-
-                                    if (loginRoute?.username != null) {
-                                        +"val username = ${loginRoute.username.fullPath}"
-                                        +"// @TODO: Your username/password validation here"
-                                        if (loginRoute.password != null) {
-                                            +"val password = ${loginRoute.password.fullPath}"
-                                            +"if (username != password) httpException(HttpStatusCode.Unauthorized, \"username != password\")"
+                                +"): ${method.responseType.toKotlinType()} {"
+                                indent {
+                                    SEPARATOR {
+                                        val reqBody = method.requestBody.firstOrNull()
+                                        if (reqBody != null) {
+                                            +"val body = call().receive<${reqBody.schema.toKotlinType()}>()"
                                         }
-                                        +"val token = myjwt.sign(username)"
-                                        Dynamic {
-                                            untyped[loginRoute.tokenPath] = SwaggerModel.Identifier("token")
+
+                                        for (param in method.parameters) {
+                                            val pschema = param.schema
+                                            val rule = pschema.rule
+                                            if (rule != null) {
+                                                +"checkRequest(${rule.toKotlin(
+                                                    param.name,
+                                                    pschema
+                                                )}) { ${"Invalid ${param.name}".quote()} }"
+                                            }
                                         }
                                     }
+                                    SEPARATOR {
+                                        for (response in method.errorResponses) {
+                                            +"if (false) ${indentString(indentLevel) { renderResponse(response) }}"
+                                        }
+                                    }
+                                    SEPARATOR {
+                                        if (method.responseType != SwaggerModel.VoidType) {
+                                            val loginRoute = method.tryGetCompatibleLoginRoute()
 
-                                    +"return ${indentString(indentLevel) {
-                                        toKotlinDefault(method.responseType, untyped, typed = true)
-                                    }}"
+                                            val untyped = method.responseType.toDefaultUntyped()
+
+                                            if (loginRoute?.username != null) {
+                                                +"val username = ${loginRoute.username.fullPath}"
+                                                +"// @TODO: Your username/password validation here"
+                                                if (loginRoute.password != null) {
+                                                    +"val password = ${loginRoute.password.fullPath}"
+                                                    +"if (username != password) httpException(HttpStatusCode.Unauthorized, \"username != password\")"
+                                                }
+                                                +"val token = myjwt.sign(username)"
+                                                Dynamic {
+                                                    untyped[loginRoute.tokenPath] = SwaggerModel.Identifier("token")
+                                                }
+                                            }
+
+                                            +"return ${indentString(indentLevel) {
+                                                toKotlinDefault(method.responseType, untyped, typed = true)
+                                            }}"
+                                        }
+                                    }
                                 }
+                                +"}"
                             }
                         }
-                        +"}"
                     }
                 }
             }
         }
     }
 
-    fun Indenter.renderFrontend(model: SwaggerModel) {
-        SEPARATOR {
-            +"interface ${model.info.classNameClient} : ${model.info.className}" {
-                +"fun setToken(token: String)" // @TODO: Based on security stuff
+    fun BlockBuilder.fileSwaggerFrontendHandler(fileName: String, info: BuildInfo, model: SwaggerModel) {
+        fileText("src/${model.info.classNameClient}.kt") {
+            SEPARATOR {
+                +"package ${info.artifactGroup}"
             }
-        }
-        SEPARATOR {
-            +"fun ${model.info.classNameClient}(endpoint: String, client: HttpClient = HttpClient()): ${model.info.classNameClient} = createClient(client, endpoint)"
+            SEPARATOR {
+                +"import java.util.*"
+                +"import io.ktor.http.*"
+                +"import io.ktor.client.*"
+                +"import io.ktor.swagger.experimental.*"
+            }
+            SEPARATOR {
+                +"interface ${model.info.classNameClient} : ${model.info.className}" {
+                    +"fun setToken(token: String)" // @TODO: Based on security stuff
+                }
+            }
+            SEPARATOR {
+                +"fun ${model.info.classNameClient}(endpoint: String, client: HttpClient = HttpClient()): ${model.info.classNameClient} = createClient(client, endpoint)"
+            }
         }
     }
 
@@ -586,6 +527,70 @@ class SwaggerGenerator(val model: SwaggerModel) : Block<BuildInfo>(*model.buildD
                 }
                 is SwaggerModel.VoidType -> +"Unit"
                 else -> error("Unsupported '$type'")
+            }
+        }
+    }
+}
+
+private fun BlockBuilder.fileSwaggerBackendTests(fileName: String, info: BuildInfo, model: SwaggerModel) {
+    fileText(fileName) {
+        SEPARATOR {
+            +"package ${info.artifactGroup}"
+        }
+        SEPARATOR {
+            +"import java.util.*"
+            +"import io.ktor.config.*"
+            +"import io.ktor.http.*"
+            +"import io.ktor.request.*"
+            +"import io.ktor.server.testing.*"
+            +"import io.ktor.swagger.experimental.*"
+            +"import kotlin.test.*"
+        }
+        SEPARATOR {
+            +"class SwaggerRoutesTest" {
+                for (path in model.paths.values) {
+                    for (method in path.methods.values) {
+                        SEPARATOR {
+                            +"/**"
+                            +" * @see ${model.info.classNameServer}.${method.methodName}"
+                            +" */"
+                            +"@Test"
+                            +"fun test${method.methodName.capitalize()}()" {
+                                +"withTestApplication" {
+                                    +"// @TODO: Adjust path as required"
+                                    +"handleRequest(HttpMethod.${method.method.toLowerCase().capitalize()}, \"${method.path}\") {"
+                                    when (method.method.toUpperCase()) {
+                                        "POST", "PUT" -> indent {
+                                            +"// @TODO: Your body here"
+                                            +"setBodyJson(mapOf<String, Any?>())"
+                                        }
+                                    }
+                                    +"}.apply {"
+                                    indent {
+                                        +"// @TODO: Your test here"
+                                        +"assertEquals(HttpStatusCode.OK, response.status())"
+                                    }
+                                    +"}"
+                                }
+                            }
+                        }
+                    }
+                }
+                SEPARATOR {
+                    +"fun <R> withTestApplication(test: TestApplicationEngine.() -> R): R" {
+                        +"return withApplication(createTestEnvironment())" {
+                            +"(environment.config as MapApplicationConfig).apply" {
+                                +"put(\"jwt.secret\", \"TODO-change-this-supersecret-or-use-SECRET-env\")"
+                            }
+                            +"application.module()"
+                            +"test()"
+                        }
+                    }
+                }
+
+                SEPARATOR {
+                    +"fun TestApplicationRequest.setBodyJson(value: Any?) = setBody(Json.stringify(value))"
+                }
             }
         }
     }
