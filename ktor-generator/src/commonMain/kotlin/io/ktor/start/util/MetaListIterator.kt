@@ -15,3 +15,5 @@ data class IteratorStepInfo<T>(
     val isFirst get() = index0 == 0
     val isLast get() = index0 >= length - 1
 }
+
+val <T> IteratorStepInfo<T>.optComma get() = if (this.isLast) "" else ","

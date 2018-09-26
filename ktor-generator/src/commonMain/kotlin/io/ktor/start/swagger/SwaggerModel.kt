@@ -279,6 +279,7 @@ data class SwaggerModel(
         val className = title.takeIf { it.isNotEmpty() }?.let { ID.normalizeClassName(it) } ?: "SwaggerApi"
         val classNameServer = "${className}Server"
         val classNameClient = "${className}Client"
+        val classNameServerTest = "${classNameServer}Test"
     }
 
     data class Response(
