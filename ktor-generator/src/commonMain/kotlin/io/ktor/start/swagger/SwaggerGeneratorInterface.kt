@@ -7,7 +7,8 @@ import io.ktor.start.project.addImport
 import io.ktor.start.util.*
 
 object SwaggerGeneratorInterface {
-    fun BlockBuilder.registerInterfaceRoutes(info: BuildInfo, model: SwaggerModel, arguments: List<SwaggerArgument>) {
+
+    fun BlockBuilder.registerRoutes(info: BuildInfo, model: SwaggerModel, arguments: List<SwaggerArgument>) {
         addImport("io.ktor.swagger.experimental.*")
         fileBinary("src/io/ktor/swagger/experimental/SwaggerUtils.kt") { info.fetch("swagger/SwaggerUtils.kt.txt") }
         addRoute {
@@ -238,4 +239,5 @@ object SwaggerGeneratorInterface {
             }
         }
     }
+
 }

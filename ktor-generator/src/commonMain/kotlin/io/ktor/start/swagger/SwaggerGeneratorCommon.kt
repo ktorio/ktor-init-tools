@@ -1,9 +1,60 @@
 package io.ktor.start.swagger
 
 import io.ktor.start.BuildInfo
+import io.ktor.start.features.server.addAuthProvider
+import io.ktor.start.project.ApplicationKt
+import io.ktor.start.project.addApplicationClasses
+import io.ktor.start.project.addHoconTop
+import io.ktor.start.project.addImport
 import io.ktor.start.util.*
 
 object SwaggerGeneratorCommon {
+
+    fun BlockBuilder.generateJwt(model: SwaggerModel): List<SwaggerArgument> = ArrayList<SwaggerArgument>().apply {
+        addImport("io.ktor.auth.*")
+        addImport("io.ktor.auth.jwt.*")
+        addImport("com.auth0.jwt.*")
+        addImport("com.auth0.jwt.algorithms.*")
+
+        addHoconTop {
+            +"jwt" {
+                +"secret = \"TODO-change-this-supersecret-or-use-SECRET-env\""
+                +"secret = \${?SECRET}"
+            }
+        }
+
+        addApplicationClasses {
+            +"open class MyJWT(val secret: String)" {
+                +"private val algorithm = Algorithm.HMAC256(secret)"
+                +"val verifier = JWT.require(algorithm).build()"
+                +"fun sign(name: String): String = JWT.create().withClaim(\"name\", name).sign(algorithm)"
+            }
+        }
+
+        this@apply.add(SwaggerArgument("val myjwt: MyJWT", "myjwt"))
+
+        addAuthProvider {
+            for (sec in model.securityDefinitions.values) {
+                +"// ---------------"
+                +"// @TODO: Please, edit the application.conf # jwt.secret property and provide a secure random value for it"
+                +"// ---------------"
+                for (descLine in sec.description.lines()) {
+                    +"// $descLine"
+                }
+                +"jwt(${sec.id.quote()})" {
+                    +"authSchemes(\"Bearer\", \"Token\")"
+                    +"verifier(myjwt.verifier)"
+                    +"validate" {
+                        +"UserIdPrincipal(it.payload.getClaim(\"name\").asString())"
+                    }
+                }
+            }
+        }
+
+        prependSeparated(ApplicationKt.MODULE_INSTALL) {
+            +"val myjwt = MyJWT(secret = environment.config.property(\"jwt.secret\").getString())"
+        }
+    }
 
     fun BlockBuilder.fileSwaggerBackendTests(fileName: String, info: BuildInfo, model: SwaggerModel) {
         fileText(fileName) {
@@ -68,7 +119,6 @@ object SwaggerGeneratorCommon {
             }
         }
     }
-
 
     fun BlockBuilder.filesHttpApi(
         apiFileName: String,

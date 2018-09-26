@@ -111,7 +111,7 @@ fun updateSwaggerModels() {
     // Allow only one swagger model
     jq("#add-swager-model").css("display", if (swaggerModels.isEmpty()) "inline-block" else "none")
 
-    swaggerGenerators = swaggerModels.map { SwaggerGenerator(it) }
+    swaggerGenerators = swaggerModels.map { SwaggerGenerator(it, , SwaggerGenerator.Kind.INTERFACE) }
     onHashUpdated(document.location!!.hash)
 }
 

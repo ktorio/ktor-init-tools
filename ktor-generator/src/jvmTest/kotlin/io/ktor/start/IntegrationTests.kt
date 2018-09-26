@@ -68,20 +68,33 @@ class IntegrationTests {
         //val testProjectRoot = File("/tmp/swagger-gen")
 
         runBlocking {
-            generate(info, SwaggerGenerator(SwaggerModel.parseJson(getResourceString("/swagger.json")!!)))
-                .writeToFolder(testProjectRoot)
+            val model = SwaggerModel.parseJson(getResourceString("/swagger.json")!!)
+            try {
+                generate(info, SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE))
+                    .writeToFolder(testProjectRoot)
 
-            val result = org.gradle.testkit.runner.GradleRunner.create()
-                .withProjectDir(testProjectRoot)
-                //.withArguments("check") // Test should fail, but the code should be valid
-                .withGradleVersion(GRADLE_VERSION)
-                .withArguments(
-                    //"-i",
-                    "compileTestKotlin"
-                )
-                .forwardOutput()
-                .build()
+                val result = org.gradle.testkit.runner.GradleRunner.create()
+                    .withProjectDir(testProjectRoot)
+                    //.withArguments("check") // Test should fail, but the code should be valid
+                    .withGradleVersion(GRADLE_VERSION)
+                    .withArguments(
+                        //"-i",
+                        "compileTestKotlin"
+                    )
+                    .forwardOutput()
+                    .build()
+            } catch (e: Throwable) {
+                val folder = File(System.getProperty("java.io.tmpdir") + "/swagger-project")
+                println("Writting problematic project to '$folder'")
+                try {
+                    generate(info, SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE))
+                        .writeToFolder(folder)
+                } catch (e: Throwable) {
+                    e.printStackTrace()
+                }
 
+                throw e
+            }
             //println("RESULT: ${result.tasks.joinToString(", ") { it.path }}")
         }
     }

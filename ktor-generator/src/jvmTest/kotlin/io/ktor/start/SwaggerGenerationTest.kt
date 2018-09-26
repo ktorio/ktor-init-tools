@@ -20,7 +20,7 @@ class SwaggerGenerationTest {
     @Test
     fun model2() = runBlocking {
         val model = swagger
-        val swaggerGenerator = SwaggerGenerator(model)
+        val swaggerGenerator = SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE)
         val results = generate(buildInfo, swaggerGenerator)
         for ((file, res) in results) {
             println("$file: $res")
@@ -31,7 +31,7 @@ class SwaggerGenerationTest {
     @Test
     fun model2Yaml() = runBlocking {
         val model = swaggerYaml
-        val swaggerGenerator = SwaggerGenerator(model)
+        val swaggerGenerator = SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE)
         val results = generate(buildInfo, swaggerGenerator)
         for ((file, res) in results) {
             println("$file: $res")
@@ -42,7 +42,7 @@ class SwaggerGenerationTest {
     @Test
     fun model3() = runBlocking {
         val model = uspto
-        val swaggerGenerator = SwaggerGenerator(model)
+        val swaggerGenerator = SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE)
         val results = generate(buildInfo, swaggerGenerator)
         for ((file, res) in results) {
             println("$file: $res")
@@ -53,7 +53,7 @@ class SwaggerGenerationTest {
     @Test
     fun modelWithJsonSchemaRules() = runBlocking {
         val model = petstore3
-        val swaggerGenerator = SwaggerGenerator(model)
+        val swaggerGenerator = SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE)
         val results = generate(buildInfo, swaggerGenerator)
         for ((file, res) in results) {
             println("$file: $res")
@@ -93,7 +93,7 @@ class SwaggerGenerationTest {
     @Test
     fun detectLoginHeuristicsInApiHttp() = runBlocking {
         val model = swagger
-        val swaggerGenerator = SwaggerGenerator(model)
+        val swaggerGenerator = SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE)
         val results = generate(buildInfo, swaggerGenerator)
         val str = results["api.http"].toString()
         assertTrue(
@@ -105,7 +105,7 @@ class SwaggerGenerationTest {
     @Test
     fun detectLimits() = runBlocking {
         for (model in listOf(swagger, swaggerYaml)) {
-            val str = generate(buildInfo, SwaggerGenerator(model)).toString()
+            val str = generate(buildInfo, SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE)).toString()
             assertTrue(str.contains("?limit=20&offset=0"))
             assertTrue(str.contains("checkRequest(limit in 1 .. 100) { \"Invalid limit\" }"))
             assertTrue(str.contains("checkRequest(offset >= 0) { \"Invalid offset\" }"))
