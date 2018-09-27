@@ -20,65 +20,120 @@ package io.ktor.start.project
 import io.ktor.start.*
 import io.ktor.start.util.*
 
-internal object BuildFilesGradle : BuildInfoBlock() {
+internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
     override fun BlockBuilder.render(info: BuildInfo) {
+        val properties = Properties.getProperties(info)
         fileText("gradle.properties") {
-            for ((key, value) in Properties.getProperties(info)) {
+            for ((key, value) in properties) {
                 +"$key=$value"
             }
         }
-        fileText("build.gradle") {
-            "buildscript" {
+        if (kotlin) {
+            fileText("build.gradle.kts") {
+                +"import org.jetbrains.kotlin.gradle.dsl.Coroutines"
+                +"import org.jetbrains.kotlin.gradle.tasks.KotlinCompile"
+                +""
+                for (key in properties.keys) {
+                    +"val $key: String by project"
+                }
+                +""
+                +"plugins" {
+                    +"application"
+                    +"kotlin(\"jvm\") version \"$KOTLIN_VERSION\""
+                }
+                +""
+                +"group = \"${info.artifactName}\""
+                +"version = \"${info.artifactVersion}\""
+                +""
+                +"application" {
+                    +"mainClassName = \"${info.developmentEngineFQ}\""
+                }
+                +""
+                +"repositories" {
+                    for (repo in reposToInclude) {
+                        when (repo) {
+                            "local" -> +"mavenLocal()"
+                            "jcenter" -> +"jcenter()"
+                            else -> +"maven { url = uri(\"$repo\") }"
+                        }
+                    }
+                }
+                +""
+                +"dependencies" {
+                    linedeferred {
+                        println("compileDependencies: $compileDependencies")
+                        for (dep in compileDependencies) {
+                            +"compile(\"${dep.dependency}\")"
+                        }
+                        for (dep in testDependencies - compileDependencies) {
+                            +"testCompile(\"${dep.dependency}\")"
+                        }
+                    }
+                }
+                +""
+                +"kotlin.experimental.coroutines = Coroutines.ENABLE"
+                +""
+                +"sourceSets[\"main\"].resources.srcDirs(\"resources\")"
+                +"sourceSets[\"test\"].resources.srcDirs(\"testresources\")"
+                +""
+                +"kotlin.sourceSets[\"main\"].kotlin.srcDirs(\"src\")"
+                +"kotlin.sourceSets[\"test\"].kotlin.srcDirs(\"test\")"
+
+            }
+        } else {
+            fileText("build.gradle") {
+                "buildscript" {
+                    "repositories" {
+                        +"jcenter()"
+                    }
+                    +""
+                    "dependencies" {
+                        +"classpath \"org.jetbrains.kotlin:kotlin-gradle-plugin:\$kotlin_version\""
+                    }
+                }
+                +""
+                +"apply plugin: 'kotlin'"
+                +"apply plugin: 'application'"
+                +""
+                +"group '${info.artifactName}'"
+                +"version '${info.artifactVersion}'"
+
+                +"mainClassName = \"${info.developmentEngineFQ}\""
+                +""
+                "sourceSets" {
+                    +"main.kotlin.srcDirs = main.java.srcDirs = ['src']"
+                    +"test.kotlin.srcDirs = test.java.srcDirs = ['test']"
+                    +"main.resources.srcDirs = ['resources']"
+                    +"test.resources.srcDirs = ['testresources']"
+                }
+                +""
                 "repositories" {
-                    +"jcenter()"
+                    for (repo in reposToInclude) {
+                        when (repo) {
+                            "local" -> +"mavenLocal()"
+                            "jcenter" -> +"jcenter()"
+                            else -> +"maven { url '$repo' }"
+                        }
+                    }
                 }
                 +""
                 "dependencies" {
-                    +"classpath \"org.jetbrains.kotlin:kotlin-gradle-plugin:\$kotlin_version\""
-                }
-            }
-            +""
-            +"apply plugin: 'kotlin'"
-            +"apply plugin: 'application'"
-            +""
-            +"group '${info.artifactName}'"
-            +"version '${info.artifactVersion}'"
-
-            +"mainClassName = \"${info.developmentEngineFQ}\""
-            +""
-            "sourceSets" {
-                +"main.kotlin.srcDirs = main.java.srcDirs = ['src']"
-                +"test.kotlin.srcDirs = test.java.srcDirs = ['test']"
-                +"main.resources.srcDirs = ['resources']"
-                +"test.resources.srcDirs = ['testresources']"
-            }
-            +""
-            "repositories" {
-                for (repo in reposToInclude) {
-                    when (repo) {
-                        "local" -> +"mavenLocal()"
-                        "jcenter" -> +"jcenter()"
-                        else -> +"maven { url '$repo' }"
+                    linedeferred {
+                        println("compileDependencies: $compileDependencies")
+                        for (dep in compileDependencies) {
+                            +"compile \"${dep.dependency}\""
+                        }
+                        for (dep in testDependencies - compileDependencies) {
+                            +"testCompile \"${dep.dependency}\""
+                        }
                     }
                 }
+                +""
+                +"kotlin.experimental.coroutines = 'enable'"
             }
-            +""
-            "dependencies" {
-                linedeferred {
-                    println("compileDependencies: $compileDependencies")
-                    for (dep in compileDependencies) {
-                        +"compile \"${dep.dependency}\""
-                    }
-                    for (dep in testDependencies - compileDependencies) {
-                        +"testCompile \"${dep.dependency}\""
-                    }
-                }
-            }
-            +""
-            +"kotlin.experimental.coroutines = 'enable'"
         }
-        fileText("settings.gradle") {
-            +"rootProject.name = '${info.artifactName}'"
+        fileText(if (kotlin) "settings.gradle.kts" else "settings.gradle") {
+            +"rootProject.name = \"${info.artifactName}\""
         }
         if (info.includeWrapper) {
             fileBinary("gradlew", mode = "755".toInt(8)) { info.fetch("gradle/gradlew") }

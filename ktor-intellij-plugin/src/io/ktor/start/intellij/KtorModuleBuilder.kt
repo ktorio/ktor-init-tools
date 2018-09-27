@@ -86,7 +86,7 @@ class KtorModuleBuilder : JavaModuleBuilder() {
 
             when (info.projectType) {
                 ProjectType.Gradle -> {
-                    val buildGradle = root["build.gradle"]
+                    val buildGradle = root["build.gradle.kts"] ?: root["build.gradle"]
                     if (buildGradle != null) {
                         invokeLater {
                             val wizard = AddModuleWizard(

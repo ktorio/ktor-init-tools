@@ -24,8 +24,8 @@ repositories {
 }
 
 dependencies {
-    //compile project(":ktor-generator")
-    compile project(path: ':ktor-generator', configuration: 'jsRuntimeElements')
+    compile project(":ktor-generator")
+    //compile project(path: ':ktor-generator', configuration: 'jsRuntimeElements')
     //compile project(path: ':ktor-generator', configuration: 'jsRuntimeOnly')
 
     compile "kotlin.js.externals:kotlin-js-jquery:3.2.0-0"

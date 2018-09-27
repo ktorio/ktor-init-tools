@@ -23,7 +23,7 @@ import io.ktor.start.util.*
 object BuildFiles : BuildInfoBlock() {
     override fun BlockBuilder.render(info: BuildInfo) {
         when (info.projectType) {
-            ProjectType.Gradle -> BuildFilesGradle.apply { render(info) }
+            ProjectType.Gradle -> BuildFilesGradle(kotlin = false).apply { render(info) }
             ProjectType.Maven -> BuildFilesMaven.apply { render(info) }
         }
 
