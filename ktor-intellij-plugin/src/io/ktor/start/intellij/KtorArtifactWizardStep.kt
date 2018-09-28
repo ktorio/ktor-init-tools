@@ -73,7 +73,7 @@ class KtorArtifactWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() 
             val model = config.swaggerModules.firstOrNull()
             if (model != null) {
                 modelLabel.text =
-                        "${model?.filename}, Routes: ${model.paths.size}, Defs: ${model.definitions.size}, SecDefs: ${model.securityDefinitions.size} (click to remove ❌)"
+                        "${model?.filename}, Routes: ${model.routes.size}, Defs: ${model.definitions.size}, SecDefs: ${model.securityDefinitions.size} (click to remove ❌)"
                 addModelButton.isVisible = false
             } else {
                 modelLabel.text = ""

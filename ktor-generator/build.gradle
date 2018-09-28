@@ -16,9 +16,16 @@ kotlin {
         fromPreset(presets.js, 'js')
         
         configure([jvm]) {
-            [tasks.getByName(compilations.main.compileKotlinTaskName), tasks.getByName(compilations.test.compileKotlinTaskName)]*.kotlinOptions {
-                //freeCompilerArgs = ["-XXLanguage:+InlineClasses"]
-                languageVersion = "1.3"
+            [tasks.getByName(compilations.main.compileKotlinTaskName), tasks.getByName(compilations.test.compileKotlinTaskName)].each {
+                it.sourceCompatibility = JavaVersion.VERSION_1_8
+                it.targetCompatibility = JavaVersion.VERSION_1_8
+
+                it.kotlinOptions {
+                    //freeCompilerArgs = ["-XXLanguage:+InlineClasses"]
+                    apiVersion = "1.3"
+                    languageVersion = "1.3"
+                    jvmTarget = "1.8"
+                }
             }
         }
 

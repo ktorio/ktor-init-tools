@@ -18,8 +18,9 @@
 
             <h2>Changelog</h2>
 
-            <h3>0.2.4</h2>
+            <h3>0.3.0</h2>
             <ul>
+                <li>Alternative swagger generation.</li>
                 <li>Gradle Kotlin-DSL generation support.</li>
                 <li>Code Style improvements.</li>
                 <li>Internal refactorings.</li>

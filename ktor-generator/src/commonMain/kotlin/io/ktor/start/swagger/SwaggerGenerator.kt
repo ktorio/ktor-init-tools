@@ -3,8 +3,7 @@ package io.ktor.start.swagger
 import io.ktor.start.BuildInfo
 import io.ktor.start.features.server.addCustomStatusPage
 import io.ktor.start.project.*
-import io.ktor.start.util.Block
-import io.ktor.start.util.BlockBuilder
+import io.ktor.start.util.*
 
 class SwaggerGenerator(
     val model: SwaggerModel,
@@ -22,17 +21,19 @@ class SwaggerGenerator(
             }
         }
 
-        val arguments = arrayListOf<SwaggerArgument>()
-        if (model.securityDefinitions.isNotEmpty()) {
-            SwaggerGeneratorCommon.apply {
-                arguments += generateJwt(model)
+        val arguments = SwaggerArguments(buildList {
+            if (model.securityDefinitions.isNotEmpty()) {
+                SwaggerGeneratorCommon.apply {
+                    addAll(generateJwt(model))
+                }
             }
-        }
+        })
 
         when (generationKind) {
             Kind.RAW -> {
                 SwaggerGeneratorRaw.apply {
                     registerRoutes(info, model, arguments)
+                    fileSwaggerDtos("src/${model.info.className}.kt", info, model)
                     fileSwaggerBackendHandler("src/${model.info.classNameServer}.kt", info, model, arguments)
                     fileSwaggerFrontendHandler("src/${model.info.classNameClient}.kt", info, model)
                 }

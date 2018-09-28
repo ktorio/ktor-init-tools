@@ -8,6 +8,10 @@ import io.ktor.start.project.ApplicationKt
 import io.ktor.start.util.*
 import kotlin.reflect.KClass
 
+data class SwaggerArguments(val arguments: List<SwaggerArgument>) {
+    val instances get() = arguments.joinToString(", ") { it.instance }
+    val decls get() = arguments.joinToString(", ") { it.decl }
+}
 data class SwaggerArgument(val decl: String, val instance: String)
 
 fun SwaggerModel.InfoGenType<*>.toKotlinType(): String = type.toKotlinType()

@@ -9,6 +9,7 @@ sourceSets {
 	main.kotlin.srcDirs += "src"
 	main.resources.srcDirs += "resources"
 	test.kotlin.srcDirs += "test"
+	test.resources.srcDirs += "testresources"
 }
 
 dependencies {
@@ -48,8 +49,13 @@ repositories {
 }
 
 [compileKotlin, compileTestKotlin].each {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+
 	it.kotlinOptions {
 		freeCompilerArgs = ["-XXLanguage:+InlineClasses"]
+		apiVersion = "1.3"
 		languageVersion = "1.3"
+		jvmTarget = "1.8"
 	}
 }

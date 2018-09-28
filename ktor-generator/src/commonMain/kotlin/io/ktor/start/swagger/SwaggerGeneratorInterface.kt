@@ -6,13 +6,13 @@ import io.ktor.start.http.HttpStatusCode
 import io.ktor.start.project.addImport
 import io.ktor.start.util.*
 
-object SwaggerGeneratorInterface {
+object SwaggerGeneratorInterface : SwaggerGeneratorBase() {
 
-    fun BlockBuilder.registerRoutes(info: BuildInfo, model: SwaggerModel, arguments: List<SwaggerArgument>) {
+    fun BlockBuilder.registerRoutes(info: BuildInfo, model: SwaggerModel, arguments: SwaggerArguments) {
         addImport("io.ktor.swagger.experimental.*")
         fileBinary("src/io/ktor/swagger/experimental/SwaggerUtils.kt") { info.fetch("swagger/SwaggerUtils.kt.txt") }
         addRoute {
-            +"registerRoutes(${model.info.classNameServer}(${arguments.joinToString(", ") { it.instance }}))"
+            +"registerRoutes(${model.info.classNameServer}(${arguments.instances}))"
         }
     }
 
@@ -43,40 +43,25 @@ object SwaggerGeneratorInterface {
                 +"import io.ktor.swagger.experimental.*"
             }
             SEPARATOR {
-
-                +"/**"
-                +" * ${model.info.title.stripLineBreaks()}"
-                +" * "
-                for (descLine in model.info.description.lines()) {
-                    +" * $descLine"
-                }
-                +" */"
+                doc(title = model.info.title, description = model.info.description)
                 +"interface ${model.info.className} : SwaggerBaseApi" {
-                    for (paths in model.paths.values) {
-                        for (path in paths.methodsList) {
+                    for (route in model.routes.values) {
+                        for (method in route.methodsList) {
                             SEPARATOR {
-                                +"/**"
-                                for (descLine in path.summaryDescription.lines()) {
-                                    +" * $descLine"
+                                doc(
+                                    title = "",
+                                    description = method.summaryDescription,
+                                    params = method.parameters.associate { it.name to it.description },
+                                    retval = method.defaultResponse.description
+                                )
+                                +"@Path(${route.path.quote()})"
+                                +"@Method(${method.method.toUpperCase().quote()})"
+                                if (method.security.isNotEmpty()) {
+                                    +"@Auth(${method.security.joinToString(", ") { it.name.quote() }})"
                                 }
-                                +" * "
-                                for (param in path.parameters) {
-                                    param.description.escape()
-                                    +" * @param ${param.name} ${param.description.stripLineBreaks()}"
-                                }
-                                if (path.parameters.isNotEmpty()) {
-                                    +" * "
-                                }
-                                +" * @return ${path.defaultResponse.description.stripLineBreaks()}"
-                                +" */"
-                                +"@Path(${paths.path.quote()})"
-                                +"@Method(${path.method.toUpperCase().quote()})"
-                                if (path.security.isNotEmpty()) {
-                                    +"@Auth(${path.security.joinToString(", ") { it.name.quote() }})"
-                                }
-                                +"suspend fun ${path.methodName}("
+                                +"suspend fun ${method.methodName}("
                                 indent {
-                                    for ((info, param) in path.parameters.metaIter) {
+                                    for ((pinfo, param) in method.parameters.metaIter) {
                                         val qpname = param.name.quote()
                                         val inAnnotation = when (param.inside) {
                                             SwaggerModel.Inside.BODY -> "@Body($qpname)"
@@ -88,46 +73,16 @@ object SwaggerGeneratorInterface {
                                         val default = if (param.required) "" else " = " + indentStringHere {
                                             toKotlinDefault(param.schema, param.default, typed = true)
                                         }
-                                        +"$inAnnotation ${param.name}: ${param.schema.toKotlinType()}$default${info.optComma}"
+                                        +"$inAnnotation ${param.name}: ${param.schema.toKotlinType()}$default${pinfo.optComma}"
                                     }
                                 }
-                                +"): ${path.responseType.toKotlinType()}"
+                                +"): ${method.responseType.toKotlinType()}"
                             }
                         }
                     }
                 }
 
-                for (def in model.definitions.values) {
-                    SEPARATOR {
-                        // @TODO: Consider using object instead?
-                        val classKeywords = if (def.props.isNotEmpty()) "data class" else "class"
-                        if (def.synthetic) {
-                            +"// Synthetic class name"
-                        }
-                        +"$classKeywords ${def.name}("
-                        indent {
-                            val props = def.props.values
-                            for ((index, prop) in props.withIndex()) {
-                                val comma = if (index >= props.size - 1) "" else ","
-                                +"val ${prop.name}: ${prop.type.toKotlinType()}$comma"
-                            }
-                        }
-                        val propsWithRules = def.propsList.filter { it.type.rule != null }
-                        if (propsWithRules.isNotEmpty()) {
-                            +") {"
-                            indent {
-                                +"init" {
-                                    for (prop in propsWithRules) {
-                                        +"${prop.name}.verifyParam(${prop.name.quote()}) { ${prop.toRuleString("it")} }"
-                                    }
-                                }
-                            }
-                            +"}"
-                        } else {
-                            +")"
-                        }
-                    }
-                }
+                swaggerDtos(info, model)
             }
         }
     }
@@ -136,7 +91,7 @@ object SwaggerGeneratorInterface {
         fileName: String,
         info: BuildInfo,
         model: SwaggerModel,
-        arguments: List<SwaggerArgument>
+        arguments: SwaggerArguments
     ) {
         fileText(fileName) {
             SEPARATOR {
@@ -149,8 +104,8 @@ object SwaggerGeneratorInterface {
                 +"import io.ktor.swagger.experimental.*"
             }
             SEPARATOR {
-                +"class ${model.info.classNameServer}(${arguments.joinToString(", ") { it.decl }}) : SwaggerBaseServer, ${model.info.className}" {
-                    for (paths in model.paths.values) {
+                +"class ${model.info.classNameServer}(${arguments.decls}) : SwaggerBaseServer, ${model.info.className}" {
+                    for (paths in model.routes.values) {
                         for (method in paths.methodsList) {
                             SEPARATOR {
                                 +"// ${method.method.stripLineBreaks().toUpperCase()} ${method.path.stripLineBreaks()}"
@@ -162,52 +117,10 @@ object SwaggerGeneratorInterface {
                                 }
                                 +"): ${method.responseType.toKotlinType()} {"
                                 indent {
-                                    SEPARATOR {
-                                        val reqBody = method.requestBody.firstOrNull()
-                                        if (reqBody != null) {
-                                            +"val body = call().receive<${reqBody.schema.toKotlinType()}>()"
-                                        }
-
-                                        for (param in method.parameters) {
-                                            val pschema = param.schema
-                                            val rule = pschema.rule
-                                            if (rule != null) {
-                                                +"checkRequest(${rule.toKotlin(
-                                                    param.name,
-                                                    pschema
-                                                )}) { ${"Invalid ${param.name}".quote()} }"
-                                            }
-                                        }
-                                    }
-                                    SEPARATOR {
-                                        for (response in method.errorResponses) {
-                                            +"if (false) ${indentString(indentLevel) { renderResponse(response) }}"
-                                        }
-                                    }
-                                    SEPARATOR {
-                                        if (method.responseType != SwaggerModel.VoidType) {
-                                            val loginRoute = method.tryGetCompatibleLoginRoute()
-
-                                            val untyped = method.responseType.toDefaultUntyped()
-
-                                            if (loginRoute?.username != null) {
-                                                +"val username = ${loginRoute.username.fullPath}"
-                                                +"// @TODO: Your username/password validation here"
-                                                if (loginRoute.password != null) {
-                                                    +"val password = ${loginRoute.password.fullPath}"
-                                                    +"if (username != password) httpException(HttpStatusCode.Unauthorized, \"username != password\")"
-                                                }
-                                                +"val token = myjwt.sign(username)"
-                                                Dynamic {
-                                                    untyped[loginRoute.tokenPath] = SwaggerModel.Identifier("token")
-                                                }
-                                            }
-
-                                            +"return ${indentString(indentLevel) {
-                                                toKotlinDefault(method.responseType, untyped, typed = true)
-                                            }}"
-                                        }
-                                    }
+                                    val untyped = routeBody(method)
+                                    +"return ${indentString(indentLevel) {
+                                        toKotlinDefault(method.responseType, untyped, typed = true)
+                                    }}"
                                 }
                                 +"}"
                             }
@@ -217,6 +130,7 @@ object SwaggerGeneratorInterface {
             }
         }
     }
+
 
     fun BlockBuilder.fileSwaggerFrontendHandler(fileName: String, info: BuildInfo, model: SwaggerModel) {
         fileText(fileName) {

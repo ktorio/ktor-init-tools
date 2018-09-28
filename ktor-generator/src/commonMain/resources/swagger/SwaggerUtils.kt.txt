@@ -263,6 +263,9 @@ suspend fun <T> ApplicationCall.getTyped(source: Source, name: String, clazz: Cl
     return Json.convert(getRaw(source, name), clazz)
 }
 
+suspend fun <T> ApplicationCall.getTypedOrNull(source: Source, name: String, clazz: Class<T>): T? =
+    getRaw(source, name)?.let { Json.convert(it, clazz) }
+
 suspend fun ApplicationCall.getRaw(source: Source, name: String): Any? {
     return when (source) {
         Source.PATH -> this.parameters.get(name)
@@ -379,3 +382,12 @@ fun Type.extractFirstGenericType(): Class<*> {
     }
     error("Couldn't find right generic type")
 }
+
+suspend inline fun <reified T : Any> ApplicationCall.getBodyParam(name: String, default: () -> T = { error("mandatory $name") }): T =
+    getTyped(Source.BODY, name, T::class.java)
+
+suspend inline fun <reified T : Any> ApplicationCall.getPath(name: String, default: () -> T = { error("mandatory $name") }): T =
+    getTyped(Source.PATH, name, T::class.java)
+
+suspend inline fun <reified T : Any> ApplicationCall.getQuery(name: String, default: () -> T = { error("mandatory $name") }): T =
+    getTyped(Source.QUERY, name, T::class.java)

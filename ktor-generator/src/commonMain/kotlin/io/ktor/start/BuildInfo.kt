@@ -17,6 +17,7 @@
 
 package io.ktor.start
 
+import io.ktor.start.swagger.*
 import io.ktor.start.util.*
 
 data class BuildInfo(
@@ -28,6 +29,8 @@ data class BuildInfo(
     val artifactVersion: String = "0.0.1-SNAPSHOT",
     val ktorEngine: KtorEngine = KtorEngine.Netty,
     val generateFeatureSample: Boolean = true,
+    //val swaggerGenKind: SwaggerGenerator.Kind = SwaggerGenerator.Kind.INTERFACE,
+    val swaggerGenKind: SwaggerGenerator.Kind = SwaggerGenerator.Kind.RAW,
     val fetch: suspend (path: String) -> ByteArray = { TODO("Must set fetch") }
 ) {
     val ktorVer = ktorVersion

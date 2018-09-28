@@ -1,25 +1,140 @@
 package io.ktor.start.swagger
 
-import io.ktor.start.BuildInfo
-import io.ktor.start.util.BlockBuilder
+import io.ktor.start.*
+import io.ktor.start.features.server.*
+import io.ktor.start.project.*
+import io.ktor.start.swagger.SwaggerGeneratorInterface.renderResponse
+import io.ktor.start.swagger.SwaggerGeneratorInterface.routeBody
+import io.ktor.start.util.*
 
-object SwaggerGeneratorRaw {
+object SwaggerGeneratorRaw : SwaggerGeneratorBase() {
 
-    fun BlockBuilder.registerRoutes(info: BuildInfo, model: SwaggerModel, arguments: ArrayList<SwaggerArgument>) {
-        TODO()
+    fun BlockBuilder.registerRoutes(info: BuildInfo, model: SwaggerModel, arguments: SwaggerArguments) {
+        addImport("io.ktor.swagger.experimental.*")
+        //fileBinary("src/io/ktor/swagger/experimental/SwaggerUtilsRaw.kt") { info.fetch("swagger/SwaggerUtilsRaw.kt.txt") }
+        fileBinary("src/io/ktor/swagger/experimental/SwaggerUtils.kt") { info.fetch("swagger/SwaggerUtils.kt.txt") }
+        addRoute {
+            +"${model.info.classNameServer}(${arguments.instances}).apply" {
+                for (tag in model.tags) {
+                    +"${tag.registerMethodName}()"
+                }
+            }
+        }
     }
 
     fun BlockBuilder.fileSwaggerBackendHandler(
         fileName: String,
         info: BuildInfo,
         model: SwaggerModel,
-        arguments: ArrayList<SwaggerArgument>
+        arguments: SwaggerArguments
     ) {
-        TODO()
+        fileText(fileName) {
+            SEPARATOR {
+                +"package ${info.artifactGroup}"
+            }
+            SEPARATOR {
+                +"import io.ktor.application.*"
+                +"import io.ktor.response.*"
+                +"import io.ktor.routing.*"
+                +"import java.util.*"
+                +"import io.ktor.swagger.experimental.*"
+                +"import io.ktor.auth.*"
+                +"import io.ktor.http.*"
+            }
+            SEPARATOR {
+                doc(title = model.info.title, description = model.info.description)
+                +"class ${model.info.classNameServer}(${arguments.decls})" {
+                    val processedMethods = hashSetOf<SwaggerModel.PathMethodModel>()
+                    for (tag in model.tags) {
+                        SEPARATOR {
+                            +"fun Routing.${tag.registerMethodName}()" {
+                                for (route in model.routes.values) {
+                                    for (method in route.methodsList) {
+                                        if (!method.processedTags.contains(tag)) continue // Not containing this tag
+                                        if (method in processedMethods) continue // Already processed
+                                        processedMethods += method
+
+                                        if (method.security.isNotEmpty()) {
+                                            +"authenticate(${method.security.joinToString(", ") { it.name.quote() }})" {
+                                                route(method, route)
+                                            }
+                                        } else {
+                                            route(method, route)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun Indenter.route(
+        method: SwaggerModel.PathMethodModel,
+        route: SwaggerModel.PathModel
+    ) {
+        +"${method.method}(${route.path.quote()})" {
+            // Parameter reading
+            SEPARATOR {
+                for ((pinfo, param) in method.parameters.metaIter) {
+                    val pname = param.name
+                    val qpname = pname.quote()
+                    val ptype = param.schema.toKotlinType()
+                    val inAnnotation = when (param.inside) {
+                        SwaggerModel.Inside.BODY -> "call.getBodyParam<$ptype>($qpname)"
+                        SwaggerModel.Inside.HEADER -> "call.getHeader<$ptype>($qpname)"
+                        SwaggerModel.Inside.QUERY -> "call.getQuery<$ptype>($qpname)"
+                        SwaggerModel.Inside.PATH -> "call.getPath<$ptype>($qpname)"
+                        SwaggerModel.Inside.FORM_DATA -> "call.getFormData<$ptype>($qpname)"
+                    }
+                    val default = if (param.required) {
+                        //"{ error(" + "mandatory $pname".quote() + ") }"
+                        ""
+                    } else {
+                        "{ " + indentStringHere {
+                            toKotlinDefault(param.schema, param.default, typed = true)
+                        } + " }"
+                    }
+                    +"val ${param.name} = $inAnnotation $default"
+                }
+            }
+            val untyped = routeBody(method)
+            +"call.respond(${indentString(indentLevel) {
+                toKotlinDefault(method.responseType, untyped, typed = true)
+            }})"
+        }
     }
 
     fun BlockBuilder.fileSwaggerFrontendHandler(fileName: String, info: BuildInfo, model: SwaggerModel) {
-        TODO()
+        fileText(fileName) {
+            SEPARATOR {
+                +"import io.ktor.client.*"
+            }
+            SEPARATOR {
+                +"open class ${model.info.classNameClient}(val endpoint: String, val client: HttpClient = HttpClient())" {
+                    +"// TODO"
+                }
+            }
+        }
+    }
+
+    fun BlockBuilder.fileSwaggerDtos(fileName: String, info: BuildInfo, model: SwaggerModel) {
+        fileText(fileName) {
+            SEPARATOR {
+                +"package ${info.artifactGroup}"
+            }
+            SEPARATOR {
+                +"import java.util.*"
+                +"import io.ktor.http.*"
+                +"import io.ktor.request.*"
+                +"import io.ktor.swagger.experimental.*"
+            }
+            SEPARATOR {
+                swaggerDtos(info, model)
+            }
+        }
     }
 
 }

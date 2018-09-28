@@ -10,7 +10,8 @@ import io.ktor.start.util.*
 
 object SwaggerGeneratorCommon {
 
-    fun BlockBuilder.generateJwt(model: SwaggerModel): List<SwaggerArgument> = ArrayList<SwaggerArgument>().apply {
+
+    fun BlockBuilder.generateJwt(model: SwaggerModel): List<SwaggerArgument> = buildList {
         addImport("io.ktor.auth.*")
         addImport("io.ktor.auth.jwt.*")
         addImport("com.auth0.jwt.*")
@@ -31,7 +32,7 @@ object SwaggerGeneratorCommon {
             }
         }
 
-        this@apply.add(SwaggerArgument("val myjwt: MyJWT", "myjwt"))
+        add(SwaggerArgument("val myjwt: MyJWT", "myjwt"))
 
         addAuthProvider {
             for (sec in model.securityDefinitions.values) {
@@ -72,7 +73,7 @@ object SwaggerGeneratorCommon {
             }
             SEPARATOR {
                 +"class SwaggerRoutesTest" {
-                    for (path in model.paths.values) {
+                    for (path in model.routes.values) {
                         for (method in path.methods.values) {
                             SEPARATOR {
                                 +"/**"
@@ -132,7 +133,7 @@ object SwaggerGeneratorCommon {
         }
 
         fileText(envJsonFileName) {
-            val paramsInUrls = model.paths.values.flatMap { it.methodsList }
+            val paramsInUrls = model.routes.values.flatMap { it.methodsList }
                 .flatMap { Regex("\\{(\\w+)\\}").findAll(it.path).map { it.groupValues[1] }.toList() }.toSet()
 
             +Json.encodePrettyUntyped(
@@ -153,7 +154,7 @@ object SwaggerGeneratorCommon {
                 +"# $descLine"
             }
             +""
-            for (path in model.paths.values) {
+            for (path in model.routes.values) {
                 for (method in path.methodsList) {
                     val httpMethod = method.method.toUpperCase()
                     +"###"

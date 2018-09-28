@@ -24,9 +24,12 @@ data class SwaggerModel(
     val produces: List<String>,
     val consumes: List<String>,
     val securityDefinitions: Map<String, SecurityDefinition>,
-    val paths: Map<String, PathModel>
+    val routes: Map<String, PathModel>
 ) {
+    val routesList = routes.values
     val definitions: Map<String, TypeDef> = this.constructDefinitions()
+
+    val tags = routesList.flatMap { it.methodsList }.flatMap { it.processedTags }.distinct()
 
     data class Server(
         val url: String,
@@ -223,6 +226,11 @@ data class SwaggerModel(
         val info: List<String>
     )
 
+    data class ProcessedTag(val tag: String) {
+        val id = ID.normalizeMethodName(tag)
+        val registerMethodName = ID.normalizeMethodName("register" + tag.capitalize())
+    }
+
     data class PathMethodModel(
         val path: String,
         val method: String,
@@ -235,6 +243,7 @@ data class SwaggerModel(
         val responses: List<Response>,
         val requestBody: List<TypeWithContentType>
     ) {
+        val processedTags = tags.map { ProcessedTag(it) }
         val summaryDescription = (summary + "\n\n" + (description ?: "")).trim()
 
         val parametersQuery = parameters.filter { it.inside == Inside.QUERY }
@@ -547,7 +556,7 @@ data class SwaggerModel(
                     produces = produces,
                     consumes = consumes,
                     securityDefinitions = securityDefinitions,
-                    paths = paths
+                    routes = paths
                 )
             }
         }
@@ -564,7 +573,7 @@ data class SwaggerModel(
         }
 
         fun find(): Result {
-            for (path in this.model.paths.values) path.find()
+            for (path in this.model.routes.values) path.find()
             return Result(out, unnameds)
         }
 
