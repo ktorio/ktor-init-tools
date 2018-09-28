@@ -3,6 +3,7 @@ package io.ktor.start.swagger
 import io.ktor.start.*
 import io.ktor.start.features.server.*
 import io.ktor.start.project.*
+import io.ktor.start.swagger.SwaggerGeneratorInterface.doc
 import io.ktor.start.util.*
 
 object SwaggerGeneratorRaw : SwaggerGeneratorBase() {
@@ -115,11 +116,64 @@ object SwaggerGeneratorRaw : SwaggerGeneratorBase() {
     fun BlockBuilder.fileSwaggerFrontendHandler(fileName: String, info: BuildInfo, model: SwaggerModel) {
         fileText(fileName) {
             SEPARATOR {
-                +"import io.ktor.client.*"
+                +"package ${info.artifactGroup}"
             }
+
             SEPARATOR {
+                +"import io.ktor.client.*"
+                +"import io.ktor.client.request.*"
+            }
+
+            SEPARATOR {
+                doc(title = model.info.title + " Client", description = model.info.description)
                 +"open class ${model.info.classNameClient}(val endpoint: String, val client: HttpClient = HttpClient())" {
-                    +"// TODO"
+                    for (route in model.routes.values) {
+                        for (method in route.methodsList) {
+                            val responseType = method.responseType.toKotlinType()
+                            SEPARATOR {
+                                doc(
+                                    title = "",
+                                    description = method.summaryDescription,
+                                    params = method.parameters.associate { it.name to it.description },
+                                    retval = method.defaultResponse.description
+                                )
+                                +"suspend fun ${method.methodName}("
+                                indent {
+                                    for ((pinfo, param) in method.parameters.metaIter) {
+                                        val qpname = param.name.quote()
+                                        val default = if (param.required) "" else " = " + indentStringHere {
+                                            toKotlinDefault(param.schema, param.default, typed = true)
+                                        }
+                                        +"${param.name}: ${param.schema.toKotlinType()}$default${pinfo.optComma} // ${param.inside}"
+                                    }
+                                }
+                                +"): $responseType" {
+                                    val replacedPath = method.path.replace(Regex("\\{(\\w+)\\}")) {
+                                        "\$" + it.groupValues[1]
+                                    }
+
+                                    +"return client.${method.method}<$responseType>(\"\$endpoint$replacedPath\")" {
+                                        if (method.parametersQuery.isNotEmpty()) {
+                                            +"this.url" {
+                                                +"this.parameters.apply" {
+                                                    for (param in method.parametersQuery) {
+                                                        +"this.append(${param.name.quote()}, \"\$${param.name}\")"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if (method.parametersBody.isNotEmpty()) {
+                                            +"this.body = mutableMapOf<String, Any?>().apply" {
+                                                for (param in method.parametersBody) {
+                                                    +"this[${param.name.quote()}] = ${param.name}"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

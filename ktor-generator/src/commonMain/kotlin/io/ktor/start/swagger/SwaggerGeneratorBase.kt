@@ -25,11 +25,22 @@ open class SwaggerGeneratorBase {
         val strippedLines = lines
             .dropWhile { it.isNullOrBlank() }
             .dropLastWhile { it.isNullOrBlank() }
+            .dropDoubleEmpty()
         +"/**"
         for (line in strippedLines) {
             +" * $line"
         }
         +" */"
+    }
+
+    fun List<String>.dropDoubleEmpty(): List<String> = buildList {
+        for (n in 0 until this@dropDoubleEmpty.size) {
+            val prev = this@dropDoubleEmpty.getOrNull(n - 1)
+            val current = this@dropDoubleEmpty.getOrNull(n)
+            if (!prev.isNullOrBlank() || !current.isNullOrBlank()) {
+                add(current!!)
+            }
+        }
     }
 
     fun Indenter.swaggerDtos(info: BuildInfo, model: SwaggerModel) {
