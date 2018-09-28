@@ -12,6 +12,7 @@ import java.io.*
 class IntegrationTests {
     companion object {
         val GRADLE_VERSION = "4.7"
+        val GRADLE_VERSION_DSL = "4.10.2"
     }
 
     @Rule
@@ -53,10 +54,25 @@ class IntegrationTests {
             org.gradle.testkit.runner.GradleRunner.create()
                 .withProjectDir(testProjectRoot)
                 .withGradleVersion(GRADLE_VERSION)
-                .withArguments(
-                    //"-i",
-                    "check"
-                )
+                .withArguments("check")
+                .forwardOutput()
+                .build()
+        }
+    }
+
+    @Test
+    fun testNormalGradleGenerationWithKotlinDsl() {
+        val testProjectRoot = testProjectDir.root
+        //val testProjectRoot = File("/tmp/normal-gradle")
+
+        runBlocking {
+            generate(info.copy(projectType = ProjectType.GradleKotlinDsl), ALL_FEATURES)
+                .writeToFolder(testProjectRoot, print = true)
+
+            org.gradle.testkit.runner.GradleRunner.create()
+                .withProjectDir(testProjectRoot)
+                .withGradleVersion(GRADLE_VERSION_DSL)
+                .withArguments("check")
                 .forwardOutput()
                 .build()
         }

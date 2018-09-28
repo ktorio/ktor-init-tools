@@ -34,6 +34,7 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                 +"import org.jetbrains.kotlin.gradle.tasks.KotlinCompile"
                 +""
                 for (key in properties.keys) {
+                    if (key.contains('.')) continue // kotlin.code.style for example
                     +"val $key: String by project"
                 }
                 +""
@@ -142,7 +143,11 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                 info.fetch("gradle/gradle/wrapper/gradle-wrapper.jar")
             }
             fileBinary("gradle/wrapper/gradle-wrapper.properties") {
-                info.fetch("gradle/gradle/wrapper/gradle-wrapper.properties")
+                if (kotlin) {
+                    info.fetch("gradle/gradle/wrapper/gradle-wrapper.properties.kotlin-dsl")
+                } else {
+                    info.fetch("gradle/gradle/wrapper/gradle-wrapper.properties")
+                }
             }
         }
     }

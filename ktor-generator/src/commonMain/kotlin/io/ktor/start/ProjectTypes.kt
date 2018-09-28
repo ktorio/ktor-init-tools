@@ -19,6 +19,7 @@ package io.ktor.start
 
 enum class ProjectType(val id: String) {
     Gradle("gradle"),
+    GradleKotlinDsl("gradle-kotlin-dsl"),
     Maven("maven");
 
     companion object {

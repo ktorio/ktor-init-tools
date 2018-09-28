@@ -24,6 +24,7 @@ object BuildFiles : BuildInfoBlock() {
     override fun BlockBuilder.render(info: BuildInfo) {
         when (info.projectType) {
             ProjectType.Gradle -> BuildFilesGradle(kotlin = false).apply { render(info) }
+            ProjectType.GradleKotlinDsl -> BuildFilesGradle(kotlin = true).apply { render(info) }
             ProjectType.Maven -> BuildFilesMaven.apply { render(info) }
         }
 
