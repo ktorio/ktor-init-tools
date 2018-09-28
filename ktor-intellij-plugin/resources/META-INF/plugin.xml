@@ -18,6 +18,12 @@
 
             <h2>Changelog</h2>
 
+            <h3>0.2.4</h2>
+            <ul>
+                <li>Gradle Kotlin-DSL generation support.</li>
+                <li>Code Style improvements.</li>
+                <li>Internal refactorings.</li>
+            </ul>
             <h3>0.2.3</h2>
             <ul>
                 <li>Ktor: 0.9.5.</li>
