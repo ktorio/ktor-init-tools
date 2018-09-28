@@ -19,11 +19,9 @@ package io.ktor.start
 
 import io.ktor.start.util.*
 
-val KOTLIN_VERSION = "1.2.70"
-val KOTLINX_COROUTINES_VERSION_FOR_KTOR_V093 = "0.23.4"
+val KOTLIN_VERSION = "1.2.71"
 
 object Versions {
-    val V093 = SemVer("0.9.3")
     val V094 = SemVer("0.9.4")
     val V095 = SemVer("0.9.5")
     //val ALL = arrayOf(V092, V093)

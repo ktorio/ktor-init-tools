@@ -3,8 +3,6 @@ package io.ktor.start.swagger
 import io.ktor.start.*
 import io.ktor.start.features.server.*
 import io.ktor.start.project.*
-import io.ktor.start.swagger.SwaggerGeneratorInterface.renderResponse
-import io.ktor.start.swagger.SwaggerGeneratorInterface.routeBody
 import io.ktor.start.util.*
 
 object SwaggerGeneratorRaw : SwaggerGeneratorBase() {
@@ -32,6 +30,7 @@ object SwaggerGeneratorRaw : SwaggerGeneratorBase() {
             SEPARATOR {
                 +"package ${info.artifactGroup}"
             }
+
             SEPARATOR {
                 +"import io.ktor.application.*"
                 +"import io.ktor.response.*"
@@ -41,12 +40,14 @@ object SwaggerGeneratorRaw : SwaggerGeneratorBase() {
                 +"import io.ktor.auth.*"
                 +"import io.ktor.http.*"
             }
+
             SEPARATOR {
                 doc(title = model.info.title, description = model.info.description)
                 +"class ${model.info.classNameServer}(${arguments.decls})" {
                     val processedMethods = hashSetOf<SwaggerModel.PathMethodModel>()
                     for (tag in model.tags) {
                         SEPARATOR {
+                            doc(tag.tag)
                             +"fun Routing.${tag.registerMethodName}()" {
                                 for (route in model.routes.values) {
                                     for (method in route.methodsList) {
@@ -54,12 +55,14 @@ object SwaggerGeneratorRaw : SwaggerGeneratorBase() {
                                         if (method in processedMethods) continue // Already processed
                                         processedMethods += method
 
-                                        if (method.security.isNotEmpty()) {
-                                            +"authenticate(${method.security.joinToString(", ") { it.name.quote() }})" {
+                                        SEPARATOR {
+                                            if (method.security.isNotEmpty()) {
+                                                +"authenticate(${method.security.joinToString(", ") { it.name.quote() }})" {
+                                                    route(method, route)
+                                                }
+                                            } else {
                                                 route(method, route)
                                             }
-                                        } else {
-                                            route(method, route)
                                         }
                                     }
                                 }
@@ -100,10 +103,12 @@ object SwaggerGeneratorRaw : SwaggerGeneratorBase() {
                     +"val ${param.name} = $inAnnotation $default"
                 }
             }
-            val untyped = routeBody(method)
-            +"call.respond(${indentString(indentLevel) {
-                toKotlinDefault(method.responseType, untyped, typed = true)
-            }})"
+            SEPARATOR {
+                val untyped = routeBodyCheckParameters(method)
+                +"call.respond(${indentString(indentLevel) {
+                    toKotlinDefault(method.responseType, untyped, typed = true)
+                }})"
+            }
         }
     }
 

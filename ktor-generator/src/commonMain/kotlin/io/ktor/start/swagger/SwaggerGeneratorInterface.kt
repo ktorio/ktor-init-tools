@@ -117,7 +117,7 @@ object SwaggerGeneratorInterface : SwaggerGeneratorBase() {
                                 }
                                 +"): ${method.responseType.toKotlinType()} {"
                                 indent {
-                                    val untyped = routeBody(method)
+                                    val untyped = routeBodyCheckParameters(method)
                                     +"return ${indentString(indentLevel) {
                                         toKotlinDefault(method.responseType, untyped, typed = true)
                                     }}"

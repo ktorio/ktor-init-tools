@@ -5,7 +5,7 @@ import io.ktor.start.swagger.SwaggerGeneratorInterface.renderResponse
 import io.ktor.start.util.*
 
 open class SwaggerGeneratorBase {
-    fun Indenter.doc(title: String, description: String, params: Map<String, Any?> = mapOf(), retval: String? = null) {
+    fun Indenter.doc(title: String, description: String = "", params: Map<String, Any?> = mapOf(), retval: String? = null) {
         doc(buildList {
             add(title.stripLineBreaks())
             add("")
@@ -66,7 +66,7 @@ open class SwaggerGeneratorBase {
         }
     }
 
-    fun Indenter.routeBody(method: SwaggerModel.PathMethodModel): Any? {
+    fun Indenter.routeBodyCheckParameters(method: SwaggerModel.PathMethodModel): Any? {
         var retval: Any? = null
 
         SEPARATOR {
