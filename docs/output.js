@@ -34,6 +34,7 @@
   var toString = $module$ktor_generator.io.ktor.start.util.toString_ecs3bj$;
   var SwaggerModel = $module$ktor_generator.io.ktor.start.swagger.SwaggerModel;
   var Throwable = Error;
+  var SwaggerGenerator$Kind = $module$ktor_generator.io.ktor.start.swagger.SwaggerGenerator.Kind;
   var SwaggerGenerator = $module$ktor_generator.io.ktor.start.swagger.SwaggerGenerator;
   var ensureNotNull = Kotlin.ensureNotNull;
   var features = $module$ktor_generator.io.ktor.start.features;
@@ -715,7 +716,7 @@
       span.append(jQuery(str_1));
       span.on('click', updateSwaggerModels$lambda(model));
       placeholder.append(span);
-      placeholder.append(jQuery('<span>').text('Routes: ' + model.paths.size + ', Defs: ' + model.definitions.size + ', Auths: ' + model.securityDefinitions.size));
+      placeholder.append(jQuery('<span>').text('Routes: ' + model.routes.size + ', Defs: ' + model.definitions.size + ', Auths: ' + model.securityDefinitions.size));
     }
     var str_2 = '#add-swager-model';
     jQuery(str_2).css('display', swaggerModels.isEmpty() ? 'inline-block' : 'none');
@@ -725,7 +726,7 @@
     tmp$_0 = $receiver.iterator();
     while (tmp$_0.hasNext()) {
       var item = tmp$_0.next();
-      destination.add_11rb$(new SwaggerGenerator(item));
+      destination.add_11rb$(new SwaggerGenerator(item, SwaggerGenerator$Kind.RAW));
     }
     swaggerGenerators = destination;
     onHashUpdated(ensureNotNull(document.location).hash);
@@ -1153,7 +1154,7 @@
               println('DEPENDENCY: ' + dependency + ' :: include=' + toInclude);
             }
 
-            this.local$info = new BuildInfo(get_includeWrapper(), ProjectType.Companion.invoke_61zpoe$(this.local$projectType), new SemVer(ktorVersion), this.local$artifactName, this.local$artifactGroup, artifactVersion, KtorEngine.Companion.invoke_61zpoe$(this.local$ktorEngine), void 0, build$lambda);
+            this.local$info = new BuildInfo(get_includeWrapper(), ProjectType.Companion.invoke_61zpoe$(this.local$projectType), new SemVer(ktorVersion), this.local$artifactName, this.local$artifactGroup, artifactVersion, KtorEngine.Companion.invoke_61zpoe$(this.local$ktorEngine), void 0, void 0, build$lambda);
             this.exceptionState_0 = 2;
             this.local$zb = new ZipBuilder_init();
             var tmp$_1;
@@ -1588,3 +1589,5 @@
   Kotlin.defineModule('output', _);
   return _;
 }));
+
+//# sourceMappingURL=output.js.map

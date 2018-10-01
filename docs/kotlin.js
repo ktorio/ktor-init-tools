@@ -21518,7 +21518,7 @@
         if (startIndex === void 0)
           startIndex = 0;
         if (endIndex === void 0)
-          endIndex = -1;
+          endIndex = $receiver.size;
         var destination_0 = destination.storage;
         arrayCopy($receiver.storage, destination_0, destinationOffset, startIndex, endIndex);
         return new UIntArray_init(destination_0);
@@ -21533,7 +21533,7 @@
         if (startIndex === void 0)
           startIndex = 0;
         if (endIndex === void 0)
-          endIndex = -1;
+          endIndex = $receiver.size;
         var destination_0 = destination.storage;
         arrayCopy($receiver.storage, destination_0, destinationOffset, startIndex, endIndex);
         return new ULongArray_init(destination_0);
@@ -21548,7 +21548,7 @@
         if (startIndex === void 0)
           startIndex = 0;
         if (endIndex === void 0)
-          endIndex = -1;
+          endIndex = $receiver.size;
         var destination_0 = destination.storage;
         arrayCopy($receiver.storage, destination_0, destinationOffset, startIndex, endIndex);
         return new UByteArray_init(destination_0);
@@ -21563,7 +21563,7 @@
         if (startIndex === void 0)
           startIndex = 0;
         if (endIndex === void 0)
-          endIndex = -1;
+          endIndex = $receiver.size;
         var destination_0 = destination.storage;
         arrayCopy($receiver.storage, destination_0, destinationOffset, startIndex, endIndex);
         return new UShortArray_init(destination_0);
@@ -23856,7 +23856,7 @@
         if (startIndex === void 0)
           startIndex = 0;
         if (endIndex === void 0)
-          endIndex = -1;
+          endIndex = $receiver.length;
         arrayCopy($receiver, destination, destinationOffset, startIndex, endIndex);
         return destination;
       };
@@ -23869,7 +23869,7 @@
         if (startIndex === void 0)
           startIndex = 0;
         if (endIndex === void 0)
-          endIndex = -1;
+          endIndex = $receiver.length;
         arrayCopy($receiver, destination, destinationOffset, startIndex, endIndex);
         return destination;
       };
@@ -23882,7 +23882,7 @@
         if (startIndex === void 0)
           startIndex = 0;
         if (endIndex === void 0)
-          endIndex = -1;
+          endIndex = $receiver.length;
         arrayCopy($receiver, destination, destinationOffset, startIndex, endIndex);
         return destination;
       };
@@ -23895,7 +23895,7 @@
         if (startIndex === void 0)
           startIndex = 0;
         if (endIndex === void 0)
-          endIndex = -1;
+          endIndex = $receiver.length;
         arrayCopy($receiver, destination, destinationOffset, startIndex, endIndex);
         return destination;
       };
@@ -23908,7 +23908,7 @@
         if (startIndex === void 0)
           startIndex = 0;
         if (endIndex === void 0)
-          endIndex = -1;
+          endIndex = $receiver.length;
         arrayCopy($receiver, destination, destinationOffset, startIndex, endIndex);
         return destination;
       };
@@ -23921,7 +23921,7 @@
         if (startIndex === void 0)
           startIndex = 0;
         if (endIndex === void 0)
-          endIndex = -1;
+          endIndex = $receiver.length;
         arrayCopy($receiver, destination, destinationOffset, startIndex, endIndex);
         return destination;
       };
@@ -23934,7 +23934,7 @@
         if (startIndex === void 0)
           startIndex = 0;
         if (endIndex === void 0)
-          endIndex = -1;
+          endIndex = $receiver.length;
         arrayCopy($receiver, destination, destinationOffset, startIndex, endIndex);
         return destination;
       };
@@ -23947,7 +23947,7 @@
         if (startIndex === void 0)
           startIndex = 0;
         if (endIndex === void 0)
-          endIndex = -1;
+          endIndex = $receiver.length;
         arrayCopy($receiver, destination, destinationOffset, startIndex, endIndex);
         return destination;
       };
@@ -23960,7 +23960,7 @@
         if (startIndex === void 0)
           startIndex = 0;
         if (endIndex === void 0)
-          endIndex = -1;
+          endIndex = $receiver.length;
         arrayCopy($receiver, destination, destinationOffset, startIndex, endIndex);
         return destination;
       };
@@ -25021,12 +25021,11 @@
       return Kotlin.newArray(size, null);
     }
     function arrayCopy(source, destination, destinationOffset, startIndex, endIndex) {
-      var endIndex_0 = endIndex === -1 ? source.length : endIndex;
-      AbstractList$Companion_getInstance().checkRangeIndexes_cub51b$(startIndex, endIndex_0, source.length);
-      var rangeSize = endIndex_0 - startIndex | 0;
+      AbstractList$Companion_getInstance().checkRangeIndexes_cub51b$(startIndex, endIndex, source.length);
+      var rangeSize = endIndex - startIndex | 0;
       AbstractList$Companion_getInstance().checkRangeIndexes_cub51b$(destinationOffset, destinationOffset + rangeSize | 0, destination.length);
       if (ArrayBuffer.isView(destination) && ArrayBuffer.isView(source)) {
-        var subrange = source.subarray(startIndex, endIndex_0);
+        var subrange = source.subarray(startIndex, endIndex);
         destination.set(subrange, destinationOffset);
       }
        else {

@@ -105,13 +105,13 @@ fun updateSwaggerModels() {
             updateSwaggerModels()
         }
         placeholder.append(span)
-        placeholder.append(jq("<span>").text("Routes: ${model.paths.size}, Defs: ${model.definitions.size}, Auths: ${model.securityDefinitions.size}"))
+        placeholder.append(jq("<span>").text("Routes: ${model.routes.size}, Defs: ${model.definitions.size}, Auths: ${model.securityDefinitions.size}"))
     }
 
     // Allow only one swagger model
     jq("#add-swager-model").css("display", if (swaggerModels.isEmpty()) "inline-block" else "none")
 
-    swaggerGenerators = swaggerModels.map { SwaggerGenerator(it, info.swaggerGenKind) }
+    swaggerGenerators = swaggerModels.map { SwaggerGenerator(it, SwaggerGenerator.Kind.RAW) }
     onHashUpdated(document.location!!.hash)
 }
 
