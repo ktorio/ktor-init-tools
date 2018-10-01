@@ -67,6 +67,7 @@ class KtorModuleBuilder : JavaModuleBuilder() {
                 artifactGroup = config.artifactGroup,
                 artifactVersion = config.artifactVersion,
                 ktorEngine = config.engine,
+                swaggerGenKind = config.swaggerGenKind,
                 fetch = {
                     val url =
                         KtorModuleType::class.java.getResourceAsStream(it)
@@ -78,7 +79,7 @@ class KtorModuleBuilder : JavaModuleBuilder() {
             )
 
             runBlocking {
-                val blocks = listOf(ApplicationKt) + config.featuresToInstall + config.swaggerModules.map { SwaggerGenerator(it, SwaggerGenerator.Kind.INTERFACE) }
+                val blocks = listOf(ApplicationKt) + config.featuresToInstall + config.swaggerModules.map { SwaggerGenerator(it, config.swaggerGenKind) }
                 for ((_, content) in generate(info, blocks)) {
                     root.createFile(content.name, content.data)
                 }

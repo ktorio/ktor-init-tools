@@ -30,4 +30,5 @@ class KtorModuleConfig {
     var wrapper = true
     var engine = KtorEngine.Netty
     var swaggerModules = listOf<SwaggerModel>()
+    var swaggerGenKind: SwaggerGenerator.Kind = SwaggerGenerator.Kind.RAW
 }

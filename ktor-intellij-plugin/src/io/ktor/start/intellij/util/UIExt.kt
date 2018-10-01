@@ -125,3 +125,5 @@ enum class TdSize(val value: Int) {
     CAN_SHRINK_GROW(GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_SHRINK),
     WANT_GROW(GridConstraints.SIZEPOLICY_WANT_GROW),
 }
+
+val <T> JComboBox<T>.items get() = (0 until this.itemCount).map { getItemAt(it) }
