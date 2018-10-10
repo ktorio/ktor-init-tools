@@ -46,7 +46,7 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
 
     lateinit var projectTypeCB: JComboBox<ProjectType>
     lateinit var engineCB: JComboBox<KtorEngine>
-    lateinit var versionCB: JComboBox<SemVer>
+    lateinit var versionCB: JComboBox<KtorVersion>
     lateinit var wrapperCheckBox: JCheckBox
     lateinit var featureServerList: FeatureCheckboxList
     lateinit var featureClientList: FeatureCheckboxList

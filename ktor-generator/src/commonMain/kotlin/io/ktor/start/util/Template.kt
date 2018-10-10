@@ -17,11 +17,11 @@
 
 package io.ktor.start.util
 
-suspend fun <TSubject : Any> generate(subject: TSubject, blocks: Iterable<Block<TSubject>>) = generate(subject, *(blocks.toList().toTypedArray()))
+suspend fun <TSubject : Any> generate(subject: TSubject, blocks: Iterable<Block<TSubject>>, config: BlockBuilder.Config? = null) = generate(subject, *(blocks.toList().toTypedArray()), config = config)
 
-suspend fun <TSubject : Any> generate(subject: TSubject, vararg blocks: Block<TSubject>): Map<String, FileResult> {
+suspend fun <TSubject : Any> generate(subject: TSubject, vararg blocks: Block<TSubject>, config: BlockBuilder.Config? = null): Map<String, FileResult> {
     val out = LinkedHashMap<String, FileResult>()
-    val bb = BlockBuilder(subject)
+    val bb = BlockBuilder(subject, config ?: (subject as? BlockBuilder.Config) ?: BlockBuilder.Config())
     for (block in blocks) bb.visit(block)
     for ((file, gen) in bb.files) {
         out[file] = gen()
@@ -65,9 +65,15 @@ class FileResult(
     override fun toString(): String = "FileResult($name, ${if (charset != null) string else "binary(${data.size})"})"
 }
 
-open class BlockBuilder(val subject: Any) : Extra by Extra.Mixin() {
+open class BlockBuilder(val subject: Any, val config: Config) : Extra by Extra.Mixin() {
     val blockInstances = LinkedHashMap<BlockSlot<*>, SlotInstance<*>>()
     val files = LinkedHashMap<String, suspend () -> FileResult>()
+
+    open class Config {
+        open fun transform(data: ByteArray, charset: Charset?): ByteArray {
+            return data
+        }
+    }
 
     fun <TSubject> getSlotInstance(slot: BlockSlot<TSubject>): SlotInstance<TSubject> {
         @Suppress("UNCHECKED_CAST")
@@ -127,7 +133,7 @@ open class BlockBuilder(val subject: Any) : Extra by Extra.Mixin() {
 
     fun fileBinary(name: String, charset: Charset? = null, mode: Int = "644".toInt(8), callback: suspend () -> ByteArray) {
         files[name] = {
-            FileResult(name, callback(), mode, charset = charset)
+            FileResult(name, config.transform(callback(), charset), mode, charset = charset)
         }
     }
 

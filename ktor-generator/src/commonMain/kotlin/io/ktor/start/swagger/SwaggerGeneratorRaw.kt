@@ -10,8 +10,7 @@ object SwaggerGeneratorRaw : SwaggerGeneratorBase() {
 
     fun BlockBuilder.registerRoutes(info: BuildInfo, model: SwaggerModel, arguments: SwaggerArguments) {
         addImport("io.ktor.swagger.experimental.*")
-        //fileBinary("src/io/ktor/swagger/experimental/SwaggerUtilsRaw.kt") { info.fetch("swagger/SwaggerUtilsRaw.kt.txt") }
-        fileBinary("src/io/ktor/swagger/experimental/SwaggerUtils.kt") { info.fetch("swagger/SwaggerUtils.kt.txt") }
+        addSwaggerUtils(info)
         addRoute {
             +"${model.info.classNameServer}(${arguments.instances}).apply" {
                 for (tag in model.tags) {

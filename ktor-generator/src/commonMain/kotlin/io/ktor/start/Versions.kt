@@ -19,13 +19,24 @@ package io.ktor.start
 
 import io.ktor.start.util.*
 
-val KOTLIN_VERSION = "1.2.71"
-
 object Versions {
-    val V094 = SemVer("0.9.4")
-    val V095 = SemVer("0.9.5")
+    val V094 = KtorVersion(version = "0.9.4", kotlinVersion = "1.2.61")
+    val V095 = KtorVersion(version = "0.9.5", kotlinVersion = "1.2.70")
+    val V100_alpha_1 = KtorVersion(version = "1.0.0-alpha-1", kotlinVersion = "1.3.0-rc-131", extraRepos = listOf("https://kotlin.bintray.com/kotlin-eap"))
     //val ALL = arrayOf(V092, V093)
     //val ALL = arrayOf(V094, V093) // @TODO: Not possible until `Feature.since` is taken into account in the feature selector
-    val ALL = arrayOf(V094, V095)
+    val ALL = arrayOf(V094, V100_alpha_1, V095)
     val LAST = V095
+}
+
+data class KtorVersion(
+    val version: String,
+    val kotlinVersion: String,
+    val extraRepos: List<String> = listOf()
+) : Comparable<KtorVersion>  {
+    val semVersion = SemVer(version)
+    val semKotlinVersion = SemVer(kotlinVersion)
+
+    override fun compareTo(other: KtorVersion): Int = this.semVersion.compareTo(other.semVersion)
+    override fun toString(): String = semVersion.toString()
 }

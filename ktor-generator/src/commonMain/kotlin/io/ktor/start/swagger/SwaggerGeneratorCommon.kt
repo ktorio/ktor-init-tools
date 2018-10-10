@@ -10,7 +10,6 @@ import io.ktor.start.util.*
 
 object SwaggerGeneratorCommon {
 
-
     fun BlockBuilder.generateJwt(model: SwaggerModel): List<SwaggerArgument> = buildList {
         addImport("io.ktor.auth.*")
         addImport("io.ktor.auth.jwt.*")

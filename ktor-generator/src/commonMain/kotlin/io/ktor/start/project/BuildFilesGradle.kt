@@ -28,6 +28,7 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                 +"$key=$value"
             }
         }
+
         if (kotlin) {
             fileText("build.gradle.kts") {
                 +"import org.jetbrains.kotlin.gradle.dsl.Coroutines"
@@ -40,7 +41,7 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                 +""
                 +"plugins" {
                     +"application"
-                    +"kotlin(\"jvm\") version \"$KOTLIN_VERSION\""
+                    +"kotlin(\"jvm\") version \"${info.kotlinVersion}\""
                 }
                 +""
                 +"group = \"${info.artifactName}\""
@@ -51,12 +52,8 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                 }
                 +""
                 +"repositories" {
-                    for (repo in reposToInclude) {
-                        when (repo) {
-                            "local" -> +"mavenLocal()"
-                            "jcenter" -> +"jcenter()"
-                            else -> +"maven { url = uri(\"$repo\") }"
-                        }
+                    for (repo in getAllReposToInclude(info)) {
+                        +genMavenRepoKotlin(repo)
                     }
                 }
                 +""
@@ -85,7 +82,9 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
             fileText("build.gradle") {
                 "buildscript" {
                     "repositories" {
-                        +"jcenter()"
+                        for (repo in setOf("jcenter") + info.ktorVer.extraRepos.toSet()) {
+                            +genMavenRepoGroovy(repo)
+                        }
                     }
                     +""
                     "dependencies" {
@@ -109,12 +108,8 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                 }
                 +""
                 "repositories" {
-                    for (repo in reposToInclude) {
-                        when (repo) {
-                            "local" -> +"mavenLocal()"
-                            "jcenter" -> +"jcenter()"
-                            else -> +"maven { url '$repo' }"
-                        }
+                    for (repo in getAllReposToInclude(info)) {
+                        +genMavenRepoGroovy(repo)
                     }
                 }
                 +""
@@ -150,5 +145,17 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                 }
             }
         }
+    }
+
+    private fun genMavenRepoKotlin(repo: String): String = when (repo) {
+        "local" -> "mavenLocal()"
+        "jcenter" -> "jcenter()"
+        else -> "maven { url = uri(\"$repo\") }"
+    }
+
+    private fun genMavenRepoGroovy(repo: String): String =  when (repo) {
+        "local" -> "mavenLocal()"
+        "jcenter" -> "jcenter()"
+        else -> "maven { url '$repo' }"
     }
 }

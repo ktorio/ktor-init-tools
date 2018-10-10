@@ -6,7 +6,7 @@ object Properties {
     fun getProperties(info: BuildInfo): Map<String, String> {
         return HashMap<String, String>().apply {
             this["kotlin.code.style"] = "official"
-            this["kotlin_version"] = KOTLIN_VERSION
+            this["kotlin_version"] = info.kotlinVersion.toString()
             this["ktor_version"] = info.ktorVersion.toString()
             this["logback_version"] = "1.2.1"
         }

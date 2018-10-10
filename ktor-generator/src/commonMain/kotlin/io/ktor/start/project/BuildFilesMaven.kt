@@ -43,7 +43,7 @@ internal object BuildFilesMaven : BuildInfoBlock() {
                     }
                     "<repositories>" {
                         linedeferred {
-                            repos@for ((index, repo) in reposToInclude.withIndex()) {
+                            repos@for ((index, repo) in getAllReposToInclude(info).withIndex()) {
                                 val repoUrl = when (repo) {
                                     "local" -> continue@repos // Skip local since it is already included
                                     "jcenter" -> "https://jcenter.bintray.com"

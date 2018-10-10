@@ -5,6 +5,10 @@ import io.ktor.start.swagger.SwaggerGeneratorInterface.renderResponse
 import io.ktor.start.util.*
 
 open class SwaggerGeneratorBase {
+    fun BlockBuilder.addSwaggerUtils(info: BuildInfo) {
+        fileBinary("src/io/ktor/swagger/experimental/SwaggerUtils.kt", charset = UTF8) { info.fetch("swagger/SwaggerUtils.kt.txt") }
+    }
+
     fun Indenter.doc(title: String, description: String = "", params: Map<String, Any?> = mapOf(), retval: String? = null) {
         doc(buildList {
             add(title.stripLineBreaks())
