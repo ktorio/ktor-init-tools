@@ -29,6 +29,8 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
             }
         }
 
+        val is100OrGreater = info.ktorVersion.semVersion >= SemVer("1.0.0")
+
         if (kotlin) {
             fileText("build.gradle.kts") {
                 +"import org.jetbrains.kotlin.gradle.dsl.Coroutines"
@@ -70,13 +72,27 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                 }
                 +""
                 +"kotlin.experimental.coroutines = Coroutines.ENABLE"
-                +""
-                +"sourceSets[\"main\"].resources.srcDirs(\"resources\")"
-                +"sourceSets[\"test\"].resources.srcDirs(\"testresources\")"
+                if (!is100OrGreater) {
+                    +""
+                    +"sourceSets[\"main\"].resources.srcDirs(\"resources\")"
+                    +"sourceSets[\"test\"].resources.srcDirs(\"testresources\")"
+                }
                 +""
                 +"kotlin.sourceSets[\"main\"].kotlin.srcDirs(\"src\")"
                 +"kotlin.sourceSets[\"test\"].kotlin.srcDirs(\"test\")"
-
+            }
+            fileText("settings.gradle.kts") {
+                if (is100OrGreater) {
+                    +"pluginManagement" {
+                        +"repositories" {
+                            +"mavenCentral()"
+                            +"maven { url = uri(\"https://kotlin.bintray.com/kotlin-eap\") }"
+                            +"maven { url = uri(\"https://plugins.gradle.org/m2/\") }"
+                        }
+                    }
+                    +""
+                }
+                +"rootProject.name = \"${info.artifactName}\""
             }
         } else {
             fileText("build.gradle") {
@@ -127,9 +143,9 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                 +""
                 +"kotlin.experimental.coroutines = 'enable'"
             }
-        }
-        fileText(if (kotlin) "settings.gradle.kts" else "settings.gradle") {
-            +"rootProject.name = \"${info.artifactName}\""
+            fileText("settings.gradle") {
+                +"rootProject.name = \"${info.artifactName}\""
+            }
         }
         if (info.includeWrapper) {
             fileBinary("gradlew", mode = "755".toInt(8)) { info.fetch("gradle/gradlew") }

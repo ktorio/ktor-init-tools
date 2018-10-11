@@ -19,6 +19,30 @@ class IntegrationTests {
     @JvmField
     var testProjectDir = TemporaryFolder()
 
+    fun getResourceString(name: String): String = getResourceBytes(name).toString(UTF8)
+
+    fun getResourceBytes(name: String): ByteArray {
+        val loaders = listOf(
+            RoutingFeature::class.java.classLoader,
+            GenerationTest::class.java.classLoader,
+            ClassLoader.getSystemClassLoader()
+        )
+        val url = loaders.mapNotNull { it.getResource(name) ?: it.getResource("/$name") }.firstOrNull()
+
+        val bytesUrl = url?.readBytes()
+        if (bytesUrl != null) {
+            return bytesUrl
+        }
+
+        for (folder in listOf("../common/resources", "src/commonMain/resources", "src/jvmTest/resources")) {
+            val file = File(File(folder), name)
+            val bytes = file.takeIf { it.exists() }?.readBytes() ?: continue
+            return bytes
+        }
+
+        error("Can't find resource '$name' cwd=${File(".").absolutePath}")
+    }
+
     val info = BuildInfo(
         includeWrapper = false,
         projectType = ProjectType.Gradle,
@@ -27,16 +51,7 @@ class IntegrationTests {
         artifactGroup = "com.example",
         artifactVersion = "0.1.0-SNAPSHOT",
         ktorEngine = KtorEngine.Netty,
-        fetch = { name ->
-            val loaders = listOf(
-                RoutingFeature::class.java.classLoader,
-                GenerationTest::class.java.classLoader,
-                ClassLoader.getSystemClassLoader()
-            )
-            val url = loaders.mapNotNull { it.getResource(name) ?: it.getResource("/$name") }.firstOrNull()
-            val file = File(File("../common/resources"), name)
-            url?.readBytes() ?: file.takeIf { it.exists() }?.readBytes() ?: error("Can't find resource '$name'")
-        }
+        fetch = { getResourceBytes(it) }
     )
 
     /**
@@ -83,11 +98,13 @@ class IntegrationTests {
         val testProjectRoot = testProjectDir.root
         //val testProjectRoot = File("/tmp/swagger-gen")
 
+        val model = SwaggerModel.parseJson(getResourceString("/swagger.json")!!)
+        val info = info
+        val features = SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE)
+
         runBlocking {
-            val model = SwaggerModel.parseJson(getResourceString("/swagger.json")!!)
             try {
-                generate(info, SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE))
-                    .writeToFolder(testProjectRoot)
+                generate(info, features).writeToFolder(testProjectRoot)
 
                 val result = org.gradle.testkit.runner.GradleRunner.create()
                     .withProjectDir(testProjectRoot)
@@ -101,10 +118,66 @@ class IntegrationTests {
                     .build()
             } catch (e: Throwable) {
                 val folder = File(System.getProperty("java.io.tmpdir") + "/swagger-project")
-                println("Writting problematic project to '$folder'")
+                println("Writing problematic project to '$folder'")
                 try {
-                    generate(info, SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE))
+                    generate(info, features)
                         .writeToFolder(folder)
+                } catch (e: Throwable) {
+                    e.printStackTrace()
+                }
+
+                throw e
+            }
+            //println("RESULT: ${result.tasks.joinToString(", ") { it.path }}")
+        }
+    }
+
+    @Test
+    fun testNormalGradleGenerationBeta() {
+        val testProjectRoot = testProjectDir.root
+        //val testProjectRoot = File("/tmp/normal-gradle")
+
+        runBlocking {
+            generate(info.copy(ktorVersion = Versions.LAST_BETA), ALL_FEATURES)
+                .writeToFolder(testProjectRoot, print = true)
+
+            org.gradle.testkit.runner.GradleRunner.create()
+                .withProjectDir(testProjectRoot)
+                .withGradleVersion(GRADLE_VERSION)
+                .withArguments("check")
+                .forwardOutput()
+                .build()
+        }
+    }
+
+    @Test
+    fun testBetaWithAllFeaturesSwaggerAndKotlinDsl() {
+        val testProjectRoot = testProjectDir.root
+        //val testProjectRoot = File("/tmp/swagger-gen")
+
+        val model = SwaggerModel.parseJson(getResourceString("/swagger.json")!!)
+        val info = info.copy(projectType = ProjectType.GradleKotlinDsl, ktorVersion = Versions.LAST_BETA)
+        val features = ALL_FEATURES + SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE)
+
+        runBlocking {
+            try {
+                generate(info, features).writeToFolder(testProjectRoot)
+
+                val result = org.gradle.testkit.runner.GradleRunner.create()
+                    .withProjectDir(testProjectRoot)
+                    //.withArguments("check") // Test should fail, but the code should be valid
+                    .withGradleVersion(GRADLE_VERSION)
+                    .withArguments(
+                        //"-i",
+                        "compileTestKotlin"
+                    )
+                    .forwardOutput()
+                    .build()
+            } catch (e: Throwable) {
+                val folder = File(System.getProperty("java.io.tmpdir") + "/swagger-project")
+                println("Writing problematic project to '$folder'")
+                try {
+                    generate(info, features).writeToFolder(folder)
                 } catch (e: Throwable) {
                     e.printStackTrace()
                 }

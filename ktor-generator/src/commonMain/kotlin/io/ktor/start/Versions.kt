@@ -27,6 +27,7 @@ object Versions {
     //val ALL = arrayOf(V094, V093) // @TODO: Not possible until `Feature.since` is taken into account in the feature selector
     val ALL = arrayOf(V094, V100_alpha_1, V095)
     val LAST = V095
+    val LAST_BETA = V100_alpha_1
 }
 
 data class KtorVersion(
