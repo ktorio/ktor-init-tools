@@ -62,8 +62,11 @@ class IntegrationTests {
         val testProjectRoot = testProjectDir.root
         //val testProjectRoot = File("/tmp/normal-gradle")
 
-        runBlocking {
-            generate(info, ALL_FEATURES)
+        val info = info
+        val features = ALL_FEATURES
+
+        runGenerationTestBlocking(info, features) {
+            generate(info, features)
                 .writeToFolder(testProjectRoot, print = true)
 
             org.gradle.testkit.runner.GradleRunner.create()
@@ -80,8 +83,11 @@ class IntegrationTests {
         val testProjectRoot = testProjectDir.root
         //val testProjectRoot = File("/tmp/normal-gradle")
 
-        runBlocking {
-            generate(info.copy(projectType = ProjectType.GradleKotlinDsl), ALL_FEATURES)
+        val info = info.copy(projectType = ProjectType.GradleKotlinDsl)
+        val features = ALL_FEATURES
+
+        runGenerationTestBlocking(info, features) {
+            generate(info, features)
                 .writeToFolder(testProjectRoot, print = true)
 
             org.gradle.testkit.runner.GradleRunner.create()
@@ -100,35 +106,21 @@ class IntegrationTests {
 
         val model = SwaggerModel.parseJson(getResourceString("/swagger.json")!!)
         val info = info
-        val features = SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE)
+        val features = listOf(SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE))
 
-        runBlocking {
-            try {
-                generate(info, features).writeToFolder(testProjectRoot)
+        runGenerationTestBlocking(info, features) {
+            generate(info, features).writeToFolder(testProjectRoot)
 
-                val result = org.gradle.testkit.runner.GradleRunner.create()
-                    .withProjectDir(testProjectRoot)
-                    //.withArguments("check") // Test should fail, but the code should be valid
-                    .withGradleVersion(GRADLE_VERSION)
-                    .withArguments(
-                        //"-i",
-                        "compileTestKotlin"
-                    )
-                    .forwardOutput()
-                    .build()
-            } catch (e: Throwable) {
-                val folder = File(System.getProperty("java.io.tmpdir") + "/swagger-project")
-                println("Writing problematic project to '$folder'")
-                try {
-                    generate(info, features)
-                        .writeToFolder(folder)
-                } catch (e: Throwable) {
-                    e.printStackTrace()
-                }
-
-                throw e
-            }
-            //println("RESULT: ${result.tasks.joinToString(", ") { it.path }}")
+            val result = org.gradle.testkit.runner.GradleRunner.create()
+                .withProjectDir(testProjectRoot)
+                //.withArguments("check") // Test should fail, but the code should be valid
+                .withGradleVersion(GRADLE_VERSION)
+                .withArguments(
+                    //"-i",
+                    "compileTestKotlin"
+                )
+                .forwardOutput()
+                .build()
         }
     }
 
@@ -137,8 +129,11 @@ class IntegrationTests {
         val testProjectRoot = testProjectDir.root
         //val testProjectRoot = File("/tmp/normal-gradle")
 
-        runBlocking {
-            generate(info.copy(ktorVersion = Versions.LAST_BETA), ALL_FEATURES)
+        val info = info.copy(ktorVersion = Versions.LAST_BETA)
+        val features = ALL_FEATURES
+
+        runGenerationTestBlocking(info, features) {
+            generate(info, features)
                 .writeToFolder(testProjectRoot, print = true)
 
             org.gradle.testkit.runner.GradleRunner.create()
@@ -159,20 +154,26 @@ class IntegrationTests {
         val info = info.copy(projectType = ProjectType.GradleKotlinDsl, ktorVersion = Versions.LAST_BETA)
         val features = ALL_FEATURES + SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE)
 
+        runGenerationTestBlocking(info, features) {
+            generate(info, features).writeToFolder(testProjectRoot)
+
+            val result = org.gradle.testkit.runner.GradleRunner.create()
+                .withProjectDir(testProjectRoot)
+                //.withArguments("check") // Test should fail, but the code should be valid
+                .withGradleVersion(GRADLE_VERSION)
+                .withArguments(
+                    //"-i",
+                    "compileTestKotlin"
+                )
+                .forwardOutput()
+                .build()
+        }
+    }
+
+    private fun runGenerationTestBlocking(info: BuildInfo, features: Iterable<BuildInfoBlock>, callback: suspend () -> Unit) {
         runBlocking {
             try {
-                generate(info, features).writeToFolder(testProjectRoot)
-
-                val result = org.gradle.testkit.runner.GradleRunner.create()
-                    .withProjectDir(testProjectRoot)
-                    //.withArguments("check") // Test should fail, but the code should be valid
-                    .withGradleVersion(GRADLE_VERSION)
-                    .withArguments(
-                        //"-i",
-                        "compileTestKotlin"
-                    )
-                    .forwardOutput()
-                    .build()
+                callback()
             } catch (e: Throwable) {
                 val folder = File(System.getProperty("java.io.tmpdir") + "/swagger-project")
                 println("Writing problematic project to '$folder'")
@@ -184,7 +185,6 @@ class IntegrationTests {
 
                 throw e
             }
-            //println("RESULT: ${result.tasks.joinToString(", ") { it.path }}")
         }
     }
 }
