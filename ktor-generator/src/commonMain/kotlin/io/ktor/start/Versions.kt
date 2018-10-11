@@ -28,6 +28,10 @@ object Versions {
     val ALL = arrayOf(V094, V100_alpha_1, V095)
     val LAST = V095
     val LAST_BETA = V100_alpha_1
+
+    private val VMAP = ALL.associate { it.version to it }
+
+    fun fromString(version: String): KtorVersion? = VMAP[version]
 }
 
 data class KtorVersion(

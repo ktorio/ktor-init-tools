@@ -318,7 +318,7 @@ suspend fun build(dev: Boolean) {
     val info = BuildInfo(
         includeWrapper = includeWrapper,
         projectType = ProjectType(projectType),
-        ktorVersion = SemVer(ktorVersion),
+        ktorVersion = Versions.fromString(ktorVersion) ?: Versions.LAST,
         artifactName = artifactName,
         artifactGroup = artifactGroup,
         artifactVersion = artifactVersion,

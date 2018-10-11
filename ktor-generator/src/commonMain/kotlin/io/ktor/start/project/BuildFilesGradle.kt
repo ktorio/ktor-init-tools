@@ -29,7 +29,8 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
             }
         }
 
-        val is100OrGreater = info.ktorVersion.semVersion >= SemVer("1.0.0")
+        val is100OrGreater = info.is100OrGreater
+        val experimentalCorroutines = !info.is100OrGreater
 
         if (kotlin) {
             fileText("build.gradle.kts") {
@@ -70,8 +71,10 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                         }
                     }
                 }
-                +""
-                +"kotlin.experimental.coroutines = Coroutines.ENABLE"
+                if (experimentalCorroutines) {
+                    +""
+                    +"kotlin.experimental.coroutines = Coroutines.ENABLE"
+                }
                 if (!is100OrGreater) {
                     +""
                     +"sourceSets[\"main\"].resources.srcDirs(\"resources\")"
@@ -140,8 +143,10 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                         }
                     }
                 }
-                +""
-                +"kotlin.experimental.coroutines = 'enable'"
+                if (experimentalCorroutines) {
+                    +""
+                    +"kotlin.experimental.coroutines = 'enable'"
+                }
             }
             fileText("settings.gradle") {
                 +"rootProject.name = \"${info.artifactName}\""
