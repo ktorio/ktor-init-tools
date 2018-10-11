@@ -178,13 +178,13 @@ fun updateHash() {
     for (dep in ALL_FEATURES) {
         if (jq("#artifact-${dep.id}").checked) dependency += dep.id
     }
-    val ktorEngine = jq("#ktor-engine").`val`()
+    val ktorEngine = jq("#ktor-engine").`val`() ?: defaultKtorEngine
     if (ktorEngine != defaultKtorEngine) items["ktor-engine"] = arrayListOf(ktorEngine)
 
-    val ktorVersion = jq("#ktor-version").`val`()
+    val ktorVersion = jq("#ktor-version").`val`() ?: defaultKtorVersion
     if (ktorVersion != defaultKtorVersion) items["ktor-version"] = arrayListOf(ktorVersion)
 
-    val projectType = jq("#project-type").`val`()
+    val projectType = jq("#project-type").`val`() ?: ProjectType.Gradle
     if (projectType != "gradle") items["project-type"] = arrayListOf(projectType)
 
     for ((key, default) in listOf(

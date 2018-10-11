@@ -18,6 +18,10 @@
 
             <h2>Changelog</h2>
 
+            <h3>0.3.1</h2>
+            <ul>
+                <li>Ktor 1.0.0-alpha-2 support.</li>
+            </ul>
             <h3>0.3.0</h2>
             <ul>
                 <li>Code Style improvements.</li>

@@ -1,7 +1,6 @@
 package io.ktor.start.swagger
 
 import io.ktor.start.*
-import io.ktor.start.features.server.*
 import io.ktor.start.util.*
 import kotlinx.coroutines.*
 import java.io.*
@@ -17,7 +16,7 @@ object GenerationSpike {
             val model = SwaggerModel.parseJson(swaggerJson)
             generate(info.copy(
                 //ktorVersion = Versions.LAST
-                ktorVersion = Versions.V100_alpha_1
+                ktorVersion = Versions.V100_alpha_2
             ), SwaggerGenerator(model, info.swaggerGenKind)).writeToFolder(testProjectRoot)
             //println("RESULT: ${result.tasks.joinToString(", ") { it.path }}")
         }
