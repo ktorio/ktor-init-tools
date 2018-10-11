@@ -53,7 +53,7 @@ object RawSocketsTlsFeature : ServerFeature(ApplicationKt, RawSocketsFeature) {
                     +"fun main(args: Array<String>)" {
                         +"runBlocking" {
                             +"val selectorManager = ActorSelectorManager(ioCoroutineDispatcher)"
-                            +"val socket = aSocket(selectorManager).tcp().connect(\"www.google.com\", port = 443).tls()"
+                            +"val socket = aSocket(selectorManager).tcp().connect(\"www.google.com\", port = 443).tls(coroutineContext = coroutineContext)"
                             +"val write = socket.openWriteChannel()"
                             +"val LINE = \"\\r\\n\""
                             +"write.writeStringUtf8(\"GET / HTTP/1.1\${LINE}Host: www.google.com\${LINE}Connection: close\${LINE}\${LINE}\")"

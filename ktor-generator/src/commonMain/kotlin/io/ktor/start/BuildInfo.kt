@@ -38,10 +38,12 @@ data class BuildInfo(
     val developmentEngineFQ = "$developmentPackage.DevelopmentEngine"
     val kotlinVersion get() = ktorVersion.semKotlinVersion
 
+    val is100OrGreater = ktorVersion.semVersion >= SemVer("1.0.0")
+
     override fun transform(data: ByteArray, charset: Charset?): ByteArray {
         if (charset == null) return data
         val content = data.toString(charset)
-        return if (ktorVersion.semVersion >= SemVer("1.0.0")) {
+        return if (is100OrGreater) {
             content
                 .replace("kotlin.coroutines.experimental.", "kotlin.coroutines.")
                 .replace("kotlinx.coroutines.experimental.", "kotlinx.coroutines.")

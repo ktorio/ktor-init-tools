@@ -116,7 +116,8 @@ object RawSocketsFeature : ServerFeature(ApplicationKt) {
                                 +"private fun InputStream.lines() = Scanner(this).lines()"
                             }
                             SEPARATOR {
-                                +"private fun Scanner.lines() = buildSequence" {
+                                val sequence = if (info.is100OrGreater) "sequence" else "buildSequence"
+                                +"private fun Scanner.lines() = $sequence" {
                                     +"while (hasNext())" {
                                         +"yield(readLine())"
                                     }
