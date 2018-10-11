@@ -50,17 +50,20 @@
   var toChar = Kotlin.toChar;
   var getCallableRef = Kotlin.getCallableRef;
   var unboxChar = Kotlin.unboxChar;
+  var replace = Kotlin.kotlin.text.replace_680rmw$;
   var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED;
   var CoroutineImpl = Kotlin.kotlin.coroutines.CoroutineImpl;
   var toInt = Kotlin.kotlin.text.toInt_6ic1pp$;
   var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
   var minus = Kotlin.kotlin.collections.minus_khz7k3$;
   var plus_1 = Kotlin.kotlin.collections.plus_iwxh38$;
+  var Comparable = Kotlin.kotlin.Comparable;
   var listOf_0 = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var LinkedHashSet_init = Kotlin.kotlin.collections.LinkedHashSet_init_287e2$;
   var plus_2 = Kotlin.kotlin.collections.plus_khz7k3$;
   var contains = Kotlin.kotlin.text.contains_sgbm27$;
   var println = Kotlin.kotlin.io.println_s8jyv4$;
+  var setOf = Kotlin.kotlin.collections.setOf_mh5how$;
   var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
   var numberToInt = Kotlin.numberToInt;
   var PrimitiveClasses$intClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.intClass;
@@ -118,7 +121,6 @@
   var toBoxedChar = Kotlin.toBoxedChar;
   var isWhitespace = Kotlin.kotlin.text.isWhitespace_myv2d0$;
   var RuntimeException_init = Kotlin.kotlin.RuntimeException_init_pdl1vj$;
-  var replace = Kotlin.kotlin.text.replace_680rmw$;
   var toSet_0 = Kotlin.kotlin.collections.toSet_us0mfu$;
   var copyOf = Kotlin.kotlin.collections.copyOf_mrm5p$;
   var numberToByte = Kotlin.numberToByte;
@@ -131,7 +133,6 @@
   var endsWith_0 = Kotlin.kotlin.text.endsWith_sgbm27$;
   var Set = Kotlin.kotlin.collections.Set;
   var Regex = Kotlin.kotlin.text.Regex;
-  var Comparable = Kotlin.kotlin.Comparable;
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_8cymmc$;
   Yaml$SingleContext.prototype = Object.create(Yaml$Context.prototype);
   Yaml$SingleContext.prototype.constructor = Yaml$SingleContext;
@@ -171,6 +172,8 @@
   YamlParser$Escapable$Text.prototype.constructor = YamlParser$Escapable$Text;
   YamlParser$Companion.prototype = Object.create(YamlParser.prototype);
   YamlParser$Companion.prototype.constructor = YamlParser$Companion;
+  BuildInfo.prototype = Object.create(BlockBuilder$Config.prototype);
+  BuildInfo.prototype.constructor = BuildInfo;
   Feature.prototype = Object.create(Block.prototype);
   Feature.prototype.constructor = Feature;
   ServerFeature.prototype = Object.create(Feature.prototype);
@@ -3578,6 +3581,7 @@
       swaggerGenKind = SwaggerGenerator$Kind$RAW_getInstance();
     if (fetch === void 0)
       fetch = BuildInfo_init$lambda;
+    BlockBuilder$Config.call(this);
     this.includeWrapper = includeWrapper;
     this.projectType = projectType;
     this.ktorVersion = ktorVersion;
@@ -3591,7 +3595,26 @@
     this.ktorVer = this.ktorVersion;
     this.developmentPackage = 'io.ktor.server.' + this.ktorEngine.id;
     this.developmentEngineFQ = this.developmentPackage + '.DevelopmentEngine';
+    this.is100OrGreater = this.ktorVersion.semVersion.compareTo_11rb$(new SemVer('1.0.0')) >= 0;
   }
+  Object.defineProperty(BuildInfo.prototype, 'kotlinVersion', {
+    get: function () {
+      return this.ktorVersion.semKotlinVersion;
+    }
+  });
+  BuildInfo.prototype.transform_66iv3j$ = function (data, charset) {
+    var tmp$;
+    if (charset == null)
+      return data;
+    var content = toString_1(data, charset);
+    if (this.is100OrGreater) {
+      tmp$ = replace(replace(content, 'kotlin.coroutines.experimental.', 'kotlin.coroutines.'), 'kotlinx.coroutines.experimental.', 'kotlinx.coroutines.');
+    }
+     else {
+      tmp$ = content;
+    }
+    return toByteArray(tmp$, charset);
+  };
   var NotImplementedError_init = Kotlin.kotlin.NotImplementedError;
   function BuildInfo_init$lambda(it, continuation_0, suspended) {
     var instance = new Coroutine$BuildInfo_init$lambda(it, continuation_0);
@@ -3638,7 +3661,7 @@
   BuildInfo.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'BuildInfo',
-    interfaces: []
+    interfaces: [BlockBuilder$Config]
   };
   BuildInfo.prototype.component1 = function () {
     return this.includeWrapper;
@@ -3670,7 +3693,7 @@
   BuildInfo.prototype.component10 = function () {
     return this.fetch;
   };
-  BuildInfo.prototype.copy_y4wsmi$ = function (includeWrapper, projectType, ktorVersion, artifactName, artifactGroup, artifactVersion, ktorEngine, generateFeatureSample, swaggerGenKind, fetch) {
+  BuildInfo.prototype.copy_nrtplq$ = function (includeWrapper, projectType, ktorVersion, artifactName, artifactGroup, artifactVersion, ktorEngine, generateFeatureSample, swaggerGenKind, fetch) {
     return new BuildInfo(includeWrapper === void 0 ? this.includeWrapper : includeWrapper, projectType === void 0 ? this.projectType : projectType, ktorVersion === void 0 ? this.ktorVersion : ktorVersion, artifactName === void 0 ? this.artifactName : artifactName, artifactGroup === void 0 ? this.artifactGroup : artifactGroup, artifactVersion === void 0 ? this.artifactVersion : artifactVersion, ktorEngine === void 0 ? this.ktorEngine : ktorEngine, generateFeatureSample === void 0 ? this.generateFeatureSample : generateFeatureSample, swaggerGenKind === void 0 ? this.swaggerGenKind : swaggerGenKind, fetch === void 0 ? this.fetch : fetch);
   };
   BuildInfo.prototype.toString = function () {
@@ -4074,14 +4097,28 @@
     }
     return Repos_instance;
   }
-  var KOTLIN_VERSION;
   function Versions() {
     Versions_instance = this;
-    this.V094 = new SemVer('0.9.4');
-    this.V095 = new SemVer('0.9.5');
-    this.ALL = [this.V094, this.V095];
+    this.V094 = new KtorVersion('0.9.4', '1.2.61');
+    this.V095 = new KtorVersion('0.9.5', '1.2.70');
+    this.V100_alpha_2 = new KtorVersion('1.0.0-alpha-2', '1.3.0-rc-131', listOf('https://kotlin.bintray.com/kotlin-eap'));
+    this.ALL = [this.V094, this.V100_alpha_2, this.V095];
     this.LAST = this.V095;
+    this.LAST_BETA = this.V100_alpha_2;
+    var $receiver = this.ALL;
+    var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
+    var destination = LinkedHashMap_init_0(capacity);
+    var tmp$;
+    for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
+      var element = $receiver[tmp$];
+      var pair = to(element.version, element);
+      destination.put_xwzc9p$(pair.first, pair.second);
+    }
+    this.VMAP_0 = destination;
   }
+  Versions.prototype.fromString_61zpoe$ = function (version) {
+    return this.VMAP_0.get_11rb$(version);
+  };
   Versions.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'Versions',
@@ -4094,6 +4131,49 @@
     }
     return Versions_instance;
   }
+  function KtorVersion(version, kotlinVersion, extraRepos) {
+    if (extraRepos === void 0) {
+      extraRepos = emptyList();
+    }
+    this.version = version;
+    this.kotlinVersion = kotlinVersion;
+    this.extraRepos = extraRepos;
+    this.semVersion = new SemVer(this.version);
+    this.semKotlinVersion = new SemVer(this.kotlinVersion);
+  }
+  KtorVersion.prototype.compareTo_11rb$ = function (other) {
+    return this.semVersion.compareTo_11rb$(other.semVersion);
+  };
+  KtorVersion.prototype.toString = function () {
+    return this.semVersion.toString();
+  };
+  KtorVersion.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'KtorVersion',
+    interfaces: [Comparable]
+  };
+  KtorVersion.prototype.component1 = function () {
+    return this.version;
+  };
+  KtorVersion.prototype.component2 = function () {
+    return this.kotlinVersion;
+  };
+  KtorVersion.prototype.component3 = function () {
+    return this.extraRepos;
+  };
+  KtorVersion.prototype.copy_bg8n2v$ = function (version, kotlinVersion, extraRepos) {
+    return new KtorVersion(version === void 0 ? this.version : version, kotlinVersion === void 0 ? this.kotlinVersion : kotlinVersion, extraRepos === void 0 ? this.extraRepos : extraRepos);
+  };
+  KtorVersion.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.version) | 0;
+    result = result * 31 + Kotlin.hashCode(this.kotlinVersion) | 0;
+    result = result * 31 + Kotlin.hashCode(this.extraRepos) | 0;
+    return result;
+  };
+  KtorVersion.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.version, other.version) && Kotlin.equals(this.kotlinVersion, other.kotlinVersion) && Kotlin.equals(this.extraRepos, other.extraRepos)))));
+  };
   function ALL_SERVER_FEATURES$lambda() {
     var $receiver = ALL_FEATURES;
     var destination = ArrayList_init();
@@ -4339,33 +4419,36 @@
     $receiver.line_61zpoe$('private fun InputStream.lines() = Scanner(this).lines()');
     return Unit;
   }
-  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda_0($receiver) {
-    var $receiver_0 = 'private fun Scanner.lines() = buildSequence';
-    var rafter = ''.length === 0 ? '' : ' ' + '';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
-    $receiver._indent();
-    try {
-      var $receiver_1 = 'while (hasNext())';
-      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
-      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda_0(closure$info) {
+    return function ($receiver) {
+      var sequence = closure$info.is100OrGreater ? 'sequence' : 'buildSequence';
+      var $receiver_0 = 'private fun Scanner.lines() = ' + sequence;
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
       $receiver._indent();
       try {
-        $receiver.line_61zpoe$('yield(readLine())');
+        var $receiver_1 = 'while (hasNext())';
+        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+        $receiver._indent();
+        try {
+          $receiver.line_61zpoe$('yield(readLine())');
+        }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$('}' + '');
+        unaryPlus_0($receiver);
       }
       finally {
         $receiver._unindent();
       }
       $receiver.line_61zpoe$('}' + '');
       unaryPlus_0($receiver);
-    }
-    finally {
-      $receiver._unindent();
-    }
-    $receiver.line_61zpoe$('}' + '');
-    unaryPlus_0($receiver);
-    return Unit;
+      return Unit;
+    };
   }
-  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda_0(this$RawSocketsFeature, this$renderFeature) {
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda_0(this$RawSocketsFeature, this$renderFeature, closure$info) {
     return function ($receiver) {
       var $receiver_0 = 'object Client';
       var rafter = ''.length === 0 ? '' : ' ' + '';
@@ -4374,6 +4457,7 @@
       try {
         var this$RawSocketsFeature_0 = this$RawSocketsFeature;
         var this$renderFeature_0 = this$renderFeature;
+        var closure$info_0 = closure$info;
         $receiver.line_61zpoe$('@JvmStatic');
         var $receiver_1 = 'fun main(args: Array<String>)';
         var rafter_0 = ''.length === 0 ? '' : ' ' + '';
@@ -4403,7 +4487,7 @@
         $receiver.line_61zpoe$('}' + '');
         unaryPlus_0($receiver);
         SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda);
-        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda_0);
+        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda_0(closure$info_0));
       }
       finally {
         $receiver._unindent();
@@ -4413,7 +4497,7 @@
       return Unit;
     };
   }
-  function RawSocketsFeature$renderFeature$lambda$lambda(this$RawSocketsFeature, this$renderFeature) {
+  function RawSocketsFeature$renderFeature$lambda$lambda(this$RawSocketsFeature, this$renderFeature, closure$info) {
     return function ($receiver) {
       $receiver.line_61zpoe$('/**');
       $receiver.line_61zpoe$(' * Two mains are provided, you must first start EchoApp.Server, and then EchoApp.Client.');
@@ -4426,10 +4510,11 @@
       try {
         var this$RawSocketsFeature_0 = this$RawSocketsFeature;
         var this$renderFeature_0 = this$renderFeature;
+        var closure$info_0 = closure$info;
         $receiver.line_61zpoe$('val selectorManager = ActorSelectorManager(ioCoroutineDispatcher)');
         $receiver.line_61zpoe$('val DefaultPort = 9002');
         SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda(this$RawSocketsFeature_0, this$renderFeature_0));
-        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda_0(this$RawSocketsFeature_0, this$renderFeature_0));
+        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda_0(this$RawSocketsFeature_0, this$renderFeature_0, closure$info_0));
       }
       finally {
         $receiver._unindent();
@@ -4471,7 +4556,7 @@
           case 0:
             this.local$$receiver.line_61zpoe$('package ' + this.local$closure$info.artifactGroup);
             putImports(this.local$$receiver, get_applicationKtImports(this.local$this$renderFeature));
-            return SEPARATOR(this.local$$receiver, RawSocketsFeature$renderFeature$lambda$lambda(this.local$this$RawSocketsFeature, this.local$this$renderFeature)), Unit;
+            return SEPARATOR(this.local$$receiver, RawSocketsFeature$renderFeature$lambda$lambda(this.local$this$RawSocketsFeature, this.local$this$renderFeature, this.local$closure$info)), Unit;
           case 1:
             throw this.exception_0;
           default:this.state_0 = 1;
@@ -4571,7 +4656,7 @@
         $receiver._indent();
         try {
           $receiver.line_61zpoe$('val selectorManager = ActorSelectorManager(ioCoroutineDispatcher)');
-          $receiver.line_61zpoe$('val socket = aSocket(selectorManager).tcp().connect("www.google.com", port = 443).tls()');
+          $receiver.line_61zpoe$('val socket = aSocket(selectorManager).tcp().connect("www.google.com", port = 443).tls(coroutineContext = coroutineContext)');
           $receiver.line_61zpoe$('val write = socket.openWriteChannel()');
           $receiver.line_61zpoe$('val LINE = "\\r\\n"');
           $receiver.line_61zpoe$('write.writeStringUtf8("GET / HTTP/1.1${LINE}Host: www.google.com${LINE}Connection: close${LINE}${LINE}")');
@@ -9489,6 +9574,9 @@
     }
     return BuildFiles_instance;
   }
+  function getAllReposToInclude($receiver, info) {
+    return plus_2(get_reposToInclude($receiver), toSet(info.ktorVer.extraRepos));
+  }
   function reposToInclude$lambda($receiver) {
     return LinkedHashSet_init();
   }
@@ -9671,22 +9759,25 @@
       return Unit;
     };
   }
-  function BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0) {
+  function BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, closure$experimentalCorroutines_0, closure$is100OrGreater_0) {
     return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, $receiver_0, this, continuation_0);
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, closure$experimentalCorroutines_0, closure$is100OrGreater_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
-  function Coroutine$BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, $receiver_0, controller, continuation_0) {
+  function Coroutine$BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, closure$experimentalCorroutines_0, closure$is100OrGreater_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
     this.exceptionState_0 = 1;
     this.local$closure$properties = closure$properties_0;
     this.local$closure$info = closure$info_0;
     this.local$this$render = this$render_0;
+    this.local$this$BuildFilesGradle = this$BuildFilesGradle_0;
+    this.local$closure$experimentalCorroutines = closure$experimentalCorroutines_0;
+    this.local$closure$is100OrGreater = closure$is100OrGreater_0;
     this.local$$receiver = $receiver_0;
   }
   Coroutine$BuildFilesGradle$render$lambda_0.$metadata$ = {
@@ -9718,8 +9809,9 @@
             this.local$$receiver.line_61zpoe$('plugins'.length === 0 ? '{' + rafter : 'plugins' + ' {' + rafter);
             this.local$$receiver._indent();
             try {
+              var closure$info = this.local$closure$info;
               this.local$$receiver.line_61zpoe$('application');
-              this.local$$receiver.line_61zpoe$('kotlin("jvm") version "1.2.71"');
+              this.local$$receiver.line_61zpoe$('kotlin(' + '"' + 'jvm' + '"' + ') version ' + '"' + closure$info.kotlinVersion + '"');
             }
             finally {
               this.local$$receiver._unindent();
@@ -9750,20 +9842,14 @@
             this.local$$receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter_1 : $receiver_0 + ' {' + rafter_1);
             this.local$$receiver._indent();
             try {
+              var closure$info_0 = this.local$closure$info;
+              var this$render = this.local$this$render;
+              var this$BuildFilesGradle = this.local$this$BuildFilesGradle;
               var tmp$_0;
-              tmp$_0 = get_reposToInclude(this.local$this$render).iterator();
+              tmp$_0 = getAllReposToInclude(this$render, closure$info_0).iterator();
               while (tmp$_0.hasNext()) {
                 var repo = tmp$_0.next();
-                switch (repo) {
-                  case 'local':
-                    this.local$$receiver.line_61zpoe$('mavenLocal()');
-                    break;
-                  case 'jcenter':
-                    this.local$$receiver.line_61zpoe$('jcenter()');
-                    break;
-                  default:this.local$$receiver.line_61zpoe$('maven { url = uri(' + '"' + repo + '"' + ') }');
-                    break;
-                }
+                this.local$$receiver.line_61zpoe$(this$BuildFilesGradle.genMavenRepoKotlin_0(repo));
               }
             }
             finally {
@@ -9786,14 +9872,97 @@
 
             this.local$$receiver.line_61zpoe$('}' + '');
             unaryPlus_0(this.local$$receiver);
-            this.local$$receiver.line_61zpoe$('');
-            this.local$$receiver.line_61zpoe$('kotlin.experimental.coroutines = Coroutines.ENABLE');
-            this.local$$receiver.line_61zpoe$('');
-            this.local$$receiver.line_61zpoe$('sourceSets["main"].resources.srcDirs("resources")');
-            this.local$$receiver.line_61zpoe$('sourceSets["test"].resources.srcDirs("testresources")');
+            if (this.local$closure$experimentalCorroutines) {
+              this.local$$receiver.line_61zpoe$('');
+              this.local$$receiver.line_61zpoe$('kotlin.experimental.coroutines = Coroutines.ENABLE');
+            }
+
+            if (!this.local$closure$is100OrGreater) {
+              this.local$$receiver.line_61zpoe$('');
+              this.local$$receiver.line_61zpoe$('sourceSets["main"].resources.srcDirs("resources")');
+              this.local$$receiver.line_61zpoe$('sourceSets["test"].resources.srcDirs("testresources")');
+            }
+
             this.local$$receiver.line_61zpoe$('');
             this.local$$receiver.line_61zpoe$('kotlin.sourceSets["main"].kotlin.srcDirs("src")');
             return this.local$$receiver.line_61zpoe$('kotlin.sourceSets["test"].kotlin.srcDirs("test")');
+          case 1:
+            throw this.exception_0;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function BuildFilesGradle$render$lambda_1(closure$is100OrGreater_0, closure$info_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_1(closure$is100OrGreater_0, closure$info_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFilesGradle$render$lambda_1(closure$is100OrGreater_0, closure$info_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$closure$is100OrGreater = closure$is100OrGreater_0;
+    this.local$closure$info = closure$info_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$BuildFilesGradle$render$lambda_1.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFilesGradle$render$lambda_1.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFilesGradle$render$lambda_1.prototype.constructor = Coroutine$BuildFilesGradle$render$lambda_1;
+  Coroutine$BuildFilesGradle$render$lambda_1.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            if (this.local$closure$is100OrGreater) {
+              var $receiver = 'pluginManagement';
+              var rafter = ''.length === 0 ? '' : ' ' + '';
+              this.local$$receiver.line_61zpoe$($receiver.length === 0 ? '{' + rafter : $receiver + ' {' + rafter);
+              this.local$$receiver._indent();
+              try {
+                var $receiver_0 = 'repositories';
+                var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+                this.local$$receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter_0 : $receiver_0 + ' {' + rafter_0);
+                this.local$$receiver._indent();
+                try {
+                  this.local$$receiver.line_61zpoe$('mavenCentral()');
+                  this.local$$receiver.line_61zpoe$('maven { url = uri("https://kotlin.bintray.com/kotlin-eap") }');
+                  this.local$$receiver.line_61zpoe$('maven { url = uri("https://plugins.gradle.org/m2/") }');
+                }
+                finally {
+                  this.local$$receiver._unindent();
+                }
+                this.local$$receiver.line_61zpoe$('}' + '');
+                unaryPlus_0(this.local$$receiver);
+              }
+              finally {
+                this.local$$receiver._unindent();
+              }
+              this.local$$receiver.line_61zpoe$('}' + '');
+              unaryPlus_0(this.local$$receiver);
+              this.local$$receiver.line_61zpoe$('');
+            }
+
+            return this.local$$receiver.line_61zpoe$('rootProject.name = ' + '"' + this.local$closure$info.artifactName + '"');
           case 1:
             throw this.exception_0;
           default:this.state_0 = 1;
@@ -9829,31 +9998,33 @@
       return Unit;
     };
   }
-  function BuildFilesGradle$render$lambda_1(closure$info_0, this$render_0) {
+  function BuildFilesGradle$render$lambda_2(closure$info_0, this$BuildFilesGradle_0, this$render_0, closure$experimentalCorroutines_0) {
     return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_1(closure$info_0, this$render_0, $receiver_0, this, continuation_0);
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_2(closure$info_0, this$BuildFilesGradle_0, this$render_0, closure$experimentalCorroutines_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
-  function Coroutine$BuildFilesGradle$render$lambda_1(closure$info_0, this$render_0, $receiver_0, controller, continuation_0) {
+  function Coroutine$BuildFilesGradle$render$lambda_2(closure$info_0, this$BuildFilesGradle_0, this$render_0, closure$experimentalCorroutines_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
     this.exceptionState_0 = 1;
     this.local$closure$info = closure$info_0;
+    this.local$this$BuildFilesGradle = this$BuildFilesGradle_0;
     this.local$this$render = this$render_0;
+    this.local$closure$experimentalCorroutines = closure$experimentalCorroutines_0;
     this.local$$receiver = $receiver_0;
   }
-  Coroutine$BuildFilesGradle$render$lambda_1.$metadata$ = {
+  Coroutine$BuildFilesGradle$render$lambda_2.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: null,
     interfaces: [CoroutineImpl]
   };
-  Coroutine$BuildFilesGradle$render$lambda_1.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$BuildFilesGradle$render$lambda_1.prototype.constructor = Coroutine$BuildFilesGradle$render$lambda_1;
-  Coroutine$BuildFilesGradle$render$lambda_1.prototype.doResume = function () {
+  Coroutine$BuildFilesGradle$render$lambda_2.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFilesGradle$render$lambda_2.prototype.constructor = Coroutine$BuildFilesGradle$render$lambda_2;
+  Coroutine$BuildFilesGradle$render$lambda_2.prototype.doResume = function () {
     do
       try {
         switch (this.state_0) {
@@ -9863,12 +10034,19 @@
             this.local$$receiver.line_61zpoe$($receiver.length === 0 ? '{' + rafter : $receiver + ' {' + rafter);
             this.local$$receiver._indent();
             try {
+              var closure$info = this.local$closure$info;
+              var this$BuildFilesGradle = this.local$this$BuildFilesGradle;
               var $receiver_0 = 'repositories';
               var rafter_0 = ''.length === 0 ? '' : ' ' + '';
               this.local$$receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter_0 : $receiver_0 + ' {' + rafter_0);
               this.local$$receiver._indent();
               try {
-                this.local$$receiver.line_61zpoe$('jcenter()');
+                var tmp$;
+                tmp$ = plus_2(setOf('jcenter'), toSet(closure$info.ktorVer.extraRepos)).iterator();
+                while (tmp$.hasNext()) {
+                  var repo = tmp$.next();
+                  this.local$$receiver.line_61zpoe$(this$BuildFilesGradle.genMavenRepoGroovy_0(repo));
+                }
               }
               finally {
                 this.local$$receiver._unindent();
@@ -9921,20 +10099,14 @@
             this.local$$receiver.line_61zpoe$($receiver_3.length === 0 ? '{' + rafter_3 : $receiver_3 + ' {' + rafter_3);
             this.local$$receiver._indent();
             try {
-              var tmp$;
-              tmp$ = get_reposToInclude(this.local$this$render).iterator();
-              while (tmp$.hasNext()) {
-                var repo = tmp$.next();
-                switch (repo) {
-                  case 'local':
-                    this.local$$receiver.line_61zpoe$('mavenLocal()');
-                    break;
-                  case 'jcenter':
-                    this.local$$receiver.line_61zpoe$('jcenter()');
-                    break;
-                  default:this.local$$receiver.line_61zpoe$("maven { url '" + repo + "' }");
-                    break;
-                }
+              var closure$info_0 = this.local$closure$info;
+              var this$render = this.local$this$render;
+              var this$BuildFilesGradle_0 = this.local$this$BuildFilesGradle;
+              var tmp$_0;
+              tmp$_0 = getAllReposToInclude(this$render, closure$info_0).iterator();
+              while (tmp$_0.hasNext()) {
+                var repo_0 = tmp$_0.next();
+                this.local$$receiver.line_61zpoe$(this$BuildFilesGradle_0.genMavenRepoGroovy_0(repo_0));
               }
             }
             finally {
@@ -9955,55 +10127,12 @@
             }
 
             this.local$$receiver.line_61zpoe$('}' + '');
-            this.local$$receiver.line_61zpoe$('');
-            return this.local$$receiver.line_61zpoe$("kotlin.experimental.coroutines = 'enable'");
-          case 1:
-            throw this.exception_0;
-          default:this.state_0 = 1;
-            throw new Error('State Machine Unreachable execution');
-        }
-      }
-       catch (e) {
-        if (this.state_0 === 1) {
-          this.exceptionState_0 = this.state_0;
-          throw e;
-        }
-         else {
-          this.state_0 = this.exceptionState_0;
-          this.exception_0 = e;
-        }
-      }
-     while (true);
-  };
-  function BuildFilesGradle$render$lambda_2(closure$info_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_2(closure$info_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
-  function Coroutine$BuildFilesGradle$render$lambda_2(closure$info_0, $receiver_0, controller, continuation_0) {
-    CoroutineImpl.call(this, continuation_0);
-    this.$controller = controller;
-    this.exceptionState_0 = 1;
-    this.local$closure$info = closure$info_0;
-    this.local$$receiver = $receiver_0;
-  }
-  Coroutine$BuildFilesGradle$render$lambda_2.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: null,
-    interfaces: [CoroutineImpl]
-  };
-  Coroutine$BuildFilesGradle$render$lambda_2.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$BuildFilesGradle$render$lambda_2.prototype.constructor = Coroutine$BuildFilesGradle$render$lambda_2;
-  Coroutine$BuildFilesGradle$render$lambda_2.prototype.doResume = function () {
-    do
-      try {
-        switch (this.state_0) {
-          case 0:
-            return this.local$$receiver.line_61zpoe$('rootProject.name = ' + '"' + this.local$closure$info.artifactName + '"');
+            if (this.local$closure$experimentalCorroutines) {
+              this.local$$receiver.line_61zpoe$('');
+              return this.local$$receiver.line_61zpoe$("kotlin.experimental.coroutines = 'enable'"), Unit;
+            }
+
+            return Unit;
           case 1:
             throw this.exception_0;
           default:this.state_0 = 1;
@@ -10023,18 +10152,20 @@
      while (true);
   };
   function BuildFilesGradle$render$lambda_3(closure$info_0) {
-    return function (continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_3(closure$info_0, continuation_0);
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_3(closure$info_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
-  function Coroutine$BuildFilesGradle$render$lambda_3(closure$info_0, continuation_0) {
+  function Coroutine$BuildFilesGradle$render$lambda_3(closure$info_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
     this.exceptionState_0 = 1;
     this.local$closure$info = closure$info_0;
+    this.local$$receiver = $receiver_0;
   }
   Coroutine$BuildFilesGradle$render$lambda_3.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -10048,15 +10179,9 @@
       try {
         switch (this.state_0) {
           case 0:
-            this.state_0 = 2;
-            this.result_0 = this.local$closure$info.fetch('gradle/gradlew', this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
+            return this.local$$receiver.line_61zpoe$('rootProject.name = ' + '"' + this.local$closure$info.artifactName + '"');
           case 1:
             throw this.exception_0;
-          case 2:
-            return this.result_0;
           default:this.state_0 = 1;
             throw new Error('State Machine Unreachable execution');
         }
@@ -10100,7 +10225,7 @@
         switch (this.state_0) {
           case 0:
             this.state_0 = 2;
-            this.result_0 = this.local$closure$info.fetch('gradle/gradlew.bat', this);
+            this.result_0 = this.local$closure$info.fetch('gradle/gradlew', this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;
@@ -10151,6 +10276,57 @@
         switch (this.state_0) {
           case 0:
             this.state_0 = 2;
+            this.result_0 = this.local$closure$info.fetch('gradle/gradlew.bat', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function BuildFilesGradle$render$lambda_6(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_6(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$BuildFilesGradle$render$lambda_6(closure$info_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+  }
+  Coroutine$BuildFilesGradle$render$lambda_6.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$BuildFilesGradle$render$lambda_6.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFilesGradle$render$lambda_6.prototype.constructor = Coroutine$BuildFilesGradle$render$lambda_6;
+  Coroutine$BuildFilesGradle$render$lambda_6.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
             this.result_0 = this.local$closure$info.fetch('gradle/gradle/wrapper/gradle-wrapper.jar', this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
@@ -10175,29 +10351,29 @@
       }
      while (true);
   };
-  function BuildFilesGradle$render$lambda_6(this$BuildFilesGradle_0, closure$info_0) {
+  function BuildFilesGradle$render$lambda_7(this$BuildFilesGradle_0, closure$info_0) {
     return function (continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_6(this$BuildFilesGradle_0, closure$info_0, continuation_0);
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_7(this$BuildFilesGradle_0, closure$info_0, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
-  function Coroutine$BuildFilesGradle$render$lambda_6(this$BuildFilesGradle_0, closure$info_0, continuation_0) {
+  function Coroutine$BuildFilesGradle$render$lambda_7(this$BuildFilesGradle_0, closure$info_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
     this.local$this$BuildFilesGradle = this$BuildFilesGradle_0;
     this.local$closure$info = closure$info_0;
   }
-  Coroutine$BuildFilesGradle$render$lambda_6.$metadata$ = {
+  Coroutine$BuildFilesGradle$render$lambda_7.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: null,
     interfaces: [CoroutineImpl]
   };
-  Coroutine$BuildFilesGradle$render$lambda_6.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$BuildFilesGradle$render$lambda_6.prototype.constructor = Coroutine$BuildFilesGradle$render$lambda_6;
-  Coroutine$BuildFilesGradle$render$lambda_6.prototype.doResume = function () {
+  Coroutine$BuildFilesGradle$render$lambda_7.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$BuildFilesGradle$render$lambda_7.prototype.constructor = Coroutine$BuildFilesGradle$render$lambda_7;
+  Coroutine$BuildFilesGradle$render$lambda_7.prototype.doResume = function () {
     do
       try {
         switch (this.state_0) {
@@ -10244,18 +10420,39 @@
   BuildFilesGradle.prototype.render_miqy8c$ = function ($receiver, info) {
     var properties = Properties_getInstance().getProperties_jbwadm$(info);
     $receiver.fileText_7k8vha$('gradle.properties', void 0, void 0, BuildFilesGradle$render$lambda(properties));
+    var is100OrGreater = info.is100OrGreater;
+    var experimentalCorroutines = !info.is100OrGreater;
     if (this.kotlin) {
-      $receiver.fileText_7k8vha$('build.gradle.kts', void 0, void 0, BuildFilesGradle$render$lambda_0(properties, info, $receiver));
+      $receiver.fileText_7k8vha$('build.gradle.kts', void 0, void 0, BuildFilesGradle$render$lambda_0(properties, info, $receiver, this, experimentalCorroutines, is100OrGreater));
+      $receiver.fileText_7k8vha$('settings.gradle.kts', void 0, void 0, BuildFilesGradle$render$lambda_1(is100OrGreater, info));
     }
      else {
-      $receiver.fileText_7k8vha$('build.gradle', void 0, void 0, BuildFilesGradle$render$lambda_1(info, $receiver));
+      $receiver.fileText_7k8vha$('build.gradle', void 0, void 0, BuildFilesGradle$render$lambda_2(info, this, $receiver, experimentalCorroutines));
+      $receiver.fileText_7k8vha$('settings.gradle', void 0, void 0, BuildFilesGradle$render$lambda_3(info));
     }
-    $receiver.fileText_7k8vha$(this.kotlin ? 'settings.gradle.kts' : 'settings.gradle', void 0, void 0, BuildFilesGradle$render$lambda_2(info));
     if (info.includeWrapper) {
-      $receiver.fileBinary_qk5z91$('gradlew', void 0, toInt('755', 8), BuildFilesGradle$render$lambda_3(info));
-      $receiver.fileBinary_qk5z91$('gradlew.bat', void 0, void 0, BuildFilesGradle$render$lambda_4(info));
-      $receiver.fileBinary_qk5z91$('gradle/wrapper/gradle-wrapper.jar', void 0, void 0, BuildFilesGradle$render$lambda_5(info));
-      $receiver.fileBinary_qk5z91$('gradle/wrapper/gradle-wrapper.properties', void 0, void 0, BuildFilesGradle$render$lambda_6(this, info));
+      $receiver.fileBinary_qk5z91$('gradlew', void 0, toInt('755', 8), BuildFilesGradle$render$lambda_4(info));
+      $receiver.fileBinary_qk5z91$('gradlew.bat', void 0, void 0, BuildFilesGradle$render$lambda_5(info));
+      $receiver.fileBinary_qk5z91$('gradle/wrapper/gradle-wrapper.jar', void 0, void 0, BuildFilesGradle$render$lambda_6(info));
+      $receiver.fileBinary_qk5z91$('gradle/wrapper/gradle-wrapper.properties', void 0, void 0, BuildFilesGradle$render$lambda_7(this, info));
+    }
+  };
+  BuildFilesGradle.prototype.genMavenRepoKotlin_0 = function (repo) {
+    switch (repo) {
+      case 'local':
+        return 'mavenLocal()';
+      case 'jcenter':
+        return 'jcenter()';
+      default:return 'maven { url = uri(' + '"' + repo + '"' + ') }';
+    }
+  };
+  BuildFilesGradle.prototype.genMavenRepoGroovy_0 = function (repo) {
+    switch (repo) {
+      case 'local':
+        return 'mavenLocal()';
+      case 'jcenter':
+        return 'jcenter()';
+      default:return "maven { url '" + repo + "' }";
     }
   };
   BuildFilesGradle.$metadata$ = {
@@ -10297,10 +10494,10 @@
       return Unit;
     };
   }
-  function BuildFilesMaven$render$lambda$lambda$lambda$lambda$lambda(this$render) {
+  function BuildFilesMaven$render$lambda$lambda$lambda$lambda$lambda(closure$info, this$render) {
     return function ($receiver) {
       var tmp$;
-      tmp$ = get_reposToInclude(this$render);
+      tmp$ = getAllReposToInclude(this$render, closure$info);
       var index = 0;
       repos: for (var tmp$_0 = tmp$.iterator(); tmp$_0.hasNext(); ++index) {
         var repo = tmp$_0.next();
@@ -10439,7 +10636,7 @@
         var $this_1 = $receiver.indenter;
         $this_1._indent();
         try {
-          this$_0.linedeferred_yot30u$(BuildFilesMaven$render$lambda$lambda$lambda$lambda$lambda(this$render_0));
+          this$_0.linedeferred_yot30u$(BuildFilesMaven$render$lambda$lambda$lambda$lambda$lambda(closure$info_0, this$render_0));
         }
         finally {
           $this_1._unindent();
@@ -11331,7 +11528,7 @@
     var value = 'official';
     $receiver.put_xwzc9p$(key, value);
     var key_0 = 'kotlin_version';
-    var value_0 = KOTLIN_VERSION;
+    var value_0 = info.kotlinVersion.toString();
     $receiver.put_xwzc9p$(key_0, value_0);
     var key_1 = 'ktor_version';
     var value_1 = info.ktorVersion.toString();
@@ -12031,6 +12228,60 @@
   };
   function SwaggerGeneratorBase() {
   }
+  function SwaggerGeneratorBase$addSwaggerUtils$lambda(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGeneratorBase$addSwaggerUtils$lambda(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$SwaggerGeneratorBase$addSwaggerUtils$lambda(closure$info_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+  }
+  Coroutine$SwaggerGeneratorBase$addSwaggerUtils$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$SwaggerGeneratorBase$addSwaggerUtils$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$SwaggerGeneratorBase$addSwaggerUtils$lambda.prototype.constructor = Coroutine$SwaggerGeneratorBase$addSwaggerUtils$lambda;
+  Coroutine$SwaggerGeneratorBase$addSwaggerUtils$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = this.local$closure$info.fetch('swagger/SwaggerUtils.kt.txt', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return this.result_0;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  SwaggerGeneratorBase.prototype.addSwaggerUtils_gtq0m3$ = function ($receiver, info) {
+    $receiver.fileBinary_qk5z91$('src/io/ktor/swagger/experimental/SwaggerUtils.kt', UTF8_getInstance(), void 0, SwaggerGeneratorBase$addSwaggerUtils$lambda(info));
+  };
   var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
   SwaggerGeneratorBase.prototype.doc_lz4qb0$ = function ($receiver, title, description, params, retval) {
     if (description === void 0)
@@ -12870,58 +13121,7 @@
     SwaggerGeneratorInterface_instance = this;
     SwaggerGeneratorBase.call(this);
   }
-  function SwaggerGeneratorInterface$registerRoutes$lambda(closure$info_0) {
-    return function (continuation_0, suspended) {
-      var instance = new Coroutine$SwaggerGeneratorInterface$registerRoutes$lambda(closure$info_0, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
-  function Coroutine$SwaggerGeneratorInterface$registerRoutes$lambda(closure$info_0, continuation_0) {
-    CoroutineImpl.call(this, continuation_0);
-    this.exceptionState_0 = 1;
-    this.local$closure$info = closure$info_0;
-  }
-  Coroutine$SwaggerGeneratorInterface$registerRoutes$lambda.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: null,
-    interfaces: [CoroutineImpl]
-  };
-  Coroutine$SwaggerGeneratorInterface$registerRoutes$lambda.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$SwaggerGeneratorInterface$registerRoutes$lambda.prototype.constructor = Coroutine$SwaggerGeneratorInterface$registerRoutes$lambda;
-  Coroutine$SwaggerGeneratorInterface$registerRoutes$lambda.prototype.doResume = function () {
-    do
-      try {
-        switch (this.state_0) {
-          case 0:
-            this.state_0 = 2;
-            this.result_0 = this.local$closure$info.fetch('swagger/SwaggerUtils.kt.txt', this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 1:
-            throw this.exception_0;
-          case 2:
-            return this.result_0;
-          default:this.state_0 = 1;
-            throw new Error('State Machine Unreachable execution');
-        }
-      }
-       catch (e) {
-        if (this.state_0 === 1) {
-          this.exceptionState_0 = this.state_0;
-          throw e;
-        }
-         else {
-          this.state_0 = this.exceptionState_0;
-          this.exception_0 = e;
-        }
-      }
-     while (true);
-  };
-  function SwaggerGeneratorInterface$registerRoutes$lambda_0(closure$model, closure$arguments) {
+  function SwaggerGeneratorInterface$registerRoutes$lambda(closure$model, closure$arguments) {
     return function ($receiver) {
       $receiver.line_61zpoe$('registerRoutes(' + closure$model.info.classNameServer + '(' + closure$arguments.instances + '))');
       return Unit;
@@ -12929,8 +13129,8 @@
   }
   SwaggerGeneratorInterface.prototype.registerRoutes_pro3mw$ = function ($receiver, info, model, arguments_0) {
     addImport($receiver, 'io.ktor.swagger.experimental.*');
-    $receiver.fileBinary_qk5z91$('src/io/ktor/swagger/experimental/SwaggerUtils.kt', void 0, void 0, SwaggerGeneratorInterface$registerRoutes$lambda(info));
-    addRoute($receiver, SwaggerGeneratorInterface$registerRoutes$lambda_0(model, arguments_0));
+    this.addSwaggerUtils_gtq0m3$($receiver, info);
+    addRoute($receiver, SwaggerGeneratorInterface$registerRoutes$lambda(model, arguments_0));
   };
   function SwaggerGeneratorInterface$renderResponse$lambda(closure$response) {
     return function ($receiver) {
@@ -13360,58 +13560,7 @@
     SwaggerGeneratorRaw_instance = this;
     SwaggerGeneratorBase.call(this);
   }
-  function SwaggerGeneratorRaw$registerRoutes$lambda(closure$info_0) {
-    return function (continuation_0, suspended) {
-      var instance = new Coroutine$SwaggerGeneratorRaw$registerRoutes$lambda(closure$info_0, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
-  function Coroutine$SwaggerGeneratorRaw$registerRoutes$lambda(closure$info_0, continuation_0) {
-    CoroutineImpl.call(this, continuation_0);
-    this.exceptionState_0 = 1;
-    this.local$closure$info = closure$info_0;
-  }
-  Coroutine$SwaggerGeneratorRaw$registerRoutes$lambda.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: null,
-    interfaces: [CoroutineImpl]
-  };
-  Coroutine$SwaggerGeneratorRaw$registerRoutes$lambda.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$SwaggerGeneratorRaw$registerRoutes$lambda.prototype.constructor = Coroutine$SwaggerGeneratorRaw$registerRoutes$lambda;
-  Coroutine$SwaggerGeneratorRaw$registerRoutes$lambda.prototype.doResume = function () {
-    do
-      try {
-        switch (this.state_0) {
-          case 0:
-            this.state_0 = 2;
-            this.result_0 = this.local$closure$info.fetch('swagger/SwaggerUtils.kt.txt', this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 1:
-            throw this.exception_0;
-          case 2:
-            return this.result_0;
-          default:this.state_0 = 1;
-            throw new Error('State Machine Unreachable execution');
-        }
-      }
-       catch (e) {
-        if (this.state_0 === 1) {
-          this.exceptionState_0 = this.state_0;
-          throw e;
-        }
-         else {
-          this.state_0 = this.exceptionState_0;
-          this.exception_0 = e;
-        }
-      }
-     while (true);
-  };
-  function SwaggerGeneratorRaw$registerRoutes$lambda_0(closure$model, closure$arguments) {
+  function SwaggerGeneratorRaw$registerRoutes$lambda(closure$model, closure$arguments) {
     return function ($receiver) {
       var $receiver_0 = closure$model.info.classNameServer + '(' + closure$arguments.instances + ').apply';
       var rafter = ''.length === 0 ? '' : ' ' + '';
@@ -13435,8 +13584,8 @@
   }
   SwaggerGeneratorRaw.prototype.registerRoutes_pro3mw$ = function ($receiver, info, model, arguments_0) {
     addImport($receiver, 'io.ktor.swagger.experimental.*');
-    $receiver.fileBinary_qk5z91$('src/io/ktor/swagger/experimental/SwaggerUtils.kt', void 0, void 0, SwaggerGeneratorRaw$registerRoutes$lambda(info));
-    addRoute($receiver, SwaggerGeneratorRaw$registerRoutes$lambda_0(model, arguments_0));
+    this.addSwaggerUtils_gtq0m3$($receiver, info);
+    addRoute($receiver, SwaggerGeneratorRaw$registerRoutes$lambda(model, arguments_0));
   };
   function SwaggerGeneratorRaw$fileSwaggerBackendHandler$lambda$lambda(closure$info) {
     return function ($receiver) {
@@ -17509,24 +17658,27 @@
     }
     return out.toString();
   }
-  function generate(subject, blocks, continuation) {
-    return generate_0(subject, copyToArray(toList_0(blocks)).slice(), continuation);
+  function generate(subject, blocks, config, continuation) {
+    if (config === void 0)
+      config = null;
+    return generate_0(subject, copyToArray(toList_0(blocks)).slice(), config, continuation);
   }
-  function generate_0(subject_0, blocks_0, continuation_0, suspended) {
-    var instance = new Coroutine$generate(subject_0, blocks_0, continuation_0);
+  function generate_0(subject_0, blocks_0, config_0, continuation_0, suspended) {
+    var instance = new Coroutine$generate(subject_0, blocks_0, config_0, continuation_0);
     if (suspended)
       return instance;
     else
       return instance.doResume(null);
   }
-  function Coroutine$generate(subject_0, blocks_0, continuation_0) {
+  function Coroutine$generate(subject_0, blocks_0, config_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
-    this.local$tmp$_0 = void 0;
+    this.local$tmp$_2 = void 0;
     this.local$out = void 0;
     this.local$file = void 0;
     this.local$subject = subject_0;
     this.local$blocks = blocks_0;
+    this.local$config = config_0;
   }
   Coroutine$generate.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -17540,28 +17692,30 @@
       try {
         switch (this.state_0) {
           case 0:
-            var tmp$;
+            if (this.local$config === void 0)
+              this.local$config = null;
+            var tmp$, tmp$_0, tmp$_1;
             this.local$out = LinkedHashMap_init();
-            var bb = new BlockBuilder(this.local$subject);
-            for (tmp$ = 0; tmp$ !== this.local$blocks.length; ++tmp$) {
-              var block = this.local$blocks[tmp$];
+            var bb = new BlockBuilder(this.local$subject, (tmp$_0 = this.local$config != null ? this.local$config : Kotlin.isType(tmp$ = this.local$subject, BlockBuilder$Config) ? tmp$ : null) != null ? tmp$_0 : new BlockBuilder$Config());
+            for (tmp$_1 = 0; tmp$_1 !== this.local$blocks.length; ++tmp$_1) {
+              var block = this.local$blocks[tmp$_1];
               bb.visit_z5skon$(block);
             }
 
-            this.local$tmp$_0 = bb.files.entries.iterator();
+            this.local$tmp$_2 = bb.files.entries.iterator();
             this.state_0 = 2;
             continue;
           case 1:
             throw this.exception_0;
           case 2:
-            if (!this.local$tmp$_0.hasNext()) {
+            if (!this.local$tmp$_2.hasNext()) {
               this.state_0 = 4;
               continue;
             }
 
-            var tmp$_0 = this.local$tmp$_0.next();
-            this.local$file = tmp$_0.key;
-            var gen = tmp$_0.value;
+            var tmp$_2 = this.local$tmp$_2.next();
+            this.local$file = tmp$_2.key;
+            var gen = tmp$_2.value;
             this.state_0 = 3;
             this.result_0 = gen(this);
             if (this.result_0 === COROUTINE_SUSPENDED)
@@ -17688,14 +17842,25 @@
     simpleName: 'FileResult',
     interfaces: []
   };
-  function BlockBuilder(subject) {
+  function BlockBuilder(subject, config) {
     this.subject = subject;
+    this.config = config;
     this.$delegate_ts3nbg$_0 = new Extra$Mixin();
     this.blockInstances = LinkedHashMap_init();
     this.files = LinkedHashMap_init();
     this.currentBlock = null;
     this.visited_7kwj06$_0 = HashSet_init();
   }
+  function BlockBuilder$Config() {
+  }
+  BlockBuilder$Config.prototype.transform_66iv3j$ = function (data, charset) {
+    return data;
+  };
+  BlockBuilder$Config.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Config',
+    interfaces: []
+  };
   BlockBuilder.prototype.getSlotInstance_aiiv2x$ = function (slot) {
     var tmp$;
     var $receiver = this.blockInstances;
@@ -17839,22 +18004,24 @@
   BlockBuilder.prototype.expandTabs_44n53b$_0 = function ($receiver) {
     return replace($receiver, '\t', '    ');
   };
-  function BlockBuilder$fileBinary$lambda(closure$name_0, closure$callback_0, closure$mode_0, closure$charset_0) {
+  function BlockBuilder$fileBinary$lambda(closure$name_0, this$BlockBuilder_0, closure$callback_0, closure$charset_0, closure$mode_0) {
     return function (continuation_0, suspended) {
-      var instance = new Coroutine$BlockBuilder$fileBinary$lambda(closure$name_0, closure$callback_0, closure$mode_0, closure$charset_0, continuation_0);
+      var instance = new Coroutine$BlockBuilder$fileBinary$lambda(closure$name_0, this$BlockBuilder_0, closure$callback_0, closure$charset_0, closure$mode_0, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
-  function Coroutine$BlockBuilder$fileBinary$lambda(closure$name_0, closure$callback_0, closure$mode_0, closure$charset_0, continuation_0) {
+  function Coroutine$BlockBuilder$fileBinary$lambda(closure$name_0, this$BlockBuilder_0, closure$callback_0, closure$charset_0, closure$mode_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
     this.local$closure$name = closure$name_0;
+    this.local$this$BlockBuilder = this$BlockBuilder_0;
     this.local$closure$callback = closure$callback_0;
-    this.local$closure$mode = closure$mode_0;
     this.local$closure$charset = closure$charset_0;
+    this.local$closure$mode = closure$mode_0;
+    this.local$tmp$ = void 0;
   }
   Coroutine$BlockBuilder$fileBinary$lambda.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -17869,6 +18036,7 @@
         switch (this.state_0) {
           case 0:
             var tmp$;
+            this.local$tmp$ = this.local$this$BlockBuilder.config;
             this.state_0 = 2;
             this.result_0 = this.local$closure$callback(this);
             if (this.result_0 === COROUTINE_SUSPENDED)
@@ -17877,7 +18045,7 @@
           case 1:
             throw this.exception_0;
           case 2:
-            tmp$ = this.result_0;
+            tmp$ = this.local$tmp$.transform_66iv3j$(this.result_0, this.local$closure$charset);
             return new FileResult(this.local$closure$name, tmp$, this.local$closure$mode, this.local$closure$charset);
           default:this.state_0 = 1;
             throw new Error('State Machine Unreachable execution');
@@ -17900,7 +18068,7 @@
       charset = null;
     if (mode === void 0)
       mode = toInt('644', 8);
-    this.files.put_xwzc9p$(name, BlockBuilder$fileBinary$lambda(name, callback, mode, charset));
+    this.files.put_xwzc9p$(name, BlockBuilder$fileBinary$lambda(name, this, callback, charset, mode));
   };
   function BlockBuilder$block$lambda(closure$instance) {
     return function ($receiver) {
@@ -19837,14 +20005,10 @@
   Object.defineProperty(package$start, 'Repos', {
     get: Repos_getInstance
   });
-  Object.defineProperty(package$start, 'KOTLIN_VERSION', {
-    get: function () {
-      return KOTLIN_VERSION;
-    }
-  });
   Object.defineProperty(package$start, 'Versions', {
     get: Versions_getInstance
   });
+  package$start.KtorVersion = KtorVersion;
   var package$features = package$start.features || (package$start.features = {});
   Object.defineProperty(package$features, 'ALL_SERVER_FEATURES', {
     get: get_ALL_SERVER_FEATURES
@@ -20176,6 +20340,7 @@
   Object.defineProperty(package$project, 'BuildFiles', {
     get: BuildFiles_getInstance
   });
+  package$project.getAllReposToInclude_ark8iq$ = getAllReposToInclude;
   package$project.get_reposToInclude_v6fwbs$ = get_reposToInclude;
   package$project.get_compileDependencies_v6fwbs$ = get_compileDependencies;
   package$project.get_testDependencies_v6fwbs$ = get_testDependencies;
@@ -20408,12 +20573,13 @@
   package$util.Stack = Stack;
   package$util.StrReader = StrReader;
   package$util.readStringLit_4ve410$ = readStringLit;
-  package$util.generate_maf521$ = generate;
-  package$util.generate_xte3qv$ = generate_0;
+  package$util.generate_59e3u8$ = generate;
+  package$util.generate_etscoe$ = generate_0;
   package$util.BlockSlot = BlockSlot;
   SlotInstance.RenderBlock = SlotInstance$RenderBlock;
   package$util.SlotInstance = SlotInstance;
   package$util.FileResult = FileResult;
+  BlockBuilder.Config = BlockBuilder$Config;
   package$util.BlockBuilder = BlockBuilder;
   package$util.Block = Block;
   package$util.ByteArrayOutputStream = ByteArrayOutputStream;
@@ -20508,7 +20674,6 @@
   package$util.get_hours_t5kl13$ = get_hours;
   package$util.get_minutes_t5kl13$ = get_minutes;
   package$util.get_seconds_t5kl13$ = get_seconds;
-  KOTLIN_VERSION = '1.2.71';
   ALL_SERVER_FEATURES = lazy(ALL_SERVER_FEATURES$lambda);
   ALL_CLIENT_FEATURES = lazy(ALL_CLIENT_FEATURES$lambda);
   ALL_FEATURES = listOf_0([CoreClientEngine_getInstance(), ApacheClientEngine_getInstance(), CioClientEngine_getInstance(), JettyClientEngine_getInstance(), MockClientEngine_getInstance(), AuthBasicClientFeature_getInstance(), JsonClientFeature_getInstance(), WebSocketClientFeature_getInstance(), HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), AuthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), WebjarsFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);

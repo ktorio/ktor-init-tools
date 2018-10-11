@@ -55,12 +55,11 @@
   var removeSuffix = Kotlin.kotlin.text.removeSuffix_gsj5wt$;
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var println = Kotlin.kotlin.io.println_s8jyv4$;
-  var SemVer = $module$ktor_generator.io.ktor.start.util.SemVer;
   var KtorEngine = $module$ktor_generator.io.ktor.start.KtorEngine;
   var BuildInfo = $module$ktor_generator.io.ktor.start.BuildInfo;
   var project = $module$ktor_generator.io.ktor.start.project;
   var listOf_0 = Kotlin.kotlin.collections.listOf_mh5how$;
-  var generate = $module$ktor_generator.io.ktor.start.util.generate_maf521$;
+  var generate = $module$ktor_generator.io.ktor.start.util.generate_59e3u8$;
   var setOf = Kotlin.kotlin.collections.setOf_i5x0yv$;
   var contains = Kotlin.kotlin.text.contains_li3zpu$;
   var equals = Kotlin.equals;
@@ -830,7 +829,7 @@
     updateIndeterminate(dependencies);
   }
   function updateHash() {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5;
     var items = LinkedHashMap_init();
     if (!get_includeWrapper()) {
       var key = 'no_wrapper';
@@ -850,40 +849,40 @@
       }
     }
     var str_0 = '#ktor-engine';
-    var ktorEngine = jQuery(str_0).val();
+    var ktorEngine = (tmp$_0 = jQuery(str_0).val()) != null ? tmp$_0 : defaultKtorEngine;
     if (ktorEngine != defaultKtorEngine) {
       var key_1 = 'ktor-engine';
       var value_0 = arrayListOf([ktorEngine]);
       items.put_xwzc9p$(key_1, value_0);
     }
     var str_1 = '#ktor-version';
-    var ktorVersion = jQuery(str_1).val();
+    var ktorVersion = (tmp$_1 = jQuery(str_1).val()) != null ? tmp$_1 : defaultKtorVersion;
     if (ktorVersion != defaultKtorVersion) {
       var key_2 = 'ktor-version';
       var value_1 = arrayListOf([ktorVersion]);
       items.put_xwzc9p$(key_2, value_1);
     }
     var str_2 = '#project-type';
-    var projectType = jQuery(str_2).val();
+    var projectType = (tmp$_2 = jQuery(str_2).val()) != null ? tmp$_2 : ProjectType.Gradle;
     if (projectType != 'gradle') {
       var key_3 = 'project-type';
       var value_2 = arrayListOf([projectType]);
       items.put_xwzc9p$(key_3, value_2);
     }
-    tmp$_0 = listOf([to(artifactGroupId, defaultArtifactGroup), to(artifactNameId, defaultArtifactName), to(artifactVersionId, defaultArtifactVersion)]).iterator();
-    while (tmp$_0.hasNext()) {
-      var tmp$_3 = tmp$_0.next();
-      var key_4 = tmp$_3.component1()
-      , default_0 = tmp$_3.component2();
+    tmp$_3 = listOf([to(artifactGroupId, defaultArtifactGroup), to(artifactNameId, defaultArtifactName), to(artifactVersionId, defaultArtifactVersion)]).iterator();
+    while (tmp$_3.hasNext()) {
+      var tmp$_6 = tmp$_3.next();
+      var key_4 = tmp$_6.component1()
+      , default_0 = tmp$_6.component2();
       var str_3 = jQuery('#' + key_4).val();
       if (str_3 != default_0) {
         var value_3 = arrayListOf([str_3]);
         items.put_xwzc9p$(key_4, value_3);
       }
     }
-    window.history.pushState(jsObject([]), document.title, ((tmp$_1 = document.location) != null ? tmp$_1.pathname : null) + '#' + formUrlEncode(items));
+    window.history.pushState(jsObject([]), document.title, ((tmp$_4 = document.location) != null ? tmp$_4.pathname : null) + '#' + formUrlEncode(items));
     try {
-      window.top.postMessage(jsObject([to('type', 'updateHash'), to('value', (tmp$_2 = document.location) != null ? tmp$_2.hash : null)]), '*');
+      window.top.postMessage(jsObject([to('type', 'updateHash'), to('value', (tmp$_5 = document.location) != null ? tmp$_5.hash : null)]), '*');
     }
      catch (e) {
       console.error(e);
@@ -1116,7 +1115,7 @@
       try {
         switch (this.state_0) {
           case 0:
-            var tmp$;
+            var tmp$, tmp$_0;
             var str = '#project-type';
             this.local$projectType = jQuery(str).val();
             var str_0 = '#ktor-engine';
@@ -1137,10 +1136,10 @@
             println('artifactVersion: ' + artifactVersion);
             var $receiver = features.ALL_FEATURES;
             var destination = ArrayList_init();
-            var tmp$_0;
-            tmp$_0 = $receiver.iterator();
-            while (tmp$_0.hasNext()) {
-              var element = tmp$_0.next();
+            var tmp$_1;
+            tmp$_1 = $receiver.iterator();
+            while (tmp$_1.hasNext()) {
+              var element = tmp$_1.next();
               var str_2 = '#artifact-' + element.id;
               if (jQuery(str_2).prop('checked'))
                 destination.add_11rb$(element);
@@ -1154,22 +1153,22 @@
               println('DEPENDENCY: ' + dependency + ' :: include=' + toInclude);
             }
 
-            this.local$info = new BuildInfo(get_includeWrapper(), ProjectType.Companion.invoke_61zpoe$(this.local$projectType), new SemVer(ktorVersion), this.local$artifactName, this.local$artifactGroup, artifactVersion, KtorEngine.Companion.invoke_61zpoe$(this.local$ktorEngine), void 0, void 0, build$lambda);
+            this.local$info = new BuildInfo(get_includeWrapper(), ProjectType.Companion.invoke_61zpoe$(this.local$projectType), (tmp$_0 = start.Versions.fromString_61zpoe$(ktorVersion)) != null ? tmp$_0 : start.Versions.LAST, this.local$artifactName, this.local$artifactGroup, artifactVersion, KtorEngine.Companion.invoke_61zpoe$(this.local$ktorEngine), void 0, void 0, build$lambda);
             this.exceptionState_0 = 2;
             this.local$zb = new ZipBuilder_init();
-            var tmp$_1;
+            var tmp$_2;
             this.state_0 = 1;
-            this.result_0 = generate(this.local$info, plus(plus(listOf_0(project.ApplicationKt), dependenciesToInclude), swaggerGenerators), this);
+            this.result_0 = generate(this.local$info, plus(plus(listOf_0(project.ApplicationKt), dependenciesToInclude), swaggerGenerators), void 0, this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;
           case 1:
             var files = this.result_0;
-            tmp$_1 = files.entries.iterator();
-            while (tmp$_1.hasNext()) {
-              var tmp$_2 = tmp$_1.next();
-              var file = tmp$_2.key;
-              var result = tmp$_2.value;
+            tmp$_2 = files.entries.iterator();
+            while (tmp$_2.hasNext()) {
+              var tmp$_3 = tmp$_2.next();
+              var file = tmp$_3.key;
+              var result = tmp$_3.value;
               var rname = this.local$info.artifactName + '/' + file;
               if (this.local$dev) {
                 console.warn('ADD file: ' + rname);
