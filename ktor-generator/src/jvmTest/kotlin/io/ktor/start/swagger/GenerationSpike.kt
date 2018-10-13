@@ -16,7 +16,7 @@ object GenerationSpike {
             val model = SwaggerModel.parseJson(swaggerJson)
             generate(info.copy(
                 //ktorVersion = Versions.LAST
-                ktorVersion = Versions.V100_alpha_2
+                ktorVersion = Versions.V100_alpha_3
             ), SwaggerGenerator(model, info.swaggerGenKind)).writeToFolder(testProjectRoot)
             //println("RESULT: ${result.tasks.joinToString(", ") { it.path }}")
         }

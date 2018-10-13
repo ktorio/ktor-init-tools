@@ -139,7 +139,7 @@ class IntegrationTests {
             org.gradle.testkit.runner.GradleRunner.create()
                 .withProjectDir(testProjectRoot)
                 .withGradleVersion(GRADLE_VERSION)
-                .withArguments("check")
+                .withArguments("-i", "check")
                 .forwardOutput()
                 .build()
         }
