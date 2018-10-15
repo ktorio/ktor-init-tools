@@ -108,7 +108,17 @@ object MockClientEngine : ClientEngine(CoreClientEngine, ApplicationTestKt) {
                         +"MockHttpResponse(call, HttpStatusCode.NotFound, ByteReadChannel(\"Not Found \${url.encodedPath}\"))"
                     }
                 }
-                +"})"
+
+                if (info.ktorVer >= Versions.V100_alpha_4) {
+                    +"}) {"
+                    indent {
+                        +"expectSuccess = false"
+                    }
+                    +"}"
+                } else {
+                    +"})"
+                }
+
 
                 +"assertEquals(byteArrayOf(1, 2, 3).toList(), client.get<ByteArray>(\"/\").toList())"
                 +"assertEquals(\"MyValue\", client.call(\"/\").response.headers[\"X-MyHeader\"])"
