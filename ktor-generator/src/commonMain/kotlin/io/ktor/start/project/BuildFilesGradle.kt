@@ -75,14 +75,18 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                     +""
                     +"kotlin.experimental.coroutines = Coroutines.ENABLE"
                 }
+                +""
+                +"kotlin.sourceSets[\"main\"].kotlin.srcDirs(\"src\")"
+                +"kotlin.sourceSets[\"test\"].kotlin.srcDirs(\"test\")"
                 if (!is100OrGreater) {
                     +""
                     +"sourceSets[\"main\"].resources.srcDirs(\"resources\")"
                     +"sourceSets[\"test\"].resources.srcDirs(\"testresources\")"
+                } else {
+                    +""
+                    +"kotlin.sourceSets[\"main\"].resources.srcDirs(\"resources\")"
+                    +"kotlin.sourceSets[\"test\"].resources.srcDirs(\"testresources\")"
                 }
-                +""
-                +"kotlin.sourceSets[\"main\"].kotlin.srcDirs(\"src\")"
-                +"kotlin.sourceSets[\"test\"].kotlin.srcDirs(\"test\")"
             }
             fileText("settings.gradle.kts") {
                 if (is100OrGreater) {
