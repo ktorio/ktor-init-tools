@@ -55,8 +55,8 @@ object RawSocketsTlsFeature : ServerFeature(ApplicationKt, RawSocketsFeature) {
                             +"val selectorManager = ActorSelectorManager(ioCoroutineDispatcher)"
                             +"val socket = aSocket(selectorManager).tcp().connect(\"www.google.com\", port = 443).tls(coroutineContext = coroutineContext)"
                             +"val write = socket.openWriteChannel()"
-                            +"val LINE = \"\\r\\n\""
-                            +"write.writeStringUtf8(\"GET / HTTP/1.1\${LINE}Host: www.google.com\${LINE}Connection: close\${LINE}\${LINE}\")"
+                            +"val EOL = \"\\r\\n\""
+                            +"write.writeStringUtf8(\"GET / HTTP/1.1\${EOL}Host: www.google.com\${EOL}Connection: close\${EOL}\${EOL}\")"
                             +"write.flush()"
                             +"println(socket.openReadChannel().readRemaining().readBytes().toString(Charsets.UTF_8))"
                         }
