@@ -4102,9 +4102,11 @@
     this.V094 = new KtorVersion('0.9.4', '1.2.61');
     this.V095 = new KtorVersion('0.9.5', '1.2.70');
     this.V100_alpha_2 = new KtorVersion('1.0.0-alpha-2', '1.3.0-rc-131', listOf('https://kotlin.bintray.com/kotlin-eap'));
-    this.ALL = [this.V094, this.V100_alpha_2, this.V095];
-    this.LAST = this.V095;
-    this.LAST_BETA = this.V100_alpha_2;
+    this.V100_alpha_3 = new KtorVersion('1.0.0-alpha-3', '1.3.0-rc-131', listOf('https://kotlin.bintray.com/kotlin-eap'));
+    this.V100_beta_1 = new KtorVersion('1.0.0-beta-1', '1.3.0-rc-131', listOf('https://kotlin.bintray.com/kotlin-eap'));
+    this.ALL = [this.V095, this.V100_beta_1];
+    this.LAST = this.V100_beta_1;
+    this.LAST_EAP = this.V100_alpha_3;
     var $receiver = this.ALL;
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
     var destination = LinkedHashMap_init_0(capacity);
@@ -4658,8 +4660,8 @@
           $receiver.line_61zpoe$('val selectorManager = ActorSelectorManager(ioCoroutineDispatcher)');
           $receiver.line_61zpoe$('val socket = aSocket(selectorManager).tcp().connect("www.google.com", port = 443).tls(coroutineContext = coroutineContext)');
           $receiver.line_61zpoe$('val write = socket.openWriteChannel()');
-          $receiver.line_61zpoe$('val LINE = "\\r\\n"');
-          $receiver.line_61zpoe$('write.writeStringUtf8("GET / HTTP/1.1${LINE}Host: www.google.com${LINE}Connection: close${LINE}${LINE}")');
+          $receiver.line_61zpoe$('val EOL = "\\r\\n"');
+          $receiver.line_61zpoe$('write.writeStringUtf8("GET / HTTP/1.1${EOL}Host: www.google.com${EOL}Connection: close${EOL}${EOL}")');
           $receiver.line_61zpoe$('write.flush()');
           $receiver.line_61zpoe$('println(socket.openReadChannel().readRemaining().readBytes().toString(Charsets.UTF_8))');
         }
@@ -5058,64 +5060,80 @@
       return this.testArtifacts_o0ceoa$_0;
     }
   });
-  function MockClientEngine$renderFeature$lambda($receiver) {
-    var $receiver_0 = 'runBlocking';
-    var rafter = ''.length === 0 ? '' : ' ' + '';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
-    $receiver._indent();
-    try {
-      $receiver.line_61zpoe$('val client = HttpClient(MockEngine { call ->');
+  function MockClientEngine$renderFeature$lambda(closure$info) {
+    return function ($receiver) {
+      var $receiver_0 = 'runBlocking';
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
       $receiver._indent();
       try {
-        var $receiver_1 = 'if (url.encodedPath == "/")';
-        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
-        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+        var closure$info_0 = closure$info;
+        $receiver.line_61zpoe$('val client = HttpClient(MockEngine { call ->');
         $receiver._indent();
         try {
-          $receiver.line_61zpoe$('MockHttpResponse(call, HttpStatusCode.OK, ByteReadChannel(byteArrayOf(1, 2, 3)), headersOf("X-MyHeader", "MyValue"))');
+          var $receiver_1 = 'if (url.encodedPath == "/")';
+          var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+          $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+          $receiver._indent();
+          try {
+            $receiver.line_61zpoe$('MockHttpResponse(call, HttpStatusCode.OK, ByteReadChannel(byteArrayOf(1, 2, 3)), headersOf("X-MyHeader", "MyValue"))');
+          }
+          finally {
+            $receiver._unindent();
+          }
+          $receiver.line_61zpoe$('}' + '');
+          unaryPlus_0($receiver);
+          var tmp$, tmp$_0;
+          var tmp$_1;
+          if ((tmp$_0 = Kotlin.isType(tmp$ = lastOrNull($receiver.actions), Indenter$Action$Line) ? tmp$ : null) != null)
+            tmp$_1 = tmp$_0;
+          else {
+            throw IllegalStateException_init('Expected a line'.toString());
+          }
+          var lastAction = tmp$_1;
+          if (!equals(lastAction.str, '}')) {
+            throw IllegalStateException_init("Expected a '}'".toString());
+          }
+          $receiver.actions.removeAt_za3lpa$($receiver.actions.size - 1 | 0);
+          var str = '} ' + 'else';
+          $receiver.line_61zpoe$(str.length === 0 ? '{' : str + ' {');
+          $receiver._indent();
+          try {
+            $receiver.line_61zpoe$('MockHttpResponse(call, HttpStatusCode.NotFound, ByteReadChannel("Not Found ${url.encodedPath}"))');
+          }
+          finally {
+            $receiver._unindent();
+          }
+          $receiver.line_61zpoe$('}');
         }
         finally {
           $receiver._unindent();
         }
-        $receiver.line_61zpoe$('}' + '');
-        unaryPlus_0($receiver);
-        var tmp$, tmp$_0;
-        var tmp$_1;
-        if ((tmp$_0 = Kotlin.isType(tmp$ = lastOrNull($receiver.actions), Indenter$Action$Line) ? tmp$ : null) != null)
-          tmp$_1 = tmp$_0;
-        else {
-          throw IllegalStateException_init('Expected a line'.toString());
+        if (closure$info_0.ktorVer.compareTo_11rb$(Versions_getInstance().V100_beta_1) >= 0) {
+          $receiver.line_61zpoe$('}) {');
+          $receiver._indent();
+          try {
+            $receiver.line_61zpoe$('expectSuccess = false');
+          }
+          finally {
+            $receiver._unindent();
+          }
+          $receiver.line_61zpoe$('}');
         }
-        var lastAction = tmp$_1;
-        if (!equals(lastAction.str, '}')) {
-          throw IllegalStateException_init("Expected a '}'".toString());
+         else {
+          $receiver.line_61zpoe$('})');
         }
-        $receiver.actions.removeAt_za3lpa$($receiver.actions.size - 1 | 0);
-        var str = '} ' + 'else';
-        $receiver.line_61zpoe$(str.length === 0 ? '{' : str + ' {');
-        $receiver._indent();
-        try {
-          $receiver.line_61zpoe$('MockHttpResponse(call, HttpStatusCode.NotFound, ByteReadChannel("Not Found ${url.encodedPath}"))');
-        }
-        finally {
-          $receiver._unindent();
-        }
-        $receiver.line_61zpoe$('}');
+        $receiver.line_61zpoe$('assertEquals(byteArrayOf(1, 2, 3).toList(), client.get<ByteArray>("/").toList())');
+        $receiver.line_61zpoe$('assertEquals("MyValue", client.call("/").response.headers["X-MyHeader"])');
+        $receiver.line_61zpoe$('assertEquals("Not Found other/path", client.get<String>("/other/path"))');
       }
       finally {
         $receiver._unindent();
       }
-      $receiver.line_61zpoe$('})');
-      $receiver.line_61zpoe$('assertEquals(byteArrayOf(1, 2, 3).toList(), client.get<ByteArray>("/").toList())');
-      $receiver.line_61zpoe$('assertEquals("MyValue", client.call("/").response.headers["X-MyHeader"])');
-      $receiver.line_61zpoe$('assertEquals("Not Found other/path", client.get<String>("/other/path"))');
-    }
-    finally {
-      $receiver._unindent();
-    }
-    $receiver.line_61zpoe$('}' + '');
-    unaryPlus_0($receiver);
-    return Unit;
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+      return Unit;
+    };
   }
   MockClientEngine.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addTestImport($receiver, 'io.ktor.client.engine.mock.*');
@@ -5124,7 +5142,7 @@
     addTestImport($receiver, 'kotlinx.coroutines.experimental.io.*');
     addTestImport($receiver, 'io.ktor.client.request.*');
     addTestImport($receiver, 'io.ktor.client.call.*');
-    addTestMethod($receiver, 'testClientMock', MockClientEngine$renderFeature$lambda);
+    addTestMethod($receiver, 'testClientMock', MockClientEngine$renderFeature$lambda(info));
   };
   MockClientEngine.$metadata$ = {
     kind: Kind_OBJECT,
@@ -9877,15 +9895,20 @@
               this.local$$receiver.line_61zpoe$('kotlin.experimental.coroutines = Coroutines.ENABLE');
             }
 
+            this.local$$receiver.line_61zpoe$('');
+            this.local$$receiver.line_61zpoe$('kotlin.sourceSets["main"].kotlin.srcDirs("src")');
+            this.local$$receiver.line_61zpoe$('kotlin.sourceSets["test"].kotlin.srcDirs("test")');
             if (!this.local$closure$is100OrGreater) {
               this.local$$receiver.line_61zpoe$('');
               this.local$$receiver.line_61zpoe$('sourceSets["main"].resources.srcDirs("resources")');
-              this.local$$receiver.line_61zpoe$('sourceSets["test"].resources.srcDirs("testresources")');
+              return this.local$$receiver.line_61zpoe$('sourceSets["test"].resources.srcDirs("testresources")');
+            }
+             else {
+              this.local$$receiver.line_61zpoe$('');
+              this.local$$receiver.line_61zpoe$('kotlin.sourceSets["main"].resources.srcDirs("resources")');
+              return this.local$$receiver.line_61zpoe$('kotlin.sourceSets["test"].resources.srcDirs("testresources")');
             }
 
-            this.local$$receiver.line_61zpoe$('');
-            this.local$$receiver.line_61zpoe$('kotlin.sourceSets["main"].kotlin.srcDirs("src")');
-            return this.local$$receiver.line_61zpoe$('kotlin.sourceSets["test"].kotlin.srcDirs("test")');
           case 1:
             throw this.exception_0;
           default:this.state_0 = 1;
