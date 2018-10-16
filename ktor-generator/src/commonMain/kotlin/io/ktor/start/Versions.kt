@@ -24,10 +24,10 @@ object Versions {
     val V095 = KtorVersion(version = "0.9.5", kotlinVersion = "1.2.70")
     val V100_alpha_2 = KtorVersion(version = "1.0.0-alpha-2", kotlinVersion = "1.3.0-rc-131", extraRepos = listOf("https://kotlin.bintray.com/kotlin-eap"))
     val V100_alpha_3 = KtorVersion(version = "1.0.0-alpha-3", kotlinVersion = "1.3.0-rc-131", extraRepos = listOf("https://kotlin.bintray.com/kotlin-eap"))
-    val V100_alpha_4 = KtorVersion(version = "1.0.0-alpha-4", kotlinVersion = "1.3.0-rc-131", extraRepos = listOf("https://kotlin.bintray.com/kotlin-eap"))
-    val ALL = arrayOf(V094, V100_alpha_3, V095)
-    val LAST = V095
-    val LAST_BETA = V100_alpha_3
+    val V100_beta_1 = KtorVersion(version = "1.0.0-beta-1", kotlinVersion = "1.3.0-rc-131", extraRepos = listOf("https://kotlin.bintray.com/kotlin-eap"))
+    val ALL = arrayOf(V095, V100_beta_1)
+    val LAST = V100_beta_1
+    val LAST_EAP = V100_alpha_3
 
     private val VMAP = ALL.associate { it.version to it }
 

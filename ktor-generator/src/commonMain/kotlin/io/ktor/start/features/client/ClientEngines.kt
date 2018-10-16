@@ -109,7 +109,7 @@ object MockClientEngine : ClientEngine(CoreClientEngine, ApplicationTestKt) {
                     }
                 }
 
-                if (info.ktorVer >= Versions.V100_alpha_4) {
+                if (info.ktorVer >= Versions.V100_beta_1) {
                     +"}) {"
                     indent {
                         +"expectSuccess = false"

@@ -129,7 +129,7 @@ class IntegrationTests {
         val testProjectRoot = testProjectDir.root
         //val testProjectRoot = File("/tmp/normal-gradle")
 
-        val info = info.copy(ktorVersion = Versions.LAST_BETA)
+        val info = info.copy(ktorVersion = Versions.LAST_EAP)
         val features = ALL_FEATURES
 
         runGenerationTestBlocking(info, features) {
@@ -151,7 +151,7 @@ class IntegrationTests {
         //val testProjectRoot = File("/tmp/swagger-gen")
 
         val model = SwaggerModel.parseJson(getResourceString("/swagger.json")!!)
-        val info = info.copy(projectType = ProjectType.GradleKotlinDsl, ktorVersion = Versions.LAST_BETA)
+        val info = info.copy(projectType = ProjectType.GradleKotlinDsl, ktorVersion = Versions.LAST_EAP)
         val features = ALL_FEATURES + SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE)
 
         runGenerationTestBlocking(info, features) {
