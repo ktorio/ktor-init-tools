@@ -42,10 +42,10 @@
   var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
   var firstOrNull = Kotlin.kotlin.collections.firstOrNull_2p1efm$;
   var ProjectType = $module$ktor_generator.io.ktor.start.ProjectType;
+  var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
   var arrayListOf = Kotlin.kotlin.collections.arrayListOf_i5x0yv$;
   var to = Kotlin.kotlin.to_ujzrz7$;
-  var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var formUrlEncode = $module$ktor_generator.io.ktor.start.util.formUrlEncode_jgmxsd$;
   var FeatureSet = $module$ktor_generator.io.ktor.start.FeatureSet;
   var trim = Kotlin.kotlin.text.trim_wqw3xr$;
@@ -795,13 +795,13 @@
   };
   var Map = Kotlin.kotlin.collections.Map;
   function onHashUpdated(hash) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12, tmp$_13;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12, tmp$_13, tmp$_14;
     var params = parseHash(hash);
     var str = '#include_wrapper';
-    var tmp$_14 = jQuery(str);
+    var tmp$_15 = jQuery(str);
     var key = 'no_wrapper';
-    var tmp$_15;
-    tmp$_14.prop('checked', (Kotlin.isType(tmp$_15 = params, Map) ? tmp$_15 : throwCCE()).containsKey_11rb$(key) ? '' : 'checked');
+    var tmp$_16;
+    tmp$_15.prop('checked', (Kotlin.isType(tmp$_16 = params, Map) ? tmp$_16 : throwCCE()).containsKey_11rb$(key) ? '' : 'checked');
     var str_0 = '#artifact-group';
     jQuery(str_0).val((tmp$_0 = (tmp$ = params.get_11rb$('artifact-group')) != null ? firstOrNull(tmp$) : null) != null ? tmp$_0 : 'com.example');
     var str_1 = '#artifact-name';
@@ -816,20 +816,27 @@
     jQuery(str_5).val((tmp$_10 = (tmp$_9 = params.get_11rb$('ktor-engine')) != null ? firstOrNull(tmp$_9) : null) != null ? tmp$_10 : defaultKtorEngine);
     var str_6 = '#project-type';
     jQuery(str_6).val((tmp$_12 = (tmp$_11 = params.get_11rb$('project-type')) != null ? firstOrNull(tmp$_11) : null) != null ? tmp$_12 : ProjectType.Gradle.id);
-    var dependencies = new DependencyChecker(hash);
-    tmp$_13 = features.ALL_FEATURES.iterator();
+    tmp$_13 = listOf(['server', 'client']).iterator();
     while (tmp$_13.hasNext()) {
-      var dep = tmp$_13.next();
+      var kind = tmp$_13.next();
+      var id = 'show-only-marked-' + kind + '-dependencies';
+      var str_7 = '#' + id;
+      set_checked(jQuery(str_7), params.containsKey_11rb$(id));
+    }
+    var dependencies = new DependencyChecker(hash);
+    tmp$_14 = features.ALL_FEATURES.iterator();
+    while (tmp$_14.hasNext()) {
+      var dep = tmp$_14.next();
       var depId = dep.id;
       var res = dependencies.includeDependency_61zpoe$(depId);
-      var str_7 = '#artifact-' + depId;
-      var item = jQuery(str_7);
+      var str_8 = '#artifact-' + depId;
+      var item = jQuery(str_8);
       set_checked(item, res);
     }
     updateIndeterminate(dependencies);
   }
   function updateHash() {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6;
     var items = LinkedHashMap_init();
     if (!get_includeWrapper()) {
       var key = 'no_wrapper';
@@ -869,20 +876,31 @@
       var value_2 = arrayListOf([projectType]);
       items.put_xwzc9p$(key_3, value_2);
     }
-    tmp$_3 = listOf([to(artifactGroupId, defaultArtifactGroup), to(artifactNameId, defaultArtifactName), to(artifactVersionId, defaultArtifactVersion)]).iterator();
+    tmp$_3 = listOf(['server', 'client']).iterator();
     while (tmp$_3.hasNext()) {
-      var tmp$_6 = tmp$_3.next();
-      var key_4 = tmp$_6.component1()
-      , default_0 = tmp$_6.component2();
-      var str_3 = jQuery('#' + key_4).val();
-      if (str_3 != default_0) {
-        var value_3 = arrayListOf([str_3]);
-        items.put_xwzc9p$(key_4, value_3);
+      var kind = tmp$_3.next();
+      var id = 'show-only-marked-' + kind + '-dependencies';
+      var str_3 = '#' + id;
+      var checked = get_checked(jQuery(str_3));
+      if (checked) {
+        var value_3 = arrayListOf(['']);
+        items.put_xwzc9p$(id, value_3);
       }
     }
-    window.history.pushState(jsObject([]), document.title, ((tmp$_4 = document.location) != null ? tmp$_4.pathname : null) + '#' + formUrlEncode(items));
+    tmp$_4 = listOf([to(artifactGroupId, defaultArtifactGroup), to(artifactNameId, defaultArtifactName), to(artifactVersionId, defaultArtifactVersion)]).iterator();
+    while (tmp$_4.hasNext()) {
+      var tmp$_7 = tmp$_4.next();
+      var key_4 = tmp$_7.component1()
+      , default_0 = tmp$_7.component2();
+      var str_4 = jQuery('#' + key_4).val();
+      if (str_4 != default_0) {
+        var value_4 = arrayListOf([str_4]);
+        items.put_xwzc9p$(key_4, value_4);
+      }
+    }
+    window.history.pushState(jsObject([]), document.title, ((tmp$_5 = document.location) != null ? tmp$_5.pathname : null) + '#' + formUrlEncode(items));
     try {
-      window.top.postMessage(jsObject([to('type', 'updateHash'), to('value', (tmp$_5 = document.location) != null ? tmp$_5.hash : null)]), '*');
+      window.top.postMessage(jsObject([to('type', 'updateHash'), to('value', (tmp$_6 = document.location) != null ? tmp$_6.hash : null)]), '*');
     }
      catch (e) {
       console.error(e);
@@ -1344,13 +1362,17 @@
     handleFiltering_0('server');
     handleFiltering_0('client');
   }
-  function handleFiltering$lambda$lambda(closure$filter) {
+  function doFiltering$lambda(closure$filter, closure$onlyMarked) {
     return function (index, element) {
+      var checkbox = jQuery(element).find("input[type='checkbox']");
       var tmp$ = closure$filter.length === 0;
       if (!tmp$) {
         tmp$ = contains(jQuery(element).text().toLowerCase(), closure$filter);
       }
-      var visible = tmp$;
+      var textMatches = tmp$;
+      var checked = get_checked(checkbox);
+      var indeterminate = jQuery(element).hasClass('indeterminate');
+      var visible = closure$onlyMarked ? (checked || indeterminate) && textMatches : textMatches;
       if (visible) {
         jQuery(element).show();
       }
@@ -1360,18 +1382,36 @@
       return Unit;
     };
   }
-  function handleFiltering$lambda(closure$dependencyFilter, closure$kind) {
+  function doFiltering(kind) {
+    var str = '#dependency-filter-' + kind;
+    var dependencyFilterQuery = jQuery(str);
+    var str_0 = '#show-only-marked-' + kind + '-dependencies';
+    var onlyMarked = get_checked(jQuery(str_0));
+    var filter = dependencyFilterQuery.val().toLowerCase();
+    console.log('doFiltering', kind, filter, onlyMarked);
+    var str_1 = '#dependencies-' + kind + ' label.artifact';
+    jQuery(str_1).each(doFiltering$lambda(filter, onlyMarked));
+  }
+  function handleFiltering$lambda(closure$kind) {
     return function () {
-      var filter = closure$dependencyFilter.val().toLowerCase();
-      var str = '#dependencies-' + closure$kind + ' label.artifact';
-      jQuery(str).each(handleFiltering$lambda$lambda(filter));
+      doFiltering(closure$kind);
+      return Unit;
+    };
+  }
+  function handleFiltering$lambda_0(closure$kind) {
+    return function () {
+      doFiltering(closure$kind);
+      updateHash();
       return Unit;
     };
   }
   function handleFiltering_0(kind) {
     var str = '#dependency-filter-' + kind;
     var dependencyFilter = jQuery(str);
-    dependencyFilter.on('keyup', handleFiltering$lambda(dependencyFilter, kind));
+    dependencyFilter.on('keyup', handleFiltering$lambda(kind));
+    var str_0 = '#show-only-marked-' + kind + '-dependencies';
+    jQuery(str_0).on('click', handleFiltering$lambda_0(kind));
+    doFiltering(kind);
   }
   function removeLoading() {
     var str = '.loading';
@@ -1568,6 +1608,7 @@
   });
   package$start.registerBuildButton = registerBuildButton;
   package$start.handleFiltering = handleFiltering;
+  package$start.doFiltering_61zpoe$ = doFiltering;
   package$start.handleFiltering_61zpoe$ = handleFiltering_0;
   package$start.removeLoading = removeLoading;
   package$start.registerKeyboardUsability = registerKeyboardUsability;
