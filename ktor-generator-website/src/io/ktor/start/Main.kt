@@ -159,6 +159,10 @@ fun onHashUpdated(hash: String) {
     jq("#ktor-version").`val`(params["ktor-version"]?.firstOrNull() ?: defaultKtorVersion)
     jq("#ktor-engine").`val`(params["ktor-engine"]?.firstOrNull() ?: defaultKtorEngine)
     jq("#project-type").`val`(params["project-type"]?.firstOrNull() ?: ProjectType.Gradle.id)
+    for (kind in listOf("server", "client")) {
+        val id = "show-only-marked-$kind-dependencies"
+        jq("#$id").checked = params.containsKey(id)
+    }
     val dependencies = DependencyChecker(hash)
     for (dep in ALL_FEATURES) {
         val depId = dep.id
@@ -186,6 +190,14 @@ fun updateHash() {
 
     val projectType = jq("#project-type").`val`() ?: ProjectType.Gradle
     if (projectType != "gradle") items["project-type"] = arrayListOf(projectType)
+
+    for (kind in listOf("server", "client")) {
+        val id = "show-only-marked-$kind-dependencies"
+        val checked = jq("#$id").checked
+        if (checked) {
+            items[id] = arrayListOf("")
+        }
+    }
 
     for ((key, default) in listOf(
         artifactGroupId to defaultArtifactGroup,
@@ -376,16 +388,31 @@ fun handleFiltering() {
     handleFiltering("client")
 }
 
+fun doFiltering(kind: String) {
+    val dependencyFilterQuery = jq("#dependency-filter-$kind")
+    val onlyMarked = jq("#show-only-marked-$kind-dependencies").checked
+    val filter = dependencyFilterQuery.`val`().unsafeCast<String>().toLowerCase()
+    console.log("doFiltering", kind, filter, onlyMarked)
+    jq("#dependencies-$kind label.artifact").each { index, element ->
+        val checkbox = jq(element).find("input[type='checkbox']")
+        val textMatches = (filter.isEmpty() || jq(element).text().toLowerCase().contains(filter))
+        val checked = checkbox.checked
+        val indeterminate = jq(element).hasClass("indeterminate")
+        val visible = if (onlyMarked) (checked || indeterminate) && textMatches else textMatches
+        if (visible) jq(element).show() else jq(element).hide()
+    }
+}
+
 fun handleFiltering(kind: String) {
     val dependencyFilter = jq("#dependency-filter-$kind")
     dependencyFilter.on("keyup") {
-        val filter = dependencyFilter.`val`().unsafeCast<String>().toLowerCase()
-        jq("#dependencies-$kind label.artifact").each { index, element ->
-            //console.log(thiz, element)
-            val visible = (filter.isEmpty() || jq(element).text().toLowerCase().contains(filter))
-            if (visible) jq(element).show() else jq(element).hide()
-        }
+        doFiltering(kind)
     }
+    jq("#show-only-marked-$kind-dependencies").on("click") {
+        doFiltering(kind)
+        updateHash()
+    }
+    doFiltering(kind)
 }
 
 fun removeLoading() {
