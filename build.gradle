@@ -4,7 +4,6 @@ buildscript {
     repositories {
         mavenLocal()
         jcenter()
-        maven { url "https://dl.bintray.com/soywiz/soywiz/" }
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://dl.bintray.com/jetbrains/kotlin-native-dependencies" }
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
@@ -28,9 +27,9 @@ allprojects {
     repositories {
         mavenLocal()
         jcenter()
-        maven { url "https://dl.bintray.com/soywiz/soywiz/" }
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://dl.bintray.com/jetbrains/kotlin-native-dependencies" }
+        maven { url 'https://dl.bintray.com/kotlin/kotlinx' }
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
         maven { url 'https://dl.bintray.com/kotlin/js-externals' }
     }

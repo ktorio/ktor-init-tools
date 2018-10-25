@@ -176,6 +176,7 @@ class IntegrationTests {
                 callback()
             } catch (e: Throwable) {
                 val folder = File(System.getProperty("java.io.tmpdir") + "/swagger-project")
+                folder.deleteRecursively()
                 println("Writing problematic project to '$folder'")
                 try {
                     generate(info, features).writeToFolder(folder)

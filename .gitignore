@@ -13,3 +13,4 @@
 /ktor-generator/jvm/build
 /ktor-generator-website/build
 /ktor-intellij-plugin/build
+package-lock.json

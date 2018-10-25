@@ -33,12 +33,15 @@ data class BuildInfo(
     val swaggerGenKind: SwaggerGenerator.Kind = SwaggerGenerator.Kind.RAW,
     val fetch: suspend (path: String) -> ByteArray = { TODO("Must set fetch") }
 ) : BlockBuilder.Config() {
+    val is100OrGreater = ktorVersion.semVersion >= SemVer("1.0.0")
+
     val ktorVer = ktorVersion
     val developmentPackage = "io.ktor.server.${ktorEngine.id}"
-    val developmentEngineFQ = "$developmentPackage.DevelopmentEngine"
+    val developmentEngineFQ = when {
+        is100OrGreater -> "$developmentPackage.EngineMain"
+        else -> "$developmentPackage.DevelopmentEngine"
+    }
     val kotlinVersion get() = ktorVersion.semKotlinVersion
-
-    val is100OrGreater = ktorVersion.semVersion >= SemVer("1.0.0")
 
     override fun transform(data: ByteArray, charset: Charset?): ByteArray {
         if (charset == null) return data
@@ -47,6 +50,7 @@ data class BuildInfo(
             content
                 .replace("kotlin.coroutines.experimental.", "kotlin.coroutines.")
                 .replace("kotlinx.coroutines.experimental.", "kotlinx.coroutines.")
+                .replace("// kotlinx.coroutines-1.0.0: // ", "")
         } else {
             content
         }.toByteArray(charset)

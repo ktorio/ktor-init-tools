@@ -60,7 +60,7 @@ class GenerationTest {
                 import io.ktor.routing.*
                 import io.ktor.http.*
 
-                fun main(args: Array<String>): Unit = io.ktor.server.netty.DevelopmentEngine.main(args)
+                fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
                 @Suppress("unused") // Referenced in application.conf
                 @kotlin.jvm.JvmOverloads
@@ -98,9 +98,9 @@ class GenerationTest {
                 import io.ktor.client.features.json.*
                 import io.ktor.client.request.*
                 import java.net.URL
-                import kotlinx.coroutines.experimental.*
+                import kotlinx.coroutines.*
 
-                fun main(args: Array<String>): Unit = io.ktor.server.netty.DevelopmentEngine.main(args)
+                fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
                 @Suppress("unused") // Referenced in application.conf
                 @kotlin.jvm.JvmOverloads

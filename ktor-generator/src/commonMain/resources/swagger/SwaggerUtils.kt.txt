@@ -84,6 +84,7 @@ fun <T : SwaggerBaseApi> createClient(clazz: Class<T>, client: HttpClient, rootU
 
         val pathReplaced = pathPattern.replace { "${rparams[it]?.value}" }
 
+        // kotlinx.coroutines-1.0.0: // kotlinx.coroutines.GlobalScope.apply {
         launch {
             try {
                 val fullUrl = "$rootUrlTrim/$pathReplaced"
@@ -117,6 +118,7 @@ fun <T : SwaggerBaseApi> createClient(clazz: Class<T>, client: HttpClient, rootU
                 cont.resumeWithException(e)
             }
         }
+        // kotlinx.coroutines-1.0.0: // }
         COROUTINE_SUSPENDED
     } as T
 }
