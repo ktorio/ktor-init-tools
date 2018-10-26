@@ -3592,10 +3592,15 @@
     this.generateFeatureSample = generateFeatureSample;
     this.swaggerGenKind = swaggerGenKind;
     this.fetch = fetch;
+    this.is100OrGreater = this.ktorVersion.semVersion.compareTo_11rb$(new SemVer('1.0.0')) >= 0;
     this.ktorVer = this.ktorVersion;
     this.developmentPackage = 'io.ktor.server.' + this.ktorEngine.id;
-    this.developmentEngineFQ = this.developmentPackage + '.DevelopmentEngine';
-    this.is100OrGreater = this.ktorVersion.semVersion.compareTo_11rb$(new SemVer('1.0.0')) >= 0;
+    var tmp$;
+    if (this.is100OrGreater)
+      tmp$ = this.developmentPackage + '.EngineMain';
+    else
+      tmp$ = this.developmentPackage + '.DevelopmentEngine';
+    this.developmentEngineFQ = tmp$;
   }
   Object.defineProperty(BuildInfo.prototype, 'kotlinVersion', {
     get: function () {
@@ -3608,7 +3613,7 @@
       return data;
     var content = toString_1(data, charset);
     if (this.is100OrGreater) {
-      tmp$ = replace(replace(content, 'kotlin.coroutines.experimental.', 'kotlin.coroutines.'), 'kotlinx.coroutines.experimental.', 'kotlinx.coroutines.');
+      tmp$ = replace(replace(replace(content, 'kotlin.coroutines.experimental.', 'kotlin.coroutines.'), 'kotlinx.coroutines.experimental.', 'kotlinx.coroutines.'), '// kotlinx.coroutines-1.0.0: // ', '');
     }
      else {
       tmp$ = content;
@@ -4101,12 +4106,10 @@
     Versions_instance = this;
     this.V094 = new KtorVersion('0.9.4', '1.2.61');
     this.V095 = new KtorVersion('0.9.5', '1.2.70');
-    this.V100_alpha_2 = new KtorVersion('1.0.0-alpha-2', '1.3.0-rc-131', listOf('https://kotlin.bintray.com/kotlin-eap'));
-    this.V100_alpha_3 = new KtorVersion('1.0.0-alpha-3', '1.3.0-rc-131', listOf('https://kotlin.bintray.com/kotlin-eap'));
-    this.V100_beta_1 = new KtorVersion('1.0.0-beta-1', '1.3.0-rc-131', listOf('https://kotlin.bintray.com/kotlin-eap'));
-    this.ALL = [this.V095, this.V100_beta_1];
-    this.LAST = this.V100_beta_1;
-    this.LAST_EAP = this.V100_alpha_3;
+    this.V100_beta_2 = new KtorVersion('1.0.0-beta-2', '1.3.0-rc-146', listOf('https://kotlin.bintray.com/kotlin-eap'));
+    this.ALL = [this.V095, this.V100_beta_2];
+    this.LAST = this.V100_beta_2;
+    this.LAST_EAP = this.V100_beta_2;
     var $receiver = this.ALL;
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
     var destination = LinkedHashMap_init_0(capacity);
@@ -5109,7 +5112,7 @@
         finally {
           $receiver._unindent();
         }
-        if (closure$info_0.ktorVer.compareTo_11rb$(Versions_getInstance().V100_beta_1) >= 0) {
+        if (closure$info_0.ktorVer.compareTo_11rb$(Versions_getInstance().V100_beta_2) >= 0) {
           $receiver.line_61zpoe$('}) {');
           $receiver._indent();
           try {
