@@ -170,6 +170,41 @@ class IntegrationTests {
         }
     }
 
+    @Test
+    fun testResourceAvailabilityKotlinDsl() {
+        val testProjectRoot = testProjectDir.root
+        //val testProjectRoot = File("/tmp/swagger-gen")
+
+        val model = SwaggerModel.parseJson(getResourceString("/swagger.json")!!)
+        val info = info.copy(projectType = ProjectType.GradleKotlinDsl, ktorVersion = Versions.LAST_EAP)
+        val features = ALL_FEATURES + SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE)
+
+        runGenerationTestBlocking(info, features) {
+            generate(info, features).writeToFolder(testProjectRoot)
+
+            testProjectRoot["src/resourcetest.kt"].writeText("""
+                package io.ktor.resourcetest
+
+                object ResourceTest {
+                    @kotlin.jvm.JvmStatic fun main(args: Array<String>) {
+                        check(ResourceTest::class.java.getResourceAsStream("application.conf") != null)
+                    }
+                }
+            """.trimIndent())
+
+            fun String.updateClassName(name: String) = replace(Regex("""mainClassName\s*=\s*"(.*)""""), "mainClassName = ${name.quote()}")
+
+            testProjectRoot["build.gradle.kts"].updateText { it.updateClassName("io.ktor.resourcetest.ResourceTest") }
+
+            val result = org.gradle.testkit.runner.GradleRunner.create()
+                .withProjectDir(testProjectRoot)
+                .withGradleVersion(GRADLE_VERSION)
+                .withArguments("run")
+                .forwardOutput()
+                .build()
+        }
+    }
+
     private fun runGenerationTestBlocking(info: BuildInfo, features: Iterable<BuildInfoBlock>, callback: suspend () -> Unit) {
         runBlocking {
             try {
