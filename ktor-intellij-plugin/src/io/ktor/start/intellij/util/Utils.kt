@@ -40,16 +40,26 @@ operator fun VirtualFile?.get(path: String?): VirtualFile? {
     return if (lastName != null) child[lastName] else child
 }
 
-fun VirtualFile.createFile(path: String, data: String, charset: Charset = UTF8): VirtualFile =
-    createFile(path, data.toByteArray(charset))
+fun VirtualFile.createFile(path: String, data: String, charset: Charset = UTF8, mode: Int = "0644".toInt(radix = 8)): VirtualFile =
+    createFile(path, data.toByteArray(charset), mode)
 
-fun VirtualFile.createFile(path: String, data: ByteArray): VirtualFile {
+fun VirtualFile.createFile(path: String, data: ByteArray, mode: Int = "0644".toInt(radix = 8)): VirtualFile {
     val file = PathInfo(path)
     val fileParent = file.parent
     val dir = this.createDirectories(fileParent)
     return runWriteAction {
         dir.createChildData(null, file.name).apply {
             setBinaryContent(data)
+            if (isInLocalFileSystem) {
+                canonicalPath?.let { cp ->
+                    val lfile = File(cp)
+                    if (lfile.exists()) {
+                        if (((mode ushr 6) and 1) != 0) { // Executable bit on the user part
+                            lfile.setExecutable(true)
+                        }
+                    }
+                }
+            }
         }
     }
 }

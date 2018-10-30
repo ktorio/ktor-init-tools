@@ -81,7 +81,7 @@ class KtorModuleBuilder : JavaModuleBuilder() {
             runBlocking {
                 val blocks = listOf(ApplicationKt) + config.featuresToInstall + config.swaggerModules.map { SwaggerGenerator(it, config.swaggerGenKind) }
                 for ((_, content) in generate(info, blocks)) {
-                    root.createFile(content.name, content.data)
+                    root.createFile(content.name, content.data, content.mode)
                 }
             }
 
