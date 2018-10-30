@@ -78,15 +78,9 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                 +""
                 +"kotlin.sourceSets[\"main\"].kotlin.srcDirs(\"src\")"
                 +"kotlin.sourceSets[\"test\"].kotlin.srcDirs(\"test\")"
-                if (!is100OrGreater) {
-                    +""
-                    +"sourceSets[\"main\"].resources.srcDirs(\"resources\")"
-                    +"sourceSets[\"test\"].resources.srcDirs(\"testresources\")"
-                } else {
-                    +""
-                    +"kotlin.sourceSets[\"main\"].resources.srcDirs(\"resources\")"
-                    +"kotlin.sourceSets[\"test\"].resources.srcDirs(\"testresources\")"
-                }
+                +""
+                +"sourceSets[\"main\"].resources.srcDirs(\"resources\")"
+                +"sourceSets[\"test\"].resources.srcDirs(\"testresources\")"
             }
             fileText("settings.gradle.kts") {
                 if (is100OrGreater) {

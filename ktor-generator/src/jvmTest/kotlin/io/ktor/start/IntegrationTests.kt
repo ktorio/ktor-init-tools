@@ -171,13 +171,17 @@ class IntegrationTests {
     }
 
     @Test
-    fun testResourceAvailabilityKotlinDsl() {
-        val testProjectRoot = testProjectDir.root
-        //val testProjectRoot = File("/tmp/swagger-gen")
+    fun testResourceAvailabilityKotlinDsl() = testResource(projectType = ProjectType.GradleKotlinDsl)
 
-        val model = SwaggerModel.parseJson(getResourceString("/swagger.json")!!)
-        val info = info.copy(projectType = ProjectType.GradleKotlinDsl, ktorVersion = Versions.LAST_EAP)
-        val features = ALL_FEATURES + SwaggerGenerator(model, SwaggerGenerator.Kind.INTERFACE)
+    @Test
+    fun testResourceAvailabilityGroovy() = testResource(projectType = ProjectType.Gradle)
+
+    private fun testResource(projectType: ProjectType) {
+        val testProjectRoot = testProjectDir.root
+        //val testProjectRoot = File("/tmp/swagger-gen-$projectType")
+
+        val info = info.copy(projectType = projectType, ktorVersion = Versions.LAST_EAP)
+        val features = listOf(RoutingFeature)
 
         runGenerationTestBlocking(info, features) {
             generate(info, features).writeToFolder(testProjectRoot)
@@ -187,18 +191,19 @@ class IntegrationTests {
 
                 object ResourceTest {
                     @kotlin.jvm.JvmStatic fun main(args: Array<String>) {
-                        check(ResourceTest::class.java.getResourceAsStream("application.conf") != null)
+                        check(ResourceTest::class.java.getResourceAsStream("/application.conf") != null)
                     }
                 }
             """.trimIndent())
 
-            fun String.updateClassName(name: String) = replace(Regex("""mainClassName\s*=\s*"(.*)""""), "mainClassName = ${name.quote()}")
+            fun String.updateMainClassName(newClassName: String) = this.replace(Regex("""mainClassName\s*=\s*"(.*)""""), "mainClassName = ${newClassName.quote()}")
 
-            testProjectRoot["build.gradle.kts"].updateText { it.updateClassName("io.ktor.resourcetest.ResourceTest") }
+            testProjectRoot["build.gradle"].updateTextIfExists { it.updateMainClassName("io.ktor.resourcetest.ResourceTest") }
+            testProjectRoot["build.gradle.kts"].updateTextIfExists { it.updateMainClassName("io.ktor.resourcetest.ResourceTest") }
 
             val result = org.gradle.testkit.runner.GradleRunner.create()
                 .withProjectDir(testProjectRoot)
-                .withGradleVersion(GRADLE_VERSION)
+                .withGradleVersion(if (projectType == ProjectType.GradleKotlinDsl) GRADLE_VERSION_DSL else GRADLE_VERSION)
                 .withArguments("run")
                 .forwardOutput()
                 .build()
