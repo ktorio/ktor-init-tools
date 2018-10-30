@@ -1711,6 +1711,8 @@
     InvocationKind.prototype.constructor = InvocationKind;
     RequireKotlinVersionKind.prototype = Object.create(Enum.prototype);
     RequireKotlinVersionKind.prototype.constructor = RequireKotlinVersionKind;
+    Random$Default.prototype = Object.create(Random.prototype);
+    Random$Default.prototype.constructor = Random$Default;
     Random$Companion.prototype = Object.create(Random.prototype);
     Random$Companion.prototype.constructor = Random$Companion;
     XorWowRandom.prototype = Object.create(Random.prototype);
@@ -3490,63 +3492,63 @@
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.collections.random_lj338n$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     var random_0 = defineInlineFunction('kotlin.kotlin.collections.random_964n91$', wrapFunction(function () {
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.collections.random_ciead0$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     var random_1 = defineInlineFunction('kotlin.kotlin.collections.random_i2lc79$', wrapFunction(function () {
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.collections.random_wayomy$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     var random_2 = defineInlineFunction('kotlin.kotlin.collections.random_tmsbgo$', wrapFunction(function () {
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.collections.random_os0q87$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     var random_3 = defineInlineFunction('kotlin.kotlin.collections.random_se6h4x$', wrapFunction(function () {
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.collections.random_2uk8lc$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     var random_4 = defineInlineFunction('kotlin.kotlin.collections.random_rjqryz$', wrapFunction(function () {
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.collections.random_zcvl96$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     var random_5 = defineInlineFunction('kotlin.kotlin.collections.random_bvy38s$', wrapFunction(function () {
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.collections.random_k31a39$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     var random_6 = defineInlineFunction('kotlin.kotlin.collections.random_l1lu5t$', wrapFunction(function () {
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.collections.random_mwcbea$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     var random_7 = defineInlineFunction('kotlin.kotlin.collections.random_355ntz$', wrapFunction(function () {
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.collections.random_8kgqmy$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     function random_8($receiver, random) {
@@ -15114,7 +15116,7 @@
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.collections.random_iscd7z$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     function random_18($receiver, random) {
@@ -17471,21 +17473,21 @@
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.ranges.random_xmiyix$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     var random_20 = defineInlineFunction('kotlin.kotlin.ranges.random_37ivyf$', wrapFunction(function () {
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.ranges.random_6753zu$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     var random_21 = defineInlineFunction('kotlin.kotlin.ranges.random_m1hxcj$', wrapFunction(function () {
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.ranges.random_bx1m1g$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     function random_22($receiver, random) {
@@ -19852,7 +19854,7 @@
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.text.random_kewcp8$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     function random_26($receiver, random) {
@@ -21393,28 +21395,28 @@
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.collections.random_b7l3ya$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     var random_28 = defineInlineFunction('kotlin.kotlin.collections.random_rnn80q$', wrapFunction(function () {
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.collections.random_2qnwpx$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     var random_29 = defineInlineFunction('kotlin.kotlin.collections.random_o5f02i$', wrapFunction(function () {
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.collections.random_i3mfo9$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     var random_30 = defineInlineFunction('kotlin.kotlin.collections.random_k4ndbq$', wrapFunction(function () {
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.collections.random_7icwln$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     function random_31($receiver, random) {
@@ -21726,14 +21728,14 @@
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.ranges.random_7v08js$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     var random_36 = defineInlineFunction('kotlin.kotlin.ranges.random_6ij5nc$', wrapFunction(function () {
       var Random = _.kotlin.random.Random;
       var random = _.kotlin.ranges.random_nk0vix$;
       return function ($receiver) {
-        return random($receiver, Random.Companion);
+        return random($receiver, Random.Default);
       };
     }));
     function random_37($receiver, random) {
@@ -24995,7 +24997,7 @@
       }
     }
     function shuffle($receiver) {
-      shuffle_0($receiver, Random$Companion_getInstance());
+      shuffle_0($receiver, Random$Default_getInstance());
     }
     function shuffled($receiver) {
       var $receiver_0 = toMutableList_8($receiver);
@@ -34863,7 +34865,7 @@
     };
     ObservableProperty.$metadata$ = {kind: Kind_CLASS, simpleName: 'ObservableProperty', interfaces: [ReadWriteProperty]};
     function Random() {
-      Random$Companion_getInstance();
+      Random$Default_getInstance();
     }
     Random.prototype.nextInt = function () {
       return this.nextBits_za3lpa$(32);
@@ -35016,55 +35018,71 @@
     Random.prototype.nextBytes_za3lpa$ = function (size) {
       return this.nextBytes_fqrh44$(new Int8Array(size));
     };
+    function Random$Default() {
+      Random$Default_instance = this;
+      Random.call(this);
+      this.defaultRandom_0 = defaultPlatformRandom();
+      this.Companion = Random$Companion_getInstance();
+    }
+    Random$Default.prototype.nextBits_za3lpa$ = function (bitCount) {
+      return this.defaultRandom_0.nextBits_za3lpa$(bitCount);
+    };
+    Random$Default.prototype.nextInt = function () {
+      return this.defaultRandom_0.nextInt();
+    };
+    Random$Default.prototype.nextInt_za3lpa$ = function (until) {
+      return this.defaultRandom_0.nextInt_za3lpa$(until);
+    };
+    Random$Default.prototype.nextInt_vux9f0$ = function (from, until) {
+      return this.defaultRandom_0.nextInt_vux9f0$(from, until);
+    };
+    Random$Default.prototype.nextLong = function () {
+      return this.defaultRandom_0.nextLong();
+    };
+    Random$Default.prototype.nextLong_s8cxhz$ = function (until) {
+      return this.defaultRandom_0.nextLong_s8cxhz$(until);
+    };
+    Random$Default.prototype.nextLong_3pjtqy$ = function (from, until) {
+      return this.defaultRandom_0.nextLong_3pjtqy$(from, until);
+    };
+    Random$Default.prototype.nextBoolean = function () {
+      return this.defaultRandom_0.nextBoolean();
+    };
+    Random$Default.prototype.nextDouble = function () {
+      return this.defaultRandom_0.nextDouble();
+    };
+    Random$Default.prototype.nextDouble_14dthe$ = function (until) {
+      return this.defaultRandom_0.nextDouble_14dthe$(until);
+    };
+    Random$Default.prototype.nextDouble_lu1900$ = function (from, until) {
+      return this.defaultRandom_0.nextDouble_lu1900$(from, until);
+    };
+    Random$Default.prototype.nextFloat = function () {
+      return this.defaultRandom_0.nextFloat();
+    };
+    Random$Default.prototype.nextBytes_fqrh44$ = function (array) {
+      return this.defaultRandom_0.nextBytes_fqrh44$(array);
+    };
+    Random$Default.prototype.nextBytes_za3lpa$ = function (size) {
+      return this.defaultRandom_0.nextBytes_za3lpa$(size);
+    };
+    Random$Default.prototype.nextBytes_mj6st8$$default = function (array, fromIndex, toIndex) {
+      return this.defaultRandom_0.nextBytes_mj6st8$(array, fromIndex, toIndex);
+    };
+    Random$Default.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Default', interfaces: [Random]};
+    var Random$Default_instance = null;
+    function Random$Default_getInstance() {
+      if (Random$Default_instance === null) {
+        new Random$Default();
+      }
+      return Random$Default_instance;
+    }
     function Random$Companion() {
       Random$Companion_instance = this;
       Random.call(this);
-      this.defaultRandom_0 = defaultPlatformRandom();
     }
     Random$Companion.prototype.nextBits_za3lpa$ = function (bitCount) {
-      return this.defaultRandom_0.nextBits_za3lpa$(bitCount);
-    };
-    Random$Companion.prototype.nextInt = function () {
-      return this.defaultRandom_0.nextInt();
-    };
-    Random$Companion.prototype.nextInt_za3lpa$ = function (until) {
-      return this.defaultRandom_0.nextInt_za3lpa$(until);
-    };
-    Random$Companion.prototype.nextInt_vux9f0$ = function (from, until) {
-      return this.defaultRandom_0.nextInt_vux9f0$(from, until);
-    };
-    Random$Companion.prototype.nextLong = function () {
-      return this.defaultRandom_0.nextLong();
-    };
-    Random$Companion.prototype.nextLong_s8cxhz$ = function (until) {
-      return this.defaultRandom_0.nextLong_s8cxhz$(until);
-    };
-    Random$Companion.prototype.nextLong_3pjtqy$ = function (from, until) {
-      return this.defaultRandom_0.nextLong_3pjtqy$(from, until);
-    };
-    Random$Companion.prototype.nextBoolean = function () {
-      return this.defaultRandom_0.nextBoolean();
-    };
-    Random$Companion.prototype.nextDouble = function () {
-      return this.defaultRandom_0.nextDouble();
-    };
-    Random$Companion.prototype.nextDouble_14dthe$ = function (until) {
-      return this.defaultRandom_0.nextDouble_14dthe$(until);
-    };
-    Random$Companion.prototype.nextDouble_lu1900$ = function (from, until) {
-      return this.defaultRandom_0.nextDouble_lu1900$(from, until);
-    };
-    Random$Companion.prototype.nextFloat = function () {
-      return this.defaultRandom_0.nextFloat();
-    };
-    Random$Companion.prototype.nextBytes_fqrh44$ = function (array) {
-      return this.defaultRandom_0.nextBytes_fqrh44$(array);
-    };
-    Random$Companion.prototype.nextBytes_za3lpa$ = function (size) {
-      return this.defaultRandom_0.nextBytes_za3lpa$(size);
-    };
-    Random$Companion.prototype.nextBytes_mj6st8$$default = function (array, fromIndex, toIndex) {
-      return this.defaultRandom_0.nextBytes_mj6st8$(array, fromIndex, toIndex);
+      return Random$Default_getInstance().nextBits_za3lpa$(bitCount);
     };
     Random$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: [Random]};
     var Random$Companion_instance = null;
@@ -42128,6 +42146,7 @@
     Object.defineProperty(package$properties, 'Delegates', {get: Delegates_getInstance});
     package$properties.ReadOnlyProperty = ReadOnlyProperty;
     package$properties.ReadWriteProperty = ReadWriteProperty;
+    Object.defineProperty(Random, 'Default', {get: Random$Default_getInstance});
     Object.defineProperty(Random, 'Companion', {get: Random$Companion_getInstance});
     package$random.Random_za3lpa$ = Random_0;
     package$random.Random_s8cxhz$ = Random_1;

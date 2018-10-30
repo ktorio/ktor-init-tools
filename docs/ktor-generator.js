@@ -4106,10 +4106,10 @@
     Versions_instance = this;
     this.V094 = new KtorVersion('0.9.4', '1.2.61');
     this.V095 = new KtorVersion('0.9.5', '1.2.70');
-    this.V100_beta_2 = new KtorVersion('1.0.0-beta-2', '1.3.0-rc-146', listOf('https://kotlin.bintray.com/kotlin-eap'));
-    this.ALL = [this.V095, this.V100_beta_2];
-    this.LAST = this.V100_beta_2;
-    this.LAST_EAP = this.V100_beta_2;
+    this.V100_beta_3 = new KtorVersion('1.0.0-beta-3', '1.3.0');
+    this.ALL = [this.V095, this.V100_beta_3];
+    this.LAST = this.V100_beta_3;
+    this.LAST_EAP = this.V100_beta_3;
     var $receiver = this.ALL;
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
     var destination = LinkedHashMap_init_0(capacity);
@@ -5112,7 +5112,7 @@
         finally {
           $receiver._unindent();
         }
-        if (closure$info_0.ktorVer.compareTo_11rb$(Versions_getInstance().V100_beta_2) >= 0) {
+        if (closure$info_0.ktorVer.compareTo_11rb$(Versions_getInstance().V100_beta_3) >= 0) {
           $receiver.line_61zpoe$('}) {');
           $receiver._indent();
           try {
@@ -9780,16 +9780,16 @@
       return Unit;
     };
   }
-  function BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, closure$experimentalCorroutines_0, closure$is100OrGreater_0) {
+  function BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, closure$experimentalCorroutines_0) {
     return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, closure$experimentalCorroutines_0, closure$is100OrGreater_0, $receiver_0, this, continuation_0);
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, closure$experimentalCorroutines_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
-  function Coroutine$BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, closure$experimentalCorroutines_0, closure$is100OrGreater_0, $receiver_0, controller, continuation_0) {
+  function Coroutine$BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, closure$experimentalCorroutines_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
     this.exceptionState_0 = 1;
@@ -9798,7 +9798,6 @@
     this.local$this$render = this$render_0;
     this.local$this$BuildFilesGradle = this$BuildFilesGradle_0;
     this.local$closure$experimentalCorroutines = closure$experimentalCorroutines_0;
-    this.local$closure$is100OrGreater = closure$is100OrGreater_0;
     this.local$$receiver = $receiver_0;
   }
   Coroutine$BuildFilesGradle$render$lambda_0.$metadata$ = {
@@ -9901,17 +9900,9 @@
             this.local$$receiver.line_61zpoe$('');
             this.local$$receiver.line_61zpoe$('kotlin.sourceSets["main"].kotlin.srcDirs("src")');
             this.local$$receiver.line_61zpoe$('kotlin.sourceSets["test"].kotlin.srcDirs("test")');
-            if (!this.local$closure$is100OrGreater) {
-              this.local$$receiver.line_61zpoe$('');
-              this.local$$receiver.line_61zpoe$('sourceSets["main"].resources.srcDirs("resources")');
-              return this.local$$receiver.line_61zpoe$('sourceSets["test"].resources.srcDirs("testresources")');
-            }
-             else {
-              this.local$$receiver.line_61zpoe$('');
-              this.local$$receiver.line_61zpoe$('kotlin.sourceSets["main"].resources.srcDirs("resources")');
-              return this.local$$receiver.line_61zpoe$('kotlin.sourceSets["test"].resources.srcDirs("testresources")');
-            }
-
+            this.local$$receiver.line_61zpoe$('');
+            this.local$$receiver.line_61zpoe$('sourceSets["main"].resources.srcDirs("resources")');
+            return this.local$$receiver.line_61zpoe$('sourceSets["test"].resources.srcDirs("testresources")');
           case 1:
             throw this.exception_0;
           default:this.state_0 = 1;
@@ -10449,7 +10440,7 @@
     var is100OrGreater = info.is100OrGreater;
     var experimentalCorroutines = !info.is100OrGreater;
     if (this.kotlin) {
-      $receiver.fileText_7k8vha$('build.gradle.kts', void 0, void 0, BuildFilesGradle$render$lambda_0(properties, info, $receiver, this, experimentalCorroutines, is100OrGreater));
+      $receiver.fileText_7k8vha$('build.gradle.kts', void 0, void 0, BuildFilesGradle$render$lambda_0(properties, info, $receiver, this, experimentalCorroutines));
       $receiver.fileText_7k8vha$('settings.gradle.kts', void 0, void 0, BuildFilesGradle$render$lambda_1(is100OrGreater, info));
     }
      else {
