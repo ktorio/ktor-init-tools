@@ -18,6 +18,12 @@
 
             <h2>Changelog</h2>
 
+            <h3>0.3.4</h2>
+            <ul>
+                <li>Ktor 1.0.0-beta-3 support (with Kotlin 1.3 and kotlinx.coroutines 1.0.0).</li>
+                <li>Fixed resources folder with Gradle Kotlin DSL.</li>
+                <li>Fixed executable permissions on generated project IntelliJ plugin.</li>
+            </ul>
             <h3>0.3.3</h2>
             <ul>
                 <li>Ktor 1.0.0-beta-2 support.</li>
