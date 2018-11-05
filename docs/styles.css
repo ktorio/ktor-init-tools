@@ -63,3 +63,19 @@ label.artifact {
 .dependencies h2 {
     margin: 0;
 }
+
+.dependencies {
+    overflow:auto;
+    margin-top: 8px;
+    border-radius:6px;
+
+    min-height: 100px;
+    height: 287px; /* Fallback for older browsers */
+    height: calc(100vh - 240px);
+}
+
+@media(max-width: 576px) {
+    .dependencies {
+        height: 20vh !important;
+    }
+}
