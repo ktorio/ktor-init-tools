@@ -55,7 +55,7 @@ class SlotInstance<TSubject>(val slot: BlockSlot<TSubject>) : Extra by Extra.Mix
 class FileResult(
     val name: String,
     val data: ByteArray,
-    val mode: Int,
+    val mode: FileMode,
     val charset: Charset?
 ) {
     val string: String by lazy {
@@ -121,7 +121,7 @@ open class BlockBuilder(val subject: Any, val config: Config) : Extra by Extra.M
         }
     }
 
-    fun fileText(name: String, charset: Charset = UTF8, mode: Int = "644".toInt(8), callback: suspend Indenter.() -> Unit) {
+    fun fileText(name: String, charset: Charset = UTF8, mode: FileMode = FileMode("644"), callback: suspend Indenter.() -> Unit) {
         fileBinary(name, charset = charset, mode = mode) {
             val indenter = Indenter()
             indenter.apply { callback() }
@@ -131,7 +131,7 @@ open class BlockBuilder(val subject: Any, val config: Config) : Extra by Extra.M
 
     private fun String.expandTabs() = this.replace("\t", "    ")
 
-    fun fileBinary(name: String, charset: Charset? = null, mode: Int = "644".toInt(8), callback: suspend () -> ByteArray) {
+    fun fileBinary(name: String, charset: Charset? = null, mode: FileMode = FileMode("644"), callback: suspend () -> ByteArray) {
         files[name] = {
             FileResult(name, config.transform(callback(), charset), mode, charset = charset)
         }

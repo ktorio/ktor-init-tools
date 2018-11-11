@@ -29,9 +29,6 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
             }
         }
 
-        val is100OrGreater = info.is100OrGreater
-        val experimentalCorroutines = !info.is100OrGreater
-
         if (kotlin) {
             fileText("build.gradle.kts") {
                 +"import org.jetbrains.kotlin.gradle.dsl.Coroutines"
@@ -71,10 +68,6 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                         }
                     }
                 }
-                if (experimentalCorroutines) {
-                    +""
-                    +"kotlin.experimental.coroutines = Coroutines.ENABLE"
-                }
                 +""
                 +"kotlin.sourceSets[\"main\"].kotlin.srcDirs(\"src\")"
                 +"kotlin.sourceSets[\"test\"].kotlin.srcDirs(\"test\")"
@@ -83,16 +76,6 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                 +"sourceSets[\"test\"].resources.srcDirs(\"testresources\")"
             }
             fileText("settings.gradle.kts") {
-                if (is100OrGreater) {
-                    +"pluginManagement" {
-                        +"repositories" {
-                            +"mavenCentral()"
-                            +"maven { url = uri(\"https://kotlin.bintray.com/kotlin-eap\") }"
-                            +"maven { url = uri(\"https://plugins.gradle.org/m2/\") }"
-                        }
-                    }
-                    +""
-                }
                 +"rootProject.name = \"${info.artifactName}\""
             }
         } else {
@@ -141,17 +124,13 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                         }
                     }
                 }
-                if (experimentalCorroutines) {
-                    +""
-                    +"kotlin.experimental.coroutines = 'enable'"
-                }
             }
             fileText("settings.gradle") {
                 +"rootProject.name = \"${info.artifactName}\""
             }
         }
         if (info.includeWrapper) {
-            fileBinary("gradlew", mode = "755".toInt(8)) { info.fetch("gradle/gradlew") }
+            fileBinary("gradlew", mode = FileMode("755")) { info.fetch("gradle/gradlew") }
             fileBinary("gradlew.bat") { info.fetch("gradle/gradlew.bat") }
             fileBinary("gradle/wrapper/gradle-wrapper.jar") {
                 info.fetch("gradle/gradle/wrapper/gradle-wrapper.jar")

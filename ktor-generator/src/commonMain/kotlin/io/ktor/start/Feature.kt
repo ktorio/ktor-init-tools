@@ -21,10 +21,10 @@ import io.ktor.start.project.*
 import io.ktor.start.util.*
 
 interface FileContainer {
-    fun add(name: String, content: ByteArray, mode: Int = "644".toInt(8))
+    fun add(name: String, content: ByteArray, mode: FileMode = FileMode("644"))
 }
 
-fun FileContainer.add(name: String, content: String, charset: Charset = UTF8, mode: Int = "644".toInt(8)) {
+fun FileContainer.add(name: String, content: String, charset: Charset = UTF8, mode: FileMode = FileMode("644")) {
     add(name, content.toByteArray(charset), mode = mode)
 }
 

@@ -155,7 +155,7 @@ internal object BuildFilesMaven : BuildInfoBlock() {
             }
         }
         if (info.includeWrapper) {
-            fileBinary("mvnw", mode = "755".toInt(8)) { info.fetch("maven/mvnw") }
+            fileBinary("mvnw", mode = FileMode("755")) { info.fetch("maven/mvnw") }
             fileBinary("mvnw.cmd") { info.fetch("maven/mvnw.cmd") }
             for (file in listOf(
                 "maven-wrapper.jar",
