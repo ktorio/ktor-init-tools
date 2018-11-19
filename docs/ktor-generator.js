@@ -4105,7 +4105,7 @@
     Versions_instance = this;
     this.V094 = new KtorVersion('0.9.4', '1.2.61');
     this.V095 = new KtorVersion('0.9.5', '1.2.70');
-    this.V100 = new KtorVersion('1.0.0-rc', '1.3.10');
+    this.V100 = new KtorVersion('1.0.0', '1.3.10');
     this.ALL = [this.V094, this.V095, this.V100];
     this.LAST = this.V100;
     this.LAST_EAP = this.V100;
