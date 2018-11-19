@@ -350,7 +350,7 @@ suspend fun build(dev: Boolean) {
                         console.log("<binary file>")
                     }
                 }
-                this@buildZip.add(rname, result.data, mode = result.mode)
+                this@buildZip.add(rname, result.data, mode = result.mode.mode)
             }
         }
         if (!dev) {
