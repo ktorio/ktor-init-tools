@@ -53,7 +53,6 @@
   var replace = Kotlin.kotlin.text.replace_680rmw$;
   var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED;
   var CoroutineImpl = Kotlin.kotlin.coroutines.CoroutineImpl;
-  var toInt = Kotlin.kotlin.text.toInt_6ic1pp$;
   var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
   var minus = Kotlin.kotlin.collections.minus_khz7k3$;
   var plus_1 = Kotlin.kotlin.collections.plus_iwxh38$;
@@ -109,6 +108,7 @@
   var toFloatArray = Kotlin.kotlin.collections.toFloatArray_zwy31$;
   var toDoubleArray = Kotlin.kotlin.collections.toDoubleArray_tcduak$;
   var toLongArray = Kotlin.kotlin.collections.toLongArray_558emf$;
+  var toInt = Kotlin.kotlin.text.toInt_6ic1pp$;
   var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
   var toString_0 = Kotlin.kotlin.text.toString_dqglrj$;
   var padStart = Kotlin.kotlin.text.padStart_vrc1nu$;
@@ -3593,7 +3593,6 @@
     this.swaggerGenKind = swaggerGenKind;
     this.fetch = fetch;
     this.is100OrGreater = this.ktorVersion.semVersion.compareTo_11rb$(new SemVer('1.0.0')) >= 0;
-    this.ktorVer = this.ktorVersion;
     this.developmentPackage = 'io.ktor.server.' + this.ktorEngine.id;
     var tmp$;
     if (this.is100OrGreater)
@@ -3723,10 +3722,10 @@
   };
   function FileContainer() {
   }
-  FileContainer.prototype.add_dkzqdg$ = function (name, content, mode, callback$default) {
+  FileContainer.prototype.add_ei5ywl$ = function (name, content, mode, callback$default) {
     if (mode === void 0)
-      mode = toInt('644', 8);
-    callback$default ? callback$default(name, content, mode) : this.add_dkzqdg$$default(name, content, mode);
+      mode = FileMode_init('644');
+    callback$default ? callback$default(name, content, mode) : this.add_ei5ywl$$default(name, content, mode);
   };
   FileContainer.$metadata$ = {
     kind: Kind_INTERFACE,
@@ -3737,8 +3736,8 @@
     if (charset === void 0)
       charset = UTF8_getInstance();
     if (mode === void 0)
-      mode = toInt('644', 8);
-    $receiver.add_dkzqdg$(name, toByteArray(content, charset), mode);
+      mode = FileMode_init('644');
+    $receiver.add_ei5ywl$(name, toByteArray(content, charset), mode);
   }
   function ServerFeature(deps) {
     Feature.call(this, deps.slice());
@@ -3827,7 +3826,7 @@
       var artifact = tmp$_0.next();
       addCompileDependency($receiver, new MvnArtifact(artifact));
     }
-    tmp$_1 = this.artifacts.iterator();
+    tmp$_1 = this.testArtifacts.iterator();
     while (tmp$_1.hasNext()) {
       var artifact_0 = tmp$_1.next();
       addTestDependency($receiver, new MvnArtifact(artifact_0));
@@ -4106,10 +4105,10 @@
     Versions_instance = this;
     this.V094 = new KtorVersion('0.9.4', '1.2.61');
     this.V095 = new KtorVersion('0.9.5', '1.2.70');
-    this.V100_beta_3 = new KtorVersion('1.0.0-beta-3', '1.3.0');
-    this.ALL = [this.V095, this.V100_beta_3];
-    this.LAST = this.V100_beta_3;
-    this.LAST_EAP = this.V100_beta_3;
+    this.V100 = new KtorVersion('1.0.0-rc', '1.3.10');
+    this.ALL = [this.V094, this.V095, this.V100];
+    this.LAST = this.V100;
+    this.LAST_EAP = this.V100;
     var $receiver = this.ALL;
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
     var destination = LinkedHashMap_init_0(capacity);
@@ -4589,7 +4588,7 @@
     addImport($receiver, 'kotlin.coroutines.experimental.*');
     addImport($receiver, 'kotlinx.coroutines.experimental.*');
     addImport($receiver, 'kotlinx.coroutines.experimental.io.*');
-    $receiver.fileText_7k8vha$('src/EchoApp.kt', void 0, void 0, RawSocketsFeature$renderFeature$lambda(info, $receiver, this));
+    $receiver.fileText_6jjb1r$('src/EchoApp.kt', void 0, void 0, RawSocketsFeature$renderFeature$lambda(info, $receiver, this));
   };
   RawSocketsFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -4741,7 +4740,7 @@
     addImport($receiver, 'io.ktor.network.tls.*');
     addImport($receiver, 'kotlinx.coroutines.experimental.*');
     addImport($receiver, 'kotlinx.io.core.*');
-    $receiver.fileText_7k8vha$('src/TlsRawSocket.kt', void 0, void 0, RawSocketsTlsFeature$renderFeature$lambda(info, $receiver));
+    $receiver.fileText_6jjb1r$('src/TlsRawSocket.kt', void 0, void 0, RawSocketsTlsFeature$renderFeature$lambda(info, $receiver));
   };
   RawSocketsTlsFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -4830,7 +4829,6 @@
     };
   }
   CoreClientEngine.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
-    addTestDependency($receiver, new MvnArtifact('io.ktor:ktor-client-mock:$ktor_version'));
     addImport($receiver, 'io.ktor.client.*');
     $receiver.appendSeparated_qu2wte$(ApplicationKt_getInstance().MODULE_INSTALL, void 0, CoreClientEngine$renderFeature$lambda($receiver, this));
   };
@@ -5031,7 +5029,7 @@
     this.description_w4am8t$_0 = 'Engine for using in tests to simulate HTTP responses programmatically.';
     this.documentation_6p2g81$_0 = 'https://ktor.io/clients/http-client.html#mock';
     this.artifacts_50995k$_0 = emptyList();
-    this.testArtifacts_o0ceoa$_0 = listOf('io.ktor:ktor-client-mock:$ktor_version');
+    this.testArtifacts_o0ceoa$_0 = listOf_0(['io.ktor:ktor-client-mock:$ktor_version', 'io.ktor:ktor-client-mock-jvm:$ktor_version']);
   }
   Object.defineProperty(MockClientEngine.prototype, 'id', {
     get: function () {
@@ -5071,48 +5069,93 @@
       $receiver._indent();
       try {
         var closure$info_0 = closure$info;
-        $receiver.line_61zpoe$('val client = HttpClient(MockEngine { call ->');
-        $receiver._indent();
-        try {
-          var $receiver_1 = 'if (url.encodedPath == "/")';
-          var rafter_0 = ''.length === 0 ? '' : ' ' + '';
-          $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+        if (closure$info_0.ktorVersion.compareTo_11rb$(Versions_getInstance().V100) >= 0) {
+          $receiver.line_61zpoe$('val client = HttpClient(MockEngine {');
           $receiver._indent();
           try {
-            $receiver.line_61zpoe$('MockHttpResponse(call, HttpStatusCode.OK, ByteReadChannel(byteArrayOf(1, 2, 3)), headersOf("X-MyHeader", "MyValue"))');
+            var $receiver_1 = 'if (url.encodedPath == "/")';
+            var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+            $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+            $receiver._indent();
+            try {
+              $receiver.line_61zpoe$('MockHttpResponse(call, HttpStatusCode.OK, ByteReadChannel(byteArrayOf(1, 2, 3)), headersOf("X-MyHeader", "MyValue"))');
+            }
+            finally {
+              $receiver._unindent();
+            }
+            $receiver.line_61zpoe$('}' + '');
+            unaryPlus_0($receiver);
+            var tmp$, tmp$_0;
+            var tmp$_1;
+            if ((tmp$_0 = Kotlin.isType(tmp$ = lastOrNull($receiver.actions), Indenter$Action$Line) ? tmp$ : null) != null)
+              tmp$_1 = tmp$_0;
+            else {
+              throw IllegalStateException_init('Expected a line'.toString());
+            }
+            var lastAction = tmp$_1;
+            if (!equals(lastAction.str, '}')) {
+              throw IllegalStateException_init("Expected a '}'".toString());
+            }
+            $receiver.actions.removeAt_za3lpa$($receiver.actions.size - 1 | 0);
+            var str = '} ' + 'else';
+            $receiver.line_61zpoe$(str.length === 0 ? '{' : str + ' {');
+            $receiver._indent();
+            try {
+              $receiver.line_61zpoe$('responseError(HttpStatusCode.NotFound, "Not Found ${url.encodedPath}")');
+            }
+            finally {
+              $receiver._unindent();
+            }
+            $receiver.line_61zpoe$('}');
           }
           finally {
             $receiver._unindent();
           }
-          $receiver.line_61zpoe$('}' + '');
-          unaryPlus_0($receiver);
-          var tmp$, tmp$_0;
-          var tmp$_1;
-          if ((tmp$_0 = Kotlin.isType(tmp$ = lastOrNull($receiver.actions), Indenter$Action$Line) ? tmp$ : null) != null)
-            tmp$_1 = tmp$_0;
-          else {
-            throw IllegalStateException_init('Expected a line'.toString());
-          }
-          var lastAction = tmp$_1;
-          if (!equals(lastAction.str, '}')) {
-            throw IllegalStateException_init("Expected a '}'".toString());
-          }
-          $receiver.actions.removeAt_za3lpa$($receiver.actions.size - 1 | 0);
-          var str = '} ' + 'else';
-          $receiver.line_61zpoe$(str.length === 0 ? '{' : str + ' {');
+        }
+         else {
+          $receiver.line_61zpoe$('val client = HttpClient(MockEngine { call ->');
           $receiver._indent();
           try {
-            $receiver.line_61zpoe$('MockHttpResponse(call, HttpStatusCode.NotFound, ByteReadChannel("Not Found ${url.encodedPath}"))');
+            var $receiver_2 = 'if (url.encodedPath == "/")';
+            var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+            $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_1 : $receiver_2 + ' {' + rafter_1);
+            $receiver._indent();
+            try {
+              $receiver.line_61zpoe$('MockHttpResponse(call, HttpStatusCode.OK, ByteReadChannel(byteArrayOf(1, 2, 3)), headersOf("X-MyHeader", "MyValue"))');
+            }
+            finally {
+              $receiver._unindent();
+            }
+            $receiver.line_61zpoe$('}' + '');
+            unaryPlus_0($receiver);
+            var tmp$_2, tmp$_3;
+            var tmp$_4;
+            if ((tmp$_3 = Kotlin.isType(tmp$_2 = lastOrNull($receiver.actions), Indenter$Action$Line) ? tmp$_2 : null) != null)
+              tmp$_4 = tmp$_3;
+            else {
+              throw IllegalStateException_init('Expected a line'.toString());
+            }
+            var lastAction_0 = tmp$_4;
+            if (!equals(lastAction_0.str, '}')) {
+              throw IllegalStateException_init("Expected a '}'".toString());
+            }
+            $receiver.actions.removeAt_za3lpa$($receiver.actions.size - 1 | 0);
+            var str_0 = '} ' + 'else';
+            $receiver.line_61zpoe$(str_0.length === 0 ? '{' : str_0 + ' {');
+            $receiver._indent();
+            try {
+              $receiver.line_61zpoe$('MockHttpResponse(call, HttpStatusCode.NotFound, ByteReadChannel("Not Found ${url.encodedPath}"))');
+            }
+            finally {
+              $receiver._unindent();
+            }
+            $receiver.line_61zpoe$('}');
           }
           finally {
             $receiver._unindent();
           }
-          $receiver.line_61zpoe$('}');
         }
-        finally {
-          $receiver._unindent();
-        }
-        if (closure$info_0.ktorVer.compareTo_11rb$(Versions_getInstance().V100_beta_3) >= 0) {
+        if (closure$info_0.ktorVersion.compareTo_11rb$(Versions_getInstance().V100) >= 0) {
           $receiver.line_61zpoe$('}) {');
           $receiver._indent();
           try {
@@ -5475,7 +5518,7 @@
     addImport($receiver, 'io.ktor.http.cio.websocket.Frame');
     addImport($receiver, 'kotlinx.coroutines.experimental.*');
     addImport($receiver, 'kotlinx.coroutines.experimental.channels.*');
-    $receiver.fileText_7k8vha$('src/WsClientApp.kt', void 0, void 0, WebSocketClientFeature$renderFeature$lambda($receiver));
+    $receiver.fileText_6jjb1r$('src/WsClientApp.kt', void 0, void 0, WebSocketClientFeature$renderFeature$lambda($receiver));
   };
   WebSocketClientFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -6848,22 +6891,14 @@
       return this.documentation_mm6hiu$_0;
     }
   });
-  function ForwardedHeaderSupportFeature$renderFeature$lambda(closure$info) {
-    return function ($receiver) {
-      var tmp$;
-      $receiver.line_61zpoe$('install(ForwardedHeaderSupport) // WARNING: for security, do not include this if not behind a reverse proxy');
-      if (closure$info.ktorVer.compareTo_11rb$(Versions_getInstance().V094) < 0)
-        tmp$ = 'XForwardedHeadersSupport';
-      else
-        tmp$ = 'XForwardedHeaderSupport';
-      var XForwardedHeadersSupport = tmp$;
-      $receiver.line_61zpoe$('install(' + XForwardedHeadersSupport + ') // WARNING: for security, do not include this if not behind a reverse proxy');
-      return Unit;
-    };
+  function ForwardedHeaderSupportFeature$renderFeature$lambda($receiver) {
+    $receiver.line_61zpoe$('install(ForwardedHeaderSupport) // WARNING: for security, do not include this if not behind a reverse proxy');
+    $receiver.line_61zpoe$('install(XForwardedHeaderSupport) // WARNING: for security, do not include this if not behind a reverse proxy');
+    return Unit;
   }
   ForwardedHeaderSupportFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.features.*');
-    addFeatureInstall($receiver, ForwardedHeaderSupportFeature$renderFeature$lambda(info));
+    addFeatureInstall($receiver, ForwardedHeaderSupportFeature$renderFeature$lambda);
   };
   ForwardedHeaderSupportFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -7036,7 +7071,7 @@
     addApplicationClasses($receiver, FreemarkerFeature$renderFeature$lambda);
     addFeatureInstall($receiver, FreemarkerFeature$renderFeature$lambda_0);
     addRoute($receiver, FreemarkerFeature$renderFeature$lambda_1);
-    $receiver.fileText_7k8vha$('resources/templates/index.ftl', void 0, void 0, FreemarkerFeature$renderFeature$lambda_2(info));
+    $receiver.fileText_6jjb1r$('resources/templates/index.ftl', void 0, void 0, FreemarkerFeature$renderFeature$lambda_2(info));
   };
   FreemarkerFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -8184,7 +8219,7 @@
     addImport($receiver, 'io.ktor.content.*');
     addImport($receiver, 'io.ktor.http.content.*');
     addRoute($receiver, StaticContentFeature$renderFeature$lambda);
-    $receiver.fileBinary_qk5z91$('resources/static/ktor_logo.svg', void 0, void 0, StaticContentFeature$renderFeature$lambda_0(info));
+    $receiver.fileBinary_z1oxai$('resources/static/ktor_logo.svg', void 0, void 0, StaticContentFeature$renderFeature$lambda_0(info));
   };
   StaticContentFeature.$metadata$ = {
     kind: Kind_OBJECT,
@@ -9135,7 +9170,7 @@
      while (true);
   };
   ApplicationConf.prototype.render_miqy8c$ = function ($receiver, info) {
-    $receiver.fileText_7k8vha$('resources/application.conf', void 0, void 0, ApplicationConf$render$lambda(this, $receiver, info));
+    $receiver.fileText_6jjb1r$('resources/application.conf', void 0, void 0, ApplicationConf$render$lambda(this, $receiver, info));
   };
   ApplicationConf.$metadata$ = {
     kind: Kind_OBJECT,
@@ -9301,7 +9336,7 @@
     addImport($receiver, 'io.ktor.application.*');
     addImport($receiver, 'io.ktor.response.*');
     addImport($receiver, 'io.ktor.request.*');
-    $receiver.fileText_7k8vha$(this.ApplicationKtFile, void 0, void 0, ApplicationKt$render$lambda(info, $receiver, this));
+    $receiver.fileText_6jjb1r$(this.ApplicationKtFile, void 0, void 0, ApplicationKt$render$lambda(info, $receiver, this));
   };
   ApplicationKt.$metadata$ = {
     kind: Kind_OBJECT,
@@ -9489,7 +9524,7 @@
   ApplicationTestKt.prototype.render_miqy8c$ = function ($receiver, info) {
     addTestImport($receiver, 'kotlin.test.*');
     addTestImport($receiver, 'io.ktor.server.testing.*');
-    $receiver.fileText_7k8vha$('test/ApplicationTest.kt', void 0, void 0, ApplicationTestKt$render$lambda(info, $receiver, this));
+    $receiver.fileText_6jjb1r$('test/ApplicationTest.kt', void 0, void 0, ApplicationTestKt$render$lambda(info, $receiver, this));
   };
   ApplicationTestKt.$metadata$ = {
     kind: Kind_OBJECT,
@@ -9577,7 +9612,9 @@
     }
     addMavenRepository_0($receiver, Repos_getInstance().local);
     addMavenRepository_0($receiver, Repos_getInstance().jcenter);
-    addMavenRepository_0($receiver, Repos_getInstance().ktor);
+    if (info.ktorVersion.compareTo_11rb$(Versions_getInstance().V100) < 0) {
+      addMavenRepository_0($receiver, Repos_getInstance().ktor);
+    }
     addCompileDependency($receiver, new MvnArtifact('org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version'));
     addCompileDependency($receiver, new MvnArtifact('io.ktor:ktor-server-' + info.ktorEngine.id + ':' + '$' + 'ktor_version'));
     addCompileDependency($receiver, new MvnArtifact('ch.qos.logback:logback-classic:$logback_version'));
@@ -9596,7 +9633,7 @@
     return BuildFiles_instance;
   }
   function getAllReposToInclude($receiver, info) {
-    return plus_2(get_reposToInclude($receiver), toSet(info.ktorVer.extraRepos));
+    return plus_2(get_reposToInclude($receiver), toSet(info.ktorVersion.extraRepos));
   }
   function reposToInclude$lambda($receiver) {
     return LinkedHashSet_init();
@@ -9780,16 +9817,16 @@
       return Unit;
     };
   }
-  function BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, closure$experimentalCorroutines_0) {
+  function BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0) {
     return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, closure$experimentalCorroutines_0, $receiver_0, this, continuation_0);
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
-  function Coroutine$BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, closure$experimentalCorroutines_0, $receiver_0, controller, continuation_0) {
+  function Coroutine$BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
     this.exceptionState_0 = 1;
@@ -9797,7 +9834,6 @@
     this.local$closure$info = closure$info_0;
     this.local$this$render = this$render_0;
     this.local$this$BuildFilesGradle = this$BuildFilesGradle_0;
-    this.local$closure$experimentalCorroutines = closure$experimentalCorroutines_0;
     this.local$$receiver = $receiver_0;
   }
   Coroutine$BuildFilesGradle$render$lambda_0.$metadata$ = {
@@ -9892,11 +9928,6 @@
 
             this.local$$receiver.line_61zpoe$('}' + '');
             unaryPlus_0(this.local$$receiver);
-            if (this.local$closure$experimentalCorroutines) {
-              this.local$$receiver.line_61zpoe$('');
-              this.local$$receiver.line_61zpoe$('kotlin.experimental.coroutines = Coroutines.ENABLE');
-            }
-
             this.local$$receiver.line_61zpoe$('');
             this.local$$receiver.line_61zpoe$('kotlin.sourceSets["main"].kotlin.srcDirs("src")');
             this.local$$receiver.line_61zpoe$('kotlin.sourceSets["test"].kotlin.srcDirs("test")');
@@ -9921,20 +9952,19 @@
       }
      while (true);
   };
-  function BuildFilesGradle$render$lambda_1(closure$is100OrGreater_0, closure$info_0) {
+  function BuildFilesGradle$render$lambda_1(closure$info_0) {
     return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_1(closure$is100OrGreater_0, closure$info_0, $receiver_0, this, continuation_0);
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_1(closure$info_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
-  function Coroutine$BuildFilesGradle$render$lambda_1(closure$is100OrGreater_0, closure$info_0, $receiver_0, controller, continuation_0) {
+  function Coroutine$BuildFilesGradle$render$lambda_1(closure$info_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
     this.exceptionState_0 = 1;
-    this.local$closure$is100OrGreater = closure$is100OrGreater_0;
     this.local$closure$info = closure$info_0;
     this.local$$receiver = $receiver_0;
   }
@@ -9950,35 +9980,6 @@
       try {
         switch (this.state_0) {
           case 0:
-            if (this.local$closure$is100OrGreater) {
-              var $receiver = 'pluginManagement';
-              var rafter = ''.length === 0 ? '' : ' ' + '';
-              this.local$$receiver.line_61zpoe$($receiver.length === 0 ? '{' + rafter : $receiver + ' {' + rafter);
-              this.local$$receiver._indent();
-              try {
-                var $receiver_0 = 'repositories';
-                var rafter_0 = ''.length === 0 ? '' : ' ' + '';
-                this.local$$receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter_0 : $receiver_0 + ' {' + rafter_0);
-                this.local$$receiver._indent();
-                try {
-                  this.local$$receiver.line_61zpoe$('mavenCentral()');
-                  this.local$$receiver.line_61zpoe$('maven { url = uri("https://kotlin.bintray.com/kotlin-eap") }');
-                  this.local$$receiver.line_61zpoe$('maven { url = uri("https://plugins.gradle.org/m2/") }');
-                }
-                finally {
-                  this.local$$receiver._unindent();
-                }
-                this.local$$receiver.line_61zpoe$('}' + '');
-                unaryPlus_0(this.local$$receiver);
-              }
-              finally {
-                this.local$$receiver._unindent();
-              }
-              this.local$$receiver.line_61zpoe$('}' + '');
-              unaryPlus_0(this.local$$receiver);
-              this.local$$receiver.line_61zpoe$('');
-            }
-
             return this.local$$receiver.line_61zpoe$('rootProject.name = ' + '"' + this.local$closure$info.artifactName + '"');
           case 1:
             throw this.exception_0;
@@ -10015,23 +10016,22 @@
       return Unit;
     };
   }
-  function BuildFilesGradle$render$lambda_2(closure$info_0, this$BuildFilesGradle_0, this$render_0, closure$experimentalCorroutines_0) {
+  function BuildFilesGradle$render$lambda_2(closure$info_0, this$BuildFilesGradle_0, this$render_0) {
     return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_2(closure$info_0, this$BuildFilesGradle_0, this$render_0, closure$experimentalCorroutines_0, $receiver_0, this, continuation_0);
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_2(closure$info_0, this$BuildFilesGradle_0, this$render_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
-  function Coroutine$BuildFilesGradle$render$lambda_2(closure$info_0, this$BuildFilesGradle_0, this$render_0, closure$experimentalCorroutines_0, $receiver_0, controller, continuation_0) {
+  function Coroutine$BuildFilesGradle$render$lambda_2(closure$info_0, this$BuildFilesGradle_0, this$render_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
     this.exceptionState_0 = 1;
     this.local$closure$info = closure$info_0;
     this.local$this$BuildFilesGradle = this$BuildFilesGradle_0;
     this.local$this$render = this$render_0;
-    this.local$closure$experimentalCorroutines = closure$experimentalCorroutines_0;
     this.local$$receiver = $receiver_0;
   }
   Coroutine$BuildFilesGradle$render$lambda_2.$metadata$ = {
@@ -10059,7 +10059,7 @@
               this.local$$receiver._indent();
               try {
                 var tmp$;
-                tmp$ = plus_2(setOf('jcenter'), toSet(closure$info.ktorVer.extraRepos)).iterator();
+                tmp$ = plus_2(setOf('jcenter'), toSet(closure$info.ktorVersion.extraRepos)).iterator();
                 while (tmp$.hasNext()) {
                   var repo = tmp$.next();
                   this.local$$receiver.line_61zpoe$(this$BuildFilesGradle.genMavenRepoGroovy_0(repo));
@@ -10144,12 +10144,7 @@
             }
 
             this.local$$receiver.line_61zpoe$('}' + '');
-            if (this.local$closure$experimentalCorroutines) {
-              this.local$$receiver.line_61zpoe$('');
-              return this.local$$receiver.line_61zpoe$("kotlin.experimental.coroutines = 'enable'"), Unit;
-            }
-
-            return Unit;
+            return this.local$$receiver;
           case 1:
             throw this.exception_0;
           default:this.state_0 = 1;
@@ -10436,22 +10431,20 @@
   };
   BuildFilesGradle.prototype.render_miqy8c$ = function ($receiver, info) {
     var properties = Properties_getInstance().getProperties_jbwadm$(info);
-    $receiver.fileText_7k8vha$('gradle.properties', void 0, void 0, BuildFilesGradle$render$lambda(properties));
-    var is100OrGreater = info.is100OrGreater;
-    var experimentalCorroutines = !info.is100OrGreater;
+    $receiver.fileText_6jjb1r$('gradle.properties', void 0, void 0, BuildFilesGradle$render$lambda(properties));
     if (this.kotlin) {
-      $receiver.fileText_7k8vha$('build.gradle.kts', void 0, void 0, BuildFilesGradle$render$lambda_0(properties, info, $receiver, this, experimentalCorroutines));
-      $receiver.fileText_7k8vha$('settings.gradle.kts', void 0, void 0, BuildFilesGradle$render$lambda_1(is100OrGreater, info));
+      $receiver.fileText_6jjb1r$('build.gradle.kts', void 0, void 0, BuildFilesGradle$render$lambda_0(properties, info, $receiver, this));
+      $receiver.fileText_6jjb1r$('settings.gradle.kts', void 0, void 0, BuildFilesGradle$render$lambda_1(info));
     }
      else {
-      $receiver.fileText_7k8vha$('build.gradle', void 0, void 0, BuildFilesGradle$render$lambda_2(info, this, $receiver, experimentalCorroutines));
-      $receiver.fileText_7k8vha$('settings.gradle', void 0, void 0, BuildFilesGradle$render$lambda_3(info));
+      $receiver.fileText_6jjb1r$('build.gradle', void 0, void 0, BuildFilesGradle$render$lambda_2(info, this, $receiver));
+      $receiver.fileText_6jjb1r$('settings.gradle', void 0, void 0, BuildFilesGradle$render$lambda_3(info));
     }
     if (info.includeWrapper) {
-      $receiver.fileBinary_qk5z91$('gradlew', void 0, toInt('755', 8), BuildFilesGradle$render$lambda_4(info));
-      $receiver.fileBinary_qk5z91$('gradlew.bat', void 0, void 0, BuildFilesGradle$render$lambda_5(info));
-      $receiver.fileBinary_qk5z91$('gradle/wrapper/gradle-wrapper.jar', void 0, void 0, BuildFilesGradle$render$lambda_6(info));
-      $receiver.fileBinary_qk5z91$('gradle/wrapper/gradle-wrapper.properties', void 0, void 0, BuildFilesGradle$render$lambda_7(this, info));
+      $receiver.fileBinary_z1oxai$('gradlew', void 0, FileMode_init('755'), BuildFilesGradle$render$lambda_4(info));
+      $receiver.fileBinary_z1oxai$('gradlew.bat', void 0, void 0, BuildFilesGradle$render$lambda_5(info));
+      $receiver.fileBinary_z1oxai$('gradle/wrapper/gradle-wrapper.jar', void 0, void 0, BuildFilesGradle$render$lambda_6(info));
+      $receiver.fileBinary_z1oxai$('gradle/wrapper/gradle-wrapper.properties', void 0, void 0, BuildFilesGradle$render$lambda_7(this, info));
     }
   };
   BuildFilesGradle.prototype.genMavenRepoKotlin_0 = function (repo) {
@@ -11299,14 +11292,14 @@
   };
   BuildFilesMaven.prototype.render_miqy8c$ = function ($receiver, info) {
     var tmp$;
-    $receiver.fileText_7k8vha$('pom.xml', void 0, void 0, BuildFilesMaven$render$lambda(info, $receiver));
+    $receiver.fileText_6jjb1r$('pom.xml', void 0, void 0, BuildFilesMaven$render$lambda(info, $receiver));
     if (info.includeWrapper) {
-      $receiver.fileBinary_qk5z91$('mvnw', void 0, toInt('755', 8), BuildFilesMaven$render$lambda_0(info));
-      $receiver.fileBinary_qk5z91$('mvnw.cmd', void 0, void 0, BuildFilesMaven$render$lambda_1(info));
+      $receiver.fileBinary_z1oxai$('mvnw', void 0, FileMode_init('755'), BuildFilesMaven$render$lambda_0(info));
+      $receiver.fileBinary_z1oxai$('mvnw.cmd', void 0, void 0, BuildFilesMaven$render$lambda_1(info));
       tmp$ = listOf_0(['maven-wrapper.jar', 'maven-wrapper.properties', 'MavenWrapperDownloader.java']).iterator();
       while (tmp$.hasNext()) {
         var file = tmp$.next();
-        $receiver.fileBinary_qk5z91$('.mvn/wrapper/' + file, void 0, void 0, BuildFilesMaven$render$lambda_2(info, file));
+        $receiver.fileBinary_z1oxai$('.mvn/wrapper/' + file, void 0, void 0, BuildFilesMaven$render$lambda_2(info, file));
       }
     }
   };
@@ -11377,7 +11370,7 @@
      while (true);
   };
   GitIgnoreFile.prototype.render_miqy8c$ = function ($receiver, info) {
-    $receiver.fileText_7k8vha$('.gitignore', void 0, void 0, GitIgnoreFile$render$lambda);
+    $receiver.fileText_6jjb1r$('.gitignore', void 0, void 0, GitIgnoreFile$render$lambda);
   };
   GitIgnoreFile.$metadata$ = {
     kind: Kind_OBJECT,
@@ -11522,7 +11515,7 @@
      while (true);
   };
   LogBackXml.prototype.render_miqy8c$ = function ($receiver, info) {
-    $receiver.fileText_7k8vha$('resources/logback.xml', void 0, void 0, LogBackXml$render$lambda);
+    $receiver.fileText_6jjb1r$('resources/logback.xml', void 0, void 0, LogBackXml$render$lambda);
   };
   LogBackXml.$metadata$ = {
     kind: Kind_OBJECT,
@@ -12297,7 +12290,7 @@
      while (true);
   };
   SwaggerGeneratorBase.prototype.addSwaggerUtils_gtq0m3$ = function ($receiver, info) {
-    $receiver.fileBinary_qk5z91$('src/io/ktor/swagger/experimental/SwaggerUtils.kt', UTF8_getInstance(), void 0, SwaggerGeneratorBase$addSwaggerUtils$lambda(info));
+    $receiver.fileBinary_z1oxai$('src/io/ktor/swagger/experimental/SwaggerUtils.kt', UTF8_getInstance(), void 0, SwaggerGeneratorBase$addSwaggerUtils$lambda(info));
   };
   var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
   SwaggerGeneratorBase.prototype.doc_lz4qb0$ = function ($receiver, title, description, params, retval) {
@@ -12817,7 +12810,7 @@
      while (true);
   };
   SwaggerGeneratorCommon.prototype.fileSwaggerBackendTests_s1stdk$ = function ($receiver, fileName, info, model) {
-    $receiver.fileText_7k8vha$(fileName, void 0, void 0, SwaggerGeneratorCommon$fileSwaggerBackendTests$lambda(info, model));
+    $receiver.fileText_6jjb1r$(fileName, void 0, void 0, SwaggerGeneratorCommon$fileSwaggerBackendTests$lambda(info, model));
   };
   function SwaggerGeneratorCommon$filesHttpApi$lambda(closure$model_0) {
     return function ($receiver_0, continuation_0, suspended) {
@@ -13118,9 +13111,9 @@
      while (true);
   };
   SwaggerGeneratorCommon.prototype.filesHttpApi_5bpr50$ = function ($receiver, apiFileName, envJsonFileName, modelSourceFileName, info, model) {
-    $receiver.fileText_7k8vha$(modelSourceFileName, void 0, void 0, SwaggerGeneratorCommon$filesHttpApi$lambda(model));
-    $receiver.fileText_7k8vha$(envJsonFileName, void 0, void 0, SwaggerGeneratorCommon$filesHttpApi$lambda_0(model));
-    $receiver.fileText_7k8vha$(apiFileName, void 0, void 0, SwaggerGeneratorCommon$filesHttpApi$lambda_1(model));
+    $receiver.fileText_6jjb1r$(modelSourceFileName, void 0, void 0, SwaggerGeneratorCommon$filesHttpApi$lambda(model));
+    $receiver.fileText_6jjb1r$(envJsonFileName, void 0, void 0, SwaggerGeneratorCommon$filesHttpApi$lambda_0(model));
+    $receiver.fileText_6jjb1r$(apiFileName, void 0, void 0, SwaggerGeneratorCommon$filesHttpApi$lambda_1(model));
   };
   SwaggerGeneratorCommon.$metadata$ = {
     kind: Kind_OBJECT,
@@ -13335,7 +13328,7 @@
      while (true);
   };
   SwaggerGeneratorInterface.prototype.fileSwaggerCommonInterface_s1stdk$ = function ($receiver, fileName, info, model) {
-    $receiver.fileText_7k8vha$(fileName, void 0, void 0, SwaggerGeneratorInterface$fileSwaggerCommonInterface$lambda(info, model, this));
+    $receiver.fileText_6jjb1r$(fileName, void 0, void 0, SwaggerGeneratorInterface$fileSwaggerCommonInterface$lambda(info, model, this));
   };
   function SwaggerGeneratorInterface$fileSwaggerBackendHandler$lambda$lambda(closure$info) {
     return function ($receiver) {
@@ -13469,7 +13462,7 @@
      while (true);
   };
   SwaggerGeneratorInterface.prototype.fileSwaggerBackendHandler_v94t6u$ = function ($receiver, fileName, info, model, arguments_0) {
-    $receiver.fileText_7k8vha$(fileName, void 0, void 0, SwaggerGeneratorInterface$fileSwaggerBackendHandler$lambda(info, model, arguments_0, this));
+    $receiver.fileText_6jjb1r$(fileName, void 0, void 0, SwaggerGeneratorInterface$fileSwaggerBackendHandler$lambda(info, model, arguments_0, this));
   };
   function SwaggerGeneratorInterface$fileSwaggerFrontendHandler$lambda$lambda(closure$info) {
     return function ($receiver) {
@@ -13559,7 +13552,7 @@
      while (true);
   };
   SwaggerGeneratorInterface.prototype.fileSwaggerFrontendHandler_s1stdk$ = function ($receiver, fileName, info, model) {
-    $receiver.fileText_7k8vha$(fileName, void 0, void 0, SwaggerGeneratorInterface$fileSwaggerFrontendHandler$lambda(info, model));
+    $receiver.fileText_6jjb1r$(fileName, void 0, void 0, SwaggerGeneratorInterface$fileSwaggerFrontendHandler$lambda(info, model));
   };
   SwaggerGeneratorInterface.$metadata$ = {
     kind: Kind_OBJECT,
@@ -13763,7 +13756,7 @@
      while (true);
   };
   SwaggerGeneratorRaw.prototype.fileSwaggerBackendHandler_v94t6u$ = function ($receiver, fileName, info, model, arguments_0) {
-    $receiver.fileText_7k8vha$(fileName, void 0, void 0, SwaggerGeneratorRaw$fileSwaggerBackendHandler$lambda(info, model, this, arguments_0));
+    $receiver.fileText_6jjb1r$(fileName, void 0, void 0, SwaggerGeneratorRaw$fileSwaggerBackendHandler$lambda(info, model, this, arguments_0));
   };
   function SwaggerGeneratorRaw$route$lambda$lambda$lambda(closure$param) {
     return function ($receiver) {
@@ -14076,7 +14069,7 @@
      while (true);
   };
   SwaggerGeneratorRaw.prototype.fileSwaggerFrontendHandler_s1stdk$ = function ($receiver, fileName, info, model) {
-    $receiver.fileText_7k8vha$(fileName, void 0, void 0, SwaggerGeneratorRaw$fileSwaggerFrontendHandler$lambda(info, model, this));
+    $receiver.fileText_6jjb1r$(fileName, void 0, void 0, SwaggerGeneratorRaw$fileSwaggerFrontendHandler$lambda(info, model, this));
   };
   function SwaggerGeneratorRaw$fileSwaggerDtos$lambda$lambda(closure$info) {
     return function ($receiver) {
@@ -14149,7 +14142,7 @@
      while (true);
   };
   SwaggerGeneratorRaw.prototype.fileSwaggerDtos_s1stdk$ = function ($receiver, fileName, info, model) {
-    $receiver.fileText_7k8vha$(fileName, void 0, void 0, SwaggerGeneratorRaw$fileSwaggerDtos$lambda(info, model, this));
+    $receiver.fileText_6jjb1r$(fileName, void 0, void 0, SwaggerGeneratorRaw$fileSwaggerDtos$lambda(info, model, this));
   };
   SwaggerGeneratorRaw.$metadata$ = {
     kind: Kind_OBJECT,
@@ -16976,6 +16969,36 @@
     }
     return DynamicAccess_instance;
   }
+  function FileMode(mode) {
+    this.mode = mode;
+  }
+  FileMode.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'FileMode',
+    interfaces: []
+  };
+  function FileMode_init(octalMode, $this) {
+    $this = $this || Object.create(FileMode.prototype);
+    FileMode.call($this, toInt(octalMode, 8));
+    return $this;
+  }
+  FileMode.prototype.component1 = function () {
+    return this.mode;
+  };
+  FileMode.prototype.copy_za3lpa$ = function (mode) {
+    return new FileMode(mode === void 0 ? this.mode : mode);
+  };
+  FileMode.prototype.toString = function () {
+    return 'FileMode(mode=' + Kotlin.toString(this.mode) + ')';
+  };
+  FileMode.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.mode) | 0;
+    return result;
+  };
+  FileMode.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.mode, other.mode))));
+  };
   function encodeURIComponent($receiver) {
     var $receiver_0 = StringBuilder_init();
     var tmp$;
@@ -18011,12 +18034,12 @@
       }
      while (true);
   };
-  BlockBuilder.prototype.fileText_7k8vha$ = function (name, charset, mode, callback) {
+  BlockBuilder.prototype.fileText_6jjb1r$ = function (name, charset, mode, callback) {
     if (charset === void 0)
       charset = UTF8_getInstance();
     if (mode === void 0)
-      mode = toInt('644', 8);
-    this.fileBinary_qk5z91$(name, charset, mode, BlockBuilder$fileText$lambda(callback, this, charset));
+      mode = FileMode_init('644');
+    this.fileBinary_z1oxai$(name, charset, mode, BlockBuilder$fileText$lambda(callback, this, charset));
   };
   BlockBuilder.prototype.expandTabs_44n53b$_0 = function ($receiver) {
     return replace($receiver, '\t', '    ');
@@ -18080,11 +18103,11 @@
       }
      while (true);
   };
-  BlockBuilder.prototype.fileBinary_qk5z91$ = function (name, charset, mode, callback) {
+  BlockBuilder.prototype.fileBinary_z1oxai$ = function (name, charset, mode, callback) {
     if (charset === void 0)
       charset = null;
     if (mode === void 0)
-      mode = toInt('644', 8);
+      mode = FileMode_init('644');
     this.files.put_xwzc9p$(name, BlockBuilder$fileBinary$lambda(name, this, callback, charset, mode));
   };
   function BlockBuilder$block$lambda(closure$instance) {
@@ -19985,7 +20008,7 @@
   var package$start = package$ktor.start || (package$ktor.start = {});
   package$start.BuildInfo = BuildInfo;
   package$start.FileContainer = FileContainer;
-  package$start.add_ykoeqs$ = add;
+  package$start.add_z3whw5$ = add;
   package$start.ServerFeature = ServerFeature;
   package$start.ClientFeature = ClientFeature;
   package$start.Feature = Feature;
@@ -20574,6 +20597,8 @@
   Object.defineProperty(package$util, 'DynamicAccess', {
     get: DynamicAccess_getInstance
   });
+  package$util.FileMode_init_61zpoe$ = FileMode_init;
+  package$util.FileMode = FileMode;
   package$util.encodeURIComponent_pdl1vz$ = encodeURIComponent;
   package$util.formUrlDecode_pdl1vz$ = formUrlDecode;
   package$util.formUrlEncode_ye33rp$ = formUrlEncode;

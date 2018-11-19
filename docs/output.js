@@ -1201,7 +1201,7 @@
                     throw e_0;
                 }
               }
-              this.local$zb.add_w0mhwy$(rname, result.data, void 0, result.mode);
+              this.local$zb.add_w0mhwy$(rname, result.data, void 0, result.mode.mode);
             }
 
             var zipBytes = this.local$zb.toByteArray();
