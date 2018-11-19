@@ -30,7 +30,9 @@ object BuildFiles : BuildInfoBlock() {
 
         addMavenRepository(Repos.local)
         addMavenRepository(Repos.jcenter)
-        addMavenRepository(Repos.ktor)
+        if (info.ktorVersion < Versions.V100) {
+            addMavenRepository(Repos.ktor)
+        }
         addCompileDependency(MvnArtifact("org.jetbrains.kotlin:kotlin-stdlib-jdk8:\$kotlin_version"))
 
         addCompileDependency(MvnArtifact("io.ktor:ktor-server-${info.ktorEngine.id}:\$ktor_version"))
