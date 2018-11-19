@@ -26,8 +26,6 @@ object CoreClientEngine : ClientEngine(ApplicationKt) {
     val CLIENT_FEATURES = newSlot("CLIENT_FEATURES")
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
-        addTestDependency(MvnArtifact("io.ktor:ktor-client-mock:\$ktor_version"))
-
         addImport("io.ktor.client.*")
 
         appendSeparated(ApplicationKt.MODULE_INSTALL) {
@@ -87,7 +85,8 @@ object MockClientEngine : ClientEngine(CoreClientEngine, ApplicationTestKt) {
     override val documentation = "https://ktor.io/clients/http-client.html#mock"
 
     override val artifacts = listOf<String>()
-    override val testArtifacts = listOf("io.ktor:ktor-client-mock:\$ktor_version")
+    override val testArtifacts = listOf("io.ktor:ktor-client-mock:\$ktor_version",
+        "io.ktor:ktor-client-mock-jvm:\$ktor_version")
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addTestImport("io.ktor.client.engine.mock.*")
@@ -99,17 +98,29 @@ object MockClientEngine : ClientEngine(CoreClientEngine, ApplicationTestKt) {
 
         addTestMethod("testClientMock") {
             +"runBlocking" {
-                +"val client = HttpClient(MockEngine { call ->"
-                indent {
-                    +"if (url.encodedPath == \"/\")" {
-                        +"MockHttpResponse(call, HttpStatusCode.OK, ByteReadChannel(byteArrayOf(1, 2, 3)), headersOf(\"X-MyHeader\", \"MyValue\"))"
+                if (info.ktorVersion >= Versions.V100) {
+                    +"val client = HttpClient(MockEngine {"
+                    indent {
+                        +"if (url.encodedPath == \"/\")" {
+                            +"MockHttpResponse(call, HttpStatusCode.OK, ByteReadChannel(byteArrayOf(1, 2, 3)), headersOf(\"X-MyHeader\", \"MyValue\"))"
+                        }
+                        appending("else") {
+                            +"responseError(HttpStatusCode.NotFound, \"Not Found \${url.encodedPath}\")"
+                        }
                     }
-                    appending("else") {
-                        +"MockHttpResponse(call, HttpStatusCode.NotFound, ByteReadChannel(\"Not Found \${url.encodedPath}\"))"
+                } else {
+                    +"val client = HttpClient(MockEngine { call ->"
+                    indent {
+                        +"if (url.encodedPath == \"/\")" {
+                            +"MockHttpResponse(call, HttpStatusCode.OK, ByteReadChannel(byteArrayOf(1, 2, 3)), headersOf(\"X-MyHeader\", \"MyValue\"))"
+                        }
+                        appending("else") {
+                            +"MockHttpResponse(call, HttpStatusCode.NotFound, ByteReadChannel(\"Not Found \${url.encodedPath}\"))"
+                        }
                     }
                 }
 
-                if (info.ktorVer >= Versions.V100_beta_3) {
+                if (info.ktorVersion >= Versions.V100) {
                     +"}) {"
                     indent {
                         +"expectSuccess = false"

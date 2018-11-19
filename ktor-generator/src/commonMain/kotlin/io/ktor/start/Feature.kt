@@ -56,7 +56,7 @@ abstract class Feature(vararg deps: Block<BuildInfo>) : Block<BuildInfo>(*deps) 
         for (artifact in artifacts) {
             addCompileDependency(MvnArtifact(artifact))
         }
-        for (artifact in artifacts) {
+        for (artifact in testArtifacts) {
             addTestDependency(MvnArtifact(artifact))
         }
         if (info.generateFeatureSample) {

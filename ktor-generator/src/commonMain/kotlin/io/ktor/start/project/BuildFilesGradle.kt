@@ -82,7 +82,7 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
             fileText("build.gradle") {
                 "buildscript" {
                     "repositories" {
-                        for (repo in setOf("jcenter") + info.ktorVer.extraRepos.toSet()) {
+                        for (repo in setOf("jcenter") + info.ktorVersion.extraRepos.toSet()) {
                             +genMavenRepoGroovy(repo)
                         }
                     }

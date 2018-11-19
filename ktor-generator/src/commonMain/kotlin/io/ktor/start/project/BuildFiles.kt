@@ -39,7 +39,7 @@ object BuildFiles : BuildInfoBlock() {
     }
 }
 
-internal fun BlockBuilder.getAllReposToInclude(info: BuildInfo) = this.reposToInclude + info.ktorVer.extraRepos.toSet()
+internal fun BlockBuilder.getAllReposToInclude(info: BuildInfo) = this.reposToInclude + info.ktorVersion.extraRepos.toSet()
 
 internal val BlockBuilder.reposToInclude: LinkedHashSet<String> by Extra.PropertyThis { LinkedHashSet<String>() }
 internal val BlockBuilder.compileDependencies: LinkedHashSet<MvnArtifact> by Extra.PropertyThis { LinkedHashSet<MvnArtifact>() }

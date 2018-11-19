@@ -35,7 +35,6 @@ data class BuildInfo(
 ) : BlockBuilder.Config() {
     val is100OrGreater = ktorVersion.semVersion >= SemVer("1.0.0")
 
-    val ktorVer = ktorVersion
     val developmentPackage = "io.ktor.server.${ktorEngine.id}"
     val developmentEngineFQ = when {
         is100OrGreater -> "$developmentPackage.EngineMain"

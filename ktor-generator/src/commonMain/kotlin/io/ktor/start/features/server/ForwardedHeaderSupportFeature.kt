@@ -33,11 +33,7 @@ object ForwardedHeaderSupportFeature : ServerFeature(ApplicationKt) {
         addImport("io.ktor.features.*")
         addFeatureInstall {
             +"install(ForwardedHeaderSupport) // WARNING: for security, do not include this if not behind a reverse proxy"
-            val XForwardedHeadersSupport = when {
-                info.ktorVer < Versions.V094 -> "XForwardedHeadersSupport"
-                else -> "XForwardedHeaderSupport"
-            }
-            +"install($XForwardedHeadersSupport) // WARNING: for security, do not include this if not behind a reverse proxy"
+            +"install(XForwardedHeaderSupport) // WARNING: for security, do not include this if not behind a reverse proxy"
         }
     }
 }
