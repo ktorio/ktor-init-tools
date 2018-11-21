@@ -58,8 +58,8 @@ task buildAndCopy(type: Copy, dependsOn: ['build']) {
     //    //    !(path.startsWith("META-INF/") || path.startsWith("${project.name}"))
     //    //}
     //}
-
-    from(new File("${projectDir}/../ktor-generator/common/resources")) {
+    
+    from(new File("${projectDir}/../ktor-generator/src/commonMain/resources")) {
         exclude "**/*.meta.js", "**/*.kjsm"
     }
 
