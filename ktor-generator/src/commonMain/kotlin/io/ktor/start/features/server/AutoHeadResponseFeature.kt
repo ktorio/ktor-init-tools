@@ -31,6 +31,8 @@ object AutoHeadResponseFeature : ServerFeature(ApplicationKt) {
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")
+        addImport("io.ktor.http.*")
+        addImport("io.ktor.http.content.*")
         addImport("io.ktor.util.date.*")
         addFeatureInstall {
             "install(CachingHeaders)" {
