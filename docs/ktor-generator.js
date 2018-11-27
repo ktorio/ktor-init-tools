@@ -6095,6 +6095,8 @@
   }
   AutoHeadResponseFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.features.*');
+    addImport($receiver, 'io.ktor.http.*');
+    addImport($receiver, 'io.ktor.http.content.*');
     addImport($receiver, 'io.ktor.util.date.*');
     addFeatureInstall($receiver, AutoHeadResponseFeature$renderFeature$lambda);
   };
