@@ -14,3 +14,6 @@
 /ktor-generator-website/build
 /ktor-intellij-plugin/build
 package-lock.json
+
+*.js.map
+*.meta.js
