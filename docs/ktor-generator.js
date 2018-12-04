@@ -204,6 +204,10 @@
   AuthBasicClientFeature.prototype.constructor = AuthBasicClientFeature;
   JsonClientFeature.prototype = Object.create(ClientFeature.prototype);
   JsonClientFeature.prototype.constructor = JsonClientFeature;
+  LoggingClientFeature.prototype = Object.create(ClientFeature.prototype);
+  LoggingClientFeature.prototype.constructor = LoggingClientFeature;
+  UserAgentClientFeature.prototype = Object.create(ClientFeature.prototype);
+  UserAgentClientFeature.prototype.constructor = UserAgentClientFeature;
   WebSocketClientFeature.prototype = Object.create(ClientFeature.prototype);
   WebSocketClientFeature.prototype.constructor = WebSocketClientFeature;
   AuthBasicFeature.prototype = Object.create(ServerFeature.prototype);
@@ -4106,9 +4110,10 @@
     this.V094 = new KtorVersion('0.9.4', '1.2.61');
     this.V095 = new KtorVersion('0.9.5', '1.2.70');
     this.V100 = new KtorVersion('1.0.0', '1.3.10');
-    this.ALL = [this.V094, this.V095, this.V100];
-    this.LAST = this.V100;
-    this.LAST_EAP = this.V100;
+    this.V101 = new KtorVersion('1.0.1', '1.3.10');
+    this.ALL = [this.V094, this.V095, this.V100, this.V101];
+    this.LAST = this.V101;
+    this.LAST_EAP = this.V101;
     var $receiver = this.ALL;
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
     var destination = LinkedHashMap_init_0(capacity);
@@ -5370,6 +5375,132 @@
       new JsonClientFeature();
     }
     return JsonClientFeature_instance;
+  }
+  function LoggingClientFeature() {
+    LoggingClientFeature_instance = this;
+    ClientFeature.call(this, [CoreClientEngine_getInstance()]);
+    this.id_3ggcs5$_0 = 'ktor-client-logging';
+    this.title_3q9ec$_0 = 'Logging feature';
+    this.description_o0n9vc$_0 = 'Logging feature for debugging client calls';
+    this.documentation_svsyiy$_0 = 'https://ktor.io/clients/http-client/features/logging.html';
+    this.since_kvwdy$_0 = Versions_getInstance().V101;
+    this.artifacts_w0af7h$_0 = listOf('io.ktor:ktor-client-logging-jvm:$ktor_version');
+  }
+  Object.defineProperty(LoggingClientFeature.prototype, 'id', {
+    get: function () {
+      return this.id_3ggcs5$_0;
+    }
+  });
+  Object.defineProperty(LoggingClientFeature.prototype, 'title', {
+    get: function () {
+      return this.title_3q9ec$_0;
+    }
+  });
+  Object.defineProperty(LoggingClientFeature.prototype, 'description', {
+    get: function () {
+      return this.description_o0n9vc$_0;
+    }
+  });
+  Object.defineProperty(LoggingClientFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_svsyiy$_0;
+    }
+  });
+  Object.defineProperty(LoggingClientFeature.prototype, 'since', {
+    get: function () {
+      return this.since_kvwdy$_0;
+    }
+  });
+  Object.defineProperty(LoggingClientFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_w0af7h$_0;
+    }
+  });
+  function LoggingClientFeature$renderFeature$lambda($receiver) {
+    var $receiver_0 = 'install(Logging)';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('level = LogLevel.HEADERS');
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  LoggingClientFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.client.features.logging.*');
+    $receiver.append_qu2wte$(CoreClientEngine_getInstance().CLIENT_FEATURES, void 0, LoggingClientFeature$renderFeature$lambda);
+  };
+  LoggingClientFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'LoggingClientFeature',
+    interfaces: [ClientFeature]
+  };
+  var LoggingClientFeature_instance = null;
+  function LoggingClientFeature_getInstance() {
+    if (LoggingClientFeature_instance === null) {
+      new LoggingClientFeature();
+    }
+    return LoggingClientFeature_instance;
+  }
+  function UserAgentClientFeature() {
+    UserAgentClientFeature_instance = this;
+    ClientFeature.call(this, [CoreClientEngine_getInstance()]);
+    this.id_xgqe86$_0 = 'ktor-client-user-agent';
+    this.title_q3kvll$_0 = 'User agent feature';
+    this.description_97kgf7$_0 = 'User agent header support feature';
+    this.documentation_2qivbv$_0 = 'https://ktor.io/clients/http-client/features/user-agent.html';
+    this.since_qkqil7$_0 = Versions_getInstance().V101;
+  }
+  Object.defineProperty(UserAgentClientFeature.prototype, 'id', {
+    get: function () {
+      return this.id_xgqe86$_0;
+    }
+  });
+  Object.defineProperty(UserAgentClientFeature.prototype, 'title', {
+    get: function () {
+      return this.title_q3kvll$_0;
+    }
+  });
+  Object.defineProperty(UserAgentClientFeature.prototype, 'description', {
+    get: function () {
+      return this.description_97kgf7$_0;
+    }
+  });
+  Object.defineProperty(UserAgentClientFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_2qivbv$_0;
+    }
+  });
+  Object.defineProperty(UserAgentClientFeature.prototype, 'since', {
+    get: function () {
+      return this.since_qkqil7$_0;
+    }
+  });
+  function UserAgentClientFeature$renderFeature$lambda($receiver) {
+    $receiver.line_61zpoe$('BrowserUserAgent() // install default browser-like user-agent');
+    $receiver.line_61zpoe$('// install(UserAgent) { agent = "some user agent" }');
+    return Unit;
+  }
+  UserAgentClientFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.client.features.UserAgent');
+    addImport($receiver, 'io.ktor.client.features.BrowserUserAgent');
+    $receiver.append_qu2wte$(CoreClientEngine_getInstance().CLIENT_FEATURES, void 0, UserAgentClientFeature$renderFeature$lambda);
+  };
+  UserAgentClientFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'UserAgentClientFeature',
+    interfaces: [ClientFeature]
+  };
+  var UserAgentClientFeature_instance = null;
+  function UserAgentClientFeature_getInstance() {
+    if (UserAgentClientFeature_instance === null) {
+      new UserAgentClientFeature();
+    }
+    return UserAgentClientFeature_instance;
   }
   function WebSocketClientFeature() {
     WebSocketClientFeature_instance = this;
@@ -20101,6 +20232,12 @@
   Object.defineProperty(package$client, 'JsonClientFeature', {
     get: JsonClientFeature_getInstance
   });
+  Object.defineProperty(package$client, 'LoggingClientFeature', {
+    get: LoggingClientFeature_getInstance
+  });
+  Object.defineProperty(package$client, 'UserAgentClientFeature', {
+    get: UserAgentClientFeature_getInstance
+  });
   Object.defineProperty(package$client, 'WebSocketClientFeature', {
     get: WebSocketClientFeature_getInstance
   });
@@ -20720,7 +20857,7 @@
   package$util.get_seconds_t5kl13$ = get_seconds;
   ALL_SERVER_FEATURES = lazy(ALL_SERVER_FEATURES$lambda);
   ALL_CLIENT_FEATURES = lazy(ALL_CLIENT_FEATURES$lambda);
-  ALL_FEATURES = listOf_0([CoreClientEngine_getInstance(), ApacheClientEngine_getInstance(), CioClientEngine_getInstance(), JettyClientEngine_getInstance(), MockClientEngine_getInstance(), AuthBasicClientFeature_getInstance(), JsonClientFeature_getInstance(), WebSocketClientFeature_getInstance(), HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), AuthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), WebjarsFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
+  ALL_FEATURES = listOf_0([CoreClientEngine_getInstance(), ApacheClientEngine_getInstance(), CioClientEngine_getInstance(), JettyClientEngine_getInstance(), MockClientEngine_getInstance(), AuthBasicClientFeature_getInstance(), JsonClientFeature_getInstance(), WebSocketClientFeature_getInstance(), LoggingClientFeature_getInstance(), UserAgentClientFeature_getInstance(), HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), AuthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), WebjarsFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
   var $receiver = ALL_FEATURES;
   var capacity = coerceAtLeast(mapCapacity(collectionSizeOrDefault($receiver, 10)), 16);
   var destination = LinkedHashMap_init_0(capacity);

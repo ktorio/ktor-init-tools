@@ -35,6 +35,8 @@ val ALL_FEATURES: List<Feature> = listOf(
     AuthBasicClientFeature,
     JsonClientFeature,
     WebSocketClientFeature,
+    LoggingClientFeature,
+    UserAgentClientFeature,
 
     // Server Features
     HtmlDslFeature,

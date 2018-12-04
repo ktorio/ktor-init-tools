@@ -62,6 +62,48 @@ object JsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
     }
 }
 
+object LoggingClientFeature : ClientFeature(CoreClientEngine) {
+    override val id: String = "ktor-client-logging"
+    override val title: String = "Logging feature"
+    override val description: String = "Logging feature for debugging client calls"
+    override val documentation: String = "https://ktor.io/clients/http-client/features/logging.html"
+
+    override val since: KtorVersion = Versions.V101
+
+    override val artifacts = listOf(
+        "io.ktor:ktor-client-logging-jvm:\$ktor_version"
+    )
+
+    override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addImport("io.ktor.client.features.logging.*")
+
+        append(CoreClientEngine.CLIENT_FEATURES) {
+            "install(Logging)" {
+                +"level = LogLevel.HEADERS"
+            }
+        }
+    }
+}
+
+object UserAgentClientFeature : ClientFeature(CoreClientEngine) {
+    override val id: String = "ktor-client-user-agent"
+    override val title: String = "User agent feature"
+    override val description: String = "User agent header support feature"
+    override val documentation: String = "https://ktor.io/clients/http-client/features/user-agent.html"
+
+    override val since: KtorVersion = Versions.V101
+
+    override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addImport("io.ktor.client.features.UserAgent")
+        addImport("io.ktor.client.features.BrowserUserAgent")
+
+        append(CoreClientEngine.CLIENT_FEATURES) {
+            +"BrowserUserAgent() // install default browser-like user-agent"
+            +"// install(UserAgent) { agent = \"some user agent\" }"
+        }
+    }
+}
+
 object WebSocketClientFeature : ClientFeature(CoreClientEngine, CioClientEngine, WebsocketsFeature) {
     override val id = "ktor-client-websocket"
     override val title = "WebSockets HttpClient support"
