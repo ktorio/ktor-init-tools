@@ -5480,6 +5480,11 @@
       return this.since_qkqil7$_0;
     }
   });
+  Object.defineProperty(UserAgentClientFeature.prototype, 'artifacts', {
+    get: function () {
+      return emptyList();
+    }
+  });
   function UserAgentClientFeature$renderFeature$lambda($receiver) {
     $receiver.line_61zpoe$('BrowserUserAgent() // install default browser-like user-agent');
     $receiver.line_61zpoe$('// install(UserAgent) { agent = "some user agent" }');
