@@ -92,6 +92,7 @@ object UserAgentClientFeature : ClientFeature(CoreClientEngine) {
     override val documentation: String = "https://ktor.io/clients/http-client/features/user-agent.html"
 
     override val since: KtorVersion = Versions.V101
+    override val artifacts: List<String> get() = emptyList()
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.features.UserAgent")
