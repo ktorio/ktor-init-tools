@@ -9,7 +9,7 @@ object AuthBasicClientFeature : ClientFeature(CoreClientEngine) {
     override val id = "ktor-client-auth-basic"
     override val title = "Auth Basic feature HttpClient"
     override val description = "Supports basic authentication for the Http Client"
-    override val documentation = "https://ktor.io/clients/http-client.html#basicauth"
+    override val documentation = "https://ktor.io/clients/http-client/features/auth.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.features.json.*")
@@ -26,8 +26,8 @@ object AuthBasicClientFeature : ClientFeature(CoreClientEngine) {
 object JsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
     override val id = "ktor-client-json-jvm"
     override val title = "Json serialization for HttpClient"
-    override val description = "Supports basic authentication for the Http Client"
-    override val documentation = "https://ktor.io/clients/http-client.html#jsonfeature"
+    override val description = "Supports JSON serialization for the Http Client"
+    override val documentation = "https://ktor.io/clients/http-client/features/json-feature.html"
     override val repos = super.repos + listOf("https://kotlin.bintray.com/kotlinx")
     override val artifacts = listOf(
         "io.ktor:ktor-client-json-jvm:\$ktor_version",
@@ -109,7 +109,7 @@ object WebSocketClientFeature : ClientFeature(CoreClientEngine, CioClientEngine,
     override val id = "ktor-client-websocket"
     override val title = "WebSockets HttpClient support"
     override val description = "HttpClient feature to establish bidirectional communication using WebSockets"
-    override val documentation = "https://ktor.io/clients/http-client.html#websockets"
+    override val documentation = "https://ktor.io/clients/http-client/features/websockets.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.*")
