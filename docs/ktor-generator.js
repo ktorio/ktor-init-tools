@@ -3624,14 +3624,7 @@
     return toByteArray(tmp$, charset);
   };
   var NotImplementedError_init = Kotlin.kotlin.NotImplementedError;
-  function BuildInfo_init$lambda(it, continuation_0, suspended) {
-    var instance = new Coroutine$BuildInfo_init$lambda(it, continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
-  }
-  function Coroutine$BuildInfo_init$lambda(it, continuation_0) {
+  function Coroutine$BuildInfo_init$lambda(it_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
   }
@@ -3666,6 +3659,13 @@
       }
      while (true);
   };
+  function BuildInfo_init$lambda(it_0, continuation_0, suspended) {
+    var instance = new Coroutine$BuildInfo_init$lambda(it_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
   BuildInfo.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'BuildInfo',
@@ -4112,9 +4112,10 @@
     this.V100 = new KtorVersion('1.0.0', '1.3.10');
     this.V101 = new KtorVersion('1.0.1', '1.3.10');
     this.V111 = new KtorVersion('1.1.1', '1.3.11');
-    this.ALL = [this.V094, this.V095, this.V100, this.V101, this.V111];
-    this.LAST = this.V111;
-    this.LAST_EAP = this.V111;
+    this.V112 = new KtorVersion('1.1.2', '1.3.20');
+    this.ALL = [this.V094, this.V095, this.V100, this.V101, this.V111, this.V112];
+    this.LAST = this.V112;
+    this.LAST_EAP = this.V112;
     var $receiver = this.ALL;
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
     var destination = LinkedHashMap_init_0(capacity);
@@ -4534,15 +4535,6 @@
       return Unit;
     };
   }
-  function RawSocketsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, this$RawSocketsFeature_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$RawSocketsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, this$RawSocketsFeature_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$RawSocketsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, this$RawSocketsFeature_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -4585,6 +4577,15 @@
       }
      while (true);
   };
+  function RawSocketsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, this$RawSocketsFeature_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$RawSocketsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, this$RawSocketsFeature_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   RawSocketsFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'java.io.*');
     addImport($receiver, 'java.util.*');
@@ -4692,15 +4693,6 @@
     unaryPlus_0($receiver);
     return Unit;
   }
-  function RawSocketsTlsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$RawSocketsTlsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$RawSocketsTlsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -4742,6 +4734,15 @@
       }
      while (true);
   };
+  function RawSocketsTlsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$RawSocketsTlsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   RawSocketsTlsFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.network.tls.*');
     addImport($receiver, 'kotlinx.coroutines.experimental.*');
@@ -5214,7 +5215,7 @@
     this.id_7yu2dq$_0 = 'ktor-client-auth-basic';
     this.title_fwiqvh$_0 = 'Auth Basic feature HttpClient';
     this.description_vd12tr$_0 = 'Supports basic authentication for the Http Client';
-    this.documentation_o7l9db$_0 = 'https://ktor.io/clients/http-client.html#basicauth';
+    this.documentation_o7l9db$_0 = 'https://ktor.io/clients/http-client/features/auth.html';
   }
   Object.defineProperty(AuthBasicClientFeature.prototype, 'id', {
     get: function () {
@@ -5274,8 +5275,8 @@
     ClientFeature.call(this, [CoreClientEngine_getInstance(), ApplicationKt_getInstance()]);
     this.id_kihmg4$_0 = 'ktor-client-json-jvm';
     this.title_ymha91$_0 = 'Json serialization for HttpClient';
-    this.description_mhece7$_0 = 'Supports basic authentication for the Http Client';
-    this.documentation_c1tfk3$_0 = 'https://ktor.io/clients/http-client.html#jsonfeature';
+    this.description_mhece7$_0 = 'Supports JSON serialization for the Http Client';
+    this.documentation_c1tfk3$_0 = 'https://ktor.io/clients/http-client/features/json-feature.html';
     this.repos_xm4dp8$_0 = plus(Kotlin.callGetter(this, ClientFeature.prototype, 'repos'), listOf('https://kotlin.bintray.com/kotlinx'));
     this.artifacts_thmji4$_0 = listOf_0(['io.ktor:ktor-client-json-jvm:$ktor_version', 'io.ktor:ktor-client-gson:$ktor_version']);
   }
@@ -5514,7 +5515,7 @@
     this.id_vy1rrn$_0 = 'ktor-client-websocket';
     this.title_k9eaoc$_0 = 'WebSockets HttpClient support';
     this.description_91aqeo$_0 = 'HttpClient feature to establish bidirectional communication using WebSockets';
-    this.documentation_77pdg2$_0 = 'https://ktor.io/clients/http-client.html#websockets';
+    this.documentation_77pdg2$_0 = 'https://ktor.io/clients/http-client/features/websockets.html';
   }
   Object.defineProperty(WebSocketClientFeature.prototype, 'id', {
     get: function () {
@@ -5598,15 +5599,6 @@
     unaryPlus_0($receiver);
     return Unit;
   }
-  function WebSocketClientFeature$renderFeature$lambda(this$renderFeature_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$WebSocketClientFeature$renderFeature$lambda(this$renderFeature_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$WebSocketClientFeature$renderFeature$lambda(this$renderFeature_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -5646,6 +5638,15 @@
       }
      while (true);
   };
+  function WebSocketClientFeature$renderFeature$lambda(this$renderFeature_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$WebSocketClientFeature$renderFeature$lambda(this$renderFeature_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   WebSocketClientFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.client.*');
     addImport($receiver, 'io.ktor.client.features.websocket.*');
@@ -7129,15 +7130,6 @@
     $receiver.line_61zpoe$('}' + '');
     return Unit;
   }
-  function FreemarkerFeature$renderFeature$lambda_2(closure$info_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$FreemarkerFeature$renderFeature$lambda(closure$info_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$FreemarkerFeature$renderFeature$lambda(closure$info_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -7204,6 +7196,15 @@
       }
      while (true);
   };
+  function FreemarkerFeature$renderFeature$lambda_2(closure$info_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$FreemarkerFeature$renderFeature$lambda(closure$info_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   FreemarkerFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'freemarker.cache.*');
     addImport($receiver, 'io.ktor.freemarker.*');
@@ -8303,15 +8304,6 @@
     $receiver.line_61zpoe$('}' + '');
     return Unit;
   }
-  function StaticContentFeature$renderFeature$lambda_0(closure$info_0) {
-    return function (continuation_0, suspended) {
-      var instance = new Coroutine$StaticContentFeature$renderFeature$lambda(closure$info_0, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$StaticContentFeature$renderFeature$lambda(closure$info_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
@@ -8354,6 +8346,15 @@
       }
      while (true);
   };
+  function StaticContentFeature$renderFeature$lambda_0(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$StaticContentFeature$renderFeature$lambda(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   StaticContentFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.content.*');
     addImport($receiver, 'io.ktor.http.content.*');
@@ -9221,15 +9222,6 @@
     this.DEPLOYMENT = this.newSlot_pdl1vj$('DEPLOYMENT');
     this.TOP = this.newSlot_pdl1vj$('CONF');
   }
-  function ApplicationConf$render$lambda(this$ApplicationConf_0, this$render_0, closure$info_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$ApplicationConf$render$lambda(this$ApplicationConf_0, this$render_0, closure$info_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$ApplicationConf$render$lambda(this$ApplicationConf_0, this$render_0, closure$info_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -9308,6 +9300,15 @@
       }
      while (true);
   };
+  function ApplicationConf$render$lambda(this$ApplicationConf_0, this$render_0, closure$info_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$ApplicationConf$render$lambda(this$ApplicationConf_0, this$render_0, closure$info_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   ApplicationConf.prototype.render_miqy8c$ = function ($receiver, info) {
     $receiver.fileText_6jjb1r$('resources/application.conf', void 0, void 0, ApplicationConf$render$lambda(this, $receiver, info));
   };
@@ -9417,15 +9418,6 @@
       return Unit;
     };
   }
-  function ApplicationKt$render$lambda(closure$info_0, this$render_0, this$ApplicationKt_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$ApplicationKt$render$lambda(closure$info_0, this$render_0, this$ApplicationKt_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$ApplicationKt$render$lambda(closure$info_0, this$render_0, this$ApplicationKt_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -9471,6 +9463,15 @@
       }
      while (true);
   };
+  function ApplicationKt$render$lambda(closure$info_0, this$render_0, this$ApplicationKt_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$ApplicationKt$render$lambda(closure$info_0, this$render_0, this$ApplicationKt_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   ApplicationKt.prototype.render_miqy8c$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.application.*');
     addImport($receiver, 'io.ktor.response.*');
@@ -9609,15 +9610,6 @@
       return Unit;
     };
   }
-  function ApplicationTestKt$render$lambda(closure$info_0, this$render_0, this$ApplicationTestKt_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$ApplicationTestKt$render$lambda(closure$info_0, this$render_0, this$ApplicationTestKt_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$ApplicationTestKt$render$lambda(closure$info_0, this$render_0, this$ApplicationTestKt_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -9660,6 +9652,15 @@
       }
      while (true);
   };
+  function ApplicationTestKt$render$lambda(closure$info_0, this$render_0, this$ApplicationTestKt_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$ApplicationTestKt$render$lambda(closure$info_0, this$render_0, this$ApplicationTestKt_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   ApplicationTestKt.prototype.render_miqy8c$ = function ($receiver, info) {
     addTestImport($receiver, 'kotlin.test.*');
     addTestImport($receiver, 'io.ktor.server.testing.*');
@@ -9883,15 +9884,6 @@
     Block.call(this, []);
     this.kotlin = kotlin;
   }
-  function BuildFilesGradle$render$lambda(closure$properties_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda(closure$properties_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$BuildFilesGradle$render$lambda(closure$properties_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -9939,6 +9931,15 @@
       }
      while (true);
   };
+  function BuildFilesGradle$render$lambda(closure$properties_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesGradle$render$lambda(closure$properties_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   function BuildFilesGradle$render$lambda$lambda$lambda(this$render) {
     return function ($receiver) {
       var tmp$, tmp$_0;
@@ -9954,15 +9955,6 @@
         $receiver.line_61zpoe$('testCompile(' + '"' + dep_0.dependency + '"' + ')');
       }
       return Unit;
-    };
-  }
-  function BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
     };
   }
   function Coroutine$BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, $receiver_0, controller, continuation_0) {
@@ -10091,9 +10083,9 @@
       }
      while (true);
   };
-  function BuildFilesGradle$render$lambda_1(closure$info_0) {
+  function BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0) {
     return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_1(closure$info_0, $receiver_0, this, continuation_0);
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_0(closure$properties_0, closure$info_0, this$render_0, this$BuildFilesGradle_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
@@ -10138,6 +10130,15 @@
       }
      while (true);
   };
+  function BuildFilesGradle$render$lambda_1(closure$info_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_1(closure$info_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   function BuildFilesGradle$render$lambda$lambda$lambda_0(this$render) {
     return function ($receiver) {
       var tmp$, tmp$_0;
@@ -10153,15 +10154,6 @@
         $receiver.line_61zpoe$('testCompile ' + '"' + dep_0.dependency + '"');
       }
       return Unit;
-    };
-  }
-  function BuildFilesGradle$render$lambda_2(closure$info_0, this$BuildFilesGradle_0, this$render_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_2(closure$info_0, this$BuildFilesGradle_0, this$render_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
     };
   }
   function Coroutine$BuildFilesGradle$render$lambda_2(closure$info_0, this$BuildFilesGradle_0, this$render_0, $receiver_0, controller, continuation_0) {
@@ -10302,9 +10294,9 @@
       }
      while (true);
   };
-  function BuildFilesGradle$render$lambda_3(closure$info_0) {
+  function BuildFilesGradle$render$lambda_2(closure$info_0, this$BuildFilesGradle_0, this$render_0) {
     return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_3(closure$info_0, $receiver_0, this, continuation_0);
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_2(closure$info_0, this$BuildFilesGradle_0, this$render_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
@@ -10349,9 +10341,9 @@
       }
      while (true);
   };
-  function BuildFilesGradle$render$lambda_4(closure$info_0) {
-    return function (continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_4(closure$info_0, continuation_0);
+  function BuildFilesGradle$render$lambda_3(closure$info_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_3(closure$info_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
@@ -10400,9 +10392,9 @@
       }
      while (true);
   };
-  function BuildFilesGradle$render$lambda_5(closure$info_0) {
+  function BuildFilesGradle$render$lambda_4(closure$info_0) {
     return function (continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_5(closure$info_0, continuation_0);
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_4(closure$info_0, continuation_0);
       if (suspended)
         return instance;
       else
@@ -10451,9 +10443,9 @@
       }
      while (true);
   };
-  function BuildFilesGradle$render$lambda_6(closure$info_0) {
+  function BuildFilesGradle$render$lambda_5(closure$info_0) {
     return function (continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_6(closure$info_0, continuation_0);
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_5(closure$info_0, continuation_0);
       if (suspended)
         return instance;
       else
@@ -10502,9 +10494,9 @@
       }
      while (true);
   };
-  function BuildFilesGradle$render$lambda_7(this$BuildFilesGradle_0, closure$info_0) {
+  function BuildFilesGradle$render$lambda_6(closure$info_0) {
     return function (continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesGradle$render$lambda_7(this$BuildFilesGradle_0, closure$info_0, continuation_0);
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_6(closure$info_0, continuation_0);
       if (suspended)
         return instance;
       else
@@ -10568,6 +10560,15 @@
       }
      while (true);
   };
+  function BuildFilesGradle$render$lambda_7(this$BuildFilesGradle_0, closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesGradle$render$lambda_7(this$BuildFilesGradle_0, closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   BuildFilesGradle.prototype.render_miqy8c$ = function ($receiver, info) {
     var properties = Properties_getInstance().getProperties_jbwadm$(info);
     $receiver.fileText_6jjb1r$('gradle.properties', void 0, void 0, BuildFilesGradle$render$lambda(properties));
@@ -11227,15 +11228,6 @@
       return Unit;
     };
   }
-  function BuildFilesMaven$render$lambda(closure$info_0, this$render_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesMaven$render$lambda(closure$info_0, this$render_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$BuildFilesMaven$render$lambda(closure$info_0, this$render_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -11275,9 +11267,9 @@
       }
      while (true);
   };
-  function BuildFilesMaven$render$lambda_0(closure$info_0) {
-    return function (continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesMaven$render$lambda_0(closure$info_0, continuation_0);
+  function BuildFilesMaven$render$lambda(closure$info_0, this$render_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesMaven$render$lambda(closure$info_0, this$render_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
@@ -11326,9 +11318,9 @@
       }
      while (true);
   };
-  function BuildFilesMaven$render$lambda_1(closure$info_0) {
+  function BuildFilesMaven$render$lambda_0(closure$info_0) {
     return function (continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesMaven$render$lambda_1(closure$info_0, continuation_0);
+      var instance = new Coroutine$BuildFilesMaven$render$lambda_0(closure$info_0, continuation_0);
       if (suspended)
         return instance;
       else
@@ -11377,9 +11369,9 @@
       }
      while (true);
   };
-  function BuildFilesMaven$render$lambda_2(closure$info_0, closure$file_0) {
+  function BuildFilesMaven$render$lambda_1(closure$info_0) {
     return function (continuation_0, suspended) {
-      var instance = new Coroutine$BuildFilesMaven$render$lambda_2(closure$info_0, closure$file_0, continuation_0);
+      var instance = new Coroutine$BuildFilesMaven$render$lambda_1(closure$info_0, continuation_0);
       if (suspended)
         return instance;
       else
@@ -11429,6 +11421,15 @@
       }
      while (true);
   };
+  function BuildFilesMaven$render$lambda_2(closure$info_0, closure$file_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BuildFilesMaven$render$lambda_2(closure$info_0, closure$file_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   BuildFilesMaven.prototype.render_miqy8c$ = function ($receiver, info) {
     var tmp$;
     $receiver.fileText_6jjb1r$('pom.xml', void 0, void 0, BuildFilesMaven$render$lambda(info, $receiver));
@@ -11457,13 +11458,6 @@
   function GitIgnoreFile() {
     GitIgnoreFile_instance = this;
     Block.call(this, []);
-  }
-  function GitIgnoreFile$render$lambda($receiver_0, continuation_0, suspended) {
-    var instance = new Coroutine$GitIgnoreFile$render$lambda($receiver_0, this, continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
   }
   function Coroutine$GitIgnoreFile$render$lambda($receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
@@ -11508,6 +11502,13 @@
       }
      while (true);
   };
+  function GitIgnoreFile$render$lambda($receiver_0, continuation_0, suspended) {
+    var instance = new Coroutine$GitIgnoreFile$render$lambda($receiver_0, this, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
   GitIgnoreFile.prototype.render_miqy8c$ = function ($receiver, info) {
     $receiver.fileText_6jjb1r$('.gitignore', void 0, void 0, GitIgnoreFile$render$lambda);
   };
@@ -11609,13 +11610,6 @@
       return Unit;
     };
   }
-  function LogBackXml$render$lambda($receiver_0, continuation_0, suspended) {
-    var instance = new Coroutine$LogBackXml$render$lambda($receiver_0, this, continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
-  }
   function Coroutine$LogBackXml$render$lambda($receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -11653,6 +11647,13 @@
       }
      while (true);
   };
+  function LogBackXml$render$lambda($receiver_0, continuation_0, suspended) {
+    var instance = new Coroutine$LogBackXml$render$lambda($receiver_0, this, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
   LogBackXml.prototype.render_miqy8c$ = function ($receiver, info) {
     $receiver.fileText_6jjb1r$('resources/logback.xml', void 0, void 0, LogBackXml$render$lambda);
   };
@@ -12377,15 +12378,6 @@
   };
   function SwaggerGeneratorBase() {
   }
-  function SwaggerGeneratorBase$addSwaggerUtils$lambda(closure$info_0) {
-    return function (continuation_0, suspended) {
-      var instance = new Coroutine$SwaggerGeneratorBase$addSwaggerUtils$lambda(closure$info_0, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$SwaggerGeneratorBase$addSwaggerUtils$lambda(closure$info_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
@@ -12428,6 +12420,15 @@
       }
      while (true);
   };
+  function SwaggerGeneratorBase$addSwaggerUtils$lambda(closure$info_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGeneratorBase$addSwaggerUtils$lambda(closure$info_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   SwaggerGeneratorBase.prototype.addSwaggerUtils_gtq0m3$ = function ($receiver, info) {
     $receiver.fileBinary_z1oxai$('src/io/ktor/swagger/experimental/SwaggerUtils.kt', UTF8_getInstance(), void 0, SwaggerGeneratorBase$addSwaggerUtils$lambda(info));
   };
@@ -12898,15 +12899,6 @@
       return Unit;
     };
   }
-  function SwaggerGeneratorCommon$fileSwaggerBackendTests$lambda(closure$info_0, closure$model_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$SwaggerGeneratorCommon$fileSwaggerBackendTests$lambda(closure$info_0, closure$model_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$SwaggerGeneratorCommon$fileSwaggerBackendTests$lambda(closure$info_0, closure$model_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -12948,18 +12940,18 @@
       }
      while (true);
   };
-  SwaggerGeneratorCommon.prototype.fileSwaggerBackendTests_s1stdk$ = function ($receiver, fileName, info, model) {
-    $receiver.fileText_6jjb1r$(fileName, void 0, void 0, SwaggerGeneratorCommon$fileSwaggerBackendTests$lambda(info, model));
-  };
-  function SwaggerGeneratorCommon$filesHttpApi$lambda(closure$model_0) {
+  function SwaggerGeneratorCommon$fileSwaggerBackendTests$lambda(closure$info_0, closure$model_0) {
     return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$SwaggerGeneratorCommon$filesHttpApi$lambda(closure$model_0, $receiver_0, this, continuation_0);
+      var instance = new Coroutine$SwaggerGeneratorCommon$fileSwaggerBackendTests$lambda(closure$info_0, closure$model_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
+  SwaggerGeneratorCommon.prototype.fileSwaggerBackendTests_s1stdk$ = function ($receiver, fileName, info, model) {
+    $receiver.fileText_6jjb1r$(fileName, void 0, void 0, SwaggerGeneratorCommon$fileSwaggerBackendTests$lambda(info, model));
+  };
   function Coroutine$SwaggerGeneratorCommon$filesHttpApi$lambda(closure$model_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -12998,19 +12990,19 @@
       }
      while (true);
   };
-  function SwaggerGeneratorCommon$filesHttpApi$lambda$lambda$lambda(it) {
-    return it.groupValues.get_za3lpa$(1);
-  }
-  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
-  function SwaggerGeneratorCommon$filesHttpApi$lambda_0(closure$model_0) {
+  function SwaggerGeneratorCommon$filesHttpApi$lambda(closure$model_0) {
     return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$SwaggerGeneratorCommon$filesHttpApi$lambda_0(closure$model_0, $receiver_0, this, continuation_0);
+      var instance = new Coroutine$SwaggerGeneratorCommon$filesHttpApi$lambda(closure$model_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
+  function SwaggerGeneratorCommon$filesHttpApi$lambda$lambda$lambda(it) {
+    return it.groupValues.get_za3lpa$(1);
+  }
+  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
   function Coroutine$SwaggerGeneratorCommon$filesHttpApi$lambda_0(closure$model_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -13079,17 +13071,17 @@
       }
      while (true);
   };
-  function SwaggerGeneratorCommon$filesHttpApi$lambda$lambda(it) {
-    return it.name + '=' + toKotlinDefault(it.schema.type, it.default, false);
-  }
-  function SwaggerGeneratorCommon$filesHttpApi$lambda_1(closure$model_0) {
+  function SwaggerGeneratorCommon$filesHttpApi$lambda_0(closure$model_0) {
     return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$SwaggerGeneratorCommon$filesHttpApi$lambda_1(closure$model_0, $receiver_0, this, continuation_0);
+      var instance = new Coroutine$SwaggerGeneratorCommon$filesHttpApi$lambda_0(closure$model_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
+  }
+  function SwaggerGeneratorCommon$filesHttpApi$lambda$lambda(it) {
+    return it.name + '=' + toKotlinDefault(it.schema.type, it.default, false);
   }
   function Coroutine$SwaggerGeneratorCommon$filesHttpApi$lambda_1(closure$model_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
@@ -13249,6 +13241,15 @@
       }
      while (true);
   };
+  function SwaggerGeneratorCommon$filesHttpApi$lambda_1(closure$model_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGeneratorCommon$filesHttpApi$lambda_1(closure$model_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   SwaggerGeneratorCommon.prototype.filesHttpApi_5bpr50$ = function ($receiver, apiFileName, envJsonFileName, modelSourceFileName, info, model) {
     $receiver.fileText_6jjb1r$(modelSourceFileName, void 0, void 0, SwaggerGeneratorCommon$filesHttpApi$lambda(model));
     $receiver.fileText_6jjb1r$(envJsonFileName, void 0, void 0, SwaggerGeneratorCommon$filesHttpApi$lambda_0(model));
@@ -13415,15 +13416,6 @@
       return Unit;
     };
   }
-  function SwaggerGeneratorInterface$fileSwaggerCommonInterface$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorInterface_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$SwaggerGeneratorInterface$fileSwaggerCommonInterface$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorInterface_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$SwaggerGeneratorInterface$fileSwaggerCommonInterface$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorInterface_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -13466,6 +13458,15 @@
       }
      while (true);
   };
+  function SwaggerGeneratorInterface$fileSwaggerCommonInterface$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorInterface_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGeneratorInterface$fileSwaggerCommonInterface$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorInterface_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   SwaggerGeneratorInterface.prototype.fileSwaggerCommonInterface_s1stdk$ = function ($receiver, fileName, info, model) {
     $receiver.fileText_6jjb1r$(fileName, void 0, void 0, SwaggerGeneratorInterface$fileSwaggerCommonInterface$lambda(info, model, this));
   };
@@ -13548,15 +13549,6 @@
       return Unit;
     };
   }
-  function SwaggerGeneratorInterface$fileSwaggerBackendHandler$lambda(closure$info_0, closure$model_0, closure$arguments_0, this$SwaggerGeneratorInterface_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$SwaggerGeneratorInterface$fileSwaggerBackendHandler$lambda(closure$info_0, closure$model_0, closure$arguments_0, this$SwaggerGeneratorInterface_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$SwaggerGeneratorInterface$fileSwaggerBackendHandler$lambda(closure$info_0, closure$model_0, closure$arguments_0, this$SwaggerGeneratorInterface_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -13600,6 +13592,15 @@
       }
      while (true);
   };
+  function SwaggerGeneratorInterface$fileSwaggerBackendHandler$lambda(closure$info_0, closure$model_0, closure$arguments_0, this$SwaggerGeneratorInterface_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGeneratorInterface$fileSwaggerBackendHandler$lambda(closure$info_0, closure$model_0, closure$arguments_0, this$SwaggerGeneratorInterface_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   SwaggerGeneratorInterface.prototype.fileSwaggerBackendHandler_v94t6u$ = function ($receiver, fileName, info, model, arguments_0) {
     $receiver.fileText_6jjb1r$(fileName, void 0, void 0, SwaggerGeneratorInterface$fileSwaggerBackendHandler$lambda(info, model, arguments_0, this));
   };
@@ -13637,15 +13638,6 @@
     return function ($receiver) {
       $receiver.line_61zpoe$('fun ' + closure$model.info.classNameClient + '(endpoint: String, client: HttpClient = HttpClient()): ' + closure$model.info.classNameClient + ' = createClient(client, endpoint)');
       return Unit;
-    };
-  }
-  function SwaggerGeneratorInterface$fileSwaggerFrontendHandler$lambda(closure$info_0, closure$model_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$SwaggerGeneratorInterface$fileSwaggerFrontendHandler$lambda(closure$info_0, closure$model_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
     };
   }
   function Coroutine$SwaggerGeneratorInterface$fileSwaggerFrontendHandler$lambda(closure$info_0, closure$model_0, $receiver_0, controller, continuation_0) {
@@ -13690,6 +13682,15 @@
       }
      while (true);
   };
+  function SwaggerGeneratorInterface$fileSwaggerFrontendHandler$lambda(closure$info_0, closure$model_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGeneratorInterface$fileSwaggerFrontendHandler$lambda(closure$info_0, closure$model_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   SwaggerGeneratorInterface.prototype.fileSwaggerFrontendHandler_s1stdk$ = function ($receiver, fileName, info, model) {
     $receiver.fileText_6jjb1r$(fileName, void 0, void 0, SwaggerGeneratorInterface$fileSwaggerFrontendHandler$lambda(info, model));
   };
@@ -13842,15 +13843,6 @@
       return Unit;
     };
   }
-  function SwaggerGeneratorRaw$fileSwaggerBackendHandler$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorRaw_0, closure$arguments_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$SwaggerGeneratorRaw$fileSwaggerBackendHandler$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorRaw_0, closure$arguments_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$SwaggerGeneratorRaw$fileSwaggerBackendHandler$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorRaw_0, closure$arguments_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -13894,6 +13886,15 @@
       }
      while (true);
   };
+  function SwaggerGeneratorRaw$fileSwaggerBackendHandler$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorRaw_0, closure$arguments_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGeneratorRaw$fileSwaggerBackendHandler$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorRaw_0, closure$arguments_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   SwaggerGeneratorRaw.prototype.fileSwaggerBackendHandler_v94t6u$ = function ($receiver, fileName, info, model, arguments_0) {
     $receiver.fileText_6jjb1r$(fileName, void 0, void 0, SwaggerGeneratorRaw$fileSwaggerBackendHandler$lambda(info, model, this, arguments_0));
   };
@@ -14156,15 +14157,6 @@
       return Unit;
     };
   }
-  function SwaggerGeneratorRaw$fileSwaggerFrontendHandler$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorRaw_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$SwaggerGeneratorRaw$fileSwaggerFrontendHandler$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorRaw_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$SwaggerGeneratorRaw$fileSwaggerFrontendHandler$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorRaw_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -14207,6 +14199,15 @@
       }
      while (true);
   };
+  function SwaggerGeneratorRaw$fileSwaggerFrontendHandler$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorRaw_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGeneratorRaw$fileSwaggerFrontendHandler$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorRaw_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   SwaggerGeneratorRaw.prototype.fileSwaggerFrontendHandler_s1stdk$ = function ($receiver, fileName, info, model) {
     $receiver.fileText_6jjb1r$(fileName, void 0, void 0, SwaggerGeneratorRaw$fileSwaggerFrontendHandler$lambda(info, model, this));
   };
@@ -14227,15 +14228,6 @@
     return function ($receiver) {
       this$SwaggerGeneratorRaw.swaggerDtos_rocn3j$($receiver, closure$info, closure$model);
       return Unit;
-    };
-  }
-  function SwaggerGeneratorRaw$fileSwaggerDtos$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorRaw_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$SwaggerGeneratorRaw$fileSwaggerDtos$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorRaw_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
     };
   }
   function Coroutine$SwaggerGeneratorRaw$fileSwaggerDtos$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorRaw_0, $receiver_0, controller, continuation_0) {
@@ -14280,6 +14272,15 @@
       }
      while (true);
   };
+  function SwaggerGeneratorRaw$fileSwaggerDtos$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorRaw_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$SwaggerGeneratorRaw$fileSwaggerDtos$lambda(closure$info_0, closure$model_0, this$SwaggerGeneratorRaw_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   SwaggerGeneratorRaw.prototype.fileSwaggerDtos_s1stdk$ = function ($receiver, fileName, info, model) {
     $receiver.fileText_6jjb1r$(fileName, void 0, void 0, SwaggerGeneratorRaw$fileSwaggerDtos$lambda(info, model, this));
   };
@@ -17842,13 +17843,6 @@
       config = null;
     return generate_0(subject, copyToArray(toList_0(blocks)).slice(), config, continuation);
   }
-  function generate_0(subject_0, blocks_0, config_0, continuation_0, suspended) {
-    var instance = new Coroutine$generate(subject_0, blocks_0, config_0, continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
-  }
   function Coroutine$generate(subject_0, blocks_0, config_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
@@ -17923,6 +17917,13 @@
       }
      while (true);
   };
+  function generate_0(subject_0, blocks_0, config_0, continuation_0, suspended) {
+    var instance = new Coroutine$generate(subject_0, blocks_0, config_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
   function BlockSlot(name, block) {
     this.name = name;
     this.block = block;
@@ -18118,15 +18119,6 @@
       once = false;
     this.prepend_qu2wte$(slot, once, BlockBuilder$prependSeparated$lambda(callback));
   };
-  function BlockBuilder$fileText$lambda(closure$callback_0, this$BlockBuilder_0, closure$charset_0) {
-    return function (continuation_0, suspended) {
-      var instance = new Coroutine$BlockBuilder$fileText$lambda(closure$callback_0, this$BlockBuilder_0, closure$charset_0, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$BlockBuilder$fileText$lambda(closure$callback_0, this$BlockBuilder_0, closure$charset_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
@@ -18173,6 +18165,15 @@
       }
      while (true);
   };
+  function BlockBuilder$fileText$lambda(closure$callback_0, this$BlockBuilder_0, closure$charset_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BlockBuilder$fileText$lambda(closure$callback_0, this$BlockBuilder_0, closure$charset_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   BlockBuilder.prototype.fileText_6jjb1r$ = function (name, charset, mode, callback) {
     if (charset === void 0)
       charset = UTF8_getInstance();
@@ -18183,15 +18184,6 @@
   BlockBuilder.prototype.expandTabs_44n53b$_0 = function ($receiver) {
     return replace($receiver, '\t', '    ');
   };
-  function BlockBuilder$fileBinary$lambda(closure$name_0, this$BlockBuilder_0, closure$callback_0, closure$charset_0, closure$mode_0) {
-    return function (continuation_0, suspended) {
-      var instance = new Coroutine$BlockBuilder$fileBinary$lambda(closure$name_0, this$BlockBuilder_0, closure$callback_0, closure$charset_0, closure$mode_0, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
   function Coroutine$BlockBuilder$fileBinary$lambda(closure$name_0, this$BlockBuilder_0, closure$callback_0, closure$charset_0, closure$mode_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
@@ -18242,6 +18234,15 @@
       }
      while (true);
   };
+  function BlockBuilder$fileBinary$lambda(closure$name_0, this$BlockBuilder_0, closure$callback_0, closure$charset_0, closure$mode_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$BlockBuilder$fileBinary$lambda(closure$name_0, this$BlockBuilder_0, closure$callback_0, closure$charset_0, closure$mode_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   BlockBuilder.prototype.fileBinary_z1oxai$ = function (name, charset, mode, callback) {
     if (charset === void 0)
       charset = null;

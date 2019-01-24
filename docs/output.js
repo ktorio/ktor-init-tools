@@ -100,13 +100,6 @@
       return safe.getOrThrow();
     };
   }
-  function await_0($receiver_0, continuation_0, suspended) {
-    var instance = new Coroutine$await($receiver_0, continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
-  }
   function Coroutine$await($receiver_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
@@ -150,8 +143,8 @@
       }
      while (true);
   };
-  function fetchFile(file_0, continuation_0, suspended) {
-    var instance = new Coroutine$fetchFile(file_0, continuation_0);
+  function await_0($receiver_0, continuation_0, suspended) {
+    var instance = new Coroutine$await($receiver_0, continuation_0);
     if (suspended)
       return instance;
     else
@@ -207,6 +200,13 @@
       }
      while (true);
   };
+  function fetchFile(file_0, continuation_0, suspended) {
+    var instance = new Coroutine$fetchFile(file_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
   function EmptyContinuation$ObjectLiteral() {
     this.context_6qs5s0$_0 = coroutines.EmptyCoroutineContext;
   }
@@ -348,13 +348,6 @@
       return safe.getOrThrow();
     };
   }
-  function dialogOpenFile(filter_0, continuation_0, suspended) {
-    var instance = new Coroutine$dialogOpenFile(filter_0, continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
-  }
   function Coroutine$dialogOpenFile(filter_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
@@ -400,6 +393,13 @@
       }
      while (true);
   };
+  function dialogOpenFile(filter_0, continuation_0, suspended) {
+    var instance = new Coroutine$dialogOpenFile(filter_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
   function CancelException() {
     RuntimeException_init(this);
     this.name = 'CancelException';
@@ -440,13 +440,6 @@
       closure$block(safe);
       return safe.getOrThrow();
     };
-  }
-  function read($receiver_0, continuation_0, suspended) {
-    var instance = new Coroutine$read($receiver_0, continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
   }
   function Coroutine$read($receiver_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
@@ -491,6 +484,13 @@
       }
      while (true);
   };
+  function read($receiver_0, continuation_0, suspended) {
+    var instance = new Coroutine$read($receiver_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
   var windowInputFile;
   var selectedFiles;
   var swaggerModels;
@@ -524,13 +524,6 @@
     return Unit;
   }
   var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
-  function main$lambda$lambda(continuation_0, suspended) {
-    var instance = new Coroutine$main$lambda$lambda(continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
-  }
   function Coroutine$main$lambda$lambda(continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 10;
@@ -634,6 +627,13 @@
       }
      while (true);
   };
+  function main$lambda$lambda(continuation_0, suspended) {
+    var instance = new Coroutine$main$lambda$lambda(continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
   function main$lambda_6() {
     launch(main$lambda$lambda);
     return Unit;
@@ -1053,13 +1053,6 @@
       jQuery(str_7).change(addDependenciesKind$lambda);
     }
   }
-  function build$lambda(it_0, continuation_0, suspended) {
-    var instance = new Coroutine$build$lambda(it_0, continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
-  }
   function Coroutine$build$lambda(it_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
@@ -1102,14 +1095,14 @@
       }
      while (true);
   };
-  var ZipBuilder_init = $module$ktor_generator.io.ktor.start.util.ZipBuilder;
-  function build(dev_0, continuation_0, suspended) {
-    var instance = new Coroutine$build(dev_0, continuation_0);
+  function build$lambda(it_0, continuation_0, suspended) {
+    var instance = new Coroutine$build$lambda(it_0, continuation_0);
     if (suspended)
       return instance;
     else
       return instance.doResume(null);
   }
+  var ZipBuilder_init = $module$ktor_generator.io.ktor.start.util.ZipBuilder;
   function Coroutine$build(dev_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 4;
@@ -1243,15 +1236,15 @@
       }
      while (true);
   };
-  function get_isLocalEnv() {
-    return setOf(['127.0.0.1', 'localhost']).contains_11rb$(ensureNotNull(document.location).hostname);
-  }
-  function registerBuildButton$lambda$lambda(continuation_0, suspended) {
-    var instance = new Coroutine$registerBuildButton$lambda$lambda(continuation_0);
+  function build(dev_0, continuation_0, suspended) {
+    var instance = new Coroutine$build(dev_0, continuation_0);
     if (suspended)
       return instance;
     else
       return instance.doResume(null);
+  }
+  function get_isLocalEnv() {
+    return setOf(['127.0.0.1', 'localhost']).contains_11rb$(ensureNotNull(document.location).hostname);
   }
   function Coroutine$registerBuildButton$lambda$lambda(continuation_0) {
     CoroutineImpl.call(this, continuation_0);
@@ -1294,16 +1287,16 @@
       }
      while (true);
   };
-  function registerBuildButton$lambda() {
-    launch(registerBuildButton$lambda$lambda);
-    return Unit;
-  }
-  function registerBuildButton$lambda$lambda_0(continuation_0, suspended) {
-    var instance = new Coroutine$registerBuildButton$lambda$lambda_0(continuation_0);
+  function registerBuildButton$lambda$lambda(continuation_0, suspended) {
+    var instance = new Coroutine$registerBuildButton$lambda$lambda(continuation_0);
     if (suspended)
       return instance;
     else
       return instance.doResume(null);
+  }
+  function registerBuildButton$lambda() {
+    launch(registerBuildButton$lambda$lambda);
+    return Unit;
   }
   function Coroutine$registerBuildButton$lambda$lambda_0(continuation_0) {
     CoroutineImpl.call(this, continuation_0);
@@ -1346,6 +1339,13 @@
       }
      while (true);
   };
+  function registerBuildButton$lambda$lambda_0(continuation_0, suspended) {
+    var instance = new Coroutine$registerBuildButton$lambda$lambda_0(continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
   function registerBuildButton$lambda_0() {
     launch(registerBuildButton$lambda$lambda_0);
     return Unit;
