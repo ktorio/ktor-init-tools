@@ -4113,9 +4113,10 @@
     this.V101 = new KtorVersion('1.0.1', '1.3.10');
     this.V111 = new KtorVersion('1.1.1', '1.3.11');
     this.V112 = new KtorVersion('1.1.2', '1.3.20');
-    this.ALL = [this.V094, this.V095, this.V100, this.V101, this.V111, this.V112];
-    this.LAST = this.V112;
-    this.LAST_EAP = this.V112;
+    this.V113 = new KtorVersion('1.1.3', '1.3.21');
+    this.ALL = [this.V101, this.V113];
+    this.LAST = this.V113;
+    this.LAST_EAP = this.V113;
     var $receiver = this.ALL;
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
     var destination = LinkedHashMap_init_0(capacity);
@@ -6869,7 +6870,7 @@
     this.id_m3ch09$_0 = 'data-conversion';
     this.title_6equey$_0 = 'DataConversion';
     this.description_6nroeu$_0 = 'Allows to serialize and deserialize a list of values (used by the Locations feature)';
-    this.documentation_wt7c60$_0 = 'https://ktor.io/features/caching-headers.html';
+    this.documentation_wt7c60$_0 = 'https://ktor.io/servers/features/data-conversion.html';
   }
   Object.defineProperty(DataConversionFeature.prototype, 'repos', {
     get: function () {
@@ -7452,7 +7453,7 @@
     }
   });
   function HttpsRedirectFeature$renderFeature$lambda($receiver) {
-    $receiver.line_61zpoe$('// http://ktor.io/servers/features/https-redirect.html#testing');
+    $receiver.line_61zpoe$('// https://ktor.io/servers/features/https-redirect.html#testing');
     var $receiver_0 = 'if (!testing)';
     var rafter = ''.length === 0 ? '' : ' ' + '';
     $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
