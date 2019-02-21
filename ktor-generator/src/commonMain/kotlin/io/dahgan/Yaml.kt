@@ -4,7 +4,7 @@
  * # Dahgan
  * A YAML 1.2 syntax parser written in [Kotlin](https://kotlinlang.org/)
  *
- * [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
+ * [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
  * [![Build Status - Master](https://travis-ci.org/kareez/dahgan.svg?branch=master)](https://travis-ci.org/kareez/dahgan)
  * [![Build Status - Develop](https://travis-ci.org/kareez/dahgan.svg?branch=develop)](https://travis-ci.org/kareez/dahgan)
  * [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.mhshams/dahgan/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.mhshams/dahgan)
@@ -229,7 +229,7 @@ internal object YamlSpec : YamlParser() {
      * These are copied directly from the YAML specification, with some changes to adapt to Kotlin language syntax and
      * also ease some of the decisions.
      *
-     * See: http://www.yaml.org/spec/1.2/spec.html
+     * See: https://yaml.org/spec/1.2/spec.html
      */
 
     /**

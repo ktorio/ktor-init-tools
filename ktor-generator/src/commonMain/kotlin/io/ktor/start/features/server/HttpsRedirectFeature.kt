@@ -32,7 +32,7 @@ object HttpsRedirectFeature : ServerFeature(ApplicationKt) {
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")
         addFeatureInstall {
-            +"// http://ktor.io/servers/features/https-redirect.html#testing"
+            +"// https://ktor.io/servers/features/https-redirect.html#testing"
             +"if (!testing)" {
                 +"install(HttpsRedirect)" {
                     +"// The port to redirect to. By default 443, the default HTTPS port."
