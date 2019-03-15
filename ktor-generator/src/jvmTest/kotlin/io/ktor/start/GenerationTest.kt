@@ -3,7 +3,7 @@ package io.ktor.start
 import io.ktor.start.features.ALL_FEATURES
 import io.ktor.start.features.both.RawSocketsTlsFeature
 import io.ktor.start.features.client.ApacheClientEngine
-import io.ktor.start.features.client.JsonClientFeature
+import io.ktor.start.features.client.GsonClientFeature
 import io.ktor.start.features.server.RoutingFeature
 import io.ktor.start.project.ApplicationKt
 import io.ktor.start.util.generate
@@ -85,7 +85,7 @@ class GenerationTest {
 
     @Test
     fun testClient() = suspendTest {
-        val files = generate(info, ApacheClientEngine, JsonClientFeature)
+        val files = generate(info, ApacheClientEngine, GsonClientFeature)
         assertEquals(
             """
                 package com.example

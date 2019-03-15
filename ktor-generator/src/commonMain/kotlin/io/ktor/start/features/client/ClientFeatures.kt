@@ -22,7 +22,10 @@ object AuthBasicClientFeature : ClientFeature(CoreClientEngine) {
     }
 }
 
-object JsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
+/**
+ * Json feature with Gson serializer generator.
+ */
+object GsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
     override val id = "ktor-client-json-jvm"
     override val title = "Json serialization for HttpClient"
     override val description = "Supports JSON serialization for the Http Client"
@@ -36,6 +39,7 @@ object JsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.features.json.*")
         addImport("io.ktor.client.request.*")
+        addImport("io.ktor.client.http.*")
         addImport("java.net.URL")
         addImport("kotlinx.coroutines.experimental.*")
         addApplicationClasses {
@@ -49,13 +53,11 @@ object JsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
         append(CoreClientEngine.CLIENT_USAGE) {
             "runBlocking" {
                 +"// Sample for making a HTTP Client request"
-                +"/*"
                 "val message = client.post<JsonSampleClass>" {
-                    +"url(URL(\"http://127.0.0.1:8080/path/to/endpoint\"))"
+                    +"url(\"http://127.0.0.1:8080/path/to/endpoint\")"
                     +"contentType(ContentType.Application.Json)"
                     +"body = JsonSampleClass(hello = \"world\")"
                 }
-                +"*/"
             }
         }
     }
