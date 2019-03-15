@@ -1,7 +1,7 @@
 package io.ktor.start
 
 import io.ktor.start.features.ALL_FEATURES
-import io.ktor.start.features.both.RawSocketsTlsFeature
+import io.ktor.start.features.sockets.RawSocketsTlsFeature
 import io.ktor.start.features.client.ApacheClientEngine
 import io.ktor.start.features.client.GsonClientFeature
 import io.ktor.start.features.server.RoutingFeature

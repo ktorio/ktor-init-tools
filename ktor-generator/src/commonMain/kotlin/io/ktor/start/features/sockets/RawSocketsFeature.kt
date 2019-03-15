@@ -15,7 +15,7 @@
  *
  */
 
-package io.ktor.start.features.both
+package io.ktor.start.features.sockets
 
 import io.ktor.start.*
 import io.ktor.start.project.*
@@ -52,7 +52,7 @@ object RawSocketsFeature : ServerFeature(ApplicationKt) {
                 +" * You can also start EchoApp.Server and then use a telnet client to connect to the echo server."
                 +" */"
                 +"object EchoApp" {
-                    +"val selectorManager = ActorSelectorManager(ioCoroutineDispatcher)"
+                    +"val selectorManager = ActorSelectorManager(Dispatchers.IO)"
                     +"val DefaultPort = 9002"
                     SEPARATOR {
                         +"object Server" {

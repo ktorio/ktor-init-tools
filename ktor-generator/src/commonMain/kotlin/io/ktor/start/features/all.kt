@@ -18,7 +18,7 @@
 package io.ktor.start.features
 
 import io.ktor.start.*
-import io.ktor.start.features.both.*
+import io.ktor.start.features.sockets.*
 import io.ktor.start.features.client.*
 import io.ktor.start.features.server.*
 

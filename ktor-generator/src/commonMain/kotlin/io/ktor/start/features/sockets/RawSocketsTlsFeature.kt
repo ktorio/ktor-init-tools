@@ -15,7 +15,7 @@
  *
  */
 
-package io.ktor.start.features.both
+package io.ktor.start.features.sockets
 
 import io.ktor.start.*
 import io.ktor.start.project.*
@@ -52,7 +52,7 @@ object RawSocketsTlsFeature : ServerFeature(ApplicationKt, RawSocketsFeature) {
                     +"@JvmStatic"
                     +"fun main(args: Array<String>)" {
                         +"runBlocking" {
-                            +"val selectorManager = ActorSelectorManager(ioCoroutineDispatcher)"
+                            +"val selectorManager = ActorSelectorManager(Dispatchers.IO)"
                             +"val socket = aSocket(selectorManager).tcp().connect(\"www.google.com\", port = 443).tls(coroutineContext = coroutineContext)"
                             +"val write = socket.openWriteChannel()"
                             +"val EOL = \"\\r\\n\""
