@@ -45,12 +45,19 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
     }
 
     lateinit var projectTypeCB: JComboBox<ProjectType>
+
     lateinit var engineCB: JComboBox<KtorEngine>
+
     lateinit var versionCB: JComboBox<KtorVersion>
+
     lateinit var wrapperCheckBox: JCheckBox
+
     lateinit var featureServerList: FeatureCheckboxList
+
     lateinit var featureClientList: FeatureCheckboxList
+
     val featuresToCheckbox = LinkedHashMap<Feature, ThreeStateCheckedTreeNode>()
+
     val panel by lazy {
         JPanel().apply {
             val description = JPanel().apply {
@@ -92,7 +99,6 @@ class KtorModuleWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() {
             add(table {
                 tr(
                     policy = TdSize.FIXED,
-                    maxHeight = 26,
                     fill = TdFill.NONE,
                     align = TdAlign.CENTER_LEFT
                 ) {
