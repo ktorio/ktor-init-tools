@@ -36,6 +36,7 @@ class KtorArtifactWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() 
 
     val panel = JPanel().apply {
         layout = GridLayoutManager(7, 2)
+
         fun addLabelText(name: String, value: String, row: Int): JTextField {
             val tfield = JTextField(value)
             addAtGrid(
@@ -58,6 +59,7 @@ class KtorArtifactWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() 
             )
             return tfield
         }
+
         addAtGrid(
             JLabel(""),
             row = 0,
@@ -65,6 +67,7 @@ class KtorArtifactWizardStep(val config: KtorModuleConfig) : ModuleWizardStep() 
             HSizePolicy = GridConstraints.SIZEPOLICY_FIXED,
             VSizePolicy = GridConstraints.SIZEPOLICY_FIXED
         )
+
         groupId = addLabelText("GroupId", config.artifactGroup, row = 1)
         artifactId = addLabelText("ArtifactId", config.artifactId, row = 2)
         version = addLabelText("Version", config.artifactVersion, row = 3)
