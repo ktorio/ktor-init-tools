@@ -12,7 +12,6 @@ object AuthBasicClientFeature : ClientFeature(CoreClientEngine) {
     override val documentation = "https://ktor.io/clients/http-client/features/auth.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
-        addImport("io.ktor.client.features.json.*")
         addImport("io.ktor.client.features.auth.basic.*")
         append(CoreClientEngine.CLIENT_FEATURES) {
             +"install(BasicAuth)" {
