@@ -33,7 +33,7 @@ val ALL_FEATURES: List<Feature> = listOf(
     JettyClientEngine,
     MockClientEngine,
     AuthBasicClientFeature,
-    JsonClientFeature,
+    GsonClientFeature,
     WebSocketClientFeature,
     LoggingClientFeature,
     UserAgentClientFeature,
