@@ -39,8 +39,6 @@ object GsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.features.json.*")
         addImport("io.ktor.client.request.*")
-        addImport("io.ktor.client.http.*")
-        addImport("java.net.URL")
         addImport("kotlinx.coroutines.experimental.*")
         addApplicationClasses {
             +"data class JsonSampleClass(val hello: String)"
@@ -53,11 +51,13 @@ object GsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
         append(CoreClientEngine.CLIENT_USAGE) {
             "runBlocking" {
                 +"// Sample for making a HTTP Client request"
+                +"/*"
                 "val message = client.post<JsonSampleClass>" {
                     +"url(\"http://127.0.0.1:8080/path/to/endpoint\")"
                     +"contentType(ContentType.Application.Json)"
                     +"body = JsonSampleClass(hello = \"world\")"
                 }
+                +"*/"
             }
         }
     }
