@@ -97,7 +97,6 @@ class GenerationTest {
                 import io.ktor.client.engine.apache.*
                 import io.ktor.client.features.json.*
                 import io.ktor.client.request.*
-                import java.net.URL
                 import kotlinx.coroutines.*
 
                 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -114,7 +113,7 @@ class GenerationTest {
                         // Sample for making a HTTP Client request
                         /*
                         val message = client.post<JsonSampleClass> {
-                            url(URL("http://127.0.0.1:8080/path/to/endpoint"))
+                            url("http://127.0.0.1:8080/path/to/endpoint")
                             contentType(ContentType.Application.Json)
                             body = JsonSampleClass(hello = "world")
                         }
