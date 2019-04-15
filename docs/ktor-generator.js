@@ -13,7 +13,6 @@
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var HashMap_init = Kotlin.kotlin.collections.HashMap_init_q3lmfv$;
-  var Unit = Kotlin.kotlin.Unit;
   var List = Kotlin.kotlin.collections.List;
   var throwCCE = Kotlin.throwCCE;
   var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
@@ -34,7 +33,6 @@
   var toByte = Kotlin.toByte;
   var to = Kotlin.kotlin.to_ujzrz7$;
   var mapOf = Kotlin.kotlin.collections.mapOf_qfcya0$;
-  var PropertyMetadata = Kotlin.PropertyMetadata;
   var toIntArray = Kotlin.kotlin.collections.toIntArray_fx3nzu$;
   var lazy = Kotlin.kotlin.lazy_klfg04$;
   var toString = Kotlin.toString;
@@ -50,32 +48,51 @@
   var toChar = Kotlin.toChar;
   var getCallableRef = Kotlin.getCallableRef;
   var unboxChar = Kotlin.unboxChar;
+  var Math_0 = Math;
+  var primitiveArrayConcat = Kotlin.primitiveArrayConcat;
+  var addAll = Kotlin.kotlin.collections.addAll_ipc267$;
+  var ArrayList_init_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   var replace = Kotlin.kotlin.text.replace_680rmw$;
-  var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED;
   var CoroutineImpl = Kotlin.kotlin.coroutines.CoroutineImpl;
+  var NotImplementedError_init = Kotlin.kotlin.NotImplementedError;
   var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
   var minus = Kotlin.kotlin.collections.minus_khz7k3$;
   var plus_1 = Kotlin.kotlin.collections.plus_iwxh38$;
+  var mapCapacity = Kotlin.kotlin.collections.mapCapacity_za3lpa$;
+  var coerceAtLeast = Kotlin.kotlin.ranges.coerceAtLeast_dqglrj$;
+  var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_bwtc7$;
   var Comparable = Kotlin.kotlin.Comparable;
   var listOf_0 = Kotlin.kotlin.collections.listOf_i5x0yv$;
+  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
+  var PropertyMetadata = Kotlin.PropertyMetadata;
+  var Unit = Kotlin.kotlin.Unit;
+  var LinkedHashMap_init_0 = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
+  var lastOrNull = Kotlin.kotlin.collections.lastOrNull_2p1efm$;
+  var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED;
   var LinkedHashSet_init = Kotlin.kotlin.collections.LinkedHashSet_init_287e2$;
   var plus_2 = Kotlin.kotlin.collections.plus_khz7k3$;
   var contains = Kotlin.kotlin.text.contains_sgbm27$;
   var println = Kotlin.kotlin.io.println_s8jyv4$;
   var setOf = Kotlin.kotlin.collections.setOf_mh5how$;
   var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
+  var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
+  var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
   var numberToInt = Kotlin.numberToInt;
   var PrimitiveClasses$intClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.intClass;
-  var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var firstOrNull = Kotlin.kotlin.collections.firstOrNull_2p1efm$;
   var removeAll = Kotlin.kotlin.collections.removeAll_qafx1e$;
   var endsWith = Kotlin.kotlin.text.endsWith_7epoxm$;
+  var copyToArray = Kotlin.kotlin.collections.copyToArray;
   var lines = Kotlin.kotlin.text.lines_gw00vp$;
-  var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
+  var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
+  var isBlank = Kotlin.kotlin.text.isBlank_gw00vp$;
+  var take = Kotlin.kotlin.collections.take_ba2ldo$;
   var capitalize = Kotlin.kotlin.text.capitalize_pdl1vz$;
   var map = Kotlin.kotlin.sequences.map_z5avom$;
   var toList = Kotlin.kotlin.sequences.toList_veqyi0$;
   var mapOf_0 = Kotlin.kotlin.collections.mapOf_x2b85n$;
+  var StringBuilder_init = Kotlin.kotlin.text.StringBuilder_init_za3lpa$;
+  var HashSet_init = Kotlin.kotlin.collections.HashSet_init_287e2$;
   var PrimitiveClasses$stringClass = Kotlin.kotlin.reflect.js.internal.PrimitiveClasses.stringClass;
   var getKClass = Kotlin.getKClass;
   var kotlin = Kotlin.kotlin;
@@ -95,6 +112,7 @@
   var L0 = Kotlin.Long.ZERO;
   var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
   var toMutableMap = Kotlin.kotlin.collections.toMutableMap_abgq59$;
+  var trim = Kotlin.kotlin.text.trim_gw00vp$;
   var toList_0 = Kotlin.kotlin.collections.toList_7wnvza$;
   var Iterable = Kotlin.kotlin.collections.Iterable;
   var dropLast = Kotlin.kotlin.collections.dropLast_yzln2o$;
@@ -113,10 +131,9 @@
   var toString_0 = Kotlin.kotlin.text.toString_dqglrj$;
   var padStart = Kotlin.kotlin.text.padStart_vrc1nu$;
   var split = Kotlin.kotlin.text.split_o64adg$;
+  var StringBuilder_init_0 = Kotlin.kotlin.text.StringBuilder_init;
   var split_0 = Kotlin.kotlin.text.split_ip8yn$;
-  var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
   var CharRange = Kotlin.kotlin.ranges.CharRange;
-  var StringBuilder_init = Kotlin.kotlin.text.StringBuilder_init;
   var withIndex = Kotlin.kotlin.collections.withIndex_7wnvza$;
   var toBoxedChar = Kotlin.toBoxedChar;
   var isWhitespace = Kotlin.kotlin.text.isWhitespace_myv2d0$;
@@ -124,7 +141,6 @@
   var toSet_0 = Kotlin.kotlin.collections.toSet_us0mfu$;
   var copyOf = Kotlin.kotlin.collections.copyOf_mrm5p$;
   var numberToByte = Kotlin.numberToByte;
-  var StringBuilder_init_0 = Kotlin.kotlin.text.StringBuilder_init_za3lpa$;
   var decapitalize = Kotlin.kotlin.text.decapitalize_pdl1vz$;
   var joinToString_0 = Kotlin.kotlin.sequences.joinToString_853xkz$;
   var arrayListOf = Kotlin.kotlin.collections.arrayListOf_i5x0yv$;
@@ -184,10 +200,6 @@
   KtorEngine.prototype.constructor = KtorEngine;
   ProjectType.prototype = Object.create(Enum.prototype);
   ProjectType.prototype.constructor = ProjectType;
-  RawSocketsFeature.prototype = Object.create(ServerFeature.prototype);
-  RawSocketsFeature.prototype.constructor = RawSocketsFeature;
-  RawSocketsTlsFeature.prototype = Object.create(ServerFeature.prototype);
-  RawSocketsTlsFeature.prototype.constructor = RawSocketsTlsFeature;
   ClientEngine.prototype = Object.create(ClientFeature.prototype);
   ClientEngine.prototype.constructor = ClientEngine;
   CoreClientEngine.prototype = Object.create(ClientEngine.prototype);
@@ -202,8 +214,8 @@
   MockClientEngine.prototype.constructor = MockClientEngine;
   AuthBasicClientFeature.prototype = Object.create(ClientFeature.prototype);
   AuthBasicClientFeature.prototype.constructor = AuthBasicClientFeature;
-  JsonClientFeature.prototype = Object.create(ClientFeature.prototype);
-  JsonClientFeature.prototype.constructor = JsonClientFeature;
+  GsonClientFeature.prototype = Object.create(ClientFeature.prototype);
+  GsonClientFeature.prototype.constructor = GsonClientFeature;
   LoggingClientFeature.prototype = Object.create(ClientFeature.prototype);
   LoggingClientFeature.prototype.constructor = LoggingClientFeature;
   UserAgentClientFeature.prototype = Object.create(ClientFeature.prototype);
@@ -278,6 +290,10 @@
   WebjarsFeature.prototype.constructor = WebjarsFeature;
   WebsocketsFeature.prototype = Object.create(ServerFeature.prototype);
   WebsocketsFeature.prototype.constructor = WebsocketsFeature;
+  RawSocketsFeature.prototype = Object.create(ServerFeature.prototype);
+  RawSocketsFeature.prototype.constructor = RawSocketsFeature;
+  RawSocketsTlsFeature.prototype = Object.create(ServerFeature.prototype);
+  RawSocketsTlsFeature.prototype.constructor = RawSocketsTlsFeature;
   HttpStatusCode.prototype = Object.create(Enum.prototype);
   HttpStatusCode.prototype.constructor = HttpStatusCode;
   ApplicationConf.prototype = Object.create(Block.prototype);
@@ -1145,7 +1161,6 @@
       return this$YamlSpec.count_spaces_za3lpa$(closure$n + 1 | 0)(state);
     };
   }
-  var Math_0 = Math;
   YamlSpec.prototype.count_spaces_za3lpa$ = function (n) {
     return this.or_yb4yy3$(this.and_yb4yy3$(this.s_space, YamlSpec$count_spaces$lambda(n, this)), this.result_za3lpa$(Math_0.max(1, n)));
   };
@@ -3178,7 +3193,6 @@
       return $receiver.limit;
     }), limit, parser);
   };
-  var primitiveArrayConcat = Kotlin.primitiveArrayConcat;
   function YamlParser$nextIf$consumeNextIf(closure$test, this$YamlParser) {
     return function (state) {
       var tmp$;
@@ -3417,7 +3431,6 @@
   YamlParser$PatternTokenizer.prototype.tokenize_7x97xx$ = function (name, input, withFollowing) {
     return this.patternParser_0(withFollowing, YamlParser$Companion_getInstance().wrap_0(this.pattern), YamlParser$Companion_getInstance().initialState_0(name, input));
   };
-  var addAll = Kotlin.kotlin.collections.addAll_ipc267$;
   YamlParser$PatternTokenizer.prototype.patternParser_0 = function (withFollowing, _parser, _state) {
     var tmp$;
     var out = ArrayList_init();
@@ -3501,7 +3514,6 @@
     else
       return '\\' + 'U' + this.toHex_vux9f0$(8, code);
   };
-  var ArrayList_init_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   YamlParser$Companion.prototype.escape_xwgkrb$ = function (text, separator) {
     if (separator === void 0)
       separator = ', ';
@@ -3623,7 +3635,6 @@
     }
     return toByteArray(tmp$, charset);
   };
-  var NotImplementedError_init = Kotlin.kotlin.NotImplementedError;
   function Coroutine$BuildInfo_init$lambda(it_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
@@ -3920,14 +3931,11 @@
     KtorEngine_initFields();
     return KtorEngine$CIO_instance;
   }
-  var mapCapacity = Kotlin.kotlin.collections.mapCapacity_za3lpa$;
-  var coerceAtLeast = Kotlin.kotlin.ranges.coerceAtLeast_dqglrj$;
-  var LinkedHashMap_init_0 = Kotlin.kotlin.collections.LinkedHashMap_init_bwtc7$;
   function KtorEngine$Companion() {
     KtorEngine$Companion_instance = this;
     var $receiver = KtorEngine$values();
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
-    var destination = LinkedHashMap_init_0(capacity);
+    var destination = LinkedHashMap_init(capacity);
     var tmp$;
     for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
       var element = $receiver[tmp$];
@@ -3936,7 +3944,7 @@
     this.BY_ID = destination;
     var $receiver_0 = KtorEngine$values();
     var capacity_0 = coerceAtLeast(mapCapacity($receiver_0.length), 16);
-    var destination_0 = LinkedHashMap_init_0(capacity_0);
+    var destination_0 = LinkedHashMap_init(capacity_0);
     var tmp$_0;
     for (tmp$_0 = 0; tmp$_0 !== $receiver_0.length; ++tmp$_0) {
       var element_0 = $receiver_0[tmp$_0];
@@ -4024,7 +4032,7 @@
     ProjectType$Companion_instance = this;
     var $receiver = ProjectType$values();
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
-    var destination = LinkedHashMap_init_0(capacity);
+    var destination = LinkedHashMap_init(capacity);
     var tmp$;
     for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
       var element = $receiver[tmp$];
@@ -4033,7 +4041,7 @@
     this.BY_ID = destination;
     var $receiver_0 = ProjectType$values();
     var capacity_0 = coerceAtLeast(mapCapacity($receiver_0.length), 16);
-    var destination_0 = LinkedHashMap_init_0(capacity_0);
+    var destination_0 = LinkedHashMap_init(capacity_0);
     var tmp$_0;
     for (tmp$_0 = 0; tmp$_0 !== $receiver_0.length; ++tmp$_0) {
       var element_0 = $receiver_0[tmp$_0];
@@ -4114,12 +4122,13 @@
     this.V111 = new KtorVersion('1.1.1', '1.3.11');
     this.V112 = new KtorVersion('1.1.2', '1.3.20');
     this.V113 = new KtorVersion('1.1.3', '1.3.21');
-    this.ALL = [this.V101, this.V113];
-    this.LAST = this.V113;
-    this.LAST_EAP = this.V113;
+    this.V114 = new KtorVersion('1.1.4', '1.3.30');
+    this.ALL = [this.V101, this.V114];
+    this.LAST = this.V114;
+    this.LAST_EAP = this.V114;
     var $receiver = this.ALL;
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
-    var destination = LinkedHashMap_init_0(capacity);
+    var destination = LinkedHashMap_init(capacity);
     var tmp$;
     for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
       var element = $receiver[tmp$];
@@ -4220,548 +4229,6 @@
   }
   var ALL_FEATURES;
   var ALL_FEATURES_BY_ID;
-  function RawSocketsFeature() {
-    RawSocketsFeature_instance = this;
-    ServerFeature.call(this, [ApplicationKt_getInstance()]);
-    this.group_yhj2r1$_0 = 'Sockets';
-    this.repos_vj7xzp$_0 = Repos_getInstance().ktor;
-    this.id_4qus7n$_0 = 'ktor-network';
-    this.title_uiv1fw$_0 = 'Raw Sockets';
-    this.description_mr4lsg$_0 = 'Adds Raw Socket support for listening and connecting to tcp and udp sockets';
-    this.documentation_dqqdw2$_0 = 'https://ktor.io/servers/raw-sockets.html';
-    this.SERVER_SOCKET = this.newSlot_pdl1vj$('SERVER_SOCKET');
-    this.CLIENT_SOCKET = this.newSlot_pdl1vj$('CLIENT_SOCKET');
-  }
-  Object.defineProperty(RawSocketsFeature.prototype, 'group', {
-    get: function () {
-      return this.group_yhj2r1$_0;
-    }
-  });
-  Object.defineProperty(RawSocketsFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_vj7xzp$_0;
-    }
-  });
-  Object.defineProperty(RawSocketsFeature.prototype, 'id', {
-    get: function () {
-      return this.id_4qus7n$_0;
-    }
-  });
-  Object.defineProperty(RawSocketsFeature.prototype, 'title', {
-    get: function () {
-      return this.title_uiv1fw$_0;
-    }
-  });
-  Object.defineProperty(RawSocketsFeature.prototype, 'description', {
-    get: function () {
-      return this.description_mr4lsg$_0;
-    }
-  });
-  Object.defineProperty(RawSocketsFeature.prototype, 'documentation', {
-    get: function () {
-      return this.documentation_dqqdw2$_0;
-    }
-  });
-  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda($receiver) {
-    $receiver.line_61zpoe$('val serverSocket = aSocket(selectorManager).tcp().bind(port = DefaultPort)');
-    return Unit;
-  }
-  var lastOrNull = Kotlin.kotlin.collections.lastOrNull_2p1efm$;
-  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda(this$RawSocketsFeature, this$renderFeature) {
-    return function ($receiver) {
-      var $receiver_0 = 'object Server';
-      var rafter = ''.length === 0 ? '' : ' ' + '';
-      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
-      $receiver._indent();
-      try {
-        var this$RawSocketsFeature_0 = this$RawSocketsFeature;
-        var this$renderFeature_0 = this$renderFeature;
-        $receiver.line_61zpoe$('@JvmStatic');
-        var $receiver_1 = 'fun main(args: Array<String>)';
-        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
-        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
-        $receiver._indent();
-        try {
-          var $receiver_2 = 'runBlocking';
-          var rafter_1 = ''.length === 0 ? '' : ' ' + '';
-          $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_1 : $receiver_2 + ' {' + rafter_1);
-          $receiver._indent();
-          try {
-            this$renderFeature_0.block_1s7wi0$($receiver, this$RawSocketsFeature_0.SERVER_SOCKET, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda);
-            $receiver.line_61zpoe$('println("Echo Server listening at ${serverSocket.localAddress}")');
-            var $receiver_3 = 'while (true)';
-            var rafter_2 = ''.length === 0 ? '' : ' ' + '';
-            $receiver.line_61zpoe$($receiver_3.length === 0 ? '{' + rafter_2 : $receiver_3 + ' {' + rafter_2);
-            $receiver._indent();
-            try {
-              $receiver.line_61zpoe$('val socket = serverSocket.accept()');
-              $receiver.line_61zpoe$('println("Accepted $socket")');
-              var rafter_3 = ''.length === 0 ? '' : ' ' + '';
-              $receiver.line_61zpoe$('launch'.length === 0 ? '{' + rafter_3 : 'launch' + ' {' + rafter_3);
-              $receiver._indent();
-              try {
-                $receiver.line_61zpoe$('val read = socket.openReadChannel()');
-                $receiver.line_61zpoe$('val write = socket.openWriteChannel(autoFlush = true)');
-                var rafter_4 = ''.length === 0 ? '' : ' ' + '';
-                $receiver.line_61zpoe$('try'.length === 0 ? '{' + rafter_4 : 'try' + ' {' + rafter_4);
-                $receiver._indent();
-                try {
-                  var $receiver_4 = 'while (true)';
-                  var rafter_5 = ''.length === 0 ? '' : ' ' + '';
-                  $receiver.line_61zpoe$($receiver_4.length === 0 ? '{' + rafter_5 : $receiver_4 + ' {' + rafter_5);
-                  $receiver._indent();
-                  try {
-                    $receiver.line_61zpoe$('val line = read.readUTF8Line()');
-                    $receiver.line_61zpoe$('write.writeStringUtf8("$line\\n")');
-                  }
-                  finally {
-                    $receiver._unindent();
-                  }
-                  $receiver.line_61zpoe$('}' + '');
-                  unaryPlus_0($receiver);
-                }
-                finally {
-                  $receiver._unindent();
-                }
-                $receiver.line_61zpoe$('}' + '');
-                unaryPlus_0($receiver);
-                var text = 'catch (e: Throwable)';
-                var tmp$, tmp$_0;
-                var tmp$_1;
-                if ((tmp$_0 = Kotlin.isType(tmp$ = lastOrNull($receiver.actions), Indenter$Action$Line) ? tmp$ : null) != null)
-                  tmp$_1 = tmp$_0;
-                else {
-                  throw IllegalStateException_init('Expected a line'.toString());
-                }
-                var lastAction = tmp$_1;
-                if (!equals(lastAction.str, '}')) {
-                  throw IllegalStateException_init("Expected a '}'".toString());
-                }
-                $receiver.actions.removeAt_za3lpa$($receiver.actions.size - 1 | 0);
-                var str = '} ' + text;
-                $receiver.line_61zpoe$(str.length === 0 ? '{' : str + ' {');
-                $receiver._indent();
-                try {
-                  $receiver.line_61zpoe$('socket.close()');
-                }
-                finally {
-                  $receiver._unindent();
-                }
-                $receiver.line_61zpoe$('}');
-              }
-              finally {
-                $receiver._unindent();
-              }
-              $receiver.line_61zpoe$('}' + '');
-              unaryPlus_0($receiver);
-            }
-            finally {
-              $receiver._unindent();
-            }
-            $receiver.line_61zpoe$('}' + '');
-            unaryPlus_0($receiver);
-          }
-          finally {
-            $receiver._unindent();
-          }
-          $receiver.line_61zpoe$('}' + '');
-          unaryPlus_0($receiver);
-        }
-        finally {
-          $receiver._unindent();
-        }
-        $receiver.line_61zpoe$('}' + '');
-        unaryPlus_0($receiver);
-      }
-      finally {
-        $receiver._unindent();
-      }
-      $receiver.line_61zpoe$('}' + '');
-      unaryPlus_0($receiver);
-      return Unit;
-    };
-  }
-  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_0($receiver) {
-    $receiver.line_61zpoe$('val socket = aSocket(selectorManager).tcp().connect("127.0.0.1", port = DefaultPort)');
-    return Unit;
-  }
-  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_1($receiver) {
-    var rafter = ''.length === 0 ? '' : ' ' + '';
-    $receiver.line_61zpoe$('launch'.length === 0 ? '{' + rafter : 'launch' + ' {' + rafter);
-    $receiver._indent();
-    try {
-      var $receiver_0 = 'while (true)';
-      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
-      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter_0 : $receiver_0 + ' {' + rafter_0);
-      $receiver._indent();
-      try {
-        $receiver.line_61zpoe$('val line = read.readUTF8Line()');
-        $receiver.line_61zpoe$('println("server: $line")');
-      }
-      finally {
-        $receiver._unindent();
-      }
-      $receiver.line_61zpoe$('}' + '');
-      unaryPlus_0($receiver);
-    }
-    finally {
-      $receiver._unindent();
-    }
-    $receiver.line_61zpoe$('}' + '');
-    unaryPlus_0($receiver);
-    return Unit;
-  }
-  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_2($receiver) {
-    var $receiver_0 = 'for (line in System.`in`.lines())';
-    var rafter = ''.length === 0 ? '' : ' ' + '';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
-    $receiver._indent();
-    try {
-      $receiver.line_61zpoe$('println("client: $line")');
-      $receiver.line_61zpoe$('write.writeStringUtf8("$line\\n")');
-    }
-    finally {
-      $receiver._unindent();
-    }
-    $receiver.line_61zpoe$('}' + '');
-    unaryPlus_0($receiver);
-    return Unit;
-  }
-  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda($receiver) {
-    $receiver.line_61zpoe$('private fun InputStream.lines() = Scanner(this).lines()');
-    return Unit;
-  }
-  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda_0(closure$info) {
-    return function ($receiver) {
-      var sequence = closure$info.is100OrGreater ? 'sequence' : 'buildSequence';
-      var $receiver_0 = 'private fun Scanner.lines() = ' + sequence;
-      var rafter = ''.length === 0 ? '' : ' ' + '';
-      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
-      $receiver._indent();
-      try {
-        var $receiver_1 = 'while (hasNext())';
-        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
-        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
-        $receiver._indent();
-        try {
-          $receiver.line_61zpoe$('yield(readLine())');
-        }
-        finally {
-          $receiver._unindent();
-        }
-        $receiver.line_61zpoe$('}' + '');
-        unaryPlus_0($receiver);
-      }
-      finally {
-        $receiver._unindent();
-      }
-      $receiver.line_61zpoe$('}' + '');
-      unaryPlus_0($receiver);
-      return Unit;
-    };
-  }
-  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda_0(this$RawSocketsFeature, this$renderFeature, closure$info) {
-    return function ($receiver) {
-      var $receiver_0 = 'object Client';
-      var rafter = ''.length === 0 ? '' : ' ' + '';
-      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
-      $receiver._indent();
-      try {
-        var this$RawSocketsFeature_0 = this$RawSocketsFeature;
-        var this$renderFeature_0 = this$renderFeature;
-        var closure$info_0 = closure$info;
-        $receiver.line_61zpoe$('@JvmStatic');
-        var $receiver_1 = 'fun main(args: Array<String>)';
-        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
-        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
-        $receiver._indent();
-        try {
-          var $receiver_2 = 'runBlocking';
-          var rafter_1 = ''.length === 0 ? '' : ' ' + '';
-          $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_1 : $receiver_2 + ' {' + rafter_1);
-          $receiver._indent();
-          try {
-            this$renderFeature_0.block_1s7wi0$($receiver, this$RawSocketsFeature_0.CLIENT_SOCKET, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_0);
-            $receiver.line_61zpoe$('val read = socket.openReadChannel()');
-            $receiver.line_61zpoe$('val write = socket.openWriteChannel(autoFlush = true)');
-            SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_1);
-            SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_2);
-          }
-          finally {
-            $receiver._unindent();
-          }
-          $receiver.line_61zpoe$('}' + '');
-          unaryPlus_0($receiver);
-        }
-        finally {
-          $receiver._unindent();
-        }
-        $receiver.line_61zpoe$('}' + '');
-        unaryPlus_0($receiver);
-        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda);
-        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda_0(closure$info_0));
-      }
-      finally {
-        $receiver._unindent();
-      }
-      $receiver.line_61zpoe$('}' + '');
-      unaryPlus_0($receiver);
-      return Unit;
-    };
-  }
-  function RawSocketsFeature$renderFeature$lambda$lambda(this$RawSocketsFeature, this$renderFeature, closure$info) {
-    return function ($receiver) {
-      $receiver.line_61zpoe$('/**');
-      $receiver.line_61zpoe$(' * Two mains are provided, you must first start EchoApp.Server, and then EchoApp.Client.');
-      $receiver.line_61zpoe$(' * You can also start EchoApp.Server and then use a telnet client to connect to the echo server.');
-      $receiver.line_61zpoe$(' */');
-      var $receiver_0 = 'object EchoApp';
-      var rafter = ''.length === 0 ? '' : ' ' + '';
-      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
-      $receiver._indent();
-      try {
-        var this$RawSocketsFeature_0 = this$RawSocketsFeature;
-        var this$renderFeature_0 = this$renderFeature;
-        var closure$info_0 = closure$info;
-        $receiver.line_61zpoe$('val selectorManager = ActorSelectorManager(ioCoroutineDispatcher)');
-        $receiver.line_61zpoe$('val DefaultPort = 9002');
-        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda(this$RawSocketsFeature_0, this$renderFeature_0));
-        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda_0(this$RawSocketsFeature_0, this$renderFeature_0, closure$info_0));
-      }
-      finally {
-        $receiver._unindent();
-      }
-      $receiver.line_61zpoe$('}' + '');
-      unaryPlus_0($receiver);
-      return Unit;
-    };
-  }
-  function Coroutine$RawSocketsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, this$RawSocketsFeature_0, $receiver_0, controller, continuation_0) {
-    CoroutineImpl.call(this, continuation_0);
-    this.$controller = controller;
-    this.exceptionState_0 = 1;
-    this.local$closure$info = closure$info_0;
-    this.local$this$renderFeature = this$renderFeature_0;
-    this.local$this$RawSocketsFeature = this$RawSocketsFeature_0;
-    this.local$$receiver = $receiver_0;
-  }
-  Coroutine$RawSocketsFeature$renderFeature$lambda.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: null,
-    interfaces: [CoroutineImpl]
-  };
-  Coroutine$RawSocketsFeature$renderFeature$lambda.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$RawSocketsFeature$renderFeature$lambda.prototype.constructor = Coroutine$RawSocketsFeature$renderFeature$lambda;
-  Coroutine$RawSocketsFeature$renderFeature$lambda.prototype.doResume = function () {
-    do
-      try {
-        switch (this.state_0) {
-          case 0:
-            this.local$$receiver.line_61zpoe$('package ' + this.local$closure$info.artifactGroup);
-            putImports(this.local$$receiver, get_applicationKtImports(this.local$this$renderFeature));
-            return SEPARATOR(this.local$$receiver, RawSocketsFeature$renderFeature$lambda$lambda(this.local$this$RawSocketsFeature, this.local$this$renderFeature, this.local$closure$info)), Unit;
-          case 1:
-            throw this.exception_0;
-          default:this.state_0 = 1;
-            throw new Error('State Machine Unreachable execution');
-        }
-      }
-       catch (e) {
-        if (this.state_0 === 1) {
-          this.exceptionState_0 = this.state_0;
-          throw e;
-        }
-         else {
-          this.state_0 = this.exceptionState_0;
-          this.exception_0 = e;
-        }
-      }
-     while (true);
-  };
-  function RawSocketsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, this$RawSocketsFeature_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$RawSocketsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, this$RawSocketsFeature_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
-  RawSocketsFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
-    addImport($receiver, 'java.io.*');
-    addImport($receiver, 'java.util.*');
-    addImport($receiver, 'io.ktor.network.selector.*');
-    addImport($receiver, 'io.ktor.network.sockets.*');
-    addImport($receiver, 'io.ktor.network.util.*');
-    addImport($receiver, 'kotlin.coroutines.experimental.*');
-    addImport($receiver, 'kotlinx.coroutines.experimental.*');
-    addImport($receiver, 'kotlinx.coroutines.experimental.io.*');
-    $receiver.fileText_6jjb1r$('src/EchoApp.kt', void 0, void 0, RawSocketsFeature$renderFeature$lambda(info, $receiver, this));
-  };
-  RawSocketsFeature.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'RawSocketsFeature',
-    interfaces: [ServerFeature]
-  };
-  var RawSocketsFeature_instance = null;
-  function RawSocketsFeature_getInstance() {
-    if (RawSocketsFeature_instance === null) {
-      new RawSocketsFeature();
-    }
-    return RawSocketsFeature_instance;
-  }
-  function RawSocketsTlsFeature() {
-    RawSocketsTlsFeature_instance = this;
-    ServerFeature.call(this, [ApplicationKt_getInstance(), RawSocketsFeature_getInstance()]);
-    this.group_5abz84$_0 = 'Sockets';
-    this.repos_aap0gi$_0 = Repos_getInstance().ktor;
-    this.id_9x2ee2$_0 = 'ktor-network-tls';
-    this.title_bb1x0b$_0 = 'Raw Secure SSL/TLS Sockets';
-    this.description_j4k8eh$_0 = 'Adds Raw Socket support for listening and connecting to tcp and udp sockets with secure sockets';
-    this.documentation_tpkipz$_0 = 'https://ktor.io/servers/raw-sockets.html#secure';
-  }
-  Object.defineProperty(RawSocketsTlsFeature.prototype, 'group', {
-    get: function () {
-      return this.group_5abz84$_0;
-    }
-  });
-  Object.defineProperty(RawSocketsTlsFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_aap0gi$_0;
-    }
-  });
-  Object.defineProperty(RawSocketsTlsFeature.prototype, 'id', {
-    get: function () {
-      return this.id_9x2ee2$_0;
-    }
-  });
-  Object.defineProperty(RawSocketsTlsFeature.prototype, 'title', {
-    get: function () {
-      return this.title_bb1x0b$_0;
-    }
-  });
-  Object.defineProperty(RawSocketsTlsFeature.prototype, 'description', {
-    get: function () {
-      return this.description_j4k8eh$_0;
-    }
-  });
-  Object.defineProperty(RawSocketsTlsFeature.prototype, 'documentation', {
-    get: function () {
-      return this.documentation_tpkipz$_0;
-    }
-  });
-  function RawSocketsTlsFeature$renderFeature$lambda$lambda($receiver) {
-    var $receiver_0 = 'object TlsRawSocket';
-    var rafter = ''.length === 0 ? '' : ' ' + '';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
-    $receiver._indent();
-    try {
-      $receiver.line_61zpoe$('@JvmStatic');
-      var $receiver_1 = 'fun main(args: Array<String>)';
-      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
-      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
-      $receiver._indent();
-      try {
-        var $receiver_2 = 'runBlocking';
-        var rafter_1 = ''.length === 0 ? '' : ' ' + '';
-        $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_1 : $receiver_2 + ' {' + rafter_1);
-        $receiver._indent();
-        try {
-          $receiver.line_61zpoe$('val selectorManager = ActorSelectorManager(ioCoroutineDispatcher)');
-          $receiver.line_61zpoe$('val socket = aSocket(selectorManager).tcp().connect("www.google.com", port = 443).tls(coroutineContext = coroutineContext)');
-          $receiver.line_61zpoe$('val write = socket.openWriteChannel()');
-          $receiver.line_61zpoe$('val EOL = "\\r\\n"');
-          $receiver.line_61zpoe$('write.writeStringUtf8("GET / HTTP/1.1${EOL}Host: www.google.com${EOL}Connection: close${EOL}${EOL}")');
-          $receiver.line_61zpoe$('write.flush()');
-          $receiver.line_61zpoe$('println(socket.openReadChannel().readRemaining().readBytes().toString(Charsets.UTF_8))');
-        }
-        finally {
-          $receiver._unindent();
-        }
-        $receiver.line_61zpoe$('}' + '');
-        unaryPlus_0($receiver);
-      }
-      finally {
-        $receiver._unindent();
-      }
-      $receiver.line_61zpoe$('}' + '');
-      unaryPlus_0($receiver);
-    }
-    finally {
-      $receiver._unindent();
-    }
-    $receiver.line_61zpoe$('}' + '');
-    unaryPlus_0($receiver);
-    return Unit;
-  }
-  function Coroutine$RawSocketsTlsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, $receiver_0, controller, continuation_0) {
-    CoroutineImpl.call(this, continuation_0);
-    this.$controller = controller;
-    this.exceptionState_0 = 1;
-    this.local$closure$info = closure$info_0;
-    this.local$this$renderFeature = this$renderFeature_0;
-    this.local$$receiver = $receiver_0;
-  }
-  Coroutine$RawSocketsTlsFeature$renderFeature$lambda.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: null,
-    interfaces: [CoroutineImpl]
-  };
-  Coroutine$RawSocketsTlsFeature$renderFeature$lambda.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$RawSocketsTlsFeature$renderFeature$lambda.prototype.constructor = Coroutine$RawSocketsTlsFeature$renderFeature$lambda;
-  Coroutine$RawSocketsTlsFeature$renderFeature$lambda.prototype.doResume = function () {
-    do
-      try {
-        switch (this.state_0) {
-          case 0:
-            this.local$$receiver.line_61zpoe$('package ' + this.local$closure$info.artifactGroup);
-            putImports(this.local$$receiver, get_applicationKtImports(this.local$this$renderFeature));
-            return SEPARATOR(this.local$$receiver, RawSocketsTlsFeature$renderFeature$lambda$lambda), Unit;
-          case 1:
-            throw this.exception_0;
-          default:this.state_0 = 1;
-            throw new Error('State Machine Unreachable execution');
-        }
-      }
-       catch (e) {
-        if (this.state_0 === 1) {
-          this.exceptionState_0 = this.state_0;
-          throw e;
-        }
-         else {
-          this.state_0 = this.exceptionState_0;
-          this.exception_0 = e;
-        }
-      }
-     while (true);
-  };
-  function RawSocketsTlsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0) {
-    return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$RawSocketsTlsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, $receiver_0, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
-  RawSocketsTlsFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
-    addImport($receiver, 'io.ktor.network.tls.*');
-    addImport($receiver, 'kotlinx.coroutines.experimental.*');
-    addImport($receiver, 'kotlinx.io.core.*');
-    $receiver.fileText_6jjb1r$('src/TlsRawSocket.kt', void 0, void 0, RawSocketsTlsFeature$renderFeature$lambda(info, $receiver));
-  };
-  RawSocketsTlsFeature.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'RawSocketsTlsFeature',
-    interfaces: [ServerFeature]
-  };
-  var RawSocketsTlsFeature_instance = null;
-  function RawSocketsTlsFeature_getInstance() {
-    if (RawSocketsTlsFeature_instance === null) {
-      new RawSocketsTlsFeature();
-    }
-    return RawSocketsTlsFeature_instance;
-  }
   function ClientEngine(deps) {
     ClientFeature.call(this, deps.slice());
     this.group_efbin8$_0 = 'HttpClient Engine';
@@ -4871,7 +4338,7 @@
         var r = clientEngine.defaultGen($receiver);
         var tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
         if ($receiver.extra == null)
-          $receiver.extra = LinkedHashMap_init();
+          $receiver.extra = LinkedHashMap_init_0();
         tmp$_7 = $receiver.extra;
         tmp$_4 = (tmp$_3 = clientEngine.name) != null ? tmp$_3 : clientEngine_metadata.callableName;
         tmp$_6 = (tmp$_5 = r) == null || Kotlin.isType(tmp$_5, Any) ? tmp$_5 : throwCCE();
@@ -4889,7 +4356,7 @@
   function set_clientEngine($receiver, clientEngine_0) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
     if ($receiver.extra == null)
-      $receiver.extra = LinkedHashMap_init();
+      $receiver.extra = LinkedHashMap_init_0();
     tmp$_3 = $receiver.extra;
     tmp$_0 = (tmp$ = clientEngine.name) != null ? tmp$ : clientEngine_metadata.callableName;
     tmp$_2 = (tmp$_1 = clientEngine_0) == null || Kotlin.isType(tmp$_1, Any) ? tmp$_1 : throwCCE();
@@ -5255,7 +4722,6 @@
     return Unit;
   }
   AuthBasicClientFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
-    addImport($receiver, 'io.ktor.client.features.json.*');
     addImport($receiver, 'io.ktor.client.features.auth.basic.*');
     $receiver.append_qu2wte$(CoreClientEngine_getInstance().CLIENT_FEATURES, void 0, AuthBasicClientFeature$renderFeature$lambda);
   };
@@ -5271,51 +4737,51 @@
     }
     return AuthBasicClientFeature_instance;
   }
-  function JsonClientFeature() {
-    JsonClientFeature_instance = this;
+  function GsonClientFeature() {
+    GsonClientFeature_instance = this;
     ClientFeature.call(this, [CoreClientEngine_getInstance(), ApplicationKt_getInstance()]);
-    this.id_kihmg4$_0 = 'ktor-client-json-jvm';
-    this.title_ymha91$_0 = 'Json serialization for HttpClient';
-    this.description_mhece7$_0 = 'Supports JSON serialization for the Http Client';
-    this.documentation_c1tfk3$_0 = 'https://ktor.io/clients/http-client/features/json-feature.html';
-    this.repos_xm4dp8$_0 = plus(Kotlin.callGetter(this, ClientFeature.prototype, 'repos'), listOf('https://kotlin.bintray.com/kotlinx'));
-    this.artifacts_thmji4$_0 = listOf_0(['io.ktor:ktor-client-json-jvm:$ktor_version', 'io.ktor:ktor-client-gson:$ktor_version']);
+    this.id_uzzko7$_0 = 'ktor-client-json-jvm';
+    this.title_x2y7i0$_0 = 'Json serialization for HttpClient';
+    this.description_n1lz4s$_0 = 'Supports JSON serialization for the Http Client';
+    this.documentation_ua468q$_0 = 'https://ktor.io/clients/http-client/features/json-feature.html';
+    this.repos_y3b41t$_0 = plus(Kotlin.callGetter(this, ClientFeature.prototype, 'repos'), listOf('https://kotlin.bintray.com/kotlinx'));
+    this.artifacts_swhujl$_0 = listOf_0(['io.ktor:ktor-client-json-jvm:$ktor_version', 'io.ktor:ktor-client-gson:$ktor_version']);
   }
-  Object.defineProperty(JsonClientFeature.prototype, 'id', {
+  Object.defineProperty(GsonClientFeature.prototype, 'id', {
     get: function () {
-      return this.id_kihmg4$_0;
+      return this.id_uzzko7$_0;
     }
   });
-  Object.defineProperty(JsonClientFeature.prototype, 'title', {
+  Object.defineProperty(GsonClientFeature.prototype, 'title', {
     get: function () {
-      return this.title_ymha91$_0;
+      return this.title_x2y7i0$_0;
     }
   });
-  Object.defineProperty(JsonClientFeature.prototype, 'description', {
+  Object.defineProperty(GsonClientFeature.prototype, 'description', {
     get: function () {
-      return this.description_mhece7$_0;
+      return this.description_n1lz4s$_0;
     }
   });
-  Object.defineProperty(JsonClientFeature.prototype, 'documentation', {
+  Object.defineProperty(GsonClientFeature.prototype, 'documentation', {
     get: function () {
-      return this.documentation_c1tfk3$_0;
+      return this.documentation_ua468q$_0;
     }
   });
-  Object.defineProperty(JsonClientFeature.prototype, 'repos', {
+  Object.defineProperty(GsonClientFeature.prototype, 'repos', {
     get: function () {
-      return this.repos_xm4dp8$_0;
+      return this.repos_y3b41t$_0;
     }
   });
-  Object.defineProperty(JsonClientFeature.prototype, 'artifacts', {
+  Object.defineProperty(GsonClientFeature.prototype, 'artifacts', {
     get: function () {
-      return this.artifacts_thmji4$_0;
+      return this.artifacts_swhujl$_0;
     }
   });
-  function JsonClientFeature$renderFeature$lambda($receiver) {
+  function GsonClientFeature$renderFeature$lambda($receiver) {
     $receiver.line_61zpoe$('data class JsonSampleClass(val hello: String)');
     return Unit;
   }
-  function JsonClientFeature$renderFeature$lambda_0($receiver) {
+  function GsonClientFeature$renderFeature$lambda_0($receiver) {
     var $receiver_0 = 'install(JsonFeature)';
     var rafter = ''.length === 0 ? '' : ' ' + '';
     $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
@@ -5329,7 +4795,7 @@
     $receiver.line_61zpoe$('}' + '');
     return Unit;
   }
-  function JsonClientFeature$renderFeature$lambda_1($receiver) {
+  function GsonClientFeature$renderFeature$lambda_1($receiver) {
     var $receiver_0 = 'runBlocking';
     var rafter = ''.length === 0 ? '' : ' ' + '';
     $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
@@ -5342,7 +4808,7 @@
       $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
       $receiver._indent();
       try {
-        $receiver.line_61zpoe$('url(URL("http://127.0.0.1:8080/path/to/endpoint"))');
+        $receiver.line_61zpoe$('url("http://127.0.0.1:8080/path/to/endpoint")');
         $receiver.line_61zpoe$('contentType(ContentType.Application.Json)');
         $receiver.line_61zpoe$('body = JsonSampleClass(hello = "world")');
       }
@@ -5358,26 +4824,25 @@
     $receiver.line_61zpoe$('}' + '');
     return Unit;
   }
-  JsonClientFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+  GsonClientFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.client.features.json.*');
     addImport($receiver, 'io.ktor.client.request.*');
-    addImport($receiver, 'java.net.URL');
     addImport($receiver, 'kotlinx.coroutines.experimental.*');
-    addApplicationClasses($receiver, JsonClientFeature$renderFeature$lambda);
-    $receiver.append_qu2wte$(CoreClientEngine_getInstance().CLIENT_FEATURES, void 0, JsonClientFeature$renderFeature$lambda_0);
-    $receiver.append_qu2wte$(CoreClientEngine_getInstance().CLIENT_USAGE, void 0, JsonClientFeature$renderFeature$lambda_1);
+    addApplicationClasses($receiver, GsonClientFeature$renderFeature$lambda);
+    $receiver.append_qu2wte$(CoreClientEngine_getInstance().CLIENT_FEATURES, void 0, GsonClientFeature$renderFeature$lambda_0);
+    $receiver.append_qu2wte$(CoreClientEngine_getInstance().CLIENT_USAGE, void 0, GsonClientFeature$renderFeature$lambda_1);
   };
-  JsonClientFeature.$metadata$ = {
+  GsonClientFeature.$metadata$ = {
     kind: Kind_OBJECT,
-    simpleName: 'JsonClientFeature',
+    simpleName: 'GsonClientFeature',
     interfaces: [ClientFeature]
   };
-  var JsonClientFeature_instance = null;
-  function JsonClientFeature_getInstance() {
-    if (JsonClientFeature_instance === null) {
-      new JsonClientFeature();
+  var GsonClientFeature_instance = null;
+  function GsonClientFeature_getInstance() {
+    if (GsonClientFeature_instance === null) {
+      new GsonClientFeature();
     }
-    return JsonClientFeature_instance;
+    return GsonClientFeature_instance;
   }
   function LoggingClientFeature() {
     LoggingClientFeature_instance = this;
@@ -8757,6 +8222,547 @@
     }
     return WebsocketsFeature_instance;
   }
+  function RawSocketsFeature() {
+    RawSocketsFeature_instance = this;
+    ServerFeature.call(this, [ApplicationKt_getInstance()]);
+    this.group_k51yn8$_0 = 'Sockets';
+    this.repos_p5ezvm$_0 = Repos_getInstance().ktor;
+    this.id_k6sgt2$_0 = 'ktor-network';
+    this.title_q5rwff$_0 = 'Raw Sockets';
+    this.description_9huigp$_0 = 'Adds Raw Socket support for listening and connecting to tcp and udp sockets';
+    this.documentation_8dm8tz$_0 = 'https://ktor.io/servers/raw-sockets.html';
+    this.SERVER_SOCKET = this.newSlot_pdl1vj$('SERVER_SOCKET');
+    this.CLIENT_SOCKET = this.newSlot_pdl1vj$('CLIENT_SOCKET');
+  }
+  Object.defineProperty(RawSocketsFeature.prototype, 'group', {
+    get: function () {
+      return this.group_k51yn8$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_p5ezvm$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsFeature.prototype, 'id', {
+    get: function () {
+      return this.id_k6sgt2$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsFeature.prototype, 'title', {
+    get: function () {
+      return this.title_q5rwff$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsFeature.prototype, 'description', {
+    get: function () {
+      return this.description_9huigp$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_8dm8tz$_0;
+    }
+  });
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda($receiver) {
+    $receiver.line_61zpoe$('val serverSocket = aSocket(selectorManager).tcp().bind(port = DefaultPort)');
+    return Unit;
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda(this$RawSocketsFeature, this$renderFeature) {
+    return function ($receiver) {
+      var $receiver_0 = 'object Server';
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+      $receiver._indent();
+      try {
+        var this$RawSocketsFeature_0 = this$RawSocketsFeature;
+        var this$renderFeature_0 = this$renderFeature;
+        $receiver.line_61zpoe$('@JvmStatic');
+        var $receiver_1 = 'fun main(args: Array<String>)';
+        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+        $receiver._indent();
+        try {
+          var $receiver_2 = 'runBlocking';
+          var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+          $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_1 : $receiver_2 + ' {' + rafter_1);
+          $receiver._indent();
+          try {
+            this$renderFeature_0.block_1s7wi0$($receiver, this$RawSocketsFeature_0.SERVER_SOCKET, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda);
+            $receiver.line_61zpoe$('println("Echo Server listening at ${serverSocket.localAddress}")');
+            var $receiver_3 = 'while (true)';
+            var rafter_2 = ''.length === 0 ? '' : ' ' + '';
+            $receiver.line_61zpoe$($receiver_3.length === 0 ? '{' + rafter_2 : $receiver_3 + ' {' + rafter_2);
+            $receiver._indent();
+            try {
+              $receiver.line_61zpoe$('val socket = serverSocket.accept()');
+              $receiver.line_61zpoe$('println("Accepted $socket")');
+              var rafter_3 = ''.length === 0 ? '' : ' ' + '';
+              $receiver.line_61zpoe$('launch'.length === 0 ? '{' + rafter_3 : 'launch' + ' {' + rafter_3);
+              $receiver._indent();
+              try {
+                $receiver.line_61zpoe$('val read = socket.openReadChannel()');
+                $receiver.line_61zpoe$('val write = socket.openWriteChannel(autoFlush = true)');
+                var rafter_4 = ''.length === 0 ? '' : ' ' + '';
+                $receiver.line_61zpoe$('try'.length === 0 ? '{' + rafter_4 : 'try' + ' {' + rafter_4);
+                $receiver._indent();
+                try {
+                  var $receiver_4 = 'while (true)';
+                  var rafter_5 = ''.length === 0 ? '' : ' ' + '';
+                  $receiver.line_61zpoe$($receiver_4.length === 0 ? '{' + rafter_5 : $receiver_4 + ' {' + rafter_5);
+                  $receiver._indent();
+                  try {
+                    $receiver.line_61zpoe$('val line = read.readUTF8Line()');
+                    $receiver.line_61zpoe$('write.writeStringUtf8("$line\\n")');
+                  }
+                  finally {
+                    $receiver._unindent();
+                  }
+                  $receiver.line_61zpoe$('}' + '');
+                  unaryPlus_0($receiver);
+                }
+                finally {
+                  $receiver._unindent();
+                }
+                $receiver.line_61zpoe$('}' + '');
+                unaryPlus_0($receiver);
+                var text = 'catch (e: Throwable)';
+                var tmp$, tmp$_0;
+                var tmp$_1;
+                if ((tmp$_0 = Kotlin.isType(tmp$ = lastOrNull($receiver.actions), Indenter$Action$Line) ? tmp$ : null) != null)
+                  tmp$_1 = tmp$_0;
+                else {
+                  throw IllegalStateException_init('Expected a line'.toString());
+                }
+                var lastAction = tmp$_1;
+                if (!equals(lastAction.str, '}')) {
+                  throw IllegalStateException_init("Expected a '}'".toString());
+                }
+                $receiver.actions.removeAt_za3lpa$($receiver.actions.size - 1 | 0);
+                var str = '} ' + text;
+                $receiver.line_61zpoe$(str.length === 0 ? '{' : str + ' {');
+                $receiver._indent();
+                try {
+                  $receiver.line_61zpoe$('socket.close()');
+                }
+                finally {
+                  $receiver._unindent();
+                }
+                $receiver.line_61zpoe$('}');
+              }
+              finally {
+                $receiver._unindent();
+              }
+              $receiver.line_61zpoe$('}' + '');
+              unaryPlus_0($receiver);
+            }
+            finally {
+              $receiver._unindent();
+            }
+            $receiver.line_61zpoe$('}' + '');
+            unaryPlus_0($receiver);
+          }
+          finally {
+            $receiver._unindent();
+          }
+          $receiver.line_61zpoe$('}' + '');
+          unaryPlus_0($receiver);
+        }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$('}' + '');
+        unaryPlus_0($receiver);
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+      return Unit;
+    };
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_0($receiver) {
+    $receiver.line_61zpoe$('val socket = aSocket(selectorManager).tcp().connect("127.0.0.1", port = DefaultPort)');
+    return Unit;
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_1($receiver) {
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$('launch'.length === 0 ? '{' + rafter : 'launch' + ' {' + rafter);
+    $receiver._indent();
+    try {
+      var $receiver_0 = 'while (true)';
+      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter_0 : $receiver_0 + ' {' + rafter_0);
+      $receiver._indent();
+      try {
+        $receiver.line_61zpoe$('val line = read.readUTF8Line()');
+        $receiver.line_61zpoe$('println("server: $line")');
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+    return Unit;
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_2($receiver) {
+    var $receiver_0 = 'for (line in System.`in`.lines())';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('println("client: $line")');
+      $receiver.line_61zpoe$('write.writeStringUtf8("$line\\n")');
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+    return Unit;
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda($receiver) {
+    $receiver.line_61zpoe$('private fun InputStream.lines() = Scanner(this).lines()');
+    return Unit;
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda_0(closure$info) {
+    return function ($receiver) {
+      var sequence = closure$info.is100OrGreater ? 'sequence' : 'buildSequence';
+      var $receiver_0 = 'private fun Scanner.lines() = ' + sequence;
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+      $receiver._indent();
+      try {
+        var $receiver_1 = 'while (hasNext())';
+        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+        $receiver._indent();
+        try {
+          $receiver.line_61zpoe$('yield(readLine())');
+        }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$('}' + '');
+        unaryPlus_0($receiver);
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+      return Unit;
+    };
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda_0(this$RawSocketsFeature, this$renderFeature, closure$info) {
+    return function ($receiver) {
+      var $receiver_0 = 'object Client';
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+      $receiver._indent();
+      try {
+        var this$RawSocketsFeature_0 = this$RawSocketsFeature;
+        var this$renderFeature_0 = this$renderFeature;
+        var closure$info_0 = closure$info;
+        $receiver.line_61zpoe$('@JvmStatic');
+        var $receiver_1 = 'fun main(args: Array<String>)';
+        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+        $receiver._indent();
+        try {
+          var $receiver_2 = 'runBlocking';
+          var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+          $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_1 : $receiver_2 + ' {' + rafter_1);
+          $receiver._indent();
+          try {
+            this$renderFeature_0.block_1s7wi0$($receiver, this$RawSocketsFeature_0.CLIENT_SOCKET, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_0);
+            $receiver.line_61zpoe$('val read = socket.openReadChannel()');
+            $receiver.line_61zpoe$('val write = socket.openWriteChannel(autoFlush = true)');
+            SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_1);
+            SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda$lambda$lambda_2);
+          }
+          finally {
+            $receiver._unindent();
+          }
+          $receiver.line_61zpoe$('}' + '');
+          unaryPlus_0($receiver);
+        }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$('}' + '');
+        unaryPlus_0($receiver);
+        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda);
+        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda$lambda$lambda_0(closure$info_0));
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+      return Unit;
+    };
+  }
+  function RawSocketsFeature$renderFeature$lambda$lambda(this$RawSocketsFeature, this$renderFeature, closure$info) {
+    return function ($receiver) {
+      $receiver.line_61zpoe$('/**');
+      $receiver.line_61zpoe$(' * Two mains are provided, you must first start EchoApp.Server, and then EchoApp.Client.');
+      $receiver.line_61zpoe$(' * You can also start EchoApp.Server and then use a telnet client to connect to the echo server.');
+      $receiver.line_61zpoe$(' */');
+      var $receiver_0 = 'object EchoApp';
+      var rafter = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+      $receiver._indent();
+      try {
+        var this$RawSocketsFeature_0 = this$RawSocketsFeature;
+        var this$renderFeature_0 = this$renderFeature;
+        var closure$info_0 = closure$info;
+        $receiver.line_61zpoe$('val selectorManager = ActorSelectorManager(Dispatchers.IO)');
+        $receiver.line_61zpoe$('val DefaultPort = 9002');
+        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda(this$RawSocketsFeature_0, this$renderFeature_0));
+        SEPARATOR($receiver, RawSocketsFeature$renderFeature$lambda$lambda$lambda$lambda_0(this$RawSocketsFeature_0, this$renderFeature_0, closure$info_0));
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+      return Unit;
+    };
+  }
+  function Coroutine$RawSocketsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, this$RawSocketsFeature_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+    this.local$this$renderFeature = this$renderFeature_0;
+    this.local$this$RawSocketsFeature = this$RawSocketsFeature_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$RawSocketsFeature$renderFeature$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$RawSocketsFeature$renderFeature$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$RawSocketsFeature$renderFeature$lambda.prototype.constructor = Coroutine$RawSocketsFeature$renderFeature$lambda;
+  Coroutine$RawSocketsFeature$renderFeature$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.local$$receiver.line_61zpoe$('package ' + this.local$closure$info.artifactGroup);
+            putImports(this.local$$receiver, get_applicationKtImports(this.local$this$renderFeature));
+            return SEPARATOR(this.local$$receiver, RawSocketsFeature$renderFeature$lambda$lambda(this.local$this$RawSocketsFeature, this.local$this$renderFeature, this.local$closure$info)), Unit;
+          case 1:
+            throw this.exception_0;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function RawSocketsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, this$RawSocketsFeature_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$RawSocketsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, this$RawSocketsFeature_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  RawSocketsFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'java.io.*');
+    addImport($receiver, 'java.util.*');
+    addImport($receiver, 'io.ktor.network.selector.*');
+    addImport($receiver, 'io.ktor.network.sockets.*');
+    addImport($receiver, 'io.ktor.network.util.*');
+    addImport($receiver, 'kotlin.coroutines.experimental.*');
+    addImport($receiver, 'kotlinx.coroutines.experimental.*');
+    addImport($receiver, 'kotlinx.coroutines.experimental.io.*');
+    $receiver.fileText_6jjb1r$('src/EchoApp.kt', void 0, void 0, RawSocketsFeature$renderFeature$lambda(info, $receiver, this));
+  };
+  RawSocketsFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'RawSocketsFeature',
+    interfaces: [ServerFeature]
+  };
+  var RawSocketsFeature_instance = null;
+  function RawSocketsFeature_getInstance() {
+    if (RawSocketsFeature_instance === null) {
+      new RawSocketsFeature();
+    }
+    return RawSocketsFeature_instance;
+  }
+  function RawSocketsTlsFeature() {
+    RawSocketsTlsFeature_instance = this;
+    ServerFeature.call(this, [ApplicationKt_getInstance(), RawSocketsFeature_getInstance()]);
+    this.group_ipjgd$_0 = 'Sockets';
+    this.repos_5j2kor$_0 = Repos_getInstance().ktor;
+    this.id_o9jihv$_0 = 'ktor-network-tls';
+    this.title_6jfh8k$_0 = 'Raw Secure SSL/TLS Sockets';
+    this.description_5foqxs$_0 = 'Adds Raw Socket support for listening and connecting to tcp and udp sockets with secure sockets';
+    this.documentation_7f7cim$_0 = 'https://ktor.io/servers/raw-sockets.html#secure';
+  }
+  Object.defineProperty(RawSocketsTlsFeature.prototype, 'group', {
+    get: function () {
+      return this.group_ipjgd$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsTlsFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_5j2kor$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsTlsFeature.prototype, 'id', {
+    get: function () {
+      return this.id_o9jihv$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsTlsFeature.prototype, 'title', {
+    get: function () {
+      return this.title_6jfh8k$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsTlsFeature.prototype, 'description', {
+    get: function () {
+      return this.description_5foqxs$_0;
+    }
+  });
+  Object.defineProperty(RawSocketsTlsFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_7f7cim$_0;
+    }
+  });
+  function RawSocketsTlsFeature$renderFeature$lambda$lambda($receiver) {
+    var $receiver_0 = 'object TlsRawSocket';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('@JvmStatic');
+      var $receiver_1 = 'fun main(args: Array<String>)';
+      var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+      $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+      $receiver._indent();
+      try {
+        var $receiver_2 = 'runBlocking';
+        var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_1 : $receiver_2 + ' {' + rafter_1);
+        $receiver._indent();
+        try {
+          $receiver.line_61zpoe$('val selectorManager = ActorSelectorManager(Dispatchers.IO)');
+          $receiver.line_61zpoe$('val socket = aSocket(selectorManager).tcp().connect("www.google.com", port = 443).tls(coroutineContext = coroutineContext)');
+          $receiver.line_61zpoe$('val write = socket.openWriteChannel()');
+          $receiver.line_61zpoe$('val EOL = "\\r\\n"');
+          $receiver.line_61zpoe$('write.writeStringUtf8("GET / HTTP/1.1${EOL}Host: www.google.com${EOL}Connection: close${EOL}${EOL}")');
+          $receiver.line_61zpoe$('write.flush()');
+          $receiver.line_61zpoe$('println(socket.openReadChannel().readRemaining().readBytes().toString(Charsets.UTF_8))');
+        }
+        finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$('}' + '');
+        unaryPlus_0($receiver);
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}' + '');
+      unaryPlus_0($receiver);
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    unaryPlus_0($receiver);
+    return Unit;
+  }
+  function Coroutine$RawSocketsTlsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, $receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$closure$info = closure$info_0;
+    this.local$this$renderFeature = this$renderFeature_0;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$RawSocketsTlsFeature$renderFeature$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$RawSocketsTlsFeature$renderFeature$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$RawSocketsTlsFeature$renderFeature$lambda.prototype.constructor = Coroutine$RawSocketsTlsFeature$renderFeature$lambda;
+  Coroutine$RawSocketsTlsFeature$renderFeature$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.local$$receiver.line_61zpoe$('package ' + this.local$closure$info.artifactGroup);
+            putImports(this.local$$receiver, get_applicationKtImports(this.local$this$renderFeature));
+            return SEPARATOR(this.local$$receiver, RawSocketsTlsFeature$renderFeature$lambda$lambda), Unit;
+          case 1:
+            throw this.exception_0;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function RawSocketsTlsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$RawSocketsTlsFeature$renderFeature$lambda(closure$info_0, this$renderFeature_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  RawSocketsTlsFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.network.tls.*');
+    addImport($receiver, 'kotlinx.coroutines.experimental.*');
+    addImport($receiver, 'kotlinx.io.core.*');
+    $receiver.fileText_6jjb1r$('src/TlsRawSocket.kt', void 0, void 0, RawSocketsTlsFeature$renderFeature$lambda(info, $receiver));
+  };
+  RawSocketsTlsFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'RawSocketsTlsFeature',
+    interfaces: [ServerFeature]
+  };
+  var RawSocketsTlsFeature_instance = null;
+  function RawSocketsTlsFeature_getInstance() {
+    if (RawSocketsTlsFeature_instance === null) {
+      new RawSocketsTlsFeature();
+    }
+    return RawSocketsTlsFeature_instance;
+  }
   function FreeHttpStatusCode(code, description) {
     this.code = code;
     this.description = description;
@@ -9086,7 +9092,7 @@
     HttpStatusCode$Companion_instance = this;
     var $receiver = HttpStatusCode$values();
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
-    var destination = LinkedHashMap_init_0(capacity);
+    var destination = LinkedHashMap_init(capacity);
     var tmp$;
     for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
       var element = $receiver[tmp$];
@@ -9507,7 +9513,7 @@
         var r = applicationKtImports.defaultGen($receiver);
         var tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
         if ($receiver.extra == null)
-          $receiver.extra = LinkedHashMap_init();
+          $receiver.extra = LinkedHashMap_init_0();
         tmp$_7 = $receiver.extra;
         tmp$_4 = (tmp$_3 = applicationKtImports.name) != null ? tmp$_3 : applicationKtImports_metadata.callableName;
         tmp$_6 = (tmp$_5 = r) == null || Kotlin.isType(tmp$_5, Any) ? tmp$_5 : throwCCE();
@@ -9695,7 +9701,7 @@
         var r = applicationTestKtImports.defaultGen($receiver);
         var tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
         if ($receiver.extra == null)
-          $receiver.extra = LinkedHashMap_init();
+          $receiver.extra = LinkedHashMap_init_0();
         tmp$_7 = $receiver.extra;
         tmp$_4 = (tmp$_3 = applicationTestKtImports.name) != null ? tmp$_3 : applicationTestKtImports_metadata.callableName;
         tmp$_6 = (tmp$_5 = r) == null || Kotlin.isType(tmp$_5, Any) ? tmp$_5 : throwCCE();
@@ -9792,7 +9798,7 @@
         var r = reposToInclude.defaultGen($receiver);
         var tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
         if ($receiver.extra == null)
-          $receiver.extra = LinkedHashMap_init();
+          $receiver.extra = LinkedHashMap_init_0();
         tmp$_7 = $receiver.extra;
         tmp$_4 = (tmp$_3 = reposToInclude.name) != null ? tmp$_3 : reposToInclude_metadata.callableName;
         tmp$_6 = (tmp$_5 = r) == null || Kotlin.isType(tmp$_5, Any) ? tmp$_5 : throwCCE();
@@ -9823,7 +9829,7 @@
         var r = compileDependencies.defaultGen($receiver);
         var tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
         if ($receiver.extra == null)
-          $receiver.extra = LinkedHashMap_init();
+          $receiver.extra = LinkedHashMap_init_0();
         tmp$_7 = $receiver.extra;
         tmp$_4 = (tmp$_3 = compileDependencies.name) != null ? tmp$_3 : compileDependencies_metadata.callableName;
         tmp$_6 = (tmp$_5 = r) == null || Kotlin.isType(tmp$_5, Any) ? tmp$_5 : throwCCE();
@@ -9854,7 +9860,7 @@
         var r = testDependencies.defaultGen($receiver);
         var tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
         if ($receiver.extra == null)
-          $receiver.extra = LinkedHashMap_init();
+          $receiver.extra = LinkedHashMap_init_0();
         tmp$_7 = $receiver.extra;
         tmp$_4 = (tmp$_3 = testDependencies.name) != null ? tmp$_3 : testDependencies_metadata.callableName;
         tmp$_6 = (tmp$_5 = r) == null || Kotlin.isType(tmp$_5, Any) ? tmp$_5 : throwCCE();
@@ -12280,7 +12286,6 @@
     }
     return tmp$;
   }
-  var copyToArray = Kotlin.kotlin.collections.copyToArray;
   function SwaggerGenerator(model, generationKind) {
     Block.call(this, copyToArray(buildDepsFromModel(model)).slice());
     this.model = model;
@@ -12433,7 +12438,6 @@
   SwaggerGeneratorBase.prototype.addSwaggerUtils_gtq0m3$ = function ($receiver, info) {
     $receiver.fileBinary_z1oxai$('src/io/ktor/swagger/experimental/SwaggerUtils.kt', UTF8_getInstance(), void 0, SwaggerGeneratorBase$addSwaggerUtils$lambda(info));
   };
-  var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
   SwaggerGeneratorBase.prototype.doc_lz4qb0$ = function ($receiver, title, description, params, retval) {
     if (description === void 0)
       description = '';
@@ -12461,8 +12465,6 @@
     }
     this.doc_5doh9f$($receiver, $receiver_0);
   };
-  var isBlank = Kotlin.kotlin.text.isBlank_gw00vp$;
-  var take = Kotlin.kotlin.collections.take_ba2ldo$;
   SwaggerGeneratorBase.prototype.doc_5doh9f$ = function ($receiver, lines) {
     var tmp$;
     var tmp$_0;
@@ -13003,7 +13005,6 @@
   function SwaggerGeneratorCommon$filesHttpApi$lambda$lambda$lambda(it) {
     return it.groupValues.get_za3lpa$(1);
   }
-  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
   function Coroutine$SwaggerGeneratorCommon$filesHttpApi$lambda_0(closure$model_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
@@ -13137,7 +13138,7 @@
                   }
                   var lastStart = 0;
                   var length = $receiver.length;
-                  var sb = StringBuilder_init_0(length);
+                  var sb = StringBuilder_init(length);
                   do {
                     var foundMatch = ensureNotNull(match);
                     sb.append_ezbsdh$($receiver, lastStart, foundMatch.range.start);
@@ -13332,7 +13333,7 @@
       var tmp$_0 = closure$method.summaryDescription;
       var $receiver_0 = closure$method.parameters;
       var capacity = coerceAtLeast(mapCapacity(collectionSizeOrDefault($receiver_0, 10)), 16);
-      var destination = LinkedHashMap_init_0(capacity);
+      var destination = LinkedHashMap_init(capacity);
       var tmp$_1;
       tmp$_1 = $receiver_0.iterator();
       while (tmp$_1.hasNext()) {
@@ -13817,7 +13818,6 @@
       return Unit;
     };
   }
-  var HashSet_init = Kotlin.kotlin.collections.HashSet_init_287e2$;
   function SwaggerGeneratorRaw$fileSwaggerBackendHandler$lambda$lambda_1(closure$model, this$SwaggerGeneratorRaw, closure$arguments) {
     return function ($receiver) {
       this$SwaggerGeneratorRaw.doc_lz4qb0$($receiver, closure$model.info.title, closure$model.info.description);
@@ -13999,7 +13999,7 @@
       var tmp$_0 = closure$method.summaryDescription;
       var $receiver_0 = closure$method.parameters;
       var capacity = coerceAtLeast(mapCapacity(collectionSizeOrDefault($receiver_0, 10)), 16);
-      var destination = LinkedHashMap_init_0(capacity);
+      var destination = LinkedHashMap_init(capacity);
       var tmp$_1;
       tmp$_1 = $receiver_0.iterator();
       while (tmp$_1.hasNext()) {
@@ -14043,7 +14043,7 @@
           }
           var lastStart = 0;
           var length = $receiver_2.length;
-          var sb = StringBuilder_init_0(length);
+          var sb = StringBuilder_init(length);
           do {
             var foundMatch = ensureNotNull(match);
             sb.append_ezbsdh$($receiver_2, lastStart, foundMatch.range.start);
@@ -14872,7 +14872,7 @@
     this.propList = propList;
     var $receiver = this.propList;
     var capacity = coerceAtLeast(mapCapacity(collectionSizeOrDefault($receiver, 10)), 16);
-    var destination = LinkedHashMap_init_0(capacity);
+    var destination = LinkedHashMap_init(capacity);
     var tmp$;
     tmp$ = $receiver.iterator();
     while (tmp$.hasNext()) {
@@ -15101,7 +15101,7 @@
     SwaggerModel$Inside$Companion_instance = this;
     var $receiver = SwaggerModel$Inside$values();
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
-    var destination = LinkedHashMap_init_0(capacity);
+    var destination = LinkedHashMap_init(capacity);
     var tmp$;
     for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
       var element = $receiver[tmp$];
@@ -15196,7 +15196,7 @@
     SwaggerModel$SecurityType$Companion_instance = this;
     var $receiver = SwaggerModel$SecurityType$values();
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
-    var destination = LinkedHashMap_init_0(capacity);
+    var destination = LinkedHashMap_init(capacity);
     var tmp$;
     for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
       var element = $receiver[tmp$];
@@ -15357,7 +15357,6 @@
   SwaggerModel$ProcessedTag.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.tag, other.tag))));
   };
-  var trim = Kotlin.kotlin.text.trim_gw00vp$;
   function SwaggerModel$PathMethodModel(path, method, summary, description, tags, security, operationId, parameters, responses, requestBody) {
     this.path = path;
     this.method = method;
@@ -16309,7 +16308,7 @@
     }
     var $receiver_1 = filterNotNull(destination);
     var capacity = coerceAtLeast(mapCapacity(collectionSizeOrDefault($receiver_1, 10)), 16);
-    var destination_0 = LinkedHashMap_init_0(capacity);
+    var destination_0 = LinkedHashMap_init(capacity);
     var tmp$_0;
     tmp$_0 = $receiver_1.iterator();
     while (tmp$_0.hasNext()) {
@@ -16339,7 +16338,7 @@
       tmp$_2.call(destination_1, new SwaggerModel$TypeDef(item_0.guessName, props, true));
     }
     var capacity_0 = coerceAtLeast(mapCapacity(collectionSizeOrDefault(destination_1, 10)), 16);
-    var destination_3 = LinkedHashMap_init_0(capacity_0);
+    var destination_3 = LinkedHashMap_init(capacity_0);
     var tmp$_5;
     tmp$_5 = destination_1.iterator();
     while (tmp$_5.hasNext()) {
@@ -17141,7 +17140,7 @@
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.mode, other.mode))));
   };
   function encodeURIComponent($receiver) {
-    var $receiver_0 = StringBuilder_init();
+    var $receiver_0 = StringBuilder_init_0();
     var tmp$;
     tmp$ = iterator($receiver);
     while (tmp$.hasNext()) {
@@ -17173,7 +17172,7 @@
       var value = tmp$_1.get_za3lpa$(1);
       tmp$_0.call(destination, to(key, value));
     }
-    var destination_0 = LinkedHashMap_init();
+    var destination_0 = LinkedHashMap_init_0();
     var tmp$_2;
     tmp$_2 = destination.iterator();
     while (tmp$_2.hasNext()) {
@@ -17266,23 +17265,12 @@
     }
     return node;
   };
-  var StrReader$readWhile$lambda = wrapFunction(function () {
-    return function (closure$filter, this$StrReader) {
-      return function () {
-        var $this = this$StrReader;
-        var filter = closure$filter;
-        while ($this.hasMore && filter($this.peekChar()))
-          $this.readChar();
-        return Unit;
-      };
-    };
-  });
   Json.prototype.decode_zdjs8x$ = function ($receiver) {
     var tmp$;
     var ic = unboxChar($receiver.skipSpaces().read());
     switch (ic) {
       case 123:
-        var out = LinkedHashMap_init();
+        var out = LinkedHashMap_init_0();
         obj: while (true) {
           switch (unboxChar($receiver.skipSpaces().read())) {
             case 125:
@@ -17361,7 +17349,7 @@
     return this.encodeUntyped_s8jyv4$(obj);
   };
   Json.prototype.encodeUntyped_s8jyv4$ = function (obj) {
-    var $receiver = StringBuilder_init();
+    var $receiver = StringBuilder_init_0();
     this.encodeUntyped_dx15ti$(obj, $receiver);
     return $receiver.toString();
   };
@@ -17475,7 +17463,7 @@
     else if (Kotlin.isNumber(obj))
       b.inline_61zpoe$(toString(obj));
     else if (Kotlin.isType(obj, CustomJsonSerializer)) {
-      var $receiver = StringBuilder_init();
+      var $receiver = StringBuilder_init_0();
       obj.encodeToJson_irqrwq$($receiver);
       b.inline_61zpoe$($receiver.toString());
     }
@@ -17484,7 +17472,7 @@
     }
   };
   Json.prototype.encodeString_1 = function (str) {
-    var $receiver = StringBuilder_init();
+    var $receiver = StringBuilder_init_0();
     this.encodeString_0(str, $receiver);
     return $receiver.toString();
   };
@@ -17674,26 +17662,11 @@
     this.skip_za3lpa$(count);
     return $receiver;
   };
-  StrReader.prototype.skipWhile_akknk2$ = defineInlineFunction('ktor-generator.io.ktor.start.util.StrReader.skipWhile_akknk2$', wrapFunction(function () {
-    return function (filter) {
-      while (this.hasMore && filter(this.peekChar()))
-        this.readChar();
-    };
-  }));
+  StrReader.prototype.skipWhile_akknk2$ = defineInlineFunction('ktor-generator.io.ktor.start.util.StrReader.skipWhile_akknk2$', function (filter) {
+    while (this.hasMore && filter(this.peekChar()))
+      this.readChar();
+  });
   StrReader.prototype.readWhile_akknk2$ = defineInlineFunction('ktor-generator.io.ktor.start.util.StrReader.readWhile_akknk2$', wrapFunction(function () {
-    var Unit = Kotlin.kotlin.Unit;
-    var wrapFunction = Kotlin.wrapFunction;
-    var StrReader$readWhile$lambda = wrapFunction(function () {
-      return function (closure$filter, this$StrReader) {
-        return function () {
-          var $this = this$StrReader;
-          var filter = closure$filter;
-          while ($this.hasMore && filter($this.peekChar()))
-            $this.readChar();
-          return Unit;
-        };
-      };
-    });
     return function (filter) {
       var tmp$;
       var start = this.pos;
@@ -17777,7 +17750,7 @@
     if (reportErrors === void 0)
       reportErrors = true;
     var tmp$;
-    var out = StringBuilder_init();
+    var out = StringBuilder_init_0();
     var quotec = unboxChar($receiver.read());
     switch (quotec) {
       case 34:
@@ -17869,7 +17842,7 @@
             if (this.local$config === void 0)
               this.local$config = null;
             var tmp$, tmp$_0, tmp$_1;
-            this.local$out = LinkedHashMap_init();
+            this.local$out = LinkedHashMap_init_0();
             var bb = new BlockBuilder(this.local$subject, (tmp$_0 = this.local$config != null ? this.local$config : Kotlin.isType(tmp$ = this.local$subject, BlockBuilder$Config) ? tmp$ : null) != null ? tmp$_0 : new BlockBuilder$Config());
             for (tmp$_1 = 0; tmp$_1 !== this.local$blocks.length; ++tmp$_1) {
               var block = this.local$blocks[tmp$_1];
@@ -18027,8 +18000,8 @@
     this.subject = subject;
     this.config = config;
     this.$delegate_ts3nbg$_0 = new Extra$Mixin();
-    this.blockInstances = LinkedHashMap_init();
-    this.files = LinkedHashMap_init();
+    this.blockInstances = LinkedHashMap_init_0();
+    this.files = LinkedHashMap_init_0();
     this.currentBlock = null;
     this.visited_7kwj06$_0 = HashSet_init();
   }
@@ -18366,12 +18339,10 @@
     }
     return this;
   };
-  ByteArrayOutputStream.prototype.byte_0 = wrapFunction(function () {
-    return function (v) {
-      var tmp$;
-      this.data_0[tmp$ = this.pos_0, this.pos_0 = tmp$ + 1 | 0, tmp$] = numberToByte(v);
-    };
-  });
+  ByteArrayOutputStream.prototype.byte_0 = function (v) {
+    var tmp$;
+    this.data_0[tmp$ = this.pos_0, this.pos_0 = tmp$ + 1 | 0, tmp$] = numberToByte(v);
+  };
   ByteArrayOutputStream.prototype.u8_za3lpa$ = function (v) {
     var $receiver = this.ensure_0(1);
     var tmp$;
@@ -18539,7 +18510,7 @@
     return ASCII_instance;
   }
   function toString_1($receiver, charset) {
-    var $receiver_0 = StringBuilder_init();
+    var $receiver_0 = StringBuilder_init_0();
     charset.decode_9w11d2$($receiver_0, $receiver, 0, $receiver.length);
     return $receiver_0.toString();
   }
@@ -18719,7 +18690,7 @@
   function setExtra($receiver, name, value) {
     var tmp$;
     if ($receiver.extra == null)
-      $receiver.extra = LinkedHashMap_init();
+      $receiver.extra = LinkedHashMap_init_0();
     if ((tmp$ = $receiver.extra) != null) {
       tmp$.put_xwzc9p$(name, value);
     }
@@ -18780,7 +18751,7 @@
   Hex.prototype.encodeBase_0 = function (data, digits) {
     if (digits === void 0)
       digits = this.DIGITS_0;
-    var out = StringBuilder_init_0(data.length * 2 | 0);
+    var out = StringBuilder_init(data.length * 2 | 0);
     for (var n = 0; n !== data.length; ++n) {
       var v = data[n] & 255;
       out.append_s8itvh$(digits.charCodeAt(v >>> 4 & 15));
@@ -19102,7 +19073,7 @@
       }
       var lastStart = 0;
       var length = templateString.length;
-      var sb = StringBuilder_init_0(length);
+      var sb = StringBuilder_init(length);
       do {
         var foundMatch = ensureNotNull(match);
         sb.append_ezbsdh$(templateString, lastStart, foundMatch.range.start);
@@ -19255,7 +19226,7 @@
     this.markHandler = markHandler;
     this.indentEmptyLines = indentEmptyLines;
     this.doIndent = doIndent;
-    this.out = StringBuilder_init();
+    this.out = StringBuilder_init_0();
     this.line = 0;
     this.newLine = true;
     this.indentIndex = 0;
@@ -19552,7 +19523,7 @@
   }
   function escape($receiver) {
     var tmp$;
-    var out = StringBuilder_init();
+    var out = StringBuilder_init_0();
     tmp$ = $receiver.length;
     for (var n = 0; n < tmp$; n++) {
       var c = $receiver.charCodeAt(n);
@@ -19586,7 +19557,7 @@
   }
   function unescape($receiver) {
     var tmp$, tmp$_0;
-    var out = StringBuilder_init();
+    var out = StringBuilder_init_0();
     var n = 0;
     while (n < $receiver.length) {
       var c = $receiver.charCodeAt((tmp$ = n, n = tmp$ + 1 | 0, tmp$));
@@ -19716,7 +19687,7 @@
   };
   function ZipBuilder() {
     ZipBuilder$Companion_getInstance();
-    this.files = LinkedHashMap_init();
+    this.files = LinkedHashMap_init_0();
   }
   function ZipBuilder$Companion() {
     ZipBuilder$Companion_instance = this;
@@ -20207,16 +20178,9 @@
       return ALL_FEATURES_BY_ID;
     }
   });
-  $$importsForInline$$['ktor-generator'] = _;
-  var package$both = package$features.both || (package$features.both = {});
-  Object.defineProperty(package$both, 'RawSocketsFeature', {
-    get: RawSocketsFeature_getInstance
-  });
-  Object.defineProperty(package$both, 'RawSocketsTlsFeature', {
-    get: RawSocketsTlsFeature_getInstance
-  });
   var package$client = package$features.client || (package$features.client = {});
   package$client.ClientEngine = ClientEngine;
+  $$importsForInline$$['ktor-generator'] = _;
   Object.defineProperty(package$client, 'CoreClientEngine', {
     get: CoreClientEngine_getInstance
   });
@@ -20237,8 +20201,8 @@
   Object.defineProperty(package$client, 'AuthBasicClientFeature', {
     get: AuthBasicClientFeature_getInstance
   });
-  Object.defineProperty(package$client, 'JsonClientFeature', {
-    get: JsonClientFeature_getInstance
+  Object.defineProperty(package$client, 'GsonClientFeature', {
+    get: GsonClientFeature_getInstance
   });
   Object.defineProperty(package$client, 'LoggingClientFeature', {
     get: LoggingClientFeature_getInstance
@@ -20354,6 +20318,13 @@
   });
   Object.defineProperty(package$server, 'WebsocketsFeature', {
     get: WebsocketsFeature_getInstance
+  });
+  var package$sockets = package$features.sockets || (package$features.sockets = {});
+  Object.defineProperty(package$sockets, 'RawSocketsFeature', {
+    get: RawSocketsFeature_getInstance
+  });
+  Object.defineProperty(package$sockets, 'RawSocketsTlsFeature', {
+    get: RawSocketsTlsFeature_getInstance
   });
   var package$http = package$start.http || (package$start.http = {});
   package$http.FreeHttpStatusCode = FreeHttpStatusCode;
@@ -20865,10 +20836,10 @@
   package$util.get_seconds_t5kl13$ = get_seconds;
   ALL_SERVER_FEATURES = lazy(ALL_SERVER_FEATURES$lambda);
   ALL_CLIENT_FEATURES = lazy(ALL_CLIENT_FEATURES$lambda);
-  ALL_FEATURES = listOf_0([CoreClientEngine_getInstance(), ApacheClientEngine_getInstance(), CioClientEngine_getInstance(), JettyClientEngine_getInstance(), MockClientEngine_getInstance(), AuthBasicClientFeature_getInstance(), JsonClientFeature_getInstance(), WebSocketClientFeature_getInstance(), LoggingClientFeature_getInstance(), UserAgentClientFeature_getInstance(), HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), AuthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), WebjarsFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
+  ALL_FEATURES = listOf_0([CoreClientEngine_getInstance(), ApacheClientEngine_getInstance(), CioClientEngine_getInstance(), JettyClientEngine_getInstance(), MockClientEngine_getInstance(), AuthBasicClientFeature_getInstance(), GsonClientFeature_getInstance(), WebSocketClientFeature_getInstance(), LoggingClientFeature_getInstance(), UserAgentClientFeature_getInstance(), HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), AuthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), WebjarsFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
   var $receiver = ALL_FEATURES;
   var capacity = coerceAtLeast(mapCapacity(collectionSizeOrDefault($receiver, 10)), 16);
-  var destination = LinkedHashMap_init_0(capacity);
+  var destination = LinkedHashMap_init(capacity);
   var tmp$;
   tmp$ = $receiver.iterator();
   while (tmp$.hasNext()) {
