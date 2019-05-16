@@ -98,7 +98,29 @@ object MockClientEngine : ClientEngine(CoreClientEngine, ApplicationTestKt) {
 
         addTestMethod("testClientMock") {
             +"runBlocking" {
-                if (info.ktorVersion >= Versions.V100) {
+                if (info.ktorVersion >= Versions.V120) {
+                    +"val client = HttpClient(MockEngine) {"
+                    indent {
+                        +"engine" {
+                            +"addHandler { request -> "
+                            indent{
+                                +"@UseExperimental(InternalAPI::class)"
+                                +"when (request.url.encodedPath)" {
+                                    +"\"/\" -> respond("
+                                        indent {
+                                            +"ByteReadChannel(byteArrayOf(1, 2, 3)),"
+                                            +"headers = headersOf(\"X-MyHeader\", \"MyValue\")"
+                                        }
+                                    +")"
+                                    +"else -> respond(\"Not Found \${request.url.encodedPath}\", HttpStatusCode.NotFound)"
+                                }
+                            }
+                            +"}"
+                        }
+                        +"expectSuccess = false"
+                    }
+                    +"}"
+                } else if (info.ktorVersion >= Versions.V100) {
                     +"val client = HttpClient(MockEngine {"
                     indent {
                         +"if (url.encodedPath == \"/\")" {
@@ -107,6 +129,9 @@ object MockClientEngine : ClientEngine(CoreClientEngine, ApplicationTestKt) {
                         appending("else") {
                             +"responseError(HttpStatusCode.NotFound, \"Not Found \${url.encodedPath}\")"
                         }
+                    }
+                    +"})" {
+                       +"expectSuccess = false"
                     }
                 } else {
                     +"val client = HttpClient(MockEngine { call ->"
@@ -118,18 +143,8 @@ object MockClientEngine : ClientEngine(CoreClientEngine, ApplicationTestKt) {
                             +"MockHttpResponse(call, HttpStatusCode.NotFound, ByteReadChannel(\"Not Found \${url.encodedPath}\"))"
                         }
                     }
-                }
-
-                if (info.ktorVersion >= Versions.V100) {
-                    +"}) {"
-                    indent {
-                        +"expectSuccess = false"
-                    }
-                    +"}"
-                } else {
                     +"})"
                 }
-
 
                 +"assertEquals(byteArrayOf(1, 2, 3).toList(), client.get<ByteArray>(\"/\").toList())"
                 +"assertEquals(\"MyValue\", client.call(\"/\").response.headers[\"X-MyHeader\"])"
