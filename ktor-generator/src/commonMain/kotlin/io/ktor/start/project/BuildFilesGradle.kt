@@ -44,7 +44,7 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                     +"kotlin(\"jvm\") version \"${info.kotlinVersion}\""
                 }
                 +""
-                +"group = \"${info.artifactName}\""
+                +"group = \"${info.artifactGroup}\""
                 +"version = \"${info.artifactVersion}\""
                 +""
                 +"application" {
@@ -95,7 +95,7 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                 +"apply plugin: 'kotlin'"
                 +"apply plugin: 'application'"
                 +""
-                +"group '${info.artifactName}'"
+                +"group '${info.artifactGroup}'"
                 +"version '${info.artifactVersion}'"
 
                 +"mainClassName = \"${info.developmentEngineFQ}\""
