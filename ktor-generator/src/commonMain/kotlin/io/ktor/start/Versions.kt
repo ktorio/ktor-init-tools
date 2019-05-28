@@ -30,10 +30,11 @@ object Versions {
     val V114 = KtorVersion(version = "1.1.4", kotlinVersion = "1.3.30")
     val V115 = KtorVersion(version = "1.1.5", kotlinVersion = "1.3.30")
     val V120 = KtorVersion(version = "1.2.0", kotlinVersion = "1.3.31")
+    val V121 = KtorVersion(version = "1.2.1", kotlinVersion = "1.3.31")
 
-    val ALL = arrayOf(V101, V115, V120)
-    val LAST = V120
-    val LAST_EAP = V120
+    val ALL = arrayOf(V101, V115, V121)
+    val LAST = V121
+    val LAST_EAP = V121
 
     private val VMAP = ALL.associate { it.version to it }
     fun fromString(version: String): KtorVersion? = VMAP[version]
