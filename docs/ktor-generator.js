@@ -272,6 +272,8 @@
   LocationsFeature.prototype.constructor = LocationsFeature;
   MetricsFeature.prototype = Object.create(ServerFeature.prototype);
   MetricsFeature.prototype.constructor = MetricsFeature;
+  MustacheFeature.prototype = Object.create(ServerFeature.prototype);
+  MustacheFeature.prototype.constructor = MustacheFeature;
   PartialContentFeature.prototype = Object.create(ServerFeature.prototype);
   PartialContentFeature.prototype.constructor = PartialContentFeature;
   RoutingFeature.prototype = Object.create(ServerFeature.prototype);
@@ -284,6 +286,8 @@
   StaticContentFeature.prototype.constructor = StaticContentFeature;
   StatusPagesFeature.prototype = Object.create(ServerFeature.prototype);
   StatusPagesFeature.prototype.constructor = StatusPagesFeature;
+  ThymeleafFeature.prototype = Object.create(ServerFeature.prototype);
+  ThymeleafFeature.prototype.constructor = ThymeleafFeature;
   VelocityFeature.prototype = Object.create(ServerFeature.prototype);
   VelocityFeature.prototype.constructor = VelocityFeature;
   WebjarsFeature.prototype = Object.create(ServerFeature.prototype);
@@ -7340,6 +7344,64 @@
     }
     return MetricsFeature_instance;
   }
+  function MustacheFeature() {
+    MustacheFeature_instance = this;
+    ServerFeature.call(this, [ApplicationKt_getInstance()]);
+    this.group_mtr8jp$_0 = 'Templating';
+    this.repos_hte7bb$_0 = Repos_getInstance().ktor;
+    this.artifacts_1a6me1$_0 = listOf('io.ktor:ktor-mustache:$ktor_version');
+    this.id_2vek9r$_0 = 'mustache';
+    this.title_gt1ari$_0 = 'Mustache';
+    this.description_4nno66$_0 = 'Serve HTML content using Mustache template engine';
+    this.documentation_poae5c$_0 = 'https://ktor.io/features/templates/mustache.html';
+  }
+  Object.defineProperty(MustacheFeature.prototype, 'group', {
+    get: function () {
+      return this.group_mtr8jp$_0;
+    }
+  });
+  Object.defineProperty(MustacheFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_hte7bb$_0;
+    }
+  });
+  Object.defineProperty(MustacheFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_1a6me1$_0;
+    }
+  });
+  Object.defineProperty(MustacheFeature.prototype, 'id', {
+    get: function () {
+      return this.id_2vek9r$_0;
+    }
+  });
+  Object.defineProperty(MustacheFeature.prototype, 'title', {
+    get: function () {
+      return this.title_gt1ari$_0;
+    }
+  });
+  Object.defineProperty(MustacheFeature.prototype, 'description', {
+    get: function () {
+      return this.description_4nno66$_0;
+    }
+  });
+  Object.defineProperty(MustacheFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_poae5c$_0;
+    }
+  });
+  MustacheFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'MustacheFeature',
+    interfaces: [ServerFeature]
+  };
+  var MustacheFeature_instance = null;
+  function MustacheFeature_getInstance() {
+    if (MustacheFeature_instance === null) {
+      new MustacheFeature();
+    }
+    return MustacheFeature_instance;
+  }
   function PartialContentFeature() {
     PartialContentFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
@@ -7955,6 +8017,64 @@
   }
   function addCustomStatusPage($receiver, callback) {
     $receiver.appendSeparated_qu2wte$(StatusPagesFeature_getInstance().CUSTOM_STATUS_PAGES, void 0, addCustomStatusPage$lambda(callback));
+  }
+  function ThymeleafFeature() {
+    ThymeleafFeature_instance = this;
+    ServerFeature.call(this, [ApplicationKt_getInstance()]);
+    this.group_bqi77y$_0 = 'Templating';
+    this.repos_gqv8gc$_0 = Repos_getInstance().ktor;
+    this.artifacts_5o1qj8$_0 = listOf('io.ktor:ktor-thymeleaf:$ktor_version');
+    this.id_6al82c$_0 = 'thymeleaf';
+    this.title_hr8505$_0 = 'Thymeleaf';
+    this.description_1r3u9d$_0 = 'Serve HTML content using Thymeleaf template engine';
+    this.documentation_4yb2gj$_0 = 'https://ktor.io/features/templates/thymeleaf.html';
+  }
+  Object.defineProperty(ThymeleafFeature.prototype, 'group', {
+    get: function () {
+      return this.group_bqi77y$_0;
+    }
+  });
+  Object.defineProperty(ThymeleafFeature.prototype, 'repos', {
+    get: function () {
+      return this.repos_gqv8gc$_0;
+    }
+  });
+  Object.defineProperty(ThymeleafFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_5o1qj8$_0;
+    }
+  });
+  Object.defineProperty(ThymeleafFeature.prototype, 'id', {
+    get: function () {
+      return this.id_6al82c$_0;
+    }
+  });
+  Object.defineProperty(ThymeleafFeature.prototype, 'title', {
+    get: function () {
+      return this.title_hr8505$_0;
+    }
+  });
+  Object.defineProperty(ThymeleafFeature.prototype, 'description', {
+    get: function () {
+      return this.description_1r3u9d$_0;
+    }
+  });
+  Object.defineProperty(ThymeleafFeature.prototype, 'documentation', {
+    get: function () {
+      return this.documentation_4yb2gj$_0;
+    }
+  });
+  ThymeleafFeature.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'ThymeleafFeature',
+    interfaces: [ServerFeature]
+  };
+  var ThymeleafFeature_instance = null;
+  function ThymeleafFeature_getInstance() {
+    if (ThymeleafFeature_instance === null) {
+      new ThymeleafFeature();
+    }
+    return ThymeleafFeature_instance;
   }
   function VelocityFeature() {
     VelocityFeature_instance = this;
@@ -20293,6 +20413,9 @@
   Object.defineProperty(package$server, 'MetricsFeature', {
     get: MetricsFeature_getInstance
   });
+  Object.defineProperty(package$server, 'MustacheFeature', {
+    get: MustacheFeature_getInstance
+  });
   Object.defineProperty(package$server, 'PartialContentFeature', {
     get: PartialContentFeature_getInstance
   });
@@ -20313,6 +20436,9 @@
     get: StatusPagesFeature_getInstance
   });
   package$server.addCustomStatusPage_xi0fd9$ = addCustomStatusPage;
+  Object.defineProperty(package$server, 'ThymeleafFeature', {
+    get: ThymeleafFeature_getInstance
+  });
   Object.defineProperty(package$server, 'VelocityFeature', {
     get: VelocityFeature_getInstance
   });
@@ -20839,7 +20965,7 @@
   package$util.get_seconds_t5kl13$ = get_seconds;
   ALL_SERVER_FEATURES = lazy(ALL_SERVER_FEATURES$lambda);
   ALL_CLIENT_FEATURES = lazy(ALL_CLIENT_FEATURES$lambda);
-  ALL_FEATURES = listOf_0([CoreClientEngine_getInstance(), ApacheClientEngine_getInstance(), CioClientEngine_getInstance(), JettyClientEngine_getInstance(), MockClientEngine_getInstance(), AuthBasicClientFeature_getInstance(), GsonClientFeature_getInstance(), WebSocketClientFeature_getInstance(), LoggingClientFeature_getInstance(), UserAgentClientFeature_getInstance(), HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), StaticContentFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), AuthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), WebjarsFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
+  ALL_FEATURES = listOf_0([CoreClientEngine_getInstance(), ApacheClientEngine_getInstance(), CioClientEngine_getInstance(), JettyClientEngine_getInstance(), MockClientEngine_getInstance(), AuthBasicClientFeature_getInstance(), GsonClientFeature_getInstance(), WebSocketClientFeature_getInstance(), LoggingClientFeature_getInstance(), UserAgentClientFeature_getInstance(), HtmlDslFeature_getInstance(), CssDslFeature_getInstance(), FreemarkerFeature_getInstance(), VelocityFeature_getInstance(), MustacheFeature_getInstance(), ThymeleafFeature_getInstance(), StaticContentFeature_getInstance(), AuthBasicFeature_getInstance(), AuthDigestFeature_getInstance(), AuthJwtFeature_getInstance(), AuthLdapFeature_getInstance(), AuthOauthFeature_getInstance(), AuthFeature_getInstance(), JsonGsonFeature_getInstance(), JsonJacksonFeature_getInstance(), LocationsFeature_getInstance(), MetricsFeature_getInstance(), SessionsFeature_getInstance(), CompressionFeature_getInstance(), CachingHeadersFeature_getInstance(), CallLoggingFeature_getInstance(), ConditionalHeadersFeature_getInstance(), CORSFeature_getInstance(), AutoHeadResponseFeature_getInstance(), DataConversionFeature_getInstance(), DefaultHeadersFeature_getInstance(), ForwardedHeaderSupportFeature_getInstance(), HSTSFeature_getInstance(), StatusPagesFeature_getInstance(), RoutingFeature_getInstance(), WebjarsFeature_getInstance(), ContentNegotiationFeature_getInstance(), HttpsRedirectFeature_getInstance(), ShutdownUrlFeature_getInstance(), WebsocketsFeature_getInstance(), RawSocketsFeature_getInstance(), PartialContentFeature_getInstance(), RawSocketsTlsFeature_getInstance()]);
   var $receiver = ALL_FEATURES;
   var capacity = coerceAtLeast(mapCapacity(collectionSizeOrDefault($receiver, 10)), 16);
   var destination = LinkedHashMap_init(capacity);
