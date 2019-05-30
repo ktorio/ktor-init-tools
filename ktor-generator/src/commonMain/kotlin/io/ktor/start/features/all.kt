@@ -43,6 +43,8 @@ val ALL_FEATURES: List<Feature> = listOf(
     CssDslFeature,
     FreemarkerFeature,
     VelocityFeature,
+    MustacheFeature,
+    ThymeleafFeature,
     StaticContentFeature,
     AuthBasicFeature,
     AuthDigestFeature,
