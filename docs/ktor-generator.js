@@ -4130,9 +4130,10 @@
     this.V115 = new KtorVersion('1.1.5', '1.3.30');
     this.V120 = new KtorVersion('1.2.0', '1.3.31');
     this.V121 = new KtorVersion('1.2.1', '1.3.31');
-    this.ALL = [this.V101, this.V115, this.V121];
-    this.LAST = this.V121;
-    this.LAST_EAP = this.V121;
+    this.V122 = new KtorVersion('1.2.2', '1.3.40');
+    this.ALL = [this.V101, this.V115, this.V121, this.V122];
+    this.LAST = this.V122;
+    this.LAST_EAP = this.V122;
     var $receiver = this.ALL;
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
     var destination = LinkedHashMap_init(capacity);
@@ -4551,13 +4552,64 @@
       $receiver._indent();
       try {
         var closure$info_0 = closure$info;
-        if (closure$info_0.ktorVersion.compareTo_11rb$(Versions_getInstance().V100) >= 0) {
+        if (closure$info_0.ktorVersion.compareTo_11rb$(Versions_getInstance().V120) >= 0) {
+          $receiver.line_61zpoe$('val client = HttpClient(MockEngine) {');
+          $receiver._indent();
+          try {
+            var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+            $receiver.line_61zpoe$('engine'.length === 0 ? '{' + rafter_0 : 'engine' + ' {' + rafter_0);
+            $receiver._indent();
+            try {
+              $receiver.line_61zpoe$('addHandler { request -> ');
+              $receiver._indent();
+              try {
+                var $receiver_1 = 'when (request.url.fullPath)';
+                var rafter_1 = ''.length === 0 ? '' : ' ' + '';
+                $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_1 : $receiver_1 + ' {' + rafter_1);
+                $receiver._indent();
+                try {
+                  $receiver.line_61zpoe$('"/" -> respond(');
+                  $receiver._indent();
+                  try {
+                    $receiver.line_61zpoe$('ByteReadChannel(byteArrayOf(1, 2, 3)),');
+                    $receiver.line_61zpoe$('headers = headersOf("X-MyHeader", "MyValue")');
+                  }
+                  finally {
+                    $receiver._unindent();
+                  }
+                  $receiver.line_61zpoe$(')');
+                  $receiver.line_61zpoe$('else -> respond("Not Found ${request.url.encodedPath}", HttpStatusCode.NotFound)');
+                }
+                finally {
+                  $receiver._unindent();
+                }
+                $receiver.line_61zpoe$('}' + '');
+                unaryPlus_0($receiver);
+              }
+              finally {
+                $receiver._unindent();
+              }
+              $receiver.line_61zpoe$('}');
+            }
+            finally {
+              $receiver._unindent();
+            }
+            $receiver.line_61zpoe$('}' + '');
+            unaryPlus_0($receiver);
+            $receiver.line_61zpoe$('expectSuccess = false');
+          }
+          finally {
+            $receiver._unindent();
+          }
+          $receiver.line_61zpoe$('}');
+        }
+         else if (closure$info_0.ktorVersion.compareTo_11rb$(Versions_getInstance().V100) >= 0) {
           $receiver.line_61zpoe$('val client = HttpClient(MockEngine {');
           $receiver._indent();
           try {
-            var $receiver_1 = 'if (url.encodedPath == "/")';
-            var rafter_0 = ''.length === 0 ? '' : ' ' + '';
-            $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+            var $receiver_2 = 'if (url.encodedPath == "/")';
+            var rafter_2 = ''.length === 0 ? '' : ' ' + '';
+            $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_2 : $receiver_2 + ' {' + rafter_2);
             $receiver._indent();
             try {
               $receiver.line_61zpoe$('MockHttpResponse(call, HttpStatusCode.OK, ByteReadChannel(byteArrayOf(1, 2, 3)), headersOf("X-MyHeader", "MyValue"))');
@@ -4593,14 +4645,25 @@
           finally {
             $receiver._unindent();
           }
+          var rafter_3 = ''.length === 0 ? '' : ' ' + '';
+          $receiver.line_61zpoe$('})'.length === 0 ? '{' + rafter_3 : '})' + ' {' + rafter_3);
+          $receiver._indent();
+          try {
+            $receiver.line_61zpoe$('expectSuccess = false');
+          }
+          finally {
+            $receiver._unindent();
+          }
+          $receiver.line_61zpoe$('}' + '');
+          unaryPlus_0($receiver);
         }
          else {
           $receiver.line_61zpoe$('val client = HttpClient(MockEngine { call ->');
           $receiver._indent();
           try {
-            var $receiver_2 = 'if (url.encodedPath == "/")';
-            var rafter_1 = ''.length === 0 ? '' : ' ' + '';
-            $receiver.line_61zpoe$($receiver_2.length === 0 ? '{' + rafter_1 : $receiver_2 + ' {' + rafter_1);
+            var $receiver_3 = 'if (url.encodedPath == "/")';
+            var rafter_4 = ''.length === 0 ? '' : ' ' + '';
+            $receiver.line_61zpoe$($receiver_3.length === 0 ? '{' + rafter_4 : $receiver_3 + ' {' + rafter_4);
             $receiver._indent();
             try {
               $receiver.line_61zpoe$('MockHttpResponse(call, HttpStatusCode.OK, ByteReadChannel(byteArrayOf(1, 2, 3)), headersOf("X-MyHeader", "MyValue"))');
@@ -4636,19 +4699,6 @@
           finally {
             $receiver._unindent();
           }
-        }
-        if (closure$info_0.ktorVersion.compareTo_11rb$(Versions_getInstance().V100) >= 0) {
-          $receiver.line_61zpoe$('}) {');
-          $receiver._indent();
-          try {
-            $receiver.line_61zpoe$('expectSuccess = false');
-          }
-          finally {
-            $receiver._unindent();
-          }
-          $receiver.line_61zpoe$('}');
-        }
-         else {
           $receiver.line_61zpoe$('})');
         }
         $receiver.line_61zpoe$('assertEquals(byteArrayOf(1, 2, 3).toList(), client.get<ByteArray>("/").toList())');
@@ -7346,7 +7396,7 @@
   }
   function MustacheFeature() {
     MustacheFeature_instance = this;
-    ServerFeature.call(this, [ApplicationKt_getInstance()]);
+    ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.group_mtr8jp$_0 = 'Templating';
     this.repos_hte7bb$_0 = Repos_getInstance().ktor;
     this.artifacts_1a6me1$_0 = listOf('io.ktor:ktor-mustache:$ktor_version');
@@ -7390,6 +7440,95 @@
       return this.documentation_poae5c$_0;
     }
   });
+  function MustacheFeature$renderFeature$lambda($receiver) {
+    $receiver.line_61zpoe$('data class MustacheUser(val id: Int, val name: String)');
+    return Unit;
+  }
+  function MustacheFeature$renderFeature$lambda_0($receiver) {
+    var $receiver_0 = 'install(Mustache)';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('mustacheFactory = DefaultMustacheFactory("templates/mustache")');
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  function MustacheFeature$renderFeature$lambda_1($receiver) {
+    var $receiver_0 = 'get("/html-mustache")';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('call.respond(MustacheContent("index.hbs", mapOf("user" to MustacheUser(1, "user1"))))');
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  function Coroutine$MustacheFeature$renderFeature$lambda($receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$MustacheFeature$renderFeature$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$MustacheFeature$renderFeature$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$MustacheFeature$renderFeature$lambda.prototype.constructor = Coroutine$MustacheFeature$renderFeature$lambda;
+  Coroutine$MustacheFeature$renderFeature$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.local$$receiver.line_61zpoe$('<html>');
+            this.local$$receiver.line_61zpoe$('<body>');
+            this.local$$receiver.line_61zpoe$('<p>Hello, {{user.name}}<\/p>');
+            this.local$$receiver.line_61zpoe$('<\/body>');
+            return this.local$$receiver.line_61zpoe$('<\/html>');
+          case 1:
+            throw this.exception_0;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function MustacheFeature$renderFeature$lambda_2($receiver_0, continuation_0, suspended) {
+    var instance = new Coroutine$MustacheFeature$renderFeature$lambda($receiver_0, this, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
+  MustacheFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'com.github.mustachejava.DefaultMustacheFactory');
+    addImport($receiver, 'io.ktor.mustache.Mustache');
+    addImport($receiver, 'io.ktor.mustache.MustacheContent');
+    addApplicationClasses($receiver, MustacheFeature$renderFeature$lambda);
+    addFeatureInstall($receiver, MustacheFeature$renderFeature$lambda_0);
+    addRoute($receiver, MustacheFeature$renderFeature$lambda_1);
+    $receiver.fileText_6jjb1r$('resources/templates/mustache/index.hbs', void 0, void 0, MustacheFeature$renderFeature$lambda_2);
+  };
   MustacheFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'MustacheFeature',
@@ -8020,7 +8159,7 @@
   }
   function ThymeleafFeature() {
     ThymeleafFeature_instance = this;
-    ServerFeature.call(this, [ApplicationKt_getInstance()]);
+    ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.group_bqi77y$_0 = 'Templating';
     this.repos_gqv8gc$_0 = Repos_getInstance().ktor;
     this.artifacts_5o1qj8$_0 = listOf('io.ktor:ktor-thymeleaf:$ktor_version');
@@ -8064,6 +8203,110 @@
       return this.documentation_4yb2gj$_0;
     }
   });
+  function ThymeleafFeature$renderFeature$lambda($receiver) {
+    $receiver.line_61zpoe$('data class ThymeleafUser(val id: Int, val name: String)');
+    return Unit;
+  }
+  function ThymeleafFeature$renderFeature$lambda_0($receiver) {
+    var $receiver_0 = 'install(Thymeleaf)';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('setTemplateResolver(ClassLoaderTemplateResolver().apply {');
+      $receiver._indent();
+      try {
+        $receiver.line_61zpoe$('prefix = "templates/thymeleaf/"');
+        $receiver.line_61zpoe$('suffix = ".html"');
+        $receiver.line_61zpoe$('characterEncoding = "utf-8"');
+      }
+      finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('})');
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  function ThymeleafFeature$renderFeature$lambda_1($receiver) {
+    var $receiver_0 = 'get("/html-thymeleaf")';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('call.respond(ThymeleafContent("index", mapOf("user" to ThymeleafUser(1, "user1"))))');
+    }
+    finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
+    return Unit;
+  }
+  function Coroutine$ThymeleafFeature$renderFeature$lambda($receiver_0, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$ThymeleafFeature$renderFeature$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$ThymeleafFeature$renderFeature$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$ThymeleafFeature$renderFeature$lambda.prototype.constructor = Coroutine$ThymeleafFeature$renderFeature$lambda;
+  Coroutine$ThymeleafFeature$renderFeature$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.local$$receiver.line_61zpoe$('<!DOCTYPE html >');
+            this.local$$receiver.line_61zpoe$('<html xmlns:th="http://www.thymeleaf.org">');
+            this.local$$receiver.line_61zpoe$('<head>');
+            this.local$$receiver.line_61zpoe$('<meta charset="UTF-8">');
+            this.local$$receiver.line_61zpoe$('<title>Title<\/title>');
+            this.local$$receiver.line_61zpoe$('<\/head>');
+            this.local$$receiver.line_61zpoe$('<body>');
+            this.local$$receiver.line_61zpoe$('<span th:text="${user.name}"><\/span>');
+            this.local$$receiver.line_61zpoe$('<\/body>');
+            return this.local$$receiver.line_61zpoe$('<\/html>');
+          case 1:
+            throw this.exception_0;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function ThymeleafFeature$renderFeature$lambda_2($receiver_0, continuation_0, suspended) {
+    var instance = new Coroutine$ThymeleafFeature$renderFeature$lambda($receiver_0, this, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  }
+  ThymeleafFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.thymeleaf.Thymeleaf');
+    addImport($receiver, 'io.ktor.thymeleaf.ThymeleafContent');
+    addImport($receiver, 'org.thymeleaf.templateresolver.ClassLoaderTemplateResolver');
+    addApplicationClasses($receiver, ThymeleafFeature$renderFeature$lambda);
+    addFeatureInstall($receiver, ThymeleafFeature$renderFeature$lambda_0);
+    addRoute($receiver, ThymeleafFeature$renderFeature$lambda_1);
+    $receiver.fileText_6jjb1r$('resources/templates/thymeleaf/index.html', void 0, void 0, ThymeleafFeature$renderFeature$lambda_2);
+  };
   ThymeleafFeature.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'ThymeleafFeature',
@@ -10137,7 +10380,7 @@
             this.local$$receiver.line_61zpoe$('}' + '');
             unaryPlus_0(this.local$$receiver);
             this.local$$receiver.line_61zpoe$('');
-            this.local$$receiver.line_61zpoe$('group = ' + '"' + this.local$closure$info.artifactName + '"');
+            this.local$$receiver.line_61zpoe$('group = ' + '"' + this.local$closure$info.artifactGroup + '"');
             this.local$$receiver.line_61zpoe$('version = ' + '"' + this.local$closure$info.artifactVersion + '"');
             this.local$$receiver.line_61zpoe$('');
             var $receiver = 'application';
@@ -10352,7 +10595,7 @@
             this.local$$receiver.line_61zpoe$("apply plugin: 'kotlin'");
             this.local$$receiver.line_61zpoe$("apply plugin: 'application'");
             this.local$$receiver.line_61zpoe$('');
-            this.local$$receiver.line_61zpoe$("group '" + this.local$closure$info.artifactName + "'");
+            this.local$$receiver.line_61zpoe$("group '" + this.local$closure$info.artifactGroup + "'");
             this.local$$receiver.line_61zpoe$("version '" + this.local$closure$info.artifactVersion + "'");
             this.local$$receiver.line_61zpoe$('mainClassName = ' + '"' + this.local$closure$info.developmentEngineFQ + '"');
             this.local$$receiver.line_61zpoe$('');
