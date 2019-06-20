@@ -104,8 +104,7 @@ object MockClientEngine : ClientEngine(CoreClientEngine, ApplicationTestKt) {
                         +"engine" {
                             +"addHandler { request -> "
                             indent{
-                                +"@UseExperimental(InternalAPI::class)"
-                                +"when (request.url.encodedPath)" {
+                                +"when (request.url.fullPath)" {
                                     +"\"/\" -> respond("
                                         indent {
                                             +"ByteReadChannel(byteArrayOf(1, 2, 3)),"
