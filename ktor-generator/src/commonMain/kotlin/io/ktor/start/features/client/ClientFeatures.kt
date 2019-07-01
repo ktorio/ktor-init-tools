@@ -6,17 +6,15 @@ import io.ktor.start.project.*
 import io.ktor.start.util.*
 
 object AuthBasicClientFeature : ClientFeature(CoreClientEngine) {
-    override val id = "ktor-client-auth-basic"
-    override val title = "Auth Basic feature HttpClient"
-    override val description = "Supports basic authentication for the Http Client"
+    override val id = "ktor-client-auth-jvm"
+    override val title = "Auth feature HttpClient"
+    override val description = "Supports authentication for the Http Client"
     override val documentation = "https://ktor.io/clients/http-client/features/auth.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
-        addImport("io.ktor.client.features.auth.basic.*")
+        addImport("io.ktor.client.features.auth.*")
         append(CoreClientEngine.CLIENT_FEATURES) {
-            +"install(BasicAuth)" {
-                +"username = \"test\""
-                +"password = \"pass\""
+            +"install(Auth)" {
             }
         }
     }
