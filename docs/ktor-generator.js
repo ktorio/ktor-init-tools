@@ -4131,9 +4131,9 @@
     this.V120 = new KtorVersion('1.2.0', '1.3.31');
     this.V121 = new KtorVersion('1.2.1', '1.3.31');
     this.V122 = new KtorVersion('1.2.2', '1.3.40');
-    this.V123 = new KtorVersion('1.2.3-rc', '1.3.41');
-    this.ALL = [this.V101, this.V115, this.V121, this.V122, this.V123];
-    this.LAST = this.V122;
+    this.V123 = new KtorVersion('1.2.3', '1.3.41');
+    this.ALL = [this.V101, this.V115, this.V123];
+    this.LAST = this.V123;
     this.LAST_EAP = this.V123;
     var $receiver = this.ALL;
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
