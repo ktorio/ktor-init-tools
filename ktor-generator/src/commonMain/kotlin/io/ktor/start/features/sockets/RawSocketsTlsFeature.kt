@@ -33,7 +33,7 @@ object RawSocketsTlsFeature : ServerFeature(ApplicationKt, RawSocketsFeature) {
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.network.tls.*")
-        addImport("kotlinx.coroutines.experimental.*")
+        addImport("kotlinx.coroutines.*")
 
         //replace(RawSocketsFeature.SERVER_SOCKET) {
         //    +"val serverSocket = aSocket(selectorManager).tcp().bind(port = DefaultPort).tls()"
@@ -42,7 +42,11 @@ object RawSocketsTlsFeature : ServerFeature(ApplicationKt, RawSocketsFeature) {
         //    +"val socket = aSocket(selectorManager).tcp().connect(\"127.0.0.1\", port = DefaultPort).tls()"
         //}
 
-        addImport("kotlinx.io.core.*")
+        if (info.ktorVersion >= Versions.V130b1) {
+            addImport("io.ktor.utils.io.*")
+        } else {
+            addImport("kotlinx.io.core.*")
+        } 
 
         fileText("src/TlsRawSocket.kt") {
             +"package ${info.artifactGroup}"

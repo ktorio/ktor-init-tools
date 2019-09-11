@@ -4133,9 +4133,10 @@
     this.V122 = new KtorVersion('1.2.2', '1.3.40');
     this.V123 = new KtorVersion('1.2.3', '1.3.41');
     this.V124 = new KtorVersion('1.2.4', '1.3.50');
-    this.ALL = [this.V101, this.V115, this.V124];
+    this.V130b1 = new KtorVersion('1.3.0-beta-1', '1.3.50');
+    this.ALL = [this.V101, this.V115, this.V124, this.V130b1];
     this.LAST = this.V124;
-    this.LAST_EAP = this.V124;
+    this.LAST_EAP = this.V130b1;
     var $receiver = this.ALL;
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
     var destination = LinkedHashMap_init(capacity);
@@ -9115,8 +9116,13 @@
   }
   RawSocketsTlsFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.network.tls.*');
-    addImport($receiver, 'kotlinx.coroutines.experimental.*');
-    addImport($receiver, 'kotlinx.io.core.*');
+    addImport($receiver, 'kotlinx.coroutines.*');
+    if (info.ktorVersion.compareTo_11rb$(Versions_getInstance().V130b1) >= 0) {
+      addImport($receiver, 'io.ktor.utils.io.*');
+    }
+     else {
+      addImport($receiver, 'kotlinx.io.core.*');
+    }
     $receiver.fileText_6jjb1r$('src/TlsRawSocket.kt', void 0, void 0, RawSocketsTlsFeature$renderFeature$lambda(info, $receiver));
   };
   RawSocketsTlsFeature.$metadata$ = {
