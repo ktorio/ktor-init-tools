@@ -10328,12 +10328,12 @@
       tmp$ = get_compileDependencies(this$render).iterator();
       while (tmp$.hasNext()) {
         var dep = tmp$.next();
-        $receiver.line_61zpoe$('compile(' + '"' + dep.dependency + '"' + ')');
+        $receiver.line_61zpoe$('implementation(' + '"' + dep.dependency + '"' + ')');
       }
       tmp$_0 = minus(get_testDependencies(this$render), get_compileDependencies(this$render)).iterator();
       while (tmp$_0.hasNext()) {
         var dep_0 = tmp$_0.next();
-        $receiver.line_61zpoe$('testCompile(' + '"' + dep_0.dependency + '"' + ')');
+        $receiver.line_61zpoe$('testImplementation(' + '"' + dep_0.dependency + '"' + ')');
       }
       return Unit;
     };
@@ -10527,12 +10527,12 @@
       tmp$ = get_compileDependencies(this$render).iterator();
       while (tmp$.hasNext()) {
         var dep = tmp$.next();
-        $receiver.line_61zpoe$('compile ' + '"' + dep.dependency + '"');
+        $receiver.line_61zpoe$('implementation ' + '"' + dep.dependency + '"');
       }
       tmp$_0 = minus(get_testDependencies(this$render), get_compileDependencies(this$render)).iterator();
       while (tmp$_0.hasNext()) {
         var dep_0 = tmp$_0.next();
-        $receiver.line_61zpoe$('testCompile ' + '"' + dep_0.dependency + '"');
+        $receiver.line_61zpoe$('testImplementation ' + '"' + dep_0.dependency + '"');
       }
       return Unit;
     };
