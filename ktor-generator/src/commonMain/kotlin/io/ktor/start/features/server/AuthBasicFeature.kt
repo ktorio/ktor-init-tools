@@ -31,7 +31,7 @@ object AuthBasicFeature : ServerFeature(ApplicationKt, AuthFeature, RoutingFeatu
     override val documentation = "https://ktor.io/features/authentication/basic.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
-        addImport("io.ktor.client.features.auth.basic.*")
+        addImport("io.ktor.auth.*")
         addAuthProvider {
             "basic(\"myBasicAuth\")" {
                 +"realm = \"Ktor Server\""
