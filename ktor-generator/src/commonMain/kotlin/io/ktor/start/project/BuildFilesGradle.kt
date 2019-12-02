@@ -61,10 +61,10 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                     linedeferred {
                         println("compileDependencies: $compileDependencies")
                         for (dep in compileDependencies) {
-                            +"compile(\"${dep.dependency}\")"
+                            +"implementation(\"${dep.dependency}\")"
                         }
                         for (dep in testDependencies - compileDependencies) {
-                            +"testCompile(\"${dep.dependency}\")"
+                            +"testImplementation(\"${dep.dependency}\")"
                         }
                     }
                 }
@@ -117,10 +117,10 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
                     linedeferred {
                         println("compileDependencies: $compileDependencies")
                         for (dep in compileDependencies) {
-                            +"compile \"${dep.dependency}\""
+                            +"implementation \"${dep.dependency}\""
                         }
                         for (dep in testDependencies - compileDependencies) {
-                            +"testCompile \"${dep.dependency}\""
+                            +"testImplementation \"${dep.dependency}\""
                         }
                     }
                 }
