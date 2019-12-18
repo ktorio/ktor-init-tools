@@ -4134,10 +4134,10 @@
     this.V123 = new KtorVersion('1.2.3', '1.3.41');
     this.V124 = new KtorVersion('1.2.4', '1.3.50');
     this.V126 = new KtorVersion('1.2.6', '1.3.60');
-    this.V130b1 = new KtorVersion('1.3.0-beta-1', '1.3.50');
-    this.ALL = [this.V101, this.V115, this.V126, this.V130b1];
+    this.V130rc = new KtorVersion('1.3.0-rc', '1.3.61');
+    this.ALL = [this.V101, this.V115, this.V126, this.V130rc];
     this.LAST = this.V126;
-    this.LAST_EAP = this.V130b1;
+    this.LAST_EAP = this.V130rc;
     var $receiver = this.ALL;
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
     var destination = LinkedHashMap_init(capacity);
@@ -4741,9 +4741,9 @@
   function AuthBasicClientFeature() {
     AuthBasicClientFeature_instance = this;
     ClientFeature.call(this, [CoreClientEngine_getInstance()]);
-    this.id_7yu2dq$_0 = 'ktor-client-auth-basic';
-    this.title_fwiqvh$_0 = 'Auth Basic feature HttpClient';
-    this.description_vd12tr$_0 = 'Supports basic authentication for the Http Client';
+    this.id_7yu2dq$_0 = 'ktor-client-auth-jvm';
+    this.title_fwiqvh$_0 = 'Auth feature HttpClient';
+    this.description_vd12tr$_0 = 'Supports authentication for the Http Client';
     this.documentation_o7l9db$_0 = 'https://ktor.io/clients/http-client/features/auth.html';
   }
   Object.defineProperty(AuthBasicClientFeature.prototype, 'id', {
@@ -4767,23 +4767,17 @@
     }
   });
   function AuthBasicClientFeature$renderFeature$lambda($receiver) {
-    var $receiver_0 = 'install(BasicAuth)';
+    var $receiver_0 = 'install(Auth)';
     var rafter = ''.length === 0 ? '' : ' ' + '';
     $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
     $receiver._indent();
-    try {
-      $receiver.line_61zpoe$('username = "test"');
-      $receiver.line_61zpoe$('password = "pass"');
-    }
-    finally {
-      $receiver._unindent();
-    }
+    $receiver._unindent();
     $receiver.line_61zpoe$('}' + '');
     unaryPlus_0($receiver);
     return Unit;
   }
   AuthBasicClientFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
-    addImport($receiver, 'io.ktor.client.features.auth.basic.*');
+    addImport($receiver, 'io.ktor.client.features.auth.*');
     $receiver.append_qu2wte$(CoreClientEngine_getInstance().CLIENT_FEATURES, void 0, AuthBasicClientFeature$renderFeature$lambda);
   };
   AuthBasicClientFeature.$metadata$ = {
@@ -5284,7 +5278,7 @@
     return Unit;
   }
   AuthBasicFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
-    addImport($receiver, 'io.ktor.client.features.auth.basic.*');
+    addImport($receiver, 'io.ktor.auth.*');
     addAuthProvider($receiver, AuthBasicFeature$renderFeature$lambda);
     addRoute($receiver, AuthBasicFeature$renderFeature$lambda_0);
   };
@@ -9118,7 +9112,7 @@
   RawSocketsTlsFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.network.tls.*');
     addImport($receiver, 'kotlinx.coroutines.*');
-    if (info.ktorVersion.compareTo_11rb$(Versions_getInstance().V130b1) >= 0) {
+    if (info.ktorVersion.compareTo_11rb$(Versions_getInstance().V130rc) >= 0) {
       addImport($receiver, 'io.ktor.utils.io.*');
     }
      else {
