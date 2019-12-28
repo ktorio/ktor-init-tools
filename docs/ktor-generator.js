@@ -4134,7 +4134,7 @@
     this.V123 = new KtorVersion('1.2.3', '1.3.41');
     this.V124 = new KtorVersion('1.2.4', '1.3.50');
     this.V126 = new KtorVersion('1.2.6', '1.3.60');
-    this.V130rc = new KtorVersion('1.3.0-rc', '1.3.61');
+    this.V130rc = new KtorVersion('1.3.0-rc2', '1.3.61');
     this.ALL = [this.V101, this.V115, this.V126, this.V130rc];
     this.LAST = this.V126;
     this.LAST_EAP = this.V130rc;
