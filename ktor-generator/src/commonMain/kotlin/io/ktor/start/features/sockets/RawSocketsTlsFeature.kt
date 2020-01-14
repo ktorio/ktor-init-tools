@@ -42,7 +42,7 @@ object RawSocketsTlsFeature : ServerFeature(ApplicationKt, RawSocketsFeature) {
         //    +"val socket = aSocket(selectorManager).tcp().connect(\"127.0.0.1\", port = DefaultPort).tls()"
         //}
 
-        if (info.ktorVersion >= Versions.V130rc) {
+        if (info.ktorVersion >= Versions.V130) {
             addImport("io.ktor.utils.io.*")
         } else {
             addImport("kotlinx.io.core.*")
