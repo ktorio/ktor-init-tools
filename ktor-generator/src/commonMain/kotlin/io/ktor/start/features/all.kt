@@ -32,6 +32,7 @@ val ALL_FEATURES: List<Feature> = listOf(
     CioClientEngine,
     JettyClientEngine,
     MockClientEngine,
+    HttpTimeoutClientFeature,
     AuthBasicClientFeature,
     GsonClientFeature,
     WebSocketClientFeature,
