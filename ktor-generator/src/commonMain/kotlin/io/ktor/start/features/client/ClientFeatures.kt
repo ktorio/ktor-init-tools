@@ -5,6 +5,22 @@ import io.ktor.start.features.server.*
 import io.ktor.start.project.*
 import io.ktor.start.util.*
 
+object HttpTimeoutClientFeature : ClientFeature(CoreClientEngine) {
+    override val id = "ktor-client-http-timeout"
+    override val title = "HttpTimeout feature HttpClient"
+    override val description = "Supports request, connect and socket timeout for the Http Client"
+    override val documentation = "https://ktor.io/clients/http-client/features/timeout.html"
+    override val since = Versions.V131
+
+    override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addImport("io.ktor.client.features.*")
+        append(CoreClientEngine.CLIENT_FEATURES) {
+            +"install(HttpTimeout)" {
+            }
+        }
+    }
+}
+
 object AuthBasicClientFeature : ClientFeature(CoreClientEngine) {
     override val id = "ktor-client-auth-jvm"
     override val title = "Auth feature HttpClient"
