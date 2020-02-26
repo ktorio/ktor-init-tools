@@ -19,6 +19,7 @@ fun SwaggerModel.InfoGenType<*>.toKotlinType(): String = type.toKotlinType()
 fun SwaggerModel.GenType.toKotlinType(): String = when (this) {
     is SwaggerModel.OptionalType -> "${this.type.toKotlinType()}?"
     is SwaggerModel.StringType -> "String"
+    is SwaggerModel.BinaryStringType -> "String"
     is SwaggerModel.PasswordType -> "String" // @TODO: SecureString instead?
     is SwaggerModel.DateType -> "Date"
     is SwaggerModel.DateTimeType -> "Date"
