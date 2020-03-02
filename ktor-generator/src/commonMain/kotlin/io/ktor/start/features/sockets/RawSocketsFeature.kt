@@ -41,7 +41,7 @@ object RawSocketsFeature : ServerFeature(ApplicationKt) {
         addImport("io.ktor.network.util.*")
         addImport("kotlin.coroutines.experimental.*")
         addImport("kotlinx.coroutines.experimental.*")
-        addImport("kotlinx.coroutines.experimental.io.*")
+        addImport("io.ktor.utils.io.*")
 
         fileText("src/EchoApp.kt") {
             +"package ${info.artifactGroup}"
@@ -97,7 +97,7 @@ object RawSocketsFeature : ServerFeature(ApplicationKt) {
                                     +"val read = socket.openReadChannel()"
                                     +"val write = socket.openWriteChannel(autoFlush = true)"
                                     SEPARATOR {
-                                        +"launch" {
+                                        +"launch(Dispatchers.IO)" {
                                             +"while (true)" {
                                                 +"val line = read.readUTF8Line()"
                                                 +"println(\"server: \$line\")"
