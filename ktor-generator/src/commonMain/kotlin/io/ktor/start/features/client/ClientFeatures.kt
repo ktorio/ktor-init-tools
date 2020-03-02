@@ -121,7 +121,7 @@ object UserAgentClientFeature : ClientFeature(CoreClientEngine) {
 }
 
 object WebSocketClientFeature : ClientFeature(CoreClientEngine, CioClientEngine, WebsocketsFeature) {
-    override val id = "ktor-client-websocket"
+    override val id = "ktor-client-websockets"
     override val title = "WebSockets HttpClient support"
     override val description = "HttpClient feature to establish bidirectional communication using WebSockets"
     override val documentation = "https://ktor.io/clients/http-client/features/websockets.html"
