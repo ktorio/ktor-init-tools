@@ -25,6 +25,7 @@ fun SwaggerModel.GenType.toKotlinType(): String = when (this) {
     is SwaggerModel.DateTimeType -> "Date"
     is SwaggerModel.Int32Type -> "Int"
     is SwaggerModel.DoubleType -> "Double"
+    is SwaggerModel.FloatType -> "Float"
     is SwaggerModel.Int64Type -> "Long"
     is SwaggerModel.BoolType -> "Boolean"
     is SwaggerModel.NamedObject -> name
@@ -55,6 +56,7 @@ fun Indenter.toKotlinDefault(type: SwaggerModel.GenType?, default: Any?, typed: 
             is SwaggerModel.DateTimeType -> +"Date()"
             is SwaggerModel.Int32Type -> +"${default.tryInt ?: 0}"
             is SwaggerModel.DoubleType -> +"${default.tryDouble ?: 0.0}"
+            is SwaggerModel.FloatType -> +"${default.tryFloat ?: 0.0f}"
             is SwaggerModel.Int64Type -> +"${default.tryLong ?: 0L}"
             is SwaggerModel.BoolType -> +"${default.tryBool ?: false}"
             is SwaggerModel.ArrayType -> +"listOf()"
