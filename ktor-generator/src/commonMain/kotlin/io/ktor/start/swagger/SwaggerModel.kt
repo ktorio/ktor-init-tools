@@ -64,7 +64,28 @@ data class SwaggerModel(
         val enum: List<String>?
     )
 
-    class InfoGenType<T : GenType>(val type: T, val rule: JsonRule?, val default: Any?) {
+    open class InfoGenType<T : GenType> {
+
+        lateinit var type: T
+
+        var rule: JsonRule? = null
+
+        var default: Any? = null
+
+        constructor()
+
+        constructor(type: T, rule: JsonRule?, default: Any?) {
+            this.type = type
+            this.rule = rule
+            this.default = default
+        }
+
+        fun copyFrom(anotherType: InfoGenType<T>) {
+            type = anotherType.type
+            rule = anotherType.rule
+            default = anotherType.default
+        }
+
         override fun toString(): String = if (rule != null) "$type($rule)" else "$type"
     }
 
@@ -316,18 +337,36 @@ data class SwaggerModel(
         }
 
         // https://swagger.io/specification/#data-types
-        fun parseDefinitionElement(def: Any?, root: Any?, namePath: String?, guessPath: List<String>): InfoGenType<GenType> {
+        fun parseDefinitionElement(
+                def: Any?,
+                root: Any?,
+                namePath: String?,
+                guessPath: List<String>,
+                cache: MutableMap<Any?, InfoGenType<GenType>> = mutableMapOf()
+        ): InfoGenType<GenType> {
             return Dynamic {
                 val ref = def["\$ref"]
                 if (ref != null) {
                     val path = ref.str
-                    val referee = parseDefinitionElement(Json.followReference(def, root, path), root, path, listOf(path))
-                    return if (referee.type is ObjType) {
+                    val node = Json.followReference(def, root, path)
+                    var cachedResult = cache[node]
+                    if (cachedResult != null) {
+                        return cachedResult
+                    } else {
+                        cachedResult = InfoGenType()
+                        cache[node] = cachedResult
+                    }
+
+                    val referee = parseDefinitionElement(node, root, path, listOf(path), cache)
+                    val res: InfoGenType<GenType> = if (referee.type is ObjType) {
                         @Suppress("UNCHECKED_CAST")
                         InfoGenType(NamedObject(path, referee as InfoGenType<ObjType>), null, null)
                     } else {
                         referee
                     }
+
+                    cachedResult.copyFrom(res)
+                    return cachedResult
                 } else {
                     val type = def["type"]
                     val format = def["format"]
@@ -358,7 +397,7 @@ data class SwaggerModel(
                         // Composed Types
                         "array" -> {
                             val items = def["items"]
-                            ArrayType(parseDefinitionElement(items, root, null, guessPath + listOf("elements")))
+                            ArrayType(parseDefinitionElement(items, root, null, guessPath + listOf("elements"), cache))
                         }
                         null, "object" -> {
                             val props = def["properties"]
@@ -366,7 +405,7 @@ data class SwaggerModel(
                             val entries =
                                 props.strEntries
                                     .map {
-                                        Prop(it.first, parseDefinitionElement(it.second, root, null, guessPath + it.first), it.first in required)
+                                        Prop(it.first, parseDefinitionElement(it.second, root, null, guessPath + it.first, cache), it.first in required)
                                     }
                             ObjType(namePath, guessPath, entries)
                         }

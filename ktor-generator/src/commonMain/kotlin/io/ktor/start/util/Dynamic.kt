@@ -134,6 +134,7 @@ object DynamicAccess {
 
     val Any?.tryInt get() = tryNumber?.toInt()
     val Any?.tryDouble get() = tryNumber?.toDouble()
+    val Any?.tryFloat get() = tryNumber?.toFloat()
     val Any?.tryLong get() = tryNumber?.toLong()
     val Any?.tryBool get() = when {
         this is Boolean -> this
