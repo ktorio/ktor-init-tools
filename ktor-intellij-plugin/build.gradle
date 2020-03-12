@@ -17,7 +17,7 @@ dependencies {
     compile project(path: ':ktor-generator', configuration: 'jvmRuntimeElements')
 }
 
-def intellijBaseVersion = "2018.3.5"
+def intellijBaseVersion = "2018.3.6"
 //def intellijVersion = "IC-$intellijBaseVersion"
 def intellijVersion = "IU-$intellijBaseVersion"
 
@@ -26,7 +26,7 @@ intellij {
     //version 'LATEST-EAP-SNAPSHOT'
     updateSinceUntilBuild false
     plugins = [
-            'maven', 'gradle'
+            'maven', 'gradle', 'Kotlin'
     ]
     pluginName 'ktor'
     downloadSources true

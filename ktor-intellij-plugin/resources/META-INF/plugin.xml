@@ -1,9 +1,9 @@
 <idea-plugin url="https://ktor.io" allow-bundled-update="true">
-    <idea-version since-build="170" />
+    <idea-version since-build="170"/>
     <id>io.ktor.intellij.plugin</id>
 
     <name>Ktor</name>
-    <version>1.3.0</version>
+    <version>1.3.2</version>
     <vendor url="https://www.jetbrains.com">JetBrains</vendor>
     <description>
         <![CDATA[
@@ -164,8 +164,52 @@
 
     <depends>org.jetbrains.plugins.gradle</depends>
     <depends>org.jetbrains.idea.maven</depends>
+    <depends>org.jetbrains.kotlin</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <moduleType id="KTOR_MODULE" implementationClass="io.ktor.start.intellij.KtorModuleType"/>
+
+        <languageInjector implementation="io.ktor.start.intellij.locations.PatternInjector"/>
+        <lang.parserDefinition implementationClass="io.ktor.start.intellij.locations.PatternParserDefinition"
+                               language="Kotlin.ktor.locations.pattern"
+                               id="Kotlin.ktor.locations.pattern.id"
+        />
+
+        <fileTypeFactory implementation="io.ktor.start.intellij.locations.PatternFileTypeFactory"/>
+
+        <lang.braceMatcher language="Kotlin.ktor.locations.pattern"
+                           implementationClass="io.ktor.start.intellij.locations.LocationPatternBraceMatcher"/>
+
+        <lang.findUsagesProvider language="Kotlin.ktor.locations.pattern"
+                                 implementationClass="io.ktor.start.intellij.locations.PatternFindUsagesProvider"/>
+
+        <localInspection language="Kotlin.ktor.locations.pattern"
+                         implementationClass="io.ktor.start.intellij.locations.ParameterNameInspection"
+                         displayName="Location path pattern parameter names validation."
+                         groupName="Ktor"
+                         enabledByDefault="true"
+                         level="ERROR"
+        />
+
+        <localInspection language="kotlin"
+                         implementationClass="io.ktor.start.intellij.locations.MissingOwnerClassReferenceInspection"
+                         displayName="Location path pattern parameter names validation."
+                         groupName="Ktor"
+                         enabledByDefault="true"
+        />
+
+        <lang.syntaxHighlighterFactory language="Kotlin.ktor.locations.pattern"
+                                       implementationClass="io.ktor.start.intellij.locations.PatternSyntaxHighlighter$Companion"/>
+
+        <annotator implementationClass="io.ktor.start.intellij.locations.ParameterNameAnnotator"
+                   language="Kotlin.ktor.locations.pattern"/>
+
+        <completion.contributor
+                implementationClass="io.ktor.start.intellij.locations.PropertyNamesCompletionContributor"
+                language="Kotlin.ktor.locations.pattern"
+        />
+
+        <psi.referenceContributor
+                implementation="io.ktor.start.intellij.locations.LocationsReferenceContributor"/>
     </extensions>
 </idea-plugin>
