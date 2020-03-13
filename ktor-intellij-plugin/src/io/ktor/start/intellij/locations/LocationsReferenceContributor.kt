@@ -4,6 +4,7 @@ import com.intellij.openapi.util.*
 import com.intellij.patterns.*
 import com.intellij.psi.*
 import com.intellij.psi.util.*
+import com.intellij.refactoring.RefactoringFactory
 import com.intellij.util.*
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.*
@@ -27,6 +28,10 @@ class LocationsReferenceContributor : PsiReferenceContributor() {
                 ): Array<PsiReference> {
                     val property = element as KtNamedDeclaration
                     property.name ?: return emptyArray()
+
+                    if (property !is KtProperty && property !is KtParameter) {
+                        return emptyArray()
+                    }
 
                     val clazz = property.parentOfType<KtClassOrObject>() ?: return emptyArray()
 
@@ -91,6 +96,17 @@ class LocationsReferenceProvider0 : PsiReferenceProvider() {
 
                         override fun multiResolve(incompleteCode: Boolean): Array<ResolveResult> {
                             return arrayOf(PsiElementResolveResult(references))
+                        }
+
+                        override fun getRangeInElement(): TextRange {
+                            return TextRange(0, element.textLength)
+                        }
+
+                        override fun handleElementRename(newElementName: String): PsiElement {
+                            val result = ManipulatorImpl().handleContentChange(componentElement, newElementName)
+                                ?: throw IncorrectOperationException("Failed to rename location parameter")
+
+                            return result
                         }
                     })
                 }
