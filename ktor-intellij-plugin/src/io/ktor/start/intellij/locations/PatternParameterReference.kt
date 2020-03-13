@@ -31,4 +31,23 @@ class PatternParameterReference(
         return multiResolve(false).singleOrNull()?.element
     }
 
+    override fun isReferenceTo(element: PsiElement): Boolean {
+        return super.isReferenceTo(element)
+    }
+
+    override fun getRangeInElement(): TextRange {
+        val nameIdentifier = element.nameIdentifier ?: return TextRange(0, element.textLength)
+        val startInside = nameIdentifier.getStartOffsetIn(element)
+        val length = nameIdentifier.textLength
+
+        if (startInside < 0 || length > element.textLength) {
+            return TextRange(0, element.textLength)
+        }
+
+        return TextRange.from(startInside, length)
+    }
+
+    override fun handleElementRename(newElementName: String): PsiElement {
+        return super.handleElementRename(newElementName)
+    }
 }

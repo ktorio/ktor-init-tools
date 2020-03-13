@@ -183,6 +183,9 @@
         <lang.findUsagesProvider language="Kotlin.ktor.locations.pattern"
                                  implementationClass="io.ktor.start.intellij.locations.PatternFindUsagesProvider"/>
 
+        <findUsagesHandlerFactory
+                implementation="io.ktor.start.intellij.locations.LocationsParametersFindUsagesHandlerFactory"/>
+
         <localInspection language="Kotlin.ktor.locations.pattern"
                          implementationClass="io.ktor.start.intellij.locations.ParameterNameInspection"
                          displayName="Location path pattern parameter names validation."
@@ -211,5 +214,24 @@
 
         <psi.referenceContributor
                 implementation="io.ktor.start.intellij.locations.LocationsReferenceContributor"/>
+
+        <definitionsScopedSearch implementation="io.ktor.start.intellij.locations.ParameterUsagesSearcher"/>
+        <referencesSearch implementation="io.ktor.start.intellij.locations.ParametersReferencesSearcher"/>
+
+        <lang.elementManipulator
+                forClass="io.ktor.start.intellij.locations.LocationsPatternPsiElement.ParameterNameElement"
+                implementationClass="io.ktor.start.intellij.locations.ManipulatorImpl"/>
+
+        <!--        <renameInputValidator implementation=""-->
+
+        <renamePsiElementProcessor
+                implementation="io.ktor.start.intellij.locations.ParameterRenameProcessor"/>
+
+        <lang.refactoringSupport
+                language="Kotlin.ktor.locations.pattern"
+                implementationClass="io.ktor.start.intellij.locations.LocationsRefactoringsSupportProvider"/>
+
+        <renameHandler implementation="io.ktor.start.intellij.locations.ParameterNameInPlaceRenameHandler"/>
+
     </extensions>
 </idea-plugin>
