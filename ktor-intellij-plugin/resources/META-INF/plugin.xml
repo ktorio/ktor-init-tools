@@ -233,5 +233,13 @@
 
         <renameHandler implementation="io.ktor.start.intellij.locations.ParameterNameInPlaceRenameHandler"/>
 
+        <codeInsight.lineMarkerProvider
+                implementationClass="io.ktor.start.intellij.locations.LocationsLineMarker"
+                language="kotlin"/>
+
+        <codeInsight.lineMarkerProvider
+                implementationClass="io.ktor.start.intellij.RoutingLineMarker"
+                language="kotlin"/>
+
     </extensions>
 </idea-plugin>

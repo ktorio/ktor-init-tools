@@ -31,19 +31,12 @@ class PatternInjector : LanguageInjector {
     ) {
         if (host.isValidHost && host is KtStringTemplateExpression) {
             val annotation = host.parentOfType<KtAnnotationEntry>() ?: return
-            val annotationFqName = annotation.resolveToCall(BodyResolveMode.PARTIAL)
-                ?.candidateDescriptor
-                ?.returnType
-                ?.toClassDescriptor
-                ?.fqNameOrNull()
-                ?.asString()
-                ?: return
+            val argument = host.parentOfType<KtValueArgument>() ?: return
 
-            if (annotationFqName != "io.ktor.locations.Location") {
+            if (!annotation.isLocation()) {
                 return
             }
 
-            val argument = host.parentOfType<KtValueArgument>() ?: return
             if (argument.getArgumentName()?.text == "path" || argument.parent.children.indexOf(argument) == 0) {
                 val length = host.textLength
 

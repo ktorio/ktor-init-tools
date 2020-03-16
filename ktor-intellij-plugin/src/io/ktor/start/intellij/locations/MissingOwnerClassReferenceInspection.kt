@@ -49,7 +49,7 @@ class MissingOwnerClassReferenceInspection : LocalInspectionTool() {
         }
     }
 
-    private fun KtClassOrObject.isLocation() = annotationEntries.any { it.shortName?.asString() == "Location" }
+    private fun KtClassOrObject.isLocation() = annotationEntries.any { it.isLocation() }
 
     private fun KtParameter.refersToClass(other: KtClassOrObject): Boolean {
         return descriptor?.type?.constructor?.declarationDescriptor?.fqNameOrNull() == other.fqName

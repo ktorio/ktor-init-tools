@@ -2,6 +2,7 @@ package io.ktor.start.intellij.locations
 
 import com.intellij.lang.annotation.*
 import com.intellij.psi.*
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
 
 class ParameterNameAnnotator : Annotator {
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
