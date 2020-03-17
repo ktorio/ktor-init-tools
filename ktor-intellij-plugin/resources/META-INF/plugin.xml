@@ -3,7 +3,7 @@
     <id>io.ktor.intellij.plugin</id>
 
     <name>Ktor</name>
-    <version>1.3.2</version>
+    <version>1.3.2-1</version>
     <vendor url="https://www.jetbrains.com">JetBrains</vendor>
     <description>
         <![CDATA[
@@ -18,7 +18,7 @@
 
             <h2>Changelog</h2>
 
-            <h3>1.3.1</h3>
+            <h3>1.3.2</h3>
             <ul>
                 <li>Ktor 1.3.2</li>
                 <li>Ktor locations inspections and intentions</li>
