@@ -33,6 +33,6 @@ class KtorModuleType : ModuleType<KtorModuleBuilder>("ktor") {
     override fun createModuleBuilder(): KtorModuleBuilder = KtorModuleBuilder()
     override fun getName(): String = NAME
     override fun getDescription(): String = DESCRIPTION
-    override fun getNodeIcon(isOpened: Boolean): Icon? = KTOR_ICON
+    override fun getNodeIcon(isOpened: Boolean): Icon = KTOR_ICON
     override fun getIcon(): Icon = KTOR_BIG_ICON
 }

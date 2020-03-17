@@ -17,32 +17,34 @@
 
 package io.ktor.start.intellij
 
-import com.intellij.execution.*
-import com.intellij.ide.actions.*
-import com.intellij.ide.util.newProjectWizard.*
-import com.intellij.ide.util.projectWizard.*
-import com.intellij.openapi.*
-import com.intellij.openapi.components.*
-import com.intellij.openapi.externalSystem.service.project.*
-import com.intellij.openapi.projectRoots.*
-import com.intellij.openapi.roots.*
-import com.intellij.openapi.roots.ui.configuration.*
-import com.intellij.openapi.util.io.*
-import com.intellij.openapi.vfs.*
-import io.ktor.start.*
-import io.ktor.start.intellij.util.*
-import io.ktor.start.project.*
-import io.ktor.start.swagger.*
-import io.ktor.start.util.*
-import kotlinx.coroutines.*
-import org.jetbrains.idea.maven.execution.*
-import org.jetbrains.idea.maven.project.*
-import org.jetbrains.plugins.gradle.service.project.wizard.*
-import java.io.*
+import com.intellij.execution.RunManager
+import com.intellij.ide.actions.ImportModuleAction
+import com.intellij.ide.util.projectWizard.JavaModuleBuilder
+import com.intellij.ide.util.projectWizard.WizardContext
+import com.intellij.openapi.Disposable
+import com.intellij.openapi.projectRoots.JavaSdk
+import com.intellij.openapi.projectRoots.SdkTypeId
+import com.intellij.openapi.roots.ModifiableRootModel
+import com.intellij.openapi.roots.ui.configuration.ModulesProvider
+import com.intellij.openapi.util.io.FileUtil
+import com.intellij.openapi.vfs.LocalFileSystem
+import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.projectImport.ProjectImportProvider
+import io.ktor.start.BuildInfo
+import io.ktor.start.ProjectType
+import io.ktor.start.intellij.util.backgroundTask
+import io.ktor.start.intellij.util.get
+import io.ktor.start.intellij.util.invokeLater
+import io.ktor.start.project.ApplicationKt
+import io.ktor.start.swagger.SwaggerGenerator
+import io.ktor.start.util.generate
+import kotlinx.coroutines.runBlocking
+import org.jetbrains.idea.maven.execution.MavenRunConfigurationType
+import org.jetbrains.idea.maven.execution.MavenRunnerParameters
+import org.jetbrains.idea.maven.project.MavenProjectsManager
+import java.io.File
 
 class KtorModuleBuilder : JavaModuleBuilder() {
-    val SILENT_GRADLE_IMPORT = false
-
     override fun getPresentableName() = KtorModuleType.NAME
     override fun getNodeIcon() = KtorModuleType.KTOR_ICON
     override fun getGroupName() = KtorModuleType.NAME
@@ -58,7 +60,8 @@ class KtorModuleBuilder : JavaModuleBuilder() {
         rootModel.addContentEntry(root)
         if (moduleJdk != null) rootModel.sdk = moduleJdk
 
-        project.backgroundTask("Setting Up Project") {
+        project.backgroundTask("Setting Up Project") { progress ->
+            progress.text = "Preparing"
             val info = BuildInfo(
                 includeWrapper = config.wrapper,
                 projectType = config.projectType,
@@ -71,41 +74,58 @@ class KtorModuleBuilder : JavaModuleBuilder() {
                 fetch = {
                     val url =
                         KtorModuleType::class.java.getResourceAsStream(it)
-                                ?: KtorModuleType::class.java.getResourceAsStream("/$it")
-                                ?: ClassLoader.getSystemClassLoader().getResourceAsStream("/$it")
-                                ?: ClassLoader.getSystemClassLoader().getResourceAsStream(it)
+                            ?: KtorModuleType::class.java.getResourceAsStream("/$it")
+                            ?: ClassLoader.getSystemClassLoader().getResourceAsStream("/$it")
+                            ?: ClassLoader.getSystemClassLoader().getResourceAsStream(it)
                     url?.readBytes() ?: error("Can't find resource '$it'")
                 }
             )
 
             runBlocking {
-                val blocks = listOf(ApplicationKt) + config.featuresToInstall + config.swaggerModules.map { SwaggerGenerator(it, config.swaggerGenKind) }
+                val blocks = listOf(ApplicationKt) + config.featuresToInstall + config.swaggerModules.map {
+                    SwaggerGenerator(
+                        it,
+                        config.swaggerGenKind
+                    )
+                }
                 for ((_, content) in generate(info, blocks)) {
-                    root.createFile(content.name, content.data, content.mode)
+                    progress.text = "Generating ${content.name}"
+                    File(root.path, content.name).apply {
+                        parentFile.apply {
+                            if (!isDirectory) {
+                                if (!mkdirs()) error("Failed to create directory $this")
+                            }
+                        }
+                        writeBytes(content.data)
+                        if (content.mode.isUserExecutable) {
+                            setExecutable(true)
+                        }
+                    }
                 }
             }
 
+            progress.text = "Configuring project model"
+            root.refresh(false, true)
+
             when (info.projectType) {
+                ProjectType.GradleKotlinDsl,
                 ProjectType.Gradle -> {
                     val buildGradle = root["build.gradle.kts"] ?: root["build.gradle"]
                     if (buildGradle != null) {
                         invokeLater {
-                            val wizard = AddModuleWizard(
+                            val provider = ProjectImportProvider.PROJECT_IMPORT_PROVIDER.extensions
+                                .firstOrNull { it.canImport(buildGradle, project) }
+                                ?: return@invokeLater
+
+                            val wizard = ImportModuleAction.createImportWizard(
                                 project,
-                                buildGradle.path,
-                                GradleProjectImportProvider(
-                                    GradleProjectImportBuilder(
-                                        ServiceManager.getService(ProjectDataManager::class.java)
-                                    )
-                                )
+                                null,
+                                buildGradle,
+                                provider
                             )
-                            if (SILENT_GRADLE_IMPORT) {
-                                wizard.commit()
-                                //wizard.clickDefaultButton()
-                            } else {
-                                if (wizard.showAndGet()) {
-                                    ImportModuleAction.createFromWizard(project, wizard)
-                                }
+
+                            if (wizard != null && (wizard.stepCount <= 0 || wizard.showAndGet())) {
+                                ImportModuleAction.createFromWizard(project, wizard)
                             }
                         }
                     }
@@ -129,12 +149,13 @@ class KtorModuleBuilder : JavaModuleBuilder() {
                                 }, project
                             ).apply {
                                 name = "${module.name} build"
-                            },
-                            false
-                        )
+                                isShared = false
+                            })
                     }
                 }
             }
+
+            progress.text = "Done."
         }
     }
 

@@ -15,11 +15,7 @@ class PatternFindUsagesProvider : EmptyFindUsagesProvider() {
             TokenSet.create(PatternLexer.TOKEN_COMPONENT),
             TokenSet.EMPTY,
             TokenSet.EMPTY
-        ) {
-            override fun processWords(fileText: CharSequence?, processor: Processor<WordOccurrence>?) {
-                super.processWords(fileText, processor)
-            }
-        }
+        ) {}
     }
 
     override fun canFindUsagesFor(psiElement: PsiElement): Boolean {

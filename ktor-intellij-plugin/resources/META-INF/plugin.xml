@@ -1,5 +1,5 @@
 <idea-plugin url="https://ktor.io" allow-bundled-update="true">
-    <idea-version since-build="170"/>
+    <idea-version since-build="183"/>
     <id>io.ktor.intellij.plugin</id>
 
     <name>Ktor</name>
@@ -162,12 +162,25 @@
         ]]>
     </description>
 
-    <depends>org.jetbrains.plugins.gradle</depends>
     <depends>org.jetbrains.idea.maven</depends>
     <depends>org.jetbrains.kotlin</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.externalSystem</depends>
+
+    <!-- we can't depend on Gradle -->
+    <!-- but it works well since we actually never invoke any gradle-related stuff directly -->
+    <!-- and query for the service instead -->
+
+    <!-- once we drop 2018.3 support, we'll uncomment this -->
+
+    <!-- this is not supported on IDEA 2018.3 -->
+<!--    <depends>com.intellij.gradle</depends>-->
+
+    <!-- this is not supported on IDEA 2019+ -->
+<!--    <depends>org.jetbrains.plugins.gradle</depends>-->
 
     <extensions defaultExtensionNs="com.intellij">
-        <moduleType id="KTOR_MODULE" implementationClass="io.ktor.start.intellij.KtorModuleType"/>
+        <moduleBuilder builderClass="io.ktor.start.intellij.KtorModuleBuilder" />
 
         <languageInjector implementation="io.ktor.start.intellij.locations.PatternInjector"/>
         <lang.parserDefinition implementationClass="io.ktor.start.intellij.locations.PatternParserDefinition"
@@ -175,14 +188,22 @@
                                id="Kotlin.ktor.locations.pattern.id"
         />
 
-        <fileTypeFactory implementation="io.ktor.start.intellij.locations.PatternFileTypeFactory"/>
+        <!-- including both seems to be fine, the factory is deprecated and required for IDEA 2018.3 -->
+<!--         non dynamic -->
+        <fileTypeFactory implementation="io.ktor.start.intellij.locations.PatternFileTypeFactory" />
+
+        <fileType name="ktor locations pattern"
+                  language="Kotlin.ktor.locations.pattern"
+                  implementationClass="io.ktor.start.intellij.locations.PatternFileType" />
 
         <lang.braceMatcher language="Kotlin.ktor.locations.pattern"
                            implementationClass="io.ktor.start.intellij.locations.LocationPatternBraceMatcher"/>
 
+        <!-- non dynamic -->
         <lang.findUsagesProvider language="Kotlin.ktor.locations.pattern"
                                  implementationClass="io.ktor.start.intellij.locations.PatternFindUsagesProvider"/>
 
+        <!-- non dynamic -->
         <findUsagesHandlerFactory
                 implementation="io.ktor.start.intellij.locations.LocationsParametersFindUsagesHandlerFactory"/>
 
@@ -215,9 +236,13 @@
         <psi.referenceContributor
                 implementation="io.ktor.start.intellij.locations.LocationsReferenceContributor"/>
 
+        <!-- non dynamic -->
         <definitionsScopedSearch implementation="io.ktor.start.intellij.locations.ParameterUsagesSearcher"/>
+
+        <!-- non dynamic -->
         <referencesSearch implementation="io.ktor.start.intellij.locations.ParametersReferencesSearcher"/>
 
+        <!-- non dynamic -->
         <lang.elementManipulator
                 forClass="io.ktor.start.intellij.locations.LocationsPatternPsiElement.ParameterNameElement"
                 implementationClass="io.ktor.start.intellij.locations.ManipulatorImpl"/>
@@ -227,10 +252,12 @@
         <renamePsiElementProcessor
                 implementation="io.ktor.start.intellij.locations.ParameterRenameProcessor"/>
 
+        <!-- non dynamic -->
         <lang.refactoringSupport
                 language="Kotlin.ktor.locations.pattern"
                 implementationClass="io.ktor.start.intellij.locations.LocationsRefactoringsSupportProvider"/>
 
+        <!-- non dynamic -->
         <renameHandler implementation="io.ktor.start.intellij.locations.ParameterNameInPlaceRenameHandler"/>
 
         <codeInsight.lineMarkerProvider

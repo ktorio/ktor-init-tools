@@ -18,15 +18,16 @@ dependencies {
 }
 
 def intellijBaseVersion = "2018.3.6"
-//def intellijVersion = "IC-$intellijBaseVersion"
-def intellijVersion = "IU-$intellijBaseVersion"
+//def intellijBaseVersion = "2019.3.3"
+def intellijVersion = "IC-$intellijBaseVersion"
+//def intellijVersion = "IU-$intellijBaseVersion"
 
 intellij {
     version intellijVersion
     //version 'LATEST-EAP-SNAPSHOT'
     updateSinceUntilBuild false
     plugins = [
-            'maven', 'gradle', 'Kotlin'
+            'maven', 'gradle', 'Kotlin'//, 'java'
     ]
     pluginName 'ktor'
     downloadSources true
