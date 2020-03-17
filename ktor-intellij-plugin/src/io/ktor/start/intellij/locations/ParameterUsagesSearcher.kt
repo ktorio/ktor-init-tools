@@ -18,20 +18,24 @@ class ParameterUsagesSearcher : QueryExecutor<PsiElement, DefinitionsScopedSearc
     ): Boolean {
         val searchElement = queryParameters.element
         if (searchElement !is LocationsPatternPsiElement) {
-            return false
+            return true
         }
 
+        var cancelled = false
         runReadAction {
             searchElement.collectDescendantsOfType<LocationsPatternPsiElement.ParameterNameElement>()
                 .forEach { element ->
                     LocationsBackReferenceProvider().getReferencesByElement(element.firstChild, ProcessingContext())
                         .map { it.element }.forEach { target ->
-                            consumer.process(target)
+                            if (!consumer.process(target)) {
+                                cancelled = true
+                                return@runReadAction
+                            }
                         }
                 }
         }
 
-        return true
+        return !cancelled
     }
 }
 
@@ -42,20 +46,24 @@ class ParametersReferencesSearcher : QueryExecutor<PsiReference, ReferencesSearc
     ): Boolean {
         val searchElement = queryParameters.elementToSearch
         if (searchElement !is LocationsPatternPsiElement) {
-            return false
+            return true
         }
 
+        var cancelled = false
         runReadAction {
             searchElement.collectDescendantsOfType<LocationsPatternPsiElement.ParameterNameElement>()
                 .forEach { element ->
                     LocationsBackReferenceProvider().getReferencesByElement(element.firstChild, ProcessingContext())
                         .forEach { target ->
-                            consumer.process(target)
+                            if (!consumer.process(target)) {
+                                cancelled = true
+                                return@runReadAction
+                            }
                         }
                 }
         }
 
-        return true
+        return !cancelled
     }
 
 }
