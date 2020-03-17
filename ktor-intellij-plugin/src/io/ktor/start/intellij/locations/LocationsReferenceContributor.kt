@@ -5,6 +5,7 @@ import com.intellij.patterns.*
 import com.intellij.psi.*
 import com.intellij.psi.util.*
 import com.intellij.util.*
+import io.ktor.start.intellij.isLocation
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.*
 import org.jetbrains.kotlin.utils.addToStdlib.*
@@ -13,17 +14,17 @@ class LocationsReferenceContributor : PsiReferenceContributor() {
     override fun registerReferenceProviders(registrar: PsiReferenceRegistrar) {
         registrar.registerReferenceProvider(
             PlatformPatterns.psiElement(KtNamedDeclaration::class.java),
-            LocationsReferenceProvider1()
+            LocationsReferenceProvider()
         )
 
         registrar.registerReferenceProvider(
             PlatformPatterns.psiElement(LocationsPatternPsiElement.SubstitutionElement::class.java),
-            LocationsReferenceProvider0()
+            LocationsBackReferenceProvider()
         )
     }
 }
 
-internal class LocationsReferenceProvider1 : PsiReferenceProvider() {
+internal class LocationsReferenceProvider : PsiReferenceProvider() {
     override fun acceptsTarget(target: PsiElement): Boolean {
         return target is LocationsPatternPsiElement.ParameterNameElement
     }
@@ -63,7 +64,7 @@ internal class LocationsReferenceProvider1 : PsiReferenceProvider() {
 
 private val EMPTY_REFERENCES_ARRAY = emptyArray<PsiReference>()
 
-internal class LocationsReferenceProvider0 : PsiReferenceProvider() {
+internal class LocationsBackReferenceProvider : PsiReferenceProvider() {
     override fun getReferencesByElement(element: PsiElement, context: ProcessingContext): Array<PsiReference> {
         val componentElement =
             element.parentOfType<LocationsPatternPsiElement.ParameterNameElement>()
@@ -79,26 +80,7 @@ internal class LocationsReferenceProvider0 : PsiReferenceProvider() {
             if (property != null) {
                 val references = property.nameIdentifier
                 if (references != null) {
-                    return arrayOf(object : PsiReferenceBase<PsiElement>(references), PsiPolyVariantReference {
-                        override fun resolve(): PsiElement? {
-                            return references
-                        }
-
-                        override fun multiResolve(incompleteCode: Boolean): Array<ResolveResult> {
-                            return arrayOf(PsiElementResolveResult(references))
-                        }
-
-                        override fun getRangeInElement(): TextRange {
-                            return TextRange(0, element.textLength)
-                        }
-
-                        override fun handleElementRename(newElementName: String): PsiElement {
-                            val result = ManipulatorImpl().handleContentChange(componentElement, newElementName)
-                                ?: throw IncorrectOperationException("Failed to rename location parameter")
-
-                            return result
-                        }
-                    })
+                    return arrayOf(PatternParameterBackReference(componentElement, references))
                 }
             }
         }

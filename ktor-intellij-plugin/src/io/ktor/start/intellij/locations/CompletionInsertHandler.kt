@@ -4,7 +4,7 @@ import com.intellij.codeInsight.completion.*
 import com.intellij.codeInsight.lookup.*
 import com.intellij.psi.util.*
 
-object StupidInsertHandler : InsertHandler<LookupElement> {
+object CompletionInsertHandler : InsertHandler<LookupElement> {
     override fun handleInsert(context: InsertionContext, item: LookupElement) {
         val text = item.lookupString
 

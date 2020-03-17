@@ -1,4 +1,4 @@
-package io.ktor.start.intellij.locations
+package io.ktor.start.intellij
 
 import org.jetbrains.kotlin.idea.caches.resolve.resolveToCall
 import org.jetbrains.kotlin.psi.KtAnnotationEntry

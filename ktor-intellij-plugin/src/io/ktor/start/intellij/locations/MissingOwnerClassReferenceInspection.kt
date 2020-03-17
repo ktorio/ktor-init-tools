@@ -2,6 +2,7 @@ package io.ktor.start.intellij.locations
 
 import com.intellij.codeInspection.*
 import com.intellij.psi.*
+import io.ktor.start.intellij.isLocation
 import org.jetbrains.kotlin.idea.search.usagesSearch.*
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.*

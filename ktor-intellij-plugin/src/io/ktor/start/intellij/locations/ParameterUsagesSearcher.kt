@@ -24,7 +24,7 @@ class ParameterUsagesSearcher : QueryExecutor<PsiElement, DefinitionsScopedSearc
         runReadAction {
             searchElement.collectDescendantsOfType<LocationsPatternPsiElement.ParameterNameElement>()
                 .forEach { element ->
-                    LocationsReferenceProvider0().getReferencesByElement(element.firstChild, ProcessingContext())
+                    LocationsBackReferenceProvider().getReferencesByElement(element.firstChild, ProcessingContext())
                         .map { it.element }.forEach { target ->
                             consumer.process(target)
                         }
@@ -48,7 +48,7 @@ class ParametersReferencesSearcher : QueryExecutor<PsiReference, ReferencesSearc
         runReadAction {
             searchElement.collectDescendantsOfType<LocationsPatternPsiElement.ParameterNameElement>()
                 .forEach { element ->
-                    LocationsReferenceProvider0().getReferencesByElement(element.firstChild, ProcessingContext())
+                    LocationsBackReferenceProvider().getReferencesByElement(element.firstChild, ProcessingContext())
                         .forEach { target ->
                             consumer.process(target)
                         }

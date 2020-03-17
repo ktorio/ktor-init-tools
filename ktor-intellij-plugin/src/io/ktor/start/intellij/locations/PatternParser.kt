@@ -10,12 +10,9 @@ import com.intellij.psi.*
 import com.intellij.psi.tree.*
 import com.intellij.psi.util.*
 import io.ktor.start.intellij.KtorModuleType
-import org.jetbrains.kotlin.idea.caches.resolve.*
+import io.ktor.start.intellij.isLocation
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.*
-import org.jetbrains.kotlin.resolve.descriptorUtil.*
-import org.jetbrains.kotlin.resolve.lazy.*
-import org.jetbrains.kotlinx.serialization.compiler.resolve.*
 import javax.swing.*
 
 object LocationsPatternLanguage : Language("Kotlin.ktor.locations.pattern") {

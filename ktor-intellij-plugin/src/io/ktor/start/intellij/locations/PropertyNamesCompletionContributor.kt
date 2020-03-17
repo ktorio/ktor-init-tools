@@ -54,7 +54,7 @@ private class LocationsPatternCompletionProvider : CompletionProvider<Completion
             sink.addElement(
                 LookupElementBuilder.create(propertyName)
                     .withIcon(AllIcons.Nodes.Property)
-                    .withInsertHandler(StupidInsertHandler)
+                    .withInsertHandler(CompletionInsertHandler)
             )
         }
     }
