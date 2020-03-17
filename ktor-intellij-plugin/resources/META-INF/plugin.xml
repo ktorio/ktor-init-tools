@@ -18,6 +18,12 @@
 
             <h2>Changelog</h2>
 
+            <h3>1.3.1</h3>
+            <ul>
+                <li>Ktor 1.3.2</li>
+                <li>Ktor locations inspections and intentions</li>
+            </ul>
+
             <h3>1.2.3</h3>
             <ul>
                 <li>Ktor 1.2.3</li>
