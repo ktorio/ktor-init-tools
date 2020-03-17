@@ -6,11 +6,9 @@
   else {
     if (typeof kotlin === 'undefined') {
       throw new Error("Error loading module 'output'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'output'.");
-    }
-    if (typeof this['ktor-generator'] === 'undefined') {
+    }if (typeof this['ktor-generator'] === 'undefined') {
       throw new Error("Error loading module 'output'. Its dependency 'ktor-generator' was not found. Please, check whether 'ktor-generator' is loaded prior to 'output'.");
-    }
-    root.output = factory(typeof output === 'undefined' ? {} : output, kotlin, this['ktor-generator']);
+    }root.output = factory(typeof output === 'undefined' ? {} : output, kotlin, this['ktor-generator']);
   }
 }(this, function (_, Kotlin, $module$ktor_generator) {
   'use strict';
@@ -140,13 +138,11 @@
           default:this.state_0 = 1;
             throw new Error('State Machine Unreachable execution');
         }
-      }
-       catch (e) {
+      } catch (e) {
         if (this.state_0 === 1) {
           this.exceptionState_0 = this.state_0;
           throw e;
-        }
-         else {
+        } else {
           this.state_0 = this.exceptionState_0;
           this.exception_0 = e;
         }
@@ -197,13 +193,11 @@
           default:this.state_0 = 1;
             throw new Error('State Machine Unreachable execution');
         }
-      }
-       catch (e) {
+      } catch (e) {
         if (this.state_0 === 1) {
           this.exceptionState_0 = this.state_0;
           throw e;
-        }
-         else {
+        } else {
           this.state_0 = this.exceptionState_0;
           this.exception_0 = e;
         }
@@ -228,8 +222,7 @@
   EmptyContinuation$ObjectLiteral.prototype.resumeWith_tl1gpc$ = function (result) {
     if (result.isFailure) {
       console.error(result.exceptionOrNull());
-    }
-  };
+    }};
   EmptyContinuation$ObjectLiteral.$metadata$ = {
     kind: Kind_CLASS,
     interfaces: [Continuation]
@@ -271,8 +264,7 @@
     var blob = new Blob([data], o);
     if (window.navigator.msSaveOrOpenBlob) {
       window.navigator.msSaveBlob(blob, filename);
-    }
-     else {
+    } else {
       var elem = Kotlin.isType(tmp$ = window.document.createElement('a'), HTMLAnchorElement) ? tmp$ : throwCCE();
       elem.href = URL.createObjectURL(blob);
       elem.download = filename;
@@ -295,14 +287,12 @@
             ff.add_11rb$(element);
           }
           closure$continuation.resumeWith_tl1gpc$(new Result(ff));
-        }
-         else {
+        } else {
           var $receiver = closure$continuation;
           var exception = new CancelException();
           $receiver.resumeWith_tl1gpc$(new Result(createFailure(exception)));
         }
-      }
-      return Unit;
+      }return Unit;
     };
   }
   function dialogOpenFile$lambda$lambda$lambda$lambda(closure$completed) {
@@ -339,8 +329,7 @@
       var wif = jQuery(str)[0];
       windowInputFile = wif;
       (tmp$ = document.body) != null ? (tmp$.append(wif), Unit) : null;
-    }
-    var inputFile = windowInputFile;
+    }var inputFile = windowInputFile;
     var completedOnce = {v: false};
     var files = {v: []};
     var completed = dialogOpenFile$lambda$lambda(completedOnce, files, continuation);
@@ -382,13 +371,11 @@
           default:this.state_0 = 1;
             throw new Error('State Machine Unreachable execution');
         }
-      }
-       catch (e) {
+      } catch (e) {
         if (this.state_0 === 1) {
           this.exceptionState_0 = this.state_0;
           throw e;
-        }
-         else {
+        } else {
           this.state_0 = this.exceptionState_0;
           this.exception_0 = e;
         }
@@ -466,13 +453,11 @@
           default:this.state_0 = 1;
             throw new Error('State Machine Unreachable execution');
         }
-      }
-       catch (e) {
+      } catch (e) {
         if (this.state_0 === 1) {
           this.exceptionState_0 = this.state_0;
           throw e;
-        }
-         else {
+        } else {
           this.state_0 = this.exceptionState_0;
           this.exception_0 = e;
         }
@@ -552,7 +537,6 @@
               this.state_0 = 5;
               continue;
             }
-
             this.local$file = this.local$tmp$.next();
             if (endsWith(this.local$file.name, '.json') || endsWith(this.local$file.name, '.yaml')) {
               this.state_0 = 3;
@@ -560,8 +544,7 @@
               if (this.result_0 === COROUTINE_SUSPENDED)
                 return COROUTINE_SUSPENDED;
               continue;
-            }
-             else {
+            } else {
               throw IllegalStateException_init('Not a JSON or YAML file'.toString());
             }
 
@@ -584,13 +567,11 @@
             var e = this.exception_0;
             if (Kotlin.isType(e, CancelException)) {
               return Unit;
-            }
-             else {
+            } else {
               if (Kotlin.isType(e, Throwable)) {
                 console.error(e);
                 return window.alert(e.toString()), Unit;
-              }
-               else {
+              } else {
                 throw e;
               }
             }
@@ -608,13 +589,11 @@
           default:this.state_0 = 10;
             throw new Error('State Machine Unreachable execution');
         }
-      }
-       catch (e) {
+      } catch (e) {
         if (this.state_0 === 10) {
           this.exceptionState_0 = this.state_0;
           throw e;
-        }
-         else {
+        } else {
           this.state_0 = this.exceptionState_0;
           this.exception_0 = e;
         }
@@ -641,8 +620,7 @@
     var edata = (Kotlin.isType(tmp$ = event, MessageEvent) ? tmp$ : throwCCE()).data;
     if (edata && edata.type === 'updateHash') {
       onHashUpdated(edata.value);
-    }
-    return Unit;
+    }return Unit;
   }
   function main(args) {
     var tmp$, tmp$_0;
@@ -762,21 +740,18 @@
         if (Kotlin.isType($receiver, Collection) && $receiver.isEmpty()) {
           any$result = false;
           break any$break;
-        }
-        tmp$ = $receiver.iterator();
+        }tmp$ = $receiver.iterator();
         while (tmp$.hasNext()) {
           var element = tmp$.next();
           if (element.blockDeps.contains_11rb$(ensureNotNull(dep))) {
             any$result = true;
             break any$break;
-          }
-        }
+          }}
         any$result = false;
       }
        while (false);
       return any$result;
-    }
-    return false;
+    }return false;
   };
   DependencyChecker.$metadata$ = {
     kind: Kind_CLASS,
@@ -831,8 +806,7 @@
       var key = 'no_wrapper';
       var value = arrayListOf(['']);
       items.put_xwzc9p$(key, value);
-    }
-    var dependency = ArrayList_init();
+    }var dependency = ArrayList_init();
     var key_0 = 'dependency';
     items.put_xwzc9p$(key_0, dependency);
     tmp$ = features.ALL_FEATURES.iterator();
@@ -842,30 +816,26 @@
       if (get_checked(jQuery(str))) {
         var element = dep.id;
         dependency.add_11rb$(element);
-      }
-    }
+      }}
     var str_0 = '#ktor-engine';
     var ktorEngine = (tmp$_0 = jQuery(str_0).val()) != null ? tmp$_0 : defaultKtorEngine;
     if (ktorEngine != defaultKtorEngine) {
       var key_1 = 'ktor-engine';
       var value_0 = arrayListOf([ktorEngine]);
       items.put_xwzc9p$(key_1, value_0);
-    }
-    var str_1 = '#ktor-version';
+    }var str_1 = '#ktor-version';
     var ktorVersion = (tmp$_1 = jQuery(str_1).val()) != null ? tmp$_1 : defaultKtorVersion;
     if (ktorVersion != defaultKtorVersion) {
       var key_2 = 'ktor-version';
       var value_1 = arrayListOf([ktorVersion]);
       items.put_xwzc9p$(key_2, value_1);
-    }
-    var str_2 = '#project-type';
+    }var str_2 = '#project-type';
     var projectType = (tmp$_2 = jQuery(str_2).val()) != null ? tmp$_2 : ProjectType.Gradle;
     if (projectType != 'gradle') {
       var key_3 = 'project-type';
       var value_2 = arrayListOf([projectType]);
       items.put_xwzc9p$(key_3, value_2);
-    }
-    tmp$_3 = listOf(['server', 'client']).iterator();
+    }tmp$_3 = listOf(['server', 'client']).iterator();
     while (tmp$_3.hasNext()) {
       var kind = tmp$_3.next();
       var id = 'show-only-marked-' + kind + '-dependencies';
@@ -874,8 +844,7 @@
       if (checked) {
         var value_3 = arrayListOf(['']);
         items.put_xwzc9p$(id, value_3);
-      }
-    }
+      }}
     tmp$_4 = listOf([to(artifactGroupId, defaultArtifactGroup), to(artifactNameId, defaultArtifactName), to(artifactVersionId, defaultArtifactVersion)]).iterator();
     while (tmp$_4.hasNext()) {
       var tmp$_7 = tmp$_4.next();
@@ -885,13 +854,11 @@
       if (str_4 != default_0) {
         var value_4 = arrayListOf([str_4]);
         items.put_xwzc9p$(key_4, value_4);
-      }
-    }
+      }}
     window.history.pushState(jsObject([]), document.title, ((tmp$_5 = document.location) != null ? tmp$_5.pathname : null) + '#' + formUrlEncode(items));
     try {
       window.top.postMessage(jsObject([to('type', 'updateHash'), to('value', (tmp$_6 = document.location) != null ? tmp$_6.hash : null)]), '*');
-    }
-     catch (e) {
+    } catch (e) {
       console.error(e);
     }
     var dependencies = new DependencyChecker(ensureNotNull(document.location).hash);
@@ -924,21 +891,18 @@
           if (Kotlin.isType($receiver_0, Collection) && $receiver_0.isEmpty()) {
             any$result = false;
             break any$break;
-          }
-          tmp$_2 = $receiver_0.iterator();
+          }tmp$_2 = $receiver_0.iterator();
           while (tmp$_2.hasNext()) {
             var element_0 = tmp$_2.next();
             if (element_0.blockDeps.contains_11rb$(feature)) {
               any$result = true;
               break any$break;
-            }
-          }
+            }}
           any$result = false;
         }
          while (false);
         tmp$_1 = any$result;
-      }
-      var selected = tmp$_1;
+      }var selected = tmp$_1;
       var indeterminate = features_0.transitive.contains_11rb$(feature);
       selector.prop('indeterminate', indeterminate);
       selector.closest('label').toggleClass('indeterminate', indeterminate).toggleClass('selected', selected);
@@ -947,12 +911,10 @@
   function parseHash(hash) {
     try {
       return formUrlDecode(trim(hash, Kotlin.charArrayOf(35)));
-    }
-     catch (e) {
+    } catch (e) {
       if (Kotlin.isType(e, Throwable)) {
         return emptyMap();
-      }
-       else
+      } else
         throw e;
     }
   }
@@ -985,8 +947,7 @@
         var answer = ArrayList_init();
         destination.put_xwzc9p$(key, answer);
         tmp$_0_0 = answer;
-      }
-       else {
+      } else {
         tmp$_0_0 = value;
       }
       var list = tmp$_0_0;
@@ -1029,8 +990,7 @@
         var tmp$_12;
         if (feature.documentation != null) {
           $receiver_0.append(jQuery('<a />').attr('href', (tmp$_12 = feature.documentation) != null ? tmp$_12 : '').attr('target', '_blank').text('Documentation'));
-        }
-        deps.append(tmp$_10.append(tmp$_11.append($receiver_0)));
+        }deps.append(tmp$_10.append(tmp$_11.append($receiver_0)));
       }
     }
     tmp$_2 = features.iterator();
@@ -1069,13 +1029,11 @@
           default:this.state_0 = 1;
             throw new Error('State Machine Unreachable execution');
         }
-      }
-       catch (e) {
+      } catch (e) {
         if (this.state_0 === 1) {
           this.exceptionState_0 = this.state_0;
           throw e;
-        }
-         else {
+        } else {
           this.state_0 = this.exceptionState_0;
           this.exception_0 = e;
         }
@@ -1171,23 +1129,19 @@
                 console.warn('ADD file: ' + rname);
                 try {
                   console.log(toString(result.data, util.UTF8));
-                }
-                 catch (e_0) {
+                } catch (e_0) {
                   if (Kotlin.isType(e_0, Throwable)) {
                     console.log('<binary file>');
-                  }
-                   else
+                  } else
                     throw e_0;
                 }
-              }
-              this.local$zb.add_w0mhwy$(rname, result.data, void 0, result.mode.mode);
+              }this.local$zb.add_w0mhwy$(rname, result.data, void 0, result.mode.mode);
             }
 
             var zipBytes = this.local$zb.toByteArray();
             if (!this.local$dev) {
               generateBrowserFile('ktor-sample-' + this.local$projectType + '-' + this.local$ktorEngine + '-' + this.local$artifactGroup + '-' + this.local$artifactName + '.zip', zipBytes);
             }
-
             this.exceptionState_0 = 4;
             this.state_0 = 3;
             continue;
@@ -1197,8 +1151,7 @@
             if (Kotlin.isType(e, Throwable)) {
               console.error(e);
               window.alert("Couldn't generate ZIP. Reason: " + e);
-            }
-             else
+            } else
               throw e;
             this.state_0 = 3;
             continue;
@@ -1209,13 +1162,11 @@
           default:this.state_0 = 4;
             throw new Error('State Machine Unreachable execution');
         }
-      }
-       catch (e) {
+      } catch (e) {
         if (this.state_0 === 4) {
           this.exceptionState_0 = this.state_0;
           throw e;
-        }
-         else {
+        } else {
           this.state_0 = this.exceptionState_0;
           this.exception_0 = e;
         }
@@ -1260,13 +1211,11 @@
           default:this.state_0 = 1;
             throw new Error('State Machine Unreachable execution');
         }
-      }
-       catch (e) {
+      } catch (e) {
         if (this.state_0 === 1) {
           this.exceptionState_0 = this.state_0;
           throw e;
-        }
-         else {
+        } else {
           this.state_0 = this.exceptionState_0;
           this.exception_0 = e;
         }
@@ -1312,13 +1261,11 @@
           default:this.state_0 = 1;
             throw new Error('State Machine Unreachable execution');
         }
-      }
-       catch (e) {
+      } catch (e) {
         if (this.state_0 === 1) {
           this.exceptionState_0 = this.state_0;
           throw e;
-        }
-         else {
+        } else {
           this.state_0 = this.exceptionState_0;
           this.exception_0 = e;
         }
@@ -1340,8 +1287,7 @@
     if (get_isLocalEnv()) {
       var str = '#buildButtonDev';
       jQuery(str).removeAttr('disabled').css('display', 'inline-block').on('click', registerBuildButton$lambda);
-    }
-    var str_0 = '#buildButton';
+    }var str_0 = '#buildButton';
     jQuery(str_0).removeAttr('disabled').on('click', registerBuildButton$lambda_0);
   }
   function handleFiltering() {
@@ -1354,15 +1300,13 @@
       var tmp$ = closure$filter.length === 0;
       if (!tmp$) {
         tmp$ = contains(jQuery(element).text().toLowerCase(), closure$filter);
-      }
-      var textMatches = tmp$;
+      }var textMatches = tmp$;
       var checked = get_checked(checkbox);
       var indeterminate = jQuery(element).hasClass('indeterminate');
       var visible = closure$onlyMarked ? (checked || indeterminate) && textMatches : textMatches;
       if (visible) {
         jQuery(element).show();
-      }
-       else {
+      } else {
         jQuery(element).hide();
       }
       return Unit;
@@ -1415,9 +1359,7 @@
         if ((e.key === 'f' || e.key === 's') && contains(filterId, 'server') || (e.key === 'c' && contains(filterId, 'client'))) {
           dependencyFilter != null ? dependencyFilter.focus() : null;
           e.preventDefault();
-        }
-      }
-      if (active === dependencyFilter) {
+        }}if (active === dependencyFilter) {
         var str = '.artifact.active:visible';
         var current = jQuery(str);
         switch (e.key) {
@@ -1438,8 +1380,7 @@
             if (equals(count, 0)) {
               var str_0 = '.artifact:visible';
               next = jQuery(str_0).first();
-            }
-             else {
+            } else {
               next = current;
               do {
                 next = up ? next.prev('.artifact') : next.next('.artifact');
@@ -1450,26 +1391,22 @@
                 if (up) {
                   var str_1 = '.artifact:visible';
                   tmp$_2 = jQuery(str_1).last();
-                }
-                 else {
+                } else {
                   var str_2 = '.artifact:visible';
                   tmp$_2 = jQuery(str_2).first();
                 }
                 next = tmp$_2;
-              }
-            }
+              }}
 
             next.addClass('active');
             current.removeClass('active');
             if (numberToInt(next.length) >= 1) {
               (tmp$_1 = next[0]) != null ? (tmp$_1.scrollIntoView(jsObject([to('behavior', 'instant'), to('block', 'center'), to('inline', 'center')])), Unit) : null;
             }
-
             e.preventDefault();
             break;
         }
-      }
-    }
+      }}
     return Unit;
   }
   function registerKeyboardUsability() {

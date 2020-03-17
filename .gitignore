@@ -17,3 +17,5 @@ package-lock.json
 
 *.js.map
 *.meta.js
+
+local.properties
