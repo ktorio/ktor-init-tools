@@ -17,10 +17,6 @@ class ParameterRenameProcessor : RenamePsiElementProcessor() {
                 || element is LocationsPatternPsiElement.ParameterNameElement
     }
 
-    override fun findReferences(element: PsiElement): MutableCollection<PsiReference> {
-        return super.findReferences(element)
-    }
-
     override fun substituteElementToRename(element: PsiElement, editor: Editor?): PsiElement? {
         if (element is LocationsPatternPsiElement.ParameterNameElement) {
             return element.parentOfType<LocationsPatternPsiElement.SubstitutionElement>()
@@ -30,22 +26,6 @@ class ParameterRenameProcessor : RenamePsiElementProcessor() {
         }
 
         return super.substituteElementToRename(element, editor)
-    }
-
-    override fun findReferences(
-        element: PsiElement,
-        searchInCommentsAndStrings: Boolean
-    ): MutableCollection<PsiReference> {
-        return super.findReferences(element, searchInCommentsAndStrings)
-    }
-
-    override fun renameElement(
-        element: PsiElement,
-        newName: String,
-        usages: Array<out UsageInfo>,
-        listener: RefactoringElementListener?
-    ) {
-        super.renameElement(element, newName, usages, listener)
     }
 
     override fun prepareRenaming(element: PsiElement, newName: String, allRenames: MutableMap<PsiElement, String>) {

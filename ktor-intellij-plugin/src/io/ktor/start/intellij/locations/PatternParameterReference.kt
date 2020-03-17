@@ -23,7 +23,9 @@ class PatternParameterReference(
                 ?.findDescendantOfType<KtStringTemplateExpression>()
                 ?.let { manager.getInjectedPsiFiles(it)?.singleOrNull()?.first as? PatternFileImpl }
 
-            file?.parameterNames?.filter { it.text == propertyName }.orEmpty()
+            file?.parameterNames?.filter { it.text == propertyName }
+                ?.mapNotNull { it.parentOfType<LocationsPatternPsiElement.SubstitutionElement>() }
+                .orEmpty()
         }.map { PsiElementResolveResult(it) }.toTypedArray()
     }
 

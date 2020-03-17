@@ -253,7 +253,9 @@
                 forClass="io.ktor.start.intellij.locations.LocationsPatternPsiElement.ParameterNameElement"
                 implementationClass="io.ktor.start.intellij.locations.ManipulatorImpl"/>
 
-        <!--        <renameInputValidator implementation=""-->
+        <lang.elementManipulator
+            forClass="io.ktor.start.intellij.locations.LocationsPatternPsiElement.SubstitutionElement"
+            implementationClass="io.ktor.start.intellij.locations.SubstitutionManipulatorImpl" />
 
         <renamePsiElementProcessor
                 implementation="io.ktor.start.intellij.locations.ParameterRenameProcessor"/>
@@ -266,6 +268,7 @@
         <!-- non dynamic -->
         <renameHandler implementation="io.ktor.start.intellij.locations.ParameterNameInPlaceRenameHandler"/>
 
+        <!-- non dynamic -->
         <codeInsight.lineMarkerProvider
                 implementationClass="io.ktor.start.intellij.locations.LocationsLineMarker"
                 language="kotlin"/>
