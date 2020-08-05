@@ -704,6 +704,7 @@ fun SwaggerModel.GenType?.toDefaultUntyped(path: List<String> = listOf(), defaul
         is SwaggerModel.DateTimeType -> ""
         is SwaggerModel.Int32Type -> Dynamic { default.tryInt ?: 0 }
         is SwaggerModel.DoubleType -> Dynamic { default.tryDouble ?: 0.0 }
+        is SwaggerModel.FloatType -> Dynamic { default.tryFloat ?: 0.0f }
         is SwaggerModel.Int64Type -> Dynamic { default.tryLong ?: 0L }
         is SwaggerModel.BoolType -> Dynamic { default.tryBool ?: false }
         is SwaggerModel.ArrayType -> listOf<Any?>().toMutableList()

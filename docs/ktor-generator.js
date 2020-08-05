@@ -16392,21 +16392,24 @@
     } else if (Kotlin.isType($receiver, SwaggerModel$DoubleType)) {
       var tmp$_2;
       tmp$_0 = (tmp$_2 = package$util.DynamicAccess.get_tryDouble_mzud1t$(default_0)) != null ? tmp$_2 : 0.0;
-    } else if (Kotlin.isType($receiver, SwaggerModel$Int64Type)) {
+    } else if (Kotlin.isType($receiver, SwaggerModel$FloatType)) {
       var tmp$_3;
-      tmp$_0 = (tmp$_3 = package$util.DynamicAccess.get_tryLong_mzud1t$(default_0)) != null ? tmp$_3 : L0;
-    } else if (Kotlin.isType($receiver, SwaggerModel$BoolType)) {
+      tmp$_0 = (tmp$_3 = package$util.DynamicAccess.get_tryFloat_mzud1t$(default_0)) != null ? tmp$_3 : 0.0;
+    } else if (Kotlin.isType($receiver, SwaggerModel$Int64Type)) {
       var tmp$_4;
-      tmp$_0 = (tmp$_4 = package$util.DynamicAccess.get_tryBool_mzud1t$(default_0)) != null ? tmp$_4 : false;
+      tmp$_0 = (tmp$_4 = package$util.DynamicAccess.get_tryLong_mzud1t$(default_0)) != null ? tmp$_4 : L0;
+    } else if (Kotlin.isType($receiver, SwaggerModel$BoolType)) {
+      var tmp$_5;
+      tmp$_0 = (tmp$_5 = package$util.DynamicAccess.get_tryBool_mzud1t$(default_0)) != null ? tmp$_5 : false;
     } else if (Kotlin.isType($receiver, SwaggerModel$ArrayType)) {
       tmp$_0 = toMutableList(emptyList());
     } else if (Kotlin.isType($receiver, SwaggerModel$MapLikeGenType)) {
       var $receiver_0 = $receiver.fields;
       var destination = ArrayList_init_0($receiver_0.size);
-      var tmp$_5;
-      tmp$_5 = $receiver_0.entries.iterator();
-      while (tmp$_5.hasNext()) {
-        var item = tmp$_5.next();
+      var tmp$_6;
+      tmp$_6 = $receiver_0.entries.iterator();
+      while (tmp$_6.hasNext()) {
+        var item = tmp$_6.next();
         destination.add_11rb$(to(item.key, toDefaultUntyped(item.value.type, plus_0(path, item.key), item.value.default)));
       }
       tmp$_0 = toMutableMap(toMap(destination));
