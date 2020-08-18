@@ -4102,7 +4102,8 @@
     this.V130 = new KtorVersion('1.3.0', '1.3.61');
     this.V131 = new KtorVersion('1.3.1', '1.3.61');
     this.V132 = new KtorVersion('1.3.2', '1.3.70');
-    this.ALL = [this.V101, this.V115, this.V126, this.V130, this.V132];
+    this.V140 = new KtorVersion('1.4.0', '1.4.0');
+    this.ALL = [this.V101, this.V115, this.V126, this.V130, this.V132, this.V140];
     this.LAST = this.V132;
     this.LAST_EAP = this.V132;
     var $receiver = this.ALL;
