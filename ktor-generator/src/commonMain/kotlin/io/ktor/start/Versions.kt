@@ -38,8 +38,9 @@ object Versions {
     val V130 = KtorVersion(version = "1.3.0", kotlinVersion = "1.3.61")
     val V131 = KtorVersion(version = "1.3.1", kotlinVersion = "1.3.61")
     val V132 = KtorVersion(version = "1.3.2", kotlinVersion = "1.3.70")
+    val V140 = KtorVersion(version = "1.4.0", kotlinVersion = "1.4.0")
 
-    val ALL = arrayOf(V101, V115, V126, V130, V132)
+    val ALL = arrayOf(V101, V115, V126, V130, V132, V140)
     val LAST = V132
     val LAST_EAP = V132
 
