@@ -1,0 +1,30 @@
+@import io.ktor.generator.core.Project
+@import io.ktor.generator.core.features.KtorFeature
+@import io.ktor.generator.core.features.FeatureInstallReceipt
+@import io.ktor.generator.core.features.Features
+@import io.ktor.generator.core.features.CodeTemplate
+
+@args (
+    Project project,
+    Features features
+)
+
+package @project.getGroupName()
+
+@with (imports = features.getAllImports()) {
+    @for (pkg: imports) {
+import @pkg
+    }
+}
+
+class ApplicationTest {
+    @for (feature: features) {
+        @with (templates = feature.getExtraTestTemplates()) {
+            @for (template: templates) {
+                @if (template.getPosition() == CodeTemplate.Position.TEST_FUNCTION) {
+    @template.getText()
+                }
+            }
+        }
+    }
+}

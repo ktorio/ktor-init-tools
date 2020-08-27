@@ -1,0 +1,76 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath "com.fizzed:rocker-gradle-plugin:1.3.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'com.fizzed.rocker' version '1.3.0'
+}
+
+sourceSets {
+    main {
+        kotlin {
+            srcDir("src/main/kotlin")
+        }
+        rocker {
+            srcDir("src/main/kotlin/io/ktor/generator/core/templating")
+        }
+    }
+    test {
+        kotlin {
+            srcDir("src/test/kotlin")
+        }
+    }
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.fizzed:rocker-runtime:1.3.0'
+    compile 'com.fizzed:rocker-compiler:1.3.0'
+    testCompile group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: '1.4.0'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+rocker {
+    skip false
+    // with the name of the source set. The value is passed through project.file().
+    outputBaseDirectory = "$buildDir/generated-src/rocker"
+    // Base directory for the directory where the hot reload feature
+    // will (re)compile classes to at runtime (and where `rocker-compiler.conf`
+    // is generated, which is used by RockerRuntime.getInstance().setReloading(true)).
+    // The actual target is a sub directory with the name of the source set.
+    // The value is passed through project.file().
+    classBaseDirectory = "$buildDir/classes"
+    failOnError true
+    skipTouch true
+    touchFile ""
+    javaVersion '1.8'
+    extendsClass null
+    extendsModelClass null
+    optimize true
+    discardLogicWhitespace = true
+    targetCharset null
+    suffixRegex null
+    postProcessing = []
+    markAsGenerated null
+}

@@ -1,0 +1,19 @@
+@import io.ktor.generator.core.Project
+@import io.ktor.generator.core.features.KtorFeature
+@import io.ktor.generator.core.features.FeatureInstallReceipt
+@import io.ktor.generator.core.features.CodeTemplate
+
+@args (
+    Project project,
+    KtorFeature feature
+)
+
+package @project.getGroupName()
+
+@with (templates = feature.getExtraTemplates()) {
+    @for (template: templates) {
+        @if (template.getPosition() == CodeTemplate.Position.SEPARATE_FILE) {
+    @template.getText()
+        }
+    }
+}

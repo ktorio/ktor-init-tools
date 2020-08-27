@@ -1,0 +1,17 @@
+@import io.ktor.generator.core.Project
+
+@args (
+    Project project,
+)
+
+ktor {
+    deployment {
+        port = 8080
+        port = ${?PORT}
+    }
+    application {
+        @with (groupName = project.getGroupName()) {
+            modules = [ @raw(groupName)@raw(".ApplicationKt.module") ]
+        }
+    }
+}

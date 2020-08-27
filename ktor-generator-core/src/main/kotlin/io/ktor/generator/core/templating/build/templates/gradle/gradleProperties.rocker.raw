@@ -1,0 +1,7 @@
+@import io.ktor.generator.core.Project
+
+@args (Project project)
+
+ktor_version=@project.getKtorVersion()
+kotlin_version=@project.getKotlinVersion()
+kotlin.code.style=official

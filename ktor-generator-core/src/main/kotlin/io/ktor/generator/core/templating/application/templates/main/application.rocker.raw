@@ -1,0 +1,52 @@
+@import io.ktor.generator.core.Project
+@import io.ktor.generator.core.features.KtorFeature
+@import io.ktor.generator.core.features.FeatureInstallReceipt
+@import io.ktor.generator.core.features.Features
+@import io.ktor.generator.core.features.CodeTemplate
+
+@args (
+    Project project,
+    Features features
+)
+
+package @project.getGroupName()
+
+@with (imports = features.getImports()) {
+    @for (pkg: imports) {
+import @pkg
+    }
+}
+
+fun main(args: Array<String>): Unit =
+@with(mainClassName = project.getMainClassName()) {
+    @raw(mainClassName)@raw("(args)")
+}
+
+@@Suppress("unused") // Referenced in application.conf
+@@kotlin.jvm.JvmOverloads
+fun Application.module(testing: Boolean = false) {
+    @for (feature: features) {
+        @if (feature.getInstallBlock() != null) {
+    @feature.getInstallBlock()
+        }
+    }
+    @for (feature: features) {
+        @with (templates = feature.getExtraTemplates()) {
+            @for (template: templates) {
+                @if (template.getPosition() == CodeTemplate.Position.INSIDE_APPLICATION_MODULE) {
+    @template.getText()
+                }
+            }
+        }
+    }
+}
+
+@for (feature: features) {
+    @with (templates = feature.getExtraTemplates()) {
+        @for (template: templates) {
+            @if (template.getPosition() == CodeTemplate.Position.OUTSIDE_APPLICATION_MODULE) {
+    @template.getText()
+            }
+        }
+    }
+}

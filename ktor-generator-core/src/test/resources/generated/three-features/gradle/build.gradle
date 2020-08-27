@@ -1,0 +1,42 @@
+plugins {
+    id 'application'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.0'
+}
+
+group "io.ktor.start"
+version "0.0.1"
+mainClassName = "io.ktor.server.netty.EngineMain"
+
+repositories {
+    mavenLocal()
+    jcenter()
+    maven { url: "https://kotlin.bintray.com/ktor" }
+}
+
+dependencies {
+    implementation "io.ktor:ktor-locations:$ktor_version"
+    implementation "io.ktor:ktor-server-netty:$ktor_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "ch.qos.logback:logback-classic:1.2.1"
+    implementation "io.ktor:ktor-server-core:$ktor_version"
+    testImplementation "io.ktor:ktor-server-tests:$ktor_version"
+}
+
+sourceSets {
+    main {
+        kotlin {
+            srcDirs 'src/main/kotlin'
+        }
+        resources {
+            srcDirs 'resources/main'
+        }
+    }
+    test {
+        kotlin {
+            srcDirs 'src/test/kotlin'
+        }
+        resources {
+            srcDirs 'resources/test'
+        }
+    }
+}

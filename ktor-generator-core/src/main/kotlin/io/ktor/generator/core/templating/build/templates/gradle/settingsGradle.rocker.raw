@@ -1,0 +1,5 @@
+@import io.ktor.generator.core.Project
+
+@args (Project project)
+
+rootProject.name = "@project.getName()"

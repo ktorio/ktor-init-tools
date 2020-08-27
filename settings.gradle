@@ -18,6 +18,4 @@ rootProject.name = 'ktor-init-tools'
 
 enableFeaturePreview('GRADLE_METADATA')
 
-include "ktor-intellij-plugin"
-include "ktor-generator-website"
-include "ktor-generator"
+include "ktor-generator-core"

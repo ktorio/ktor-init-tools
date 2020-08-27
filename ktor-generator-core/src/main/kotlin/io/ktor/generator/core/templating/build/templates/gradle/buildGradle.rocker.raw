@@ -1,0 +1,80 @@
+@import io.ktor.generator.core.Project
+@import io.ktor.generator.core.features.KtorFeature
+@import io.ktor.generator.core.features.FeatureInstallReceipt
+@import io.ktor.generator.core.features.Features
+
+@args (
+    Project project,
+    Features features
+)
+
+plugins {
+    id 'application'
+    id 'org.jetbrains.kotlin.jvm' version '@project.getKotlinVersion()'
+    @with (requiredPlugins = features.getAllGradlePlugins()) {
+        @for (plugin: requiredPlugins) {
+            @if (plugin.getVersion() != null) {
+    id "@plugin.getId()" version "@plugin.getVersion()"
+            } else {
+    id "@plugin.getId()"
+            }
+        }
+    }
+}
+
+group "@project.getGroupName()"
+version "0.0.1"
+mainClassName = "@project.getMainClassName()"
+
+repositories {
+    @with (repos = features.getAllGradleRepositoryFunctions()) {
+        @for (fun: repos) {
+    @raw(fun)()
+        }
+    }
+    @with (repos = features.getAllGradleRepositoryUrls()) {
+        @for (url: repos) {
+    maven { url: "@url" }
+        }
+    }
+}
+
+dependencies {
+    @with (dependencies = features.getGradleDependencies()) {
+        @for (dependency: dependencies) {
+            @if (dependency.getVersion() != null) {
+    implementation "@dependency.getGroup():@dependency.getArtifact():@dependency.getVersion().getGradleFormat()"
+            } else {
+    implementation "@dependency.getGroup():@dependency.getArtifact()"
+            }
+        }
+    }
+    @with (dependencies = features.getTestGradleDependencies()) {
+        @for (dependency: dependencies) {
+            @if (dependency.getVersion() != null) {
+    testImplementation "@dependency.getGroup():@dependency.getArtifact():@dependency.getVersion().getGradleFormat()"
+            } else {
+    testImplementation "@dependency.getGroup():@dependency.getArtifact()"
+            }
+        }
+    }
+}
+
+sourceSets {
+    main {
+        kotlin {
+            srcDirs 'src/main/kotlin'
+        }
+        resources {
+            srcDirs 'resources/main'
+        }
+    }
+    test {
+        kotlin {
+            srcDirs 'src/test/kotlin'
+        }
+        resources {
+            srcDirs 'resources/test'
+        }
+    }
+}
