@@ -27,7 +27,7 @@ object DataConversionFeature : ServerFeature(ApplicationKt) {
     override val id = "data-conversion"
     override val title = "DataConversion"
     override val description = "Allows to serialize and deserialize a list of values (used by the Locations feature)"
-    override val documentation = "https://ktor.io/servers/features/data-conversion.html"
+    override val documentation = "https://ktor.io/docs/data-conversion.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")

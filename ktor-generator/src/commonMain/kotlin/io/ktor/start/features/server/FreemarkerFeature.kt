@@ -28,7 +28,7 @@ object FreemarkerFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val id = "freemarker"
     override val title = "Freemarker"
     override val description = "Serve HTML content using Apache's FreeMarker template engine"
-    override val documentation = "https://ktor.io/features/templates/freemarker.html"
+    override val documentation = "https://ktor.io/docs/freemarker.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("freemarker.cache.*")

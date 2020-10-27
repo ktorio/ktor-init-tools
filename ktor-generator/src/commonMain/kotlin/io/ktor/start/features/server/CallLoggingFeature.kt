@@ -27,7 +27,7 @@ object CallLoggingFeature : ServerFeature(ApplicationKt) {
     override val id = "call-logging"
     override val title = "CallLogging"
     override val description = "Logs client requests"
-    override val documentation = "https://ktor.io/features/call-logging.html"
+    override val documentation = "https://ktor.io/docs/call-logging.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")

@@ -28,7 +28,7 @@ object AuthDigestFeature : ServerFeature(ApplicationKt, AuthFeature, RoutingFeat
     override val id = "auth-digest"
     override val title = "Authentication Digest"
     override val description = "Handle Digest authentication"
-    override val documentation = "https://ktor.io/features/authentication/digest.html"
+    override val documentation = "https://ktor.io/docs/digest.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.util.*")

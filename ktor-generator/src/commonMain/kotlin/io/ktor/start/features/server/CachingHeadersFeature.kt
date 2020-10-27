@@ -27,7 +27,7 @@ object CachingHeadersFeature : ServerFeature(ApplicationKt) {
     override val id = "auto-head-response"
     override val title = "AutoHeadResponse"
     override val description = "Provide responses to HEAD requests for existing routes that have the GET verb defined"
-    override val documentation = "https://ktor.io/features/autoheadresponse.html"
+    override val documentation = "https://ktor.io/docs/autoheadresponse.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")

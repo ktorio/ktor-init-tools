@@ -29,7 +29,7 @@ object ContentNegotiationFeature : ServerFeature(ApplicationKt) {
     override val id = "content-negotiation"
     override val title = "ContentNegotiation"
     override val description = "Provides automatic content conversion according to Content-Type and Accept headers."
-    override val documentation = "https://ktor.io/features/content-negotiation.html"
+    override val documentation = "https://ktor.io/docs/content-negotiation.html"
 
     val BLOCK = newSlot("BLOCK")
 

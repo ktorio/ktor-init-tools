@@ -27,7 +27,7 @@ object StatusPagesFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val id = "status-pages"
     override val title = "Status Pages"
     override val description = "Allow to respond to thrown exceptions."
-    override val documentation = "https://ktor.io/features/status-pages.html"
+    override val documentation = "https://ktor.io/docs/status-pages.html"
 
     val CUSTOM_STATUS_PAGES = newSlot("CUSTOM_STATUS_PAGES")
 

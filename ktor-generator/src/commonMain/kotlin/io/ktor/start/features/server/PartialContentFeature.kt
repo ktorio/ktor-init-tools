@@ -28,7 +28,7 @@ object PartialContentFeature : ServerFeature(ApplicationKt) {
     override val title = "PartialContent"
     override val description = "Handles requests with the Range header. " +
             "Generating Accept-Ranges and the Content-Range headers and slicing the served content when required."
-    override val documentation = "https://ktor.io/features/partial-content.html"
+    override val documentation = "https://ktor.io/docs/partial-content.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")

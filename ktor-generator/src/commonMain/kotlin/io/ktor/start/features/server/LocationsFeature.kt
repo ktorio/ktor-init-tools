@@ -27,7 +27,7 @@ object LocationsFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val id = "ktor-locations"
     override val title = "Locations"
     override val description = "Allows to define route locations in a typed way"
-    override val documentation = "https://ktor.io/features/locations.html"
+    override val documentation = "https://ktor.io/docs/features-locations.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.locations.*")

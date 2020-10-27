@@ -14,7 +14,7 @@ object WebjarsFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val id = "webjars"
     override val title = "Webjars"
     override val description = "Allows you to package your assets such as javascript libraries and css as part of your uber-jar."
-    override val documentation = "https://ktor.io/features/webjars.html"
+    override val documentation = "https://ktor.io/docs/webjars.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.webjars.*")

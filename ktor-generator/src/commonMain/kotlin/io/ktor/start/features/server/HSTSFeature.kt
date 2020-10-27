@@ -27,7 +27,7 @@ object HSTSFeature : ServerFeature(ApplicationKt) {
     override val id = "hsts"
     override val title = "HSTS"
     override val description = "Enable HTTP Strict Transport Security (HSTS)"
-    override val documentation = "https://ktor.io/features/hsts.html"
+    override val documentation = "https://ktor.io/docs/hsts.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")

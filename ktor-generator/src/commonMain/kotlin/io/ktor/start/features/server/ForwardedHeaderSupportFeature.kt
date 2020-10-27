@@ -27,7 +27,7 @@ object ForwardedHeaderSupportFeature : ServerFeature(ApplicationKt) {
     override val id = "forwarded-header-support"
     override val title = "ForwardedHeaderSupport"
     override val description = "This feature allows you to handle reverse proxy headers to get information about the original request when it’s behind a proxy."
-    override val documentation = "https://ktor.io/features/forward-headers.html"
+    override val documentation = "https://ktor.io/docs/forward-headers.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")

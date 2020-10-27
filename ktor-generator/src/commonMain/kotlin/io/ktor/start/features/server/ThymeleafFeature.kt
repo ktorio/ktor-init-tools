@@ -16,7 +16,7 @@ object ThymeleafFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val id = "thymeleaf"
     override val title = "Thymeleaf"
     override val description = "Serve HTML content using Thymeleaf template engine"
-    override val documentation = "https://ktor.io/features/templates/thymeleaf.html"
+    override val documentation = "https://ktor.io/docs/thymeleaf.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.thymeleaf.Thymeleaf")

@@ -26,5 +26,5 @@ object MetricsFeature : ServerFeature(ApplicationKt) {
     override val id = "ktor-metrics"
     override val title = "Metrics"
     override val description = "Adds supports for monitoring several metrics"
-    override val documentation = "https://ktor.io/features/metrics.html"
+    override val documentation = "https://ktor.io/docs/features-metrics.html"
 }

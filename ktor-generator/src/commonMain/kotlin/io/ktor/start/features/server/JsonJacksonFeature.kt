@@ -32,7 +32,7 @@ object JsonJacksonFeature : ServerFeature(ApplicationKt,
     override val id = "ktor-jackson"
     override val title = "Jackson"
     override val description = "Handles JSON serialization using Jackson library"
-    override val documentation = "https://ktor.io/features/content-negotiation/jackson.html"
+    override val documentation = "https://ktor.io/docs/content-negotiation-jackson.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("com.fasterxml.jackson.databind.*")

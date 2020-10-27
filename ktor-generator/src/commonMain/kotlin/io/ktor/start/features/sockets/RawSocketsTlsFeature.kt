@@ -29,7 +29,7 @@ object RawSocketsTlsFeature : ServerFeature(ApplicationKt, RawSocketsFeature) {
     override val title = "Raw Secure SSL/TLS Sockets"
     override val description =
         "Adds Raw Socket support for listening and connecting to tcp and udp sockets with secure sockets"
-    override val documentation = "https://ktor.io/servers/raw-sockets.html#secure"
+    override val documentation = "https://ktor.io/docs/servers-raw-sockets.html#secure"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.network.tls.*")

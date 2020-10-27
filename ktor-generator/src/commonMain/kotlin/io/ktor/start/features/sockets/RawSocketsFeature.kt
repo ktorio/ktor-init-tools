@@ -28,7 +28,7 @@ object RawSocketsFeature : ServerFeature(ApplicationKt) {
     override val id = "ktor-network"
     override val title = "Raw Sockets"
     override val description = "Adds Raw Socket support for listening and connecting to tcp and udp sockets"
-    override val documentation = "https://ktor.io/servers/raw-sockets.html"
+    override val documentation = "https://ktor.io/docs/servers-raw-sockets.html"
 
     val SERVER_SOCKET = newSlot("SERVER_SOCKET")
     val CLIENT_SOCKET = newSlot("CLIENT_SOCKET")

@@ -13,7 +13,7 @@ object CoreClientEngine : ClientEngine(ApplicationKt) {
     override val id = "ktor-client-core"
     override val title = "HttpClient Engine"
     override val description = "Core of the HttpClient. Required for libraries."
-    override val documentation = "https://ktor.io/clients/http-client.html"
+    override val documentation = "https://ktor.io/docs/clients-index.html"
 
     override val artifacts: List<String> by lazy {
         listOf(
@@ -46,7 +46,7 @@ object ApacheClientEngine : ClientEngine(CoreClientEngine) {
     override val id: String = "ktor-client-apache"
     override val title = "Apache HttpClient Engine"
     override val description = "Engine for the Ktor HttpClient using Apache. Supports HTTP 1.x and HTTP 2.0."
-    override val documentation = "https://ktor.io/clients/http-client.html#apache"
+    override val documentation = "https://ktor.io/docs/http-client-engines.html#apache"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.engine.apache.*")
@@ -58,7 +58,7 @@ object CioClientEngine : ClientEngine(CoreClientEngine) {
     override val id: String = "ktor-client-cio"
     override val title = "CIO HttpClient Engine"
     override val description = "Engine for the Ktor HttpClient using CIO (Corroutine I/O). Only supports HTTP 1.x."
-    override val documentation = "https://ktor.io/clients/http-client.html#cio"
+    override val documentation = "https://ktor.io/docs/http-client-engines.html#cio"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.engine.cio.*")
@@ -70,7 +70,7 @@ object JettyClientEngine : ClientEngine(CoreClientEngine) {
     override val id: String = "ktor-client-jetty"
     override val title = "Jetty HttpClient Engine"
     override val description = "Engine for the Ktor HttpClient using Jetty. Only supports HTTP 2.x."
-    override val documentation = "https://ktor.io/clients/http-client.html#jetty"
+    override val documentation = "https://ktor.io/docs/http-client-engines.html#jetty"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.engine.jetty.*")
@@ -82,7 +82,7 @@ object MockClientEngine : ClientEngine(CoreClientEngine, ApplicationTestKt) {
     override val id: String = "ktor-client-mock"
     override val title = "Mock HttpClient Engine"
     override val description = "Engine for using in tests to simulate HTTP responses programmatically."
-    override val documentation = "https://ktor.io/clients/http-client.html#mock"
+    override val documentation = "https://ktor.io/docs/http-client-engines.html#mockengine"
 
     override val artifacts = listOf<String>()
     override val testArtifacts = listOf("io.ktor:ktor-client-mock:\$ktor_version",

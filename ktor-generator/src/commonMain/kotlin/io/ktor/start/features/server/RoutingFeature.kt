@@ -27,7 +27,7 @@ object RoutingFeature : ServerFeature(ApplicationKt, ApplicationTestKt) {
     override val id = "routing"
     override val title = "Routing"
     override val description = "Allows to define structured routes and associated handlers."
-    override val documentation = "https://ktor.io/features/routing.html"
+    override val documentation = "https://ktor.io/docs/routing.html"
     val BLOCK = newSlot("BLOCK")
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {

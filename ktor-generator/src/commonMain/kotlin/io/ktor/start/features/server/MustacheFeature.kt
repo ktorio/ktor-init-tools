@@ -16,7 +16,7 @@ object MustacheFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val id = "mustache"
     override val title = "Mustache"
     override val description = "Serve HTML content using Mustache template engine"
-    override val documentation = "https://ktor.io/features/templates/mustache.html"
+    override val documentation = "https://ktor.io/docs/mustache.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("com.github.mustachejava.DefaultMustacheFactory")

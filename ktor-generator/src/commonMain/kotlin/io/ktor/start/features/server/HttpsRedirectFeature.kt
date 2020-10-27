@@ -27,7 +27,7 @@ object HttpsRedirectFeature : ServerFeature(ApplicationKt) {
     override val id = "https-redirect"
     override val title = "HttpsRedirect"
     override val description = "All the affected HTTP calls perform a redirect to its HTTPS counterpart before processing the call"
-    override val documentation = "https://ktor.io/features/https-redirect.html"
+    override val documentation = "https://ktor.io/docs/https-redirect.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")

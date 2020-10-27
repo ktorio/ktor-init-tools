@@ -27,7 +27,7 @@ object CompressionFeature : ServerFeature(ApplicationKt) {
     override val id = "compression"
     override val title = "Compression"
     override val description = "Compress outgoing content using gzip, deflate or custom encoder and thus reduce the size of the response"
-    override val documentation = "https://ktor.io/features/compression.html"
+    override val documentation = "https://ktor.io/docs/compression.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")

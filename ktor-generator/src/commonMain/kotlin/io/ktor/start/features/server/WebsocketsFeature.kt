@@ -27,7 +27,7 @@ object WebsocketsFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val id = "ktor-websockets"
     override val title = "WebSockets"
     override val description = "Adds WebSockets support for bidirectional communication with the client"
-    override val documentation = "https://ktor.io/features/websockets.html"
+    override val documentation = "https://ktor.io/docs/clients-websockets.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.websocket.*")
