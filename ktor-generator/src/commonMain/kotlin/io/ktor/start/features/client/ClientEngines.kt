@@ -85,68 +85,76 @@ object MockClientEngine : ClientEngine(CoreClientEngine, ApplicationTestKt) {
     override val documentation = "https://ktor.io/clients/http-client.html#mock"
 
     override val artifacts = listOf<String>()
-    override val testArtifacts = listOf("io.ktor:ktor-client-mock:\$ktor_version",
-        "io.ktor:ktor-client-mock-jvm:\$ktor_version")
+    override val testArtifacts = listOf(
+        "io.ktor:ktor-client-mock:\$ktor_version",
+        "io.ktor:ktor-client-mock-jvm:\$ktor_version"
+    )
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addTestImport("io.ktor.client.*")
         addTestImport("io.ktor.client.engine.mock.*")
-        addTestImport("kotlinx.coroutines.experimental.*")
-        addTestImport("io.ktor.http.*")
-        addTestImport("kotlinx.coroutines.experimental.io.*")
         addTestImport("io.ktor.client.request.*")
-        addTestImport("io.ktor.client.call.*")
+        addTestImport("io.ktor.client.statement.*")
+        addTestImport("io.ktor.http.*")
+        addTestImport("io.ktor.utils.io.*")
+        addTestImport("kotlinx.coroutines.*")
+        addTestImport("kotlin.test.*")
 
         addTestMethod("testClientMock") {
             +"runBlocking" {
-                if (info.ktorVersion >= Versions.V120) {
-                    +"val client = HttpClient(MockEngine) {"
-                    indent {
-                        +"engine" {
-                            +"addHandler { request -> "
-                            indent{
-                                +"when (request.url.fullPath)" {
-                                    +"\"/\" -> respond("
+                when {
+                    info.ktorVersion >= Versions.V120 -> {
+                        +"val client = HttpClient(MockEngine) {"
+                        indent {
+                            +"engine" {
+                                +"addHandler { request -> "
+                                indent {
+                                    +"when (request.url.fullPath)" {
+                                        +"\"/\" -> respond("
                                         indent {
                                             +"ByteReadChannel(byteArrayOf(1, 2, 3)),"
                                             +"headers = headersOf(\"X-MyHeader\", \"MyValue\")"
                                         }
-                                    +")"
-                                    +"else -> respond(\"Not Found \${request.url.encodedPath}\", HttpStatusCode.NotFound)"
+                                        +")"
+                                        +"else -> respond(\"Not Found \${request.url.encodedPath}\", HttpStatusCode.NotFound)"
+                                    }
                                 }
+                                +"}"
                             }
-                            +"}"
+                            +"expectSuccess = false"
                         }
-                        +"expectSuccess = false"
+                        +"}"
                     }
-                    +"}"
-                } else if (info.ktorVersion >= Versions.V100) {
-                    +"val client = HttpClient(MockEngine {"
-                    indent {
-                        +"if (url.encodedPath == \"/\")" {
-                            +"MockHttpResponse(call, HttpStatusCode.OK, ByteReadChannel(byteArrayOf(1, 2, 3)), headersOf(\"X-MyHeader\", \"MyValue\"))"
+                    info.ktorVersion >= Versions.V100 -> {
+                        +"val client = HttpClient(MockEngine {"
+                        indent {
+                            +"if (url.encodedPath == \"/\")" {
+                                +"MockHttpResponse(call, HttpStatusCode.OK, ByteReadChannel(byteArrayOf(1, 2, 3)), headersOf(\"X-MyHeader\", \"MyValue\"))"
+                            }
+                            appending("else") {
+                                +"responseError(HttpStatusCode.NotFound, \"Not Found \${url.encodedPath}\")"
+                            }
                         }
-                        appending("else") {
-                            +"responseError(HttpStatusCode.NotFound, \"Not Found \${url.encodedPath}\")"
-                        }
-                    }
-                    +"})" {
-                       +"expectSuccess = false"
-                    }
-                } else {
-                    +"val client = HttpClient(MockEngine { call ->"
-                    indent {
-                        +"if (url.encodedPath == \"/\")" {
-                            +"MockHttpResponse(call, HttpStatusCode.OK, ByteReadChannel(byteArrayOf(1, 2, 3)), headersOf(\"X-MyHeader\", \"MyValue\"))"
-                        }
-                        appending("else") {
-                            +"MockHttpResponse(call, HttpStatusCode.NotFound, ByteReadChannel(\"Not Found \${url.encodedPath}\"))"
+                        +"})" {
+                            +"expectSuccess = false"
                         }
                     }
-                    +"})"
+                    else -> {
+                        +"val client = HttpClient(MockEngine { call ->"
+                        indent {
+                            +"if (url.encodedPath == \"/\")" {
+                                +"MockHttpResponse(call, HttpStatusCode.OK, ByteReadChannel(byteArrayOf(1, 2, 3)), headersOf(\"X-MyHeader\", \"MyValue\"))"
+                            }
+                            appending("else") {
+                                +"MockHttpResponse(call, HttpStatusCode.NotFound, ByteReadChannel(\"Not Found \${url.encodedPath}\"))"
+                            }
+                        }
+                        +"})"
+                    }
                 }
 
                 +"assertEquals(byteArrayOf(1, 2, 3).toList(), client.get<ByteArray>(\"/\").toList())"
-                +"assertEquals(\"MyValue\", client.call(\"/\").response.headers[\"X-MyHeader\"])"
+                +"assertEquals(\"MyValue\", client.request<HttpResponse>(\"/\").headers[\"X-MyHeader\"])"
                 +"assertEquals(\"Not Found other/path\", client.get<String>(\"/other/path\"))"
             }
         }
