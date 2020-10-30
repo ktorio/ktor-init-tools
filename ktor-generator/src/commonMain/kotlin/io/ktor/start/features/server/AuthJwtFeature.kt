@@ -27,5 +27,5 @@ object AuthJwtFeature : ServerFeature(ApplicationKt, AuthFeature) {
     override val id = "auth-jwt"
     override val title = "Authentication JWT"
     override val description = "Handle JWT authentication"
-    override val documentation = "https://ktor.io/features/authentication/jwt.html"
+    override val documentation = "https://ktor.io/docs/jwt.html"
 }

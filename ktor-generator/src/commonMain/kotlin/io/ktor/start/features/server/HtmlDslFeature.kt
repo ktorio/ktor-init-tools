@@ -28,7 +28,7 @@ object HtmlDslFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val id = "html-dsl"
     override val title = "HTML DSL"
     override val description = "Generate HTML using Kotlin code like a pure-core template engine"
-    override val documentation = "https://ktor.io/features/templates/html-dsl.html"
+    override val documentation = "https://ktor.io/docs/html-dsl.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.html.*")

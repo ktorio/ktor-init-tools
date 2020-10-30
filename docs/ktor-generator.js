@@ -4228,7 +4228,7 @@
     this.id_z0dcbv$_0 = 'ktor-client-core';
     this.title_vfzv4c$_0 = 'HttpClient Engine';
     this.description_awih0o$_0 = 'Core of the HttpClient. Required for libraries.';
-    this.documentation_9k27km$_0 = 'https://ktor.io/clients/http-client.html';
+    this.documentation_9k27km$_0 = 'https://ktor.io/docs/clients-index.html';
     this.artifacts_nebgnx$_0 = lazy(CoreClientEngine$artifacts$lambda);
     this.CLIENT_USAGE = this.newSlot_pdl1vj$('CLIENT');
     this.CLIENT_FEATURES = this.newSlot_pdl1vj$('CLIENT_FEATURES');
@@ -4344,7 +4344,7 @@
     this.id_jt5mgs$_0 = 'ktor-client-apache';
     this.title_qhya4j$_0 = 'Apache HttpClient Engine';
     this.description_4x0fyx$_0 = 'Engine for the Ktor HttpClient using Apache. Supports HTTP 1.x and HTTP 2.0.';
-    this.documentation_8q7rad$_0 = 'https://ktor.io/clients/http-client.html#apache';
+    this.documentation_8q7rad$_0 = 'https://ktor.io/docs/http-client-engines.html#apache';
   }
   Object.defineProperty(ApacheClientEngine.prototype, 'id', {
     get: function () {
@@ -4387,7 +4387,7 @@
     this.id_z106rz$_0 = 'ktor-client-cio';
     this.title_74e7ma$_0 = 'CIO HttpClient Engine';
     this.description_tan2zy$_0 = 'Engine for the Ktor HttpClient using CIO (Corroutine I/O). Only supports HTTP 1.x.';
-    this.documentation_l414pc$_0 = 'https://ktor.io/clients/http-client.html#cio';
+    this.documentation_l414pc$_0 = 'https://ktor.io/docs/http-client-engines.html#cio';
   }
   Object.defineProperty(CioClientEngine.prototype, 'id', {
     get: function () {
@@ -4430,7 +4430,7 @@
     this.id_wqanbw$_0 = 'ktor-client-jetty';
     this.title_px338j$_0 = 'Jetty HttpClient Engine';
     this.description_sfwk93$_0 = 'Engine for the Ktor HttpClient using Jetty. Only supports HTTP 2.x.';
-    this.documentation_vlhxz9$_0 = 'https://ktor.io/clients/http-client.html#jetty';
+    this.documentation_vlhxz9$_0 = 'https://ktor.io/docs/http-client-engines.html#jetty';
   }
   Object.defineProperty(JettyClientEngine.prototype, 'id', {
     get: function () {
@@ -4473,7 +4473,7 @@
     this.id_541874$_0 = 'ktor-client-mock';
     this.title_28v3i9$_0 = 'Mock HttpClient Engine';
     this.description_w4am8t$_0 = 'Engine for using in tests to simulate HTTP responses programmatically.';
-    this.documentation_6p2g81$_0 = 'https://ktor.io/clients/http-client.html#mock';
+    this.documentation_6p2g81$_0 = 'https://ktor.io/docs/http-client-engines.html#mockengine';
     this.artifacts_50995k$_0 = emptyList();
     this.testArtifacts_o0ceoa$_0 = listOf_0(['io.ktor:ktor-client-mock:$ktor_version', 'io.ktor:ktor-client-mock-jvm:$ktor_version']);
   }
@@ -4685,7 +4685,7 @@
     this.id_2r66xn$_0 = 'ktor-client-http-timeout';
     this.title_w7t6py$_0 = 'HttpTimeout feature HttpClient';
     this.description_nhc6ou$_0 = 'Supports request, connect and socket timeout for the Http Client';
-    this.documentation_ny3krg$_0 = 'https://ktor.io/clients/http-client/features/timeout.html';
+    this.documentation_ny3krg$_0 = 'https://ktor.io/docs/timeout.html';
     this.since_vqnjqc$_0 = Versions_getInstance().V131;
   }
   Object.defineProperty(HttpTimeoutClientFeature.prototype, 'id', {
@@ -4744,7 +4744,7 @@
     this.id_7yu2dq$_0 = 'ktor-client-auth-jvm';
     this.title_fwiqvh$_0 = 'Auth feature HttpClient';
     this.description_vd12tr$_0 = 'Supports authentication for the Http Client';
-    this.documentation_o7l9db$_0 = 'https://ktor.io/clients/http-client/features/auth.html';
+    this.documentation_o7l9db$_0 = 'https://ktor.io/docs/features-auth.html';
   }
   Object.defineProperty(AuthBasicClientFeature.prototype, 'id', {
     get: function () {
@@ -4797,7 +4797,7 @@
     this.id_uzzko7$_0 = 'ktor-client-json-jvm';
     this.title_x2y7i0$_0 = 'Json serialization for HttpClient';
     this.description_n1lz4s$_0 = 'Supports JSON serialization for the Http Client';
-    this.documentation_ua468q$_0 = 'https://ktor.io/clients/http-client/features/json-feature.html';
+    this.documentation_ua468q$_0 = 'https://ktor.io/docs/json-feature.html';
     this.repos_y3b41t$_0 = plus(Kotlin.callGetter(this, ClientFeature.prototype, 'repos'), listOf('https://kotlin.bintray.com/kotlinx'));
     this.artifacts_swhujl$_0 = listOf_0(['io.ktor:ktor-client-json-jvm:$ktor_version', 'io.ktor:ktor-client-gson:$ktor_version']);
   }
@@ -4900,7 +4900,7 @@
     this.id_3ggcs5$_0 = 'ktor-client-logging';
     this.title_3q9ec$_0 = 'Logging feature';
     this.description_o0n9vc$_0 = 'Logging feature for debugging client calls';
-    this.documentation_svsyiy$_0 = 'https://ktor.io/clients/http-client/features/logging.html';
+    this.documentation_svsyiy$_0 = 'https://ktor.io/docs/features-logging.html';
     this.since_kvwdy$_0 = Versions_getInstance().V101;
     this.artifacts_w0af7h$_0 = listOf('io.ktor:ktor-client-logging-jvm:$ktor_version');
   }
@@ -4968,7 +4968,7 @@
     this.id_xgqe86$_0 = 'ktor-client-user-agent';
     this.title_q3kvll$_0 = 'User agent feature';
     this.description_97kgf7$_0 = 'User agent header support feature';
-    this.documentation_2qivbv$_0 = 'https://ktor.io/clients/http-client/features/user-agent.html';
+    this.documentation_2qivbv$_0 = 'https://ktor.io/docs/user-agent.html';
     this.since_qkqil7$_0 = Versions_getInstance().V101;
   }
   Object.defineProperty(UserAgentClientFeature.prototype, 'id', {
@@ -5028,7 +5028,7 @@
     this.id_vy1rrn$_0 = 'ktor-client-websockets';
     this.title_k9eaoc$_0 = 'WebSockets HttpClient support';
     this.description_91aqeo$_0 = 'HttpClient feature to establish bidirectional communication using WebSockets';
-    this.documentation_77pdg2$_0 = 'https://ktor.io/clients/http-client/features/websockets.html';
+    this.documentation_77pdg2$_0 = 'https://ktor.io/docs/http-client-features-websockets.html';
   }
   Object.defineProperty(WebSocketClientFeature.prototype, 'id', {
     get: function () {
@@ -5184,7 +5184,7 @@
     this.id_grpqcf$_0 = 'auth-basic';
     this.title_p2a3pc$_0 = 'Authentication Basic';
     this.description_hdbtwc$_0 = 'Handle Basic authentication';
-    this.documentation_pmttwe$_0 = 'https://ktor.io/features/authentication/basic.html';
+    this.documentation_pmttwe$_0 = 'https://ktor.io/docs/basic.html';
   }
   Object.defineProperty(AuthBasicFeature.prototype, 'group', {
     get: function () {
@@ -5283,7 +5283,7 @@
     this.id_956wr$_0 = 'auth-digest';
     this.title_rw8qqi$_0 = 'Authentication Digest';
     this.description_llyhdq$_0 = 'Handle Digest authentication';
-    this.documentation_114cjg$_0 = 'https://ktor.io/features/authentication/digest.html';
+    this.documentation_114cjg$_0 = 'https://ktor.io/docs/digest.html';
   }
   Object.defineProperty(AuthDigestFeature.prototype, 'group', {
     get: function () {
@@ -5399,7 +5399,7 @@
     this.id_8i5ba9$_0 = 'auth';
     this.title_qx2fuq$_0 = 'Authentication';
     this.description_l2ahya$_0 = 'Handle Basic and Digest HTTP Auth, Form authentication and OAuth 1a and 2';
-    this.documentation_qqc0ww$_0 = 'https://ktor.io/features/authentication.html';
+    this.documentation_qqc0ww$_0 = 'https://ktor.io/docs/features-authentication.html';
     this.BLOCK = this.newSlot_pdl1vj$('BLOCK');
   }
   Object.defineProperty(AuthFeature.prototype, 'group', {
@@ -5486,7 +5486,7 @@
     this.id_8v1dt4$_0 = 'auth-jwt';
     this.title_3edrvr$_0 = 'Authentication JWT';
     this.description_nhrp6d$_0 = 'Handle JWT authentication';
-    this.documentation_em38mv$_0 = 'https://ktor.io/features/authentication/jwt.html';
+    this.documentation_em38mv$_0 = 'https://ktor.io/docs/jwt.html';
   }
   Object.defineProperty(AuthJwtFeature.prototype, 'group', {
     get: function () {
@@ -5543,7 +5543,7 @@
     this.id_wrrgjc$_0 = 'auth-ldap';
     this.title_s1g6nr$_0 = 'Authentication LDAP';
     this.description_4vbylh$_0 = 'Handle LDAP authentication';
-    this.documentation_hgcisn$_0 = 'https://ktor.io/features/authentication/ldap.html';
+    this.documentation_hgcisn$_0 = 'https://ktor.io/docs/ldap.html';
   }
   Object.defineProperty(AuthLdapFeature.prototype, 'group', {
     get: function () {
@@ -5600,7 +5600,7 @@
     this.id_r4wajc$_0 = 'auth-oauth';
     this.title_bzjcyx$_0 = 'Authentication OAuth';
     this.description_v0yqkb$_0 = 'Handle OAuth authentication';
-    this.documentation_tpmiex$_0 = 'https://ktor.io/features/authentication/oauth.html';
+    this.documentation_tpmiex$_0 = 'https://ktor.io/docs/authentication-oauth.html';
   }
   Object.defineProperty(AuthOauthFeature.prototype, 'group', {
     get: function () {
@@ -5656,7 +5656,7 @@
     this.id_uzkfxz$_0 = 'caching-headers';
     this.title_jzj61i$_0 = 'CachingHeaders';
     this.description_fp9286$_0 = 'Send the headers Cache-Control and Expires used by clients and proxies to cache requests';
-    this.documentation_felmrc$_0 = 'https://ktor.io/features/caching-headers.html';
+    this.documentation_felmrc$_0 = 'https://ktor.io/docs/caching-headers.html';
   }
   Object.defineProperty(AutoHeadResponseFeature.prototype, 'repos', {
     get: function () {
@@ -5744,7 +5744,7 @@
     this.id_hzkv3a$_0 = 'cors';
     this.title_rl6mmx$_0 = 'CORS';
     this.description_h31csd$_0 = 'Enable Cross-Origin Resource Sharing (CORS)';
-    this.documentation_f5bx6t$_0 = 'https://ktor.io/features/cors.html';
+    this.documentation_f5bx6t$_0 = 'https://ktor.io/docs/cors.html';
   }
   Object.defineProperty(CORSFeature.prototype, 'repos', {
     get: function () {
@@ -5819,7 +5819,7 @@
     this.id_894vts$_0 = 'auto-head-response';
     this.title_fnvyhr$_0 = 'AutoHeadResponse';
     this.description_vh4wqr$_0 = 'Provide responses to HEAD requests for existing routes that have the GET verb defined';
-    this.documentation_z7p4ld$_0 = 'https://ktor.io/features/autoheadresponse.html';
+    this.documentation_z7p4ld$_0 = 'https://ktor.io/docs/autoheadresponse.html';
   }
   Object.defineProperty(CachingHeadersFeature.prototype, 'repos', {
     get: function () {
@@ -5878,7 +5878,7 @@
     this.id_v4r6t6$_0 = 'call-logging';
     this.title_8s1j9$_0 = 'CallLogging';
     this.description_edg1wp$_0 = 'Logs client requests';
-    this.documentation_7u6okn$_0 = 'https://ktor.io/features/call-logging.html';
+    this.documentation_7u6okn$_0 = 'https://ktor.io/docs/call-logging.html';
   }
   Object.defineProperty(CallLoggingFeature.prototype, 'repos', {
     get: function () {
@@ -5948,7 +5948,7 @@
     this.id_n0qw69$_0 = 'compression';
     this.title_d44xj4$_0 = 'Compression';
     this.description_57ts7w$_0 = 'Compress outgoing content using gzip, deflate or custom encoder and thus reduce the size of the response';
-    this.documentation_45fzoi$_0 = 'https://ktor.io/features/compression.html';
+    this.documentation_45fzoi$_0 = 'https://ktor.io/docs/compression.html';
   }
   Object.defineProperty(CompressionFeature.prototype, 'repos', {
     get: function () {
@@ -6034,7 +6034,7 @@
     this.id_o944rr$_0 = 'conditional-headers';
     this.title_5oe056$_0 = 'ConditionalHeaders';
     this.description_mg1h5i$_0 = 'Avoids sending content if the client already has the same content using ETag or LastModified';
-    this.documentation_1wntaw$_0 = 'https://ktor.io/features/conditional-headers.html';
+    this.documentation_1wntaw$_0 = 'https://ktor.io/docs/conditional-headers.html';
   }
   Object.defineProperty(ConditionalHeadersFeature.prototype, 'repos', {
     get: function () {
@@ -6094,7 +6094,7 @@
     this.id_1tud0h$_0 = 'content-negotiation';
     this.title_178hmm$_0 = 'ContentNegotiation';
     this.description_j6ojmq$_0 = 'Provides automatic content conversion according to Content-Type and Accept headers.';
-    this.documentation_f9k7z4$_0 = 'https://ktor.io/features/content-negotiation.html';
+    this.documentation_f9k7z4$_0 = 'https://ktor.io/docs/content-negotiation.html';
     this.BLOCK = this.newSlot_pdl1vj$('BLOCK');
   }
   Object.defineProperty(ContentNegotiationFeature.prototype, 'group', {
@@ -6333,7 +6333,7 @@
     this.id_m3ch09$_0 = 'data-conversion';
     this.title_6equey$_0 = 'DataConversion';
     this.description_6nroeu$_0 = 'Allows to serialize and deserialize a list of values (used by the Locations feature)';
-    this.documentation_wt7c60$_0 = 'https://ktor.io/servers/features/data-conversion.html';
+    this.documentation_wt7c60$_0 = 'https://ktor.io/docs/data-conversion.html';
   }
   Object.defineProperty(DataConversionFeature.prototype, 'repos', {
     get: function () {
@@ -6392,7 +6392,7 @@
     this.id_zj8wu$_0 = 'default-headers';
     this.title_672wdb$_0 = 'DefaultHeaders';
     this.description_jltksl$_0 = 'This feature adds a default set of headers to HTTP responses';
-    this.documentation_6rs2f1$_0 = 'https://ktor.io/features/default-headers.html';
+    this.documentation_6rs2f1$_0 = 'https://ktor.io/docs/default-headers.html';
   }
   Object.defineProperty(DefaultHeadersFeature.prototype, 'repos', {
     get: function () {
@@ -6460,7 +6460,7 @@
     this.id_rltf7b$_0 = 'forwarded-header-support';
     this.title_a9cfc8$_0 = 'ForwardedHeaderSupport';
     this.description_htd7bg$_0 = 'This feature allows you to handle reverse proxy headers to get information about the original request when it\u2019s behind a proxy.';
-    this.documentation_mm6hiu$_0 = 'https://ktor.io/features/forward-headers.html';
+    this.documentation_mm6hiu$_0 = 'https://ktor.io/docs/forward-headers.html';
   }
   Object.defineProperty(ForwardedHeaderSupportFeature.prototype, 'repos', {
     get: function () {
@@ -6521,7 +6521,7 @@
     this.id_781f4x$_0 = 'freemarker';
     this.title_sgh6f4$_0 = 'Freemarker';
     this.description_jvgtwk$_0 = "Serve HTML content using Apache's FreeMarker template engine";
-    this.documentation_xei3a6$_0 = 'https://ktor.io/features/templates/freemarker.html';
+    this.documentation_xei3a6$_0 = 'https://ktor.io/docs/freemarker.html';
   }
   Object.defineProperty(FreemarkerFeature.prototype, 'group', {
     get: function () {
@@ -6685,7 +6685,7 @@
     this.id_7i9dib$_0 = 'hsts';
     this.title_xmr9z8$_0 = 'HSTS';
     this.description_7ox1eo$_0 = 'Enable HTTP Strict Transport Security (HSTS)';
-    this.documentation_k58qw2$_0 = 'https://ktor.io/features/hsts.html';
+    this.documentation_k58qw2$_0 = 'https://ktor.io/docs/hsts.html';
   }
   Object.defineProperty(HSTSFeature.prototype, 'repos', {
     get: function () {
@@ -6754,7 +6754,7 @@
     this.id_bcmddh$_0 = 'html-dsl';
     this.title_r8vjpw$_0 = 'HTML DSL';
     this.description_1gtliw$_0 = 'Generate HTML using Kotlin code like a pure-core template engine';
-    this.documentation_zdgxpy$_0 = 'https://ktor.io/features/templates/html-dsl.html';
+    this.documentation_zdgxpy$_0 = 'https://ktor.io/docs/html-dsl.html';
   }
   Object.defineProperty(HtmlDslFeature.prototype, 'group', {
     get: function () {
@@ -6863,7 +6863,7 @@
     this.id_fmyhc0$_0 = 'https-redirect';
     this.title_n61xmn$_0 = 'HttpsRedirect';
     this.description_covkrn$_0 = 'All the affected HTTP calls perform a redirect to its HTTPS counterpart before processing the call';
-    this.documentation_op6e1t$_0 = 'https://ktor.io/features/https-redirect.html';
+    this.documentation_op6e1t$_0 = 'https://ktor.io/docs/https-redirect.html';
   }
   Object.defineProperty(HttpsRedirectFeature.prototype, 'repos', {
     get: function () {
@@ -6947,7 +6947,7 @@
     this.id_ngj250$_0 = 'ktor-gson';
     this.title_3sb9nx$_0 = 'GSON';
     this.description_bw0nnb$_0 = 'Handles JSON serialization using GSON library';
-    this.documentation_zd36vf$_0 = 'https://ktor.io/features/content-negotiation/gson.html';
+    this.documentation_zd36vf$_0 = 'https://ktor.io/docs/content-negotiation-gson.html';
   }
   Object.defineProperty(JsonGsonFeature.prototype, 'group', {
     get: function () {
@@ -7031,7 +7031,7 @@
     this.id_ogwk7w$_0 = 'ktor-jackson';
     this.title_bxz38b$_0 = 'Jackson';
     this.description_8yz4hr$_0 = 'Handles JSON serialization using Jackson library';
-    this.documentation_1tiou5$_0 = 'https://ktor.io/features/content-negotiation/jackson.html';
+    this.documentation_1tiou5$_0 = 'https://ktor.io/docs/content-negotiation-jackson.html';
   }
   Object.defineProperty(JsonJacksonFeature.prototype, 'group', {
     get: function () {
@@ -7119,7 +7119,7 @@
     this.id_7yznmx$_0 = 'ktor-locations';
     this.title_tgif60$_0 = 'Locations';
     this.description_x7k3dg$_0 = 'Allows to define route locations in a typed way';
-    this.documentation_o1t10q$_0 = 'https://ktor.io/features/locations.html';
+    this.documentation_o1t10q$_0 = 'https://ktor.io/docs/features-locations.html';
   }
   Object.defineProperty(LocationsFeature.prototype, 'repos', {
     get: function () {
@@ -7258,7 +7258,7 @@
     this.id_z55v50$_0 = 'ktor-metrics';
     this.title_wshcbn$_0 = 'Metrics';
     this.description_c6mard$_0 = 'Adds supports for monitoring several metrics';
-    this.documentation_dp5sfv$_0 = 'https://ktor.io/features/metrics.html';
+    this.documentation_dp5sfv$_0 = 'https://ktor.io/docs/features-metrics.html';
   }
   Object.defineProperty(MetricsFeature.prototype, 'repos', {
     get: function () {
@@ -7310,7 +7310,7 @@
     this.id_2vek9r$_0 = 'mustache';
     this.title_gt1ari$_0 = 'Mustache';
     this.description_4nno66$_0 = 'Serve HTML content using Mustache template engine';
-    this.documentation_poae5c$_0 = 'https://ktor.io/features/templates/mustache.html';
+    this.documentation_poae5c$_0 = 'https://ktor.io/docs/mustache.html';
   }
   Object.defineProperty(MustacheFeature.prototype, 'group', {
     get: function () {
@@ -7451,7 +7451,7 @@
     this.id_tz5ocv$_0 = 'partial-content';
     this.title_xbafji$_0 = 'PartialContent';
     this.description_t5tcgi$_0 = 'Handles requests with the Range header. ' + 'Generating Accept-Ranges and the Content-Range headers and slicing the served content when required.';
-    this.documentation_cyic7k$_0 = 'https://ktor.io/features/partial-content.html';
+    this.documentation_cyic7k$_0 = 'https://ktor.io/docs/partial-content.html';
   }
   Object.defineProperty(PartialContentFeature.prototype, 'repos', {
     get: function () {
@@ -7521,7 +7521,7 @@
     this.id_34kdmn$_0 = 'routing';
     this.title_opu6lc$_0 = 'Routing';
     this.description_2pi0zg$_0 = 'Allows to define structured routes and associated handlers.';
-    this.documentation_bg4xu$_0 = 'https://ktor.io/features/routing.html';
+    this.documentation_bg4xu$_0 = 'https://ktor.io/docs/routing.html';
     this.BLOCK = this.newSlot_pdl1vj$('BLOCK');
   }
   Object.defineProperty(RoutingFeature.prototype, 'repos', {
@@ -7639,7 +7639,7 @@
     this.id_74og3u$_0 = 'ktor-sessions';
     this.title_vzgn3r$_0 = 'Sessions';
     this.description_dsfbot$_0 = 'Adds supports for sessions: with the payload in the client or the server';
-    this.documentation_eyn7sb$_0 = 'https://ktor.io/features/sessions.html';
+    this.documentation_eyn7sb$_0 = 'https://ktor.io/docs/sessions.html';
   }
   Object.defineProperty(SessionsFeature.prototype, 'repos', {
     get: function () {
@@ -7740,7 +7740,7 @@
     this.id_712coe$_0 = 'shutdown-url';
     this.title_osrccz$_0 = 'Shutdown URL';
     this.description_co788f$_0 = 'This feature enables a URL that when accessed, shutdowns the server.';
-    this.documentation_e6x13j$_0 = 'https://ktor.io/features/shutdown-url.html';
+    this.documentation_e6x13j$_0 = 'https://ktor.io/docs/shutdown-url.html';
   }
   Object.defineProperty(ShutdownUrlFeature.prototype, 'repos', {
     get: function () {
@@ -7816,7 +7816,7 @@
     this.id_tesp6s$_0 = 'static-content';
     this.title_ck31a3$_0 = 'Static Content';
     this.description_9pr5b3$_0 = 'Serves static files from defined locations.';
-    this.documentation_6cfw4d$_0 = 'https://ktor.io/features/static-content.html';
+    this.documentation_6cfw4d$_0 = 'https://ktor.io/docs/static-content.html';
   }
   Object.defineProperty(StaticContentFeature.prototype, 'repos', {
     get: function () {
@@ -7936,7 +7936,7 @@
     this.id_2viaaz$_0 = 'status-pages';
     this.title_cvstho$_0 = 'Status Pages';
     this.description_rjfq6w$_0 = 'Allow to respond to thrown exceptions.';
-    this.documentation_h9g53q$_0 = 'https://ktor.io/features/status-pages.html';
+    this.documentation_h9g53q$_0 = 'https://ktor.io/docs/status-pages.html';
     this.CUSTOM_STATUS_PAGES = this.newSlot_pdl1vj$('CUSTOM_STATUS_PAGES');
   }
   Object.defineProperty(StatusPagesFeature.prototype, 'repos', {
@@ -8047,7 +8047,7 @@
     this.id_6al82c$_0 = 'thymeleaf';
     this.title_hr8505$_0 = 'Thymeleaf';
     this.description_1r3u9d$_0 = 'Serve HTML content using Thymeleaf template engine';
-    this.documentation_4yb2gj$_0 = 'https://ktor.io/features/templates/thymeleaf.html';
+    this.documentation_4yb2gj$_0 = 'https://ktor.io/docs/thymeleaf.html';
   }
   Object.defineProperty(ThymeleafFeature.prototype, 'group', {
     get: function () {
@@ -8203,7 +8203,7 @@
     this.id_aq7496$_0 = 'velocity';
     this.title_qm33uf$_0 = 'Velocity';
     this.description_mctxlf$_0 = "Serve HTML content using Apache's Velocity template engine";
-    this.documentation_cql7u3$_0 = 'https://ktor.io/features/templates/velocity.html';
+    this.documentation_cql7u3$_0 = 'https://ktor.io/docs/velocity.html';
   }
   Object.defineProperty(VelocityFeature.prototype, 'group', {
     get: function () {
@@ -8260,7 +8260,7 @@
     this.id_tyoyrf$_0 = 'webjars';
     this.title_8qkrfq$_0 = 'Webjars';
     this.description_dw8u2m$_0 = 'Allows you to package your assets such as javascript libraries and css as part of your uber-jar.';
-    this.documentation_p4t5ms$_0 = 'https://ktor.io/features/webjars.html';
+    this.documentation_p4t5ms$_0 = 'https://ktor.io/docs/webjars.html';
   }
   Object.defineProperty(WebjarsFeature.prototype, 'since', {
     get: function () {
@@ -8351,7 +8351,7 @@
     this.id_bjgwfv$_0 = 'ktor-websockets';
     this.title_s9c23q$_0 = 'WebSockets';
     this.description_nbqn42$_0 = 'Adds WebSockets support for bidirectional communication with the client';
-    this.documentation_49wqyk$_0 = 'https://ktor.io/features/websockets.html';
+    this.documentation_49wqyk$_0 = 'https://ktor.io/docs/clients-websockets.html';
   }
   Object.defineProperty(WebsocketsFeature.prototype, 'repos', {
     get: function () {
@@ -8462,7 +8462,7 @@
     this.id_k6sgt2$_0 = 'ktor-network';
     this.title_q5rwff$_0 = 'Raw Sockets';
     this.description_9huigp$_0 = 'Adds Raw Socket support for listening and connecting to tcp and udp sockets';
-    this.documentation_8dm8tz$_0 = 'https://ktor.io/servers/raw-sockets.html';
+    this.documentation_8dm8tz$_0 = 'https://ktor.io/docs/servers-raw-sockets.html';
     this.SERVER_SOCKET = this.newSlot_pdl1vj$('SERVER_SOCKET');
     this.CLIENT_SOCKET = this.newSlot_pdl1vj$('CLIENT_SOCKET');
   }
@@ -8831,7 +8831,7 @@
     this.id_o9jihv$_0 = 'ktor-network-tls';
     this.title_6jfh8k$_0 = 'Raw Secure SSL/TLS Sockets';
     this.description_5foqxs$_0 = 'Adds Raw Socket support for listening and connecting to tcp and udp sockets with secure sockets';
-    this.documentation_7f7cim$_0 = 'https://ktor.io/servers/raw-sockets.html#secure';
+    this.documentation_7f7cim$_0 = 'https://ktor.io/docs/servers-raw-sockets.html#secure';
   }
   Object.defineProperty(RawSocketsTlsFeature.prototype, 'group', {
     get: function () {

@@ -27,7 +27,7 @@ object StaticContentFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val id = "static-content"
     override val title = "Static Content"
     override val description = "Serves static files from defined locations."
-    override val documentation = "https://ktor.io/features/static-content.html"
+    override val documentation = "https://ktor.io/docs/static-content.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.content.*")

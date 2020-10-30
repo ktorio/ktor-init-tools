@@ -27,7 +27,7 @@ object DefaultHeadersFeature : ServerFeature(ApplicationKt) {
     override val id = "default-headers"
     override val title = "DefaultHeaders"
     override val description = "This feature adds a default set of headers to HTTP responses"
-    override val documentation = "https://ktor.io/features/default-headers.html"
+    override val documentation = "https://ktor.io/docs/default-headers.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")

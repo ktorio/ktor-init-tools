@@ -28,7 +28,7 @@ object AuthBasicFeature : ServerFeature(ApplicationKt, AuthFeature, RoutingFeatu
     override val id = "auth-basic"
     override val title = "Authentication Basic"
     override val description = "Handle Basic authentication"
-    override val documentation = "https://ktor.io/features/authentication/basic.html"
+    override val documentation = "https://ktor.io/docs/basic.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.auth.*")

@@ -29,7 +29,7 @@ object SessionsFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val id = "ktor-sessions"
     override val title = "Sessions"
     override val description = "Adds supports for sessions: with the payload in the client or the server"
-    override val documentation = "https://ktor.io/features/sessions.html"
+    override val documentation = "https://ktor.io/docs/sessions.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.sessions.*")

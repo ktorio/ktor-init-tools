@@ -27,7 +27,7 @@ object AutoHeadResponseFeature : ServerFeature(ApplicationKt) {
     override val id = "caching-headers"
     override val title = "CachingHeaders"
     override val description = "Send the headers Cache-Control and Expires used by clients and proxies to cache requests"
-    override val documentation = "https://ktor.io/features/caching-headers.html"
+    override val documentation = "https://ktor.io/docs/caching-headers.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")

@@ -27,7 +27,7 @@ object CORSFeature : ServerFeature(ApplicationKt) {
     override val id = "cors"
     override val title = "CORS"
     override val description = "Enable Cross-Origin Resource Sharing (CORS)"
-    override val documentation = "https://ktor.io/features/cors.html"
+    override val documentation = "https://ktor.io/docs/cors.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")

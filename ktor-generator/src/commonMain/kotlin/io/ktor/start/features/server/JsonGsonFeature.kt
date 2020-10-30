@@ -32,7 +32,7 @@ object JsonGsonFeature : ServerFeature(ApplicationKt,
     override val id = "ktor-gson"
     override val title = "GSON"
     override val description = "Handles JSON serialization using GSON library"
-    override val documentation = "https://ktor.io/features/content-negotiation/gson.html"
+    override val documentation = "https://ktor.io/docs/content-negotiation-gson.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.gson.*")

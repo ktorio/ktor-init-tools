@@ -27,5 +27,5 @@ object AuthOauthFeature : ServerFeature(ApplicationKt, AuthFeature) {
     override val id = "auth-oauth"
     override val title = "Authentication OAuth"
     override val description = "Handle OAuth authentication"
-    override val documentation = "https://ktor.io/features/authentication/oauth.html"
+    override val documentation = "https://ktor.io/docs/authentication-oauth.html"
 }

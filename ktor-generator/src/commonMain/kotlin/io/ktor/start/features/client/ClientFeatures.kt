@@ -9,7 +9,7 @@ object HttpTimeoutClientFeature : ClientFeature(CoreClientEngine) {
     override val id = "ktor-client-http-timeout"
     override val title = "HttpTimeout feature HttpClient"
     override val description = "Supports request, connect and socket timeout for the Http Client"
-    override val documentation = "https://ktor.io/clients/http-client/features/timeout.html"
+    override val documentation = "https://ktor.io/docs/timeout.html"
     override val since = Versions.V131
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
@@ -25,7 +25,7 @@ object AuthBasicClientFeature : ClientFeature(CoreClientEngine) {
     override val id = "ktor-client-auth-jvm"
     override val title = "Auth feature HttpClient"
     override val description = "Supports authentication for the Http Client"
-    override val documentation = "https://ktor.io/clients/http-client/features/auth.html"
+    override val documentation = "https://ktor.io/docs/features-auth.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.features.auth.*")
@@ -43,7 +43,7 @@ object GsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
     override val id = "ktor-client-json-jvm"
     override val title = "Json serialization for HttpClient"
     override val description = "Supports JSON serialization for the Http Client"
-    override val documentation = "https://ktor.io/clients/http-client/features/json-feature.html"
+    override val documentation = "https://ktor.io/docs/json-feature.html"
     override val repos = super.repos + listOf("https://kotlin.bintray.com/kotlinx")
     override val artifacts = listOf(
         "io.ktor:ktor-client-json-jvm:\$ktor_version",
@@ -81,7 +81,7 @@ object LoggingClientFeature : ClientFeature(CoreClientEngine) {
     override val id: String = "ktor-client-logging"
     override val title: String = "Logging feature"
     override val description: String = "Logging feature for debugging client calls"
-    override val documentation: String = "https://ktor.io/clients/http-client/features/logging.html"
+    override val documentation: String = "https://ktor.io/docs/features-logging.html"
 
     override val since: KtorVersion = Versions.V101
 
@@ -104,7 +104,7 @@ object UserAgentClientFeature : ClientFeature(CoreClientEngine) {
     override val id: String = "ktor-client-user-agent"
     override val title: String = "User agent feature"
     override val description: String = "User agent header support feature"
-    override val documentation: String = "https://ktor.io/clients/http-client/features/user-agent.html"
+    override val documentation: String = "https://ktor.io/docs/user-agent.html"
 
     override val since: KtorVersion = Versions.V101
     override val artifacts: List<String> get() = emptyList()
@@ -124,7 +124,7 @@ object WebSocketClientFeature : ClientFeature(CoreClientEngine, CioClientEngine,
     override val id = "ktor-client-websockets"
     override val title = "WebSockets HttpClient support"
     override val description = "HttpClient feature to establish bidirectional communication using WebSockets"
-    override val documentation = "https://ktor.io/clients/http-client/features/websockets.html"
+    override val documentation = "https://ktor.io/docs/http-client-features-websockets.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.*")

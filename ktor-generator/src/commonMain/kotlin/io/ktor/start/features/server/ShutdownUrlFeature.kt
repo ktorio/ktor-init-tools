@@ -27,7 +27,7 @@ object ShutdownUrlFeature : ServerFeature(ApplicationKt, ApplicationConf) {
     override val id = "shutdown-url"
     override val title = "Shutdown URL"
     override val description = "This feature enables a URL that when accessed, shutdowns the server."
-    override val documentation = "https://ktor.io/features/shutdown-url.html"
+    override val documentation = "https://ktor.io/docs/shutdown-url.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.server.engine.*")

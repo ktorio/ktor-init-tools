@@ -28,7 +28,7 @@ object AuthFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val id = "auth"
     override val title = "Authentication"
     override val description = "Handle Basic and Digest HTTP Auth, Form authentication and OAuth 1a and 2"
-    override val documentation = "https://ktor.io/features/authentication.html"
+    override val documentation = "https://ktor.io/docs/features-authentication.html"
 
     val BLOCK = newSlot("BLOCK")
 
