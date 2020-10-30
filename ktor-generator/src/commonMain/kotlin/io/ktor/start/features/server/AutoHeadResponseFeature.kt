@@ -24,27 +24,15 @@ import io.ktor.start.util.*
 object AutoHeadResponseFeature : ServerFeature(ApplicationKt) {
     override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-server-core:\$ktor_version")
-    override val id = "caching-headers"
-    override val title = "CachingHeaders"
-    override val description = "Send the headers Cache-Control and Expires used by clients and proxies to cache requests"
-    override val documentation = "https://ktor.io/docs/caching-headers.html"
+    override val id = "auto-head-response"
+    override val title = "AutoHeadResponse"
+    override val description = "Provide responses to HEAD requests for existing routes that have the GET verb defined"
+    override val documentation = "https://ktor.io/docs/autoheadresponse.html"
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.features.*")
-        addImport("io.ktor.http.*")
-        addImport("io.ktor.http.content.*")
-        addImport("io.ktor.util.date.*")
         addFeatureInstall {
-            "install(CachingHeaders)" {
-                +"options { outgoingContent ->"
-                indent {
-                    "when (outgoingContent.contentType?.withoutParameters())" {
-                        +"ContentType.Text.CSS -> CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 24 * 60 * 60), expires = null as? GMTDate?)"
-                        +"else -> null"
-                    }
-                }
-                +"}"
-            }
+            +"install(AutoHeadResponse)"
         }
     }
 }
