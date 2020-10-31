@@ -4663,9 +4663,13 @@
     addTestImport($receiver, 'io.ktor.client.engine.mock.*');
     addTestImport($receiver, 'kotlinx.coroutines.experimental.*');
     addTestImport($receiver, 'io.ktor.http.*');
-    addTestImport($receiver, 'kotlinx.coroutines.experimental.io.*');
     addTestImport($receiver, 'io.ktor.client.request.*');
     addTestImport($receiver, 'io.ktor.client.call.*');
+    if (info.ktorVersion.compareTo_11rb$(Versions_getInstance().V130) >= 0) {
+      addTestImport($receiver, 'io.ktor.utils.io.*');
+    } else {
+      addTestImport($receiver, 'kotlinx.coroutines.experimental.io.*');
+    }
     addTestMethod($receiver, 'testClientMock', MockClientEngine$renderFeature$lambda(info));
   };
   MockClientEngine.$metadata$ = {

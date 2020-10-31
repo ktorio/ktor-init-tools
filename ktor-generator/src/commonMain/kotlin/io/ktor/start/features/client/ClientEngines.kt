@@ -92,9 +92,13 @@ object MockClientEngine : ClientEngine(CoreClientEngine, ApplicationTestKt) {
         addTestImport("io.ktor.client.engine.mock.*")
         addTestImport("kotlinx.coroutines.experimental.*")
         addTestImport("io.ktor.http.*")
-        addTestImport("kotlinx.coroutines.experimental.io.*")
         addTestImport("io.ktor.client.request.*")
         addTestImport("io.ktor.client.call.*")
+        if (info.ktorVersion >= Versions.V130) {
+            addTestImport("io.ktor.utils.io.*")
+        } else {
+            addTestImport("kotlinx.coroutines.experimental.io.*")
+        }
 
         addTestMethod("testClientMock") {
             +"runBlocking" {
