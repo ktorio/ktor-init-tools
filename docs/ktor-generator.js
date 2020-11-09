@@ -4104,9 +4104,10 @@
     this.V132 = new KtorVersion('1.3.2', '1.3.70');
     this.V140 = new KtorVersion('1.4.0', '1.4.0');
     this.V141 = new KtorVersion('1.4.1', '1.4.10');
-    this.ALL = [this.V101, this.V115, this.V126, this.V130, this.V132, this.V140, this.V141];
-    this.LAST = this.V141;
-    this.LAST_EAP = this.V141;
+    this.V142 = new KtorVersion('1.4.2', '1.4.10');
+    this.ALL = [this.V101, this.V115, this.V126, this.V130, this.V132, this.V140, this.V141, this.V142];
+    this.LAST = this.V142;
+    this.LAST_EAP = this.V142;
     var $receiver = this.ALL;
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
     var destination = LinkedHashMap_init(capacity);
@@ -4649,7 +4650,7 @@
           $receiver.line_61zpoe$('})');
         }
         $receiver.line_61zpoe$('assertEquals(byteArrayOf(1, 2, 3).toList(), client.get<ByteArray>("/").toList())');
-        $receiver.line_61zpoe$('assertEquals("MyValue", client.call("/").response.headers["X-MyHeader"])');
+        $receiver.line_61zpoe$('assertEquals("MyValue", client.request<HttpResponse>("/").headers["X-MyHeader"])');
         $receiver.line_61zpoe$('assertEquals("Not Found other/path", client.get<String>("/other/path"))');
       }finally {
         $receiver._unindent();
@@ -4660,12 +4661,14 @@
     };
   }
   MockClientEngine.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addTestImport($receiver, 'io.ktor.client.*');
     addTestImport($receiver, 'io.ktor.client.engine.mock.*');
-    addTestImport($receiver, 'kotlinx.coroutines.experimental.*');
-    addTestImport($receiver, 'io.ktor.http.*');
-    addTestImport($receiver, 'kotlinx.coroutines.experimental.io.*');
     addTestImport($receiver, 'io.ktor.client.request.*');
-    addTestImport($receiver, 'io.ktor.client.call.*');
+    addTestImport($receiver, 'io.ktor.client.statement.*');
+    addTestImport($receiver, 'io.ktor.http.*');
+    addTestImport($receiver, 'io.ktor.utils.io.*');
+    addTestImport($receiver, 'kotlinx.coroutines.*');
+    addTestImport($receiver, 'kotlin.test.*');
     addTestMethod($receiver, 'testClientMock', MockClientEngine$renderFeature$lambda(info));
   };
   MockClientEngine.$metadata$ = {
@@ -4687,6 +4690,7 @@
     this.description_nhc6ou$_0 = 'Supports request, connect and socket timeout for the Http Client';
     this.documentation_ny3krg$_0 = 'https://ktor.io/docs/timeout.html';
     this.since_vqnjqc$_0 = Versions_getInstance().V131;
+    this.artifacts_6q19zx$_0 = emptyList();
   }
   Object.defineProperty(HttpTimeoutClientFeature.prototype, 'id', {
     get: function () {
@@ -4711,6 +4715,11 @@
   Object.defineProperty(HttpTimeoutClientFeature.prototype, 'since', {
     get: function () {
       return this.since_vqnjqc$_0;
+    }
+  });
+  Object.defineProperty(HttpTimeoutClientFeature.prototype, 'artifacts', {
+    get: function () {
+      return this.artifacts_6q19zx$_0;
     }
   });
   function HttpTimeoutClientFeature$renderFeature$lambda($receiver) {
