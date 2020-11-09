@@ -18,6 +18,18 @@
 
             <h2>Changelog</h2>
 
+            <h3>1.4.2</h3>
+
+            <ul>
+                <li>Ktor 1.4.2</li>
+                <li>KTOR-1086 Fix Ktor wizard tooltip text</li>
+                <li>KTOR-1198 Upgrade gradle wrapper in generated projects to 6.6.1</li>
+                <li>Fix mock engine samples, upgrade gradle wrapper</li>
+                <li>KTOR-1179 Fix changelog for 1.4.0 to 1.4.1</li>
+                <li>KTOR-1150 Fix HttpTimeout artifacts</li>
+                <li>Fix feature documentation links</li>
+            </ul>
+
             <h3>1.4.1</h3>
 
             <ul>
