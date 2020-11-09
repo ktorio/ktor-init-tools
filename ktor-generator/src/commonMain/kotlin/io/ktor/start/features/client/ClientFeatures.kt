@@ -11,6 +11,7 @@ object HttpTimeoutClientFeature : ClientFeature(CoreClientEngine) {
     override val description = "Supports request, connect and socket timeout for the Http Client"
     override val documentation = "https://ktor.io/docs/timeout.html"
     override val since = Versions.V131
+    override val artifacts: List<String> = emptyList()
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
         addImport("io.ktor.client.features.*")

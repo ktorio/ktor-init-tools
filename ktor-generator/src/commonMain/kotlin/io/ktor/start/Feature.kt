@@ -28,11 +28,9 @@ fun FileContainer.add(name: String, content: String, charset: Charset = UTF8, mo
     add(name, content.toByteArray(charset), mode = mode)
 }
 
-abstract class ServerFeature(vararg deps: Block<BuildInfo>) : Feature(*deps) {
-}
+abstract class ServerFeature(vararg deps: Block<BuildInfo>) : Feature(*deps)
 
-abstract class ClientFeature(vararg deps: Block<BuildInfo>) : Feature(*deps) {
-}
+abstract class ClientFeature(vararg deps: Block<BuildInfo>) : Feature(*deps)
 
 abstract class Feature(vararg deps: Block<BuildInfo>) : Block<BuildInfo>(*deps) {
     val featureDeps get() = blockDeps.filterIsInstance<Feature>()
