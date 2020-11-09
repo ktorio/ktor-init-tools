@@ -53,6 +53,8 @@ class KtorModuleBuilder : JavaModuleBuilder() {
     override fun isSuitableSdkType(sdk: SdkTypeId?) = sdk === JavaSdk.getInstance()
     val config = KtorModuleConfig()
 
+    override fun getDescription(): String = "Create a <b>Ktor</b> application."
+
     override fun setupRootModel(rootModel: ModifiableRootModel) {
         val root = createAndGetRoot() ?: return
         val project = rootModel.project
