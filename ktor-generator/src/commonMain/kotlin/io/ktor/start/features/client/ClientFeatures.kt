@@ -149,7 +149,10 @@ object WebSocketClientFeature : ClientFeature(CoreClientEngine, CioClientEngine,
                             +"client.ws(method = HttpMethod.Get, host = \"127.0.0.1\", port = 8080, path = \"/myws/echo\")" {
                                 // this: WebSocketSession"
                                 +"send(Frame.Text(\"Hello World\"))"
-                                +"for (message in incoming.map { it as? Frame.Text }.filterNotNull())" {
+                                +"for (message in incoming)" {
+                                    +"if (message !is Frame.Text)" {
+                                        "continue"
+                                    }
                                     +"println(\"Server said: \" + message.readText())"
                                 }
                             }
