@@ -4107,9 +4107,10 @@
     this.V142 = new KtorVersion('1.4.2', '1.4.10');
     this.V143 = new KtorVersion('1.4.3', '1.4.20');
     this.V150 = new KtorVersion('1.5.0', '1.4.21');
-    this.ALL = [this.V101, this.V115, this.V126, this.V132, this.V143, this.V150];
-    this.LAST = this.V150;
-    this.LAST_EAP = this.V150;
+    this.V151 = new KtorVersion('1.5.1', '1.4.21');
+    this.ALL = [this.V143, this.V151];
+    this.LAST = this.V151;
+    this.LAST_EAP = this.V151;
     var $receiver = this.ALL;
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
     var destination = LinkedHashMap_init(capacity);
@@ -5085,11 +5086,22 @@
           $receiver._indent();
           try {
             $receiver.line_61zpoe$('send(Frame.Text("Hello World"))');
-            var $receiver_4 = 'for (message in incoming.map { it as? Frame.Text }.filterNotNull())';
+            var $receiver_4 = 'for (message in incoming)';
             var rafter_3 = ''.length === 0 ? '' : ' ' + '';
             $receiver.line_61zpoe$($receiver_4.length === 0 ? '{' + rafter_3 : $receiver_4 + ' {' + rafter_3);
             $receiver._indent();
             try {
+              var $receiver_5 = 'if (message !is Frame.Text)';
+              var rafter_4 = ''.length === 0 ? '' : ' ' + '';
+              $receiver.line_61zpoe$($receiver_5.length === 0 ? '{' + rafter_4 : $receiver_5 + ' {' + rafter_4);
+              $receiver._indent();
+              try {
+                'continue';
+              }finally {
+                $receiver._unindent();
+              }
+              $receiver.line_61zpoe$('}' + '');
+              unaryPlus_0($receiver);
               $receiver.line_61zpoe$('println("Server said: " + message.readText())');
             }finally {
               $receiver._unindent();
