@@ -4108,9 +4108,10 @@
     this.V143 = new KtorVersion('1.4.3', '1.4.20');
     this.V150 = new KtorVersion('1.5.0', '1.4.21');
     this.V151 = new KtorVersion('1.5.1', '1.4.21');
-    this.ALL = [this.V143, this.V151];
-    this.LAST = this.V151;
-    this.LAST_EAP = this.V151;
+    this.V152 = new KtorVersion('1.5.2', '1.4.30');
+    this.ALL = [this.V143, this.V151, this.V152];
+    this.LAST = this.V152;
+    this.LAST_EAP = this.V152;
     var $receiver = this.ALL;
     var capacity = coerceAtLeast(mapCapacity($receiver.length), 16);
     var destination = LinkedHashMap_init(capacity);

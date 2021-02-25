@@ -226,10 +226,10 @@
     <!-- once we drop 2018.3 support, we'll uncomment this -->
 
     <!-- this is not supported on IDEA 2018.3 -->
-<!--    <depends>com.intellij.gradle</depends>-->
+    <!--    <depends>com.intellij.gradle</depends>-->
 
     <!-- this is not supported on IDEA 2019+ -->
-<!--    <depends>org.jetbrains.plugins.gradle</depends>-->
+    <!--    <depends>org.jetbrains.plugins.gradle</depends>-->
 
     <extensions defaultExtensionNs="com.intellij">
         <moduleBuilder builderClass="io.ktor.start.intellij.KtorModuleBuilder" />
@@ -241,7 +241,7 @@
         />
 
         <!-- including both seems to be fine, the factory is deprecated and required for IDEA 2018.3 -->
-<!--         non dynamic -->
+        <!--         non dynamic -->
         <fileTypeFactory implementation="io.ktor.start.intellij.locations.PatternFileTypeFactory" />
 
         <fileType name="ktor locations pattern"
@@ -300,8 +300,8 @@
                 implementationClass="io.ktor.start.intellij.locations.ManipulatorImpl"/>
 
         <lang.elementManipulator
-            forClass="io.ktor.start.intellij.locations.LocationsPatternPsiElement.SubstitutionElement"
-            implementationClass="io.ktor.start.intellij.locations.SubstitutionManipulatorImpl" />
+                forClass="io.ktor.start.intellij.locations.LocationsPatternPsiElement.SubstitutionElement"
+                implementationClass="io.ktor.start.intellij.locations.SubstitutionManipulatorImpl" />
 
         <renamePsiElementProcessor
                 implementation="io.ktor.start.intellij.locations.ParameterRenameProcessor"/>
