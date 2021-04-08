@@ -22,7 +22,6 @@ import io.ktor.start.project.*
 import io.ktor.start.util.*
 
 object ShutdownUrlFeature : ServerFeature(ApplicationKt, ApplicationConf) {
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-server-host-common:\$ktor_version")
     override val id = "shutdown-url"
     override val title = "Shutdown URL"

@@ -39,7 +39,7 @@ abstract class Feature(vararg deps: Block<BuildInfo>) : Block<BuildInfo>(*deps) 
     open val tags = listOf<String>()
     open val since: KtorVersion? = null
 
-    open val repos: List<String> = Repos.ktor
+    open val repos: List<String> = Repos.mavenCentral
     abstract val id: String
     open val artifacts: List<String> by lazy { listOf("io.ktor:$id:\$ktor_version") }
     open val testArtifacts: List<String> by lazy { listOf<String>() }

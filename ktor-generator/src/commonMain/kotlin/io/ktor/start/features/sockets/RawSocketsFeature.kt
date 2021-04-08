@@ -24,7 +24,6 @@ import io.ktor.start.util.*
 object RawSocketsFeature : ServerFeature(ApplicationKt) {
     override val group = "Sockets"
 
-    override val repos = Repos.ktor
     override val id = "ktor-network"
     override val title = "Raw Sockets"
     override val description = "Adds Raw Socket support for listening and connecting to tcp and udp sockets"

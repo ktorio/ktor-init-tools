@@ -82,7 +82,7 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
             fileText("build.gradle") {
                 "buildscript" {
                     "repositories" {
-                        for (repo in setOf("jcenter") + info.ktorVersion.extraRepos.toSet()) {
+                        for (repo in setOf("mavenCentral") + info.ktorVersion.extraRepos.toSet()) {
                             +genMavenRepoGroovy(repo)
                         }
                     }
@@ -147,13 +147,13 @@ internal class BuildFilesGradle(val kotlin: Boolean) : BuildInfoBlock() {
 
     private fun genMavenRepoKotlin(repo: String): String = when (repo) {
         "local" -> "mavenLocal()"
-        "jcenter" -> "jcenter()"
+        "mavenCentral" -> "mavenCentral()"
         else -> "maven { url = uri(\"$repo\") }"
     }
 
     private fun genMavenRepoGroovy(repo: String): String =  when (repo) {
         "local" -> "mavenLocal()"
-        "jcenter" -> "jcenter()"
+        "mavenCentral" -> "mavenCentral()"
         else -> "maven { url '$repo' }"
     }
 }

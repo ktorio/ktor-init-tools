@@ -11,7 +11,6 @@ import io.ktor.start.util.BlockBuilder
 
 object MustacheFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val group: String = "Templating"
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-mustache:\$ktor_version")
     override val id = "mustache"
     override val title = "Mustache"

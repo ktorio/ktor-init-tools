@@ -19,7 +19,6 @@ package io.ktor.start
 
 object Repos {
     val local = listOf("local")
-    val jcenter = listOf("jcenter")
-    val ktor = listOf("https://kotlin.bintray.com/ktor")
-    val kotlin_js_wrappers = listOf("https://kotlin.bintray.com/kotlin-js-wrappers")
+    val mavenCentral = listOf("mavenCentral")
+    val kotlin_js_wrappers = listOf("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers")
 }

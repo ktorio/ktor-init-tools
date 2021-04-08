@@ -22,7 +22,6 @@ import io.ktor.start.project.*
 import io.ktor.start.util.*
 
 object WebsocketsFeature : ServerFeature(ApplicationKt, RoutingFeature) {
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-websockets:\$ktor_version")
     override val id = "ktor-websockets"
     override val title = "WebSockets"

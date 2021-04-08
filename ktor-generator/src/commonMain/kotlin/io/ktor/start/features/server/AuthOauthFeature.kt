@@ -22,7 +22,6 @@ import io.ktor.start.project.*
 
 object AuthOauthFeature : ServerFeature(ApplicationKt, AuthFeature) {
     override val group: String = "Authentication"
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-auth:\$ktor_version")
     override val id = "auth-oauth"
     override val title = "Authentication OAuth"

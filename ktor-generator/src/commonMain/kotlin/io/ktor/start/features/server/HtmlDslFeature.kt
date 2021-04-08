@@ -23,7 +23,7 @@ import io.ktor.start.util.*
 
 object HtmlDslFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val group: String = "Templating"
-    override val repos = Repos.jcenter
+    override val repos = Repos.mavenCentral
     override val artifacts = listOf("io.ktor:ktor-html-builder:\$ktor_version")
     override val id = "html-dsl"
     override val title = "HTML DSL"
