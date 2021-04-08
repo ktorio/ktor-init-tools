@@ -22,7 +22,6 @@ import io.ktor.start.project.*
 import io.ktor.start.util.*
 
 object LocationsFeature : ServerFeature(ApplicationKt, RoutingFeature) {
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-locations:\$ktor_version")
     override val id = "ktor-locations"
     override val title = "Locations"

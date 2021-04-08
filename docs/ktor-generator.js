@@ -3748,7 +3748,7 @@
     this.group_a4qfdz$_0 = 'Features';
     this.tags_4pwcxp$_0 = emptyList();
     this.since_4l64le$_0 = null;
-    this.repos_54de5l$_0 = Repos_getInstance().ktor;
+    this.repos_54de5l$_0 = Repos_getInstance().mavenCentral;
     this.artifacts_g5f33r$_0 = lazy(Feature$artifacts$lambda(this));
     this.testArtifacts_6s9xgp$_0 = lazy(Feature$testArtifacts$lambda);
     this.documentation_nx4xfm$_0 = null;
@@ -4067,9 +4067,8 @@
   function Repos() {
     Repos_instance = this;
     this.local = listOf('local');
-    this.jcenter = listOf('jcenter');
-    this.ktor = listOf('https://kotlin.bintray.com/ktor');
-    this.kotlin_js_wrappers = listOf('https://kotlin.bintray.com/kotlin-js-wrappers');
+    this.mavenCentral = listOf('mavenCentral');
+    this.kotlin_js_wrappers = listOf('https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers');
   }
   Repos.$metadata$ = {
     kind: Kind_OBJECT,
@@ -4812,7 +4811,6 @@
     this.title_x2y7i0$_0 = 'Json serialization for HttpClient';
     this.description_n1lz4s$_0 = 'Supports JSON serialization for the Http Client';
     this.documentation_ua468q$_0 = 'https://ktor.io/docs/json-feature.html';
-    this.repos_y3b41t$_0 = plus(Kotlin.callGetter(this, ClientFeature.prototype, 'repos'), listOf('https://kotlin.bintray.com/kotlinx'));
     this.artifacts_swhujl$_0 = listOf_0(['io.ktor:ktor-client-json-jvm:$ktor_version', 'io.ktor:ktor-client-gson:$ktor_version']);
   }
   Object.defineProperty(GsonClientFeature.prototype, 'id', {
@@ -4833,11 +4831,6 @@
   Object.defineProperty(GsonClientFeature.prototype, 'documentation', {
     get: function () {
       return this.documentation_ua468q$_0;
-    }
-  });
-  Object.defineProperty(GsonClientFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_y3b41t$_0;
     }
   });
   Object.defineProperty(GsonClientFeature.prototype, 'artifacts', {
@@ -5204,7 +5197,6 @@
     AuthBasicFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance(), RoutingFeature_getInstance()]);
     this.group_v301hj$_0 = 'Authentication';
-    this.repos_q2n095$_0 = Repos_getInstance().ktor;
     this.artifacts_aoeizt$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
     this.id_grpqcf$_0 = 'auth-basic';
     this.title_p2a3pc$_0 = 'Authentication Basic';
@@ -5214,11 +5206,6 @@
   Object.defineProperty(AuthBasicFeature.prototype, 'group', {
     get: function () {
       return this.group_v301hj$_0;
-    }
-  });
-  Object.defineProperty(AuthBasicFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_q2n095$_0;
     }
   });
   Object.defineProperty(AuthBasicFeature.prototype, 'artifacts', {
@@ -5303,7 +5290,6 @@
     AuthDigestFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance(), RoutingFeature_getInstance()]);
     this.group_xwyoip$_0 = 'Authentication';
-    this.repos_swlnab$_0 = Repos_getInstance().ktor;
     this.artifacts_swddtp$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
     this.id_956wr$_0 = 'auth-digest';
     this.title_rw8qqi$_0 = 'Authentication Digest';
@@ -5313,11 +5299,6 @@
   Object.defineProperty(AuthDigestFeature.prototype, 'group', {
     get: function () {
       return this.group_xwyoip$_0;
-    }
-  });
-  Object.defineProperty(AuthDigestFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_swlnab$_0;
     }
   });
   Object.defineProperty(AuthDigestFeature.prototype, 'artifacts', {
@@ -5419,7 +5400,6 @@
     AuthFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.group_kwci2j$_0 = 'Authentication';
-    this.repos_pwpjax$_0 = Repos_getInstance().ktor;
     this.artifacts_e1kzvr$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
     this.id_8i5ba9$_0 = 'auth';
     this.title_qx2fuq$_0 = 'Authentication';
@@ -5430,11 +5410,6 @@
   Object.defineProperty(AuthFeature.prototype, 'group', {
     get: function () {
       return this.group_kwci2j$_0;
-    }
-  });
-  Object.defineProperty(AuthFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_pwpjax$_0;
     }
   });
   Object.defineProperty(AuthFeature.prototype, 'artifacts', {
@@ -5506,7 +5481,6 @@
     AuthJwtFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance()]);
     this.group_9f3pny$_0 = 'Authentication';
-    this.repos_4eqofk$_0 = Repos_getInstance().ktor;
     this.artifacts_3aqenk$_0 = listOf('io.ktor:ktor-auth-jwt:$ktor_version');
     this.id_8v1dt4$_0 = 'auth-jwt';
     this.title_3edrvr$_0 = 'Authentication JWT';
@@ -5516,11 +5490,6 @@
   Object.defineProperty(AuthJwtFeature.prototype, 'group', {
     get: function () {
       return this.group_9f3pny$_0;
-    }
-  });
-  Object.defineProperty(AuthJwtFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_4eqofk$_0;
     }
   });
   Object.defineProperty(AuthJwtFeature.prototype, 'artifacts', {
@@ -5563,7 +5532,6 @@
     AuthLdapFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance()]);
     this.group_y264fy$_0 = 'Authentication';
-    this.repos_t1t37k$_0 = Repos_getInstance().ktor;
     this.artifacts_35gluo$_0 = listOf('io.ktor:ktor-auth-ldap:$ktor_version');
     this.id_wrrgjc$_0 = 'auth-ldap';
     this.title_s1g6nr$_0 = 'Authentication LDAP';
@@ -5573,11 +5541,6 @@
   Object.defineProperty(AuthLdapFeature.prototype, 'group', {
     get: function () {
       return this.group_y264fy$_0;
-    }
-  });
-  Object.defineProperty(AuthLdapFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_t1t37k$_0;
     }
   });
   Object.defineProperty(AuthLdapFeature.prototype, 'artifacts', {
@@ -5620,7 +5583,6 @@
     AuthOauthFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), AuthFeature_getInstance()]);
     this.group_5ytf6q$_0 = 'Authentication';
-    this.repos_az6gf4$_0 = Repos_getInstance().ktor;
     this.artifacts_mbz4ow$_0 = listOf('io.ktor:ktor-auth:$ktor_version');
     this.id_r4wajc$_0 = 'auth-oauth';
     this.title_bzjcyx$_0 = 'Authentication OAuth';
@@ -5630,11 +5592,6 @@
   Object.defineProperty(AuthOauthFeature.prototype, 'group', {
     get: function () {
       return this.group_5ytf6q$_0;
-    }
-  });
-  Object.defineProperty(AuthOauthFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_az6gf4$_0;
     }
   });
   Object.defineProperty(AuthOauthFeature.prototype, 'artifacts', {
@@ -5676,18 +5633,12 @@
   function AutoHeadResponseFeature() {
     AutoHeadResponseFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
-    this.repos_kzw2lb$_0 = Repos_getInstance().ktor;
     this.artifacts_g2pl8f$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_uzkfxz$_0 = 'caching-headers';
     this.title_jzj61i$_0 = 'CachingHeaders';
     this.description_fp9286$_0 = 'Send the headers Cache-Control and Expires used by clients and proxies to cache requests';
     this.documentation_felmrc$_0 = 'https://ktor.io/docs/caching-headers.html';
   }
-  Object.defineProperty(AutoHeadResponseFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_kzw2lb$_0;
-    }
-  });
   Object.defineProperty(AutoHeadResponseFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_g2pl8f$_0;
@@ -5764,18 +5715,12 @@
   function CORSFeature() {
     CORSFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
-    this.repos_sljj6q$_0 = Repos_getInstance().ktor;
     this.artifacts_orj4zi$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_hzkv3a$_0 = 'cors';
     this.title_rl6mmx$_0 = 'CORS';
     this.description_h31csd$_0 = 'Enable Cross-Origin Resource Sharing (CORS)';
     this.documentation_f5bx6t$_0 = 'https://ktor.io/docs/cors.html';
   }
-  Object.defineProperty(CORSFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_sljj6q$_0;
-    }
-  });
   Object.defineProperty(CORSFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_orj4zi$_0;
@@ -5839,18 +5784,12 @@
   function CachingHeadersFeature() {
     CachingHeadersFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
-    this.repos_go8v1k$_0 = Repos_getInstance().ktor;
     this.artifacts_4n8blk$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_894vts$_0 = 'auto-head-response';
     this.title_fnvyhr$_0 = 'AutoHeadResponse';
     this.description_vh4wqr$_0 = 'Provide responses to HEAD requests for existing routes that have the GET verb defined';
     this.documentation_z7p4ld$_0 = 'https://ktor.io/docs/autoheadresponse.html';
   }
-  Object.defineProperty(CachingHeadersFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_go8v1k$_0;
-    }
-  });
   Object.defineProperty(CachingHeadersFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_4n8blk$_0;
@@ -5898,18 +5837,12 @@
   function CallLoggingFeature() {
     CallLoggingFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
-    this.repos_194y32$_0 = Repos_getInstance().ktor;
     this.artifacts_7z519q$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_v4r6t6$_0 = 'call-logging';
     this.title_8s1j9$_0 = 'CallLogging';
     this.description_edg1wp$_0 = 'Logs client requests';
     this.documentation_7u6okn$_0 = 'https://ktor.io/docs/call-logging.html';
   }
-  Object.defineProperty(CallLoggingFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_194y32$_0;
-    }
-  });
   Object.defineProperty(CallLoggingFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_7z519q$_0;
@@ -5968,18 +5901,12 @@
   function CompressionFeature() {
     CompressionFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
-    this.repos_c3s0zb$_0 = Repos_getInstance().ktor;
     this.artifacts_ser0pj$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_n0qw69$_0 = 'compression';
     this.title_d44xj4$_0 = 'Compression';
     this.description_57ts7w$_0 = 'Compress outgoing content using gzip, deflate or custom encoder and thus reduce the size of the response';
     this.documentation_45fzoi$_0 = 'https://ktor.io/docs/compression.html';
   }
-  Object.defineProperty(CompressionFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_c3s0zb$_0;
-    }
-  });
   Object.defineProperty(CompressionFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_ser0pj$_0;
@@ -6054,18 +5981,12 @@
   function ConditionalHeadersFeature() {
     ConditionalHeadersFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
-    this.repos_4o13ld$_0 = Repos_getInstance().ktor;
     this.artifacts_abh87l$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_o944rr$_0 = 'conditional-headers';
     this.title_5oe056$_0 = 'ConditionalHeaders';
     this.description_mg1h5i$_0 = 'Avoids sending content if the client already has the same content using ETag or LastModified';
     this.documentation_1wntaw$_0 = 'https://ktor.io/docs/conditional-headers.html';
   }
-  Object.defineProperty(ConditionalHeadersFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_4o13ld$_0;
-    }
-  });
   Object.defineProperty(ConditionalHeadersFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_abh87l$_0;
@@ -6114,7 +6035,6 @@
     ContentNegotiationFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
     this.group_77yfet$_0 = 'Content Negotiation';
-    this.repos_27le6f$_0 = Repos_getInstance().ktor;
     this.artifacts_xpb4br$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_1tud0h$_0 = 'content-negotiation';
     this.title_178hmm$_0 = 'ContentNegotiation';
@@ -6125,11 +6045,6 @@
   Object.defineProperty(ContentNegotiationFeature.prototype, 'group', {
     get: function () {
       return this.group_77yfet$_0;
-    }
-  });
-  Object.defineProperty(ContentNegotiationFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_27le6f$_0;
     }
   });
   Object.defineProperty(ContentNegotiationFeature.prototype, 'artifacts', {
@@ -6191,7 +6106,7 @@
     CssDslFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance(), HtmlDslFeature_getInstance()]);
     this.group_veryml$_0 = 'Templating';
-    this.repos_ylz245$_0 = plus(Repos_getInstance().jcenter, Repos_getInstance().kotlin_js_wrappers);
+    this.repos_ylz245$_0 = plus(Repos_getInstance().mavenCentral, Repos_getInstance().kotlin_js_wrappers);
     this.artifacts_xzvytx$_0 = listOf('org.jetbrains:kotlin-css-jvm:1.0.0-pre.31-kotlin-1.2.41');
     this.id_du5bqr$_0 = 'css-dsl';
     this.title_xlm5kc$_0 = 'CSS DSL';
@@ -6353,18 +6268,12 @@
   function DataConversionFeature() {
     DataConversionFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
-    this.repos_5edxv5$_0 = Repos_getInstance().ktor;
     this.artifacts_4tzc41$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_m3ch09$_0 = 'data-conversion';
     this.title_6equey$_0 = 'DataConversion';
     this.description_6nroeu$_0 = 'Allows to serialize and deserialize a list of values (used by the Locations feature)';
     this.documentation_wt7c60$_0 = 'https://ktor.io/docs/data-conversion.html';
   }
-  Object.defineProperty(DataConversionFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_5edxv5$_0;
-    }
-  });
   Object.defineProperty(DataConversionFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_4tzc41$_0;
@@ -6412,18 +6321,12 @@
   function DefaultHeadersFeature() {
     DefaultHeadersFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
-    this.repos_56pzti$_0 = Repos_getInstance().ktor;
     this.artifacts_ip5x8q$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_zj8wu$_0 = 'default-headers';
     this.title_672wdb$_0 = 'DefaultHeaders';
     this.description_jltksl$_0 = 'This feature adds a default set of headers to HTTP responses';
     this.documentation_6rs2f1$_0 = 'https://ktor.io/docs/default-headers.html';
   }
-  Object.defineProperty(DefaultHeadersFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_56pzti$_0;
-    }
-  });
   Object.defineProperty(DefaultHeadersFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_ip5x8q$_0;
@@ -6480,18 +6383,12 @@
   function ForwardedHeaderSupportFeature() {
     ForwardedHeaderSupportFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
-    this.repos_b9pbw1$_0 = Repos_getInstance().ktor;
     this.artifacts_rf2yhd$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_rltf7b$_0 = 'forwarded-header-support';
     this.title_a9cfc8$_0 = 'ForwardedHeaderSupport';
     this.description_htd7bg$_0 = 'This feature allows you to handle reverse proxy headers to get information about the original request when it\u2019s behind a proxy.';
     this.documentation_mm6hiu$_0 = 'https://ktor.io/docs/forward-headers.html';
   }
-  Object.defineProperty(ForwardedHeaderSupportFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_b9pbw1$_0;
-    }
-  });
   Object.defineProperty(ForwardedHeaderSupportFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_rf2yhd$_0;
@@ -6541,7 +6438,6 @@
     FreemarkerFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.group_yh747b$_0 = 'Templating';
-    this.repos_tgu2yx$_0 = Repos_getInstance().ktor;
     this.artifacts_qojtbd$_0 = listOf('io.ktor:ktor-freemarker:$ktor_version');
     this.id_781f4x$_0 = 'freemarker';
     this.title_sgh6f4$_0 = 'Freemarker';
@@ -6551,11 +6447,6 @@
   Object.defineProperty(FreemarkerFeature.prototype, 'group', {
     get: function () {
       return this.group_yh747b$_0;
-    }
-  });
-  Object.defineProperty(FreemarkerFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_tgu2yx$_0;
     }
   });
   Object.defineProperty(FreemarkerFeature.prototype, 'artifacts', {
@@ -6705,18 +6596,12 @@
   function HSTSFeature() {
     HSTSFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
-    this.repos_wmedff$_0 = Repos_getInstance().ktor;
     this.artifacts_18qyhx$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_7i9dib$_0 = 'hsts';
     this.title_xmr9z8$_0 = 'HSTS';
     this.description_7ox1eo$_0 = 'Enable HTTP Strict Transport Security (HSTS)';
     this.documentation_k58qw2$_0 = 'https://ktor.io/docs/hsts.html';
   }
-  Object.defineProperty(HSTSFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_wmedff$_0;
-    }
-  });
   Object.defineProperty(HSTSFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_18qyhx$_0;
@@ -6774,7 +6659,7 @@
     HtmlDslFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.group_x9lhi3$_0 = 'Templating';
-    this.repos_s98g9p$_0 = Repos_getInstance().jcenter;
+    this.repos_s98g9p$_0 = Repos_getInstance().mavenCentral;
     this.artifacts_szsc8z$_0 = listOf('io.ktor:ktor-html-builder:$ktor_version');
     this.id_bcmddh$_0 = 'html-dsl';
     this.title_r8vjpw$_0 = 'HTML DSL';
@@ -6883,18 +6768,12 @@
   function HttpsRedirectFeature() {
     HttpsRedirectFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
-    this.repos_o6eu6g$_0 = Repos_getInstance().ktor;
     this.artifacts_xp2d0o$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_fmyhc0$_0 = 'https-redirect';
     this.title_n61xmn$_0 = 'HttpsRedirect';
     this.description_covkrn$_0 = 'All the affected HTTP calls perform a redirect to its HTTPS counterpart before processing the call';
     this.documentation_op6e1t$_0 = 'https://ktor.io/docs/https-redirect.html';
   }
-  Object.defineProperty(HttpsRedirectFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_o6eu6g$_0;
-    }
-  });
   Object.defineProperty(HttpsRedirectFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_xp2d0o$_0;
@@ -6967,7 +6846,6 @@
     JsonGsonFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), ContentNegotiationFeature_getInstance(), RoutingFeature_getInstance()]);
     this.group_28eo4a$_0 = 'Content Negotiation';
-    this.repos_2ryd44$_0 = Repos_getInstance().ktor;
     this.artifacts_1ovdbw$_0 = listOf('io.ktor:ktor-gson:$ktor_version');
     this.id_ngj250$_0 = 'ktor-gson';
     this.title_3sb9nx$_0 = 'GSON';
@@ -6977,11 +6855,6 @@
   Object.defineProperty(JsonGsonFeature.prototype, 'group', {
     get: function () {
       return this.group_28eo4a$_0;
-    }
-  });
-  Object.defineProperty(JsonGsonFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_2ryd44$_0;
     }
   });
   Object.defineProperty(JsonGsonFeature.prototype, 'artifacts', {
@@ -7051,7 +6924,6 @@
     JsonJacksonFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), ContentNegotiationFeature_getInstance(), RoutingFeature_getInstance()]);
     this.group_hyp10i$_0 = 'Content Negotiation';
-    this.repos_cybzs4$_0 = Repos_getInstance().ktor;
     this.artifacts_fad5hg$_0 = listOf('io.ktor:ktor-jackson:$ktor_version');
     this.id_ogwk7w$_0 = 'ktor-jackson';
     this.title_bxz38b$_0 = 'Jackson';
@@ -7061,11 +6933,6 @@
   Object.defineProperty(JsonJacksonFeature.prototype, 'group', {
     get: function () {
       return this.group_hyp10i$_0;
-    }
-  });
-  Object.defineProperty(JsonJacksonFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_cybzs4$_0;
     }
   });
   Object.defineProperty(JsonJacksonFeature.prototype, 'artifacts', {
@@ -7139,18 +7006,12 @@
   function LocationsFeature() {
     LocationsFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
-    this.repos_ugvbpt$_0 = Repos_getInstance().ktor;
     this.artifacts_xu1ky7$_0 = listOf('io.ktor:ktor-locations:$ktor_version');
     this.id_7yznmx$_0 = 'ktor-locations';
     this.title_tgif60$_0 = 'Locations';
     this.description_x7k3dg$_0 = 'Allows to define route locations in a typed way';
     this.documentation_o1t10q$_0 = 'https://ktor.io/docs/features-locations.html';
   }
-  Object.defineProperty(LocationsFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_ugvbpt$_0;
-    }
-  });
   Object.defineProperty(LocationsFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_xu1ky7$_0;
@@ -7278,18 +7139,12 @@
   function MetricsFeature() {
     MetricsFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
-    this.repos_xsu8vg$_0 = Repos_getInstance().ktor;
     this.artifacts_qhtto4$_0 = listOf('io.ktor:ktor-metrics:$ktor_version');
     this.id_z55v50$_0 = 'ktor-metrics';
     this.title_wshcbn$_0 = 'Metrics';
     this.description_c6mard$_0 = 'Adds supports for monitoring several metrics';
     this.documentation_dp5sfv$_0 = 'https://ktor.io/docs/features-metrics.html';
   }
-  Object.defineProperty(MetricsFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_xsu8vg$_0;
-    }
-  });
   Object.defineProperty(MetricsFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_qhtto4$_0;
@@ -7330,7 +7185,6 @@
     MustacheFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.group_mtr8jp$_0 = 'Templating';
-    this.repos_hte7bb$_0 = Repos_getInstance().ktor;
     this.artifacts_1a6me1$_0 = listOf('io.ktor:ktor-mustache:$ktor_version');
     this.id_2vek9r$_0 = 'mustache';
     this.title_gt1ari$_0 = 'Mustache';
@@ -7340,11 +7194,6 @@
   Object.defineProperty(MustacheFeature.prototype, 'group', {
     get: function () {
       return this.group_mtr8jp$_0;
-    }
-  });
-  Object.defineProperty(MustacheFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_hte7bb$_0;
     }
   });
   Object.defineProperty(MustacheFeature.prototype, 'artifacts', {
@@ -7471,18 +7320,12 @@
   function PartialContentFeature() {
     PartialContentFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
-    this.repos_ybnc3b$_0 = Repos_getInstance().ktor;
     this.artifacts_l00cyf$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_tz5ocv$_0 = 'partial-content';
     this.title_xbafji$_0 = 'PartialContent';
     this.description_t5tcgi$_0 = 'Handles requests with the Range header. ' + 'Generating Accept-Ranges and the Content-Range headers and slicing the served content when required.';
     this.documentation_cyic7k$_0 = 'https://ktor.io/docs/partial-content.html';
   }
-  Object.defineProperty(PartialContentFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_ybnc3b$_0;
-    }
-  });
   Object.defineProperty(PartialContentFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_l00cyf$_0;
@@ -7541,7 +7384,6 @@
   function RoutingFeature() {
     RoutingFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), ApplicationTestKt_getInstance()]);
-    this.repos_pq7355$_0 = Repos_getInstance().ktor;
     this.artifacts_w3p8dz$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
     this.id_34kdmn$_0 = 'routing';
     this.title_opu6lc$_0 = 'Routing';
@@ -7549,11 +7391,6 @@
     this.documentation_bg4xu$_0 = 'https://ktor.io/docs/routing.html';
     this.BLOCK = this.newSlot_pdl1vj$('BLOCK');
   }
-  Object.defineProperty(RoutingFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_pq7355$_0;
-    }
-  });
   Object.defineProperty(RoutingFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_w3p8dz$_0;
@@ -7659,18 +7496,12 @@
   function SessionsFeature() {
     SessionsFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
-    this.repos_uz3qjy$_0 = Repos_getInstance().ktor;
     this.artifacts_1earjm$_0 = listOf('io.ktor:ktor-server-sessions:$ktor_version');
     this.id_74og3u$_0 = 'ktor-sessions';
     this.title_vzgn3r$_0 = 'Sessions';
     this.description_dsfbot$_0 = 'Adds supports for sessions: with the payload in the client or the server';
     this.documentation_eyn7sb$_0 = 'https://ktor.io/docs/sessions.html';
   }
-  Object.defineProperty(SessionsFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_uz3qjy$_0;
-    }
-  });
   Object.defineProperty(SessionsFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_1earjm$_0;
@@ -7760,18 +7591,12 @@
   function ShutdownUrlFeature() {
     ShutdownUrlFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), ApplicationConf_getInstance()]);
-    this.repos_nseft6$_0 = Repos_getInstance().ktor;
     this.artifacts_ymjlgq$_0 = listOf('io.ktor:ktor-server-host-common:$ktor_version');
     this.id_712coe$_0 = 'shutdown-url';
     this.title_osrccz$_0 = 'Shutdown URL';
     this.description_co788f$_0 = 'This feature enables a URL that when accessed, shutdowns the server.';
     this.documentation_e6x13j$_0 = 'https://ktor.io/docs/shutdown-url.html';
   }
-  Object.defineProperty(ShutdownUrlFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_nseft6$_0;
-    }
-  });
   Object.defineProperty(ShutdownUrlFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_ymjlgq$_0;
@@ -7836,18 +7661,12 @@
   function StaticContentFeature() {
     StaticContentFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
-    this.repos_dkfxtw$_0 = Repos_getInstance().ktor;
     this.artifacts_j7f4mc$_0 = listOf('io.ktor:ktor-server-host-common:$ktor_version');
     this.id_tesp6s$_0 = 'static-content';
     this.title_ck31a3$_0 = 'Static Content';
     this.description_9pr5b3$_0 = 'Serves static files from defined locations.';
     this.documentation_6cfw4d$_0 = 'https://ktor.io/docs/static-content.html';
   }
-  Object.defineProperty(StaticContentFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_dkfxtw$_0;
-    }
-  });
   Object.defineProperty(StaticContentFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_j7f4mc$_0;
@@ -7956,7 +7775,6 @@
   function StatusPagesFeature() {
     StatusPagesFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
-    this.repos_bvfwxv$_0 = Repos_getInstance().ktor;
     this.artifacts_qjikgt$_0 = listOf('io.ktor:ktor-server-host-common:$ktor_version');
     this.id_2viaaz$_0 = 'status-pages';
     this.title_cvstho$_0 = 'Status Pages';
@@ -7964,11 +7782,6 @@
     this.documentation_h9g53q$_0 = 'https://ktor.io/docs/status-pages.html';
     this.CUSTOM_STATUS_PAGES = this.newSlot_pdl1vj$('CUSTOM_STATUS_PAGES');
   }
-  Object.defineProperty(StatusPagesFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_bvfwxv$_0;
-    }
-  });
   Object.defineProperty(StatusPagesFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_qjikgt$_0;
@@ -8067,7 +7880,6 @@
     ThymeleafFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.group_bqi77y$_0 = 'Templating';
-    this.repos_gqv8gc$_0 = Repos_getInstance().ktor;
     this.artifacts_5o1qj8$_0 = listOf('io.ktor:ktor-thymeleaf:$ktor_version');
     this.id_6al82c$_0 = 'thymeleaf';
     this.title_hr8505$_0 = 'Thymeleaf';
@@ -8077,11 +7889,6 @@
   Object.defineProperty(ThymeleafFeature.prototype, 'group', {
     get: function () {
       return this.group_bqi77y$_0;
-    }
-  });
-  Object.defineProperty(ThymeleafFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_gqv8gc$_0;
     }
   });
   Object.defineProperty(ThymeleafFeature.prototype, 'artifacts', {
@@ -8223,7 +8030,6 @@
     VelocityFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
     this.group_kld628$_0 = 'Templating';
-    this.repos_plq7am$_0 = Repos_getInstance().ktor;
     this.artifacts_hjogc2$_0 = listOf('io.ktor:ktor-velocity:$ktor_version');
     this.id_aq7496$_0 = 'velocity';
     this.title_qm33uf$_0 = 'Velocity';
@@ -8233,11 +8039,6 @@
   Object.defineProperty(VelocityFeature.prototype, 'group', {
     get: function () {
       return this.group_kld628$_0;
-    }
-  });
-  Object.defineProperty(VelocityFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_plq7am$_0;
     }
   });
   Object.defineProperty(VelocityFeature.prototype, 'artifacts', {
@@ -8280,7 +8081,6 @@
     WebjarsFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
     this.since_89f4g4$_0 = Versions_getInstance().V094;
-    this.repos_7q7uvx$_0 = Repos_getInstance().ktor;
     this.artifacts_kxa9a5$_0 = listOf_0(['io.ktor:ktor-webjars:$ktor_version', 'org.webjars:jquery:3.2.1']);
     this.id_tyoyrf$_0 = 'webjars';
     this.title_8qkrfq$_0 = 'Webjars';
@@ -8290,11 +8090,6 @@
   Object.defineProperty(WebjarsFeature.prototype, 'since', {
     get: function () {
       return this.since_89f4g4$_0;
-    }
-  });
-  Object.defineProperty(WebjarsFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_7q7uvx$_0;
     }
   });
   Object.defineProperty(WebjarsFeature.prototype, 'artifacts', {
@@ -8371,18 +8166,12 @@
   function WebsocketsFeature() {
     WebsocketsFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), RoutingFeature_getInstance()]);
-    this.repos_r8z5jx$_0 = Repos_getInstance().ktor;
     this.artifacts_9pl77n$_0 = listOf('io.ktor:ktor-websockets:$ktor_version');
     this.id_bjgwfv$_0 = 'ktor-websockets';
     this.title_s9c23q$_0 = 'WebSockets';
     this.description_nbqn42$_0 = 'Adds WebSockets support for bidirectional communication with the client';
     this.documentation_49wqyk$_0 = 'https://ktor.io/docs/clients-websockets.html';
   }
-  Object.defineProperty(WebsocketsFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_r8z5jx$_0;
-    }
-  });
   Object.defineProperty(WebsocketsFeature.prototype, 'artifacts', {
     get: function () {
       return this.artifacts_9pl77n$_0;
@@ -8483,7 +8272,6 @@
     RawSocketsFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
     this.group_k51yn8$_0 = 'Sockets';
-    this.repos_p5ezvm$_0 = Repos_getInstance().ktor;
     this.id_k6sgt2$_0 = 'ktor-network';
     this.title_q5rwff$_0 = 'Raw Sockets';
     this.description_9huigp$_0 = 'Adds Raw Socket support for listening and connecting to tcp and udp sockets';
@@ -8494,11 +8282,6 @@
   Object.defineProperty(RawSocketsFeature.prototype, 'group', {
     get: function () {
       return this.group_k51yn8$_0;
-    }
-  });
-  Object.defineProperty(RawSocketsFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_p5ezvm$_0;
     }
   });
   Object.defineProperty(RawSocketsFeature.prototype, 'id', {
@@ -8852,7 +8635,6 @@
     RawSocketsTlsFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance(), RawSocketsFeature_getInstance()]);
     this.group_ipjgd$_0 = 'Sockets';
-    this.repos_5j2kor$_0 = Repos_getInstance().ktor;
     this.id_o9jihv$_0 = 'ktor-network-tls';
     this.title_6jfh8k$_0 = 'Raw Secure SSL/TLS Sockets';
     this.description_5foqxs$_0 = 'Adds Raw Socket support for listening and connecting to tcp and udp sockets with secure sockets';
@@ -8861,11 +8643,6 @@
   Object.defineProperty(RawSocketsTlsFeature.prototype, 'group', {
     get: function () {
       return this.group_ipjgd$_0;
-    }
-  });
-  Object.defineProperty(RawSocketsTlsFeature.prototype, 'repos', {
-    get: function () {
-      return this.repos_5j2kor$_0;
     }
   });
   Object.defineProperty(RawSocketsTlsFeature.prototype, 'id', {
@@ -9974,10 +9751,8 @@
         break;
     }
     addMavenRepository_0($receiver, Repos_getInstance().local);
-    addMavenRepository_0($receiver, Repos_getInstance().jcenter);
-    if (info.ktorVersion.compareTo_11rb$(Versions_getInstance().V100) < 0) {
-      addMavenRepository_0($receiver, Repos_getInstance().ktor);
-    }addCompileDependency($receiver, new MvnArtifact('org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version'));
+    addMavenRepository_0($receiver, Repos_getInstance().mavenCentral);
+    addCompileDependency($receiver, new MvnArtifact('org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version'));
     addCompileDependency($receiver, new MvnArtifact('io.ktor:ktor-server-' + info.ktorEngine.id + ':' + '$' + 'ktor_version'));
     addCompileDependency($receiver, new MvnArtifact('ch.qos.logback:logback-classic:$logback_version'));
     addTestDependency($receiver, new MvnArtifact('io.ktor:ktor-server-tests:$ktor_version'));
@@ -10395,7 +10170,7 @@
               this.local$$receiver._indent();
               try {
                 var tmp$;
-                tmp$ = plus_2(setOf('jcenter'), toSet(closure$info.ktorVersion.extraRepos)).iterator();
+                tmp$ = plus_2(setOf('mavenCentral'), toSet(closure$info.ktorVersion.extraRepos)).iterator();
                 while (tmp$.hasNext()) {
                   var repo = tmp$.next();
                   this.local$$receiver.line_61zpoe$(this$BuildFilesGradle.genMavenRepoGroovy_0(repo));
@@ -10775,8 +10550,8 @@
     switch (repo) {
       case 'local':
         return 'mavenLocal()';
-      case 'jcenter':
-        return 'jcenter()';
+      case 'mavenCentral':
+        return 'mavenCentral()';
       default:return 'maven { url = uri(' + '"' + repo + '"' + ') }';
     }
   };
@@ -10784,8 +10559,8 @@
     switch (repo) {
       case 'local':
         return 'mavenLocal()';
-      case 'jcenter':
-        return 'jcenter()';
+      case 'mavenCentral':
+        return 'mavenCentral()';
       default:return "maven { url '" + repo + "' }";
     }
   };
@@ -10835,15 +10610,10 @@
       repos: for (var tmp$_0 = tmp$.iterator(); tmp$_0.hasNext(); ++index) {
         var repo = tmp$_0.next();
         var tmp$_1;
-        switch (repo) {
-          case 'local':
-            continue repos;
-          case 'jcenter':
-            tmp$_1 = 'https://jcenter.bintray.com';
-            break;
-          default:tmp$_1 = repo;
-            break;
-        }
+        if (equals(repo, 'local'))
+          continue repos;
+        else
+          tmp$_1 = repo;
         var repoUrl = tmp$_1;
         xml($receiver, BuildFilesMaven$render$lambda$lambda$lambda$lambda$lambda$lambda(index, $receiver, repoUrl));
       }

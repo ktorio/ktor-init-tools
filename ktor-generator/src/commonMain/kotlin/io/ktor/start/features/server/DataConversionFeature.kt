@@ -22,7 +22,6 @@ import io.ktor.start.project.*
 import io.ktor.start.util.*
 
 object DataConversionFeature : ServerFeature(ApplicationKt) {
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-server-core:\$ktor_version")
     override val id = "data-conversion"
     override val title = "DataConversion"

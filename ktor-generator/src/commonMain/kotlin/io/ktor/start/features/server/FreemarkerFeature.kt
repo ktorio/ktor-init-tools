@@ -23,7 +23,6 @@ import io.ktor.start.util.*
 
 object FreemarkerFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val group: String = "Templating"
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-freemarker:\$ktor_version")
     override val id = "freemarker"
     override val title = "Freemarker"

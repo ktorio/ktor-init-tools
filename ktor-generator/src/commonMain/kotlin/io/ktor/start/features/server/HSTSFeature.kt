@@ -22,7 +22,6 @@ import io.ktor.start.project.*
 import io.ktor.start.util.*
 
 object HSTSFeature : ServerFeature(ApplicationKt) {
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-server-core:\$ktor_version")
     override val id = "hsts"
     override val title = "HSTS"

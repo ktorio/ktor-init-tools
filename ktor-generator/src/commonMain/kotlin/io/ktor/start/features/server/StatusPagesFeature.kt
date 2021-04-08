@@ -22,7 +22,6 @@ import io.ktor.start.project.*
 import io.ktor.start.util.*
 
 object StatusPagesFeature : ServerFeature(ApplicationKt, RoutingFeature) {
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-server-host-common:\$ktor_version")
     override val id = "status-pages"
     override val title = "Status Pages"

@@ -22,7 +22,6 @@ import io.ktor.start.project.*
 import io.ktor.start.util.*
 
 object AutoHeadResponseFeature : ServerFeature(ApplicationKt) {
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-server-core:\$ktor_version")
     override val id = "caching-headers"
     override val title = "CachingHeaders"

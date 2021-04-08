@@ -45,7 +45,6 @@ object GsonClientFeature : ClientFeature(CoreClientEngine, ApplicationKt) {
     override val title = "Json serialization for HttpClient"
     override val description = "Supports JSON serialization for the Http Client"
     override val documentation = "https://ktor.io/docs/json-feature.html"
-    override val repos = super.repos + listOf("https://kotlin.bintray.com/kotlinx")
     override val artifacts = listOf(
         "io.ktor:ktor-client-json-jvm:\$ktor_version",
         "io.ktor:ktor-client-gson:\$ktor_version"

@@ -27,7 +27,6 @@ object JsonGsonFeature : ServerFeature(ApplicationKt,
 ) {
     override val group: String = "Content Negotiation"
 
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-gson:\$ktor_version")
     override val id = "ktor-gson"
     override val title = "GSON"

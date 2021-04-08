@@ -27,7 +27,6 @@ object JsonJacksonFeature : ServerFeature(ApplicationKt,
 ) {
     override val group: String = "Content Negotiation"
 
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-jackson:\$ktor_version")
     override val id = "ktor-jackson"
     override val title = "Jackson"

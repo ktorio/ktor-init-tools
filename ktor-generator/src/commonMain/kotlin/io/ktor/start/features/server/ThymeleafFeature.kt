@@ -11,7 +11,6 @@ import io.ktor.start.util.BlockBuilder
 
 object ThymeleafFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val group: String = "Templating"
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-thymeleaf:\$ktor_version")
     override val id = "thymeleaf"
     override val title = "Thymeleaf"

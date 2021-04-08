@@ -22,7 +22,6 @@ import io.ktor.start.project.*
 
 object AuthLdapFeature : ServerFeature(ApplicationKt, AuthFeature) {
     override val group: String = "Authentication"
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-auth-ldap:\$ktor_version")
     override val id = "auth-ldap"
     override val title = "Authentication LDAP"

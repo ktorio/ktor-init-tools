@@ -22,7 +22,6 @@ import io.ktor.start.project.*
 
 object VelocityFeature : ServerFeature(ApplicationKt) {
     override val group: String = "Templating"
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-velocity:\$ktor_version")
     override val id = "velocity"
     override val title = "Velocity"

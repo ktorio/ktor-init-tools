@@ -6,7 +6,6 @@ import io.ktor.start.util.*
 
 object WebjarsFeature : ServerFeature(ApplicationKt, RoutingFeature) {
     override val since = Versions.V094
-    override val repos = Repos.ktor
     override val artifacts = listOf(
         "io.ktor:ktor-webjars:\$ktor_version",
         "org.webjars:jquery:3.2.1" // sample

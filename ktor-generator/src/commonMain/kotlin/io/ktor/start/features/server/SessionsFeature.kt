@@ -22,7 +22,6 @@ import io.ktor.start.project.*
 import io.ktor.start.util.*
 
 object SessionsFeature : ServerFeature(ApplicationKt, RoutingFeature) {
-    override val repos = Repos.ktor
     override val artifacts = listOf(
         "io.ktor:ktor-server-sessions:\$ktor_version" // Only required for Cache and Directory storages
     )

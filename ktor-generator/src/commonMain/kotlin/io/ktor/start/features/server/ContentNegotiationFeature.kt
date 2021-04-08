@@ -24,7 +24,6 @@ import io.ktor.start.util.*
 object ContentNegotiationFeature : ServerFeature(ApplicationKt) {
     override val group: String = "Content Negotiation"
 
-    override val repos = Repos.ktor
     override val artifacts = listOf("io.ktor:ktor-server-core:\$ktor_version")
     override val id = "content-negotiation"
     override val title = "ContentNegotiation"
