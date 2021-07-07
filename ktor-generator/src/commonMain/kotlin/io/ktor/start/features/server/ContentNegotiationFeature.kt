@@ -33,6 +33,7 @@ object ContentNegotiationFeature : ServerFeature(ApplicationKt) {
     val BLOCK = newSlot("BLOCK")
 
     override fun BlockBuilder.renderFeature(info: BuildInfo) {
+        addImport("io.ktor.features.*")
         addFeatureInstall {
             "install(ContentNegotiation)" {
                block(BLOCK)

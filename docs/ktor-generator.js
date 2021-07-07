@@ -6090,6 +6090,7 @@
     };
   }
   ContentNegotiationFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
+    addImport($receiver, 'io.ktor.features.*');
     addFeatureInstall($receiver, ContentNegotiationFeature$renderFeature$lambda(this, $receiver));
   };
   ContentNegotiationFeature.$metadata$ = {
