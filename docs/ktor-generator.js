@@ -5635,10 +5635,10 @@
     AutoHeadResponseFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
     this.artifacts_g2pl8f$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
-    this.id_uzkfxz$_0 = 'caching-headers';
-    this.title_jzj61i$_0 = 'CachingHeaders';
-    this.description_fp9286$_0 = 'Send the headers Cache-Control and Expires used by clients and proxies to cache requests';
-    this.documentation_felmrc$_0 = 'https://ktor.io/docs/caching-headers.html';
+    this.id_uzkfxz$_0 = 'auto-head-response';
+    this.title_jzj61i$_0 = 'AutoHeadResponse';
+    this.description_fp9286$_0 = 'Provide responses to HEAD requests for existing routes that have the GET verb defined';
+    this.documentation_felmrc$_0 = 'https://ktor.io/docs/autoheadresponse.html';
   }
   Object.defineProperty(AutoHeadResponseFeature.prototype, 'artifacts', {
     get: function () {
@@ -5666,40 +5666,11 @@
     }
   });
   function AutoHeadResponseFeature$renderFeature$lambda($receiver) {
-    var $receiver_0 = 'install(CachingHeaders)';
-    var rafter = ''.length === 0 ? '' : ' ' + '';
-    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
-    $receiver._indent();
-    try {
-      $receiver.line_61zpoe$('options { outgoingContent ->');
-      $receiver._indent();
-      try {
-        var $receiver_1 = 'when (outgoingContent.contentType?.withoutParameters())';
-        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
-        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
-        $receiver._indent();
-        try {
-          $receiver.line_61zpoe$('ContentType.Text.CSS -> CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 24 * 60 * 60), expires = null as? GMTDate?)');
-          $receiver.line_61zpoe$('else -> null');
-        }finally {
-          $receiver._unindent();
-        }
-        $receiver.line_61zpoe$('}' + '');
-      }finally {
-        $receiver._unindent();
-      }
-      $receiver.line_61zpoe$('}');
-    }finally {
-      $receiver._unindent();
-    }
-    $receiver.line_61zpoe$('}' + '');
+    $receiver.line_61zpoe$('install(AutoHeadResponse)');
     return Unit;
   }
   AutoHeadResponseFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.features.*');
-    addImport($receiver, 'io.ktor.http.*');
-    addImport($receiver, 'io.ktor.http.content.*');
-    addImport($receiver, 'io.ktor.util.date.*');
     addFeatureInstall($receiver, AutoHeadResponseFeature$renderFeature$lambda);
   };
   AutoHeadResponseFeature.$metadata$ = {
@@ -5786,10 +5757,10 @@
     CachingHeadersFeature_instance = this;
     ServerFeature.call(this, [ApplicationKt_getInstance()]);
     this.artifacts_4n8blk$_0 = listOf('io.ktor:ktor-server-core:$ktor_version');
-    this.id_894vts$_0 = 'auto-head-response';
-    this.title_fnvyhr$_0 = 'AutoHeadResponse';
-    this.description_vh4wqr$_0 = 'Provide responses to HEAD requests for existing routes that have the GET verb defined';
-    this.documentation_z7p4ld$_0 = 'https://ktor.io/docs/autoheadresponse.html';
+    this.id_894vts$_0 = 'caching-headers';
+    this.title_fnvyhr$_0 = 'CachingHeaders';
+    this.description_vh4wqr$_0 = 'Send the headers Cache-Control and Expires used by clients and proxies to cache requests';
+    this.documentation_z7p4ld$_0 = 'https://ktor.io/docs/caching-headers.html';
   }
   Object.defineProperty(CachingHeadersFeature.prototype, 'artifacts', {
     get: function () {
@@ -5817,11 +5788,40 @@
     }
   });
   function CachingHeadersFeature$renderFeature$lambda($receiver) {
-    $receiver.line_61zpoe$('install(AutoHeadResponse)');
+    var $receiver_0 = 'install(CachingHeaders)';
+    var rafter = ''.length === 0 ? '' : ' ' + '';
+    $receiver.line_61zpoe$($receiver_0.length === 0 ? '{' + rafter : $receiver_0 + ' {' + rafter);
+    $receiver._indent();
+    try {
+      $receiver.line_61zpoe$('options { outgoingContent ->');
+      $receiver._indent();
+      try {
+        var $receiver_1 = 'when (outgoingContent.contentType?.withoutParameters())';
+        var rafter_0 = ''.length === 0 ? '' : ' ' + '';
+        $receiver.line_61zpoe$($receiver_1.length === 0 ? '{' + rafter_0 : $receiver_1 + ' {' + rafter_0);
+        $receiver._indent();
+        try {
+          $receiver.line_61zpoe$('ContentType.Text.CSS -> CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 24 * 60 * 60), expires = null as? GMTDate?)');
+          $receiver.line_61zpoe$('else -> null');
+        }finally {
+          $receiver._unindent();
+        }
+        $receiver.line_61zpoe$('}' + '');
+      }finally {
+        $receiver._unindent();
+      }
+      $receiver.line_61zpoe$('}');
+    }finally {
+      $receiver._unindent();
+    }
+    $receiver.line_61zpoe$('}' + '');
     return Unit;
   }
   CachingHeadersFeature.prototype.renderFeature_gtq0m3$ = function ($receiver, info) {
     addImport($receiver, 'io.ktor.features.*');
+    addImport($receiver, 'io.ktor.http.*');
+    addImport($receiver, 'io.ktor.http.content.*');
+    addImport($receiver, 'io.ktor.util.date.*');
     addFeatureInstall($receiver, CachingHeadersFeature$renderFeature$lambda);
   };
   CachingHeadersFeature.$metadata$ = {
