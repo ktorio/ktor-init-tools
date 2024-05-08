@@ -4,14 +4,6 @@
 	http://jedwatson.github.io/classnames
 */
 
-/*!
- * cookie
- * Copyright(c) 2012-2014 Roman Shtylman
- * Copyright(c) 2015 Douglas Christopher Wilson
- * Copyright(c) 2016 Jeff Kohrman
- * MIT Licensed
- */
-
 /**
  * @license React
  * react-dom.production.min.js
